@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import  SiteBrandComponent from "@/components/SiteBrandComponent.vue";
+  import ThemeToggleComponent from "@/components/ThemeToggleComponent.vue";
 
   const menuItems = [
     { title: "Cuestionarios", path: "/quizzes" },
@@ -10,12 +11,12 @@
 <template>
   <header class="bg-slate-100 dark:bg-slate-900 text-black dark:text-white">
     <div class="flex items-center justify-between container mx-auto p-4">
-      <router-link class="mx-auto sm:mx-0" to="/">
+      <router-link to="/">
         <SiteBrandComponent class="max-w-[160px]" />
       </router-link>
-      <div class="hidden sm:flex items-center gap-5">
+      <div class="flex items-center gap-5">
         <nav>
-          <ul class="flex space-x-4">
+          <ul class="hidden sm:flex space-x-4">
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <router-link to="/" class="hover:underline">
                 {{ menuItem.title }}
@@ -23,6 +24,7 @@
             </li>
           </ul>
         </nav>
+        <ThemeToggleComponent />
       </div>
     </div>
   </header>
