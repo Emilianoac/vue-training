@@ -3,12 +3,12 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import IconLang from "@/components/icons/IconLang.vue";
 
-const { locale, availableLocales } = useI18n({ useScope: "global" });
+const { locale } = useI18n({ useScope: "global" });
 
 const isOpen = ref(false);
 const languages = [
-  { code: "en", name: "English" },
-  { code: "es", name: "Spanish" },
+  { code: "en", name: "general.english"},
+  { code: "es", name: "general.spanish"}
 ];
 
 function changeLanguage(lang: string) {
@@ -38,7 +38,7 @@ function changeLanguage(lang: string) {
           <button 
             @click="changeLanguage(language.code)"            
             class="w-full text-start block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            {{ language.name }}
+            {{ $t(language.name) }}
           </button>
         </li>
       </ul>
