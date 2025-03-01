@@ -36,7 +36,8 @@ function changeLanguage(lang: string) {
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
         <li v-for="(language) in languages" :key="language.code">
           <button 
-            @click="changeLanguage(language.code)"            
+            @click="changeLanguage(language.code)"   
+            :class="locale === language.code ? 'bg-blue-200 hover:bg-blue-200 dark:bg-blue-600 hover:dark:bg-blue-600  ' : ''"         
             class="w-full text-start block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
             {{ $t(language.name) }}
           </button>
