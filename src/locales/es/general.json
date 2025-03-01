@@ -1,0 +1,11 @@
+{
+  "challenge": {
+    "one": "Desafío",
+    "many": "Desafíos"
+  },
+  "quiz": {
+    "one": "Cuestionario",
+    "many": "Cuestionarios"
+  },
+  "home": "Inicio"
+}

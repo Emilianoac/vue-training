@@ -1,0 +1,11 @@
+{
+  "challenge": {
+    "one": "Challenge",
+    "many": "Challenges"
+  },
+  "quiz": {
+    "one": "Quiz",
+    "many": "Quizzes"
+  },
+  "home": "Home"
+}

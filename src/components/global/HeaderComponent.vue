@@ -1,10 +1,14 @@
 <script lang="ts" setup>
-  import  SiteBrandComponent from "@/components/SiteBrandComponent.vue";
+  import { useI18n } from "vue-i18n";
+  import LangToggleComponent from "@/components/LangToggleComponent.vue";
+  import SiteBrandComponent from "@/components/SiteBrandComponent.vue";
   import ThemeToggleComponent from "@/components/ThemeToggleComponent.vue";
 
+  const { t } = useI18n();
+
   const menuItems = [
-    { title: "Cuestionarios", path: "/quizzes" },
-    { title: "Desafios", path: "/challenges" },
+    { title: "general.quiz.many", path: "/quizzes" },
+    { title:  "general.challenge.many", path: "/challenges" },
   ]
 </script>
 
@@ -19,12 +23,13 @@
           <ul class="hidden sm:flex space-x-4">
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <router-link to="/" class="hover:underline">
-                {{ menuItem.title }}
+                {{ $t(menuItem.title) }}
               </router-link>
             </li>
           </ul>
         </nav>
         <ThemeToggleComponent />
+        <LangToggleComponent />
       </div>
     </div>
   </header>
