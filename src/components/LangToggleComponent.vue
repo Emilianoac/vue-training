@@ -22,7 +22,7 @@ function changeLanguage(lang: string) {
     <!-- Dropdown button -->
     <button 
       @click="isOpen = !isOpen"
-      id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+      data-test="lang-toggle-button"
       class="bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white  w-8 h-8 rounded-full flex items-center justify-center focus:ring-4  focus:ring-blue-300 dark:focus:ring-blue-800 focus:outline-none"
       type="button"> 
         <IconLang width="14" height="14"/>
@@ -30,16 +30,17 @@ function changeLanguage(lang: string) {
 
     <!-- Dropdown menu -->
     <div 
-      id="dropdown" 
+      data-test="lang-toggle-menu" 
       :class="isOpen ? 'absolute' : 'hidden'"
       class="z-10 top-12 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
         <li v-for="(language) in languages" :key="language.code">
           <button 
             @click="changeLanguage(language.code)"   
-            :class="locale === language.code ? 'bg-blue-200 hover:bg-blue-200 dark:bg-blue-600 hover:dark:bg-blue-600  ' : ''"         
+            :data-test="`lang-${language.code}`"
+            :class="locale === language.code ? 'bg-blue-200 hover:bg-blue-200 dark:bg-blue-600 hover:dark:bg-blue-600' : ''"         
             class="w-full text-start block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            {{ $t(language.name) }}
+             {{ $t(language.name) }}
           </button>
         </li>
       </ul>
