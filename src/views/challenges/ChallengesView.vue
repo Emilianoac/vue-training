@@ -5,7 +5,7 @@ import ChallengeListComponent from "@/components/ChallengeListComponent.vue";
 
 <template>
   <div class="mt-7">
-    <h1 class="text-2xl font-bold text-center">{{ $t("general.challenge.many")}}</h1>
+    <h1 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.challenge.many")}}</h1>
     <ChallengeListComponent />
   </div>
 </template>
