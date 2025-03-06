@@ -22,7 +22,7 @@
         <nav>
           <ul class="hidden sm:flex space-x-4">
             <li v-for="(menuItem, index) in menuItems" :key="index">
-              <router-link to="/" class="hover:underline">
+              <router-link :to="menuItem.path" class="hover:underline">
                 {{ $t(menuItem.title) }}
               </router-link>
             </li>
