@@ -1,13 +1,12 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import { useI18n } from "vue-i18n";
+
 
 export const useGeneralStore = defineStore("general", () => {
-  const locale = ref(document.cookie.split("=")[1] || "en");
+  const i18n = useI18n();
+  const locale = i18n.locale as unknown as "en" | "es";
 
-  function setLocale(newLocale: string) {
-    locale.value = newLocale;
-    document.cookie = `locale=${newLocale}`;
-  };
-
-  return { locale, setLocale }
+  return { 
+    locale
+  } 
 });
