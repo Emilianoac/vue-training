@@ -23,7 +23,7 @@ import headerIllustration from "@/assets/images/header-illustration.png";
         </div>
       </div>
       <div>
-        <img :src="headerIllustration" alt="">
+        <img :src="headerIllustration" alt="Header Illustration"/>
       </div>
     </div>
 </template>
