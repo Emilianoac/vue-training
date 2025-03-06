@@ -3,7 +3,8 @@ import headerIllustration from "@/assets/images/header-illustration.png";
 </script>
 
 <template>
-    <div class="block md:flex  items-center justify-between mt-14">
+    <!-- Header -->
+    <section class="block md:flex  items-center justify-between mt-14">
       <div class="mb-10 md:mb-0">
         <h1 class="text-4xl md:text-6xl font-bold max-w-[540px]">
           {{ $t("home.welcome") }} 
@@ -25,5 +26,5 @@ import headerIllustration from "@/assets/images/header-illustration.png";
       <div>
         <img :src="headerIllustration" alt="Header Illustration"/>
       </div>
-    </div>
+    </section>
 </template>
