@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-  import { useI18n } from "vue-i18n";
   import LangToggleComponent from "@/components/LangToggleComponent.vue";
   import SiteBrandComponent from "@/components/SiteBrandComponent.vue";
   import ThemeToggleComponent from "@/components/ThemeToggleComponent.vue";
-
-  const { t } = useI18n();
 
   const menuItems = [
     { title: "general.quiz.many", path: "/quizzes" },
