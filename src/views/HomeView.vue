@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import challenges from "@/data/challenges";
 import headerIllustration from "@/assets/images/header-illustration.png";
-import ChallengeCardComponent from "@/components/ChallengeCardComponent.vue";
+import ChallengeListComponent from "@/components/ChallengeListComponent.vue";
 
 </script>
 
@@ -34,18 +33,7 @@ import ChallengeCardComponent from "@/components/ChallengeCardComponent.vue";
     <!-- Challenges -->
     <section class="mt-20">
       <h2 class="text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
-        <ChallengeCardComponent 
-          v-for="challenge in challenges" 
-          :key="challenge.id" 
-          :name="challenge.title" 
-          :level="challenge.level" 
-          :level-label="challenge.levelLabel"
-          :img="challenge.cover"
-          :description="challenge.short_description"
-          :id="challenge.id" 
-        />
-      </div>
+      <ChallengeListComponent />
     </section>
 
 </template>
