@@ -10,7 +10,9 @@
   "play": {
     "info" : "El código que escribas en este editor no se guardará una vez que cierres o recargues la página.",
     "instructions": "Para asegurarte que has completado el desafio, deber abrir una nueva terminal y ejecutar el comando:",
-    "instructions_2": "Si todos los tests pasan, entonces has completado el desafio!"
+    "instructions_2": "Si todos los tests pasan, entonces has completado el desafio!",
+    "expand_editor": "Expandir editor",
+    "collapse_editor": "Colapsar editor"
   },
   "firefox_message": {
     "title": "Problemas con Firefox",

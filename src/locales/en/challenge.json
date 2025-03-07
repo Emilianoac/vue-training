@@ -10,7 +10,9 @@
   "play": {
     "info" : "The code you write in this editor will not be saved once you close or reload the page.",
     "instructions": "To ensure you have completed the challenge, you should open a new terminal and run the command:",
-    "instructions_2": "If all tests pass, then you have completed the challenge!"
+    "instructions_2": "If all tests pass, then you have completed the challenge!",
+    "expand_editor": "Expand editor",
+    "collapse_editor": "Collapse editor"
   },
   "firefox_message": {
     "title": "Firefox Issues",

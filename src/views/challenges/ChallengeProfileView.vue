@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
 import challenges from "@/data/challenges";
 import BadgeComponent from "@/components/BadgeComponent.vue";
 import TabComponent from "@/components/TabComponent.vue";
-import FirefoxAlertComponent from "@/components/FirefoxAlertComponent.vue";
+import ChallengeCodeEditor from "@/components/challenge/ChallengeCodeEditor.vue";
 
 const store = useGeneralStore();
 const route = useRoute();
@@ -63,54 +63,11 @@ const tabsItems = [
       </template>
   
       <template #play>
-        <div class="my-5">
-            <div class="grid grid-cols-1 lg:grid-cols-[0.3fr,1fr] gap-6">
-              <div>
-                <!-- Info -->
-                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                  {{$t("challenge.play.info")}}
-                </div>
-      
-                <!-- Instructions -->
-                <p>
-                  {{$t("challenge.play.instructions")}}
-                  <code class="bg-gray-200 dark:bg-gray-800 dark:text-gray-300 p-1 rounded-md">npm run test:unit</code>
-                </p>
-                <p class="my-4">{{$t("challenge.play.instructions_2")}}</p>
-  
-                <hr class="my-4 dark:border-gray-700"/>
-  
-                <!-- Firefox Alert -->
-                <FirefoxAlertComponent />
-              </div>
-  
-              <!-- Playground -->
-              <iframe
-                class="w-full h-[500px]"
-                :src="challenge?.stackblitz.challenge"
-                frameborder="0"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
+        <ChallengeCodeEditor :stackblitzUrl="challenge?.stackblitz.challenge" />
       </template>
   
       <template #solution>
-        <div class="my-5">
-            <div class="grid grid-cols-1 lg:grid-cols-[0.3fr,1fr] gap-6">
-              <div>
-                <FirefoxAlertComponent />
-              </div>
-  
-              <!-- Playground -->
-              <iframe
-                class="w-full h-[500px]"
-                :src="challenge?.stackblitz.solution"
-                frameborder="0"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
+        <ChallengeCodeEditor :stackblitzUrl="challenge?.stackblitz.solution" />
       </template>
     </TabComponent>
   </template>
