@@ -10,8 +10,8 @@
 </script>
 
 <template>
-  <header class="bg-slate-100 dark:bg-slate-900 text-black dark:text-white">
-    <div class="flex items-center justify-between container mx-auto p-4">
+  <header class="bg-slate-50 dark:bg-slate-900 text-black dark:text-white">
+    <div class="flex items-center justify-between container mx-auto p-4 px-10">
       <router-link to="/">
         <SiteBrandComponent class="max-w-[160px]" />
       </router-link>
