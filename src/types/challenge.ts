@@ -1,6 +1,7 @@
 export interface Challenge {
   id: string;
   cover: string;
+  images: string[];
   level: "easy" | "medium" | "hard";
   levelLabel: {
     en: "Easy" | "Medium" | "Hard";

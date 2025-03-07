@@ -4,6 +4,9 @@ const challenge: Challenge = {
   "id": "conditional-message-display",
   "level": "easy",
   "cover": "public/images/challenges/conditional-message-display/cover.jpg",
+  "images": [
+    "public/images/challenges/conditional-message-display/image-1.gif",
+  ],
   "levelLabel": {
     "es": "Fácil",
     "en": "Easy"
@@ -35,8 +38,8 @@ const challenge: Challenge = {
     ]
   },
   "stackblitz": {
-    "challenge": "https://stackblitz.com/edit/vitejs-vite-vyvqxdxd?embed=1&file=src%2Fcomponents%2FCounter.vue",
-    "solution": "https://stackblitz.com/edit/emi-conditional-message-display-solution?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue&hideNavigation=1"
+    "challenge": "https://stackblitz.com/edit/emi-conditional-message-display-challenge?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue",
+    "solution": "https://stackblitz.com/edit/emi-conditional-message-display-solution?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue"
   }
 }
 export default challenge;
