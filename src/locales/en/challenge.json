@@ -1,0 +1,25 @@
+{
+  "tabs": {
+    "description": "Description",
+    "play": "Play",
+    "solution": "Solution"
+  },
+  "description": {
+    "objectives": "Objectives"
+  },
+  "play": {
+    "info" : "The code you write in this editor will not be saved once you close or reload the page.",
+    "instructions": "To ensure you have completed the challenge, you should open a new terminal and run the command:",
+    "instructions_2": "If all tests pass, then you have completed the challenge!"
+  },
+  "firefox_message": {
+    "title": "Firefox Issues",
+    "message_1": "StackBlitz uses WebContainers technology, which is not fully compatible with Firefox when embedded in an iframe.",
+    "message_2": "If you experience issues running the code, try one of these options:",
+    "option_1": "Click on Fork on StackBlitz to generate your own copy of the code.",
+    "option_2": "Use a Chromium-based browser like Google Chrome or Microsoft Edge.",
+    "option_3": "Download the code and run it on your local machine.",
+    "message_3": "More information about browser compatibility in the",
+    "link": "official StackBlitz documentation."
+  }
+}
