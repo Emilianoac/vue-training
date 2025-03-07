@@ -29,6 +29,9 @@ const router = createRouter({
       redirect: "/not-found",
     }
   ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router
