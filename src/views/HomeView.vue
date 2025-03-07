@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import headerIllustration from "@/assets/images/header-illustration.png";
-import ChallengeListComponent from "@/components/ChallengeListComponent.vue";
+import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 
 </script>
 

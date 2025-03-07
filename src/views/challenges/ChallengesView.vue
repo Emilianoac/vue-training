@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ChallengeListComponent from "@/components/ChallengeListComponent.vue";
+import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 
 </script>
 

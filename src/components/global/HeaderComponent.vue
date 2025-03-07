@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-  import LangToggleComponent from "@/components/LangToggleComponent.vue";
-  import SiteBrandComponent from "@/components/SiteBrandComponent.vue";
-  import ThemeToggleComponent from "@/components/ThemeToggleComponent.vue";
+  import LangToggleComponent from "@/components/global/LangToggleComponent.vue";
+  import SiteBrandComponent from "@/components/global/SiteBrandComponent.vue";
+  import ThemeToggleComponent from "@/components/global/ThemeToggleComponent.vue";
 
   const menuItems = [
     { title: "general.quiz.many", path: "/quizzes" },

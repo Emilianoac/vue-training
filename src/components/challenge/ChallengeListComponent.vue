@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import challenges from "@/data/challenges";
-import ChallengeCardComponent from "@/components/ChallengeCardComponent.vue";
+import ChallengeCardComponent from "@/components/challenge/ChallengeCardComponent.vue";
 
 </script>
 
