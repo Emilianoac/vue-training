@@ -9,5 +9,7 @@
   },
   "home": "Inicio",
   "english": "Inglés",
-  "spanish": "Español"
+  "spanish": "Español",
+  "pageNotFound": "Página no encontrada",
+  "goToHome": "Ir a Inicio"
 }

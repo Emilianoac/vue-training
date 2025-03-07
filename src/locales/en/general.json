@@ -9,5 +9,7 @@
   },
   "home": "Home",
   "english": "English",
-  "spanish": "Spanish"
+  "spanish": "Spanish",
+  "pageNotFound": "Page not found",
+  "goToHome": "Go to Home"
 }

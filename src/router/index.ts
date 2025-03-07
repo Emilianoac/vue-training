@@ -13,6 +13,20 @@ const router = createRouter({
       path: "/challenges",
       name: "challenges",
       component: () => import("@/views/challenges/ChallengesView.vue"),
+    },
+    {
+      path: "/challenges/:id",
+      name: "challenge",
+      component: () => import("@/views/challenges/ChallengeProfileView.vue"),
+    },
+    {   
+      path: "/not-found",
+      name: "not-found", 
+      component: () => import("@/views/NotFoundView.vue")
+    },
+    { 
+      path: "/:pathMatch(.*)*", 
+      redirect: "/not-found",
     }
   ],
 })
