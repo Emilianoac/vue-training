@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref, useTemplateRef} from "vue";
 import { useI18n } from "vue-i18n";
 import IconLang from "@/components/icons/IconLang.vue";
 
 const { locale } = useI18n({ useScope: "global" });
 
+const dropdownRef = useTemplateRef("lang-dropdown");
 const isOpen = ref(false);
 const languages = [
   { code: "en", name: "general.english"},
@@ -15,10 +16,24 @@ function changeLanguage(lang: string) {
   document.cookie = "locale=" + lang;
   locale.value = lang;
 }
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
+    isOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("mousedown", handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("mousedown", handleClickOutside);
+});
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative" ref="lang-dropdown">
     <!-- Dropdown button -->
     <button 
       @click="isOpen = !isOpen"
