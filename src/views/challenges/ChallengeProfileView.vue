@@ -5,7 +5,7 @@ import { useGeneralStore } from "@/stores/general";
 import challenges from "@/data/challenges";
 import BadgeComponent from "@/components/BadgeComponent.vue";
 import TabComponent from "@/components/TabComponent.vue";
-import ChallengeCodeEditor from "@/components/challenge/ChallengeCodeEditor.vue";
+import ChallengeCodeEditorLayout from "@/components/challenge/ChallengeCodeEditorLayout.vue";
 
 const store = useGeneralStore();
 const route = useRoute();
@@ -63,11 +63,11 @@ const tabsItems = [
       </template>
   
       <template #play>
-        <ChallengeCodeEditor :stackblitzUrl="challenge?.stackblitz.challenge" />
+        <ChallengeCodeEditorLayout :stackblitzUrl="challenge?.stackblitz.challenge" />
       </template>
   
       <template #solution>
-        <ChallengeCodeEditor :stackblitzUrl="challenge?.stackblitz.solution" />
+        <ChallengeCodeEditorLayout :stackblitzUrl="challenge?.stackblitz.solution" />
       </template>
     </TabComponent>
   </template>
