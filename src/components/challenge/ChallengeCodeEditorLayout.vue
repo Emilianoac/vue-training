@@ -14,6 +14,7 @@ defineProps<{
 <template>
   <div class="flex items-center justify-end my-3">
     <button 
+      data-test="toggle-editor"
       @click="expandeEditor = !expandeEditor" 
       :title="expandeEditor ? $t('challenge.play.collapse_editor') : $t('challenge.play.expand_editor')"
       class="bg-slate-300 dark:bg-gray-800 p-1 rounded-md hover:bg-slate-200 dark:hover:bg-gray-700 hidden lg:block">
@@ -21,8 +22,9 @@ defineProps<{
       </button>
   </div>
   <div 
+    data-test="challenge-playground"
     class="grid grid-cols-1 gap-6 mb-5"
-    :class="[expandeEditor ? 'lg:grid-cols-[1fr]' : 'lg:grid-cols-[0.3fr,1fr]']">
+    :class="[expandeEditor ? 'expand-editor' : 'collapse-editor']">
 
     <div v-if="!expandeEditor">
       <!-- Info -->
@@ -45,6 +47,8 @@ defineProps<{
 
       <!-- Playground -->
       <iframe
+        data-test="stackblitz-iframe"
+        @load="$emit('iframe-loaded')"
         class="w-full h-[500px]"
         :src="stackblitzUrl"
         frameborder="0"
@@ -54,5 +58,12 @@ defineProps<{
 </template>
 
 <style lang="postcss" scoped>
-  
+
+  .expand-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .collapse-editor {
+    grid-template-columns: 0.3fr 1fr;
+  }
 </style>
