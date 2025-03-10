@@ -9,7 +9,7 @@
 
 <template>
   <span 
-    class="inline-block px-2 py-1 rounded-full text-xs font-bold"
+    class="block w-fit px-2 py-1 rounded-full text-xs font-bold"
     :class="[type ? levelColors[type].bg : '', type ? levelColors[type].text : '']">
       {{ text }}
   </span>
