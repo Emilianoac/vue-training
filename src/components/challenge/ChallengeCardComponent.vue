@@ -2,6 +2,7 @@
 import { useGeneralStore } from "@/stores/general";
 import BadgeComponent from "@/components/BadgeComponent.vue";
 import { levelColors } from "@/utils/levelColors";
+import CardComponent from "@/components/CardComponent.vue";
 
 const store = useGeneralStore();
 
@@ -25,7 +26,7 @@ defineProps<{
 </script>
 
 <template>
-  <card class="bg-white  dark:bg-slate-900 shadow-md rounded-lg overflow-hidden">
+  <CardComponent>
     <router-link :to="`/challenges/${id}`">
       <img :src="img" alt="Challenge Image" class="w-full h-48 object-cover object-center">
       <div class="p-4">
@@ -38,7 +39,7 @@ defineProps<{
         <p class=" opacity-65 ">{{ description[store.locale] }}</p>
       </div>
     </router-link>
-  </card>
+  </CardComponent>
 </template>
 
 <style lang="postcss">
