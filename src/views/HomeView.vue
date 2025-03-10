@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import headerIllustration from "@/assets/images/header-illustration.png";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
+import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
 
 </script>
 
@@ -34,6 +35,12 @@ import ChallengeListComponent from "@/components/challenge/ChallengeListComponen
     <section class="mt-20">
       <h2 class="text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
       <ChallengeListComponent />
+    </section>
+
+    <!-- Quizzes -->
+    <section class="mt-20">
+      <h2 class="text-3xl font-bold text-center">{{ $t("general.quiz.many") }}</h2>
+      <QuizListComponent />
     </section>
 
 </template>
