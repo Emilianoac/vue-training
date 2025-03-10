@@ -19,6 +19,16 @@ const router = createRouter({
       name: "challenge",
       component: () => import("@/views/challenges/ChallengeProfileView.vue"),
     },
+    {
+      path: "/quizzes",
+      name: "quizzes",
+      component: () => import("@/views/quizzes/QuizzesView.vue"),
+    },
+    {
+      path: "/quizzes/:id",
+      name: "quiz",
+      component: () => import("@/views/quizzes/QuizProfileView.vue"),
+    },
     {   
       path: "/not-found",
       name: "not-found", 
