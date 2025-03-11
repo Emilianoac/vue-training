@@ -38,7 +38,7 @@ onUnmounted(() => {
     <button 
       @click="isOpen = !isOpen"
       data-test="lang-toggle-button"
-      class="bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white  w-8 h-8 rounded-full flex items-center justify-center focus:ring-4  focus:ring-blue-300 dark:focus:ring-blue-800 focus:outline-none"
+      class="bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white  w-8 h-8 rounded-md flex items-center justify-center focus:ring-4  focus:ring-blue-300 dark:focus:ring-blue-800 focus:outline-none"
       type="button"> 
         <IconLang width="14" height="14"/>
     </button>

@@ -25,8 +25,10 @@
             </li>
           </ul>
         </nav>
-        <ThemeToggleComponent />
-        <LangToggleComponent />
+        <div class="flex items-center gap-2">
+          <ThemeToggleComponent />
+          <LangToggleComponent />
+        </div>
       </div>
     </div>
   </header>

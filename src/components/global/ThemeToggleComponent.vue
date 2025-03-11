@@ -10,7 +10,7 @@
 <template>
     <button 
       @click="toggle()" 
-      class="p-2 rounded-full bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none">
+      class="p-2 rounded-md bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none">
       <IconSun v-if="isDark" class="w-4 h-4 text-yellow-500" />
       <IconMoon v-else class="w-4 h-4 text-yellow-500" />
     </button>
