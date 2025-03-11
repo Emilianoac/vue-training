@@ -1,0 +1,15 @@
+{
+  "question": "Question",
+  "verify_answer": "Verify answer",
+  "next_question": "Next question",
+  "your_answer": "Your answer",
+  "correct_answer": "Correct answer",
+  "finish_quiz": "Finish quiz",
+  "your_result": "Your result",
+  "correct_answers": "Correct answers",
+  "wrong_answers": "Wrong answers",
+  "view_details": "View details",
+  "explanation": "Explanation",
+  "total_questions": "Total questions",
+  "success_percentage": "Success percentage"
+}
