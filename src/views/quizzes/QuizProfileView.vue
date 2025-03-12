@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
 import quizzes from "@/data/quizzes";
@@ -33,6 +33,18 @@ const  {
   handleUserAnswer,
   handleNextQuestion,
 } = useQuiz(quiz ? quiz : null);
+
+onMounted(() => {
+  if (quiz) {
+    document.title = `${quiz.title[store.locale]} - Vue Training`;
+  }
+});
+
+watch(() => store.locale, () => {
+  if (quiz) {
+    document.title = `${quiz.title[store.locale]} - Vue Training`;
+  }
+});
 </script>
 
 <template>

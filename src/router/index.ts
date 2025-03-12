@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { i18n } from "@/i18n";
 import HomeView from "@/views/HomeView.vue";
-
+ 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -8,11 +9,13 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: {titleKey: "general.home"}
     },
     {
       path: "/challenges",
       name: "challenges",
       component: () => import("@/views/challenges/ChallengesView.vue"),
+      meta: {titleKey: "general.challenge.many"}
     },
     {
       path: "/challenges/:id",
@@ -23,6 +26,7 @@ const router = createRouter({
       path: "/quizzes",
       name: "quizzes",
       component: () => import("@/views/quizzes/QuizzesView.vue"),
+      meta: {titleKey: "general.quiz.many"}
     },
     {
       path: "/quizzes/:id",
@@ -32,7 +36,8 @@ const router = createRouter({
     {   
       path: "/not-found",
       name: "not-found", 
-      component: () => import("@/views/NotFoundView.vue")
+      component: () => import("@/views/NotFoundView.vue"),
+      meta: {titleKey: "general.notFound"}
     },
     { 
       path: "/:pathMatch(.*)*", 
@@ -43,5 +48,13 @@ const router = createRouter({
     return { top: 0 }
   }
 })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.titleKey ? `${i18n.global.t(to.meta.titleKey as string)} - Vue Training`   : "Vue Training"
+  if (to.meta.title) {
+    console.log(to.meta.title)
+  }
+  next()
+});
 
 export default router

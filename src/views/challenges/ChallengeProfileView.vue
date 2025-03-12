@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref} from "vue";
+import { onMounted, watch} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
 import challenges from "@/data/challenges";
@@ -13,17 +13,29 @@ const router = useRouter();
 
 const challenge = challenges.find((challenge) => challenge.id === route.params.id);
 
+const tabsItems = [
+  { name: "challenge.tabs.description", id: "description" },
+  { name : "challenge.tabs.play", id: "play" },
+  { name: "challenge.tabs.solution", id: "solution" },
+];
+
 onMounted(() => {
   if (!challenge) {
     router.push({ name: "not-found" });
   }
 });
 
-const tabsItems = [
-  { name: "challenge.tabs.description", id: "description" },
-  { name : "challenge.tabs.play", id: "play" },
-  { name: "challenge.tabs.solution", id: "solution" },
-];
+onMounted(() => {
+  if (challenge) {
+    document.title = `${challenge.title[store.locale]} - Vue Training`;
+  }
+});
+
+watch(() => store.locale, () => {
+  if (challenge) {
+    document.title = `${challenge.title[store.locale]} - Vue Training`;
+  }
+});
 </script>
 
 <template>
