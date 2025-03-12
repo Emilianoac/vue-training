@@ -21,7 +21,7 @@ defineProps<{
 
     <button 
       class="app-button primary text-sm font-semibold"
-      @click="$emit('startQuiz')">Start Quiz</button>
+      @click="$emit('startQuiz')">{{ $t("quiz.start_quiz") }}</button>
   </div>
 </template>
 

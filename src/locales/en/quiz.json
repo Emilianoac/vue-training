@@ -1,4 +1,5 @@
 {
+  "start_quiz": "Start quiz",
   "question": "Question",
   "verify_answer": "Verify answer",
   "next_question": "Next question",
