@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <header class="bg-slate-50 dark:bg-slate-900 text-black dark:text-white">
+  <header class="bg-white dark:bg-slate-900 text-black dark:text-white sticky top-0 z-50 shadow-sm">
     <div class="flex items-center justify-between container mx-auto p-4 px-4 md:px-10">
       <router-link to="/">
         <SiteBrandComponent class="max-w-[160px]" />
