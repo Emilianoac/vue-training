@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import headerIllustration from "@/assets/images/header-illustration.png";
+import headerIllustration from "@/assets/images/app-illustration.svg";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
+import HeaderIllustration from "@/components/HeaderIllustration.vue";
 
 </script>
 
@@ -27,7 +28,7 @@ import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
         </div>
       </div>
       <div>
-        <img :src="headerIllustration" alt="Header Illustration"/>
+        <HeaderIllustration />
       </div>
     </section>
 
