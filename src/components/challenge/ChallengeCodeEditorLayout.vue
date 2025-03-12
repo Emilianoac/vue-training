@@ -64,6 +64,6 @@ defineProps<{
   }
 
   .collapse-editor {
-    grid-template-columns: 0.3fr 1fr;
+    @apply grid-cols-1 lg:grid-cols-[0.3fr,1fr];
   }
 </style>
