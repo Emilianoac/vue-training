@@ -18,11 +18,11 @@ import HeaderIllustration from "@/components/HeaderIllustration.vue";
         </p>
         <div class="mt-5 gap-4 flex justify-center lg:justify-start">
           <router-link to="/quizzes" class="app-button primary">
-           {{ $t("general.quiz.many") }}
+            {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
           </router-link>
 
           <router-link to="/challenges" class="app-button primary">
-            {{ $t("general.challenge.many") }}
+            {{$t("general.goTo")}} {{$t("general.challenge.many") }}
           </router-link>
         </div>
       </div>
