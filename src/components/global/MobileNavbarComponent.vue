@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 
 const menuItems = [
-  { title: "general.challenge.many", path: "/challenges" },
   { title: "general.home", path: "/" },
+  { title: "general.challenge.many", path: "/challenges" },
   { title: "general.quiz.many", path: "/quizzes" },
 ]
 </script>
@@ -15,7 +15,7 @@ const menuItems = [
         :key="index" 
         :to="menuItem.path" 
         active-class="text-color-primary font-semibold"
-        class="text-[0.95em] text-center py-1 border-b-[3px] border-r border-l first-of-type:border-0 last-of-type:border-0 border-b-transparent block w-full">
+        class="border-r border-l first-of-type:border-0 last-of-type:border-0 border-slate-400 dark:border-slate-600 block w-full text-[0.95em] text-center py-1">
           {{ $t(menuItem.title) }}
       </router-link>
     </div>
