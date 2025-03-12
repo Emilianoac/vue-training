@@ -7,7 +7,7 @@ import HeaderIllustration from "@/components/HeaderIllustration.vue";
 
 <template>
     <!-- Header -->
-    <section class="block md:flex  items-center justify-between my-14 md:my-14">
+    <section class="block lg:flex items-center justify-between my-14 lg:my-14">
       <div class="mb-10 md:mb-0">
         <h1 class="text-4xl md:text-6xl font-bold max-w-[540px]">
           {{ $t("home.welcome") }} 
