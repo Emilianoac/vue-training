@@ -24,7 +24,7 @@ defineProps<{
 
 <template>
   <div class="grid grid-cols-1 md:grid-cols-[0.6fr,2fr] gap-3">
-    <div class="static md:sticky top-0 md:top-4 p-4 bg-white dark:bg-slate-900 rounded-md self-start">
+    <div class="static md:sticky md:top-20  p-4 bg-white dark:bg-slate-900 rounded-md self-start">
       <div class="flex justify-between items-center mb-4">
         <h1 class="font-bold">{{ quiz?.title[store.locale]}}</h1>
         <img :src="quiz?.category.image" alt="Quiz Image" class="w-[30px]">
