@@ -37,7 +37,7 @@ export interface Question {
     en: string;
     es: string;
   };
-  codeLanguage: "javascript" | "typescript" | "handlebars" | "html" | "css";
+  codeLanguage: string;
   answers: Answer[];
 }
 
