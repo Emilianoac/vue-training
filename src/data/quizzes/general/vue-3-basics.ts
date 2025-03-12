@@ -66,8 +66,8 @@ const quiz: Quiz = {
         {
           "id": 4,
           "answerText": {
-            "es": "Definir propiedades reactivas que no se recalculan automáticamente.",
-            "en": "Define reactive properties that are not recalculated automatically."
+            "es": "Llamar a una API externa.",
+            "en": "Call an external API."
           },
           "isCorrect": false
         }
