@@ -11,7 +11,7 @@ defineProps<{
   <!-- Quiz Progress -->
   <div class="flex justify-between items-center mb-4">
     <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
-      {{ $t('quiz.question') }} {{ currentQuestionIndex + 1 }} {{ $t('general.of') }} {{ quizLength }}
+      {{ $t('quiz.question') }} {{ currentQuestionIndex }} {{ $t('general.of') }} {{ quizLength }}
     </p>
   </div>
 
