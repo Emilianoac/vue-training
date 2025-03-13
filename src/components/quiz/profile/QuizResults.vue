@@ -81,6 +81,7 @@ defineProps<{
           </div>
           <!-- Code example -->
           <highlightjs 
+            v-if="question.codeExample[store.locale]"
             class="text-xs md:text-base rounded-md overflow-hidden" 
             :language="question.codeLanguage"
             :code="question.codeExample[store.locale]"

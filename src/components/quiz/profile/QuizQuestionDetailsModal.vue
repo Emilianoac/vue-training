@@ -48,6 +48,7 @@ const correctAnswer = computed(() => {
   
           <!-- Code Example -->
           <highlightjs 
+            v-if="question.correctAnswerCodeExample[store.locale]"
             class="text-sm rounded-md overflow-hidden mt-4" 
             :language="question.codeLanguage"
             :code="question.correctAnswerCodeExample[store.locale]"
