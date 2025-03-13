@@ -49,7 +49,7 @@ const correctAnswer = computed(() => {
           <!-- Code Example -->
           <highlightjs 
             class="text-sm rounded-md overflow-hidden mt-4" 
-            :language="question"
+            :language="question.codeLanguage"
             :code="question.correctAnswerCodeExample[store.locale]"
           />
         </div>

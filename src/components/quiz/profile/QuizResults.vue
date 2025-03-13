@@ -10,6 +10,7 @@ defineProps<{
     answers: Array<Answer & {isSelected: boolean}>;
     explanation: {en: string, es: string};
     codeExample: {en: string, es: string};
+    codeLanguage: string;
   }[];
   userStats: {
     total: number;
@@ -81,7 +82,7 @@ defineProps<{
           <!-- Code example -->
           <highlightjs 
             class="text-xs md:text-base rounded-md overflow-hidden" 
-            :language="question"
+            :language="question.codeLanguage"
             :code="question.codeExample[store.locale]"
           />
           <hr class="my-10 border-t border-gray-200 dark:border-slate-800">
