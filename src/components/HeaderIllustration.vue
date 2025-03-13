@@ -8,9 +8,9 @@
     <g id="illustration">
       <g id="code-editor-2">
         <rect id="Rectangle 6" width="107" height="87" rx="4" transform="matrix(0.866025 0.5 0 1 360 56.1543)"
-          fill="#22221F" />
+          class="fill-slate-300 dark:fill-gray-800"/>
         <rect id="Rectangle 6_2" width="107" height="87" rx="4" transform="matrix(0.866025 0.5 0 1 358 57.1543)"
-          fill="#3A3B37" />
+          class="fill-white dark:fill-gray-700"/>
         <rect id="Rectangle 7" width="93" height="3" rx="1.5" transform="matrix(0.866025 0.5 0 1 365.794 72.6543)"
           fill="#41B883" />
         <rect id="Rectangle 10" width="32" height="3" rx="1.5" transform="matrix(0.866025 0.5 0 1 365.794 78.6543)"
@@ -160,9 +160,10 @@
       </g>
       <g id="code-editor-1">
         <rect id="Rectangle 6_3" width="107" height="87" rx="4"
-          transform="matrix(0.906308 -0.422618 0 1 119.093 116.679)" fill="#22221F" />
+          transform="matrix(0.906308 -0.422618 0 1 119.093 116.679)" fill="#22221F" 
+          class="fill-slate-300 dark:fill-gray-800"/>
         <rect id="Rectangle 6_4" width="107" height="87" rx="4" transform="matrix(0.906308 -0.422618 0 1 121 117.81)"
-          fill="#3A3B37" />
+          class="fill-white dark:fill-gray-700"/>
         <rect id="Rectangle 7_2" width="93" height="3" rx="1.5"
           transform="matrix(0.906308 -0.422618 0 1 129.157 125.006)" fill="#41B883" />
         <rect id="Rectangle 10_2" width="32" height="3" rx="1.5"
