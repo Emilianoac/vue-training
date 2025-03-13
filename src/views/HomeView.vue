@@ -31,16 +31,15 @@ import HeaderIllustration from "@/components/HeaderIllustration.vue";
       </div>
     </section>
 
-    <!-- Challenges -->
-    <section class="mt-20">
-      <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
-      <ChallengeListComponent />
-    </section>
-
     <!-- Quizzes -->
     <section class="mt-20">
       <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.quiz.many") }}</h2>
       <QuizListComponent />
     </section>
 
+    <!-- Challenges -->
+    <section class="mt-20">
+      <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
+      <ChallengeListComponent />
+    </section>
 </template>
