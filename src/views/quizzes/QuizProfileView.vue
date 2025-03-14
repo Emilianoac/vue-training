@@ -52,10 +52,13 @@ watch(() => store.locale, () => {
 
     <!-- Quiz Welcome -->
     <QuizWelcome 
-      v-if="!quizInit"
-      :title="quiz?.title[store.locale]"
-      :description="quiz?.description[store.locale]"
-      :image="quiz?.category.image"
+      v-if="!quizInit && quiz"
+      :title="quiz.title[store.locale]"
+      :description="quiz.description[store.locale]"
+      :image="quiz.category.image"
+      :category="quiz.category.name"
+      :level="quiz.level"
+      :levelLabel="quiz.levelLabel[store.locale]"
       @startQuiz="quizInit = true"
     />
     
