@@ -14,9 +14,8 @@ import CardComponent from "@/components/CardComponent.vue";
       :level-label="challenge.levelLabel"
       :img="challenge.cover"
       :description="challenge.short_description"
-      :id="challenge.id" 
       type="challenge"
-      link="/challenge/:id"
+      :link="`/challenges/${challenge.id}`"
     />
   </div>
 </template>

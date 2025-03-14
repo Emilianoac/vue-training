@@ -13,9 +13,8 @@ import CardComponent from "@/components/CardComponent.vue";
       :level="quiz.level" 
       :level-label="quiz.levelLabel"
       :img="quiz.category.image"
-      :id="quiz.id" 
       type="quiz"
-      link="/quiz/:id"
+      :link="`/quizzes/${quiz.id}`"
       :description="quiz.description"
     />
   </div>
