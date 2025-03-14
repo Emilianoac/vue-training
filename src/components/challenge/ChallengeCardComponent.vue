@@ -30,13 +30,13 @@ defineProps<{
     <router-link :to="`/challenges/${id}`">
       <img :src="img" alt="Challenge Image" class="w-full h-48 object-cover object-center">
       <div class="p-4">
-        <h3 class="font-bold">{{ name[store.locale] }}</h3>
+        <h3 class="font-bold min-h-[50px] line-clamp-2">{{ name[store.locale] }}</h3>
         <BadgeComponent 
           :text="levelLabel[store.locale]" 
           :type="level"
-          class="my-4"
+          class="mb-4 mt-2"
          />
-        <p class=" opacity-65 ">{{ description[store.locale] }}</p>
+        <p class="opacity-65 text-sm line-clamp-2">{{ description[store.locale] }}</p>
       </div>
     </router-link>
   </CardComponent>
