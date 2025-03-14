@@ -19,8 +19,11 @@
         <nav>
           <ul class="hidden sm:flex space-x-4">
             <li v-for="(menuItem, index) in menuItems" :key="index">
-              <router-link :to="menuItem.path" class="border-b-[3px] border-transparent pb-1" active-class="border-b-color-primary">
-                {{ $t(menuItem.title) }}
+              <router-link 
+                :to="menuItem.path" 
+                class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-color-primary/30"
+                active-class="border-b-color-primary hover:!border-b-color-primary">
+                  {{ $t(menuItem.title) }}
               </router-link>
             </li>
           </ul>
