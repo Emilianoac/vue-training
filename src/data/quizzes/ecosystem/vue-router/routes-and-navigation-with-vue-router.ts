@@ -6,8 +6,8 @@ const quiz: Quiz = {
   "slug": "routes-and-navigation-with-vue-router",
   "level": "medium",
   "category": {
-    "id": "vue",
-    "name": "Vue",
+    "id": "vue-router",
+    "name": "Vue Router",
     "image": "public/images/quizzes/categories/vue.png"
   },
   "title": {
