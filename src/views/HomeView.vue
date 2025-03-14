@@ -42,6 +42,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
           :description="quiz.description"
           :level="quiz.level"
           :type="'quiz'"
+          :category="quiz.category.name"
           :img="quiz.category.image"
           :levelLabel="quiz.levelLabel"
           :link="`/quizzes/${quiz.id}`">
