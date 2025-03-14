@@ -31,14 +31,18 @@ defineProps<{
         <img :src="img" alt="Challenge Image" class="w-[30px]">
       </div>
       <div class="mt-3">
-        <h3 class="font-bold tex">{{ name[store.locale] }}</h3>
+        <h3 class="font-bold tex min-h-[50px] line-clamp-2">{{ name[store.locale] }}</h3>
         <BadgeComponent 
           :text="levelLabel[store.locale]" 
           :type="level"
-          class="mt-4"
+          class="mt-2"
          />
       </div>
-      <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">{{ description[store.locale] }}</p>
+      <p 
+        class="mt-3 text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
+        :title="description[store.locale]">
+          {{ description[store.locale] }}
+      </p>
     </router-link>
   </CardComponent>
 </template>
