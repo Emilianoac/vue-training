@@ -15,6 +15,7 @@ defineProps<{
     es: "Fácil" | "Medio" | "Difícil";
     en: "Easy" | "Medium" | "Hard";
   },
+  category: string;
   id: string;
   img: string;
   description: {
@@ -31,15 +32,16 @@ defineProps<{
         <img :src="img" alt="Challenge Image" class="w-[30px]">
       </div>
       <div class="mt-3">
-        <h3 class="font-bold tex min-h-[50px] line-clamp-2">{{ name[store.locale] }}</h3>
+        <p class="text-sm opacity-70 mb-1">{{ category  }}</p>
+        <h3 class="font-bold line-clamp-1">{{ name[store.locale] }}</h3>
         <BadgeComponent 
           :text="levelLabel[store.locale]" 
           :type="level"
-          class="mt-2"
+          class="my-4"
          />
       </div>
       <p 
-        class="mt-3 text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
+        class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
         :title="description[store.locale]">
           {{ description[store.locale] }}
       </p>
