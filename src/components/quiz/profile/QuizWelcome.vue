@@ -10,7 +10,7 @@ defineProps<{
   description: string;
   image: string;
   category: string;
-  level: "easy" | "medium" | "hard";
+  level: "basic" | "intermediate" | "advanced";
   levelLabel: string;
 }>();
 </script>

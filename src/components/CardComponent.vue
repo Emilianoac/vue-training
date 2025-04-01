@@ -8,10 +8,10 @@ defineProps<{
     es: string;
     en: string;
   },
-  level: "easy" | "medium" | "hard";
+  level: "basic" | "intermediate" | "advanced";
   levelLabel: {
-    es: "Fácil" | "Medio" | "Difícil";
-    en: "Easy" | "Medium" | "Hard";
+    es: "Fácil" | "Intermedio" | "Avanzado";
+    en: "Easy" | "Intermediate" | "Advanced";
   },
   category?: string;
   link: string;

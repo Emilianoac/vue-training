@@ -4,7 +4,7 @@ const quiz: Quiz = {
   "id": "pinia-basics",
   "isPublic": true,
   "slug": "pinia-basics",
-  "level": "easy",
+  "level": "basic",
   "category": {
     "id": "pinia",
     "name": "Pinia",
@@ -15,8 +15,8 @@ const quiz: Quiz = {
     "en": "Introduction to Pinia"
   },
   "levelLabel": {
-    "es": "Fácil",
-    "en": "Easy"
+    "es": "Básico",
+    "en": "Basic"
   },
   "description": {
     "es": "Este cuestionario cubre los conceptos básicos de Pinia, el gestor de estado para Vue 3.",

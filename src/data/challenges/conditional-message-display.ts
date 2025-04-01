@@ -2,14 +2,14 @@ import type { Challenge } from "@/types/challenge";
 
 const challenge: Challenge = {
   "id": "conditional-message-display",
-  "level": "easy",
+  "level": "basic",
   "cover": "public/images/challenges/conditional-message-display/cover.jpg",
   "images": [
     "public/images/challenges/conditional-message-display/image-1.gif",
   ],
   "levelLabel": {
-    "es": "Fácil",
-    "en": "Easy"
+    "es": "Básico",
+    "en": "Basic"
   },
   "title": {
     "es": "Visualización condicional de mensajes",

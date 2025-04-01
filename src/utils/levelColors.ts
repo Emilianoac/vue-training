@@ -1,13 +1,13 @@
 export const levelColors = {
-  easy: {
+  basic: {
     bg: "bg-green-300",
     text: "text-green-800"
   },
-  medium: {
+  intermediate: {
     bg: "bg-yellow-500",
     text: "text-yellow-800"
   },
-  hard: {
+  advanced: {
     bg: "bg-red-500",
     text: "text-red-900"
   }

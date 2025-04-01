@@ -3,7 +3,7 @@
 
   defineProps<{
     text: string;
-    type?: "easy" | "medium" | "hard";
+    type?: "basic" | "intermediate" | "advanced";
   }>();
 </script>
 

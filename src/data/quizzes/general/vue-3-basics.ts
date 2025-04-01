@@ -4,7 +4,7 @@ const quiz: Quiz = {
   "id": "introduction-to-vue-3",
   "isPublic": true,
   "slug": "intoduction-to-vue-3",
-  "level": "easy",
+  "level": "basic",
   "category": {
     "id": "vue",
     "name": "Vue",
@@ -15,8 +15,8 @@ const quiz: Quiz = {
     "en": "Introduction to Vue 3" 
   },
   "levelLabel": {
-    "es": "Fácil",
-    "en": "Easy"
+    "es": "Básico",
+    "en": "Basic"
   },
   "description": {
     "es": "Este quiz evalúa conocimientos básicos sobre directivas en Vue.js.",

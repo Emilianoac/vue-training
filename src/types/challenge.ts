@@ -2,10 +2,10 @@ export interface Challenge {
   id: string;
   cover: string;
   images: string[];
-  level: "easy" | "medium" | "hard";
+  level: "basic" | "intermediate" | "advanced";
   levelLabel: {
-    en: "Easy" | "Medium" | "Hard";
-    es: "Fácil" | "Medio" | "Difícil";
+    en: "Basic" | "Intermediate" | "Advanced";
+    es: "Básico" | "Intermedio" | "Avanzado";
   };
   title: {
     en: string;

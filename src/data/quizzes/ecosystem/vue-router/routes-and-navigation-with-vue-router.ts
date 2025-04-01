@@ -4,7 +4,7 @@ const quiz: Quiz = {
   "id": "routes-and-navigation-with-vue-router",
   "isPublic": true,
   "slug": "routes-and-navigation-with-vue-router",
-  "level": "medium",
+  "level": "intermediate",
   "category": {
     "id": "vue-router",
     "name": "Vue Router",
@@ -15,8 +15,8 @@ const quiz: Quiz = {
     "en": "Routes and navigation with Vue Router",
   },
   "levelLabel": {
-    "es": "Medio",
-    "en": "Medium",
+    "es": "Intermedio",
+    "en": "Intermediate"
   },
   "description": {
     "es": "Este quiz se centra en la configuración y el uso de Vue Router, incluyendo la definición de rutas, navegación y anidación de rutas en aplicaciones Vue.",

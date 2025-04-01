@@ -2,7 +2,7 @@ export interface Quiz {
   id: string;
   isPublic: boolean;
   slug: string;
-  level: "easy" | "medium" | "hard";
+  level: "basic" | "intermediate" | "advanced";
   category: {
     id: string;
     name: string;
@@ -13,8 +13,8 @@ export interface Quiz {
     es: string;
   };
   levelLabel: {
-    en: "Easy" | "Medium" | "Hard";
-    es: "Fácil" | "Medio" | "Difícil";
+    es: "Básico" | "Intermedio" | "Avanzado";
+    en: "Basic" | "Intermediate" | "Advanced";
   };
   description: {
     en: string;
