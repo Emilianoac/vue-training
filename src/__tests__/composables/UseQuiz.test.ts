@@ -102,5 +102,7 @@ describe("useQuiz", () => {
     expect(quizComposable.userStats.value.total).toBe(quizMock.questions.length);
     expect(quizComposable.userStats.value.correct).toBeGreaterThanOrEqual(0);
     expect(quizComposable.userStats.value.wrong).toBeGreaterThanOrEqual(0);
+    expect(quizComposable.userStats.value.percentage).toBeGreaterThanOrEqual(0);
+    expect(Number.isInteger(quizComposable.userStats.value.percentage)).toBe(true);
   });
 });

@@ -54,8 +54,7 @@ export default function useQuiz(quiz: Quiz | null) {
         return question.answers.every((answer) => answer.isSelected === answer.isCorrect);
       }).length;
       userStats.value.wrong = userStats.value.total - userStats.value.correct;
-      userStats.value.percentage = (userStats.value.correct / userStats.value.total) * 100;
-
+      userStats.value.percentage = Math.round((userStats.value.correct / userStats.value.total) * 100);
       return;
     }
 
