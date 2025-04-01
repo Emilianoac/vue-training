@@ -15,6 +15,7 @@ const languages = [
 function changeLanguage(lang: string) {
   document.cookie = "locale=" + lang;
   locale.value = lang;
+  changeLangAttribute(lang);
 }
 
 const handleClickOutside = (event: MouseEvent) => {
@@ -23,7 +24,12 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 };
 
+function changeLangAttribute(lang: string) {
+  document.documentElement.lang = lang;
+}
+
 onMounted(() => {
+  changeLangAttribute(locale.value);
   document.addEventListener("mousedown", handleClickOutside);
 });
 

@@ -54,8 +54,9 @@ describe("Lang Toggle component", () => {
     const spanishButton = wrapper.find("[data-test='lang-es']");
     
     await spanishButton.trigger("click");
-  
+      
     expect(i18n.global.locale.value).toBe("es"); 
+    expect(document.documentElement.getAttribute("lang")).toBe("es");
   });
 
   describe("when clicking outside the dropdown menu", () => {
