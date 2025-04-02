@@ -63,9 +63,6 @@ watch(() => store.locale, () => {
               </ul>
             </div>
             <div>
-              <!-- Cover -->
-              <img :src="challenge?.cover" alt="Cover" class="w-full rounded-md" />
-  
               <!-- Gallery -->
                <div v-if="challenge?.images.length" class="mt-4">
                   <img v-for="(image, i) in challenge?.images" :key="i" :src="image" alt="Gallery" class="w-full rounded-md" />
