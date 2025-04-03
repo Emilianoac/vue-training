@@ -2,7 +2,7 @@ import {expect, describe, it, beforeEach} from "vitest";
 import { effectScope, nextTick, type Ref, type ComputedRef } from "vue";
 import useQuiz from "../../composables/useQuiz";
 import quizMock from "../__mocks__/quizMock";
-import type { Question, Answer } from "../../types/quiz";
+import type { Question, Answer, CodeExample } from "../../types/quiz";
 
 interface QuizComposable {
   quizInit: Ref<Boolean>;
@@ -16,7 +16,7 @@ interface QuizComposable {
     question: { en: string; es: string };
     answers: Array<Answer & { isSelected: boolean }>;
     explanation: { en: string; es: string };
-    codeExample: { en: string; es: string };
+    codeExample: { en: CodeExample[]; es: CodeExample[]};
   }>>;
   isLastQuestion: ComputedRef<boolean>;
   isFinished: Ref<boolean>;
@@ -91,7 +91,7 @@ describe("useQuiz", () => {
   it("should finish the quiz and calculate stats", async () => {
     for (let i = 0; i < quizMock.questions.length; i++) {
       quizComposable.selectedOption.value = quizMock.questions[i].answers[0].id; 
-      quizComposable.handleUserAnswer(); // Llama a handleUserAnswer para registrar la respuesta
+      quizComposable.handleUserAnswer();
   
       quizComposable.handleNextQuestion();
       await nextTick();
