@@ -37,7 +37,7 @@ defineProps<{
       <img v-if="type === 'challenge'" :src="img" alt="Challenge Image" class="w-full h-48 object-cover object-center">
       <div class="p-4">
         <!-- Category -->
-        <p v-if="category" class="text-sm opacity-70 mb-1 mt-3">{{ category }}</p>
+        <p v-if="category" class="text-sm opacity-70 mb-1">{{ category }}</p>
         <!-- Title -->
         <h3 class="font-bold line-clamp-1">{{ title[store.locale] }}</h3>
         <!-- Description -->
