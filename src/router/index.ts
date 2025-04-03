@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { useTopLoader } from "@/composables/useTopLoader";
 import { i18n } from "@/i18n";
 import HomeView from "@/views/HomeView.vue";
  
@@ -50,11 +51,20 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const loader = useTopLoader();
+  loader.start();
   document.title = to.meta.titleKey ? `${i18n.global.t(to.meta.titleKey as string)} - Vue Training`   : "Vue Training"
   if (to.meta.title) {
     console.log(to.meta.title)
   }
   next()
 });
+
+
+router.afterEach(() => {
+  const loader = useTopLoader();
+  loader.finish();
+});
+
 
 export default router

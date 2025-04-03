@@ -24,7 +24,7 @@ watch(locale, () => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="progress-bar bg-color-primary"></div>
+  <TopLoader />
   <DefaultLayout>
     <RouterView />
   </DefaultLayout>
