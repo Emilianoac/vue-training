@@ -1,6 +1,10 @@
 <script lang="ts" setup>
-import quizzes from "@/data/quizzes";
 import CardComponent from "@/components/CardComponent.vue";
+import type { Quiz } from "@/types/quiz";
+
+defineProps<{
+  quizzes: Quiz[];
+}>();
 
 </script>
 
@@ -11,6 +15,7 @@ import CardComponent from "@/components/CardComponent.vue";
       :key="quiz.id" 
       :title="quiz.title" 
       :level="quiz.level" 
+      :category="quiz.category.name"
       :level-label="quiz.levelLabel"
       :img="quiz.category.image"
       type="quiz"
