@@ -1,5 +1,5 @@
 import {ref, computed} from "vue";
-import type {Quiz, Answer} from "@/types/quiz";
+import type {Quiz, Answer, CodeExample} from "@/types/quiz";
 
 export default function useQuiz(quiz: Quiz | null) {  
   if (!quiz) throw new Error("No quiz provided");
@@ -17,8 +17,7 @@ export default function useQuiz(quiz: Quiz | null) {
     question: { en: string; es: string;}; 
     answers: Array<Answer & { isSelected: boolean; }>;
     explanation: { en: string; es: string; };
-    codeExample: { en: string; es: string; };
-    codeLanguage: string;
+    codeExample: { en: CodeExample[]; es: CodeExample[]; };
   }>>([]);
   const userStats = ref({ correct: 0, wrong: 0, percentage: 0, total: 0 });
 
@@ -37,7 +36,6 @@ export default function useQuiz(quiz: Quiz | null) {
       answers: answersWithSelection,
       explanation: currentQuestion.value.correctAnswerExplanation,
       codeExample: currentQuestion.value.correctAnswerCodeExample,
-      codeLanguage: currentQuestion.value.codeLanguage,
     });
 
     checkAnswer.value = true;

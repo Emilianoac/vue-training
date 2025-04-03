@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useGeneralStore } from "@/stores/general";
-import type { Quiz, Answer } from "@/types/quiz";
+import type { Quiz, Answer, CodeExample } from "@/types/quiz";
 
 const store = useGeneralStore();
 
@@ -9,7 +9,7 @@ defineProps<{
     question: {en: string, es: string};
     answers: Array<Answer & {isSelected: boolean}>;
     explanation: {en: string, es: string};
-    codeExample: {en: string, es: string};
+    codeExample: {en: CodeExample[], es: CodeExample[]};
     codeLanguage: string;
   }[];
   userStats: {
@@ -81,10 +81,10 @@ defineProps<{
           </div>
           <!-- Code example -->
           <highlightjs 
-            v-if="question.codeExample[store.locale]"
-            class="text-xs md:text-base rounded-md overflow-hidden" 
-            :language="question.codeLanguage"
-            :code="question.codeExample[store.locale]"
+            v-for="codeExample in question.codeExample[store.locale]"
+            class="text-xs md:text-base rounded-md overflow-hidden mb-4 last-of-type:mb-0" 
+            :language="codeExample.language"
+            :code="codeExample.code"  
           />
           <hr class="my-10 border-t border-gray-200 dark:border-slate-800">
         </li>

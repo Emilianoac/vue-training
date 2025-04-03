@@ -46,13 +46,14 @@ const correctAnswer = computed(() => {
             <p>{{ question.correctAnswerExplanation[store.locale] }}</p>
           </div>
   
-          <!-- Code Example -->
-          <highlightjs 
-            v-if="question.correctAnswerCodeExample[store.locale]"
-            class="text-sm rounded-md overflow-hidden mt-4" 
-            :language="question.codeLanguage"
-            :code="question.correctAnswerCodeExample[store.locale]"
-          />
+          <!-- Code Example --> 
+          <template v-for="codeExample in question.correctAnswerCodeExample[store.locale]">
+            <highlightjs 
+              class="text-sm rounded-md overflow-hidden mt-4" 
+              :language="codeExample.language"
+              :code="codeExample.code"
+            />
+          </template>
         </div>
       </div>
   </div>
