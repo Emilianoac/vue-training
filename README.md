@@ -1,26 +1,25 @@
-# Vue Training
+# Vue Training 🏆
 
+Vue Training is a platform designed to enhance your Vue.js skills through practical challenges and quizzes. You will find a variety of exercises where you must implement the necessary logic to pass the tests.
 
-## Project Setup
+## 🚀 Features
 
-```sh
-npm install
-```
+  📌 Interactive challenges: Solve Vue.js-specific problems with clear instructions.
 
-### Compile and Hot-Reload for Development
+  ✅ Test validation: Each challenge includes tests to verify that your solution is correct.
 
-```sh
-npm run dev
-```
+  🧠 Vue.js quizzes: Test your knowledge with multiple-choice questions.
 
-### Type-Check, Compile and Minify for Production
+## 🎯 How does it work?
 
-```sh
-npm run build
-```
+  Select a challenge from the site.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+  Open it in StackBlitz and implement your solution.
 
-```sh
-npm run test:unit
-```
+  Make sure the tests pass before marking it as completed.
+
+  Check the solution if you need help.
+
+## 🌟 Contributions
+
+If you have ideas for new challenges or improvements, contributions are welcome!
