@@ -34,10 +34,9 @@ const quiz: Quiz = {
         "en": "Pinia is a library for state management in Vue, which allows storing and sharing the application state across different components."
       },
       "correctAnswerCodeExample": {
-        "es": "",
-        "en": "",
+        "es": [],
+        "en": []
       },
-      "codeLanguage": "plaintext",
       "answers": [
         {
           "id": 1,
@@ -84,10 +83,19 @@ const quiz: Quiz = {
         "en": "The defineStore function is used to create a new store in Pinia, which can be imported and used in different components of the application."
       },
       "correctAnswerCodeExample": {
-        "es": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 })\n});`,
-        "en": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 })\n});`
+        "es": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 })\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 })\n});`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -134,10 +142,19 @@ const quiz: Quiz = {
         "en": "To access the store, you import the function that defines the store and then call that function inside the component."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n</script>\n`,
-        "en": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n</script>\n`
+        "es": [
+          {
+            "code": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n</script>\n`,
+            "language": "handlebars",
+          }
+        ],
+        "en": [
+          {
+            "code": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n</script>\n`,
+            "language": "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -184,10 +201,19 @@ const quiz: Quiz = {
         "en": "With defineStore, pinia stores can be used directly with Composition API, allowing cleaner access without relying on this."
       },
       "correctAnswerCodeExample": {
-        "es": `import { defineStore } from "pinia";\nimport { ref, computed } from "vue";\n\nexport const useCounterStore = defineStore("counter", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  const doubleCount = computed(() => count.value * 2);\n  \n  return { count, increment, decrement, doubleCount };\n});`,
-        "en": `import { defineStore } from "pinia";\nimport { ref, computed } from "vue";\n\nexport const useCounterStore = defineStore("counter", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  const doubleCount = computed(() => count.value * 2);\n  \n  return { count, increment, decrement, doubleCount };\n});`
+        "es": [
+          {
+            "code": `import { defineStore } from "pinia";\nimport { ref, computed } from "vue";\n\nexport const useCounterStore = defineStore("counter", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  const doubleCount = computed(() => count.value * 2);\n  \n  return { count, increment, decrement, doubleCount };\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { defineStore } from "pinia";\nimport { ref, computed } from "vue";\n\nexport const useCounterStore = defineStore("counter", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  const doubleCount = computed(() => count.value * 2);\n  \n  return { count, increment, decrement, doubleCount };\n});`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -234,10 +260,19 @@ const quiz: Quiz = {
         "en": "The state option defines the initial state of the store, which can be modified or accessed by the components that use it."
       },
       "correctAnswerCodeExample": {
-        "es": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0,\n  })\n});`,
-        "en": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0,\n  })\n});`
+        "es": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0,\n  })\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0,\n  })\n});`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -284,10 +319,19 @@ const quiz: Quiz = {
         "en": "Actions in Pinia are defined inside the actions option, allowing you to execute methods that modify the store state."
       },
       "correctAnswerCodeExample": {
-        "es": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});`,
-        "en": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});`
+        "es": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});`,
+          "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -335,10 +379,19 @@ const quiz: Quiz = {
         "en": "Getters in Pinia are derived properties from the state that are automatically recalculated when their dependencies change."
       },
       "correctAnswerCodeExample": {
-        "es": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2\n  }\n});`,
-        "en": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2\n  }\n});`
+        "es": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2\n  }\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { defineStore } from "pinia";\n\nexport const useCounterStore = defineStore("counter", {\n  state: () => ({ \n    count: 0 \n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2\n  }\n});`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -385,10 +438,9 @@ const quiz: Quiz = {
         "en": "To keep the state persistent, you can use persistence libraries that store the state in the browser, allowing its restoration after a reload."
       },
       "correctAnswerCodeExample": {
-        "es": "",
-        "en": "",
+        "es": [],
+        "en": [],
       },
-      "codeLanguage": "plaintext",
       "answers": [
         {
           "id": 1,
@@ -435,10 +487,19 @@ const quiz: Quiz = {
         "en": "Pinia allows defining a $reset() method to restore the state to its initial configuration."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n\n  // Resetear el contador a su valor inicial\n  counterStore.$reset();\n</script>`,
-        "en": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n\n  // Reset the counter to its initial value\n  counterStore.$reset();\n</script>`
+        "es": [
+          {
+            "code": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n\n  // Resetear el contador a su valor inicial\n  counterStore.$reset();\n</script>`,
+            "language": "handlebars"
+          }
+        ],
+        "en": [
+          {
+            "code": `<script setup>\n  import { useCounterStore } from "@/stores/counter";\n\n  const counterStore = useCounterStore();\n\n  // Reset the counter to its initial value\n  counterStore.$reset();\n</script>`,
+          "language": "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -485,10 +546,19 @@ const quiz: Quiz = {
         "en": "In Pinia, any function inside actions can be asynchronous, allowing you to make API calls or tasks that require waiting."
       },
       "correctAnswerCodeExample": {
-        "es": `export const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 }),\n  actions: {\n    async fetchCount() {\n      const response = await fetch("/api/count");\n      this.count = await response.json();\n    }\n  }\n});`,
-        "en": `export const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 }),\n  actions: {\n    async fetchCount() {\n      const response = await fetch("/api/count");\n      this.count = await response.json();\n    }\n  }\n});`
+        "es": [
+          {
+            "code": `export const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 }),\n  actions: {\n    async fetchCount() {\n      const response = await fetch("/api/count");\n      this.count = await response.json();\n    }\n  }\n});`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `export const useCounterStore = defineStore("counter", {\n  state: () => ({ count: 0 }),\n  actions: {\n    async fetchCount() {\n      const response = await fetch("/api/count");\n      this.count = await response.json();\n    }\n  }\n});`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,

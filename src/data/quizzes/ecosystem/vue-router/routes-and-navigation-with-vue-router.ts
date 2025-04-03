@@ -34,10 +34,19 @@ const quiz: Quiz = {
         "en": "The createWebHistory function allows you to configure Vue Router to use the HTML5 history mode, which removes the hash # in the URL and allows for clean routes."
       },
       "correctAnswerCodeExample": {
-        "es": `import { createRouter, createWebHistory } from "vue-router";\n\nimport Home from "./views/Home.vue";\nimport About from "./views/About.vue";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\n// Crear el router con historial HTML5\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
-        "en": `import { createRouter, createWebHistory } from "vue-router";\n\nimport Home from "./views/Home.vue";\nimport About from "./views/About.vue";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\n// Create the router with HTML5 history\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`
+        "es": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nimport Home from "./views/Home.vue";\nimport About from "./views/About.vue";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\n// Crear el router con historial HTML5\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nimport Home from "./views/Home.vue";\nimport About from "./views/About.vue";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\n// Create the router with HTML5 history\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -84,10 +93,19 @@ const quiz: Quiz = {
         "en": "To navigate programmatically, you use router.push(), which allows you to change the current route to the one passed as an argument."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { useRouter } from "vue-router";\n\nconst router = useRouter();\n function gotToAbout() {\n router.push("/about");\n}\n</script>\n\n<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <button @click="gotToAbout">Ir a About</button>\n  </div>\n</template>`,
-        "en": `<script setup>\nimport { useRouter } from "vue-router";\n\nconst router = useRouter();\n function gotToAbout() {\n router.push("/about");\n}\n</script>\n\n<template>\n  <div>\n    <h1>Welcome to the main page</h1>\n    <button @click="gotToAbout">Go to About</button>\n  </div>\n</template>`
+        "es": [
+          {
+            "code": `<script setup>\nimport { useRouter } from "vue-router";\n\nconst router = useRouter();\n function gotToAbout() {\n router.push("/about");\n}\n</script>\n\n<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <button @click="gotToAbout">Ir a About</button>\n  </div>\n</template>`,
+            "language": "handlebars"
+          }
+        ],
+        "en": [
+          {
+            "code": `<script setup>\nimport { useRouter } from "vue-router";\n\nconst router = useRouter();\n function gotToAbout() {\n router.push("/about");\n}\n</script>\n\n<template>\n  <div>\n    <h1>Welcome to the main page</h1>\n    <button @click="gotToAbout">Go to About</button>\n  </div>\n</template>`,
+            "language": "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -134,10 +152,19 @@ const quiz: Quiz = {
         "en": "The 'children' option allows you to define nested routes, where a parent route can have multiple child routes, making it easier to create complex navigation structures."
       },
       "correctAnswerCodeExample": {
-        "es": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "profile" component: UserProfile }\n    ]\n  }\n];`,
-        "en": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "profile" component: UserProfile }\n    ]\n  }\n];`
+        "es": [
+          {
+            "code": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "profile" component: UserProfile }\n    ]\n  }\n];`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            code: `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "profile" component: UserProfile }\n    ]\n  }\n];`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -184,10 +211,9 @@ const quiz: Quiz = {
         "en": "Vue Router allows you to manage navigation between different views or components in a Vue application, making it easier to create single-page applications (SPAs)."
       },
       "correctAnswerCodeExample": {
-        "es": "",
-        "en": ""
+        "es": [],
+        "en": []
       },
-      "codeLanguage": "plaintext",
       "answers": [
         {
           "id": 1,
@@ -234,10 +260,19 @@ const quiz: Quiz = {
         "en": "Routes in Vue Router are defined as objects inside an array, specifying the path and the component that should be rendered."
       },
       "correctAnswerCodeExample": {
-        "es": `const routes = [\n  { path: "/home", component: Home }\n];`,
-        "en": `const routes = [\n  { path: "/home", component: Home }\n];`
+        "es": [
+          {
+            "code": `const routes = [\n  { path: "/home", component: Home }\n];`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `const routes = [\n  { path: "/home", component: Home }\n];`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -284,10 +319,19 @@ const quiz: Quiz = {
         "en": "createRouter() is the function used to create a new instance of Vue Router, allowing you to define the configuration and routes."
       },
       "correctAnswerCodeExample": {
-        "es": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
-        "en": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`
+        "es": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  { path: "/", component: Home },\n  { path: "/about", component: About }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -334,10 +378,19 @@ const quiz: Quiz = {
         "en": "The <router-link> component is used to create navigation links that allow you to change routes without reloading the page."
       },
       "correctAnswerCodeExample": {
-        "es": `<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <router-link to="/profile">Ir a mi perfil</router-link>\n  </div>\n</template>\n`,
-        "en": `<template>\n  <div>\n    <h1>Welcome to the main page</h1>\n    <router-link to="/profile">Go to my profile</router-link>\n  </div>\n</template>\n`
+        "es": [
+          {
+            code: `<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <router-link to="/profile">Ir a mi perfil</router-link>\n  </div>\n</template>\n`,
+          "language": "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<template>\n  <div>\n    <h1>Welcome to the main page</h1>\n    <router-link to="/profile">Go to my profile</router-link>\n  </div>\n</template>\n`,
+          "language": "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -384,10 +437,19 @@ const quiz: Quiz = {
         "en": "To set a default subroute in a nested route, you define a subroute with an empty path (path: '') inside children. This causes Vue Router to automatically load the default subroute when the user accesses the parent route without changing the URL."
       },
       "correctAnswerCodeExample": {
-        "es": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "", component: Profile } // Subruta por defecto\n    ]\n  }\n];`,
-        "en": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "", component: Profile } // Default subroute\n    ]\n  }\n];`
+        "es": [
+          {
+            "code": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "", component: Profile } // Subruta por defecto\n    ]\n  }\n];`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `const routes = [\n  {\n    path: "/dashboard",\n    component: Dashboard,\n    children: [\n      { path: "", component: Profile } // Default subroute\n    ]\n  }\n];`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -434,10 +496,19 @@ const quiz: Quiz = {
         "en": "In Vue Router, a dynamic route is defined using dynamic parameters, which are indicated with a colon : followed by the parameter name."
       },
       "correctAnswerCodeExample": {
-        "es": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  {\n    path: "/user/:id" // Ruta dinámica con parámetro :id\n    name: "UserProfile",\n    component: () => import('@/views/UserProfile.vue')\n  },\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n});\n\nexport default router;\n`,
-        "en": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  {\n    path: "/user/:id" // Dynamic route with :id parameter\n    name: "UserProfile",\n    component: () => import('@/views/UserProfile.vue')\n  },\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n});\n\nexport default router;\n`
+        "es": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  {\n    path: "/user/:id" // Ruta dinámica con parámetro :id\n    name: "UserProfile",\n    component: () => import('@/views/UserProfile.vue')\n  },\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n});\n\nexport default router;\n`,
+          "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `import { createRouter, createWebHistory } from "vue-router";\n\nconst routes = [\n  {\n    path: "/user/:id" // Dynamic route with :id parameter\n    name: "UserProfile",\n    component: () => import('@/views/UserProfile.vue')\n  },\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n});\n\nexport default router;\n`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,
@@ -484,10 +555,19 @@ const quiz: Quiz = {
         "en": "To lazily load a component in a Vue Router route, you use a dynamic import function that returns a promise with the component."
       },
       "correctAnswerCodeExample": {
-        "es": `const routes = [\n  {\n    path: "/about",\n    component: () => import("./views/About.vue") // Carga perezosa\n  }\n];`,
-        "en": `const routes = [\n  {\n    path: "/about",\n    component: () => import("./views/About.vue") // Lazy loading\n  }\n];`
+        "es": [
+          {
+            "code": `const routes = [\n  {\n    path: "/about",\n    component: () => import("./views/About.vue") // Carga perezosa\n  }\n];`,
+            "language": "javascript"
+          }
+        ],
+        "en": [
+          {
+            "code": `const routes = [\n  {\n    path: "/about",\n    component: () => import("./views/About.vue") // Lazy loading\n  }\n];`,
+            "language": "javascript"
+          }
+        ]
       },
-      "codeLanguage": "javascript",
       "answers": [
         {
           "id": 1,

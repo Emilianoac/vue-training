@@ -34,11 +34,15 @@ export interface Question {
     es: string;
   }
   correctAnswerCodeExample: {
-    en: string;
-    es: string;
+    en: CodeExample[];
+    es: CodeExample[];
   };
-  codeLanguage: string;
   answers: Answer[];
+}
+
+export interface CodeExample {
+  code: string;
+  language: string;
 }
 
 export interface Answer {

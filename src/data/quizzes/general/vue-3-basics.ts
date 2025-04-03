@@ -34,10 +34,19 @@ const quiz: Quiz = {
         "en": "computed allows you to define properties that are recalculated when their dependencies change, helping to optimize performance."
       },
       "correctAnswerCodeExample": {
-        "es" : `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hola, Vue 3!");\n</script>`,
-        "en": `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hello, Vue 3!");\n</script>`
+        "es" : [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hola, Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hello, Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -84,10 +93,19 @@ const quiz: Quiz = {
         "en": "Methods are defined directly as functions inside <script setup>, where they can be called or returned as needed."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nconst sayHello = () => alert("¡Hola desde Vue 3!");\n</script>`,
-        "en": `<script setup>\nconst sayHello = () => alert("Hello from Vue 3!");\n</script>`
+        "es": [
+          {
+            code: `<script setup>\nconst sayHello = () => alert("¡Hola desde Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nconst sayHello = () => alert("Hello from Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -134,10 +152,19 @@ const quiz: Quiz = {
         "en": "onMounted allows you to run code when the component has been added to the DOM, similar to the mounted hook in the Options API."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { onMounted } from "vue";\n\nonMounted(() => {\n  console.log("Componente montado");\n});\n</script>`,
-        "en": `<script setup>\nimport { onMounted } from "vue";\n\nonMounted(() => {\n  console.log("Component mounted");\n});\n</script>`
+        "es": [
+          {
+            code: `<script setup>\nimport { onMounted } from "vue";\n\nonMounted(() => {\n  console.log("Componente montado");\n});\n</script>`,
+            language: "handlebars",
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { onMounted } from "vue";\n\nonMounted(() => {\n  console.log("Component mounted");\n});\n</script>`,
+            language: "handlebars",
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -184,10 +211,19 @@ const quiz: Quiz = {
         "en": "reactive converts an object into reactive, allowing Vue to automatically detect and update changes to its properties."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { reactive } from "vue";\n\nconst state = reactive({ count: 0 });\n</script>`,
-        "en": `<script setup>\nimport { reactive } from "vue";\n\nconst state = reactive({ count: 0 });\n</script>`
+        "es": [
+          {
+            code: `<script setup>\nimport { reactive } from "vue";\n\nconst state = reactive({ count: 0 });\n</script>`,
+            language: "handlebars"
+          },
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { reactive } from "vue";\n\nconst state = reactive({ count: 0 });\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -234,10 +270,19 @@ const quiz: Quiz = {
         "en": "ref is used to create a reactive reference to a value, such as numbers or strings, allowing Vue to react to these changes."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hola, Vue 3!");\n</script>`,
-        "en": `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hello, Vue 3!");\n</script>`
+        "es": [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hola, Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hello, Vue 3!");\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -284,10 +329,19 @@ const quiz: Quiz = {
         "en": "watch allows you to watch for changes in reactive data and run functions in response to these changes."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { ref, watch } from "vue";\n\nconst count = ref(0);\nwatch(count, (newCount) => {\n console.log("Nuevo valor:", newCount);\n});\n</script>`,
-        "en": `<script setup>\nimport { ref, watch } from "vue";\n\nconst count = ref(0);\nwatch(count, (newCount) => {\n console.log("New value:", newCount);\n});\n</script>`
+        "es": [
+          {
+            code: `<script setup>\nimport { ref, watch } from "vue";\n\nconst count = ref(0);\nwatch(count, (newCount) => {\n console.log("Nuevo valor:", newCount);\n});\n</script>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { ref, watch } from "vue";\n\nconst count = ref(0);\nwatch(count, (newCount) => {\n console.log("New value:", newCount);\n});\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -334,10 +388,19 @@ const quiz: Quiz = {
         "en": "v-model can be bound to a reactive variable created with ref, allowing for two-way reactivity in the template."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { ref } from "vue";\n\nconst text = ref("");\n</script>\n\n<template>\n<input v-model="text"/>\n</template>`,
-        "en": `<script setup>\nimport { ref } from "vue";\n\nconst text = ref("");\n</script>\n\n<template>\n<input v-model="text"/>\n</template>`,
+        "es": [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst text = ref("");\n</script>\n\n<template>\n<input v-model="text"/>\n</template>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { ref } from "vue";\n\nconst text = ref("");\n</script>\n\n<template>\n<input v-model="text"/>\n</template>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       answers: [
         {
           "id": 1,
@@ -384,10 +447,19 @@ const quiz: Quiz = {
         "en": "ref is useful for primitive values, while reactive converts entire objects into reactive. Both allow reactivity, but reactive is preferred for complex data structures."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nimport { ref, reactive } from "vue";\n\nconst count = ref(0); // Para valores primitivos\nconst state = reactive({ count: 0, name: "Vue"}); // Para objetos\n</script>`,
-        "en": `<script setup>\nimport { ref, reactive } from "vue";\n\nconst count = ref(0); // For primitive values\nconst state = reactive({ count: 0, name: "Vue"}); // For objects\n</script>`,
+        "es": [
+          {
+            code: `<script setup>\nimport { ref, reactive } from "vue";\n\nconst count = ref(0); // Para valores primitivos\nconst state = reactive({ count: 0, name: "Vue"}); // Para objetos\n</script>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nimport { ref, reactive } from "vue";\n\nconst count = ref(0); // For primitive values\nconst state = reactive({ count: 0, name: "Vue"}); // For objects\n</script>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -434,10 +506,19 @@ const quiz: Quiz = {
         "en": "With <script setup>, props are defined using defineProps, which allows you to receive data from the parent component reactively and easily."
       },
       "correctAnswerCodeExample": {
-        "es": `<script setup>\nconst props = defineProps({\n  title: String,\n  count: Number\n});\n</script>\n\n<template>\n  <h1>{{ title }}</h1>\n  <p>Count: {{ count }}</p>\n</template>`,
-        "en": `<script setup>\nconst props = defineProps({\n  title: String,\n  count: Number\n});\n</script>\n\n<template>\n  <h1>{{ title }}</h1>\n  <p>Count: {{ count }}</p>\n</template>`,
+        "es": [
+          {
+            code: `<script setup>\nconst props = defineProps({\n  title: String,\n  count: Number\n});\n</script>\n\n<template>\n  <h1>{{ title }}</h1>\n  <p>Count: {{ count }}</p>\n</template>`,
+            language: "handlebars"
+          }
+        ],
+        "en": [
+          {
+            code: `<script setup>\nconst props = defineProps({\n  title: String,\n  count: Number\n});\n</script>\n\n<template>\n  <h1>{{ title }}</h1>\n  <p>Count: {{ count }}</p>\n</template>`,
+            language: "handlebars"
+          }
+        ]
       },
-      "codeLanguage": "handlebars",
       "answers": [
         {
           "id": 1,
@@ -484,10 +565,19 @@ const quiz: Quiz = {
         "en": "defineEmits allows you to declare events that a component can emit, facilitating communication from the child component to the parent component."
       },
       "correctAnswerCodeExample": {
-          "es": `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Incrementar</button>\n</template>`,
-          "en": `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Increment</button>\n</template>`, 
+          "es": [
+            {
+              code: `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Incrementar</button>\n</template>`,
+              language: "handlebars"
+            }
+          ],
+          "en": [
+            {
+              code: `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Increment</button>\n</template>`, 
+              language: "handlebars"
+            }
+          ]
       },
-      "codeLanguage": "handlebars",
       answers: [
         {
           "id": 1,
