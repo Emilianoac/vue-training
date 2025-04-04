@@ -10,7 +10,7 @@ const store = useGeneralStore();
 const { t } = useI18n();
 
 const quizzes = ref(quizzesData);
-const all = computed(() => t("general.all")); // Hacer "all" reactivo
+const all = computed(() => t("general.all"));
 
 const selectedCategory = ref(all.value);
 const selectedDifficulty = ref(all.value);
@@ -35,7 +35,6 @@ watch(() => store.locale, () => {
   selectedCategory.value = all.value;
   selectedDifficulty.value = all.value;
 });
-
 </script>
 
 <template>
