@@ -14,5 +14,9 @@
   "pageNotFound": "Page not found",
   "goToHome": "Go to Home",
   "of": "of",
-  "goTo": "Go to"
+  "goTo": "Go to",
+  "category": "Category",
+  "all": "All",
+  "difficulty": "Difficulty",
+  "noResults": "No results found"
 }
