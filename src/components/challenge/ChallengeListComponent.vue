@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import challenges from "@/data/challenges";
 import CardComponent from "@/components/CardComponent.vue";
+import type { Challenge } from "@/types/challenge";
 
+defineProps<{
+  challenges: Challenge[];
+}>();
 </script>
 
 <template>
