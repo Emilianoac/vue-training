@@ -49,7 +49,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
         </CardComponent>
       </swiper-slide>
     </SwiperComponent>
-    <router-link to="/quizzes" class="app-button primary !block w-max mx-auto mt-5">
+    <router-link to="/quizzes" class="app-button primary !block w-max mx-auto mt-8">
       {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
     </router-link>
   </section>
@@ -70,7 +70,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
         </CardComponent>
       </swiper-slide>
     </SwiperComponent>
-    <router-link to="/challenges" class="app-button primary !block w-max mx-auto mt-5">
+    <router-link to="/challenges" class="app-button primary !block w-max mx-auto mt-8">
       {{$t("general.goTo")}} {{$t("general.challenge.many") }}
     </router-link>
   </section>
