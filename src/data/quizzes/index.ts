@@ -8,8 +8,6 @@ const quizzes = [
   routes_and_navigation_with_vue_router,
   pinia_basics,
   pinia_intermediate,
-  pinia_intermediate,
-
 ];
 
 export default quizzes;
