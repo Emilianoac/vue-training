@@ -10,7 +10,6 @@ defineProps<{
     answers: Array<Answer & {isSelected: boolean}>;
     explanation: {en: string, es: string};
     codeExample: {en: CodeExample[], es: CodeExample[]};
-    codeLanguage: string;
   }[];
   userStats: {
     total: number;
