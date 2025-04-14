@@ -8,7 +8,7 @@ const quiz: Quiz = {
   "category": {
     "id": "vue-router",
     "name": "Vue Router",
-    "image": "public/images/quizzes/categories/vue.png"
+    "image": "vue-training/images/quizzes/categories/vue.png"
   },
   "title": {
     "es": "Rutas y navegación con Vue Router",

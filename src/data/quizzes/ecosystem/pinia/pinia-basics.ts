@@ -8,7 +8,7 @@ const quiz: Quiz = {
   "category": {
     "id": "pinia",
     "name": "Pinia",
-    "image": "public/images/quizzes/categories/pinia.png"
+    "image": "vue-training/images/quizzes/categories/pinia.png"
   },
   "title": {
     "es": "Introducción a Pinia",

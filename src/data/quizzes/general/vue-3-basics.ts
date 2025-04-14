@@ -8,7 +8,7 @@ const quiz: Quiz = {
   "category": {
     "id": "vue",
     "name": "Vue",
-    "image": "public/images/quizzes/categories/vue.png"
+    "image": "vue-training/images/quizzes/categories/vue.png"
   },
   "title": {
     "es": "Introducción a Vue 3",
