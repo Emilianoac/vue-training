@@ -3,9 +3,9 @@ import type { Challenge } from "@/types/challenge";
 const challenge: Challenge = {
   "id": "conditional-message-display",
   "level": "basic",
-  "cover": "vue-training/images/challenges/conditional-message-display/cover.webp",
+  "cover": "public/images/challenges/conditional-message-display/cover.webp",
   "images": [
-    "vue-training/images/challenges/conditional-message-display/image-1.gif",
+    "public/images/challenges/conditional-message-display/image-1.gif",
   ],
   "levelLabel": {
     "es": "Básico",
