@@ -39,7 +39,7 @@ defineProps<{
         <!-- Category -->
         <p v-if="category" class="text-sm opacity-70 mb-1">{{ category }}</p>
         <!-- Title -->
-        <h3 class="font-bold line-clamp-1">{{ title[store.locale] }}</h3>
+        <h3 class="text-sm font-bold line-clamp-1">{{ title[store.locale] }}</h3>
         <!-- Description -->
         <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-3" :title="description[store.locale]">{{ description[store.locale] }}</p>
         <!-- Level Badge -->
