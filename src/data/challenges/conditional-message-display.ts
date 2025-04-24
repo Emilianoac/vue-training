@@ -25,16 +25,12 @@ const challenge: Challenge = {
   },
   "objectives": {
     "es": [
-      "Maneja el estado de autenticación utilizando la reactividad de Vue.",
-      "Asegúrate de que al hacer clic en el botón, el estado de autenticación cambie.",
-      "Muestra el mensaje de bienvenida solo cuando el usuario está autenticado.",
-      "Muestra el mensaje de invitación a iniciar sesión solo cuando el usuario no está autenticado."
+      "Mostrar solo el mensaje que corresponde al estado de autenticación.",
+      "Alternar el estado de autenticación al hacer clic en el botón.",
     ],
     "en": [
-      "Manage the authentication state using Vue's reactivity.",
-      "Ensure that clicking the button toggles the authentication state.",
-      "Display the welcome message only when the user is authenticated.",
-      "Display the sign-in invitation message only when the user is not authenticated."
+      "Display only the message that corresponds to the authentication state.",
+      "Toggle the authentication state when clicking the button.",
     ]
   },
   "stackblitz": {
