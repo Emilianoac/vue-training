@@ -26,12 +26,12 @@ const quiz: Quiz = {
     {
       "id": 1,
       "questionText": {
-        "es": "¿Cuál es el propósito de computed en Vue?",
-        "en": "What is the purpose of computed in Vue?"
+        "es": "¿Cuál es el propósito del metodo computed en Vue?",
+        "en": "What is the purpose of the computed method in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "computed permite definir propiedades que se recalculan cuando sus dependencias cambian, ayudando a optimizar el rendimiento.",
-        "en": "computed allows you to define properties that are recalculated when their dependencies change, helping to optimize performance."
+        "es": "El metodo computed permite definir propiedades que se recalculan cuando sus dependencias cambian, ayudando a optimizar el rendimiento.",
+        "en": "The computed method allows you to define properties that are recalculated when their dependencies change, helping to optimize performance."
       },
       "correctAnswerCodeExample": {
         "es" : [
@@ -144,8 +144,8 @@ const quiz: Quiz = {
     {
       "id": 3,
       "questionText": {
-        "es": "¿Cómo funciona el ciclo de vida onMounted en la Composition API?",
-        "en": "How does the onMounted lifecycle work in the Composition API?"
+        "es": "¿Cómo funciona el lifecycle hook onMounted en Vue 3?",
+        "en": "How does the onMounted lifecycle work in Vue 3?"
       },
       "correctAnswerExplanation": {
         "es": "onMounted permite ejecutar código cuando el componente se ha añadido al DOM, similar al hook mounted en la Options API.",
