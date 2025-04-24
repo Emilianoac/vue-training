@@ -72,11 +72,16 @@ watch(() => store.locale, () => {
       </template>
   
       <template #play>
-        <ChallengeCodeEditorLayout :stackblitzUrl="challenge?.stackblitz.challenge" />
+        <ChallengeCodeEditorLayout 
+          :objectives="challenge?.objectives[store.locale]"
+          :stackblitzUrl="challenge?.stackblitz.challenge" 
+        />
       </template>
   
       <template #solution>
-        <ChallengeCodeEditorLayout :stackblitzUrl="challenge?.stackblitz.solution" />
+        <ChallengeCodeEditorLayout 
+          :stackblitzUrl="challenge?.stackblitz.solution" 
+        />
       </template>
     </TabComponent>
   </template>
