@@ -36,13 +36,13 @@ const quiz: Quiz = {
       "correctAnswerCodeExample": {
         "es" : [
           {
-            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hola, Vue 3!");\n</script>`,
+            code: `<script setup>\nimport { ref, computed } from "vue";\n\nconst clickCount = ref(0);\n\nconst clicksMultiplied = computed(() => "Clics multiplicados por dos: " + clickCount.value * 2);\n</script>\n\n<template>\n  <button @click="clickCount++">Haz clic</button>\n  <p> Clics: {{clickCount }}</p>\n  <p>{{ clicksMultiplied }}</p>\n</template>`,
             language: "handlebars"
           }
         ],
         "en": [
           {
-            code: `<script setup>\nimport { ref } from "vue";\n\nconst message = ref("Hello, Vue 3!");\n</script>`,
+            code: `<script setup>\nimport { ref, computed } from "vue";\n\nconst clickCount = ref(0);\n\nconst clicksMultiplied = computed(() => "Clicks multiplied by two: " + clickCount.value * 2);\n</script>\n\n<template>\n  <button @click="clickCount++">Click</button>\n  <p> Clicks: {{clickCount }}</p>\n  <p>{{ clicksMultiplied }}</p>\n</template>`,
             language: "handlebars"
           }
         ]
@@ -567,14 +567,22 @@ const quiz: Quiz = {
       "correctAnswerCodeExample": {
           "es": [
             {
-              code: `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Incrementar</button>\n</template>`,
-              language: "handlebars"
+              "code": `<!-- src/components/Counter.vue -->\n<script setup>\nconst emit = defineEmits(["increment"]);\n\nconst incrementCount = () => {\n  emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Incrementar</button>\n</template>`,
+              "language": "handlebars"
+            },
+            {
+              "code": `<!-- src/App.vue -->\n<script setup>\nimport { ref } from "vue";\nimport Counter from "./components/Counter.vue";\n\nconst count = ref(0);\n\nconst increment = () => {\n  count.value++;\n};\n</script>\n\n<template>\n  <div>\n    <h1>Contador: {{ count }}</h1>\n    <Counter @increment="increment" />\n  </div>\n</template>`,
+              "language": "handlebars"
             }
           ],
           "en": [
             {
-              code: `<script setup>\nconst emit = defineEmits(["increment"]);\nconst incrementCount = () => {\n emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Increment</button>\n</template>`, 
-              language: "handlebars"
+              "code": `<!-- src/components/Counter.vue -->\n<script setup>\nconst emit = defineEmits(["increment"]);\n\nconst incrementCount = () => {\n  emit("increment");\n};\n</script>\n\n<template>\n  <button @click="incrementCount">Increment</button>\n</template>`,
+              "language": "handlebars"
+            },
+            {
+              "code": `<!-- src/App.vue -->\n<script setup>\nimport { ref } from "vue";\nimport Counter from "./components/Counter.vue";\n\nconst count = ref(0);\n\nconst increment = () => {\n  count.value++;\n};\n</script>\n\n<template>\n  <div>\n    <h1>Counter: {{ count }}</h1>\n    <Counter @increment="increment" />\n  </div>\n</template>`,
+              "language": "handlebars"
             }
           ]
       },
