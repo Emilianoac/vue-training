@@ -19,10 +19,10 @@ const correctAnswer = computed(() => {
 
 <template>
   <div 
-    class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-md"
+    class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999] backdrop-blur-md"
     @click.self="$emit('closeModal')">
-      <div class="bg-slate-100 dark:bg-slate-900 rounded-md w-full max-w-[700px] relative mx-6">
-        <div class="p-8">
+      <div class="bg-slate-100 dark:bg-slate-900 rounded-md w-full max-w-[700px] max-h-[90vh] overflow-y-auto relative mx-6">
+        <div class="p-4 md:p-8 text-sm md:text-base">
           <button 
             @click="$emit('closeModal')"
             class="text-sm text-slate-600 dark:text-slate-400 absolute top-4 right-4 hover:text-slate-700 dark:hover:text-slate-300">
