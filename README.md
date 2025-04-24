@@ -5,12 +5,23 @@
 Vue Training is a platform designed to enhance your Vue.js skills through practical challenges and quizzes. You will find a variety of exercises where you must implement the necessary logic to pass the tests.
 
 
+
+
+
 ## 🚀 Features
-  📌 Interactive challenges: Solve Vue.js-specific problems with clear instructions.
+  ### 📌 Interactive challenges with Test validation
 
-  ✅ Test validation: Each challenge includes tests to verify that your solution is correct.
+  Solve Vue.js-specific problems with clear instructions. Each challenge includes tests to verify that your solution is correct.
 
-  🧠 Vue.js quizzes: Test your knowledge with multiple-choice questions.
+  ![challenge](https://emilianoac.github.io/vue-training/readme-images/challenge.webp)
+
+
+  ### 🧠 Vue.js quizzes
+
+  Test your knowledge with multiple-choice questions.
+  
+  ![quiz](https://emilianoac.github.io/vue-training/readme-images/quiz.webp)
+
 
 
 ## 🎯 How does it work?
