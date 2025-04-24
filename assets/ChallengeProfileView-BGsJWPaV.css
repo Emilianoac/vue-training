@@ -1,0 +1,1 @@
+.expand-editor[data-v-a8d4e334]{grid-template-columns:1fr}.collapse-editor[data-v-a8d4e334]{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width: 1024px){.collapse-editor[data-v-a8d4e334]{grid-template-columns:.3fr 1fr}}
