@@ -10,6 +10,9 @@ export default {
       colors: {
         "color-primary": "#41b883",
         "color-primary-hover": "#339870",
+        "slate": {
+          900: "#121D37",
+        }
       }
     },
   },
