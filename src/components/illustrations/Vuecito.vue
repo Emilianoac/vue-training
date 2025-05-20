@@ -2,6 +2,7 @@
 
 withDefaults(defineProps<{
   mood?: "happy" | "angry" | "surprised";
+  tipId: number;
 }>(), {
   mood: "happy",
 });
@@ -145,7 +146,7 @@ withDefaults(defineProps<{
     </g>
 
     <Transition name="icon-fade" mode="out-in">
-      <g id="iconos-cabeza" :key="mood">
+      <g id="iconos-cabeza" :key="tipId">
         <g id="pulgar-arriba" v-if="mood === 'happy'">
           <path id="Vector"
             d="M167 125.031C167 120.837 170.4 117.438 174.594 117.438C178.788 117.438 182.188 120.837 182.188 125.031V155.406C182.188 159.6 178.788 163 174.594 163C170.4 163 167 159.6 167 155.406V125.031Z"
