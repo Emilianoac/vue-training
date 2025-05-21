@@ -2,6 +2,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { useTopLoader } from "@/composables/useTopLoader";
 import { i18n } from "@/i18n";
 import HomeView from "@/views/HomeView.vue";
+import IconChallenge from "@/components/icons/IconBoxGlove.vue"
+import IconHome from "@/components/icons/IconHome.vue"
+import IconQuiz from "@/components/icons/IconList.vue"
+import IconRandomTip from "@/components/icons/IconDice.vue"
  
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -10,13 +14,21 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
-      meta: {titleKey: "general.home", menu: true}
+      meta: {
+        titleKey: "general.home", 
+        menu: true,
+        icon: IconHome
+      }
     },
     {
       path: "/challenges",
       name: "challenges",
       component: () => import("@/views/challenges/ChallengesView.vue"),
-      meta: {titleKey: "general.challenge.many", menu: true}
+      meta: {
+        titleKey: "general.challenge.many", 
+        menu: true,
+        icon: IconChallenge,
+    }
     },
     {
       path: "/challenges/:id",
@@ -27,7 +39,11 @@ const router = createRouter({
       path: "/quizzes",
       name: "quizzes",
       component: () => import("@/views/quizzes/QuizzesView.vue"),
-      meta: {titleKey: "general.quiz.many", menu: true}
+      meta: {
+        titleKey: "general.quiz.many", 
+        menu: true,
+        icon: IconQuiz,
+      }
     },
     {
       path: "/quizzes/:id",
@@ -38,7 +54,11 @@ const router = createRouter({
       path: "/random-tip",
       name: "random_tip",
       component: () => import("@/views/RandomTipView.vue"),
-      meta: {titleKey: "general.randomTip", menu: true}
+      meta: {
+        titleKey: "general.randomTip", 
+        menu: true,
+        icon: IconRandomTip,
+      }
     },
     {   
       path: "/not-found",
