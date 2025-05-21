@@ -36,7 +36,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
   <section class="mt-20">
     <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.quiz.many") }}</h2>
     <SwiperComponent>
-      <swiper-slide v-for="quiz in quizzes" :key="quiz.id">
+      <swiper-slide v-for="quiz in quizzes" :key="quiz.id" class="py-4">
         <CardComponent
           :title="quiz.title"
           :description="quiz.description"
@@ -58,7 +58,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
   <section class="mt-20">
     <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
     <SwiperComponent>
-      <swiper-slide v-for="challenge in challenges" :key="challenge.id">
+      <swiper-slide v-for="challenge in challenges" :key="challenge.id" class="py-4">
         <CardComponent
           :title="challenge.title"
           :description="challenge.description"
