@@ -1,22 +1,23 @@
 <script lang="ts" setup>
+  import { useRouter } from "vue-router";
 
-const menuItems = [
-  { title: "general.home", path: "/" },
-  { title: "general.challenge.many", path: "/challenges" },
-  { title: "general.quiz.many", path: "/quizzes" },
-]
+  const router = useRouter();
+  
+  const menuItems = router.getRoutes().filter(route => {
+    return route.meta.menu === true
+  });
 </script>
 
 <template>
-  <nav class="bg-white dark:bg-slate-900 text-black dark:text-white rounded-md shadow-md bottom-3 mx-6 fixed right-0 left-0 block md:hidden z-[999]">
-    <div class="grid grid-cols-3 items-center justify-between container mx-auto p-3">
+  <nav class="bg-white dark:bg-slate-900 text-black dark:text-white rounded-md shadow-md bottom-3 mx-2 fixed right-0 left-0 block md:hidden z-[999]">
+    <div class="flex items-center justify-between container mx-auto p-2">
       <router-link 
         v-for="(menuItem, index) in menuItems" 
         :key="index" 
         :to="menuItem.path" 
         active-class="text-color-primary font-semibold"
-        class=" text-sm border-r border-l first-of-type:border-0 last-of-type:border-0 border-slate-200 dark:border-slate-800 block w-full text-[0.95em] text-center py-1">
-          {{ $t(menuItem.title) }}
+        class=" text-[0.79em] border-r last-of-type:border-0 border-slate-200 dark:border-slate-800 block w-full text-center py-1">
+          {{ $t(menuItem.meta.titleKey ?? '') }}
       </router-link>
     </div>
   </nav>

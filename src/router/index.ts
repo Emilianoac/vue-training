@@ -10,13 +10,13 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
-      meta: {titleKey: "general.home"}
+      meta: {titleKey: "general.home", menu: true}
     },
     {
       path: "/challenges",
       name: "challenges",
       component: () => import("@/views/challenges/ChallengesView.vue"),
-      meta: {titleKey: "general.challenge.many"}
+      meta: {titleKey: "general.challenge.many", menu: true}
     },
     {
       path: "/challenges/:id",
@@ -27,12 +27,18 @@ const router = createRouter({
       path: "/quizzes",
       name: "quizzes",
       component: () => import("@/views/quizzes/QuizzesView.vue"),
-      meta: {titleKey: "general.quiz.many"}
+      meta: {titleKey: "general.quiz.many", menu: true}
     },
     {
       path: "/quizzes/:id",
       name: "quiz",
       component: () => import("@/views/quizzes/QuizProfileView.vue"),
+    },
+    {
+      path: "/random-tip",
+      name: "random_tip",
+      component: () => import("@/views/RandomTipView.vue"),
+      meta: {titleKey: "general.randomTip", menu: true}
     },
     {   
       path: "/not-found",

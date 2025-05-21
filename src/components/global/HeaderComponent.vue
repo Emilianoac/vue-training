@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+  import { useRouter } from "vue-router"
   import LangToggleComponent from "@/components/global/LangToggleComponent.vue";
   import SiteBrandComponent from "@/components/global/SiteBrandComponent.vue";
   import ThemeToggleComponent from "@/components/global/ThemeToggleComponent.vue";
 
-  const menuItems = [
-    { title: "general.quiz.many", path: "/quizzes" },
-    { title:  "general.challenge.many", path: "/challenges" },
-  ]
+  const router = useRouter();
+  
+  const menuItems = router.getRoutes().filter(route => {
+    return route.meta.menu === true
+  });
 </script>
 
 <template>
@@ -23,7 +25,7 @@
                 :to="menuItem.path" 
                 class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-color-primary/30"
                 active-class="border-b-color-primary hover:!border-b-color-primary">
-                  {{ $t(menuItem.title) }}
+                  {{ $t(menuItem.meta.titleKey ?? '') }}
               </router-link>
             </li>
           </ul>
