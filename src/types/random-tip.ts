@@ -18,10 +18,11 @@ export interface RandomTip {
     es: string
     en: string;
   }
-  codeExample: CodeExample[];
+  codeExamples: CodeExamples[];
+  source?: string;
 }
 
-export interface CodeExample {
+export interface CodeExamples {
   lang: string;
   code: {
     es: string;
