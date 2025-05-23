@@ -22,16 +22,11 @@ Vue Training is a platform designed to enhance your Vue.js skills through practi
   
   ![quiz](https://emilianoac.github.io/vue-training/readme-images/quiz.webp)
 
+  ### 🎲 Random Tips 
 
+  A collection of useful tips and tricks to enhance your Vue.js skills.
 
-## 🎯 How does it work?
-  Select a challenge from the site.
-
-  Open it in StackBlitz and implement your solution.
-
-  Make sure the tests pass before marking it as completed.
-
-  Check the solution if you need help.
+  ![tips](https://emilianoac.github.io/vue-training/readme-images/random-tip.webp)
 
 
 ## 🌟 Contributions
