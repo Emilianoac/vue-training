@@ -48,6 +48,13 @@
                   :code="codeExample.code[store.locale]"
                 />
               </template>
+              <!-- Source link -->
+              <div v-if="randomTip.source" class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <span class="block">{{ $t("randomTip.general.source") }} </span>
+                <a :href="randomTip.source" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">
+                  {{ randomTip.source }}
+                </a>
+              </div>
             </div>
           </div>
         </transition>
