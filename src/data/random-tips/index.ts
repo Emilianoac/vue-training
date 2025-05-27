@@ -111,8 +111,59 @@ const randomTips: RandomTip[] = [
       }
     ],
     "source": "https://vuejs.org/api/sfc-script-setup.html#defineModel"
+  },
+  {
+    "id": 4,
+    "mood": "surprised",
+    "category": {
+      "id": "vue",
+      "name": "Vue",
+      "icon": `${import.meta.env.BASE_URL}/images/quizzes/categories/vue.png`
+    },
+    "title": {
+      "es": "¡Haz tus componentes más flexibles con scoped slots!",
+      "en": "Make your components more flexible with scoped slots!"
+    },
+    "description": {
+      "es": "Los scoped slots permiten que el componente padre controle cómo renderizar cada ítem del hijo.",
+      "en": "Scoped slots let the parent control how to render each item of the child component."
+    },
+    "text": {
+      "es": dedent(`
+        ## **¡Haz tus componentes más flexibles con scoped slots!**
+        Usa scoped slots cuando un componente hijo deba delegar el control visual al padre, como en un listado que carga datos pero deja que el padre decida cómo se muestra cada ítem.
+        <br /> <br />
+        Esto permite separar la lógica del diseño y reutilizar el mismo componente con distintos estilos.
+        <br /> <br />
+        Para pasar datos desde el componente hijo al slot, usamos \`v-bind\`, que expone un objeto con los valores que el padre puede usar en su plantilla.
+      `),
+      "en": dedent(`
+        ## **Make your components more flexible with scoped slots!**
+        Use scoped slots when a child component should delegate visual control to the parent — for example, in a list that loads data but lets the parent decide how each item is displayed.
+        <br /> <br />
+        This helps separate logic from layout and allows the same component to be reused with different styles.
+        <br /> <br />
+        To pass data from the child to the slot, use \`v-bind\`, which exposes an object with values the parent can access in its template.
+      `)
+    },
+    "codeExamples": [
+      {
+        "lang": "handlebars",
+        "code": {
+          "es": "<!-- Componente padre -->\n<FancyList :api-url=\"url\">\n  <template #item=\"{ body, username, likes }\">\n    <div class=\"item\">\n      <p>{{ body }}</p>\n      <p>por {{ username }} | {{ likes }} likes</p>\n    </div>\n  </template>\n</FancyList>",
+          "en": "<!-- Parent component -->\n<FancyList :api-url=\"url\">\n  <template #item=\"{ body, username, likes }\">\n    <div class=\"item\">\n      <p>{{ body }}</p>\n      <p>by {{ username }} | {{ likes }} likes</p>\n    </div>\n  </template>\n</FancyList>"
+        }
+      },
+      {
+        "lang": "handlebars",
+        "code": {
+          "es": "<!-- FancyList.vue -->\n<ul>\n  <li v-for=\"item in items\" :key=\"item.id\">\n    <slot name=\"item\" v-bind=\"item\" />\n  </li>\n</ul>",
+          "en": "<!-- FancyList.vue -->\n<ul>\n  <li v-for=\"item in items\" :key=\"item.id\">\n    <slot name=\"item\" v-bind=\"item\" />\n  </li>\n</ul>"
+        }
+      }
+    ],
+    "source": "https://vuejs.org/guide/components/slots.html#scoped-slots"
   }
-
 ]
 
 export default randomTips;
