@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useGeneralStore } from "@/stores/general";
 import type { Quiz, Answer, CodeExample } from "@/types/quiz";
+import {marked} from "marked";
 
 const store = useGeneralStore();
 
@@ -48,7 +49,10 @@ defineProps<{
     <div class="bg-white dark:bg-slate-900 p-7 rounded-md">
       <ul>
         <li v-for="(question, i) in userHistory" :key="i">
-          <h5 class="font-bold text-xl mb-4"> {{ i + 1 }}. {{ question.question[store.locale] }}</h5>
+          <div class="flex items-center font-bold text-xl mb-4">
+            <span class="block me-1">{{ i + 1 }}.</span>
+            <div v-html="marked(question.question[store.locale])"></div>
+          </div>
           <ul>
             <li 
               v-for="answer in question.answers" 
@@ -58,7 +62,7 @@ defineProps<{
                 '!border-green-500': answer.isCorrect, 
                 '!border-red-500': !answer.isCorrect && answer.isSelected
               }">
-              <span class="block">{{ answer.answerText[store.locale] }}</span>
+              <div class="block" v-html="marked(answer.answerText[store.locale])"></div>
               <span 
                 v-if="answer.isCorrect" 
                 class="block text-end text-xs font-bold text-green-500">
@@ -74,9 +78,10 @@ defineProps<{
           <!-- Explanation -->
           <div>
             <h6 class="font-bold mt-4">{{ $t('quiz.explanation') }}</h6>
-            <p class="p-3 bg-slate-100 dark:bg-slate-800 rounded-md mt-2 mb-4">
-              {{ question.explanation[store.locale] }}
-            </p>
+            <div 
+              class="p-3 bg-slate-50 dark:bg-slate-800 rounded-md mt-2 mb-4"
+              v-html="marked(question.explanation[store.locale])">
+            </div>
           </div>
           <!-- Code example -->
           <highlightjs 

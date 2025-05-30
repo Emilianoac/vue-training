@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+import { computed } from "vue";
 import type { Question } from "@/types/quiz";
 import { useGeneralStore } from "@/stores/general";
+import { marked } from "marked";
 
 const store = useGeneralStore();
 const selectedOption = defineModel();
 
-defineProps<{
+const props = defineProps<{
   question: Question;
   checkAnswer: boolean,
 }>();
@@ -13,9 +15,10 @@ defineProps<{
 </script>
 
 <template>
-  <h2 class="text-xl font-bold mb-4">
-    {{ question.id }}. {{ question.questionText[store.locale] }}
-  </h2>
+  <div class="flex items-center text-xl font-bold mb-4">
+    <span class="block me-1">{{ question.id }}.</span>
+    <div class="question-text" v-html="marked(question.questionText[store.locale])"></div>
+  </div>
   <ul>
     <li
       v-for="answer in question.answers"
@@ -41,9 +44,7 @@ defineProps<{
           'cursor-not-allowed opacity-85': checkAnswer
         }"
       >
-        <span class="block w-full text-start pl-3">
-          {{ answer.answerText[store.locale] }}
-        </span>
+        <span class="block w-full text-start pl-3" v-html="marked(answer.answerText[store.locale])"></span>
         <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-500">
           {{ selectedOption === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
         </span>
@@ -59,5 +60,5 @@ defineProps<{
 </template>
 
 <style lang="postcss">
-  
+
 </style>

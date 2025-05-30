@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import type { Question } from "@/types/quiz";
 import { useGeneralStore } from "@/stores/general";
+import { marked } from "marked";
 
 defineEmits<{
   closeModal: void;
@@ -15,13 +16,14 @@ const props = defineProps<{
 const correctAnswer = computed(() => {
   return props.question.answers.find((answer) => answer.isCorrect);
 });
+
 </script>
 
 <template>
   <div 
     class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999] backdrop-blur-md"
     @click.self="$emit('closeModal')">
-      <div class="bg-slate-100 dark:bg-slate-900 rounded-md w-full max-w-[700px] max-h-[90vh] overflow-y-auto relative mx-6">
+      <div class="bg-white dark:bg-slate-900 rounded-md w-full max-w-[700px] max-h-[90vh] overflow-y-auto relative mx-6">
         <div class="p-4 md:p-8 text-sm md:text-base">
           <button 
             @click="$emit('closeModal')"
@@ -31,10 +33,10 @@ const correctAnswer = computed(() => {
           
           <dl class="mt-4">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-            <dd class="mt-2">{{ question.questionText[store.locale] }}</dd>
+            <dd class="mt-2" v-html="marked(question.questionText[store.locale])"></dd>
   
             <dt class="font-bold mt-4">Respuesta correcta</dt>
-            <dd class="mt-2">{{ correctAnswer?.answerText[store.locale] }}</dd>
+            <dd class="mt-2" v-html="marked(correctAnswer?.answerText[store.locale] ?? '')"></dd>
           </dl>
   
           <hr class="my-5 border-slate-200 dark:border-slate-800">
@@ -42,9 +44,7 @@ const correctAnswer = computed(() => {
           <h3 class="font-bold">{{ $t("quiz.explanation") }}</h3>
   
           <!-- Explanation -->
-          <div class="mt-4 bg-slate-200 dark:bg-slate-800 p-4 rounded-md">
-            <p>{{ question.correctAnswerExplanation[store.locale] }}</p>
-          </div>
+          <div class="mt-2 mb-5" v-html="marked(question.correctAnswerExplanation[store.locale])"></div>
   
           <!-- Code Example --> 
           <template v-for="codeExample in question.correctAnswerCodeExample[store.locale]">
