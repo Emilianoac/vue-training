@@ -118,8 +118,8 @@ const quiz: Quiz = {
         {
           "id": 2,
           "answerText": {
-            "es": "Usando `watch` para observar la propiedad del estado.",
-            "en": "Using `watch` to observe the state property."
+            "es": "Usando `watch()` para observar la propiedad del estado.",
+            "en": "Using `watch()` to observe the state property."
           },
           "isCorrect": false
         },
@@ -530,8 +530,8 @@ const quiz: Quiz = {
     {
       "id": 9,
       "questionText": {
-        "es": "¿Para qué se utiliza un plugin en Pinia y cómo se puede registrar uno?",
-        "en": "What is a plugin used for in Pinia and how can you register one?"
+        "es": "¿Para qué se utiliza los plugins en Pinia y cómo puedes registrar uno?",
+        "en": "What is the purpose of plugins in Pinia and how can you register one?"
       },
       "correctAnswerExplanation": {
         "es": "Los plugins en Pinia se utilizan para extender la funcionalidad del store, como la persistencia del estado o la integración con otras bibliotecas. Se registran usando el método `use` de la instancia de Pinia.",

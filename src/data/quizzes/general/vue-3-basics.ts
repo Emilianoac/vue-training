@@ -26,12 +26,12 @@ const quiz: Quiz = {
     {
       "id": 1,
       "questionText": {
-        "es": "¿Cuál es el propósito del metodo computed en Vue?",
-        "en": "What is the purpose of the computed method in Vue?"
+        "es": "¿Cuál es el propósito de `computed()` en Vue?",
+        "en": "What is the purpose of `computed()` in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "El metodo computed permite definir propiedades que se recalculan cuando sus dependencias cambian, ayudando a optimizar el rendimiento.",
-        "en": "The computed method allows you to define properties that are recalculated when their dependencies change, helping to optimize performance."
+        "es": "El metodo `computed()` permite definir propiedades que se recalculan cuando sus dependencias cambian, ayudando a optimizar el rendimiento.",
+        "en": "The `computed()` method allows you to define properties that are recalculated when their dependencies change, helping to optimize performance."
       },
       "correctAnswerCodeExample": {
         "es" : [
@@ -85,12 +85,12 @@ const quiz: Quiz = {
     {
       "id": 2,
       "questionText": {
-        "es": "¿Cómo defines métodos dentro de <script setup> usando la Composition API?",
-        "en": "How do you define methods inside <script setup> using the Composition API?"
+        "es": "Usando la Composition API, ¿cómo defines métodos dentro de \`<script setup>`\ en Vue?",
+        "en": "Using the Composition API, how do you define methods inside \`<script setup>`\ in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "Los métodos se definen directamente como funciones dentro de <script setup>, donde pueden ser llamados o retornados según se necesiten.",
-        "en": "Methods are defined directly as functions inside <script setup>, where they can be called or returned as needed."
+        "es": "Los métodos se definen directamente como funciones dentro de \`<script setup>`\, donde pueden ser llamados o retornados según se necesiten.",
+        "en": "Methods are defined directly as functions inside \`<script setup>`\, where they can be called or returned as needed."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -110,32 +110,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando la opción methods.",
-            "en": "Using the methods option."
+            "es": "Usando la opción `methods`.",
+            "en": "Using the `methods` option."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Definiéndolos directamente dentro de <script setup>.",
-            "en": "Defining them directly inside <script setup>."
+            "es": "Definiéndolos directamente dentro de \`<script setup>`\.",
+            "en": "Defining them directly inside \`<script setup>`\."
           },
           "isCorrect": true
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Asignando valores directamente en data.",
-            "en": "Assigning values directly in data."
+            "es": "Asignando valores directamente en `data`.",
+            "en": "Assigning values directly in `data`."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Solo se pueden definir en watch.",
-            "en": "They can only be defined in watch."
+            "es": "Solo se pueden definir en `watch`.",
+            "en": "They can only be defined in `watch`."
           },
           "isCorrect": false
         }
@@ -144,12 +144,12 @@ const quiz: Quiz = {
     {
       "id": 3,
       "questionText": {
-        "es": "¿Cómo funciona el lifecycle hook onMounted en Vue 3?",
-        "en": "How does the onMounted lifecycle work in Vue 3?"
+        "es": "¿Cómo funciona el lifecycle hook `onMounted()` en Vue 3?",
+        "en": "How does the `onMounted()` lifecycle work in Vue 3?"
       },
       "correctAnswerExplanation": {
-        "es": "onMounted permite ejecutar código cuando el componente se ha añadido al DOM, similar al hook mounted en la Options API.",
-        "en": "onMounted allows you to run code when the component has been added to the DOM, similar to the mounted hook in the Options API."
+        "es": "`onMounted()` permite ejecutar código cuando el componente se ha añadido al DOM, similar al hook mounted en la Options API.",
+        "en": "`onMounted()` allows you to run code when the component has been added to the DOM, similar to the mounted hook in the Options API."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -185,8 +185,8 @@ const quiz: Quiz = {
         {
           "id": 3,
           "answerText": {
-            "es": "Se ejecuta al inicializar un ref.",
-            "en": "Runs when initializing a ref."
+            "es": "Se ejecuta al inicializar un `ref()`.",
+            "en": "Runs when initializing a `ref()`."
           },
           "isCorrect": false
         },
@@ -203,12 +203,12 @@ const quiz: Quiz = {
     {
       "id": 4,
       "questionText": {
-        "es": "¿Cuál es la función principal de reactive en Vue?",
-        "en": "What is the main purpose of reactive in Vue?"
+        "es": "¿Cuál es la función principal de `reactive()` en Vue?",
+        "en": "What is the main purpose of `reactive()` in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "reactive convierte un objeto en reactivo, permitiendo que Vue detecte y actualice automáticamente los cambios en sus propiedades.",
-        "en": "reactive converts an object into reactive, allowing Vue to automatically detect and update changes to its properties."
+        "es": "`reactive()` convierte un objeto en reactivo, permitiendo que Vue detecte y actualice automáticamente los cambios en sus propiedades.",
+        "en": "`reactive()` converts an object into a reactive one, allowing Vue to automatically detect and update changes to its properties."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -262,12 +262,12 @@ const quiz: Quiz = {
     {
       "id": 5,
       "questionText": {
-        "es": "¿Para qué se utiliza ref en Vue?",
-        "en": "What is ref used for in Vue?"
+        "es": "¿Para qué se utiliza `ref()` en Vue?",
+        "en": "What is `ref()` used for in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "ref se usa para crear una referencia reactiva de un valor, como números o strings, permitiendo que Vue reactive estos cambios.",
-        "en": "ref is used to create a reactive reference to a value, such as numbers or strings, allowing Vue to react to these changes."
+        "es": "`ref()` se usa para crear una referencia reactiva de un valor, como números o strings, permitiendo que Vue reaccione a estos cambios.",
+        "en": "`ref()` is used to create a reactive reference to a value, such as numbers or strings, allowing Vue to react to these changes."  
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -321,12 +321,12 @@ const quiz: Quiz = {
     {
       "id": 6,
       "questionText": {
-        "es": "¿Para qué sirve watch en Vue?",
-        "en": "What is watch used for in Vue?"
+        "es": "¿Para qué sirve `watch()` en Vue?",
+        "en": "What is `watch()` used for in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "watch permite observar cambios en datos reactivos y ejecutar funciones en respuesta a estos cambios.",
-        "en": "watch allows you to watch for changes in reactive data and run functions in response to these changes."
+        "es": "`watch()` permite observar cambios en datos reactivos y ejecutar funciones en respuesta a estos cambios.",
+        "en": "`watch()` allows you to observe changes in reactive data and run functions in response to these changes."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -380,12 +380,12 @@ const quiz: Quiz = {
     {
       "id": 7,
       "questionText": {
-        "es": "¿Cómo se utiliza v-model en la Composition API con <script setup>?",
-        "en": "How is v-model used in the Composition API with <script setup>?"
+        "es": "¿Usando la compostion API, cómo declaras un `v-model`?",
+        "en": "Using the Composition API, how do you declare a `v-model`?"
       },
       "correctAnswerExplanation": {
-        "es": "v-model puede enlazarse con una variable reactiva creada con ref, permitiendo la reactividad bidireccional en el template.",
-        "en": "v-model can be bound to a reactive variable created with ref, allowing for two-way reactivity in the template."
+        "es": "`v-model` puede enlazarse con una variable reactiva creada con `ref()`, permitiendo la reactividad bidireccional en el template.",
+        "en": "`v-model` can be bound to a reactive variable created with `ref()`, allowing two-way reactivity in the template."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -413,18 +413,18 @@ const quiz: Quiz = {
         {
           "id": 2,
           "answerText": {
-            "es": "Aplicando ref en propiedades reactivas.",
-            "en": "Applying ref to reactive properties."
+            "es": "Declarando una variable con `ref()` y usándola en el template.",
+            "en": "Declaring a variable with `ref()` and using it in the template."
           },
-          "isCorrect": false
+          "isCorrect": true
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Usando ref con una variable reactiva en el template.",
-            "en": "Using ref with a reactive variable in the template."
+            "es": "No se puede usar `v-model` con la Composition API.",
+            "en": "`v-model` cannot be used with the Composition API."
           },
-          "isCorrect": true
+          "isCorrect": false
         },
         {
           "id": 4,
@@ -439,12 +439,12 @@ const quiz: Quiz = {
     {
       "id": 8,
       "questionText": {
-        "es": "¿Cuál es la diferencia principal entre ref y reactive en Vue 3?",
-        "en": "What is the main difference between ref and reactive in Vue 3?"
+        "es": "¿Cuál es la diferencia principal entre `ref()` y `reactive()` en Vue 3?",
+        "en": "What is the main difference between `ref()` and `reactive()` in Vue 3?"
       },
       "correctAnswerExplanation": {
-        "es": "ref es útil para valores primitivos, mientras que reactive convierte objetos enteros en reactivos. Ambos permiten reactividad, pero reactive es preferido para estructuras de datos complejas.",
-        "en": "ref is useful for primitive values, while reactive converts entire objects into reactive. Both allow reactivity, but reactive is preferred for complex data structures."
+        "es": "`ref()` es útil para valores primitivos, mientras que `reactive()` convierte objetos enteros en reactivos. Ambos permiten reactividad, pero `reactive()` es preferido para estructuras de datos complejas.",
+        "en": "`ref()` is useful for primitive values, while `reactive()` converts entire objects into reactive ones. Both allow reactivity, but `reactive()` is preferred for complex data structures."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -464,32 +464,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "ref solo funciona con tipos de datos primitivos.",
-            "en": "ref only works with primitive data types."
+            "es": "`ref()` solo funciona con tipos de datos primitivos.",
+            "en": "`ref` only works with primitive data types."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "reactive crea una referencia mutable.",
-            "en": "reactive creates a mutable reference."
+            "es": "`reactive()` crea una referencia mutable.",
+            "en": "`reactive()` creates a mutable reference."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "ref se usa para valores primitivos y reactive para objetos complejos.",
-            "en": "ref is used for primitive values and reactive for complex objects."
+            "es": "`ref()` se usa para valores primitivos y `reactive()` para objetos complejos.",
+            "en": "`ref()` is used for primitive values and `reactive()` for complex objects."
           },
           "isCorrect": true
         },
         {
           "id": 4,
           "answerText": {
-            "es": "reactive no permite reactividad.",
-            "en": "reactive does not allow reactivity."
+            "es": "`reactive()` no permite reactividad.",
+            "en": "`reactive()` does not allow reactivity."
           },
           "isCorrect": false
         }
@@ -498,12 +498,12 @@ const quiz: Quiz = {
     {
       "id": 9,
       "questionText": {
-        "es": "¿Cómo defines props en un componente usando <script setup> en Vue 3?",
-        "en": "How do you define props in a component using <script setup> in Vue 3?"
+      "es": "¿Cómo defines `props` en un componente usando \`<script setup>`\ en Vue?",
+        "en": "How do you define props in a component using \`<script setup>`\ in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "Con <script setup>, las props se definen usando defineProps, lo cual permite recibir datos desde el componente padre de manera reactiva y fácil.",
-        "en": "With <script setup>, props are defined using defineProps, which allows you to receive data from the parent component reactively and easily."
+        "es": "Con \`<script setup>`\, las props se definen usando defineProps, lo cual permite recibir datos desde el componente padre de manera reactiva y fácil.",
+        "en": "With \`<script setup>`\, props are defined using defineProps, which allows you to receive data from the parent component in a reactive and straightforward way."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -523,15 +523,15 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Creándolas con ref.",
-            "en": "Creating them with ref."
+            "es": "Creándolas con `ref()`.",
+            "en": "Creating them with `ref()`."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Importando props desde vue.",
+            "es": "Importando `props` desde vue.",
             "en": "Importing props from vue."
           },
           "isCorrect": false
@@ -539,16 +539,16 @@ const quiz: Quiz = {
         {
           "id": 3,
           "answerText": {
-            "es": "Definiendo defineProps dentro de <script setup>.",
-            "en": "Defining defineProps inside <script setup>."
+            "es": "Utilizando `defineProps()` dentro de \`<script setup>`\.", 
+            "en": "Using `defineProps()` inside \`<script setup>`\."
           },
           "isCorrect": true
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Usando la opción props en export default.",
-            "en": "Using the props option in export default."
+            "es": "Usando la opción `props` en `export default`.",
+            "en": "Using the `props` option in `export default`."
           },
           "isCorrect": false
         }
@@ -557,12 +557,12 @@ const quiz: Quiz = {
     {
       "id": 10,
       "questionText": {
-        "es": "¿Para qué sirve defineEmits en Vue 3?",
-        "en": "What is defineEmits used for in Vue 3?"
+        "es": "¿Para qué sirve `defineEmits()` en Vue?",
+        "en": "What is `defineEmits()` used for in Vue?"
       },
       "correctAnswerExplanation": {
-        "es": "defineEmits permite declarar eventos que un componente puede emitir, facilitando la comunicación desde el componente hijo hacia el componente padre.",
-        "en": "defineEmits allows you to declare events that a component can emit, facilitating communication from the child component to the parent component."
+        "es": "`defineEmits()` permite declarar eventos que un componente puede emitir, facilitando la comunicación desde el componente hijo hacia el componente padre.",
+        "en": "`defineEmits()` allows you to declare events that a component can emit, facilitating communication from the child component to the parent component."
       },
       "correctAnswerCodeExample": {
           "es": [

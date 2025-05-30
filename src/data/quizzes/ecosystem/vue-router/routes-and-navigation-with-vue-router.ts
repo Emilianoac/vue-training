@@ -51,32 +51,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "createWebHashHistory",
-            "en": "createWebHashHistory"
+            "es": "`createWebHashHistory()`",
+            "en": "`createWebHashHistory()`"
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "createWebHistory",
-            "en": "createWebHistory"
+            "es": "`createWebHistory()`",
+            "en": "`createWebHistory()`"
           },
           "isCorrect": true
         },
         {
           "id": 3,
           "answerText": {
-            "es": "useHistoryMode",
-            "en": "useHistoryMode"
+            "es": "`useHistoryMode()`",
+            "en": "`useHistoryMode()`"
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "historyMode: 'html5'",
-            "en": "historyMode: 'html5'"
+            "es": "`historyMode: 'html5'`",
+            "en": "`historyMode: 'html5'`"
           },
           "isCorrect": false
         }
@@ -89,8 +89,8 @@ const quiz: Quiz = {
         "en": "How do you programmatically navigate to a route in Vue Router?"
       },
       "correctAnswerExplanation": {
-        "es": "Para navegar programáticamente, se utiliza router.push(), que permite cambiar la ruta actual a la que se pasa como argumento.",
-        "en": "To navigate programmatically, you use router.push(), which allows you to change the current route to the one passed as an argument."
+        "es": "Para navegar programáticamente, se utiliza `router.push()`, que permite cambiar la ruta actual a la que se pasa como argumento.",
+        "en": "To navigate programmatically, you use `router.push()`, which allows you to change the current route to the one passed as an argument."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -110,32 +110,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando router.push().",
-            "en": "Using router.push()."
+            "es": "Usando `router.push()`.",
+            "en": "Using `router.push()`."
           },
           "isCorrect": true
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Llamando a navigate().",
-            "en": "Calling navigate()."
+            "es": "Llamando a `navigate()`.",
+            "en": "Calling `navigate()`."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Usando this.navigate().",
-            "en": "Using this.navigate()."
+            "es": "Usando `this.navigate()`.",
+            "en": "Using `this.navigate()`."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Modificando window.location.",
-            "en": "Modifying window.location."
+            "es": "Modificando `window.location`.",
+            "en": "Modifying `window.location`."
           },
           "isCorrect": false
         }
@@ -169,32 +169,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "children",
-            "en": "children"
+            "es": "`children`",
+            "en": "`children`"
           },
           "isCorrect": true
         },
         {
           "id": 2,
           "answerText": {
-            "es": "nestedRoutes",
-            "en": "nestedRoutes"
+            "es": "`nestedRoutes`",
+            "en": "`nestedRoutes`"
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "subRoutes",
-            "en": "subRoutes"
+            "es": "`subRoutes`",
+            "en": "`subRoutes`"
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "parent",
-            "en": "parent"
+            "es": "`parent`",
+            "en": "`parent`"
           },
           "isCorrect": false
         }
@@ -277,8 +277,8 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando defineRoute().",
-            "en": "Using defineRoute()."
+            "es": "Usando `defineRoute()`.",
+            "en": "Using `defineRoute()`."
           },
           "isCorrect": false
         },
@@ -293,16 +293,16 @@ const quiz: Quiz = {
         {
           "id": 3,
           "answerText": {
-            "es": "Con la función createRoute().",
-            "en": "Using createRoute()."
+            "es": "Usando `createRoute()`.",
+            "en": "Using `createRoute()`."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Usando addRoute() en el componente.",
-            "en": "Using addRoute() in the component."
+            "es": "Usando `addRoute()` en el componente.",
+            "en": "Using `addRoute()` in the component."
           },
           "isCorrect": false
         }
@@ -315,8 +315,8 @@ const quiz: Quiz = {
         "en": "Which function is used to create a Vue Router instance?"
       },
       "correctAnswerExplanation": {
-        "es": "createRouter() es la función que se utiliza para crear una nueva instancia de Vue Router, permitiendo definir la configuración y las rutas.",
-        "en": "createRouter() is the function used to create a new instance of Vue Router, allowing you to define the configuration and routes."
+        "es": "`createRouter()` es la función que se utiliza para crear una nueva instancia de Vue Router, permitiendo definir la configuración y las rutas.",
+        "en": "`createRouter()` is the function used to create a new Vue Router instance, allowing you to define the configuration and routes."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -336,32 +336,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "createRouter()",
-            "en": "createRouter()"
+            "es": "`createRouter()`",
+            "en": "`createRouter()`"
           },
           "isCorrect": true
         },
         {
           "id": 2,
           "answerText": {
-            "es": "initRouter()",
-            "en": "initRouter()"
+            "es": "`initRouter()`",
+            "en": "`initRouter()`"
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "new Router()",
-            "en": "new Router()"
+            "es": "`new Router()`",
+            "en": "`new Router()`"
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "setupRouter()",
-            "en": "setupRouter()"
+            "es": "`setupRouter()`",
+            "en": "`setupRouter()`"
           },
           "isCorrect": false
         }
@@ -374,8 +374,8 @@ const quiz: Quiz = {
         "en": "How is navigation implemented with links in Vue Router?"
       },
       "correctAnswerExplanation": {
-        "es": "El componente <router-link> se utiliza para crear enlaces de navegación que permiten cambiar de ruta sin recargar la página.",
-        "en": "The <router-link> component is used to create navigation links that allow you to change routes without reloading the page."
+        "es": "El componente `<router-link>` se utiliza para crear enlaces de navegación que permiten cambiar de ruta sin recargar la página.",
+        "en": "The `<router-link>` component is used to create navigation links that allow you to change routes without reloading the page."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -395,32 +395,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando <a href='/ruta'>.",
-            "en": "Using <a href='/route'>."
+            "es": "Usando `<a href='/ruta'>`.",
+            "en": "Using `<a href='/route'>`."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Con el componente <router-link>.",
-            "en": "Using the <router-link> component."
+            "es": "Con el componente `<router-link>`.",
+            "en": "Using the `<router-link>` component."
           },
           "isCorrect": true
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Llamando a router.navigate().",
-            "en": "Calling router.navigate()."
+            "es": "Llamando a `router.navigate()`.",
+            "en": "Calling `router.navigate()`."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Modificando window.location.",
-            "en": "Modifying window.location."
+            "es": "Modificando `window.location`.",
+            "en": "Modifying `window.location`."
           },
           "isCorrect": false
         }
@@ -433,8 +433,8 @@ const quiz: Quiz = {
         "en": "How do you set a default subroute in a nested route in Vue Router?"
       },
       "correctAnswerExplanation": {
-        "es": "Para establecer una subruta por defecto en una ruta anidada, se define una subruta con un path vacio (path: '') dentro de children. Esto hace que cuando el usuario acceda a la ruta padre, Vue Router cargue automáticamente la subruta por defecto sin cambiar la URL.",
-        "en": "To set a default subroute in a nested route, you define a subroute with an empty path (path: '') inside children. This causes Vue Router to automatically load the default subroute when the user accesses the parent route without changing the URL."
+        "es": "Para establecer una subruta por defecto en una ruta anidada, se define una subruta con un path vacio `path: ''` dentro de children. Esto hace que cuando el usuario acceda a la ruta padre, Vue Router cargue automáticamente la subruta por defecto sin cambiar la URL.",
+        "en": "To set a default subroute in a nested route, you define a subroute with an empty path `path: ''` inside children. This causes Vue Router to automatically load the default subroute when the user accesses the parent route without changing the URL."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -454,24 +454,24 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Definiendo una propiedad default: true.",
-            "en": "Defining a default: true property."
+            "es": "Definiendo una propiedad `default: true`.",
+            "en": "Defining a `default: true` property."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Usando el atributo default en children.",
-            "en": "Using the default attribute in children."
+            "es": "Usando el atributo `default` en `children`.",
+            "en": "Using the `default` attribute in `children`."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Definiendo una subruta con un path vacío (path: ' ').",
-            "en": "Defining a subroute with an empty path (path: ' ')."
+            "es": "Definiendo una subruta con un path vacío `path: ' '`.",
+            "en": "Defining a subroute with an empty path `path: ' '`."
           },
           "isCorrect": true
         },
@@ -479,7 +479,7 @@ const quiz: Quiz = {
           "id": 4,
           "answerText": {
             "es": "Usando el atributo defaultRoute.",
-            "en": "Using the defaultRoute attribute."
+            "en": "Using the `defaultRoute` attribute."
           },
           "isCorrect": false
         }
@@ -492,8 +492,8 @@ const quiz: Quiz = {
         "en": "How can you define a dynamic route in Vue Router?"
       },
       "correctAnswerExplanation": {
-        "es": "En Vue Router, una ruta dinámica se define usando parámetros dinámicos, que se indican con dos puntos : seguidos del nombre del parámetro. ",
-        "en": "In Vue Router, a dynamic route is defined using dynamic parameters, which are indicated with a colon : followed by the parameter name."
+        "es": "En Vue Router, una ruta dinámica se define usando parámetros dinámicos, que se indican con dos puntos `:` seguidos del nombre del parámetro. ",
+        "en": "In Vue Router, a dynamic route is defined using dynamic parameters, which are indicated with a colon `:` followed by the parameter name."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -513,32 +513,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando corchetes [ ].",
-            "en": "Using brackets [ ]."
+            "es": "Usando corchetes `[ ]`.",
+            "en": "Using brackets `[ ]`."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Con un asterisco *.",
-            "en": "With an asterisk *."
+            "es": "Con un asterisco `*`.",
+            "en": "With an asterisk `*`."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Usando paréntesis ( ).",
-            "en": "Using parentheses ( )."
+            "es": "Usando paréntesis `( )`.",
+            "en": "Using parentheses `( )`."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Con dos puntos : seguidos del nombre del parámetro.",
-            "en": "With a colon : followed by the parameter name."
+            "es": "Con dos puntos `:` seguidos del nombre del parámetro.",
+            "en": "With a colon `:` followed by the parameter name."
           },
           "isCorrect": true
         }
@@ -572,32 +572,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Importando el componente con la función loadComponent().",
-            "en": "Importing the component with the loadComponent() function."
+            "es": "Importando el componente con la función `loadComponent()`.",
+            "en": "Importing the component with the `loadComponent()` function."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Importando el componente con la función dynamicImport().",
-            "en": "Importing the component with the dynamicImport() function."
+            "es": "Importando el componente con la función `dynamicImport()`.",
+            "en": "Importing the component with the `dynamicImport()` function."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Importando el componente con la función import().",
-            "en": "Importing the component with the import() function."
+            "es": "Importando el componente con la función `import()`.",
+            "en": "Importing the component with the `import()` function."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Importado el componente con () => import(...).",
-            "en": "Importing the component with () => import(...)."
+            "es": "Importado el componente con `() => import(...)`.",
+            "en": "Importing the component with `() => import(...)`."
           },
           "isCorrect": true
         }

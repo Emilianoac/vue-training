@@ -79,8 +79,8 @@ const quiz: Quiz = {
         "en": "Which function is used to define a store in Pinia?"
       },
       "correctAnswerExplanation": {
-        "es": "La función defineStore se utiliza para crear un nuevo store en Pinia, que se puede importar y utilizar en diferentes componentes de la aplicación.",
-        "en": "The defineStore function is used to create a new store in Pinia, which can be imported and used in different components of the application."
+        "es": "La función `defineStore()` se utiliza para crear un nuevo store en Pinia, que se puede importar y utilizar en diferentes componentes de la aplicación.",
+        "en": "The `defineStore()` function is used to create a new store in Pinia, which can be imported and used in different components of the application."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -100,32 +100,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "defineStore",
-            "en": "defineStore"
+            "es": "`defineStore()`",
+            "en": "`defineStore()`"
           },
           "isCorrect": true
         },
         {
           "id": 2,
           "answerText": {
-            "es": "createStore",
-            "en": "createStore"
+            "es": "`createStore()`",
+            "en": "`createStore()`"
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "define",
-            "en": "define"
+            "es": "`define()`",
+            "en": "`define()`"
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "setStore",
-            "en": "setStore"
+            "es": "`setStore()`",
+            "en": "`setStore()`"
           },
           "isCorrect": false
         }
@@ -201,12 +201,12 @@ const quiz: Quiz = {
     {
       "id": 4,
       "questionText": {
-        "es": "Usando la options syntax, ¿qué permite la opción state dentro de un store en Pinia?",
-        "en": "Using the options syntax, what does the state option allow within a store in Pinia?"
+        "es": "Usando la options syntax, ¿qué permite la opción `state` dentro de un store en Pinia?",
+        "en": "Using the options syntax, what does the `state` option allow within a store in Pinia?"
       },
       "correctAnswerExplanation": {
-        "es": "Usando la options syntax, la opción state define el estado inicial del store, que puede ser modificado o accedido por los componentes que lo utilizan.",
-        "en": "Using the options syntax, the state option defines the initial state of the store, which can be modified or accessed by the components that use it."
+        "es": "Usando la options syntax, la opción `state` define el estado inicial del store, que puede ser modificado o accedido por los componentes que lo utilizan.",
+        "en": "Using the options syntax, the `state` option defines the initial state of the store, which can be modified or accessed by the components that use it."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -260,7 +260,7 @@ const quiz: Quiz = {
     {
       "id": 5,
       "questionText": {
-        "es": "¿Usando la options syntax, cómo se define una acción en un store de Pinia?",
+        "es": "Usando la options syntax, ¿cómo se define una acción en un store de Pinia?",
         "en": "Using the options syntax, how do you define an action in a Pinia store?"
       },
       "correctAnswerExplanation": {
@@ -285,32 +285,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Con una propiedad setup.",
-            "en": "With a setup property."
+            "es": "Dentro de la propiedad `setupActions`.",
+            "en": "Inside the 'setupActions' property."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Usando computed.",
-            "en": "Using computed."
+            "es": "Usando `computed()`.",
+            "en": "Using `computed()`."
           },
           "isCorrect": false
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Dentro de la opción state.",
-            "en": "Inside the state option."
+            "es": "Dentro de la propiedad `option`.",
+            "en": "Inside the 'option' property."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Usando la opción actions.",
-            "en": "Using the actions option."
+            "es": "Dentro de la propiedad `actions`.",
+            "en": "Inside the 'actions' property."
           },
           "isCorrect": true
         }
@@ -320,11 +320,11 @@ const quiz: Quiz = {
     {
       "id": 6,
       "questionText": {
-        "es": "¿Usando la sintaxis setup como se definen las acciones en un store de Pinia?",
-        "en": "How do you define actions in a Pinia store?"
+        "es": "Usando la setup syntax, ¿como se definen las acciones en un store de Pinia?",
+        "en": "Using the setup syntax, how are actions defined in a Pinia store?"
       },
       "correctAnswerExplanation": {
-        "es": "En Pinia, usando la sintaxis setup, las acciones se definen como funciones dentro del store que modifican el estado del store. Estas funciones pueden ser utilizadas en los componentes para cambiar el estado del store.",
+        "es": "En Pinia, usando la setup syntax, las acciones se definen como funciones dentro del store que modifican el estado del store. Estas funciones pueden ser utilizadas en los componentes para cambiar el estado del store.",
         "en": "In Pinia, using the setup syntax, actions are defined as functions inside the store that modify the store's state. These functions can be used in components to change the store"
       },
       "correctAnswerCodeExample": {
@@ -345,32 +345,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando la propiedad 'actions' dentro del store.",
+            "es": "Dentro de la propiedad `actions` del store.",
             "en": "Using the 'actions' property inside the store."
-          },
-          "isCorrect": true
-        },
-        {
-          "id": 2,
-          "answerText": {
-            "es": "Definiendo el estado directamente en el store.",
-            "en": "Defining the state directly in the store."
           },
           "isCorrect": false
         },
         {
+          "id": 2,
+          "answerText": {
+            "es": "Creando funciones dentro del store.",
+            "en": "Creating functions inside the store."
+          },
+          "isCorrect": true
+        },
+        {
           "id": 3,
           "answerText": {
-            "es": "Usando computed dentro del store.",
-            "en": "Using computed inside the store."
+            "es": "Usando `computed()` dentro del store.",
+            "en": "Using `computed()` inside the store."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Usando el método $reset() del store.",
-            "en": "Using the $reset() method of the store."
+            "es": "Dentro de la propiedad `methods` del store.",
+            "en": "Inside the 'methods' property of the store."
           },
           "isCorrect": false
         }
@@ -379,12 +379,12 @@ const quiz: Quiz = {
     {
       "id": 7,
       "questionText": {
-        "es": "¿Usando la setup syntax, cómo puedes resetear un estado?",
+        "es": "Usando la setup syntax, ¿cómo puedes resetear un estado?",
         "en": "Using the setup syntax, how can you reset a state?"
       },
       "correctAnswerExplanation": {
-        "es": "Para resetear un estado con la setup syntax necesitas definir tu propio método $reset() dentro del store, que restablezca el estado a su configuración inicial.",
-        "en": "To reset a state with the setup syntax, you need to define your own $reset() method inside the store that resets the state to its initial configuration."
+        "es": "Para resetear un estado con la setup syntax necesitas definir tu propio método `$reset()` dentro del store, que restablezca el estado a su configuración inicial.",
+        "en": "To reset a state with the setup syntax, you need to define your own `$reset()` method inside the store that resets the state to its initial configuration."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -404,8 +404,8 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando el método $reset() del store.",
-            "en": "Using the $reset() method of the store."
+            "es": "Usando el método `$reset()` del store.",
+            "en": "Using the `$reset()` method of the store."
           },
           "isCorrect": true
         },
@@ -428,8 +428,8 @@ const quiz: Quiz = {
         {
           "id": 4,
           "answerText": {
-            "es": "Utilizando defineStore nuevamente.",
-            "en": "Using defineStore again."
+            "es": "Utilizando `defineStore()` nuevamente.",
+            "en": "Using `defineStore()` again."
           },
           "isCorrect": false
         }
@@ -442,8 +442,8 @@ const quiz: Quiz = {
         "en": "What is the advantage of using the setup syntax in pinia?"
       },
       "correctAnswerExplanation": {
-        "es": "Con la setup syntax, puedes acceder al estado y acciones del store sin necesidad de usar 'this', lo que simplifica el código y mejora la legibilidad.",
-        "en": "With the setup syntax, you can access the store's state and actions without needing to use 'this', which simplifies the code and improves readability."
+        "es": "Con la setup syntax, puedes acceder al estado y acciones del store sin necesidad de usar `this`, lo que simplifica el código y mejora la legibilidad.",
+        "en": "With the setup syntax, you can access the store's state and actions without needing to use `this`, which simplifies the code and improves readability."
       },
       "correctAnswerCodeExample": {
         "es": [
@@ -471,8 +471,8 @@ const quiz: Quiz = {
         {
           "id": 2,
           "answerText": {
-            "es": "Simplifica el acceso al estado sin this.",
-            "en": "Simplifies state access without this."
+            "es": "Simplifica el acceso al estado sin `this`.",
+            "en": "Simplifies state access without `this`."
           },
           "isCorrect": true
         },
@@ -497,8 +497,8 @@ const quiz: Quiz = {
     {
       "id": 9,
       "questionText": {
-        "es": "¿Qué es un getter en Pinia?",
-        "en": "What is a getter in Pinia?"
+        "es": "Usando la options syntax, ¿cuál es el propósito de un getter en Pinia?",
+        "en": "Using the options syntax, what is the purpose of a getter in Pinia?"
       },
       "correctAnswerExplanation": {
         "es": "Los getters en Pinia son propiedades derivadas del estado que se recalculan automáticamente cuando sus dependencias cambian. Permiten acceder a valores computados basados en el estado del store.",
@@ -530,32 +530,32 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Un método para definir rutas.",
-            "en": "A method to define routes."
+            "es": "Definir rutas.",
+            "en": "Defining routes."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Un valor calculado que depende del estado.",
-            "en": "A computed value that depends on the state."
+            "es": "Calcular un valor computado que depende del estado.",
+            "en": "Calculating a computed value that depends on the state."
           },
           "isCorrect": true
         },
         {
           "id": 3,
           "answerText": {
-            "es": "Una función que inicializa el estado.",
-            "en": "A function that initializes the state."
+            "es": "Inicializar el estado.",
+            "en": "Initializing the state."
           },
           "isCorrect": false
         },
         {
           "id": 4,
           "answerText": {
-            "es": "Un método asíncrono para actualizar datos.",
-            "en": "An asynchronous method to update data."
+            "es": "Actualizar datos de forma asíncrona.",
+            "en": "Updating data asynchronously."
           },
           "isCorrect": false
         }
@@ -589,16 +589,16 @@ const quiz: Quiz = {
         {
           "id": 1,
           "answerText": {
-            "es": "Usando this.store.",
-            "en": "Using this.store."
+            "es": "Usando `this.store`.",
+            "en": "Using `this.store`."
           },
           "isCorrect": false
         },
         {
           "id": 2,
           "answerText": {
-            "es": "Creando una instancia del store con new.",
-            "en": "Creating an instance of the store with new."
+            "es": "Creando una instancia del store con `new`.",
+            "en": "Creating an instance of the store with `new`."
           },
           "isCorrect": false
         },
@@ -613,8 +613,8 @@ const quiz: Quiz = {
         {
           "id": 4,
           "answerText": {
-            "es": "Mediante la opción computed.",
-            "en": "Using the computed option."
+            "es": "Mediante la opción `computed`.",
+            "en": "Using the `computed` option."
           },
           "isCorrect": false
         }
