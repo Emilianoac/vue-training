@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,8 +7,9 @@
 
 @layer base {
   body {
-   @apply bg-white dark:bg-slate-900;
-   @apply text-gray-800 dark:text-gray-200;
+    @apply font-poppins;
+    @apply bg-white dark:bg-slate-900;
+    @apply text-gray-800 dark:text-gray-200;
   }
 }
 
