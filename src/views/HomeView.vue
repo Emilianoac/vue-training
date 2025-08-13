@@ -8,10 +8,12 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
 
 <template>
   <!-- Hero Section -->
-  <section class="block lg:grid grid-cols-[1fr_0.6fr] items-center justify-between my-14 lg:my-14">
+  <section class="block lg:grid grid-cols-[1fr_0.8fr] items-center justify-between my-14 lg:my-14">
     <div class="mb-10 md:mb-0">
       <h1 class="text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
-        {{ $t("home.welcome") }} 
+        {{ $t("home.welcome-one") }} 
+        <span class="text-color-primary">{{ $t("home.welcome-two") }}</span>
+        {{ $t("home.welcome-three") }}
         Vue.js
       </h1>
       <p class="text-2xl my-10  max-w-[500px]">
