@@ -16,7 +16,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="max-w-[450px] w-full mx-auto text-center bg-white dark:bg-slate-900 p-4 rounded-md mb-4 shadow-">
+  <div class="max-w-[450px] w-full mx-auto text-center bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-4 rounded-md mb-4 shadow-">
     <!-- Quiz Image -->
     <div class="bg-slate-100 dark:bg-slate-800 p-1 rounded-full mx-auto h-[60px] w-[60px] flex items-center justify-center">
       <img class="max-w-[30px]" :src="image" alt="Quiz Image" />

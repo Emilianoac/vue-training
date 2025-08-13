@@ -48,7 +48,10 @@ defineProps<{
 
     <div class="bg-white dark:bg-slate-900 p-7 rounded-md">
       <ul>
-        <li v-for="(question, i) in userHistory" :key="i">
+        <li 
+          v-for="(question, i) in userHistory" 
+          :key="i" 
+          class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-4 rounded-md mb-6 last:mb-0">
           <div class="flex items-center font-bold text-xl mb-4">
             <span class="block me-1">{{ i + 1 }}.</span>
             <div v-html="marked(question.question[store.locale])"></div>

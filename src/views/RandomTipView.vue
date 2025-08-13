@@ -78,16 +78,14 @@
       <li 
         v-for="tip in randomTips" 
         :key="tip.id" 
-        :class="{
-          '!outline-color-primary': randomTip.id === tip.id,
-        }"
-        class="blog lg:flex items-center bg-white dark:bg-slate-900 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-s transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
+        :class="{ '!outline-color-primary': randomTip.id === tip.id }"
+        class="block lg:flex items-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
         @click="selectTip(tip)">
-          <div class="bg-gray-100 dark:bg-slate-800 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center">
+          <div class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center">
             <img :src="tip.category.icon" alt="Category Icon"/>
           </div>
           <div>
-            <span class="text-sm text-gray-500 dark:text-gray-400 mb-1 mt-5 lg:mt-0 block">{{ tip.category.name}}</span>
+            <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">{{ tip.category.name}}</span>
             <h4 class="font-bold mb-1"> {{ tip.title[store.locale] }} </h4>
             <p class="text-[0.92em]"> {{ tip.description[store.locale] }} </p>
           </div>
@@ -99,7 +97,7 @@
 <style lang="postcss">
 
 .tip-container {
-  @apply bg-white dark:bg-slate-900 shadow-md rounded-lg overflow-hidden p-5;
+  @apply bg-white border dark:bg-slate-800/50  border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5;
 
   h2 {
     @apply text-[1.1em] lg:text-xl mb-4;

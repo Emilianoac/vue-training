@@ -68,7 +68,7 @@ watch(() => store.locale, () => {
       <h1 class="text-xl  font-bold mb-6">{{ quiz?.title[store.locale]}}</h1>
   
       <!-- Quiz Container -->
-      <div class="bg-white dark:bg-slate-900 p-4 rounded-md mx-auto"> 
+      <div class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200  p-4 rounded-md mx-auto"> 
         <!-- Progress -->
         <QuizProgress 
           :progress="quizProgress" 

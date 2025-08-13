@@ -3,31 +3,37 @@
 @tailwind utilities;
 
 
-body {
- @apply bg-gray-100 dark:bg-[#111626];
- @apply text-gray-800 dark:text-gray-200;
+@layer base {
+  body {
+   @apply bg-white dark:bg-slate-900;
+   @apply text-gray-800 dark:text-gray-200;
+  }
+}
+
+@layer components {
+  .app-button {
+    @apply px-4 py-2 rounded-md inline-block bg-gray-800 text-white shadow-md transition-transform duration-100;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .app-button:active {
+    @apply scale-95;
+  }
+  
+  .app-button.primary {
+    @apply bg-color-primary text-white dark:text-black;
+    @apply hover:bg-color-primary-hover transition duration-300 hover:disabled:bg-color-primary-hover;
+  }
+  
+  .app-button.secondary {
+    @apply bg-slate-500 text-white ;
+    @apply hover:bg-slate-600 transition duration-300 hover:disabled:bg-slate-600;
+  }
+  
+  code:not(.hljs) {
+    @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-blue-200 px-1 py-0.5 rounded-md text-base font-normal font-mono;
+  }
 }
 
 
-.app-button {
-  @apply px-4 py-2 rounded-md inline-block bg-gray-800 text-white shadow-md transition-transform duration-100;
-  @apply disabled:opacity-50 disabled:cursor-not-allowed;
-}
 
-.app-button:active {
-  @apply scale-95;
-}
-
-.app-button.primary {
-  @apply bg-color-primary text-white dark:text-black;
-  @apply hover:bg-color-primary-hover transition duration-300 hover:disabled:bg-color-primary-hover;
-}
-
-.app-button.secondary {
-  @apply bg-slate-500 text-white ;
-  @apply hover:bg-slate-600 transition duration-300 hover:disabled:bg-slate-600;
-}
-
-code:not(.hljs) {
-  @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-blue-200 px-1 py-0.5 rounded-md text-base font-normal font-mono;
-}
