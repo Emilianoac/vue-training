@@ -1,4 +1,6 @@
 {
-  "welcome": "Cuestionarios y Desafios para practicar con",
+  "welcome-one": "Cuestionarios y",
+  "welcome-two": "Desafios",
+  "welcome-three": "para practicar con",
   "description": "Pon a prueba tu conocimiento y sigue mejorando con cada desafío."
 }

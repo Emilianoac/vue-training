@@ -1,4 +1,6 @@
 {
-  "welcome": "Quizzes and Challenges to practice with",
+  "welcome-one": "Quizzes and",
+  "welcome-two": "Challenges",
+  "welcome-three": "to practice with",
   "description": "Test your knowledge and keep improving with each challenge."
 }
