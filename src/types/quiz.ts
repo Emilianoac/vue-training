@@ -8,31 +8,19 @@ export interface Quiz {
     name: string;
     image: string;
   };
-  title: {
-    en: string;
-    es: string;
-  };
+  title: MultilingualString;
   levelLabel: {
     es: "Básico" | "Intermedio" | "Avanzado";
     en: "Basic" | "Intermediate" | "Advanced";
   };
-  description: {
-    en: string;
-    es: string;
-  };
+  description: MultilingualString;
   questions: Question[];
 }
 
 export interface Question {
   id: number;
-  questionText: {
-    en: string;
-    es: string;
-  };
-  correctAnswerExplanation: {
-    en: string;
-    es: string;
-  }
+  questionText: MultilingualString;
+  correctAnswerExplanation: MultilingualString;
   correctAnswerCodeExample: {
     en: CodeExample[];
     es: CodeExample[];
@@ -47,9 +35,18 @@ export interface CodeExample {
 
 export interface Answer {
   id: number;
-  answerText: {
-    en: string;
-    es: string;
-  };
+  answerText: MultilingualString;
   isCorrect: boolean;
+}
+
+export interface AnswerRecord {
+  question: MultilingualString;
+  answers: Array<Answer & { isSelected: boolean }>;
+  explanation: MultilingualString;
+  codeExample: { en: CodeExample[]; es: CodeExample[] };
+}
+
+export interface MultilingualString {
+  en: string;
+  es: string;
 }
