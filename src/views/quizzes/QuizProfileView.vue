@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
 import useQuiz from "@/composables/useQuiz";
@@ -11,11 +11,12 @@ import QuizQuestionDetailsModal from "@/components/quiz/profile/QuizQuestionDeta
 
 const store = useGeneralStore();
 const route = useRoute();
-const showModal = ref(false);
 
 const  { 
-  hasCheckedAnswer,
+  quiz,
+  showDetails,
   isQuizInitialized,
+  hasCheckedAnswer,
   selectedOptionId,
   quizProgress, 
   currentQuestionIndex, 
@@ -24,14 +25,11 @@ const  {
   isLastQuestion,
   userHistory, 
   userStats,
-  quiz,
 
   goToNextQuestion,
   loadQuiz,
   answerCurrentQuestion
 } = useQuiz();
-
-loadQuiz(route.params.id as string );
 
 
 function updateDocumentTitle() {
@@ -40,7 +38,8 @@ function updateDocumentTitle() {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await loadQuiz(route.params.id as string );
   updateDocumentTitle();
 });
 
@@ -89,7 +88,7 @@ watch(() => store.locale, () => {
         <div class="flex justify-end items-center gap-3 mt-6">
           <!-- View Details button -->
           <button v-if="hasCheckedAnswer && currentQuestion" 
-            @click="showModal = true"
+            @click="showDetails = true"
             class="app-button secondary text-sm">
             {{ $t('quiz.view_details') }}
           </button>
@@ -124,9 +123,9 @@ watch(() => store.locale, () => {
 
   <Teleport to="body">
     <QuizQuestionDetailsModal 
-      v-if="showModal && currentQuestion"
+      v-if="showDetails && currentQuestion"
       :question="currentQuestion"
-      @close-modal="showModal = false"
+      @close-modal="showDetails = false"
     />
   </Teleport>
 </template>
