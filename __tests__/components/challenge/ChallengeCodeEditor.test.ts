@@ -1,7 +1,7 @@
 import {it, describe, expect } from "vitest";
 import {i18nTest } from "../../i18nTest";
 import {mount} from "@vue/test-utils";
-import ChallengeCodeEditor from "../../../components/challenge/ChallengeCodeEditorLayout.vue";
+import ChallengeCodeEditor from "@/components/challenge/ChallengeCodeEditorLayout.vue";
 import { nextTick } from "vue";
 
 

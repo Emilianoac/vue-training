@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect, vi } from "vitest";
 import { createI18n } from "vue-i18n";
-import LangSwitcher from "../../../components/global/LangToggleComponent.vue";
+import LangSwitcher from "@/components/global/LangToggleComponent.vue";
 import { nextTick } from "vue";
 
 const i18n = createI18n({
