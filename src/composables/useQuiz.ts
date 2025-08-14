@@ -1,80 +1,135 @@
-import {ref, computed} from "vue";
-import type {Quiz, Answer, CodeExample} from "@/types/quiz";
+import { ref, computed } from "vue";
+import type { Quiz, Answer, CodeExample } from "@/types/quiz";
+import getQuizService from "@/services/api/get-quiz/getQuizService";
 
-export default function useQuiz(quiz: Quiz | null) {  
-  if (!quiz) throw new Error("No quiz provided");
+interface UserHistory {
+  question: { en: string; es: string };
+  answers: Array<Answer & { isSelected: boolean }>;
+  explanation: { en: string; es: string };
+  codeExample: { en: CodeExample[]; es: CodeExample[] };
+}
 
-  const quizInit = ref(false);
+export default function useQuiz() {
+  const quiz = ref<Quiz | null>(null);
+  const error = ref({ status: false, message: "" });
+  const isQuizInitialized = ref(false);
   const quizProgress = ref(0);
   const currentQuestionIndex = ref(0);
-  const currentQuestion = computed(() => quiz.questions[currentQuestionIndex.value]);
-  const selectedOption = ref<null | number>(null);
-  const checkAnswer = ref(false);
-  const isLastQuestion = computed(() => currentQuestionIndex.value === quiz.questions.length - 1);
+  const selectedOptionId = ref<number | null>(null);
+  const hasCheckedAnswer = ref(false);
   const isFinished = ref(false);
 
-  const userHistory = ref<Array<{ 
-    question: { en: string; es: string;}; 
-    answers: Array<Answer & { isSelected: boolean; }>;
-    explanation: { en: string; es: string; };
-    codeExample: { en: CodeExample[]; es: CodeExample[]; };
-  }>>([]);
+  const userHistory = ref<UserHistory[]>([]);
   const userStats = ref({ correct: 0, wrong: 0, percentage: 0, total: 0 });
 
-  function handleUserAnswer() {
-    if (!quiz || !selectedOption.value || !currentQuestion.value) return;
+  const currentQuestion = computed(() =>
+    quiz.value ? quiz.value.questions[currentQuestionIndex.value] : null
+  );
 
-    const answersWithSelection = currentQuestion.value.answers.map((answer: Answer) => ({
-      id: answer.id,
-      answerText: answer.answerText,
-      isCorrect: answer.isCorrect,
-      isSelected: answer.id === selectedOption.value,
-    }));
-    
-    userHistory.value.push({
-      question: currentQuestion.value.questionText,
-      answers: answersWithSelection,
-      explanation: currentQuestion.value.correctAnswerExplanation,
-      codeExample: currentQuestion.value.correctAnswerCodeExample,
-    });
+  const isLastQuestion = computed(() => 
+    quiz.value ? currentQuestionIndex.value === quiz.value.questions.length - 1 : false
+  );
 
-    checkAnswer.value = true;
-  };
+  function loadQuiz(id: string) {
+    try {
+      const quizData = getQuizService(id);
+      quiz.value = quizData;
+      resetQuizState();
+    } catch (err) {
+      setError(err);
+    }
+  }
 
-  function handleNextQuestion() {
-    if (!quiz) return;
+  function answerCurrentQuestion() {
+    if (!currentQuestion.value) return;
+    recordUserAnswer(currentQuestion.value, selectedOptionId.value);
+    hasCheckedAnswer.value = true;
+  }
 
-    if (currentQuestionIndex.value === quiz.questions.length - 1) {
-      isFinished.value = true;
+  function goToNextQuestion() {
+    if (!quiz.value) return;
 
-      userStats.value.total = userHistory.value.length;
-      userStats.value.correct = userHistory.value.filter((question) => {
-        return question.answers.every((answer) => answer.isSelected === answer.isCorrect);
-      }).length;
-      userStats.value.wrong = userStats.value.total - userStats.value.correct;
-      userStats.value.percentage = Math.round((userStats.value.correct / userStats.value.total) * 100);
+    if (isLastQuestion.value) {
+      finishQuiz();
       return;
     }
 
+    incrementQuestionIndex();
+    resetQuestionState();
+  }
+
+  function setError(err: unknown) {
+    error.value.status = true;
+    error.value.message = err instanceof Error ? err.message : "An unexpected error occurred";
+  }
+
+  function resetQuizState() {
+    quizProgress.value = 0;
+    currentQuestionIndex.value = 0;
+    selectedOptionId.value = null;
+    hasCheckedAnswer.value = false;
+    isFinished.value = false;
+    userHistory.value = [];
+    userStats.value = { correct: 0, wrong: 0, percentage: 0, total: 0 };
+  }
+
+  function resetQuestionState() {
+    selectedOptionId.value = null;
+    hasCheckedAnswer.value = false;
+  }
+
+  function incrementQuestionIndex() {
+    if (!quiz.value) return;
     currentQuestionIndex.value++;
-    quizProgress.value = ((currentQuestionIndex.value + 1) / quiz.questions.length) * 100;
-    checkAnswer.value = false;
-    selectedOption.value = null;
+    quizProgress.value =
+      ((currentQuestionIndex.value + 1) / quiz.value.questions.length) * 100;
+  }
+
+  function recordUserAnswer(question: Quiz["questions"][number], selectedId: number | null) {
+    const mappedAnswers = question.answers.map(answer => ({
+      ...answer,
+      isSelected: answer.id === selectedId
+    }));
+
+    userHistory.value.push({
+      question: question.questionText,
+      answers: mappedAnswers,
+      explanation: question.correctAnswerExplanation,
+      codeExample: question.correctAnswerCodeExample
+    });
+  }
+
+  function finishQuiz() {
+    isFinished.value = true;
+    calculateUserStats();
+  }
+
+  function calculateUserStats() {
+    const totalQuestions = userHistory.value.length;
+    const correctAnswers = userHistory.value.filter(q => q.answers.every(ans => ans.isSelected === ans.isCorrect)).length;
+
+    userStats.value.total = totalQuestions;
+    userStats.value.correct = correctAnswers;
+    userStats.value.wrong = totalQuestions - correctAnswers;
+    userStats.value.percentage = Math.round((correctAnswers / totalQuestions) * 100);
   }
 
   return {
-    quizInit,
+    error,
+    isQuizInitialized,
     quizProgress,
     currentQuestionIndex,
     currentQuestion,
-    selectedOption,
-    checkAnswer,
+    selectedOptionId,
+    hasCheckedAnswer,
     userStats,
     userHistory,
     isLastQuestion,
     isFinished,
+    quiz,
 
-    handleUserAnswer,
-    handleNextQuestion
-  }
+    loadQuiz,
+    answerCurrentQuestion,
+    goToNextQuestion
+  };
 }

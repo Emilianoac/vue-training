@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
-import quizzes from "@/data/quizzes";
 import useQuiz from "@/composables/useQuiz";
 import QuizWelcome from "@/components/quiz/profile/QuizWelcome.vue";
 import QuizProgress from "@/components/quiz/profile/QuizProgress.vue";
@@ -12,38 +11,41 @@ import QuizQuestionDetailsModal from "@/components/quiz/profile/QuizQuestionDeta
 
 const store = useGeneralStore();
 const route = useRoute();
-const router = useRouter();
-
-const quiz = quizzes.find((quiz) => quiz.id === route.params.id);
 const showModal = ref(false);
 
-if (!quiz) router.push({ name: "NotFound" });
-
 const  { 
-  quizInit,
+  hasCheckedAnswer,
+  isQuizInitialized,
+  selectedOptionId,
   quizProgress, 
   currentQuestionIndex, 
   currentQuestion, 
-  selectedOption, 
   isFinished,
   isLastQuestion,
-  checkAnswer,
   userHistory, 
   userStats,
-  handleUserAnswer,
-  handleNextQuestion,
-} = useQuiz(quiz ? quiz : null);
+  quiz,
+
+  goToNextQuestion,
+  loadQuiz,
+  answerCurrentQuestion
+} = useQuiz();
+
+loadQuiz(route.params.id as string );
+
+
+function updateDocumentTitle() {
+  if (quiz.value) {
+    document.title = `${quiz.value.title[store.locale]} - Vue Training`;
+  }
+}
 
 onMounted(() => {
-  if (quiz) {
-    document.title = `${quiz.title[store.locale]} - Vue Training`;
-  }
+  updateDocumentTitle();
 });
 
 watch(() => store.locale, () => {
-  if (quiz) {
-    document.title = `${quiz.title[store.locale]} - Vue Training`;
-  }
+  updateDocumentTitle();
 });
 </script>
 
@@ -52,18 +54,18 @@ watch(() => store.locale, () => {
 
     <!-- Quiz Welcome -->
     <QuizWelcome 
-      v-if="!quizInit && quiz"
+      v-if="!isQuizInitialized && quiz"
       :title="quiz.title[store.locale]"
       :description="quiz.description[store.locale]"
       :image="quiz.category.image"
       :category="quiz.category.name"
       :level="quiz.level"
       :levelLabel="quiz.levelLabel[store.locale]"
-      @startQuiz="quizInit = true"
+      @startQuiz="isQuizInitialized = true"
     />
     
     <!-- Quiz on Progress -->
-    <div v-if="!isFinished && quizInit" class="max-w-[950px] mx-auto">
+    <div v-if="!isFinished && isQuizInitialized" class="max-w-[950px] mx-auto">
       <!-- Quiz Title -->
       <h1 class="text-xl  font-bold mb-6">{{ quiz?.title[store.locale]}}</h1>
   
@@ -77,34 +79,34 @@ watch(() => store.locale, () => {
         />
 
         <!-- Question -->
-        <QuizQuestion 
+        <QuizQuestion v-if="currentQuestion"
           :question="currentQuestion" 
-          :checkAnswer="checkAnswer"
-          v-model="selectedOption"
+          :checkAnswer="hasCheckedAnswer"
+          v-model="selectedOptionId"
         />
 
         <!-- Controls -->
         <div class="flex justify-end items-center gap-3 mt-6">
           <!-- View Details button -->
-          <button v-if="checkAnswer" 
+          <button v-if="hasCheckedAnswer && currentQuestion" 
             @click="showModal = true"
             class="app-button secondary text-sm">
             {{ $t('quiz.view_details') }}
           </button>
           <!-- Verify Answer Button -->
           <button 
-            v-if="!checkAnswer"
-            :disabled="!selectedOption"
+            v-if="!hasCheckedAnswer && currentQuestion"
+            :disabled="!selectedOptionId"
             class="app-button primary text-sm" 
-            @click="handleUserAnswer">
+            @click="answerCurrentQuestion">
             {{ $t('quiz.verify_answer') }}
           </button>
           <!-- Next Question Button -->
           <button 
             v-else
-            :disabled="!selectedOption"
+            :disabled="!selectedOptionId"
             class="app-button primary text-sm"
-            @click="handleNextQuestion">
+            @click="goToNextQuestion">
             {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
           </button>
         </div>
@@ -122,7 +124,7 @@ watch(() => store.locale, () => {
 
   <Teleport to="body">
     <QuizQuestionDetailsModal 
-      v-if="showModal"
+      v-if="showModal && currentQuestion"
       :question="currentQuestion"
       @close-modal="showModal = false"
     />
