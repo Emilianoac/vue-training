@@ -12,8 +12,8 @@
 </script>
 
 <template>
-  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800  sticky top-0 z-50">
-    <div class="flex items-center justify-between container mx-auto p-4 px-4 md:px-10">
+  <header class=" bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800  sticky top-0 z-50">
+    <div class="max-w-[1280px] flex items-center justify-between container mx-auto p-4 px-4 md:px-10">
       <router-link to="/">
         <SiteBrandComponent class="max-w-[160px]" />
       </router-link>
