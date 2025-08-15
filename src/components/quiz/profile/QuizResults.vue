@@ -56,7 +56,7 @@ function getStars(p: number ) {
 
   <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_0.8fr] gap-6">
     <!-- Quiz Results Summary -->
-    <div class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
+    <div class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
       <p class="font-semibold mb-7 flex items-center">
         <icon icon="mdi:trophy" class="text-yellow-500 me-2" />
         {{ $t("quiz.results.your_score") }}
@@ -82,18 +82,18 @@ function getStars(p: number ) {
 
       <!-- User Stats -->
       <div class="grid grid-cols-2 gap-4">
-        <div class="bg-slate-100 dark:bg-slate-700/50 flex flex-col justify-center items-center rounded-md p-4">
+        <div class="bg-white dark:bg-slate-700/50 flex flex-col justify-center items-center rounded-md p-4">
           <p class="text-2xl font-bold text-green-500">{{ userStats.correct }}</p>
           <p class="text-sm">{{ $t("quiz.results.correct") }}</p>
         </div>
-        <div class="bg-slate-100 dark:bg-slate-700/50  flex flex-col justify-center items-center rounded-md p-4">
+        <div class="bg-white dark:bg-slate-700/50  flex flex-col justify-center items-center rounded-md p-4">
           <p class="text-2xl font-bold text-red-500">{{ userStats.wrong }}</p>
           <p class="text-sm">{{ $t("quiz.results.wrong") }}</p>
         </div>
       </div>
     </div>
 
-    <div class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
+    <div class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
       <!-- progress bar -->
       <div class="mb-6">
         <div class="flex justify-between items-center mb-2">
@@ -150,8 +150,8 @@ function getStars(p: number ) {
       <li 
         v-for="(question, i) in userHistory" 
         :key="i" 
-        class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-6 last:mb-0">
-        <div class="flex items-center font-semibold text-[1.1em] mb-4">
+        class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-6 last:mb-0">
+        <div class="flex items-start font-semibold text-[1.1em] mb-4">
           <span class="block me-1">{{ i + 1 }}.</span>
           <div v-html="marked(question.question[store.locale])"></div>
         </div>
@@ -167,12 +167,12 @@ function getStars(p: number ) {
             <div class="block" v-html="marked(answer.answerText[store.locale])"></div>
             <span 
               v-if="answer.isCorrect" 
-              class="block text-end text-xs font-bold text-green-500">
+              class="block text-end text-xs font-semibold text-green-500 mt-3 md:mt-0">
               {{ answer.isSelected ? $t('quiz.your_answer')  : $t('quiz.correct_answer')  }}
             </span>
             <span 
               v-if="!answer.isCorrect && answer.isSelected"
-              class="block text-end text-xs font-bold text-red-500">
+              class="block text-end text-xs font-semibold text-red-500 mt-3 md:mt-0">
                 {{ $t('quiz.your_answer') }}
             </span>
           </li>
@@ -183,7 +183,7 @@ function getStars(p: number ) {
             Show {{ $t('quiz.explanation') }}
           </summary>
           <div 
-            class="bg-slate-50 dark:bg-slate-800 rounded-md mt-2 p-3" 
+            class="bg-slate-200 dark:bg-slate-800 rounded-md mt-2 p-3" 
             v-html="marked(question.explanation[store.locale])">
           </div>
 

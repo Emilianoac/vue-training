@@ -16,9 +16,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="max-w-[450px] w-full mx-auto text-center bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-4 rounded-md mb-4 shadow-">
+  <div class="max-w-[450px] w-full mx-auto text-center bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-4 shadow-">
     <!-- Quiz Image -->
-    <div class="bg-slate-100 dark:bg-slate-800 p-1 rounded-full mx-auto h-[60px] w-[60px] flex items-center justify-center">
+    <div class="bg-slate-200 dark:bg-slate-800 p-1 rounded-full mx-auto h-[60px] w-[60px] flex items-center justify-center">
       <img class="max-w-[30px]" :src="image" alt="Quiz Image" />
     </div>
     <!-- Quiz Level Badge -->
@@ -29,7 +29,7 @@ defineProps<{
     <h1 class="font-bold text-xl">{{ title }}</h1>
     <hr class="my-5 border-gray-200 dark:border-slate-800">
     <!-- Quiz Description -->
-    <p class="opacity-70 mb-7">{{ description }}</p>
+    <p class="opacity-70 mb-7 text-[0.94em]">{{ description }}</p>
     <!-- Start Quiz Button -->
     <button 
       class="app-button primary font-semibold mx-auto block w-full"
