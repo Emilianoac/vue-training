@@ -11,7 +11,7 @@ const swiperParams = {
     640: { slidesPerView: 1 },
     768: { slidesPerView: 2 },
     1024: { slidesPerView: 3 },
-    1200: { slidesPerView: 4 },
+    1200: { slidesPerView: 3 },
   },
 };
 
@@ -37,7 +37,7 @@ onMounted(() => {
 
 <template>
   <swiper-container 
-    class="mt-10 my-swiper"
+    class="my-swiper"
     init="false"
     ref="swiper-container"
     pagination="true"
