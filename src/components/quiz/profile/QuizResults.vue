@@ -49,7 +49,7 @@ function getStars(p: number ) {
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold">{{ quiz?.title[store.locale]}}</h1>
+  <h1 class="text-4xl font-bold">{{ quiz?.title[store.locale]}}</h1>
   <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
     {{ $t("quiz.results.quiz_completed") }}
   </p>
@@ -143,7 +143,7 @@ function getStars(p: number ) {
 
 
   <div class="mt-8">
-    <h2 class="text-xl font-bold mb-4">
+    <h2 class="text-2xl font-bold mb-4">
       {{ $t("quiz.results.question_review") }}
     </h2>
     <ul>
@@ -151,7 +151,7 @@ function getStars(p: number ) {
         v-for="(question, i) in userHistory" 
         :key="i" 
         class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-6 last:mb-0">
-        <div class="flex items-center font-bold text-[1.1em] mb-4">
+        <div class="flex items-center font-semibold text-[1.1em] mb-4">
           <span class="block me-1">{{ i + 1 }}.</span>
           <div v-html="marked(question.question[store.locale])"></div>
         </div>
