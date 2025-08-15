@@ -23,6 +23,9 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@iconify-json/line-md": "^1.2.11",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify/vue": "^5.0.0",
     "@pinia/testing": "^1.0.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
