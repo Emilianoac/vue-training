@@ -8,7 +8,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
 
 <template>
   <!-- Hero Section -->
-  <section class="block lg:grid grid-cols-[1fr_0.8fr] items-center justify-between my-14 lg:my-14">
+  <section class="block lg:grid grid-cols-[1fr_0.8fr] items-center justify-between my-14 gap-8">
     <div class="mb-10 md:mb-0">
       <h1 class="text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
         {{ $t("home.welcome-one") }} 
@@ -29,9 +29,7 @@ import SwiperComponent from "@/components/SwiperComponent.vue";
         </router-link>
       </div>
     </div>
-    <div>
-      <HeaderIllustration />
-    </div>
+    <HeaderIllustration class="max-w-[500px] lg:max-w-none mx-auto" />
   </section>
 
   <!-- Quizzes -->
