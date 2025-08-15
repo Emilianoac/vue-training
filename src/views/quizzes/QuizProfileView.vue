@@ -25,7 +25,10 @@ const  {
   isLastQuestion,
   userHistory, 
   userStats,
+  elapsedTime,
 
+  startQuiz,
+  resetQuizState,
   goToNextQuestion,
   loadQuiz,
   answerCurrentQuestion
@@ -60,7 +63,7 @@ watch(() => store.locale, () => {
       :category="quiz.category.name"
       :level="quiz.level"
       :levelLabel="quiz.levelLabel[store.locale]"
-      @startQuiz="isQuizInitialized = true"
+      @startQuiz="startQuiz()"
     />
     
     <!-- Quiz on Progress -->
@@ -115,9 +118,11 @@ watch(() => store.locale, () => {
     <!-- Quiz Results -->
      <QuizResults 
       v-else-if="isFinished"
+      :elapsed-time="elapsedTime"
       :userHistory="userHistory"
       :userStats="userStats"
       :quiz="quiz"
+      @resetQuiz="resetQuizState()"
     />
   </div>
 
