@@ -51,7 +51,7 @@ function getStars(p: number ) {
 <template>
   <h1 class="text-3xl font-bold">{{ quiz?.title[store.locale]}}</h1>
   <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
-    Quiz completed successfully!
+    {{ $t("quiz.results.quiz_completed") }}
   </p>
 
   <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_0.8fr] gap-6">
@@ -59,14 +59,16 @@ function getStars(p: number ) {
     <div class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
       <p class="font-semibold mb-7 flex items-center">
         <icon icon="mdi:trophy" class="text-yellow-500 me-2" />
-        Your Score
+        {{ $t("quiz.results.your_score") }}
       </p>
 
       <!-- Success Rate and Stars -->
       <div class="grid grid-cols-2 items-center gap-4 mb-10">
         <div>
           <span class="font-bold text-6xl">{{ userStats.percentage }}%</span>
-          <p class="text-slate-500 dark:text-slate-400 text-sm">Success Rate</p>
+          <p class="text-slate-500 dark:text-slate-400 text-sm">
+            {{ $t("quiz.results.success_rate") }}
+          </p>
         </div>
         <div class="flex justify-center items-center justify-self-end">
           <Icon
@@ -82,11 +84,11 @@ function getStars(p: number ) {
       <div class="grid grid-cols-2 gap-4">
         <div class="bg-slate-100 dark:bg-slate-700/50 flex flex-col justify-center items-center rounded-md p-4">
           <p class="text-2xl font-bold text-green-500">{{ userStats.correct }}</p>
-          <p class="text-sm">Correct</p>
+          <p class="text-sm">{{ $t("quiz.results.correct") }}</p>
         </div>
         <div class="bg-slate-100 dark:bg-slate-700/50  flex flex-col justify-center items-center rounded-md p-4">
           <p class="text-2xl font-bold text-red-500">{{ userStats.wrong }}</p>
-          <p class="text-sm">Wrong</p>
+          <p class="text-sm">{{ $t("quiz.results.wrong") }}</p>
         </div>
       </div>
     </div>
@@ -95,7 +97,7 @@ function getStars(p: number ) {
       <!-- progress bar -->
       <div class="mb-6">
         <div class="flex justify-between items-center mb-2">
-          <p>Accuracy</p>
+          <p>{{ $t("quiz.results.accuracy") }}</p>
           <p class="font-bold">{{ userStats.percentage }}%</p>
         </div>
         <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
@@ -110,7 +112,7 @@ function getStars(p: number ) {
       <div class="flex items-center mb-5 gap-3">
         <icon icon="mdi:clock-outline" class="text-xl" />
         <div>
-          <p class=" text-slate-500 text-sm">Time Taken</p>
+          <p class=" text-slate-500 text-sm">{{ $t("quiz.results.time_taken") }}</p>
           <p class="font-semibold">
             {{ Math.floor(elapsedTime / 60) ? Math.floor(elapsedTime / 60) + ' min' : '' }} 
             {{ elapsedTime % 60 }} seconds
@@ -122,7 +124,7 @@ function getStars(p: number ) {
       <div class="flex items-center mb-5 gap-3">
         <icon icon="mdi:checkbox-marked-circle-outline" class="text-green-500 text-xl" />
         <div>
-          <p class=" text-slate-500 text-sm">Questions Correctly Answered</p>
+          <p class=" text-slate-500 text-sm">{{ $t("quiz.results.questions_correctly_answered") }}</p>
           <p class="font-semibold">
             {{ userStats.correct }} / {{ userStats.total }}
           </p>
@@ -134,14 +136,16 @@ function getStars(p: number ) {
         @click="$emit('resetQuiz')"
         class="app-button primary w-full mt-10">
         <icon icon="mdi:rotate-left" class="me-2 text-xl" />
-        Retake Quiz
+        {{ $t("quiz.results.retake_quiz") }}
       </button>
     </div>
   </div>
 
 
   <div class="mt-8">
-    <h2 class="text-xl font-bold mb-4">Question review</h2>
+    <h2 class="text-xl font-bold mb-4">
+      {{ $t("quiz.results.question_review") }}
+    </h2>
     <ul>
       <li 
         v-for="(question, i) in userHistory" 

@@ -13,5 +13,18 @@
   "close_details": "Cerrar detalles",
   "explanation": "Explicación",
   "total_questions": "Total de preguntas",
-  "success_percentage": "Porcentaje de éxito"
+  "success_percentage": "Porcentaje de éxito",
+
+  "results": {
+    "quiz_completed": "¡Cuestionario completo exitosamente!",
+    "your_score": "Tu puntuación",
+    "success_rate": "Tasa de éxito",
+    "correct": "Correctas",
+    "wrong": "Incorrectas",
+    "accuracy": "Precisión",
+    "time_taken": "Tiempo utilizado",
+    "questions_correctly_answered": "Preguntas respondidas correctamente",
+    "retake_quiz": "Repetir cuestionario",
+    "question_review": "Revisión de preguntas"
+  }
 }

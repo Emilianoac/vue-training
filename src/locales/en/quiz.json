@@ -13,5 +13,18 @@
   "close_details": "Close details",
   "explanation": "Explanation",
   "total_questions": "Total questions",
-  "success_percentage": "Success percentage"
+  "success_percentage": "Success percentage",
+
+  "results": {
+    "quiz_completed": "Quiz completed successfully!",
+    "your_score": "Your score",
+    "success_rate": "Success rate",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "accuracy": "Accuracy",
+    "time_taken": "Time taken",
+    "questions_correctly_answered": "Questions answered correctly",
+    "retake_quiz": "Retake quiz",
+    "question_review": "Question review"
+  }
 }
