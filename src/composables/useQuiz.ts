@@ -14,7 +14,9 @@ export default function useQuiz() {
   const selectedOptionId = ref<number | null>(null);
   const hasCheckedAnswer = ref(false);
   const isFinished = ref(false);
-
+  const startTime = ref<number | null>(null);
+  const endTime = ref<number | null>(null);
+  
   const userHistory = ref<AnswerRecord[]>([]);
   const userStats = ref({ correct: 0, wrong: 0, percentage: 0, total: 0 });
 
@@ -26,6 +28,13 @@ export default function useQuiz() {
     quiz.value ? currentQuestionIndex.value === quiz.value.questions.length - 1 : false
   );
 
+  const elapsedTime = computed(() => {
+    if (startTime.value && endTime.value) {
+      return Math.floor((endTime.value - startTime.value) / 1000);
+    }
+    return 0;
+  });
+
   async function loadQuiz(id: string) {
     try {
       const quizData = await getQuizService(id);
@@ -34,6 +43,11 @@ export default function useQuiz() {
     } catch (err) {
       setError(err);
     }
+  }
+
+  function startQuiz() {
+    isQuizInitialized.value = true;
+    startTime.value = Date.now();
   }
 
   function answerCurrentQuestion() {
@@ -79,9 +93,12 @@ export default function useQuiz() {
     isFinished.value = false;
     userHistory.value = [];
     userStats.value = { correct: 0, wrong: 0, percentage: 0, total: 0 };
+    startTime.value = Date.now();
+    endTime.value = null;
   }
 
   function finishQuiz() {
+    endTime.value = Date.now();
     isFinished.value = true;
     userStats.value = calculateStatsUseCase(userHistory.value);
   }
@@ -105,9 +122,12 @@ export default function useQuiz() {
     userHistory,
     isLastQuestion,
     isFinished,
+    elapsedTime,
 
+    startQuiz,
+    resetQuizState,
     loadQuiz,
     answerCurrentQuestion,
-    goToNextQuestion
+    goToNextQuestion,
   };
 }
