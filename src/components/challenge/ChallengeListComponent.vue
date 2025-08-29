@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CardComponent from "@/components/CardComponent.vue";
+import CardComponent from "@/components/ui/CardComponent.vue";
 import type { Challenge } from "@/types/challenge";
 
 defineProps<{

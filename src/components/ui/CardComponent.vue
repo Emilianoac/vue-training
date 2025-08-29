@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useGeneralStore } from "@/stores/general";
-import BadgeComponent from "@/components/BadgeComponent.vue";
+import BadgeComponent from "@/components/ui/BadgeComponent.vue";
 const store = useGeneralStore();
 
 defineProps<{

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
-import FirefoxAlertComponent from "@/components/FirefoxAlertComponent.vue";
-import IconExpand from "@/components/icons/IconExpand.vue";
+import FirefoxAlertComponent from "@/components/challenge/FirefoxAlertComponent.vue";
+import IconExpand from "@/components/assets/icons/IconExpand.vue";
 
 const expandeEditor = ref(false);
 

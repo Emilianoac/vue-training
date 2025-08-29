@@ -3,8 +3,8 @@ import { onMounted, watch} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useGeneralStore } from "@/stores/general";
 import challenges from "@/data/challenges";
-import BadgeComponent from "@/components/BadgeComponent.vue";
-import TabComponent from "@/components/TabComponent.vue";
+import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+import TabComponent from "@/components/ui/TabComponent.vue";
 import ChallengeCodeEditorLayout from "@/components/challenge/ChallengeCodeEditorLayout.vue";
 
 const store = useGeneralStore();

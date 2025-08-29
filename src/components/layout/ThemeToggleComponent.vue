@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { useDark, useToggle } from "@vueuse/core";
-  import IconMoon from "@/components/icons/IconMoon.vue";
-  import IconSun from "@/components/icons/IconSun.vue";
+  import IconMoon from "@/components/assets/icons/IconMoon.vue";
+  import IconSun from "@/components/assets/icons/IconSun.vue";
 
   const isDark = useDark();
   const toggle = useToggle(isDark);

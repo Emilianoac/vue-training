@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import { useGeneralStore } from "@/stores/general";
 import quizzesData from "@/data/quizzes";
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
-import SelectComponent from "@/components/SelectComponent.vue";
+import SelectComponent from "@/components/ui/SelectComponent.vue";
 
 const store = useGeneralStore();
 const { t } = useI18n();

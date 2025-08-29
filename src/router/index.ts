@@ -2,10 +2,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { useTopLoader } from "@/composables/useTopLoader";
 import { i18n } from "@/i18n";
 import HomeView from "@/views/HomeView.vue";
-import IconChallenge from "@/components/icons/IconBoxGlove.vue"
-import IconHome from "@/components/icons/IconHome.vue"
-import IconQuiz from "@/components/icons/IconList.vue"
-import IconRandomTip from "@/components/icons/IconDice.vue"
+import IconChallenge from "@/components/assets/icons/IconBoxGlove.vue"
+import IconHome from "@/components/assets/icons/IconHome.vue"
+import IconQuiz from "@/components/assets/icons/IconList.vue"
+import IconRandomTip from "@/components/assets/icons/IconDice.vue"
  
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

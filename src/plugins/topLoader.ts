@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import TopLoader from "../components/TopLoader.vue";
+import TopLoader from "../components/ui/TopLoader.vue";
 import { useTopLoader } from "../composables/useTopLoader";
 
 export default {

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
   import { useGeneralStore } from "@/stores/general";
   import { useRandomTip } from "@/composables/useRandomTip";
-  import Vuecito from "@/components/illustrations/Vuecito.vue";
-  import IconBook from "@/components/icons/IconBook.vue";
+  import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
+  import IconBook from "@/components/assets/icons/IconBook.vue";
 
   const { randomTip, randomTips, markdownToHtml, getRandomTip, selectTip } = useRandomTip();
   

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import BadgeComponent from "@/components/BadgeComponent.vue";
+import BadgeComponent from "@/components/ui/BadgeComponent.vue";
 
 defineEmits<{
   startQuiz: () => void;

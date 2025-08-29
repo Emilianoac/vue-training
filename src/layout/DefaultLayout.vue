@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import HeaderComponent from "@/components/global/HeaderComponent.vue";
-import MobileNavbarComponent from "@/components/global/MobileNavbarComponent.vue";
+import HeaderComponent from "@/components/layout/HeaderComponent.vue";
+import MobileNavbarComponent from "@/components/layout/MobileNavbarComponent.vue";
 </script>
 
 <template>

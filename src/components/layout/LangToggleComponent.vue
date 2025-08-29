@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, useTemplateRef} from "vue";
 import { useI18n } from "vue-i18n";
-import IconLang from "@/components/icons/IconLang.vue";
+import IconLang from "@/components/assets/icons/IconLang.vue";
 
 const { locale } = useI18n({ useScope: "global" });
 

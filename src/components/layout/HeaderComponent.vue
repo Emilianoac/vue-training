@@ -1,8 +1,8 @@
 <script lang="ts" setup>
   import { useRouter } from "vue-router"
-  import LangToggleComponent from "@/components/global/LangToggleComponent.vue";
-  import SiteBrandComponent from "@/components/global/SiteBrandComponent.vue";
-  import ThemeToggleComponent from "@/components/global/ThemeToggleComponent.vue";
+  import LangToggleComponent from "@/components/layout/LangToggleComponent.vue";
+  import SiteBrandComponent from "@/components/layout/SiteBrandComponent.vue";
+  import ThemeToggleComponent from "@/components/layout/ThemeToggleComponent.vue";
 
   const router = useRouter();
   

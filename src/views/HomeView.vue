@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import challenges from "@/data/challenges";
 import quizzes from "@/data/quizzes";
-import HeaderIllustration from "@/components/illustrations/HeaderIllustration.vue";
-import CardComponent from "@/components/CardComponent.vue";
-import SwiperComponent from "@/components/SwiperComponent.vue";
+import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustration.vue";
+import CardComponent from "@/components/ui/CardComponent.vue";
+import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 </script>
 
 <template>

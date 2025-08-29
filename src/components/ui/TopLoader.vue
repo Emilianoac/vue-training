@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useTopLoader } from "../composables/useTopLoader";
+import { useTopLoader } from "../../composables/useTopLoader";
 
 const { loading, progress } = useTopLoader();
 const show = ref(false);
