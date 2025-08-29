@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CardComponent from "@/components/ui/CardComponent.vue";
+import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import type { Challenge } from "@/types/challenge";
 
 defineProps<{
@@ -9,16 +9,9 @@ defineProps<{
 
 <template>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-    <CardComponent
+    <ChallengeCard
       v-for="challenge in challenges" 
-      :key="challenge.id" 
-      :title="challenge.title" 
-      :level="challenge.level" 
-      :level-label="challenge.levelLabel"
-      :img="challenge.cover"
-      :description="challenge.short_description"
-      type="challenge"
-      :link="`/challenges/${challenge.id}`"
+      :challenge="challenge"
     />
   </div>
 </template>

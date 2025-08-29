@@ -2,7 +2,8 @@
 import challenges from "@/data/challenges";
 import quizzes from "@/data/quizzes";
 import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustration.vue";
-import CardComponent from "@/components/ui/CardComponent.vue";
+import QuizCard from "@/components/quiz/QuizCard.vue";
+import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 </script>
 
@@ -37,16 +38,7 @@ import SwiperComponent from "@/components/ui/SwiperComponent.vue";
     <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.quiz.many") }}</h2>
     <SwiperComponent>
       <swiper-slide v-for="quiz in quizzes" :key="quiz.id" class="py-4">
-        <CardComponent
-          :title="quiz.title"
-          :description="quiz.description"
-          :level="quiz.level"
-          :type="'quiz'"
-          :category="quiz.category.name"
-          :img="quiz.category.image"
-          :levelLabel="quiz.levelLabel"
-          :link="`/quizzes/${quiz.id}`">
-        </CardComponent>
+        <QuizCard :quiz="quiz"/>
       </swiper-slide>
     </SwiperComponent>
     <router-link to="/quizzes" class="app-button primary !block w-max mx-auto mt-8">
@@ -59,15 +51,7 @@ import SwiperComponent from "@/components/ui/SwiperComponent.vue";
     <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.challenge.many") }}</h2>
     <SwiperComponent>
       <swiper-slide v-for="challenge in challenges" :key="challenge.id" class="py-4">
-        <CardComponent
-          :title="challenge.title"
-          :description="challenge.description"
-          :level="challenge.level"
-          :type="'challenge'"
-          :img="challenge.cover"
-          :levelLabel="challenge.levelLabel"
-          :link="`/challenges/${challenge.id}`">
-        </CardComponent>
+        <ChallengeCard :challenge="challenge"/>
       </swiper-slide>
     </SwiperComponent>
     <router-link to="/challenges" class="app-button primary !block w-max mx-auto mt-8">
