@@ -17,11 +17,13 @@
     isLastQuestion: boolean;
   }>();
 
+  const selectedOptionId = defineModel<number | null>('selectedOptionId');
+
   const emits = defineEmits<{
     (e: "update:showDetails", value: boolean): void;
     (e: "answerCurrentQuestion"): void;
     (e: "goToNextQuestion"): void;
-    (e: "update:selectedOptionId", value: number | null): void;
+    (e: "update:selectedOptionId", value: number | null): void; // 👈 para reemitir
   }>();
 </script>
 
@@ -44,6 +46,7 @@
       <QuizQuestion v-if="currentQuestion"
         :question="currentQuestion" 
         :checkAnswer="hasCheckedAnswer"
+        :model-value="selectedOptionId"
         @update:model-value="emits('update:selectedOptionId', $event)"
       />
 

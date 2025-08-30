@@ -7,8 +7,13 @@ const store = useGeneralStore();
 const selectedOption = defineModel();
 
 const props = defineProps<{
+  modelValue: number | null;
   question: Question;
-  checkAnswer: boolean,
+  checkAnswer: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: number | null): void;
 }>();
 
 </script>
@@ -26,9 +31,10 @@ const props = defineProps<{
     >
       <input
         class="curson-pointer ms-2 peer absolute z-10"
-        v-model="selectedOption"
         :value="answer.id"
+        :checked="selectedOption === answer.id"
         :disabled="checkAnswer"
+        @change="emit('update:modelValue', answer.id)"
         type="radio"
         name="answer"
         :id="`answer-${answer.id}`"
