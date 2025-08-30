@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed } from "vue";
 import type { Question } from "@/types/quiz";
 import { useGeneralStore } from "@/stores/general";
 import { marked } from "marked";
