@@ -1,0 +1,12 @@
+import { createI18n } from "vue-i18n";
+import en from "../i18n/locales/en.json";
+import es from "../i18n/locales/es.json";
+
+export const i18nTest = createI18n({
+  locale: "en",
+  fallbackLocale: "en",
+  messages: {
+    en: en,
+    es: es,
+  }
+});

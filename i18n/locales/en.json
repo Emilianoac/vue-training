@@ -1,0 +1,109 @@
+{
+  "en": "English",
+  "es": "Spanish",
+
+  "menu-label": {
+    "home": "Home",
+    "quizzes": "Quizzes",
+    "challenges": "Challenges",
+    "randomTip": "Random tip"
+  },
+
+  "general": {
+    "challenge": {
+      "one": "Challenge",
+      "many": "Challenges"
+    },
+    "quiz": {
+      "one": "Quiz",
+      "many": "Quizzes"
+    },
+    "randomTip": "Random Tip",
+    "home": "Home",
+    "notFound": "Not found",
+    "english": "English",
+    "spanish": "Spanish",
+    "pageNotFound": "Page not found",
+    "goToHome": "Go to Home",
+    "of": "of",
+    "goTo": "Go to",
+    "category": "Category",
+    "all": "All",
+    "difficulty": "Difficulty",
+    "noResults": "No results found"
+  },
+
+  "home": {
+    "welcome-one": "Quizzes and",
+    "welcome-two": "Challenges",
+    "welcome-three": "to practice with",
+    "description": "Test your knowledge and keep improving with each challenge."
+  },
+
+  "quiz": {
+    "start_quiz": "Start quiz",
+    "question": "Question",
+    "verify_answer": "Verify answer",
+    "next_question": "Next question",
+    "your_answer": "Your answer",
+    "correct_answer": "Correct answer",
+    "finish_quiz": "Finish quiz",
+    "your_result": "Your result",
+    "correct_answers": "Correct answers",
+    "wrong_answers": "Wrong answers",
+    "view_details": "View details",
+    "close_details": "Close details",
+    "explanation": "Explanation",
+    "total_questions": "Total questions",
+    "success_percentage": "Success percentage",
+
+    "results": {
+      "quiz_completed": "Quiz completed successfully!",
+      "your_score": "Your score",
+      "success_rate": "Success rate",
+      "correct": "Correct",
+      "wrong": "Wrong",
+      "accuracy": "Accuracy",
+      "time_taken": "Time taken",
+      "questions_correctly_answered": "Questions answered correctly",
+      "retake_quiz": "Retake quiz",
+      "question_review": "Question review"
+    }
+  },
+
+  "randomTip": {
+    "general": {
+      "get_a_new_tip": "Get a random tip",
+      "list_of_tips": "List of all tips",
+      "source": "Source"
+    }
+  },
+
+  "challenge": {
+    "tabs": {
+      "description": "Description",
+      "play": "Play",
+      "solution": "Solution"
+    },
+    "description": {
+      "objectives": "Objectives"
+    },
+    "play": {
+      "info" : "The code you write in this editor will not be saved once you close or reload the page.",
+      "instructions": "To ensure you have completed the challenge, you should open a new terminal and run the command:",
+      "instructions_2": "If all tests pass, then you have completed the challenge!",
+      "expand_editor": "Expand editor",
+      "collapse_editor": "Collapse editor"
+    },
+    "firefox_message": {
+      "title": "Firefox Issues",
+      "message_1": "StackBlitz uses WebContainers technology, which is not fully compatible with Firefox when embedded in an iframe.",
+      "message_2": "If you experience issues running the code, try one of these options:",
+      "option_1": "Click on Fork on StackBlitz to generate your own copy of the code.",
+      "option_2": "Use a Chromium-based browser like Google Chrome or Microsoft Edge.",
+      "option_3": "Download the code and run it on your local machine.",
+      "message_3": "More information about browser compatibility in the",
+      "link": "official StackBlitz documentation."
+    }
+  }
+}
