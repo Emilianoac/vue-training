@@ -32,5 +32,9 @@ export default defineNuxtConfig({
   colorMode: {
     preference: "dark",
     fallback: "dark"
+  },
+  runtimeConfig: {
+    strapiUrl: process.env.STRAPI_URL,
+    strapiToken: process.env.STRAPI_TOKEN
   }
 })
