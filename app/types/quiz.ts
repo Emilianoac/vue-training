@@ -6,25 +6,20 @@ export interface Quiz {
   category: {
     id: string;
     name: string;
-    image: string;
+    image: {
+      url: string
+    }
   };
-  title: MultilingualString;
-  levelLabel: {
-    es: "Básico" | "Intermedio" | "Avanzado";
-    en: "Basic" | "Intermediate" | "Advanced";
-  };
-  description: MultilingualString;
+  title: string
+  description: string
   questions: Question[];
 }
 
 export interface Question {
   id: number;
-  questionText: MultilingualString;
-  correctAnswerExplanation: MultilingualString;
-  correctAnswerCodeExample: {
-    en: CodeExample[];
-    es: CodeExample[];
-  };
+  questionText: string
+  correctAnswerExplanation: string
+  correctAnswerCodeExample: CodeExample[];
   answers: Answer[];
 }
 
@@ -35,14 +30,14 @@ export interface CodeExample {
 
 export interface Answer {
   id: number;
-  answerText: MultilingualString;
+  answerText: string
   isCorrect: boolean;
 }
 
 export interface AnswerRecord {
-  question: MultilingualString;
+  question: string
   answers: Array<Answer & { isSelected: boolean }>;
-  explanation: MultilingualString;
+  explanation: string
   codeExample: { en: CodeExample[]; es: CodeExample[] };
 }
 
