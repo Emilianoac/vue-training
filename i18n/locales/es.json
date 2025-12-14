@@ -68,6 +68,12 @@
       "questions_correctly_answered": "Preguntas respondidas correctamente",
       "retake_quiz": "Repetir cuestionario",
       "question_review": "Revisión de preguntas"
+    },
+
+    "levels": {
+      "basic": "Básico",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
     }
   },
 
