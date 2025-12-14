@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import challenges from "@/data/challenges";
-import quizzes from "@/data/quizzes";
+import useQuizData from "@/composables/quiz/useQuizData";
 import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustration.vue";
 import QuizCard from "@/components/quiz/QuizCard.vue";
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 
 definePageMeta({ menu: true, titleKey: "menu-label.home" });
-
 useStaticPageSeo();
+
+const {quizzes, getQuizzes} = useQuizData();
+await getQuizzes();
 </script>
 
 <template>
