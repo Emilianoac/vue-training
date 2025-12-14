@@ -26,8 +26,13 @@ function createQuizService(): QuizService {
             }
             questions {
               questionText
-              CorrectAnswerExplanation
+              correctAnswerExplanation
+              correctAnswerCodeExample {
+                code
+                language
+              }
               answers {
+                id
                 isCorrect
                 answerText
               }
@@ -69,14 +74,8 @@ function createQuizService(): QuizService {
             description
             category {
               name
-              image { url }
-            }
-            questions {
-              questionText
-              CorrectAnswerExplanation
-              answers {
-                isCorrect
-                answerText
+              image { 
+                url 
               }
             }
           }
