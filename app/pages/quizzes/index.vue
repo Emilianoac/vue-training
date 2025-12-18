@@ -1,34 +1,24 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import quizzesData from "@/data/quizzes";
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
+import { useQuizListFilters } from "@/composables/quiz/useQuizListFilters";
+import { quizService } from "@/services/api/quiz/quizService";
 
 definePageMeta({ menu: true, titleKey: "menu-label.quizzes" });
 useStaticPageSeo("quizzes");
-const { t, locale } = useI18n();
 
-const quizzes = ref(quizzesData);
-const all = computed(() => t("general.all"));
+const { locale } = useI18n();
 
-const selectedCategory = ref(all.value);
-const selectedDifficulty = ref(all.value);
+const data =  await quizService.fetchQuizzes();
 
-const categories = computed(() => {
-  return [all.value, ...Array.from(new Set(quizzes.value.map(quiz => quiz.category.name)))];
-});
-
-const difficulties = computed(() => {
-  return [all.value, ...Array.from(new Set(quizzes.value.map(quiz => quiz.levelLabel[locale.value])))];
-});
-
-const currentQuizzes = computed(() => {
-  return quizzes.value.filter(quiz => {
-    const categoryMatch = selectedCategory.value === all.value || quiz.category.name === selectedCategory.value;
-    const difficultyMatch = selectedDifficulty.value === all.value || quiz.levelLabel[locale.value] === selectedDifficulty.value;
-    return categoryMatch && difficultyMatch;
-  });
-});
+const { 
+  all, 
+  selectedCategory, 
+  selectedDifficulty, 
+  categories, 
+  currentQuizzes, 
+  difficulties 
+} = useQuizListFilters(data);
 
 watch(() => locale.value, () => {
   selectedCategory.value = all.value;
