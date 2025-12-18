@@ -2,13 +2,13 @@
 import type { Question } from "@/types/quiz";
 import { marked } from "marked";
 
-const { locale } = useI18n();
 const selectedOption = defineModel();
 
 const props = defineProps<{
   modelValue: number | null;
   question: Question;
   checkAnswer: boolean;
+  questionIndex: number;
 }>();
 
 const emit = defineEmits<{
@@ -19,8 +19,8 @@ const emit = defineEmits<{
 
 <template>
   <div class="flex items-center text-xl font-bold mb-4">
-    <span class="block me-1">{{ question.id }}.</span>
-    <div class="question-text" v-html="marked(question.questionText[locale])"></div>
+    <span class="block me-1">{{ questionIndex + 1}}.</span>
+    <div class="question-text" v-html="marked(question.questionText)"></div>
   </div>
   <ul>
     <li
@@ -48,7 +48,7 @@ const emit = defineEmits<{
           'cursor-not-allowed opacity-85': checkAnswer
         }"
       >
-        <span class="block w-full text-start pl-3" v-html="marked(answer.answerText[locale])"></span>
+        <span class="block w-full text-start pl-3" v-html="marked(answer.answerText)"></span>
         <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-500">
           {{ selectedOption === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
         </span>

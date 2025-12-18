@@ -6,7 +6,6 @@ import { marked } from "marked";
 defineEmits<{
   closeModal: []
 }>();
-const { locale } = useI18n();
 
 const props = defineProps<{
   question: Question;
@@ -32,10 +31,10 @@ const correctAnswer = computed(() => {
           
           <dl class="mt-4">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-            <dd class="mt-2" v-html="marked(question.questionText[locale])"></dd>
+            <dd class="mt-2" v-html="marked(question.questionText)"></dd>
   
             <dt class="font-bold mt-4">Respuesta correcta</dt>
-            <dd class="mt-2" v-html="marked(correctAnswer?.answerText[locale] ?? '')"></dd>
+            <dd class="mt-2" v-html="marked(correctAnswer?.answerText ?? '')"></dd>
           </dl>
   
           <hr class="my-5 border-slate-200 dark:border-slate-800">
@@ -43,10 +42,10 @@ const correctAnswer = computed(() => {
           <h3 class="font-bold">{{ $t("quiz.explanation") }}</h3>
   
           <!-- Explanation -->
-          <div class="mt-2 mb-5" v-html="marked(question.correctAnswerExplanation[locale])"></div>
+          <div class="mt-2 mb-5" v-html="marked(question.correctAnswerExplanation)"></div>
   
           <!-- Code Example --> 
-          <template v-for="codeExample in question.correctAnswerCodeExample[locale]">
+          <template v-for="codeExample in question.correctAnswerCodeExample">
             <highlightjs 
               class="text-sm rounded-md overflow-hidden mt-4" 
               :language="codeExample.language"

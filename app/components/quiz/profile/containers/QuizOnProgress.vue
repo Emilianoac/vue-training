@@ -45,6 +45,7 @@
       <!-- Question -->
       <QuizQuestion v-if="currentQuestion"
         :question="currentQuestion" 
+        :question-index="currentQuestionIndex"
         :checkAnswer="hasCheckedAnswer"
         :model-value="selectedOptionId"
         @update:model-value="emits('update:selectedOptionId', $event)"
