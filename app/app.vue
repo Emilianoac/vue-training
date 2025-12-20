@@ -8,6 +8,7 @@
 </script>
 
 <template>
+  <NuxtLoadingIndicator color="#11ad68"/>
   <NuxtLayout>
     <NuxtPage/>
   </NuxtLayout>
