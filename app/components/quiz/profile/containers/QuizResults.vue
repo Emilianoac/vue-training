@@ -48,7 +48,7 @@ function getStars(p: number ) {
 </script>
 
 <template>
-  <h1 class="text-4xl font-bold">{{ quiz?.title[locale]}}</h1>
+  <h1 class="text-4xl font-bold">{{ quiz.title}}</h1>
   <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
     {{ $t("quiz.results.quiz_completed") }}
   </p>
@@ -152,7 +152,7 @@ function getStars(p: number ) {
         class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-6 last:mb-0">
         <div class="flex items-start font-semibold text-[1.1em] mb-4">
           <span class="block me-1">{{ i + 1 }}.</span>
-          <div v-html="marked(question.question[locale])"></div>
+          <div v-html="marked(question.question)"></div>
         </div>
         <ul>
           <li 
@@ -163,7 +163,7 @@ function getStars(p: number ) {
               '!border-green-500': answer.isCorrect, 
               '!border-red-500': !answer.isCorrect && answer.isSelected
             }">
-            <div class="block" v-html="marked(answer.answerText[locale])"></div>
+            <div class="block" v-html="marked(answer.answerText)"></div>
             <span 
               v-if="answer.isCorrect" 
               class="block text-end text-xs font-semibold text-green-500 mt-3 md:mt-0">
@@ -183,11 +183,11 @@ function getStars(p: number ) {
           </summary>
           <div 
             class="bg-slate-200 dark:bg-slate-800 rounded-md mt-2 p-3" 
-            v-html="marked(question.explanation[locale])">
+            v-html="marked(question.explanation)">
           </div>
 
           <highlightjs 
-            v-for="codeExample in question.codeExample[locale]"
+            v-for="codeExample in question.codeExample"
             class="text-xs md:text-base rounded-md overflow-hidden mt-5 mb-4 last-of-type:mb-0" 
             :language="codeExample.language"
             :code="codeExample.code"  
