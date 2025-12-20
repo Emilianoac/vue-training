@@ -38,7 +38,7 @@ export interface AnswerRecord {
   question: string
   answers: Array<Answer & { isSelected: boolean }>;
   explanation: string
-  codeExample: { en: CodeExample[]; es: CodeExample[] };
+  codeExample: CodeExample[];
 }
 
 export interface MultilingualString {
