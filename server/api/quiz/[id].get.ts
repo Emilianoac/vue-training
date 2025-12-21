@@ -1,6 +1,6 @@
 import { quizService } from "@@/server/services/quiz/quizService";
 
-export default defineEventHandler(async (event) => {
+export default cachedEventHandler(async (event) => {
 
   const slug = getRouterParam(event, "id");
   const locale = getCookie(event, "i18n_redirected") ?? "en";
@@ -14,4 +14,7 @@ export default defineEventHandler(async (event) => {
 
   return await quizService.fetchQuiz(slug, locale);
 
+},{
+  maxAge: 30 * 60,
+  staleMaxAge: 60 * 60 * 24,
 })
