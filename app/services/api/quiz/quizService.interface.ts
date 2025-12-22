@@ -1,6 +1,6 @@
 import type { Quiz} from "@/types/quiz";
 
 export interface QuizService {
-  fetchQuiz(slug: string): Promise<Quiz>;
-  fetchQuizzes(): Promise<Quiz[]>;
+  fetchQuiz(url: string): Promise<Quiz>;
+  fetchQuizzes(url: string): Promise<Quiz[]>;
 }

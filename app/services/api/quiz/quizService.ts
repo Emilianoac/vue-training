@@ -6,11 +6,11 @@ import type { QuizService} from "@/services/api/quiz/quizService.interface";
 
 function createQuizService(): QuizService {
   return {
-    async fetchQuiz(slug: string) {
-      return dataFetcher<Quiz>(`/api/quiz/${slug}`);
+    async fetchQuiz(url) {
+      return dataFetcher<Quiz>(url);
     },
-    async fetchQuizzes() {
-      return dataFetcher<Quiz[]>("/api/quiz/all")
+    async fetchQuizzes(url) {
+      return dataFetcher<Quiz[]>(url)
     }
   }
 }
