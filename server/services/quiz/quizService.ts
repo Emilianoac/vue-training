@@ -63,10 +63,10 @@ function createQuizService(): QuizService {
       }
     },
 
-    async fetchQuizzes() {
+    async fetchQuizzes(locale: string) {
       const query = gql`
-        query {
-          quizzes {
+        query Quizzes($locale: I18NLocaleCode!) {
+          quizzes (locale: $locale) {
             documentId
             title
             slug
@@ -83,7 +83,7 @@ function createQuizService(): QuizService {
       `;
 
       try {
-        const { quizzes } = await client.request(query);
+        const { quizzes } = await client.request(query, { locale });
 
         if (!quizzes || quizzes.length === 0) {
           throw createError({
