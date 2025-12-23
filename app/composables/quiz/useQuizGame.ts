@@ -1,11 +1,12 @@
 import { quizService} from "@/services/api/quiz/quizService";
 import { calculateStatsUseCase } from "@/services/use-cases/quiz/calculate-stats/calculateStatsUseCase";
 import { recordAnswerUseCase } from "@/services/use-cases/quiz/record-answer/recordAnswerUseCase";
-import type { Quiz, AnswerRecord } from "@/types/quiz";
+import useQuizData from "./useQuizData";
+import type { AnswerRecord } from "@/types/quiz";
 
 export default function useQuiz() {
-  const quiz = ref<Quiz | null>(null);
-  const error = ref({ status: false, message: "" });
+  const { getQuiz, quiz, error } = useQuizData();
+
   const showDetails = ref(false);
   const isQuizInitialized = ref(false);
   const quizProgress = ref(0);
@@ -38,8 +39,7 @@ export default function useQuiz() {
 
   async function loadQuiz(id: string) {
     try {
-      const quizData = await quizService.fetchQuiz(id);
-      quiz.value = quizData;
+      await getQuiz(id);
       resetQuizState();
     } catch (err) {
       setError(err);

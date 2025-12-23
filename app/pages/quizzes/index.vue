@@ -2,14 +2,15 @@
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
 import { useQuizListFilters } from "@/composables/quiz/useQuizListFilters";
-import { quizService } from "@/services/api/quiz/quizService";
+import useQuizData from "@/composables/quiz/useQuizData";
 
 definePageMeta({ menu: true, titleKey: "menu-label.quizzes" });
 useStaticPageSeo("quizzes");
 
 const { locale } = useI18n();
 
-const data =  await quizService.fetchQuizzes();
+const {quizzes, getQuizzes} = useQuizData();
+await getQuizzes();
 
 const { 
   all, 
@@ -18,7 +19,7 @@ const {
   categories, 
   currentQuizzes, 
   difficulties 
-} = useQuizListFilters(data);
+} = useQuizListFilters(quizzes.value);
 
 watch(() => locale.value, () => {
   selectedCategory.value = all.value;
