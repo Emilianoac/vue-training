@@ -3,7 +3,7 @@ import { quizService } from "@@/server/services/quiz/quizService";
 export default cachedEventHandler(async (event) => {
 
   const slug = getRouterParam(event, "id");
-  const locale = getCookie(event, "i18n_redirected") ?? "en";
+  const locale = getQuery(event).locale?.toString() ?? "en";
 
   if (!slug) {
     throw createError({
