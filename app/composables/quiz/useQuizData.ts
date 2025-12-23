@@ -1,15 +1,20 @@
 import { quizService } from "@/services/api/quiz/quizService";
 import type { Quiz } from "@/types/quiz";
 
-export default function useProjectData() {
+export default function useQuizData() {
   const { locale } = useI18n();
   
+  const quiz = ref<Quiz>();
   const quizzes = ref<Quiz[]>([]);
   const isLoading = ref(false);
   const error = ref<{ status: boolean; message: string }>({ 
     status: false, 
     message: "" 
   });
+
+  async function getQuiz(slug: string) {
+    await loadAndSet(() => quizService.fetchQuiz(`/api/quiz/${slug}?locale=${locale.value}`), quiz)
+  }
 
   async function getQuizzes() {
     await loadAndSet(() => quizService.fetchQuizzes(`/api/quiz/all?locale=${locale.value}`), quizzes)
@@ -32,10 +37,12 @@ export default function useProjectData() {
   }
 
   return {
+    quiz,
     quizzes,
     isLoading,
     error,
 
+    getQuiz,
     getQuizzes
   };
 }
