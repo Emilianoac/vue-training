@@ -12,8 +12,14 @@ export default cachedEventHandler(async (event) => {
     });
   }
 
-  return await quizService.fetchQuiz(slug, locale);
-
+  try {
+    return await quizService.fetchQuiz(slug, locale);
+  } catch(e) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Quiz not found."
+    });
+  }
 },{
   maxAge: 30 * 60,
   staleMaxAge: 60 * 60 * 24,

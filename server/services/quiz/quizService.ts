@@ -41,26 +41,12 @@ function createQuizService(): QuizService {
         }
       `;
 
-      try {
-        const { quizzes } = await client.request(query, { slug, locale });
+      const { quizzes } = await client.request(query, { slug, locale });
 
-        if (!quizzes || quizzes.length === 0) {
-          throw createError({
-            statusCode: 404,
-            statusMessage: `Quiz with slug "${slug}" not found`,
-          });
-        }
-
-        return quizzes[0] as Quiz;
-
-      } catch (e: unknown) {
-        console.error("Error fetching quiz");
-
-        throw createError({
-          statusCode: 500,
-          statusMessage: e instanceof Error ? e.message : "Internal server error",
-        });
+      if (!quizzes || quizzes.length === 0) {
+        throw new Error (`Quiz with slug "${slug}" not found.`)
       }
+      return quizzes[0] as Quiz;
     },
 
     async fetchQuizzes(locale: string) {
@@ -82,25 +68,11 @@ function createQuizService(): QuizService {
         }
       `;
 
-      try {
-        const { quizzes } = await client.request(query, { locale });
-
-        if (!quizzes || quizzes.length === 0) {
-          throw createError({
-            statusCode: 404,
-            statusMessage: "Quizzes not found"
-          });
-        }
-
-        return quizzes as Quiz[];
-
-      } catch (e: unknown) {
-        console.error("Error fetching quizzes:", e);
-        throw createError({
-          statusCode: 500,
-          statusMessage: e instanceof Error ? e.message : "Internal server error",
-        });
+      const { quizzes } = await client.request(query, { locale });
+      if (!quizzes || quizzes.length === 0) {
+        throw new Error("Quizzes not found.")
       }
+      return quizzes as Quiz[];
     }
   }
 }
