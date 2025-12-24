@@ -7,7 +7,7 @@ const expandeEditor = ref(false);
 
 defineProps<{  
   stackblitzUrl: string;
-  objectives?: string[];
+  objectives?: {data: string}[];
 }>();
 
 </script>
@@ -36,9 +36,9 @@ defineProps<{
             v-for="(item, i) in objectives" 
             :key="i" 
             class="mb-2 last-of-type:mb-0 text-gray-900 dark:text-gray-300 text-sm p-2 rounded-md bg-gray-200 dark:bg-gray-800 flex gap-1 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer">
-              <input type="checkbox" class="mr-2" :id="item" :value="item" :name="item" :key="i" />
-              <label :for="item" class="text-gray-900 dark:text-gray-300 text-sm cursor-pointer">
-                {{ item }}
+              <input type="checkbox" class="mr-2" :id="item.data" :value="item" :name="item.data" :key="i" />
+              <label :for="item.data" class="text-gray-900 dark:text-gray-300 text-sm cursor-pointer">
+                {{ item.data }}
               </label>
           </li>
         </ul>

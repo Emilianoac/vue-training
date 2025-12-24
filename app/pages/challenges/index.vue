@@ -1,35 +1,31 @@
 <script lang="ts" setup>
-import { ref, computed, watch } from "vue";
+import { watch } from "vue";
 import { useI18n } from "vue-i18n";
-import challengesData from "@/data/challenges";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
+import useChallengeData from "@/composables/challenge/useChallengeData";
 
 definePageMeta({ menu: true, titleKey: "menu-label.challenges" });
 useStaticPageSeo("challenges");
+
+const {challenges, getChallenges} = useChallengeData();
+await getChallenges();
+
 const { locale } = useI18n();
-const { t } = useI18n();
 
-const challenge = ref(challengesData);
-const all = computed(() => t("general.all"));
-
-const selectedDifficulty = ref(all.value);
-
-const difficulties = computed(() => {
-  return [all.value, ...Array.from(new Set(challenge.value.map(quiz => quiz.levelLabel[locale.value])))];
-});
-
-const currentQuizzes = computed(() => {
-  return challenge.value.filter(challenge => {
-    const difficultyMatch = selectedDifficulty.value === all.value || challenge.levelLabel[locale.value] === selectedDifficulty.value;
-    return difficultyMatch;
-  });
-});
+const { 
+  currentDataList : currentChallenges, 
+  all, 
+  selectedCategory, 
+  selectedDifficulty, 
+  categories, 
+  difficulties 
+} = useDataListFilter(challenges.value);
 
 watch(() => locale.value, () => {
+  selectedCategory.value = all.value;
   selectedDifficulty.value = all.value;
 });
-
 </script>
 
 <template>
@@ -44,8 +40,8 @@ watch(() => locale.value, () => {
         />
       </div>
     </div>
-    <ChallengeListComponent :challenges="currentQuizzes" />
-    <div v-if="currentQuizzes.length === 0" class="text-center mt-4">
+    <ChallengeListComponent :challenges="currentChallenges" />
+    <div v-if="currentChallenges.length === 0" class="text-center mt-4">
       <p class="text-xl md:text-2xl text-gray-500 dark:text-gray-600 mt-20">
         {{ $t("general.noResults") }}
       </p>
