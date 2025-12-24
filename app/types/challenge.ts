@@ -1,28 +1,21 @@
 export interface Challenge {
-  id: string;
-  cover: string;
-  images: string[];
+  title: string;
+  slug: string
+  cover: {
+    url: string
+  };
+  category: {
+    id: string;
+    name: string;
+    image: {
+      url: string
+    }
+  };
+  images: {url: string}[];
   level: "basic" | "intermediate" | "advanced";
-  levelLabel: {
-    en: "Basic" | "Intermediate" | "Advanced";
-    es: "Básico" | "Intermedio" | "Avanzado";
-  };
-  title: {
-    en: string;
-    es: string;
-  };
-  description: {
-    en: string;
-    es: string;
-  };
-  short_description: {
-    en: string;
-    es: string;
-  };
-  objectives: {
-    en: string[];
-    es: string[];
-  };
+  description: string;
+  short_description: string;
+  objectives: { data: string }[];  
   stackblitz: {
     challenge: string;
     solution: string;
