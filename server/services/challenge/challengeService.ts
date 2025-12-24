@@ -54,12 +54,14 @@ function createChallengeService(): ChallengeService {
           challenges(locale: $locale) {
             title
             slug
+            level
             category {
               name
               image {
                 url
               }
             }
+            short_description
             cover {
               url
             }
