@@ -1,25 +1,25 @@
 <script setup lang="ts">
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
-import { useQuizListFilters } from "@/composables/quiz/useQuizListFilters";
 import useQuizData from "@/composables/quiz/useQuizData";
+import useDataListFilter  from "@/composables/useDataListFilter";
 
 definePageMeta({ menu: true, titleKey: "menu-label.quizzes" });
 useStaticPageSeo("quizzes");
 
-const { locale } = useI18n();
-
 const {quizzes, getQuizzes} = useQuizData();
 await getQuizzes();
 
+const { locale } = useI18n();
+
 const { 
+  currentDataList : currentQuizzes, 
   all, 
   selectedCategory, 
   selectedDifficulty, 
   categories, 
-  currentQuizzes, 
   difficulties 
-} = useQuizListFilters(quizzes.value);
+} = useDataListFilter(quizzes.value);
 
 watch(() => locale.value, () => {
   selectedCategory.value = all.value;
