@@ -15,6 +15,7 @@ function createChallengeService(): ChallengeService {
           ) {
             title
             slug
+            level
             category {
               name
               image {
