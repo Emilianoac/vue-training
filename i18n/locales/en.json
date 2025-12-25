@@ -18,6 +18,11 @@
       "one": "Quiz",
       "many": "Quizzes"
     },
+    "levels": {
+      "basic": "Basic",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
     "randomTip": "Random Tip",
     "home": "Home",
     "notFound": "Not found",
@@ -68,12 +73,6 @@
       "questions_correctly_answered": "Questions answered correctly",
       "retake_quiz": "Retake quiz",
       "question_review": "Question review"
-    },
-
-    "levels": {
-      "basic": "Basic",
-      "intermediate": "Intermediate",
-      "advanced": "Advanced"
     }
   },
 

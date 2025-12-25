@@ -16,7 +16,7 @@
         <!-- Image -->
         <img :src="challenge.cover.url" alt="Challenge Image" class="w-full h-48 object-cover object-center">
         <!-- Level Badge -->
-        <BadgeComponent :text="challenge.level" :type="challenge.level" class="absolute top-3 right-3"/>
+        <BadgeComponent :text="$t(`general.levels.${challenge.level}`)" :type="challenge.level" class="absolute top-3 right-3"/>
       </div>
       <div class="p-4">
         <!-- Title -->

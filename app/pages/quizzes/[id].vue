@@ -48,7 +48,6 @@ useSeoMeta({
       :image="quiz.category.image.url"
       :category="quiz.category.name"
       :level="quiz.level"
-      levelLabel="basico"
       @startQuiz="startQuiz()"
     />
     

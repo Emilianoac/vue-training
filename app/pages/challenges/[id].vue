@@ -38,7 +38,7 @@ watch(() => locale.value, () => {
 <template>
   <template v-if="challenge">
     <div class="mt-10">
-      <BadgeComponent class="mb-3" :type="challenge.level" :text="challenge.level" />
+      <BadgeComponent class="mb-3" :type="challenge.level" :text="$t(`general.levels.${challenge.level}`)" />
       <h1 class="text-2xl font-bold mb-2">{{ challenge.title}}</h1>
     </div>
   

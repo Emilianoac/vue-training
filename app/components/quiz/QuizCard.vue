@@ -18,7 +18,7 @@ defineProps<{
           <img :src="quiz.category.image.url" alt="Quiz Image" class="w-[30px]">
         </div>
         <!-- Level Badge -->
-        <BadgeComponent :text="$t(`quiz.levels.${quiz.level}`)" :type="quiz.level"/>
+        <BadgeComponent :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level"/>
       </div>
       <div class="p-4">
         <!-- Category -->

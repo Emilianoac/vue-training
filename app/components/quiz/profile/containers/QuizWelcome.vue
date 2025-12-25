@@ -12,7 +12,6 @@ defineProps<{
   image: string;
   category: string;
   level: "basic" | "intermediate" | "advanced";
-  levelLabel: string;
 }>();
 </script>
 
@@ -25,7 +24,7 @@ defineProps<{
           <img class="max-w-[30px]" :src="image" alt="Quiz Image" />
         </div>
         <!-- Quiz Level Badge -->
-        <BadgeComponent :type="level" :text="levelLabel" class="mb-3"/>
+        <BadgeComponent :type="level" :text="$t(`general.levels.${level}`)" class="mb-3"/>
       </div>
       <div class="flex items-start mb-6 gap-3">
         <div>
