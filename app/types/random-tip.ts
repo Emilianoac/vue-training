@@ -1,31 +1,20 @@
 export interface RandomTip {
-  id: number;
-  mood: "happy" | "angry" | "surprised";
+  documentId: string;
+  title: string;
   category: {
     id: string;
     name: string;
-    icon: string;
+    image: {
+      url: string
+    }
   },
-  description: {
-    es: string
-    en: string;
-  },
-  title: {
-    es: string
-    en: string;
-  }
-  text: {
-    es: string
-    en: string;
-  }
-  codeExamples: CodeExamples[];
-  source?: string;
+  short_description: string;
+  content: string
+  code_examples: CodeExamples[];
+  source_url?: string;
 }
 
 export interface CodeExamples {
   lang: string;
-  code: {
-    es: string;
-    en: string;
-  };
+  code: string;
 }
