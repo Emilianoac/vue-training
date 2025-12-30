@@ -59,7 +59,7 @@ watch(() => locale.value, async() => {
           <QuizCard :quiz="item"/>
         </template>
       </SwiperComponent>
-      <NuxtLink to="/quizzes" class="app-button primary !block w-max mx-auto mt-8">
+      <NuxtLink to="/quizzes" class="app-button primary !block w-max mx-auto mt-2">
         {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
       </NuxtLink>
     </section>
@@ -72,7 +72,7 @@ watch(() => locale.value, async() => {
           <ChallengeCard :challenge="item"/>
         </template>
       </SwiperComponent>
-      <NuxtLink to="/challenges" class="app-button primary !block w-max mx-auto mt-8">
+      <NuxtLink to="/challenges" class="app-button primary !block w-max mx-auto mt-2">
         {{$t("general.goTo")}} {{$t("general.challenge.many") }}
       </NuxtLink>
     </section>
