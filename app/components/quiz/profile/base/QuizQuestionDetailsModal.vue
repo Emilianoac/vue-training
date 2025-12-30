@@ -33,7 +33,7 @@ const correctAnswer = computed(() => {
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
             <dd class="mt-2" v-html="marked(question.questionText)"></dd>
   
-            <dt class="font-bold mt-4">Respuesta correcta</dt>
+            <dt class="font-bold mt-4">{{ $t("quiz.correct_answer") }}</dt>
             <dd class="mt-2" v-html="marked(correctAnswer?.answerText ?? '')"></dd>
           </dl>
   
