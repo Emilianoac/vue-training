@@ -12,23 +12,6 @@ export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
     );
   });
 
-  watch(
-    randomTips,
-    (tips) => {
-      if (!tips.length) {
-        currentTipId.value = null;
-        return;
-      }
-
-      if (
-        !currentTipId.value || !tips.some(t => t.documentId === currentTipId.value)
-      ) {
-        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId: null;
-      }
-    },
-    { immediate: true }
-  );
-
   function applyTip(tip: RandomTip | null) {
     currentTipId.value = tip?.documentId ?? null;
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -52,6 +35,23 @@ export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
     applyTip(tip);
   }
 
+  watch(
+    randomTips,
+    (tips) => {
+      if (!tips.length) {
+        currentTipId.value = null;
+        return;
+      }
+
+      if (
+        !currentTipId.value || !tips.some(t => t.documentId === currentTipId.value)
+      ) {
+        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId: null;
+      }
+    },
+    { immediate: true }
+  );
+  
   return {
     currentRandomTip,
     currentTipId,
