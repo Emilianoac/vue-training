@@ -25,24 +25,28 @@ const correctAnswer = computed(() => {
         <div class="p-4 md:p-8 text-sm md:text-base">
           <button 
             @click="$emit('closeModal')"
-            class="text-sm text-slate-600 dark:text-slate-400 absolute top-4 right-4 hover:text-slate-700 dark:hover:text-slate-300">
-            [ {{ $t("quiz.close_details") }} ]
+            :title="$t('quiz.close_details')"
+            class="bg-slate-300 dark:bg-slate-700 rounded-md  p-2 flex items-center text-sm text-slate-600 dark:text-slate-100 absolute top-4 right-4 hover:text-slate-700 dark:hover:text-slate-300">
+            <Icon name="mdi:close" size="18"></Icon>
           </button>
           
-          <dl class="mt-4">
+          <dl class="mt-9 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-            <dd class="mt-2" v-html="marked(question.questionText)"></dd>
-  
-            <dt class="font-bold mt-4">{{ $t("quiz.correct_answer") }}</dt>
-            <dd class="mt-2" v-html="marked(correctAnswer?.answerText ?? '')"></dd>
+            <dd class="mt-1 text-sm" v-html="marked(question.questionText)"></dd>
           </dl>
-  
+
+          <dl class="mt-4 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
+            <dt class="font-bold">{{ $t("quiz.correct_answer") }}</dt>
+            <dd class="mt-1 text-sm" v-html="marked(correctAnswer?.answerText ?? '')"></dd>
+          </dl>
+
+          
           <hr class="my-5 border-slate-200 dark:border-slate-800">
   
           <h3 class="font-bold">{{ $t("quiz.explanation") }}</h3>
   
           <!-- Explanation -->
-          <div class="mt-2 mb-5" v-html="marked(question.correctAnswerExplanation)"></div>
+          <div class="mt-2 mb-5 text-sm" v-html="marked(question.correctAnswerExplanation)"></div>
   
           <!-- Code Example --> 
           <template v-for="codeExample in question.correctAnswerCodeExample">
