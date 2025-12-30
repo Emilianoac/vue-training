@@ -1,38 +1,60 @@
+import type { Ref } from "vue";
 import type { RandomTip } from "@/types/random-tip";
 
-export default function useRandomTipGame(randomTips: RandomTip[]) {
+export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
 
-  const currentRandomTip = ref<RandomTip | null>(randomTips[0] ? randomTips[0] : null);
-  const error = reactive({
-    status: false,
-    message: ""
-  })
+  const currentTipId = ref<string | null>(null);
+
+  const currentRandomTip = computed<RandomTip | null>(() => {
+    if (!currentTipId.value) return null;
+    return (
+      randomTips.value.find( tip => tip.documentId === currentTipId.value ) ?? null
+    );
+  });
+
+  watch(
+    randomTips,
+    (tips) => {
+      if (!tips.length) {
+        currentTipId.value = null;
+        return;
+      }
+
+      if (
+        !currentTipId.value || !tips.some(t => t.documentId === currentTipId.value)
+      ) {
+        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId: null;
+      }
+    },
+    { immediate: true }
+  );
 
   function applyTip(tip: RandomTip | null) {
-    if (!currentRandomTip) {
-      error.status = true;
-      return;
-    }
-    currentRandomTip.value = tip;
+    currentTipId.value = tip?.documentId ?? null;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function getRandomTip() {
-    let newTip = currentRandomTip.value;
+    if (!randomTips.value.length) return;
+
+    let newTipId: string;
 
     do {
-      newTip = randomTips[Math.floor(Math.random() * randomTips.length)] ?? null
-    } while (newTip?.documentId === currentRandomTip.value?.documentId);
+      const random = randomTips.value[Math.floor(Math.random() * randomTips.value.length)]!;      
+      newTipId = random.documentId;
+    } while (newTipId === currentTipId.value && randomTips.value.length > 1);
 
-    applyTip(newTip);
+    currentTipId.value = newTipId;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function selectTip(tip: RandomTip) {
     applyTip(tip);
-  } 
+  }
 
   return {
     currentRandomTip,
+    currentTipId,
     randomTips,
     getRandomTip,
     selectTip

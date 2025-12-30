@@ -8,13 +8,17 @@
   definePageMeta({ menu: true, titleKey: "menu-label.randomTip" });
   useStaticPageSeo("randomTips");
 
+  const { locale } = useI18n();
+
   const { getRandomTips, randomTips} = useRandomTipData();
 
   await getRandomTips();
 
-  const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips.value);
+  const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips);
   
-  
+  watch(() => locale.value, async () => {
+    await getRandomTips();
+  });
 </script>
 
 <template>

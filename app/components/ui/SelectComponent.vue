@@ -3,7 +3,7 @@
 const selectedItem = defineModel();
 
 defineProps<{
-  items: string[];
+  items: {label: string, id:string}[];
   label: string;
 }>();
 </script>
@@ -16,8 +16,8 @@ defineProps<{
     <select 
       class="w-full py-2 px-5 border border-gray-300 dark:border-gray-800 rounded-md dark:bg-gray-900 text-sm" 
       v-model="selectedItem">
-        <option v-for="category in items" :key="category" :value="category">
-          {{ category }}
+        <option v-for="category in items" :key="category.id" :value="category.id">
+          {{ category.label }}
         </option>
     </select>
   </div>

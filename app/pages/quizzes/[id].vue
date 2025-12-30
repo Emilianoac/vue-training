@@ -6,6 +6,7 @@ import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.
 import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
 import QuizQuestionDetailsModal from "@/components/quiz/profile/base/QuizQuestionDetailsModal.vue";
 
+const { locale } = useI18n();
 const route = useRoute();
 
 const  { 
@@ -33,7 +34,11 @@ const  {
 await loadQuiz(route.params.id as string );
 
 useSeoMeta({
-  title: quiz.value?.title,
+  title: computed(() => quiz.value?.title)
+})
+
+watch(() => locale.value, async () => {
+  await loadQuiz(route.params.id as string);
 })
 
 </script>

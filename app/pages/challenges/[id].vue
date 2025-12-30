@@ -7,7 +7,6 @@ import ChallengeCodeEditorLayout from "@/components/challenge/ChallengeCodeEdito
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
 const route = useRoute();
-const router = useRouter();
 
 const { locale } = useI18n();
 
@@ -20,18 +19,12 @@ const tabsItems = [
   { name: "challenge.tabs.solution", id: "solution" },
 ];
 
-onMounted(() => {
-  if (challenge) {
-    document.title = `${challenge.value?.title} - Vue Training`;
-  } else {
-    router.push({ name: "not-found" });
-  }
-});
+useSeoMeta({
+  title: computed(() => challenge.value?.title)
+})
 
-watch(() => locale.value, () => {
-  if (challenge) {
-    document.title = `${challenge.value?.title} - Vue Training`;
-  }
+watch(() => locale.value, async () => {
+  await getChallenge(route.params.id as string);
 });
 </script>
 

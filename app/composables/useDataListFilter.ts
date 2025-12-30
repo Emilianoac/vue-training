@@ -1,39 +1,55 @@
-import { ref, computed } from "vue";
+import { computed, ref, type Ref } from "vue";
 
-export default function useDataListFilter<T extends { category: { name: string }; level: string }>(
-  data: T[], 
-) {
+export default function useDataListFilter<
+  T extends { category: { name: string }; level: string }
+>(data: Ref<T[]>) {
+
   const { t } = useI18n();
+
+  const ALL = "all";
+
+  const selectedCategory = ref(ALL);
+  const selectedDifficulty = ref(ALL);
   
-  const dataList = ref<T[]>(data);
-  const all = computed(() => t("general.all"));
-
-  const selectedCategory = ref(all.value);
-  const selectedDifficulty = ref(all.value);
-
   const categories = computed(() => {
-    return [all.value, ...Array.from(new Set(dataList.value.map(item => item.category.name)))];
+    return [
+      { id: ALL, label: t("general.all") },
+      ...Array.from(new Set(data.value.map(i => i.category.name))).map(name => ({
+        id: name,
+        label: name
+      }))
+    ];
   });
 
   const difficulties = computed(() => {
-    return [all.value, ...Array.from(new Set(dataList.value.map(item => item.level)))];
+    return [
+      { id: ALL, label: t("general.all") },
+      ...Array.from(new Set(data.value.map(i => i.level))).map(name => ({
+        id: name,
+        label: name
+      }))
+    ];
   });
 
   const currentDataList = computed(() => {
-    return dataList.value.filter(item => {
-      const categoryMatch = selectedCategory.value === all.value || item.category.name === selectedCategory.value;
-      const difficultyMatch = selectedDifficulty.value === all.value || item.level === selectedDifficulty.value;
+    return data.value.filter(item => {
+      const categoryMatch =
+        selectedCategory.value === ALL ||
+        item.category.name === selectedCategory.value;
+
+      const difficultyMatch =
+        selectedDifficulty.value === ALL ||
+        item.level === selectedDifficulty.value;
+
       return categoryMatch && difficultyMatch;
     });
   });
 
-  return { 
-    dataList, 
-    all, 
-    selectedCategory, 
-    selectedDifficulty, 
-    categories, 
-    difficulties, 
-    currentDataList 
+  return {
+    selectedCategory,
+    selectedDifficulty,
+    categories,
+    difficulties,
+    currentDataList
   };
 }

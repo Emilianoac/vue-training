@@ -13,17 +13,15 @@ await getQuizzes();
 const { locale } = useI18n();
 
 const { 
-  currentDataList : currentQuizzes, 
-  all, 
+  currentDataList, 
   selectedCategory, 
   selectedDifficulty, 
   categories, 
   difficulties 
-} = useDataListFilter(quizzes.value);
+} = useDataListFilter(quizzes);
 
-watch(() => locale.value, () => {
-  selectedCategory.value = all.value;
-  selectedDifficulty.value = all.value;
+watch(() => locale.value, async () => {
+  await getQuizzes();
 });
 </script>
 
@@ -44,9 +42,9 @@ watch(() => locale.value, () => {
         />
       </div>
     </div>
-    <QuizListComponent :quizzes="currentQuizzes" />
+    <QuizListComponent :quizzes="currentDataList" />
 
-    <div v-if="currentQuizzes.length === 0" class="text-center mt-4">
+    <div v-if="currentDataList.length === 0" class="text-center mt-4">
       <p class="text-xl md:text-2xl text-gray-500 dark:text-gray-600 mt-20">
         {{ $t("general.noResults") }}
       </p>

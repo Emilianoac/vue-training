@@ -9,11 +9,19 @@ import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 definePageMeta({ menu: true, titleKey: "menu-label.home" });
 useStaticPageSeo();
 
+const { locale } = useI18n();
+
+
 const {quizzes, getQuizzes} = useQuizData();
 const { challenges, getChallenges } = useChallengeData();
 
 await getQuizzes();
 await getChallenges();
+
+watch(() => locale.value, async() => {
+  await getQuizzes();
+  await getChallenges();
+});
 </script>
 
 <template>

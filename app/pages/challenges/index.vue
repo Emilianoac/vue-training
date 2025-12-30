@@ -15,16 +15,14 @@ const { locale } = useI18n();
 
 const { 
   currentDataList : currentChallenges, 
-  all, 
   selectedCategory, 
   selectedDifficulty, 
   categories, 
   difficulties 
-} = useDataListFilter(challenges.value);
+} = useDataListFilter(challenges);
 
-watch(() => locale.value, () => {
-  selectedCategory.value = all.value;
-  selectedDifficulty.value = all.value;
+watch(() => locale.value, async() => {
+  await getChallenges();
 });
 </script>
 
