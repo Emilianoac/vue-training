@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import QuizListComponent from "@/components/quiz/QuizListComponent.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
+import IconList from "@/components/assets/icons/IconList.vue";
 import useQuizData from "@/composables/quiz/useQuizData";
 import useDataListFilter  from "@/composables/useDataListFilter";
 
-definePageMeta({ menu: true, titleKey: "menu-label.quizzes" });
+definePageMeta({ 
+  menu: true, 
+  titleKey: "menu-label.quizzes",
+  icon: IconList
+});
 useStaticPageSeo("quizzes");
 
 const {quizzes, getQuizzes} = useQuizData();

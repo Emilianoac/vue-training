@@ -2,10 +2,15 @@
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
+import IconBoxGlove from "@/components/assets/icons/IconBoxGlove.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
-definePageMeta({ menu: true, titleKey: "menu-label.challenges" });
+definePageMeta({ 
+  menu: true, 
+  titleKey: "menu-label.challenges",
+  icon: IconBoxGlove
+});
 useStaticPageSeo("challenges");
 
 const {challenges, getChallenges} = useChallengeData();

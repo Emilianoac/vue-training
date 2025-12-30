@@ -4,8 +4,13 @@
   import IconBook from "@/components/assets/icons/IconBook.vue";
   import useRandomTipData from "@/composables/random-tip/useRandomTipData";
   import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
+  import IconDice from "@/components/assets/icons/IconDice.vue";
 
-  definePageMeta({ menu: true, titleKey: "menu-label.randomTip" });
+  definePageMeta({ 
+    menu: true, 
+    titleKey: "menu-label.randomTip",
+    icon: IconDice
+  });
   useStaticPageSeo("randomTips");
 
   const { locale } = useI18n();

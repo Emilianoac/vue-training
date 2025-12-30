@@ -5,8 +5,13 @@ import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustra
 import QuizCard from "@/components/quiz/QuizCard.vue";
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import SwiperComponent from "@/components/ui/SwiperComponent.vue";
+import IconHome from "@/components/assets/icons/IconHome.vue";
 
-definePageMeta({ menu: true, titleKey: "menu-label.home" });
+definePageMeta({ 
+  menu: true, 
+  titleKey: "menu-label.home" ,
+  icon: IconHome
+});
 useStaticPageSeo();
 
 const { locale } = useI18n();
