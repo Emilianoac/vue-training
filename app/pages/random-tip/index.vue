@@ -47,15 +47,17 @@
                 <!-- Tip explanation -->
                 <div v-html="marked(currentRandomTip.content)"></div>
                 <!-- Tip code examples -->
-                <template v-if="currentRandomTip.code_examples.length">
-                  <highlightjs 
-                    v-for="(codeExample, index) in currentRandomTip.code_examples" 
-                    :key="index"
-                    class="text-sm rounded-md overflow-hidden mt-4" 
-                    :language="codeExample.lang" 
-                    :code="codeExample.code"
-                  />
-                </template>
+                <ClientOnly>
+                  <template v-if="currentRandomTip.code_examples.length">
+                    <highlightjs 
+                      v-for="(codeExample, index) in currentRandomTip.code_examples" 
+                      :key="index"
+                      class="text-sm rounded-md overflow-hidden mt-4" 
+                      :language="codeExample.lang" 
+                      :code="codeExample.code"
+                    />
+                  </template>
+                </ClientOnly>
                 <!-- Source link -->
                 <div v-if="currentRandomTip.source_url" class="mt-4 text-sm text-gray-500 dark:text-gray-400">
                   <span class="block">{{ $t("randomTip.general.source") }} </span>
