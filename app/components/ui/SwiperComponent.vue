@@ -71,10 +71,10 @@
   }
 
   .embla__dot {
+    @apply bg-color-primary;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--text-color);
     opacity: 0.3;
     transform: scale(0.7);
     border: none;
