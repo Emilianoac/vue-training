@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <nav class="bg-white dark:bg-slate-900 text-black dark:text-white border border-gray-100 dark:border-slate-800 rounded-md shadow-md bottom-3 mx-2 sticky right-0 left-0 block md:hidden z-[999]">
+  <nav class="w-full m-0 bg-white dark:bg-slate-900 text-black dark:text-white border border-gray-100 dark:border-slate-800 rounded-tl-md rounded-tr-md shadow-md bottom-0 sticky right-0 left-0 block md:hidden z-[999]">
     <div class="flex items-center justify-between container mx-auto p-2">
       <router-link 
         v-for="(menuItem, index) in menuItems" 
