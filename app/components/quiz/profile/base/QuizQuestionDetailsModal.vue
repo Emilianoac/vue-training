@@ -23,12 +23,16 @@ const correctAnswer = computed(() => {
     @click.self="$emit('closeModal')">
       <div class="bg-white dark:bg-slate-900 rounded-md w-full max-w-[700px] max-h-[90vh] overflow-y-auto relative mx-6">
         <div class="p-4 md:p-8 text-sm md:text-base">
-          <button 
-            @click="$emit('closeModal')"
-            :title="$t('quiz.close_details')"
-            class="bg-slate-300 dark:bg-slate-700 rounded-md  p-2 flex items-center text-sm text-slate-600 dark:text-slate-100 absolute top-4 right-4 hover:text-slate-700 dark:hover:text-slate-300">
-            <Icon name="mdi:close" size="18"></Icon>
-          </button>
+          <div class="flex justify-between items-center">
+            <h4 class="font-bold text-xl md:text-2xl">{{ $t('quiz.details') }}</h4>
+
+            <button 
+              @click="$emit('closeModal')"
+              :title="$t('quiz.close_details')"
+              class="bg-slate-300 dark:bg-slate-700 rounded-md p-2 flex items-center text-sm text-slate-600 dark:text-slate-100 hover:text-slate-700 dark:hover:text-slate-300">
+              <Icon name="mdi:close" size="18"></Icon>
+            </button>
+          </div>
           
           <dl class="mt-9 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
