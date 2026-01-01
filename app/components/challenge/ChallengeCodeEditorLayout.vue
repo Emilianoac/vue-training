@@ -31,26 +31,23 @@ defineProps<{
       <!-- Objectives -->
       <template v-if="objectives">
         <h2 class="font-bold text-gray-900 dark:text-white mb-2">{{$t("challenge.description.objectives")}}</h2>
-        <ul class="mt-2 text-gray-900 dark:text-gray-300 p-0">
+        <ul class="list-disc list-inside text-gray-900 dark:text-gray-300 text-sm p-4 rounded-md bg-slate-100 dark:bg-slate-800/50 mt-2">
           <li 
             v-for="(item, i) in objectives" 
             :key="i" 
-            class="mb-2 last-of-type:mb-0 text-gray-900 dark:text-gray-300 text-sm p-2 rounded-md bg-gray-200 dark:bg-gray-800 flex gap-1 hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer">
-              <input type="checkbox" class="mr-2" :id="item.data" :value="item" :name="item.data" :key="i" />
-              <label :for="item.data" class="text-gray-900 dark:text-gray-300 text-sm cursor-pointer">
-                {{ item.data }}
-              </label>
+            class="mb-3 pb-3 border-b-2 border-b-slate-200 dark:border-b-slate-800 last-of-type:mb-0 last-of-type:border-b-0 last-of-type:pb-0">
+             {{ item.data }}
           </li>
         </ul>
         <hr class="h-px my-6 bg-gray-300 border-0 dark:bg-gray-700"/>
       </template>
 
       <!-- Instructions -->
-      <p>
+      <p class="text-sm">
         {{$t("challenge.play.instructions")}}
-        <code class="bg-gray-200 dark:bg-gray-800 dark:text-gray-300 p-1 rounded-md">npm run test:unit</code>
+        <code class="bg-gray-200 dark:bg-gray-800 dark:text-gray-300 p-1 rounded-md whitespace-nowrap">npm run test:unit</code>
       </p>
-      <p class="my-4">{{$t("challenge.play.instructions_2")}}</p>
+      <p class="my-4 text-sm">{{$t("challenge.play.instructions_2")}}</p>
 
       <hr class="my-6 dark:border-gray-700"/>
 
