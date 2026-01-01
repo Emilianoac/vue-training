@@ -14,9 +14,9 @@ const {challenge, getChallenge} = useChallengeData();
 await getChallenge(route.params.id as string)
 
 const tabsItems = [
-  { name: "challenge.tabs.description", id: "description" },
-  { name : "challenge.tabs.play", id: "play" },
-  { name: "challenge.tabs.solution", id: "solution" },
+  { name: "challenge.tabs.description", id: "description", icon: "mdi:list-box" },
+  { name : "challenge.tabs.play", id: "play", icon: "mdi:gamepad-square" },
+  { name: "challenge.tabs.solution", id: "solution", icon: "mdi:crystal-ball" },
 ];
 
 useSeoMeta({
