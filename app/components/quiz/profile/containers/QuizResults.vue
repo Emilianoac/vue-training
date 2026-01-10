@@ -101,7 +101,7 @@ function getStars(p: number ) {
         </div>
         <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
           <div 
-            class="bg-color-primary h-2.5 rounded-full" 
+            class="bg-brand-main-500 h-2.5 rounded-full" 
             :style="{ width: `${userStats.percentage}%` }">
           </div>
         </div>

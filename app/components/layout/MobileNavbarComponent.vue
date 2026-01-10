@@ -15,7 +15,7 @@
         v-for="(menuItem, index) in menuItems" 
         :key="index" 
         :to="menuItem.path" 
-        active-class="text-color-primary font-semibold"
+        active-class="text-brand-main-500 font-semibold"
         class="text-[0.7em] border-r last-of-type:border-0 border-slate-200 dark:border-slate-800 block w-full text-center py-1">
           <component 
             :is="menuItem.meta.icon" 

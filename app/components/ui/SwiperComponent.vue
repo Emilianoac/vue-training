@@ -71,7 +71,7 @@
   }
 
   .embla__dot {
-    @apply bg-color-primary;
+    @apply bg-brand-main-500;
     width: 14px;
     height: 14px;
     border-radius: 50%;

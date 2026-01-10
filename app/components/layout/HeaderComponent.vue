@@ -23,8 +23,8 @@
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <router-link 
                 :to="menuItem.path" 
-                class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-color-primary/30"
-                active-class="border-b-color-primary hover:!border-b-color-primary">
+                class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-brand-main-500/30"
+                active-class="border-b-brand-main-500 hover:!border-b-brand-main-500">
                   {{ $t(menuItem.meta.titleKey ?? '') }}
               </router-link>
             </li>

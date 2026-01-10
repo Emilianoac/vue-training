@@ -97,7 +97,7 @@
         <li 
           v-for="tip in randomTips" 
           :key="tip.documentId" 
-          :class="{ '!outline-color-primary': currentRandomTip.documentId === tip.documentId }"
+          :class="{ '!outline-brand-main-500': currentRandomTip.documentId === tip.documentId }"
           class="block lg:flex items-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
           @click="selectTip(tip)">
             <div class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center">

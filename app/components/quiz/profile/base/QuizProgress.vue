@@ -18,7 +18,7 @@ defineProps<{
   <!-- Progress Bar -->
   <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mb-6">
     <div 
-      class="bg-color-primary h-2.5 rounded-full transition-[width] duration-500 ease-in-out" 
+      class="bg-brand-main-500 h-2.5 rounded-full transition-[width] duration-500 ease-in-out" 
       :style="{ width: `${progress}%` }">
     </div>
   </div>

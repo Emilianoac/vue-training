@@ -36,7 +36,7 @@ watch(() => locale.value, async() => {
       <div class="mb-10 md:mb-0">
         <h1 class="text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
           {{ $t("home.welcome-one") }} 
-          <span class="text-color-primary">{{ $t("home.welcome-two") }}</span>
+          <span class="text-brand-main-500">{{ $t("home.welcome-two") }}</span>
           {{ $t("home.welcome-three") }}
           Vue.js
         </h1>

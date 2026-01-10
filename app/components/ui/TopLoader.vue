@@ -36,6 +36,6 @@ watch(loading, (newVal) => {
   height: 4px;
   transition: width 0.2s ease-out, opacity 0.5s ease-in-out;
   z-index: 9999;
-  @apply bg-color-primary;
+  @apply bg-brand-main-500;
 }
 </style>

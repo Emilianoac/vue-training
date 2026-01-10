@@ -38,8 +38,8 @@
   }
   
   .app-button.primary {
-    @apply bg-color-primary;
-    @apply hover:bg-color-primary-hover transition duration-300 hover:disabled:bg-color-primary-hover;
+    @apply bg-brand-main-700;
+    @apply hover:bg-brand-main-800 transition duration-300 hover:disabled:bg-brand-main-600;
   }
   
   .app-button.secondary {
