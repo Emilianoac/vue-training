@@ -1,25 +1,31 @@
 <script setup lang="ts">
+const NuxtLink = resolveComponent('NuxtLink');
 
-  interface Props {
-    type?: "button" | "NuxtLink" | "a",
-    to?: string,
-    variant?: "primary" | "secondary",
-  }
+interface Props {
+  type?: "button" | "a" | "NuxtLink",
+  to?: string | object | null,
+  variant?: "primary" | "secondary",
+}
 
 const props = withDefaults(defineProps<Props>(), {
-  type: "NuxtLink",
-  variant: "primary"
+  type: "button",
+  variant: "primary",
+  to: null
 })
 
-const componentType = computed(() => props.to ? defineNuxtLink({}) : props.type)
+const componentType = computed(() => {
+  if (props.type === "NuxtLink") return NuxtLink
+  return props.type
+})
 </script>
 
 <template>
   <component
     :is="componentType"
-    :to="to"
+    v-bind="$attrs"
+    :to="type === 'NuxtLink' ? to : undefined"
     class="app-button" 
-    :class="[variant]"
+    :class="variant"
   >
     <slot />
   </component>
@@ -28,8 +34,9 @@ const componentType = computed(() => props.to ? defineNuxtLink({}) : props.type)
 
 <style lang="postcss" scoped>
   .app-button {
-    @apply flex items-center justify-center font-medium px-6 py-2 rounded-md;
+    @apply flex items-center justify-center font-medium px-6 py-2 rounded-lg;
     @apply transition-all duration-300 cursor-pointer;
+    @apply border-b-4;
 
     &:disabled {
       @apply cursor-not-allowed opacity-40;
@@ -44,18 +51,26 @@ const componentType = computed(() => props.to ? defineNuxtLink({}) : props.type)
     }
 
     &.primary {
-      @apply text-white bg-brand-main-700;
+      @apply text-white bg-brand-main-700 border-brand-main-900;
 
       &:not(:disabled):hover {
         @apply bg-brand-main-800;
       }
+
+      &:not(:disabled):active {
+        @apply border-transparent;
+      }
     }
 
     &.secondary {
-      @apply bg-blue-100 text-blue-500;
+      @apply text-blue-900 bg-blue-50 border-slate-500;
 
       &:not(:disabled):hover {
-        @apply bg-blue-200;
+        @apply bg-blue-100;
+      }
+
+      &:not(:disabled):active {
+        @apply border-transparent;
       }
     }
   }

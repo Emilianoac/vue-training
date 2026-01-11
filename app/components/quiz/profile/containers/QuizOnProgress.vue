@@ -3,6 +3,7 @@
 
   import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue"
   import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";
+  import BaseButton from "@/components/ui/BaseButton.vue";
 
   defineProps<{
     isFinished: boolean;
@@ -54,27 +55,32 @@
       <!-- Controls -->
       <div class="flex justify-end items-center gap-3 mt-6">
         <!-- View Details button -->
-        <button v-if="hasCheckedAnswer && currentQuestion" 
+        <BaseButton 
+          v-if="hasCheckedAnswer && currentQuestion" 
+          type="button"
+          variant="secondary"
           @click="emits('update:showDetails', true)"
           class="app-button secondary text-sm">
           {{ $t('quiz.view_details') }}
-        </button>
+        </BaseButton>
         <!-- Verify Answer Button -->
-        <button 
+        <BaseButton
           v-if="!hasCheckedAnswer && currentQuestion"
+          type="button"
           :disabled="!selectedOptionId"
           class="app-button primary text-sm" 
           @click="emits('answerCurrentQuestion')">
           {{ $t('quiz.verify_answer') }}
-        </button>
+        </BaseButton>
         <!-- Next Question Button -->
-        <button 
+        <BaseButton
           v-else
+          type="button"
           :disabled="!selectedOptionId"
           class="app-button primary text-sm"
           @click="emits('goToNextQuestion')">
           {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
-        </button>
+        </BaseButton>
       </div>
     </div>
   </div>

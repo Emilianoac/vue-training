@@ -21,12 +21,12 @@
         <nav>
           <ul class="hidden sm:flex space-x-6">
             <li v-for="(menuItem, index) in menuItems" :key="index">
-              <router-link 
+              <NuxtLink
                 :to="menuItem.path" 
                 class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-brand-main-500/30"
                 active-class="border-b-brand-main-500 hover:!border-b-brand-main-500">
                   {{ $t(menuItem.meta.titleKey ?? '') }}
-              </router-link>
+              </NuxtLink>
             </li>
           </ul>
         </nav>

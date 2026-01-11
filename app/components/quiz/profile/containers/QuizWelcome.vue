@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 
 defineEmits<{
@@ -35,9 +36,11 @@ defineProps<{
         </div>
       </div>
     </div>
-    <button 
-      class="app-button primary font-semibold mx-auto block w-full"
-      @click="$emit('startQuiz')">{{ $t("quiz.start_quiz") }}</button>
+    <BaseButton
+      class="font-semibold mx-auto block w-full"
+      type="button"
+      @click="$emit('startQuiz')">{{ $t("quiz.start_quiz") }}
+    </BaseButton>
     </div>
 </template>
 

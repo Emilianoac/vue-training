@@ -5,6 +5,7 @@ import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustra
 import QuizCard from "@/components/quiz/QuizCard.vue";
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import SwiperComponent from "@/components/ui/SwiperComponent.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 import IconHome from "@/components/assets/icons/IconHome.vue";
 
 definePageMeta({ 
@@ -45,13 +46,9 @@ watch(() => locale.value, async() => {
           {{ $t("home.description") }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:w-max gap-4 justify-center lg:justify-start">
-          <NuxtLink to="/quizzes" class="app-button primary px-8">
+          <BaseButton type="NuxtLink" variant="primary" to="/quizzes">
             {{$t("home.hero_button_text")}}
-          </NuxtLink>
-  
-          <NuxtLink to="/challenges" class="app-button-outline px-8">
-            {{$t("general.goTo")}} {{$t("general.challenge.many") }}
-          </NuxtLink>
+          </BaseButton>
         </div>
       </div>
       <HeaderIllustration class="max-w-[500px] lg:max-w-none mx-auto" />
@@ -65,9 +62,9 @@ watch(() => locale.value, async() => {
           <QuizCard :quiz="item"/>
         </template>
       </SwiperComponent>
-      <NuxtLink to="/quizzes" class="app-button primary !block w-max mx-auto mt-2">
+      <BaseButton type="NuxtLink" to="/quizzes" class="w-max mx-auto mt-2">
         {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
-      </NuxtLink>
+      </BaseButton>
     </section>
   
     <!-- Challenges -->
@@ -78,9 +75,9 @@ watch(() => locale.value, async() => {
           <ChallengeCard :challenge="item"/>
         </template>
       </SwiperComponent>
-      <NuxtLink to="/challenges" class="app-button primary !block w-max mx-auto mt-2">
+      <BaseButton type="NuxtLink" to="/challenges" class="w-max mx-auto mt-2">
         {{$t("general.goTo")}} {{$t("general.challenge.many") }}
-      </NuxtLink>
+      </BaseButton>
     </section>
   </div>
 </template>

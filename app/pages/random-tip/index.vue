@@ -4,6 +4,7 @@
   import IconBook from "@/components/assets/icons/IconBook.vue";
   import useRandomTipData from "@/composables/random-tip/useRandomTipData";
   import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
+  import BaseButton from "@/components/ui/BaseButton.vue";
   import IconDice from "@/components/assets/icons/IconDice.vue";
 
   definePageMeta({ 
@@ -14,7 +15,6 @@
   useStaticPageSeo("randomTips");
 
   const { locale } = useI18n();
-
   const { getRandomTips, randomTips} = useRandomTipData();
 
   await getRandomTips();
@@ -39,13 +39,14 @@
             :tip-id="currentRandomTip.documentId"
           />
           <!-- Get a new tip button -->
-          <button
-            class="app-button bg-gray-800 text-white dark:bg-white dark:text-black mx-auto w-max mt-10 text-sm lg:text-base !hidden lg:!flex font-semibold hover:opacity-85 transition-all duration-200"
-            @click="getRandomTip"
-          >
-            {{ $t("randomTip.general.get_a_new_tip") }}
+          <BaseButton 
+            type="button" 
+            variant="secondary"
+            @click="getRandomTip" 
+            class="mx-auto mt-8 !hidden lg:!flex">
+              {{ $t("randomTip.general.get_a_new_tip") }}
             <IconBook class="inline-block ml-2" width="24" height="24"/>
-          </button>
+          </BaseButton>
         </div>
   
         <!-- Tip Content -->
@@ -79,13 +80,16 @@
           </transition>
         </div>
       </div>
-  
+
       <!-- Get a new tip button -->
-      <button
-        class="app-button bg-gray-800 text-white dark:bg-white dark:text-black mx-auto w-max mt-10 text-sm lg:text-base lg:!hidden !flex font-semibold hover:opacity-85 transition-all duration-200"
-        @click="getRandomTip">
+      <BaseButton 
+        type="button" 
+        variant="secondary" 
+        @click="getRandomTip" 
+        class="mx-auto mt-8 lg:!hidden !flex">
           {{ $t("randomTip.general.get_a_new_tip") }}
-      </button>
+        <IconBook class="inline-block ml-2" width="24" height="24"/>
+      </BaseButton>
     </section>
   
     <hr class="my-10 w-full border-t border-gray-200 dark:border-gray-800"/>

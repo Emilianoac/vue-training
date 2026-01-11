@@ -11,7 +11,7 @@
 
 <template>
   <CardComponent>
-    <router-link class="block" :to="`/challenges/${challenge.slug}`">
+    <NuxtLink class="block" :to="`/challenges/${challenge.slug}`">
       <div class="relative">
         <!-- Image -->
         <img :src="challenge.cover.url" alt="Challenge Image" class="w-full h-48 object-cover object-center">
@@ -26,7 +26,7 @@
           {{ challenge.short_description }}
         </p>
       </div>
-    </router-link>
+    </NuxtLink>
   </CardComponent>
 </template>
 
