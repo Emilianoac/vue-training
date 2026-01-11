@@ -41,8 +41,11 @@
   "home": {
     "welcome-one": "Quizzes and",
     "welcome-two": "Challenges",
-    "welcome-three": "to practice with",
-    "description": "Test your knowledge and keep improving with each challenge."
+    "welcome-three": "to",
+    "welcome-four": "practice",
+    "welcome-five": "with",
+    "description": "Test your knowledge and keep improving with each challenge.",
+    "hero_button_text": "Get started with quizzes"
   },
 
   "quiz": {

@@ -41,8 +41,11 @@
   "home": {
     "welcome-one": "Cuestionarios y",
     "welcome-two": "Desafios",
-    "welcome-three": "para practicar con",
-    "description": "Pon a prueba tu conocimiento y sigue mejorando con cada desafío."
+    "welcome-three": "para",
+    "welcome-four": "practicar",
+    "welcome-five": "con",
+    "description": "Pon a prueba tu conocimiento y sigue mejorando con cada desafío.",
+    "hero_button_text": "Comenzar con cuestionarios"
   },
 
   "quiz": {

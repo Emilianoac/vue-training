@@ -9,13 +9,12 @@ import IconHome from "@/components/assets/icons/IconHome.vue";
 
 definePageMeta({ 
   menu: true, 
-  titleKey: "menu-label.home" ,
+  titleKey: "menu-label.home",
   icon: IconHome
 });
 useStaticPageSeo();
 
 const { locale } = useI18n();
-
 
 const {quizzes, getQuizzes} = useQuizData();
 const { challenges, getChallenges } = useChallengeData();
@@ -36,16 +35,18 @@ watch(() => locale.value, async() => {
       <div class="mb-10 md:mb-0">
         <h1 class="text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
           {{ $t("home.welcome-one") }} 
-          <span class="text-brand-main-500">{{ $t("home.welcome-two") }}</span>
-          {{ $t("home.welcome-three") }}
-          Vue.js
+          {{ $t("home.welcome-two") }}
+          {{ $t("home.welcome-three") }} 
+          <span class="text-brand-main-600">{{$t("home.welcome-four") }}</span>
+          {{ $t("home.welcome-five") }} 
+          <span class="text-brand-main-600">Vue.js</span>
         </h1>
         <p class="text-2xl my-10  max-w-[500px]">
           {{ $t("home.description") }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:w-max gap-4 justify-center lg:justify-start">
           <NuxtLink to="/quizzes" class="app-button primary px-8">
-            {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
+            {{$t("home.hero_button_text")}}
           </NuxtLink>
   
           <NuxtLink to="/challenges" class="app-button-outline px-8">
