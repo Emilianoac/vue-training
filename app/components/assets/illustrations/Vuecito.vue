@@ -2,13 +2,15 @@
 
 withDefaults(defineProps<{
   tipId: string;
+  showCodeEditor?: boolean,
 }>(), {
+  showCodeEditor: true,
 });
 </script>
 
 <template>
   <svg width="401" height="548" viewBox="0 0 401 548" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g id="editor-codigo" filter="url(#filter0_f_199_82)" class="code-editor-illustration">
+    <g v-if="showCodeEditor" id="editor-codigo" filter="url(#filter0_f_199_82)" class="code-editor-illustration">
       <rect id="Rectangle 6" x="16" y="6" width="378.683" height="307.901" rx="9" fill="#3A3B37" />
       <rect id="Rectangle 7" x="47.8518" y="44.9299" width="329.135" height="10.6173" rx="5.30864" fill="#616965" />
       <rect id="Rectangle 10" x="47.8518" y="66.1645" width="113.251" height="10.6173" rx="5.30864" fill="#4C524C" />
