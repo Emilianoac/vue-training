@@ -46,8 +46,8 @@ watch(() => locale.value, async() => {
           {{ $t("home.description") }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:w-max gap-4 justify-center lg:justify-start">
-          <BaseButton type="NuxtLink" variant="primary" to="/quizzes">
-            {{$t("home.hero_button_text")}}
+          <BaseButton type="NuxtLink" variant="primary" to="/quizzes" class="gap-1">
+            {{$t("home.hero_button_text")}} <Icon name="mdi:arrow-right" size="24"></Icon>
           </BaseButton>
         </div>
       </div>
