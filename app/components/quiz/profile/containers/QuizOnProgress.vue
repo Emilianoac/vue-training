@@ -26,23 +26,25 @@
     (e: "goToNextQuestion"): void;
     (e: "update:selectedOptionId", value: number | null): void; // 👈 para reemitir
   }>();
+
+
 </script>
 
 <template>
   <!-- Quiz on Progress -->
-  <div class="max-w-[950px] mx-auto">
+  <div>
     <!-- Quiz Title -->
     <h1 class="text-xl  font-bold mb-6">{{ title }}</h1>
 
+    <!-- Progress -->
+    <QuizProgress 
+      :progress="quizProgress" 
+      :currentQuestionIndex="currentQuestionIndex + 1"
+      :quizLength="quiz?.questions.length"
+    />
+
     <!-- Quiz Container -->
     <div class="bg-white dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200  p-4 rounded-md mx-auto"> 
-      <!-- Progress -->
-      <QuizProgress 
-        :progress="quizProgress" 
-        :currentQuestionIndex="currentQuestionIndex + 1"
-        :quizLength="quiz?.questions.length"
-      />
-
       <!-- Question -->
       <QuizQuestion v-if="currentQuestion"
         :question="currentQuestion" 
@@ -51,37 +53,39 @@
         :model-value="selectedOptionId"
         @update:model-value="emits('update:selectedOptionId', $event)"
       />
+    </div>
+  </div>
 
-      <!-- Controls -->
-      <div class="flex justify-end items-center gap-3 mt-6">
-        <!-- View Details button -->
-        <BaseButton 
-          v-if="hasCheckedAnswer && currentQuestion" 
-          type="button"
-          variant="secondary"
-          @click="emits('update:showDetails', true)"
-          class="app-button secondary text-sm">
-          {{ $t('quiz.view_details') }}
-        </BaseButton>
-        <!-- Verify Answer Button -->
-        <BaseButton
-          v-if="!hasCheckedAnswer && currentQuestion"
-          type="button"
-          :disabled="!selectedOptionId"
-          class="app-button primary text-sm" 
-          @click="emits('answerCurrentQuestion')">
-          {{ $t('quiz.verify_answer') }}
-        </BaseButton>
-        <!-- Next Question Button -->
-        <BaseButton
-          v-else
-          type="button"
-          :disabled="!selectedOptionId"
-          class="app-button primary text-sm"
-          @click="emits('goToNextQuestion')">
-          {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
-        </BaseButton>
-      </div>
+  <!-- Controls -->
+  <div class="fixed lg:relative bottom-0 w-full left-0 bg-slate-100 dark:bg-slate-800 dark:lg:bg-transparent lg:bg-transparent rounded-md mt-4 z-[999]">
+    <div class="container max-w-[1280px] mx-auto flex justify-end items-center gap-3 lg:p-0 p-4">
+      <!-- View Details button -->
+      <BaseButton 
+        v-if="hasCheckedAnswer && currentQuestion" 
+        type="button"
+        variant="secondary"
+        @click="emits('update:showDetails', true)"
+        class="app-button secondary text-sm">
+        {{ $t('quiz.view_details') }}
+      </BaseButton>
+      <!-- Verify Answer Button -->
+      <BaseButton
+        v-if="!hasCheckedAnswer && currentQuestion"
+        type="button"
+        :disabled="!selectedOptionId"
+        class="app-button primary text-sm" 
+        @click="emits('answerCurrentQuestion')">
+        {{ $t('quiz.verify_answer') }}
+      </BaseButton>
+      <!-- Next Question Button -->
+      <BaseButton
+        v-else
+        type="button"
+        :disabled="!selectedOptionId"
+        class="app-button primary text-sm"
+        @click="emits('goToNextQuestion')">
+        {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
+      </BaseButton>
     </div>
   </div>
 </template>

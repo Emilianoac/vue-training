@@ -18,7 +18,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="flex items-center text-xl font-bold mb-4">
+  <div class="block md:flex items-center text-xl font-bold mb-4">
     <span class="block me-1">{{ questionIndex + 1}}.</span>
     <div class="question-text" v-html="marked(question.questionText)"></div>
   </div>
