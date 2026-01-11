@@ -30,7 +30,7 @@
 
 <template>
   <!-- Quiz on Progress -->
-  <div v-if="!isFinished && isQuizInitialized" class="max-w-[950px] mx-auto">
+  <div class="max-w-[950px] mx-auto">
     <!-- Quiz Title -->
     <h1 class="text-xl  font-bold mb-6">{{ title }}</h1>
 

@@ -9,6 +9,7 @@ export default function useQuiz() {
 
   const showDetails = ref(false);
   const isQuizInitialized = ref(false);
+  const isQuizLoading = ref(false);
   const quizProgress = ref(0);
   const currentQuestionIndex = ref(0);
   const selectedOptionId = ref<number | null>(null);
@@ -48,7 +49,12 @@ export default function useQuiz() {
 
   function startQuiz() {
     isQuizInitialized.value = true;
-    startTime.value = Date.now();
+    isQuizLoading.value = true;
+    
+    setTimeout(() => {
+      isQuizLoading.value = false;
+      startTime.value = Date.now();
+    }, 3000);
   }
 
   function answerCurrentQuestion() {
@@ -114,6 +120,7 @@ export default function useQuiz() {
     error,
     showDetails,
     isQuizInitialized,
+    isQuizLoading,
     quizProgress,
     currentQuestionIndex,
     currentQuestion,
