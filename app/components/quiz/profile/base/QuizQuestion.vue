@@ -29,7 +29,7 @@ const emit = defineEmits<{
       class="flex items-center rounded-md gap-2 cursor-pointer relative mb-2"
     >
       <input
-        class="curson-pointer ms-2 peer absolute z-10"
+        class="curson-pointer ms-2 peer absolute z-10 accent-blue-500 checked:accent-indigo-600"
         :value="answer.id"
         :checked="selectedOption === answer.id"
         :disabled="checkAnswer"
@@ -40,7 +40,7 @@ const emit = defineEmits<{
       />
       <label
         :for="`answer-${answer.id}`"
-        class="grid grid-cols-1 md:grid-cols-[1fr,max-content] items-center w-full h-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500"
+        class=" grid grid-cols-1 md:grid-cols-[1fr,max-content] items-center w-full h-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500"
         :class="{ 
           '!border-green-500 bg-green-800/10': checkAnswer && answer.isCorrect,
           '!border-red-500 bg-red-800/10': checkAnswer && !answer.isCorrect,
