@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Quiz, AnswerRecord } from "@/types/quiz";
 import { marked } from "marked";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 defineEmits<{
   resetQuiz: []
@@ -139,12 +140,10 @@ function getStars(p: number ) {
         </div>
   
         <!-- Retake Quiz Button -->
-        <button 
-          @click="$emit('resetQuiz')"
-          class="app-button primary w-full mt-10">
-          <Icon name="mdi:rotate-left" class="me-2 text-xl" />
+         <BaseButton type="button" variant="primary" @click="$emit('resetQuiz')" class="w-full mt-6">
           {{ $t("quiz.results.retake_quiz") }}
-        </button>
+          <Icon name="mdi:rotate-left" class="ms-2 text-xl"/>
+        </BaseButton>
       </div>
     </div>
   
