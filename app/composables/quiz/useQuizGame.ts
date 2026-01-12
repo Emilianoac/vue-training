@@ -57,6 +57,16 @@ export default function useQuiz() {
     }, 3000);
   }
 
+  function leaveQuiz(message: string) {
+    const userResponse = window.confirm(message)
+
+    if (userResponse) {
+      window.location.reload();
+    } else {
+      return;
+    }
+  }
+
   function answerCurrentQuestion() {
     if (!currentQuestion.value) {
       setError("No current question available.");
@@ -109,7 +119,6 @@ export default function useQuiz() {
     isFinished.value = true;
     userStats.value = calculateStatsUseCase(userHistory.value);
   }
-
   function setError(err: unknown) {
     error.value.status = true;
     error.value.message = err instanceof Error ? err.message : "An unexpected error occurred";
@@ -133,6 +142,7 @@ export default function useQuiz() {
     elapsedTime,
 
     startQuiz,
+    leaveQuiz,
     resetQuizState,
     loadQuiz,
     answerCurrentQuestion,

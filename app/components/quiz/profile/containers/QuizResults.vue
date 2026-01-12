@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { Quiz, AnswerRecord } from "@/types/quiz";
-import {marked } from "marked";
-import { Icon } from "@iconify/vue";
+import { marked } from "marked";
 
 defineEmits<{
   resetQuiz: []
@@ -17,6 +16,7 @@ const props = defineProps<{
   };
   elapsedTime: number;
   quiz: Quiz;
+  leaveQuiz: (message:string) => void;
 }>();
 
 const starsArray = getStars(props.userStats.percentage);
@@ -47,7 +47,16 @@ function getStars(p: number ) {
 
 <template>
   <div>
-    <h1 class="text-4xl font-bold">{{ quiz.title}}</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="text-4xl font-bold">{{ quiz.title}}</h1>
+      <button 
+        class="hover:opacity-30"
+        :title="$t('quiz.leave_quiz')"
+        @click="leaveQuiz($t('quiz.leave_quiz_confirm'))">
+          <Icon name="mdi:close" size="20" />
+      </button>
+    </div>
+    
     <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
       {{ $t("quiz.results.quiz_completed") }}
     </p>
@@ -56,7 +65,7 @@ function getStars(p: number ) {
       <!-- Quiz Results Summary -->
       <div class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]">
         <p class="font-semibold mb-7 flex items-center">
-          <icon icon="mdi:trophy" class="text-yellow-500 me-2" />
+          <Icon name="mdi:trophy" class="text-yellow-500 me-2" />
           {{ $t("quiz.results.your_score") }}
         </p>
   
@@ -72,7 +81,7 @@ function getStars(p: number ) {
             <Icon
               v-for="(type, index) in starsArray"
               :key="index"
-              :icon="type === 'full' ? 'line-md:star-filled' : type === 'half' ? 'line-md:star-filled-half' : 'line-md:star'"
+              :name="type === 'full' ? 'line-md:star-filled' : type === 'half' ? 'line-md:star-filled-half' : 'line-md:star'"
               class="text-yellow-400 text-4xl"
             />
           </div>
@@ -108,7 +117,7 @@ function getStars(p: number ) {
   
         <!-- Time Taken -->
         <div class="flex items-center mb-5 gap-3">
-          <icon icon="mdi:clock-outline" class="text-xl" />
+          <Icon name="mdi:clock-outline" class="text-xl" />
           <div>
             <p class=" text-slate-500 text-sm">{{ $t("quiz.results.time_taken") }}</p>
             <p class="font-semibold">
@@ -120,7 +129,7 @@ function getStars(p: number ) {
   
         <!-- Questions Answered -->
         <div class="flex items-center mb-5 gap-3">
-          <icon icon="mdi:checkbox-marked-circle-outline" class="text-green-500 text-xl" />
+          <Icon name="mdi:checkbox-marked-circle-outline" class="text-green-500 text-xl" />
           <div>
             <p class=" text-slate-500 text-sm">{{ $t("quiz.results.questions_correctly_answered") }}</p>
             <p class="font-semibold">
@@ -133,7 +142,7 @@ function getStars(p: number ) {
         <button 
           @click="$emit('resetQuiz')"
           class="app-button primary w-full mt-10">
-          <icon icon="mdi:rotate-left" class="me-2 text-xl" />
+          <Icon name="mdi:rotate-left" class="me-2 text-xl" />
           {{ $t("quiz.results.retake_quiz") }}
         </button>
       </div>

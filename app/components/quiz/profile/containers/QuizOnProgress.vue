@@ -16,6 +16,7 @@
     hasCheckedAnswer: boolean;
     selectedOptionId: number | null;
     isLastQuestion: boolean;
+    leaveQuiz: (message: string) => void;
   }>();
 
   const selectedOptionId = defineModel<number | null>('selectedOptionId');
@@ -27,14 +28,21 @@
     (e: "update:selectedOptionId", value: number | null): void; // 👈 para reemitir
   }>();
 
-
 </script>
 
 <template>
   <!-- Quiz on Progress -->
   <div>
-    <!-- Quiz Title -->
-    <h1 class="text-xl  font-bold mb-6">{{ title }}</h1>
+    <div class="flex justify-between items-center">
+      <!-- Quiz Title -->
+      <h1 class="text-xl  font-bold mb-6">{{ title }}</h1>
+      <button 
+        class="hover:opacity-30"
+        :title="$t('quiz.leave_quiz')"
+        @click="leaveQuiz($t('quiz.leave_quiz_confirm'))">
+          <Icon name="mdi:close" :size="20"/>
+      </button>
+    </div>
 
     <!-- Progress -->
     <QuizProgress 

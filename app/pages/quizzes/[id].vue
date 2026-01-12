@@ -31,6 +31,7 @@ const  {
   elapsedTime,
 
   startQuiz,
+  leaveQuiz,
   resetQuizState,
   goToNextQuestion,
   loadQuiz,
@@ -86,6 +87,7 @@ watch(() => locale.value, async () => {
         :selectedOptionId="selectedOptionId"
         :hasCheckedAnswer="hasCheckedAnswer"
         :isLastQuestion="isLastQuestion"
+        :leave-quiz="leaveQuiz"
         @update:showDetails="(value: boolean) => showDetails = value"
         @answerCurrentQuestion="answerCurrentQuestion()"
         @goToNextQuestion="goToNextQuestion()"
@@ -100,6 +102,7 @@ watch(() => locale.value, async () => {
         :userStats="userStats"
         :quiz="quiz"
         @resetQuiz="resetQuizState()"
+        :leave-quiz="leaveQuiz"
       />
     </div>
   

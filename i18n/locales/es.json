@@ -65,6 +65,8 @@
     "explanation": "Explicación",
     "total_questions": "Total de preguntas",
     "success_percentage": "Porcentaje de éxito",
+    "leave_quiz": "Abandonar Quiz",
+    "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
 
     "results": {
       "quiz_completed": "¡Cuestionario completo exitosamente!",
