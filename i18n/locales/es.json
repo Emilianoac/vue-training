@@ -70,7 +70,7 @@
     "success_percentage": "Porcentaje de éxito",
     "leave_quiz": "Abandonar Quiz",
     "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
-
+    
     "results": {
       "quiz_completed": "¡Cuestionario completado exitosamente!",
       "your_score": "Tu puntuación",
@@ -81,7 +81,8 @@
       "time_taken": "Tiempo utilizado",
       "questions_correctly_answered": "Preguntas respondidas correctamente",
       "retake_quiz": "Repetir cuestionario",
-      "question_review": "Revisión de preguntas"
+      "question_review": "Revisión de preguntas",
+      "go_to_quizzes_list": "Ir a cuestionarios"
     }
   },
 

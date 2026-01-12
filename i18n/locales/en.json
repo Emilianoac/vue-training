@@ -70,7 +70,7 @@
     "success_percentage": "Success percentage",
     "leave_quiz": "Leave Quiz",
     "leave_quiz_confirm": "Are you sure you want to leave the quiz?",
-
+    
     "results": {
       "quiz_completed": "Quiz completed successfully!",
       "your_score": "Your score",
@@ -81,7 +81,8 @@
       "time_taken": "Time taken",
       "questions_correctly_answered": "Questions answered correctly",
       "retake_quiz": "Retake quiz",
-      "question_review": "Question review"
+      "question_review": "Question review",
+      "go_to_quizzes_list": "Go to quizzes list"
     }
   },
 

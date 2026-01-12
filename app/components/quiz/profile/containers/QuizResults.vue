@@ -48,10 +48,10 @@ function getStars(p: number ) {
 
 <template>
   <div>
-    <div class="flex justify-between items-center">
-      <h1 class="text-4xl font-bold">{{ quiz.title}}</h1>
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <h1 class="text-2xl md:text-4xl font-bold order-2 md:order-1 self-start">{{ quiz.title}}</h1>
       <button 
-        class="hover:opacity-30"
+        class="hover:opacity-30 order-1 md:order-2 self-end"
         :title="$t('quiz.leave_quiz')"
         @click="leaveQuiz($t('quiz.leave_quiz_confirm'))">
           <Icon name="mdi:close" size="20" />
@@ -90,11 +90,11 @@ function getStars(p: number ) {
   
         <!-- User Stats -->
         <div class="grid grid-cols-2 gap-4">
-          <div class="bg-white dark:bg-slate-700/50 flex flex-col justify-center items-center rounded-md p-4">
+          <div class="bg-slate-200 dark:bg-slate-700/50 flex flex-col justify-center items-center rounded-md p-4">
             <p class="text-2xl font-bold text-green-500">{{ userStats.correct }}</p>
             <p class="text-sm">{{ $t("quiz.results.correct") }}</p>
           </div>
-          <div class="bg-white dark:bg-slate-700/50  flex flex-col justify-center items-center rounded-md p-4">
+          <div class="bg-slate-200 dark:bg-slate-700/50  flex flex-col justify-center items-center rounded-md p-4">
             <p class="text-2xl font-bold text-red-500">{{ userStats.wrong }}</p>
             <p class="text-sm">{{ $t("quiz.results.wrong") }}</p>
           </div>
@@ -143,6 +143,11 @@ function getStars(p: number ) {
          <BaseButton type="button" variant="primary" @click="$emit('resetQuiz')" class="w-full mt-6">
           {{ $t("quiz.results.retake_quiz") }}
           <Icon name="mdi:rotate-left" class="ms-2 text-xl"/>
+        </BaseButton>
+
+        <!-- Go to quiz list button -->
+         <BaseButton type="NuxtLink" variant="secondary" to="/quizzes" class="w-full mt-3">
+          {{ $t("quiz.results.go_to_quizzes_list") }}
         </BaseButton>
       </div>
     </div>
