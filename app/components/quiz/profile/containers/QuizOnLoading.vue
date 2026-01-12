@@ -25,7 +25,7 @@
       </div>
 
       <div class="flex items-center gap-2 mt-6">
-        <span class="block font-bold">Cargando </span> 
+        <span class="block font-bold">{{ $t("general.loading") }} </span> 
         <div class="loading-dots">
           <div class="loading-dot-1"></div>
           <div class="loading-dot-2"></div>

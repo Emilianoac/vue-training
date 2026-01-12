@@ -35,7 +35,10 @@
     "category": "Categoría",
     "all": "Todas",
     "difficulty": "Dificultad",
-    "noResults": "No se encontraron resultados"
+    "noResults": "No se encontraron resultados",
+    "loading": "Cargando",
+    "show": "Mostrar",
+    "seconds": "Segundos"
   },
 
   "home": {
@@ -69,7 +72,7 @@
     "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
 
     "results": {
-      "quiz_completed": "¡Cuestionario completo exitosamente!",
+      "quiz_completed": "¡Cuestionario completado exitosamente!",
       "your_score": "Tu puntuación",
       "success_rate": "Tasa de éxito",
       "correct": "Correctas",

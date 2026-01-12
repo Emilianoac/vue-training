@@ -122,7 +122,7 @@ function getStars(p: number ) {
             <p class=" text-slate-500 text-sm">{{ $t("quiz.results.time_taken") }}</p>
             <p class="font-semibold">
               {{ Math.floor(elapsedTime / 60) ? Math.floor(elapsedTime / 60) + ' min' : '' }} 
-              {{ elapsedTime % 60 }} seconds
+              {{ elapsedTime % 60 }} {{ $t("general.seconds") }}
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ function getStars(p: number ) {
           <!-- Explanation -->
           <details class="mt-4">
             <summary class="cursor-pointer font-semibold">
-              Show {{ $t('quiz.explanation') }}
+              {{ $t('general.show') }} {{ $t('quiz.explanation') }}
             </summary>
             <div 
               class="bg-slate-200 dark:bg-slate-800 rounded-md mt-2 p-3" 
