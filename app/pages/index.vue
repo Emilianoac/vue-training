@@ -34,7 +34,7 @@ watch(() => locale.value, async() => {
     <!-- Hero Section -->
     <section class="block lg:grid grid-cols-[1fr_0.8fr] items-center justify-between my-14 gap-8">
       <div class="mb-10 md:mb-0">
-        <h1 class="text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl !leading-tight font-bold mx-auto lg:mx-0">
           {{ $t("home.welcome-one") }} 
           {{ $t("home.welcome-two") }}
           {{ $t("home.welcome-three") }} 
@@ -42,7 +42,7 @@ watch(() => locale.value, async() => {
           {{ $t("home.welcome-five") }} 
           <span class="text-brand-main-600">Vue.js</span>
         </h1>
-        <p class="text-2xl my-10  max-w-[500px]">
+        <p class="text-xl sm:text-2xl my-5 sm:my-10 max-w-[500px]">
           {{ $t("home.description") }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:w-max gap-4 justify-center lg:justify-start">
