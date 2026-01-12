@@ -172,18 +172,18 @@ function getStars(p: number ) {
               :key="answer.id"
               class="block md:flex justify-between items-center mb-2 border border-slate-200 dark:border-slate-800 p-3 rounded-md" 
               :class="{
-                '!border-green-500': answer.isCorrect, 
-                '!border-red-500': !answer.isCorrect && answer.isSelected
+                '!border-green-500 bg-green-800/10': answer.isCorrect, 
+                '!border-red-500 bg-red-800/10': !answer.isCorrect && answer.isSelected
               }">
               <div class="block" v-html="marked(answer.answerText)"></div>
               <span 
                 v-if="answer.isCorrect" 
-                class="block text-end text-xs font-semibold text-green-500 mt-3 md:mt-0">
+                class="block text-end text-xs font-semibold text-green-800 dark:text-green-500 mt-3 md:mt-0">
                 {{ answer.isSelected ? $t('quiz.your_answer')  : $t('quiz.correct_answer')  }}
               </span>
               <span 
                 v-if="!answer.isCorrect && answer.isSelected"
-                class="block text-end text-xs font-semibold text-red-500 mt-3 md:mt-0">
+                class="block text-end text-xs font-semibold text-red-500 dark:text-red-300 mt-3 md:mt-0">
                   {{ $t('quiz.your_answer') }}
               </span>
             </li>

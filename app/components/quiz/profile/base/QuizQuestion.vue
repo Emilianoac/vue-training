@@ -42,19 +42,19 @@ const emit = defineEmits<{
         :for="`answer-${answer.id}`"
         class="grid grid-cols-1 md:grid-cols-[1fr,max-content] items-center w-full h-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500"
         :class="{ 
-          '!border-green-500': checkAnswer && answer.isCorrect,
-          '!border-red-500': checkAnswer && !answer.isCorrect,
+          '!border-green-500 bg-green-800/10': checkAnswer && answer.isCorrect,
+          '!border-red-500 bg-red-800/10': checkAnswer && !answer.isCorrect,
           'hover:bg-gray-100 dark:hover:bg-slate-800' : !checkAnswer,
           'cursor-not-allowed opacity-85': checkAnswer
         }"
       >
         <span class="block w-full text-start pl-3" v-html="marked(answer.answerText)"></span>
-        <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-500">
+        <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-800 dark:text-green-500">
           {{ selectedOption === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
         </span>
         <span
           v-if="checkAnswer && !answer.isCorrect && selectedOption === answer.id"
-          class="text-xs font-bold inline-block text-end text-red-500"
+          class="text-xs font-bold inline-block text-end text-red-500 dark:text-red-300"
         >
           {{ $t('quiz.your_answer') }}
         </span>
