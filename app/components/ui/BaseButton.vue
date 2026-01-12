@@ -63,7 +63,7 @@ const componentType = computed(() => {
     }
 
     &.secondary {
-      @apply text-blue-900 bg-blue-50 border-slate-500;
+      @apply text-blue-900 bg-blue-100 dark:bg-blue-200 dark:text-blue-950 border-slate-500;
 
       &:not(:disabled):hover {
         @apply bg-blue-100;
