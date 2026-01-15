@@ -5,6 +5,11 @@ module.exports = {
     "./app/**/*.{js,ts,vue}",
   ],
   theme: {
+    container: {
+      screens: {
+        xl: "1280px"
+      }
+    },
     extend: {
       colors: {
         "brand-main": {

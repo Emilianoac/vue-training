@@ -17,7 +17,36 @@ defineProps<{
 </script>
 
 <template>
-  <div class="max-w-[500px] mx-auto bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 rounded-md p-8">
+  <div class="grid grid-cols-[1fr_0.8fr] gap-12">
+    <div>
+      <NuxtLink to="/quizzes" class="mb-8 inline-flex items-center hover:opacity-50">
+        <Icon class="me-1" name="mdi:arrow-left" size="24"/>
+        Return to quizzes
+      </NuxtLink>
+
+      <!-- Quiz Level Badge -->
+      <BadgeComponent :type="level" :text="$t(`general.levels.${level}`)" class="mb-3"/>
+
+      <!-- Quiz Title -->
+      <h1 class="font-bold text-5xl mb-3">{{ title }}</h1>
+      <!-- Quiz Description -->
+      <p class="opacity-85">{{ description }}</p>
+
+      <BaseButton
+        class="font-semibold my-8"
+        type="button"
+        @click="$emit('startQuiz')">
+          {{ $t("quiz.start_quiz") }}
+          <Icon class="ms-1" name="mdi:arrow-right" size="24"/>
+      </BaseButton>
+    </div>
+    <div>
+      <div class="bg-slate-200 dark:bg-slate-800/50 flex justify-center items-center h-svh w-full rounded-md">
+        <img class="max-w-[200px]" :src="image" alt="Quiz Image" />
+      </div>
+    </div>
+  </div>
+  <div class="hidden max-w-[500px] mx-auto bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 rounded-md p-8">
     <div>
       <div class="flex items-start justify-between mb-5">
         <!-- Quiz category icon -->

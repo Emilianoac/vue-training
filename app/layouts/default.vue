@@ -6,7 +6,7 @@ import FooterComponent from "~/components/layout/FooterComponent.vue";
 
 <template>
   <HeaderComponent/>
-  <div class="container max-w-[1280px] mx-auto px-4 md:px-10 mb-20 min-h-[80vh]">
+  <div class="container mx-auto px-4 mb-20 min-h-[80vh]">
     <slot />
   </div>
   <FooterComponent/>

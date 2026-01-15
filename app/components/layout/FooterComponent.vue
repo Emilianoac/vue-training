@@ -4,7 +4,7 @@
 
 <template>
   <footer class="w-full bg-gray-50 dark:bg-gray-950/35 b">
-    <div class="container max-w-[1280px] mx-auto py-3 md:px-10">
+    <div class="container mx-auto py-3 md:px-10">
       <div class="flex-col justify-center flex items-center">
         <div class="flex items-center gap-3">
           <span class="text-sm">© 2025</span>

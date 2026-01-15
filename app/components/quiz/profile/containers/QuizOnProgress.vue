@@ -66,7 +66,7 @@
 
   <!-- Controls -->
   <div class="fixed lg:relative bottom-0 w-full left-0 bg-slate-100 dark:bg-slate-800 dark:lg:bg-transparent lg:bg-transparent rounded-md mt-4 z-[999]">
-    <div class="container max-w-[1280px] mx-auto flex justify-end items-center gap-3 lg:p-0 p-4">
+    <div class="container mx-auto flex justify-end items-center gap-3 lg:p-0 p-4">
       <!-- View Details button -->
       <BaseButton 
         v-if="hasCheckedAnswer && currentQuestion" 
