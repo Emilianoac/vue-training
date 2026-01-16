@@ -12,14 +12,14 @@
 </script>
 
 <template>
-  <header class=" bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800  sticky top-0 z-50">
+  <header class=" bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/">
         <SiteBrandComponent class="max-w-[160px]" />
       </NuxtLink>
       <div class="flex items-center gap-5">
         <nav>
-          <ul class="hidden sm:flex space-x-6">
+          <ul class="hidden md:flex space-x-6">
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <NuxtLink
                 :to="menuItem.path" 
