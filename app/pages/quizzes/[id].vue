@@ -68,6 +68,7 @@ watch(() => locale.value, async () => {
         :image="quiz.category.image.url"
         :category="quiz.category.name"
         :level="quiz.level"
+        :number-of-questions="quiz.questions.length"
         @startQuiz="startQuiz()"
       />
 

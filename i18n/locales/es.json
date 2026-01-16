@@ -38,7 +38,9 @@
     "noResults": "No se encontraron resultados",
     "loading": "Cargando",
     "show": "Mostrar",
-    "seconds": "Segundos"
+    "seconds": "Segundos",
+    "duration": "Duración",
+    "questions": "Preguntas"
   },
 
   "home": {
@@ -70,6 +72,8 @@
     "success_percentage": "Porcentaje de éxito",
     "leave_quiz": "Abandonar Quiz",
     "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
+    "return_to_quizzes": "Volver a cuestionarios",
+    "quiz_duration": "Unlimited",
     
     "results": {
       "quiz_completed": "¡Cuestionario completado exitosamente!",

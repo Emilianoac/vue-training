@@ -38,7 +38,9 @@
     "noResults": "No results found",
     "loading": "Loading",
     "show": "Show",
-    "seconds": "Seconds"
+    "seconds": "Seconds",
+    "duration": "Duration",
+    "questions": "Questions"
   },
 
   "home": {
@@ -52,7 +54,7 @@
   },
 
   "quiz": {
-    "start_quiz": "Start quiz",
+    "start_quiz": "Start with the quiz",
     "question": "Question",
     "verify_answer": "Verify answer",
     "next_question": "Next question",
@@ -70,6 +72,9 @@
     "success_percentage": "Success percentage",
     "leave_quiz": "Leave Quiz",
     "leave_quiz_confirm": "Are you sure you want to leave the quiz?",
+    "return_to_quizzes": "Return to quizzes",
+    "quiz_duration": "Unlimited",
+
     
     "results": {
       "quiz_completed": "Quiz completed successfully!",
