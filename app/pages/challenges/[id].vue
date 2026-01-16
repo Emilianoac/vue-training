@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, watch} from "vue";
 import { useRoute, useRouter } from "vue-router";
-import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+import ChipComponent from "@/components/ui/ChipComponent.vue";
 import TabComponent from "@/components/ui/TabComponent.vue";
 import ChallengeCodeEditorLayout from "@/components/challenge/ChallengeCodeEditorLayout.vue";
 import useChallengeData from "@/composables/challenge/useChallengeData";
@@ -31,7 +31,7 @@ watch(() => locale.value, async () => {
 <template>
   <template v-if="challenge">
     <div class="mt-10">
-      <BadgeComponent class="mb-3" :type="challenge.level" :text="$t(`general.levels.${challenge.level}`)" />
+      <ChipComponent class="mb-3" :type="challenge.level" :text="$t(`general.levels.${challenge.level}`)" />
       <h1 class="text-2xl font-bold mb-2">{{ challenge.title}}</h1>
     </div>
   

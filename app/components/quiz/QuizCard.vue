@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+import ChipComponent from "@/components/ui/ChipComponent.vue";
 import CardComponent from"@/components/ui/CardComponent.vue";
 
 import type { Quiz } from "@/types/quiz";
@@ -17,8 +17,8 @@ defineProps<{
         <div class="w-[50px] h-[50px] bg-slate-200 dark:bg-slate-800 p-1 rounded-full flex justify-center items-center">
           <img :src="quiz.category.image.url" alt="Quiz Image" class="w-[30px]">
         </div>
-        <!-- Level Badge -->
-        <BadgeComponent :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level"/>
+        <!-- Level Chip -->
+        <ChipComponent :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level"/>
       </div>
       <div class="p-4">
         <!-- Category -->

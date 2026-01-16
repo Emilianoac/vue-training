@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+import ChipComponent from "@/components/ui/ChipComponent.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 
 defineEmits<{
@@ -25,8 +25,8 @@ defineProps<{
   
     <div class="flex flex-col-reverse md:grid grid-cols-[1fr_0.6fr] bg-slate-100 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 rounded-lg overflow-hidden">
       <div class="p-4 md:p-10">
-        <!-- Quiz Level Badge -->
-        <BadgeComponent :type="level" :text="$t(`general.levels.${level}`)" class="mb-3"/>
+        <!-- Quiz Level Chip -->
+        <ChipComponent :type="level" :text="$t(`general.levels.${level}`)" class="mb-3"/>
         <span class="inline-block opacity-75 text-sm">{{ category }}</span>
         <!-- Quiz Title -->
         <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">{{ title }}</h1>

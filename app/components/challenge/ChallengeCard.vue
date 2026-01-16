@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import type { Challenge } from "@/types/challenge";
 
-  import BadgeComponent from "@/components/ui/BadgeComponent.vue";
+  import ChipComponent from "@/components/ui/ChipComponent.vue";
   import CardComponent from"@/components/ui/CardComponent.vue";
 
   defineProps<{
@@ -15,8 +15,8 @@
       <div class="relative">
         <!-- Image -->
         <img :src="challenge.cover.url" alt="Challenge Image" class="w-full h-48 object-cover object-center">
-        <!-- Level Badge -->
-        <BadgeComponent :text="$t(`general.levels.${challenge.level}`)" :type="challenge.level" class="absolute top-3 right-3"/>
+        <!-- Level Chip -->
+        <ChipComponent :text="$t(`general.levels.${challenge.level}`)" :type="challenge.level" class="absolute top-3 right-3"/>
       </div>
       <div class="p-4">
         <!-- Title -->
