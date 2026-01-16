@@ -32,9 +32,9 @@ watch(() => locale.value, async() => {
 </script>
 
 <template>
-  <div class="mt-7">
+  <div class="mt-5 md:mt-10">
     <div class="block md:flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-bold text-center mb-4 md:mb-0">{{ $t("general.challenge.many") }}</h1>
+      <h1 class="text-2xl font-bold mb-6 md:mb-0">{{ $t("general.challenge.many") }}</h1>
       <div class="block md:flex items-center gap-5">
         <SelectComponent
           :items="difficulties"

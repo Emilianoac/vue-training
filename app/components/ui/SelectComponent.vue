@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="block md:flex items-center gap-2 mb-4 md:mb-0 last:mb-0">
+  <div class="block md:flex items-center gap-2">
     <label for="category" class="text-sm mb-2 md:mb-0 text-gray-700 dark:text-gray-300 font-semibold flex items-center">
       <span>{{ label }}</span> <span class="hidden md:inline">:</span>
     </label>
