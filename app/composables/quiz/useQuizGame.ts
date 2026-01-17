@@ -12,7 +12,7 @@ export default function useQuiz() {
   const isQuizLoading = ref(false);
   const quizProgress = ref(0);
   const currentQuestionIndex = ref(0);
-  const selectedOptionId = ref<number | null>(null);
+  const selectedOptionId = ref<string | null>(null);
   const hasCheckedAnswer = ref(false);
   const isFinished = ref(false);
   const startTime = ref<number | null>(null);

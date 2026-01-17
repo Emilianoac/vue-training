@@ -92,7 +92,7 @@ watch(() => locale.value, async () => {
         @update:showDetails="(value: boolean) => showDetails = value"
         @answerCurrentQuestion="answerCurrentQuestion()"
         @goToNextQuestion="goToNextQuestion()"
-        @update:selectedOptionId="(value: number | null) => selectedOptionId = value"
+        @update:selectedOptionId="(value: string | null) => selectedOptionId = value"
       />
   
       <!-- Quiz Results -->

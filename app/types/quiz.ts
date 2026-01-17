@@ -29,7 +29,7 @@ export interface CodeExample {
 }
 
 export interface Answer {
-  id: number;
+  id: string;
   answerText: string
   isCorrect: boolean;
 }

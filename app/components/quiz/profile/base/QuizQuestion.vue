@@ -5,14 +5,14 @@ import { marked } from "marked";
 const selectedOption = defineModel();
 
 const props = defineProps<{
-  modelValue: number | null;
+  modelValue: string | null;
   question: Question;
   checkAnswer: boolean;
   questionIndex: number;
 }>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: number | null): void;
+  (e: 'update:modelValue', value: string | null): void;
 }>();
 
 </script>

@@ -14,18 +14,18 @@
     currentQuestion: Question | null;
     quiz: Quiz;
     hasCheckedAnswer: boolean;
-    selectedOptionId: number | null;
+    selectedOptionId: string | null;
     isLastQuestion: boolean;
     leaveQuiz: (message: string) => void;
   }>();
 
-  const selectedOptionId = defineModel<number | null>('selectedOptionId');
+  const selectedOptionId = defineModel<string | null>("selectedOptionId");
 
   const emits = defineEmits<{
     (e: "update:showDetails", value: boolean): void;
     (e: "answerCurrentQuestion"): void;
     (e: "goToNextQuestion"): void;
-    (e: "update:selectedOptionId", value: number | null): void; // 👈 para reemitir
+    (e: "update:selectedOptionId", value: string | null): void;
   }>();
 
 </script>
