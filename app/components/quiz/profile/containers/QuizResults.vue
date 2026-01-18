@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import type { Quiz, AnswerRecord } from "@/types/quiz";
+import type { AnswerRecord } from "@/types/quiz";
 import { marked } from "marked";
 import BaseButton from "@/components/ui/BaseButton.vue";
 
-defineEmits<{
-  resetQuiz: []
+const emit = defineEmits<{
+  (e: "resetQuiz"): void
+  (e: "leaveQuiz", message: string): void 
 }>();
 
 const props = defineProps<{
+  title: string,
   userHistory: AnswerRecord[];
   userStats: {
     total: number;
@@ -16,8 +18,6 @@ const props = defineProps<{
     percentage: number;
   };
   elapsedTime: number;
-  quiz: Quiz;
-  leaveQuiz: (message:string) => void;
 }>();
 
 const starsArray = getStars(props.userStats.percentage);
@@ -49,11 +49,11 @@ function getStars(p: number ) {
 <template>
   <div>
     <div class="flex flex-col md:flex-row justify-between items-center">
-      <h1 class="text-2xl md:text-4xl font-bold order-2 md:order-1 self-start">{{ quiz.title}}</h1>
+      <h1 class="text-2xl md:text-4xl font-bold order-2 md:order-1 self-start">{{ title}}</h1>
       <button 
         class="hover:opacity-30 order-1 md:order-2 self-end"
         :title="$t('quiz.leave_quiz')"
-        @click="leaveQuiz($t('quiz.leave_quiz_confirm'))">
+        @click="emit('leaveQuiz',$t('quiz.leave_quiz_confirm'))">
           <Icon name="mdi:close" size="20" />
       </button>
     </div>
@@ -140,7 +140,11 @@ function getStars(p: number ) {
         </div>
   
         <!-- Retake Quiz Button -->
-         <BaseButton type="button" variant="primary" @click="$emit('resetQuiz')" class="w-full mt-6">
+         <BaseButton 
+          type="button" 
+          variant="primary" 
+          @click="emit('resetQuiz')" 
+          class="w-full mt-6">
           {{ $t("quiz.results.retake_quiz") }}
           <Icon name="mdi:rotate-left" class="ms-2 text-xl"/>
         </BaseButton>

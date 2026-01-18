@@ -1,6 +1,7 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useRoute } from "vue-router";
 import useQuizGame from "~/composables/quiz/useQuizGame";
+
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
@@ -8,133 +9,107 @@ import QuizOnLoading from "@/components/quiz/profile/containers/QuizOnLoading.vu
 import QuizQuestionDetailsModal from "@/components/quiz/profile/base/QuizQuestionDetailsModal.vue";
 
 definePageMeta({
-  layout: false 
-})
+  layout: false,
+});
 
-const { locale } = useI18n();
 const route = useRoute();
+const { locale } = useI18n();
 
-const  { 
+const showQuestionDetails = ref(false);
+
+const {
   quiz,
-  showDetails,
-  isQuizInitialized,
-  isQuizLoading,
-  hasCheckedAnswer,
-  selectedOptionId,
-  quizProgress, 
-  currentQuestionIndex, 
-  currentQuestion, 
-  isFinished,
+
+  state,
+  
+  totalQuestions,
+  displayQuestionIndex,
+  currentQuestion,
   isLastQuestion,
-  userHistory, 
-  userStats,
   elapsedTime,
 
-  startQuiz,
-  leaveQuiz,
-  resetQuizState,
-  goToNextQuestion,
-  loadQuiz,
-  answerCurrentQuestion
+  actions
 } = useQuizGame();
 
-await loadQuiz(route.params.id as string );
+
+await actions.loadQuiz(route.params.id as string);
 
 useSeoMeta({
-  title: computed(() => quiz.value?.title)
-})
+  title: computed(() => quiz.value?.title),
+});
 
 const currentLayout = computed(() => {
-  if (isQuizInitialized.value || isFinished.value) {
+  if (state.quizState.isInitialized || state.quizState.isFinished) {
     return "blank";
   }
   return "default";
-})
+});
 
-watch(() => locale.value, async () => {
-  await loadQuiz(route.params.id as string);
-})
-
+watch(() => locale.value,
+  async () => {
+    await actions.loadQuiz(route.params.id as string);
+  }
+);
 </script>
 
 <template>
   <NuxtLayout :name="currentLayout">
     <div class="mt-10" v-if="quiz">
-      <!-- Quiz Welcome -->
-      <QuizWelcome 
-        v-if="!isQuizInitialized && quiz"
+      <!-- Welcome -->
+      <QuizWelcome
+        v-if="!state.quizState.isInitialized"
         :title="quiz.title"
         :description="quiz.description"
         :image="quiz.category.image.url"
         :category="quiz.category.name"
         :level="quiz.level"
-        :number-of-questions="quiz.questions.length"
-        @startQuiz="startQuiz()"
+        :number-of-questions="totalQuestions"
+        @startQuiz="actions.startQuiz()"
       />
 
-      <!-- Quiz Loading -->
-      <QuizOnLoading v-else-if="isQuizInitialized && isQuizLoading"/>
-      
-      <!-- Quiz on Progress -->
-      <QuizOnProgress 
-        v-else-if="!isFinished && isQuizInitialized"
-        :isFinished="isFinished"
-        :isQuizInitialized="isQuizInitialized"
+      <!-- Loading -->
+      <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading"/>
+
+      <!-- On progress -->
+      <QuizOnProgress
+        v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
         :title="quiz.title"
-        :quizProgress="quizProgress"
-        :currentQuestionIndex="currentQuestionIndex"  
+        :total-questions="totalQuestions"
         :currentQuestion="currentQuestion"
-        :quiz="quiz"
-        :selectedOptionId="selectedOptionId"
-        :hasCheckedAnswer="hasCheckedAnswer"
+        :quizProgress="state.progress.percentage"
+        :currentQuestionIndex="displayQuestionIndex"
+        :selectedOptionId="state.answer.selectedOptionId"
+        :hasCheckedAnswer="state.answer.hasCheckedAnswer"
         :isLastQuestion="isLastQuestion"
-        :leave-quiz="leaveQuiz"
-        @update:showDetails="(value: boolean) => showDetails = value"
-        @answerCurrentQuestion="answerCurrentQuestion()"
-        @goToNextQuestion="goToNextQuestion()"
-        @update:selectedOptionId="(value: string | null) => selectedOptionId = value"
+        :is-finished="state.quizState.isFinished"
+        :is-quiz-initialized="state.quizState.isInitialized"
+        @update:showDetails="showQuestionDetails = $event"
+        @update:selectedOptionId="state.answer.selectedOptionId = $event"
+        @answerCurrentQuestion="actions.answerCurrentQuestion()"
+        @goToNextQuestion="actions.goToNextQuestion()"
+        @leave-quiz="(message) => actions.leaveQuiz(message)"
       />
-  
-      <!-- Quiz Results -->
+
+      <!-- Results -->
       <QuizResults
         v-else
+        :title="quiz.title"
         :elapsed-time="elapsedTime"
-        :userHistory="userHistory"
-        :userStats="userStats"
-        :quiz="quiz"
-        @resetQuiz="resetQuizState()"
-        :leave-quiz="leaveQuiz"
+        :userHistory="state.result.history"
+        :userStats="state.result.stats"
+        @leave-quiz="(message) => actions.leaveQuiz(message)"
+        @resetQuiz="actions.resetQuizState()"
       />
     </div>
-  
+
     <Teleport to="body">
-      <QuizQuestionDetailsModal 
-        v-if="showDetails && currentQuestion"
+      <QuizQuestionDetailsModal
+        v-if="showQuestionDetails && currentQuestion"
         :question="currentQuestion"
-        @close-modal="showDetails = false"
+        @close-modal="showQuestionDetails = false"
       />
     </Teleport>
   </NuxtLayout>
 </template>
 
-<style scoped>
-/* Duración y curva de la animación */
-.loading-fade-enter-active,
-.loading-fade-leave-active {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Estado invisible (al empezar a entrar y al terminar de salir) */
-.loading-fade-enter-from,
-.loading-fade-leave-to {
-  opacity: 0;
-  transform: scale(0.95); /* Un pequeño zoom out */
-}
-
-/* Estado visible (opcional, por defecto es 1) */
-.loading-fade-enter-to,
-.loading-fade-leave-from {
-  opacity: 1;
-  transform: scale(1);
-}
-</style>
+<style lang="postcss" scoped></style>
