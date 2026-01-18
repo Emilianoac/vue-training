@@ -2,8 +2,6 @@
 import type { Question } from "@/types/quiz";
 import { marked } from "marked";
 
-const selectedOption = defineModel();
-
 const props = defineProps<{
   modelValue: string | null;
   question: Question;
@@ -18,20 +16,22 @@ const emit = defineEmits<{
 </script>
 
 <template>
+
   <div class="block md:flex items-center text-xl font-bold mb-4">
-    <span class="block me-1">{{ questionIndex + 1}}.</span>
+    <span class="block me-1">{{ questionIndex }}.</span>
     <div class="question-text" v-html="marked(question.questionText)"></div>
   </div>
+
   <ul>
     <li
       v-for="answer in question.answers"
       :key="answer.id"
       class="flex items-center rounded-md gap-2 cursor-pointer relative mb-2"
     >
-      <input
+<input
         class="curson-pointer ms-2 peer absolute z-10 accent-blue-500 checked:accent-indigo-600"
         :value="answer.id"
-        :checked="selectedOption === answer.id"
+        :checked="modelValue === answer.id"
         :disabled="checkAnswer"
         @change="emit('update:modelValue', answer.id)"
         type="radio"
@@ -49,16 +49,18 @@ const emit = defineEmits<{
         }"
       >
         <span class="block w-full text-start pl-3" v-html="marked(answer.answerText)"></span>
+        
         <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-800 dark:text-green-500">
-          {{ selectedOption === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
+          {{ modelValue === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
         </span>
+        
         <span
-          v-if="checkAnswer && !answer.isCorrect && selectedOption === answer.id"
+          v-if="checkAnswer && !answer.isCorrect && modelValue === answer.id"
           class="text-xs font-bold inline-block text-end text-red-500 dark:text-red-300"
         >
           {{ $t('quiz.your_answer') }}
         </span>
-      </label>
+      </label> 
     </li>
   </ul>
 </template>

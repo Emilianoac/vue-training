@@ -18,7 +18,6 @@
     isLastQuestion: boolean;
   }>();
 
-  const selectedOptionId = defineModel<string | null>("selectedOptionId");
 
   const emits = defineEmits<{
     (e: "update:showDetails", value: boolean): void;
