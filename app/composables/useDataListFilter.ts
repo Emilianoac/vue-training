@@ -26,7 +26,7 @@ export default function useDataListFilter<
       { id: ALL, label: t("general.all") },
       ...Array.from(new Set(data.value.map(i => i.level))).map(name => ({
         id: name,
-        label: name
+        label: t(`general.levels.${name}`)
       }))
     ];
   });
