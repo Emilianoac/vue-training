@@ -2,15 +2,17 @@
 import type { Question } from "@/types/quiz";
 import { marked } from "marked";
 
+import QuizAnswerOption from "./QuizAnswerOption.vue";
+
 const props = defineProps<{
-  modelValue: string | null;
+  selectedOption: string | null;
   question: Question;
   checkAnswer: boolean;
   questionIndex: number;
 }>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | null): void;
+  (e: 'update:selectedOption', value: string | null): void;
 }>();
 
 </script>
@@ -28,39 +30,16 @@ const emit = defineEmits<{
       :key="answer.id"
       class="flex items-center rounded-md gap-2 cursor-pointer relative mb-2"
     >
-<input
-        class="curson-pointer ms-2 peer absolute z-10 accent-blue-500 checked:accent-indigo-600"
-        :value="answer.id"
-        :checked="modelValue === answer.id"
-        :disabled="checkAnswer"
-        @change="emit('update:modelValue', answer.id)"
-        type="radio"
-        name="answer"
-        :id="`answer-${answer.id}`"
-      />
-      <label
-        :for="`answer-${answer.id}`"
-        class=" grid grid-cols-1 md:grid-cols-[1fr,max-content] items-center w-full h-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500"
-        :class="{ 
-          '!border-green-500 bg-green-800/10': checkAnswer && answer.isCorrect,
-          '!border-red-500 bg-red-800/10': checkAnswer && !answer.isCorrect,
-          'hover:bg-gray-100 dark:hover:bg-slate-800' : !checkAnswer,
-          'cursor-not-allowed opacity-85': checkAnswer
-        }"
-      >
-        <span class="block w-full text-start pl-3" v-html="marked(answer.answerText)"></span>
-        
-        <span v-if="checkAnswer && answer.isCorrect" class="text-xs font-bold inline-block text-end text-green-800 dark:text-green-500">
-          {{ modelValue === answer.id ? $t('quiz.your_answer') : $t('quiz.correct_answer') }}
-        </span>
-        
-        <span
-          v-if="checkAnswer && !answer.isCorrect && modelValue === answer.id"
-          class="text-xs font-bold inline-block text-end text-red-500 dark:text-red-300"
-        >
-          {{ $t('quiz.your_answer') }}
-        </span>
-      </label> 
+
+    <QuizAnswerOption
+      :answer-id="answer.id"
+      :answer-text="answer.answerText"
+      :isSelected="selectedOption === answer.id"
+      :isCorrectAnswer="answer.isCorrect"
+      :showAnswerResult="checkAnswer"
+      :isDisabled="checkAnswer"
+      @select="(option) => emit('update:selectedOption', option)"
+    />
     </li>
   </ul>
 </template>
