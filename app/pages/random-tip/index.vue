@@ -1,11 +1,13 @@
 <script lang="ts" setup>
-  import { marked } from "marked";
+  
   import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
   import IconBook from "@/components/assets/icons/IconBook.vue";
-  import useRandomTipData from "@/composables/random-tip/useRandomTipData";
-  import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
   import BaseButton from "@/components/ui/BaseButton.vue";
   import IconDice from "@/components/assets/icons/IconDice.vue";
+
+  import useRandomTipData from "@/composables/random-tip/useRandomTipData";
+  import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
+  import useMarkdownParser  from "@/composables/useMarkdownParser";
 
   definePageMeta({ 
     menu: true, 
@@ -16,10 +18,16 @@
 
   const { locale } = useI18n();
   const { getRandomTips, randomTips} = useRandomTipData();
+  const { parse } = useMarkdownParser();
 
   await getRandomTips();
 
   const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips);
+
+  const parsedExplanation = computed(() => {
+    if (!currentRandomTip.value) return ""
+    return parse(currentRandomTip.value.content)
+  })
   
   watch(() => locale.value, async () => {
     await getRandomTips();
@@ -55,7 +63,7 @@
             <div class="tip-container" :key="currentRandomTip.documentId" >
               <div class="tip-content">
                 <!-- Tip explanation -->
-                <div v-html="marked(currentRandomTip.content)"></div>
+                <div v-html="parsedExplanation"></div>
                 <!-- Tip code examples -->
                 <ClientOnly>
                   <template v-if="currentRandomTip.code_examples.length">

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { AnswerRecord } from "@/types/quiz";
-import { marked } from "marked";
 import BaseButton from "@/components/ui/BaseButton.vue";
 
 const emit = defineEmits<{
@@ -19,6 +18,20 @@ const props = defineProps<{
   };
   elapsedTime: number;
 }>();
+
+const {parse} = useMarkdownParser();
+
+const parsedHistory = computed(() =>
+  props.userHistory.map(q => ({
+    ...q,
+    parsedQuestion: parse(q.question),
+    parsedAnswers: q.answers.map(a => ({
+      ...a,
+      parsedText: parse(a.answerText)
+    })),
+    parsedExplanation: parse(q.explanation)
+  }))
+);
 
 const starsArray = getStars(props.userStats.percentage);
 
@@ -163,23 +176,23 @@ function getStars(p: number ) {
       </h2>
       <ul>
         <li 
-          v-for="(question, i) in userHistory" 
+          v-for="(question, i) in parsedHistory" 
           :key="i" 
           class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-6 rounded-md mb-6 last:mb-0">
           <div class="flex items-start font-semibold text-[1.1em] mb-4">
             <span class="block me-1">{{ i + 1 }}.</span>
-            <div v-html="marked(question.question)"></div>
+            <div v-html="question.parsedQuestion"></div>
           </div>
           <ul>
             <li 
-              v-for="answer in question.answers" 
+              v-for="answer in question.parsedAnswers" 
               :key="answer.id"
               class="block md:flex justify-between items-center mb-2 border border-slate-200 dark:border-slate-800 p-3 rounded-md" 
               :class="{
                 '!border-green-500 bg-green-800/10': answer.isCorrect, 
                 '!border-red-500 bg-red-800/10': !answer.isCorrect && answer.isSelected
               }">
-              <div class="block" v-html="marked(answer.answerText)"></div>
+              <div class="block" v-html="answer.parsedText"></div>
               <span 
                 v-if="answer.isCorrect" 
                 class="block text-end text-xs font-semibold text-green-800 dark:text-green-500 mt-3 md:mt-0">
@@ -199,7 +212,7 @@ function getStars(p: number ) {
             </summary>
             <div 
               class="bg-slate-200 dark:bg-slate-800 rounded-md mt-2 p-3" 
-              v-html="marked(question.explanation)">
+              v-html="question.parsedExplanation">
             </div>
   
             <highlightjs 

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import type { Question } from "@/types/quiz";
-import { marked } from "marked";
 
-defineEmits<{
+const emit = defineEmits<{
   closeModal: []
 }>();
 
@@ -11,10 +10,11 @@ const props = defineProps<{
   question: Question;
 }>();
 
+const { parse } = useMarkdownParser();
+
 const correctAnswer = computed(() => {
   return props.question.answers.find((answer) => answer.isCorrect);
 });
-
 </script>
 
 <template>
@@ -36,12 +36,12 @@ const correctAnswer = computed(() => {
           
           <dl class="mt-9 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-            <dd class="mt-1 text-sm" v-html="marked(question.questionText)"></dd>
+            <dd class="mt-1 text-sm" v-html="parse(question.questionText)"></dd>
           </dl>
 
           <dl class="mt-4 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.correct_answer") }}</dt>
-            <dd class="mt-1 text-sm" v-html="marked(correctAnswer?.answerText ?? '')"></dd>
+            <dd class="mt-1 text-sm" v-html="parse(correctAnswer?.answerText ?? '')"></dd>
           </dl>
 
           
@@ -50,7 +50,7 @@ const correctAnswer = computed(() => {
           <h3 class="font-bold">{{ $t("quiz.explanation") }}</h3>
   
           <!-- Explanation -->
-          <div class="mt-2 mb-5 text-sm" v-html="marked(question.correctAnswerExplanation)"></div>
+          <div class="mt-2 mb-5 text-sm" v-html="parse(question.correctAnswerExplanation)"></div>
   
           <!-- Code Example --> 
           <template v-for="codeExample in question.correctAnswerCodeExample">

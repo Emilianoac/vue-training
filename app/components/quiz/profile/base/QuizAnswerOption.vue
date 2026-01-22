@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { marked } from "marked";
 
 const props = defineProps<{
   answerId: string;
@@ -22,6 +21,7 @@ const showWrongSelected = computed(() => props.showAnswerResult && !props.isCorr
 </script>
 
 <template>
+  
 
   <input
     type="radio"
@@ -57,7 +57,7 @@ const showWrongSelected = computed(() => props.showAnswerResult && !props.isCorr
       :class="{'!border-indigo-500' : isSelected}">
         <div v-if="isSelected" class="w-[70%] h-[70%] rounded-sm bg-indigo-500"></div>
     </div>
-    <span class="block w-full text-start pl-3" v-html="marked(answerText)"/>
+    <span class="block w-full text-start pl-3" v-html="answerText"/>
   </div>
 
   <span v-if="showCorrect" class="selected-option-message text-green-800 dark:text-green-500">
