@@ -1,11 +1,16 @@
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 export default function useMarkdownParser() {
-  const { $dompurify } = useNuxtApp();
 
   function parse(markdown: string) {
     const html = marked(markdown, {async: false});
-    return $dompurify.sanitize(html);
+
+    if (import.meta.server) {
+      return html;
+    }
+
+    return DOMPurify.sanitize(html);
   }
 
   return { 
