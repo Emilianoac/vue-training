@@ -25,6 +25,7 @@ const {
   totalQuestions,
   displayQuestionIndex,
   currentQuestion,
+  currentCorrectAnswer,
   isLastQuestion,
   elapsedTime,
 
@@ -104,8 +105,11 @@ watch(() => locale.value,
 
     <Teleport to="body">
       <QuizQuestionDetailsModal
-        v-if="showQuestionDetails && currentQuestion"
-        :question="currentQuestion"
+        v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
+        :question-text="currentQuestion.questionText"
+        :code-examples="currentQuestion.correctAnswerCodeExample"
+        :explanation="currentQuestion.correctAnswerExplanation"
+        :correct-answer="currentCorrectAnswer.answerText"
         @close-modal="showQuestionDetails = false"
       />
     </Teleport>

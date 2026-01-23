@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed } from "vue";
 import type { Question } from "@/types/quiz";
 
 const emit = defineEmits<{
@@ -7,14 +6,17 @@ const emit = defineEmits<{
 }>();
 
 const props = defineProps<{
-  question: Question;
+  questionText: string
+  correctAnswer: string
+  explanation: string
+  codeExamples: Question["correctAnswerCodeExample"]
 }>();
 
 const { parse } = useMarkdownParser();
 
-const correctAnswer = computed(() => {
-  return props.question.answers.find((answer) => answer.isCorrect);
-});
+const parsedQuestionText = parse(props.questionText);
+const parsedCorrectAnswer = parse(props.correctAnswer);
+const parsedExplanation = parse(props.explanation);
 </script>
 
 <template>
@@ -36,12 +38,12 @@ const correctAnswer = computed(() => {
           
           <dl class="mt-9 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-            <dd class="mt-1 text-sm" v-html="parse(question.questionText)"></dd>
+            <dd class="mt-1 text-sm" v-html="parsedQuestionText"></dd>
           </dl>
 
           <dl class="mt-4 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
             <dt class="font-bold">{{ $t("quiz.correct_answer") }}</dt>
-            <dd class="mt-1 text-sm" v-html="parse(correctAnswer?.answerText ?? '')"></dd>
+            <dd class="mt-1 text-sm" v-html="parsedCorrectAnswer"></dd>
           </dl>
 
           
@@ -50,10 +52,10 @@ const correctAnswer = computed(() => {
           <h3 class="font-bold">{{ $t("quiz.explanation") }}</h3>
   
           <!-- Explanation -->
-          <div class="mt-2 mb-5 text-sm" v-html="parse(question.correctAnswerExplanation)"></div>
+          <div class="mt-2 mb-5 text-sm" v-html="parsedExplanation"></div>
   
           <!-- Code Example --> 
-          <template v-for="codeExample in question.correctAnswerCodeExample">
+          <template v-for="codeExample in codeExamples">
             <highlightjs 
               class="text-sm rounded-md overflow-hidden mt-4" 
               :language="codeExample.language"
