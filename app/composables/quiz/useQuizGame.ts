@@ -31,13 +31,24 @@ export default function useQuiz() {
 
   // Derived
   const totalQuestions = computed(() => quiz.value?.questions.length ?? 0);
+
   const displayQuestionIndex = computed(() => state.progress.currentQuestionIndex + 1);
+
   const currentQuestion = computed(() =>
     quiz.value?.questions[state.progress.currentQuestionIndex] ?? null
   );
+
+  const currentCorrectAnswer = computed(() => {
+    const q = currentQuestion.value;
+    if (!q) return null;
+
+    return q.answers.find(a => a.isCorrect) ?? null;
+  });
+  
   const isLastQuestion = computed(() =>
     quiz.value ? state.progress.currentQuestionIndex === quiz.value.questions.length - 1 : false
   );
+
   const elapsedTime = computed(() =>
     state.startTime && state.endTime ? Math.floor((state.endTime - state.startTime) / 1000) : 0
   );
@@ -129,6 +140,7 @@ export default function useQuiz() {
     totalQuestions,
     displayQuestionIndex,
     currentQuestion,
+    currentCorrectAnswer,
     isLastQuestion,
     elapsedTime,
     // actions
