@@ -27,7 +27,7 @@ const showWrongSelected = computed(() => props.showAnswerResult && !props.isCorr
     type="radio"
     :id="`answer-${answerId}`"
     name="option"
-    class="sr-only"
+    class="sr-only peer"
     :checked="isSelected"
     :disabled="isDisabled"
     @change="emit('select', answerId)"
