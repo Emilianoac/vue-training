@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type {Level } from "@/schemas/quiz.schema";
 import ChipComponent from "@/components/ui/ChipComponent.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 
@@ -12,7 +13,7 @@ defineProps<{
   image: string;
   category: string;
   numberOfQuestions:  number,
-  level: "basic" | "intermediate" | "advanced";
+  level: Level,
 }>();
 </script>
 

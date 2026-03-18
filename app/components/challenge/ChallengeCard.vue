@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import type { Challenge } from "@/types/challenge";
+  import type { Challenge } from "@/schemas/challenge.schema";
 
   import ChipComponent from "@/components/ui/ChipComponent.vue";
   import CardComponent from"@/components/ui/CardComponent.vue";

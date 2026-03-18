@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import type { Question } from "@/types/quiz";
+  import type { Question } from "@/schemas/quiz.schema";
 
   import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue"
   import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";

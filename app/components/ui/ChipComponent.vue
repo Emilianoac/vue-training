@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+  import type { Level } from "@/schemas/quiz.schema";
   import { levelColors } from "@/utils/levelColors";
 
   defineProps<{
     text: string;
-    type?: "basic" | "intermediate" | "advanced";
+    type?: Level;
+
   }>();
 </script>
 

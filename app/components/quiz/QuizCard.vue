@@ -2,7 +2,7 @@
 import ChipComponent from "@/components/ui/ChipComponent.vue";
 import CardComponent from"@/components/ui/CardComponent.vue";
 
-import type { Quiz } from "@/types/quiz";
+import type { Quiz } from "@/schemas/quiz.schema";
 
 defineProps<{
   quiz: Quiz;

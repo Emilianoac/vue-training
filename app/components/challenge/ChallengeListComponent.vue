@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
-import type { Challenge } from "@/types/challenge";
+import type { Challenge } from "@/schemas/challenge.schema";
 
 defineProps<{
   challenges: Challenge[];

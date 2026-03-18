@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Question } from "@/types/quiz";
+import type { Question } from "@/schemas/quiz.schema";
 import useMarkdownParser from "@/composables/useMarkdownParser"
 import QuizAnswerOption from "./QuizAnswerOption.vue";
 

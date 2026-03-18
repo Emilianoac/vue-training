@@ -1,5 +1,5 @@
 import type { Ref } from "vue";
-import type { RandomTip } from "@/types/random-tip";
+import type { RandomTip } from "@/schemas/randomTip.schema";
 
 export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
 

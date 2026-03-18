@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Question } from "@/types/quiz";
+import type { Question } from "@/schemas/quiz.schema";
 
 const emit = defineEmits<{
   closeModal: []
