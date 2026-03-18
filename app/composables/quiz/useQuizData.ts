@@ -1,5 +1,5 @@
 import { quizService } from "@/services/api/quiz/quizService";
-import type { Quiz } from "@/types/quiz";
+import type { Quiz } from "@/schemas/quiz.schema";
 
 export default function useQuizData() {
   const { locale } = useI18n();
@@ -13,11 +13,11 @@ export default function useQuizData() {
   });
 
   async function getQuiz(slug: string) {
-    await loadAndSet(() => quizService.fetchQuiz(`/api/quiz/${slug}?locale=${locale.value}`), quiz)
+    await loadAndSet(() => quizService.fetchQuiz(slug, locale.value), quiz);
   }
 
   async function getQuizzes() {
-    await loadAndSet(() => quizService.fetchQuizzes(`/api/quiz/all?locale=${locale.value}`), quizzes)
+    await loadAndSet(() => quizService.fetchQuizzes(locale.value), quizzes);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {

@@ -1,6 +1,5 @@
-import type { Quiz} from "@/types/quiz";
-
+import type { Quiz, QuizListItem } from "@/schemas/quiz.schema";
 export interface QuizService {
-  fetchQuiz(url: string): Promise<Quiz>;
-  fetchQuizzes(url: string): Promise<Quiz[]>;
+  fetchQuiz(slug: string, locale: string): Promise<Quiz>;
+  fetchQuizzes(locale: string): Promise<QuizListItem[]>;
 }
