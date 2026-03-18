@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "nuxt-icon", "@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/test-utils/module"],
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "nuxt-icon", "@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/test-utils/module","@nuxt/content"],
   css: ["~/assets/css/main.css"],
   app: {
     head: {
