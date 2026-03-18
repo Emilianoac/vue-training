@@ -1,5 +1,5 @@
 import { randomTipService } from "@/services/api/random-tip/randomTipService";
-import type { RandomTip } from "@/types/random-tip";
+import type { RandomTip } from "@/schemas/randomTip.schema";
 
 export default function useRandomTipData() {
   const { locale } = useI18n();
@@ -12,7 +12,7 @@ export default function useRandomTipData() {
   });
 
   async function getRandomTips() {
-    await loadAndSet(() => randomTipService.fetchRandomTips(`/api/random-tip/all?locale=${locale.value}`), randomTips)
+    await loadAndSet(() => randomTipService.fetchRandomTips(locale.value), randomTips)
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {

@@ -1,5 +1,5 @@
-import type { RandomTip } from "@/types/random-tip";
+import type { RandomTip } from "@/schemas/randomTip.schema";
 
 export interface RandomTipService {
-  fetchRandomTips(url: string): Promise<RandomTip[]>;
+  fetchRandomTips(locale: string): Promise<RandomTip[]>;
 }
