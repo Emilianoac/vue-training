@@ -1,0 +1,340 @@
+{
+  "documentId": "routes-and-navigation-with-vue-router",
+  "title": "Rutas y navegación con Vue Router",
+  "level": "intermediate",
+  "slug": "routes-and-navigation-with-vue-router",
+  "description": "Este cuestionario se centra en la configuración y el uso de Vue Router, incluyendo la definición de rutas, navegación y anidación de rutas en aplicaciones Vue.",
+  "category": {
+    "name": "Vue Router",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "questions": [
+    {
+      "id": "62",
+      "questionText": "¿Cuál de las siguientes opciones permite configurar Vue Router para usar el modo de historial HTML5?",
+      "correctAnswerExplanation": "La función createWebHistory permite configurar Vue Router para utilizar el historial HTML5, lo que elimina el hash # en la URL y permite rutas limpias.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { createRouter, createWebHistory } from \"vue-router\";\n\nimport Home from \"./views/Home.vue\";\nimport About from \"./views/About.vue\";\n\nconst routes = [\n  { path: \"/\", component: Home },\n  { path: \"/about\", component: About }\n];\n\n// Crear el router con historial HTML5\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "245",
+          "isCorrect": false,
+          "answerText": "`createWebHashHistory()`"
+        },
+        {
+          "id": "246",
+          "isCorrect": true,
+          "answerText": "`createWebHistory()`"
+        },
+        {
+          "id": "247",
+          "isCorrect": false,
+          "answerText": "`useHistoryMode()`"
+        },
+        {
+          "id": "248",
+          "isCorrect": false,
+          "answerText": "`historyMode: 'html5'`"
+        }
+      ]
+    },
+    {
+      "id": "63",
+      "questionText": "¿Cómo se navega programáticamente a una ruta en Vue Router?",
+      "correctAnswerExplanation": "Para navegar programáticamente, se utiliza `router.push()`, que permite cambiar la ruta actual a la que se pasa como argumento.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { useRouter } from \"vue-router\";\n\nconst router = useRouter();\n function gotToAbout() {\n router.push(\"/about\");\n}\n</script>\n\n<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <button @click=\"gotToAbout\">Ir a About</button>\n  </div>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "249",
+          "isCorrect": true,
+          "answerText": "Usando `router.push()`."
+        },
+        {
+          "id": "250",
+          "isCorrect": false,
+          "answerText": "Llamando a `navigate()`."
+        },
+        {
+          "id": "251",
+          "isCorrect": false,
+          "answerText": "Usando `this.navigate()`."
+        },
+        {
+          "id": "252",
+          "isCorrect": false,
+          "answerText": "Modificando `window.location`."
+        }
+      ]
+    },
+    {
+      "id": "64",
+      "questionText": "¿Qué opción permite definir rutas anidadas en Vue Router?",
+      "correctAnswerExplanation": "La opción 'children' permite definir rutas anidadas, donde una ruta padre puede tener varias rutas hijas, facilitando la creación de estructuras de navegación complejas.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "const routes = [\n  {\n    path: \"/dashboard\",\n    component: Dashboard,\n    children: [\n      { path: \"profile\" component: UserProfile }\n    ]\n  }\n];",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "253",
+          "isCorrect": true,
+          "answerText": "`children`"
+        },
+        {
+          "id": "254",
+          "isCorrect": false,
+          "answerText": "`nestedRoutes`"
+        },
+        {
+          "id": "255",
+          "isCorrect": false,
+          "answerText": "`subRoutes`"
+        },
+        {
+          "id": "256",
+          "isCorrect": false,
+          "answerText": "`parent`"
+        }
+      ]
+    },
+    {
+      "id": "61",
+      "questionText": "¿Cuál es el propósito principal de Vue Router en una aplicación Vue?",
+      "correctAnswerExplanation": "Vue Router permite gestionar la navegación entre diferentes vistas o componentes en una aplicación Vue, facilitando la creación de aplicaciones de una sola página (SPA).",
+      "correctAnswerCodeExample": [],
+      "answers": [
+        {
+          "id": "241",
+          "isCorrect": false,
+          "answerText": "Manejar el estado global."
+        },
+        {
+          "id": "242",
+          "isCorrect": false,
+          "answerText": "Realizar pruebas unitarias."
+        },
+        {
+          "id": "243",
+          "isCorrect": true,
+          "answerText": "Gestionar la navegación entre diferentes vistas."
+        },
+        {
+          "id": "244",
+          "isCorrect": false,
+          "answerText": "Mejorar el rendimiento de la aplicación."
+        }
+      ]
+    },
+    {
+      "id": "65",
+      "questionText": "¿Cómo se define una ruta en Vue Router?",
+      "correctAnswerExplanation": "Las rutas en Vue Router se definen como objetos dentro de un array, especificando la ruta y el componente que debe renderizarse.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "const routes = [\n  { path: \"/home\", component: Home }\n];",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "257",
+          "isCorrect": false,
+          "answerText": "Usando `defineRoute()`."
+        },
+        {
+          "id": "258",
+          "isCorrect": true,
+          "answerText": "Mediante un objeto en un array de rutas."
+        },
+        {
+          "id": "259",
+          "isCorrect": false,
+          "answerText": "Usando `createRoute()`."
+        },
+        {
+          "id": "260",
+          "isCorrect": false,
+          "answerText": "Usando `addRoute()` en el componente."
+        }
+      ]
+    },
+    {
+      "id": "66",
+      "questionText": "¿Qué función se utiliza para crear una instancia de Vue Router?",
+      "correctAnswerExplanation": "`createRouter()` es la función que se utiliza para crear una nueva instancia de Vue Router, permitiendo definir la configuración y las rutas.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { createRouter, createWebHistory } from \"vue-router\";\n\nconst routes = [\n  { path: \"/\", component: Home },\n  { path: \"/about\", component: About }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "261",
+          "isCorrect": true,
+          "answerText": "`createRouter()`"
+        },
+        {
+          "id": "262",
+          "isCorrect": false,
+          "answerText": "`initRouter()`"
+        },
+        {
+          "id": "263",
+          "isCorrect": false,
+          "answerText": "`new Router()`"
+        },
+        {
+          "id": "264",
+          "isCorrect": false,
+          "answerText": "`setupRouter()`"
+        }
+      ]
+    },
+    {
+      "id": "67",
+      "questionText": "¿Cómo se implementa la navegación con enlaces en Vue Router?",
+      "correctAnswerExplanation": "El componente `<router-link>` se utiliza para crear enlaces de navegación que permiten cambiar de ruta sin recargar la página.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<template>\n  <div>\n    <h1>Bienvenido a la página principal</h1>\n    <router-link to=\"/profile\">Ir a mi perfil</router-link>\n  </div>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "265",
+          "isCorrect": false,
+          "answerText": "Usando `<a href='/ruta'>`."
+        },
+        {
+          "id": "266",
+          "isCorrect": true,
+          "answerText": "Con el componente `<router-link>`."
+        },
+        {
+          "id": "267",
+          "isCorrect": false,
+          "answerText": "Llamando a `router.navigate()`."
+        },
+        {
+          "id": "268",
+          "isCorrect": false,
+          "answerText": "Modificando `window.location`."
+        }
+      ]
+    },
+    {
+      "id": "68",
+      "questionText": "¿Cómo se establece una subruta por defecto en una ruta anidada en Vue Router?",
+      "correctAnswerExplanation": "Para establecer una subruta por defecto en una ruta anidada, se define una subruta con un path vacio `path: ''` dentro de children. Esto hace que cuando el usuario acceda a la ruta padre, Vue Router cargue automáticamente la subruta por defecto sin cambiar la URL.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "const routes = [\n  {\n    path: \"/dashboard\",\n    component: Dashboard,\n    children: [\n      { path: \"\", component: Profile } // Subruta por defecto\n    ]\n  }\n];",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "269",
+          "isCorrect": false,
+          "answerText": "Definiendo una propiedad `default: true`."
+        },
+        {
+          "id": "270",
+          "isCorrect": false,
+          "answerText": "Usando el atributo `default` en `children`."
+        },
+        {
+          "id": "271",
+          "isCorrect": true,
+          "answerText": "Definiendo una subruta con un path vacío `path: ' '`."
+        },
+        {
+          "id": "272",
+          "isCorrect": false,
+          "answerText": "Usando el atributo defaultRoute."
+        }
+      ]
+    },
+    {
+      "id": "69",
+      "questionText": "¿Cómo puedes definir una ruta dinámica en Vue Router?",
+      "correctAnswerExplanation": "En Vue Router, una ruta dinámica se define usando parámetros dinámicos, que se indican con dos puntos `:` seguidos del nombre del parámetro.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { createRouter, createWebHistory } from \"vue-router\";\n\nconst routes = [\n  {\n    path: \"/user/:id\" // Ruta dinámica con parámetro :id\n    name: \"UserProfile\",\n    component: () => import('@/views/UserProfile.vue')\n  },\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n});\n\nexport default router;",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "273",
+          "isCorrect": false,
+          "answerText": "Usando corchetes `[ ]`."
+        },
+        {
+          "id": "274",
+          "isCorrect": false,
+          "answerText": "Con un asterisco `*`."
+        },
+        {
+          "id": "275",
+          "isCorrect": false,
+          "answerText": "Usando paréntesis `( )`."
+        },
+        {
+          "id": "276",
+          "isCorrect": true,
+          "answerText": "Con dos puntos `:` seguidos del nombre del parámetro."
+        }
+      ]
+    },
+    {
+      "id": "70",
+      "questionText": "¿Cómo se puede cargar un componente de forma perezosa (lazy loading) en una ruta de Vue Router?",
+      "correctAnswerExplanation": "Para cargar un componente de forma perezosa en una ruta de Vue Router, se utiliza una función de importación dinámica que devuelve una promesa con el componente.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "const routes = [\n  {\n    path: \"/about\",\n    component: () => import(\"./views/About.vue\") // Carga perezosa\n  }\n];",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "277",
+          "isCorrect": false,
+          "answerText": "Importando el componente con la función `loadComponent()`."
+        },
+        {
+          "id": "278",
+          "isCorrect": false,
+          "answerText": "Importando el componente con la función `dynamicImport()`."
+        },
+        {
+          "id": "279",
+          "isCorrect": false,
+          "answerText": "Importando el componente con la función `import()`."
+        },
+        {
+          "id": "280",
+          "isCorrect": true,
+          "answerText": "Importado el componente con `() => import(...)`."
+        }
+      ]
+    }
+  ]
+}

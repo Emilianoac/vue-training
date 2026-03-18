@@ -1,0 +1,19 @@
+{
+  "documentId": "use-writable-computed-properties",
+  "title": "Usa Propiedades Computadas Editables",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Las propiedades computadas son de solo lectura por defecto, pero puedes hacerlas editables definiendo un getter y un setter.",
+  "content": "## **Usa Propiedades Computadas Editables**\nA veces necesitas una propiedad computada a la que también se le pueda asignar un valor. En lugar de pasar una función a `computed()`, puedes pasar un objeto con los métodos `get` y `set`.\n\nEsto es extremadamente útil cuando quieres vincular un `v-model` a una propiedad que requiere una lógica de transformación o cuando trabajas con estados de Pinia que no quieres mutar directamente.",
+  "code_examples": [
+    {
+      "code": "<script setup>\nimport { ref, computed } from \"vue\";\n\nconst nombre = ref(\"Juan\");\nconst apellido = ref(\"Pérez\");\n\nconst nombreCompleto = computed({\n  // se ejecuta al leer la propiedad\n  get: () => `${nombre.value} ${apellido.value}`,\n  // se ejecuta al asignar un valor (ej. v-model)\n  set: (nuevoValor) => {\n    const nombres = nuevoValor.split(\" \");\n    nombre.value = nombres[0];\n    apellido.value = nombres[nombres.length - 1];\n  }\n});\n</script>\n\n<template>\n  <input v-model=\"nombreCompleto\" />\n  <p>Nombre: {{ nombre }}</p>\n  <p>Apellido: {{ apellido }}</p>\n</template>",
+      "lang": "handlebars"
+    }
+  ],
+  "source_url": "https://vuejs.org/guide/essentials/computed.html#writable-computed"
+}

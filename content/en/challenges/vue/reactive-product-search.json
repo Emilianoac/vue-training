@@ -1,0 +1,43 @@
+{
+  "documentId": "reactive-product-search",
+  "title": "Reactive Product Search",
+  "slug": "reactive-product-search",
+  "level": "intermediate",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Filter a product list in real-time using computed properties.",
+  "description": [
+    "In this challenge, you must implement the search logic for a product list. The user will type in a text field, and the list should automatically update to show only the products that match the name (ignoring case sensitivity).",
+    "If the input field is empty, all products should be displayed. If there are no matches, a message stating that no results were found must be shown."
+  ],
+  "cover": {
+    "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768226560/vue-training/reactive_product_search_cover_dfac0d781f.webp"
+  },
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768226560/vue-training/reactive_product_search_cover_dfac0d781f.webp"
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Bind the search input to the state using v-model."
+    },
+    {
+      "data": "Implement a computed property that filters the product array based on the search term."
+    },
+    {
+      "data": "Ensure the search is case-insensitive."
+    },
+    {
+      "data": "Conditionally display the 'No products found' message when the filtered list is empty."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-reactive-product-search-challenge?embed=1&file=src%2Fcomponents%2FProductSearch.vue",
+    "solution": "https://stackblitz.com/edit/emi-reactive-product-search-solution?embed=1&file=src%2Fcomponents%2FProductSearch.vue"
+  }
+}

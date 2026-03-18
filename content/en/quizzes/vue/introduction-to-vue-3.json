@@ -1,0 +1,339 @@
+{
+  "documentId": "introduction-to-vue-3",
+  "title": "Introduction to Vue 3",
+  "level": "basic",
+  "slug": "introduction-to-vue-3",
+  "description": "Este cuestionario evalúa conocimientos básicos sobre directivas en Vue.js.",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "questions": [
+    {
+      "questionText": "¿Cuál es el propósito de `computed()` en Vue?",
+      "correctAnswerExplanation": "El metodo `computed()` permite definir propiedades que se recalculan cuando sus dependencias cambian, ayudando a optimizar el rendimiento.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { ref, computed } from \"vue\";\n\nconst clickCount = ref(0);\n\nconst clicksMultiplied = computed( () => \"Clics multiplicados por dos: \" + clickCount.value * 2);\n</script>\n\n<template>\n  <button @click=\"clickCount++\">Haz clic</button>\n  <p>Clics: {{ clickCount }}</p>\n  <p>{{ clicksMultiplied }}</p>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "1",
+          "isCorrect": false,
+          "answerText": "Ejecutar una acción al montarse el componente."
+        },
+        {
+          "id": "2",
+          "isCorrect": true,
+          "answerText": "Definir propiedades reactivas que se recalculan automáticamente."
+        },
+        {
+          "id": "3",
+          "isCorrect": false,
+          "answerText": "Actualizar el DOM de forma imperativa."
+        },
+        {
+          "id": "4",
+          "isCorrect": false,
+          "answerText": "Llamar a una API externa."
+        }
+      ]
+    },
+    {
+      "questionText": "Usando la Composition API, ¿cómo defines métodos dentro de `<script setup>` en Vue?",
+      "correctAnswerExplanation": "Los métodos se definen directamente como funciones dentro de `<script setup>`, donde pueden ser llamados o retornados según se necesiten.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup> \nconst sayHello = () => alert(\"¡Hola desde Vue 3!\");\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "9",
+          "isCorrect": false,
+          "answerText": "Usando la opción `methods`"
+        },
+        {
+          "id": "10",
+          "isCorrect": true,
+          "answerText": "Definiéndolos directamente dentro de `<script setup>`."
+        },
+        {
+          "id": "11",
+          "isCorrect": false,
+          "answerText": "Asignando valores directamente en `data`."
+        },
+        {
+          "id": "12",
+          "isCorrect": false,
+          "answerText": "Solo se pueden definir en `watch`."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Cómo funciona el lifecycle hook `onMounted()` en Vue 3?",
+      "correctAnswerExplanation": "`onMounted()` permite ejecutar código cuando el componente se ha añadido al DOM, similar al hook mounted en la Options API.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { onMounted } from \"vue\";\nonMounted(() => { \n  console.log(\"Componente montado\"); \n});\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "17",
+          "isCorrect": false,
+          "answerText": "Llama automáticamente a una API."
+        },
+        {
+          "id": "18",
+          "isCorrect": false,
+          "answerText": "Define estilos para el componente."
+        },
+        {
+          "id": "19",
+          "isCorrect": false,
+          "answerText": "Se ejecuta al inicializar un `ref()`."
+        },
+        {
+          "id": "20",
+          "isCorrect": true,
+          "answerText": "Ejecuta una función cuando el componente se ha montado."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Cuál es la función principal de `reactive()` en Vue?",
+      "correctAnswerExplanation": "`reactive()` convierte un objeto en reactivo, permitiendo que Vue detecte y actualice automáticamente los cambios en sus propiedades.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { reactive } from \"vue\";\n\nconst state = reactive({ count: 0 });\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "25",
+          "isCorrect": false,
+          "answerText": "Ejecutar funciones del ciclo de vida."
+        },
+        {
+          "id": "26",
+          "isCorrect": false,
+          "answerText": "Crear una instancia de Vue."
+        },
+        {
+          "id": "27",
+          "isCorrect": true,
+          "answerText": "Crear un objeto reactivo que detecta cambios en sus propiedades."
+        },
+        {
+          "id": "28",
+          "isCorrect": false,
+          "answerText": "Definir rutas para la aplicación."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Para qué se utiliza `ref()` en Vue?",
+      "correctAnswerExplanation": "`ref()` se usa para crear una referencia reactiva de un valor, como números o strings, permitiendo que Vue reaccione a estos cambios.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { ref } from \"vue\";\n\nconst message = ref(\"Hola, Vue 3!\");\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "29",
+          "isCorrect": true,
+          "answerText": "Para crear una referencia reactiva de un valor primitivo."
+        },
+        {
+          "id": "30",
+          "isCorrect": false,
+          "answerText": "Para manipular el DOM directamente."
+        },
+        {
+          "id": "31",
+          "isCorrect": false,
+          "answerText": "Para ejecutar funciones asíncronas."
+        },
+        {
+          "id": "32",
+          "isCorrect": false,
+          "answerText": "Para renderizar un componente condicionalmente."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Para qué sirve `watch()` en Vue?",
+      "correctAnswerExplanation": "`watch()` permite observar cambios en datos reactivos y ejecutar funciones en respuesta a estos cambios.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { ref, watch } from \"vue\";\n\nconst count = ref(0);\nwatch(count, (newCount) => {\n console.log(\"Nuevo valor:\", newCount);\n});\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "33",
+          "isCorrect": false,
+          "answerText": "Para modificar directamente el DOM."
+        },
+        {
+          "id": "34",
+          "isCorrect": true,
+          "answerText": "Para ejecutar código en respuesta a cambios en valores reactivos."
+        },
+        {
+          "id": "35",
+          "isCorrect": false,
+          "answerText": "Para ejecutar código solo al montar el componente."
+        },
+        {
+          "id": "36",
+          "isCorrect": false,
+          "answerText": "Para definir estilos dinámicos."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Usando la compostion API, cómo declaras un `v-model`?",
+      "correctAnswerExplanation": "v-model` puede enlazarse con una variable reactiva creada con `ref()`, permitiendo la reactividad bidireccional en el template.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { ref } from \"vue\";\n\nconst text = ref(\"\");\n</script>\n\n<template>\n<input v-model=\"text\"/>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "37",
+          "isCorrect": false,
+          "answerText": "Definiendo métodos dentro de setup"
+        },
+        {
+          "id": "38",
+          "isCorrect": true,
+          "answerText": "Declarando una variable con `ref()` y usándola en el template."
+        },
+        {
+          "id": "39",
+          "isCorrect": false,
+          "answerText": "No se puede usar `v-model` con la Composition API."
+        },
+        {
+          "id": "40",
+          "isCorrect": false,
+          "answerText": "Definiendo el estado en data."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Cuál es la diferencia principal entre `ref()` y `reactive()` en Vue 3?",
+      "correctAnswerExplanation": "`ref()` es útil para valores primitivos, mientras que `reactive()` convierte objetos enteros en reactivos. Ambos permiten reactividad, pero `reactive()` es preferido para estructuras de datos complejas.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { ref, reactive } from \"vue\";\n\nconst count = ref(0); // Para valores primitivos\nconst state = reactive({ count: 0, name: \"Vue\"}); // Para objetos\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "41",
+          "isCorrect": false,
+          "answerText": "`ref()` solo funciona con tipos de datos primitivos."
+        },
+        {
+          "id": "42",
+          "isCorrect": false,
+          "answerText": "`reactive()` crea una referencia mutable."
+        },
+        {
+          "id": "43",
+          "isCorrect": true,
+          "answerText": "`ref()` se usa para valores primitivos y `reactive()` para objetos complejos."
+        },
+        {
+          "id": "44",
+          "isCorrect": false,
+          "answerText": "`reactive()` no permite reactividad."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Cómo defines `props` en un componente usando `<script setup>` en Vue?",
+      "correctAnswerExplanation": "Con `<script setup>`, las props se definen usando defineProps, lo cual permite recibir datos desde el componente padre de manera reactiva y fácil.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nconst props = defineProps({\n  title: String,\n  count: Number\n});\n</script>\n\n<template>\n  <h1>{{ title }}</h1>\n  <p>Count: {{ count }}</p>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "45",
+          "isCorrect": false,
+          "answerText": "Creándolas con `ref()`."
+        },
+        {
+          "id": "46",
+          "isCorrect": false,
+          "answerText": "Importando `props` desde vue."
+        },
+        {
+          "id": "47",
+          "isCorrect": true,
+          "answerText": "Utilizando `defineProps()` dentro de `<script setup>`."
+        },
+        {
+          "id": "48",
+          "isCorrect": false,
+          "answerText": "Usando la opción `props` en `export default`."
+        }
+      ]
+    },
+    {
+      "questionText": "¿Para qué sirve `defineEmits()` en Vue?",
+      "correctAnswerExplanation": "`defineEmits()` permite declarar eventos que un componente puede emitir, facilitando la comunicación desde el componente hijo hacia el componente padre.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<!-- src/components/Counter.vue -->\n<script setup>\nconst emit = defineEmits([\"increment\"]);\n\nconst incrementCount = () => {\n  emit(\"increment\");\n};\n</script>\n\n<template>\n  <button @click=\"incrementCount\">Incrementar</button>\n</template>",
+          "language": "handlebars"
+        },
+        {
+          "code": "<!-- src/App.vue -->\n<script setup>\nimport { ref } from \"vue\";\nimport Counter from \"./components/Counter.vue\";\n\nconst count = ref(0);\n\nconst increment = () => {\n  count.value++;\n};\n</script>\n\n<template>\n  <div>\n    <h1>Contador: {{ count }}</h1>\n    <Counter @increment=\"increment\" />\n  </div>\n</template>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "49",
+          "isCorrect": false,
+          "answerText": "Para definir propiedades reactivas."
+        },
+        {
+          "id": "50",
+          "isCorrect": false,
+          "answerText": "Para capturar eventos emitidos por el componente."
+        },
+        {
+          "id": "51",
+          "isCorrect": true,
+          "answerText": "Para emitir eventos desde un componente hijo hacia su componente padre."
+        },
+        {
+          "id": "52",
+          "isCorrect": false,
+          "answerText": "Para importar variables reactivas desde el componente padre."
+        }
+      ]
+    }
+  ]
+}

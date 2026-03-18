@@ -1,0 +1,37 @@
+{
+  "documentId": "conditional-message-display",
+  "title": "Conditional Message Display",
+  "slug": "conditional-message-display",
+  "level": "basic",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Implement the logic to toggle authentication state and display the appropriate message.",
+  "description": [
+    "In this challenge, you'll implement the logic to toggle a user's login status. You will be given a user interface with two messages: one welcoming authenticated users and another inviting users to sign in or register.",
+    "Your task is to ensure that clicking a button dynamically changes the authentication state and only displays the appropriate message based on the current status."
+  ],
+  "cover": {
+    "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1766369824/vue-training/conditional_message_display_cover_b29319234a.webp"
+  },
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1766369824/vue-training/conditional_message_display_cover_b29319234a.webp"
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Display only the message that corresponds to the authentication state."
+    },
+    {
+      "data": "Toggle the authentication state when clicking the button."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-conditional-message-display-challenge?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue",
+    "solution": "https://stackblitz.com/edit/emi-conditional-message-display-solution?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue"
+  }
+}

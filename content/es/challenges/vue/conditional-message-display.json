@@ -1,0 +1,37 @@
+{
+  "documentId": "conditional-message-display",
+  "title": "Visualización condicional de mensajes",
+  "slug": "conditional-message-display",
+  "level": "basic",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Implementa la lógica para alternar el estado de autenticación y mostrar el mensaje correspondiente.",
+  "description": [
+    "En este desafío, implementarás la lógica para alternar el estado de inicio de sesión de un usuario. Se te proporcionará una interfaz con dos mensajes: uno de bienvenida para usuarios autenticados y otro invitando a iniciar sesión o registrarse.",
+    "Tu tarea es hacer que, al hacer clic en un botón, el estado de autenticación cambie dinámicamente y solo se muestre el mensaje correspondiente según el estado actual."
+  ],
+  "cover": {
+    "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1766369824/vue-training/conditional_message_display_cover_b29319234a.webp"
+  },
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1766369824/vue-training/conditional_message_display_cover_b29319234a.webp"
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Mostrar solo el mensaje que corresponde al estado de autenticación."
+    },
+    {
+      "data": "Alternar el estado de autenticación al hacer clic en el botón."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-conditional-message-display-challenge?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue",
+    "solution": "https://stackblitz.com/edit/emi-conditional-message-display-solution?embed=1&file=src%2Fcomponents%2FConditionalMessageDisplay.vue"
+  }
+}

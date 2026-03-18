@@ -1,0 +1,19 @@
+{
+  "documentId": "use-writable-computed-properties",
+  "title": "Use Writable Computed Properties",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Computed properties are read-only by default, but you can create 'writable' ones by providing a getter and a setter.",
+  "content": "## **Use Writable Computed Properties**\nSometimes you need a computed property that you can also assign a value to. Instead of passing a single function to `computed()`, pass an object with `get` and `set` methods.\n\nThis is particularly useful when you want to wrap a prop or a state from a store into a `v-model` inside a child component while maintaining the 'one-way data flow' principle.",
+  "code_examples": [
+    {
+      "code": "\n<script setup>\nimport { ref, computed } from \"vue\";\n\nconst firstName = ref(\"John\");\nconst lastName = ref(\"Doe\");\n\nconst fullName = computed({\n  // executed when reading the property\n  get: () => `${firstName.value} ${lastName.value}`,\n  // executed when assigning a value (e.g. v-model)\n  set: (newValue) => {\n    const names = newValue.split(\" \");\n    firstName.value = names[0];\n    lastName.value = names[names.length - 1];\n  }\n});\n</script>",
+      "lang": "handlebars"
+    }
+  ],
+  "source_url": "https://vuejs.org/guide/essentials/computed.html#writable-computed"
+}

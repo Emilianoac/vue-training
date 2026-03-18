@@ -1,0 +1,43 @@
+{
+  "documentId": "smart-counter-watchers",
+  "title": "Contador inteligente con Watchers",
+  "slug": "smart-counter-watchers",
+  "level": "intermediate",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Implementa un contador con límites de seguridad utilizando watchers para reaccionar a los cambios.",
+  "description": [
+    "En este desafío, construirás un contador que tiene un rango permitido de 0 a 10. Tu tarea es utilizar un 'watcher' para vigilar el valor del contador.",
+    "Si el usuario intenta superar el límite máximo (10) o el mínimo (0), el contador debe bloquearse en ese límite y mostrar un mensaje de advertencia que desaparezca después de 2 segundos."
+  ],
+  "cover": {
+    "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768232417/vue-training/smart_counter_watchers_cover_adaa490d17.webp"
+  },
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768232417/vue-training/smart_counter_watchers_cover_adaa490d17.webp"
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Usar un watcher para monitorear el valor del contador."
+    },
+    {
+      "data": "Impedir que el contador sea menor a 0 o mayor a 10."
+    },
+    {
+      "data": "Mostrar un mensaje de alerta dinámico cuando se alcancen los límites."
+    },
+    {
+      "data": "Utilizar un temporizador (setTimeout) para ocultar el mensaje de alerta automáticamente."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-smart-counter-watchers-challenge?embed=1&file=src%2Fcomponents%2FSmartCounter.vue",
+    "solution": "https://stackblitz.com/edit/emi-smart-counter-watchers-solution?embed=1&file=src%2Fcomponents%2FSmartCounter.vue"
+  }
+}

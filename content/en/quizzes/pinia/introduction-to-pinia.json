@@ -1,0 +1,338 @@
+{
+  "documentId": "introduction-to-pinia",
+  "title": "Introduction to Pinia",
+  "level": "basic",
+  "slug": "introduction-to-pinia",
+  "description": "This quiz covers the basics of Pinia, the state manager for Vue 3.",
+  "category": {
+    "name": "Pinia",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/pinia_6fe4d6accb.png"
+    }
+  },
+  "questions": [
+    {
+      "questionText": "What is the main purpose of Pinia in Vue 3?",
+      "correctAnswerExplanation": "Pinia is a library for state management in Vue, which allows storing and sharing the application state across different components.",
+      "correctAnswerCodeExample": [],
+      "answers": [
+        {
+          "id": "121",
+          "isCorrect": false,
+          "answerText": "Integrating third-party components."
+        },
+        {
+          "id": "122",
+          "isCorrect": true,
+          "answerText": "Managing the global state of the application."
+        },
+        {
+          "id": "123",
+          "isCorrect": false,
+          "answerText": "Creating functional components."
+        },
+        {
+          "id": "124",
+          "isCorrect": false,
+          "answerText": "Rendering the server-side DOM."
+        }
+      ]
+    },
+    {
+      "questionText": "Which function is used to define a store in Pinia?",
+      "correctAnswerExplanation": "The `defineStore()` function is used to create a new store in Pinia, which can be imported and used in different components of the application.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", {\n  state: () => ({ count: 0 })\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "125",
+          "isCorrect": true,
+          "answerText": "`defineStore()`"
+        },
+        {
+          "id": "126",
+          "isCorrect": false,
+          "answerText": "`createStore()`"
+        },
+        {
+          "id": "127",
+          "isCorrect": false,
+          "answerText": "`define()`"
+        },
+        {
+          "id": "128",
+          "isCorrect": false,
+          "answerText": "`setStore()`"
+        }
+      ]
+    },
+    {
+      "questionText": "What are the two syntaxes that Pinia offers to define a store?",
+      "correctAnswerExplanation": "Pinia offers two syntaxes to define a store: the options syntax and the setup syntax. The first is similar to Vuex, while the second takes advantage of Vue 3's Composition API features.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// Options Syntax\n\nimport { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", {\n  state: () => ({ count: 0 }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});",
+          "language": "javascript"
+        },
+        {
+          "code": "// Setup Syntax\n\nimport { defineStore } from \"pinia\";\nimport { ref } from \"vue\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  return { count, increment };\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "129",
+          "isCorrect": true,
+          "answerText": "options syntax and setup syntax."
+        },
+        {
+          "id": "130",
+          "isCorrect": false,
+          "answerText": "class syntax and functional syntax."
+        },
+        {
+          "id": "131",
+          "isCorrect": false,
+          "answerText": "reactive syntax and ref syntax."
+        },
+        {
+          "id": "132",
+          "isCorrect": false,
+          "answerText": "setup syntax and class syntax."
+        }
+      ]
+    },
+    {
+      "questionText": "Using the options syntax, what does the `state` option allow within a store in Pinia?",
+      "correctAnswerExplanation": "Using the options syntax, the `state` option defines the initial state of the store, which can be modified or accessed by the components that use it.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", {\n  state: () => ({ \n    count: 0,\n  })\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "133",
+          "isCorrect": false,
+          "answerText": "Defining computed properties."
+        },
+        {
+          "id": "134",
+          "isCorrect": true,
+          "answerText": "Defining the initial state of the store."
+        },
+        {
+          "id": "135",
+          "isCorrect": false,
+          "answerText": "Executing lifecycle actions."
+        },
+        {
+          "id": "136",
+          "isCorrect": false,
+          "answerText": "Setting navigation routes."
+        }
+      ]
+    },
+    {
+      "questionText": "Using the options syntax, how do you define an action in a Pinia store?",
+      "correctAnswerExplanation": "Using the options syntax, actions in Pinia are defined within the actions option, allowing you to execute methods that modify the store's state.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", {\n  state: () => ({ \n    count: 0 \n  }),\n  actions: {\n    increment() {\n      this.count++;\n    }\n  }\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "137",
+          "isCorrect": false,
+          "answerText": "Inside the 'setupActions' property."
+        },
+        {
+          "id": "138",
+          "isCorrect": false,
+          "answerText": "Using `computed()`."
+        },
+        {
+          "id": "139",
+          "isCorrect": false,
+          "answerText": "Inside the 'option' property."
+        },
+        {
+          "id": "140",
+          "isCorrect": true,
+          "answerText": "Inside the 'actions' property."
+        }
+      ]
+    },
+    {
+      "questionText": "Using the setup syntax, how are actions defined in a Pinia store?",
+      "correctAnswerExplanation": "In Pinia, using the setup syntax, actions are defined as functions inside the store that modify the store's state. These functions can be used in components to change the store",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { defineStore } from \"pinia\";\nimport { ref } from \"vue\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const count = ref(0);\n\n  function increment() {\n    count.value ++\n  }\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "141",
+          "isCorrect": false,
+          "answerText": "Using the 'actions' property inside the store."
+        },
+        {
+          "id": "142",
+          "isCorrect": true,
+          "answerText": "Creating functions inside the store."
+        },
+        {
+          "id": "143",
+          "isCorrect": false,
+          "answerText": "Using `computed()` inside the store."
+        },
+        {
+          "id": "144",
+          "isCorrect": false,
+          "answerText": "Inside the 'methods' property of the store."
+        }
+      ]
+    },
+    {
+      "questionText": "Using the setup syntax, how can you reset a state?",
+      "correctAnswerExplanation": "To reset a state with the setup syntax, you need to define your own `reset()` method inside the store that resets the state to its initial configuration.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "export const useCounterStore = defineStore('counter', () => {\n  const count = ref(0)\n\n  function $reset() {\n    count.value = 0\n  }\n\n  return { count, $reset }\n})",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "145",
+          "isCorrect": true,
+          "answerText": "Defining your own `reset()` method in the store."
+        },
+        {
+          "id": "146",
+          "isCorrect": false,
+          "answerText": "Reassigning the state directly."
+        },
+        {
+          "id": "147",
+          "isCorrect": false,
+          "answerText": "Defining a getter."
+        },
+        {
+          "id": "148",
+          "isCorrect": false,
+          "answerText": "Using `defineStore()` again."
+        }
+      ]
+    },
+    {
+      "questionText": "What is the advantage of using the setup syntax in pinia?",
+      "correctAnswerExplanation": "With the setup syntax, you can access the store's state and actions without needing to use `this`, which simplifies the code and improves readability.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { defineStore } from \"pinia\";\nimport { ref, computed } from \"vue\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  const doubleCount = computed(() => count.value * 2);\n  \n  return { count, increment, decrement, doubleCount };\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "149",
+          "isCorrect": false,
+          "answerText": "Improves application performance."
+        },
+        {
+          "id": "150",
+          "isCorrect": true,
+          "answerText": "Simplifies state access without `this`."
+        },
+        {
+          "id": "151",
+          "isCorrect": false,
+          "answerText": "Allows integration with Vuex."
+        },
+        {
+          "id": "152",
+          "isCorrect": false,
+          "answerText": "Allows using only static data."
+        }
+      ]
+    },
+    {
+      "questionText": "Using the options syntax, what is the purpose of a getter in Pinia?",
+      "correctAnswerExplanation": "Getters in Pinia are derived properties of the state that are automatically recalculated when their dependencies change. They allow access to computed values based on the store's state.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// Options Syntax\nimport { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", {\n  state: () => ({ \n    count: 0 \n  }),\n  getters: {\n    doubleCount: (state) => state.count * 2\n  }\n});",
+          "language": "javascript"
+        },
+        {
+          "code": "// Setup Syntax\nimport { defineStore } from \"pinia\";\nimport { computed, ref } from \"vue\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const count = ref(0);\n\n  const doubleCount = computed(() => count.value * 2)\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "153",
+          "isCorrect": false,
+          "answerText": "Defining routes."
+        },
+        {
+          "id": "154",
+          "isCorrect": true,
+          "answerText": "Calculating a computed value that depends on the state."
+        },
+        {
+          "id": "155",
+          "isCorrect": false,
+          "answerText": "Initializing the state."
+        },
+        {
+          "id": "156",
+          "isCorrect": false,
+          "answerText": "Updating data asynchronously."
+        }
+      ]
+    },
+    {
+      "questionText": "How do you access the store from a component?",
+      "correctAnswerExplanation": "To access the store, you import the function that defines the store and then call that function inside the component.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\n  import { useCounterStore } from \"@/stores/counter\";\n\n  const counterStore = useCounterStore();\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "157",
+          "isCorrect": false,
+          "answerText": "Using `this.store`."
+        },
+        {
+          "id": "158",
+          "isCorrect": false,
+          "answerText": "Creating an instance of the store with `new`."
+        },
+        {
+          "id": "159",
+          "isCorrect": true,
+          "answerText": "Importing and calling the store function directly."
+        },
+        {
+          "id": "160",
+          "isCorrect": false,
+          "answerText": "Using the `computed` option."
+        }
+      ]
+    }
+  ]
+}

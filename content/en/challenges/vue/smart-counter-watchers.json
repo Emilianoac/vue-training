@@ -1,0 +1,43 @@
+  {
+    "documentId": "smart-counter-watchers",
+    "title": "Smart Counter with Watchers",
+    "slug": "smart-counter-watchers",
+    "level": "intermediate",
+    "category": {
+      "name": "Vue",
+      "image": {
+        "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+      }
+    },
+    "short_description": "Implement a counter with safety limits using watchers to react to state changes.",
+    "description": [
+      "In this challenge, you will build a counter with a allowed range from 0 to 10. Your task is to use a 'watcher' to monitor the counter value.",
+      "If the user tries to exceed the maximum limit (10) or go below the minimum (0), the counter must be locked at that limit and display a warning message that disappears automatically after 2 seconds."
+    ],
+    "cover": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768232417/vue-training/smart_counter_watchers_cover_adaa490d17.webp"
+    },
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768232417/vue-training/smart_counter_watchers_cover_adaa490d17.webp"
+      }
+    ],
+    "objectives": [
+      {
+        "data": "Use a watcher to monitor the counter value in real-time."
+      },
+      {
+        "data": "Prevent the counter from being less than 0 or greater than 10."
+      },
+      {
+        "data": "Display a dynamic alert message when limits are reached."
+      },
+      {
+        "data": "Use a timer (setTimeout) to hide the alert message after 2000ms."
+      }
+    ],
+    "stackblitz": {
+      "challenge": "https://stackblitz.com/edit/emi-smart-counter-watchers-challenge?embed=1&file=src%2Fcomponents%2FSmartCounter.vue",
+      "solution": "https://stackblitz.com/edit/emi-smart-counter-watchers-solution?embed=1&file=src%2Fcomponents%2FSmartCounter.vue"
+    }
+  }

@@ -1,0 +1,361 @@
+{
+  "documentId": "persistence-and-asynchronous-actions-in-pinia",
+  "title": "Persistencia y acciones asíncronas en Pinia",
+  "level": "intermediate",
+  "slug": "persistence-and-asynchronous-actions-in-pinia",
+  "description": "Este cuestionario aborda conceptos intermedios de Pinia, como la persistencia del estado, las acciones asíncronas y otros temas relacionados.",
+  "category": {
+    "name": "Pinia",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/pinia_6fe4d6accb.png"
+    }
+  },
+  "questions": [
+    {
+      "id": "41",
+      "questionText": "¿Cómo puedes llamar una acción de un store de Pinia dentro de un componente de Vue?",
+      "correctAnswerExplanation": "Las acciones en Pinia se llaman directamente desde la instancia del store como funciones normales.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { useCounterStore } from \"@/stores/counter\";\n\nconst counterStore = useCounterStore();\ncounterStore.increment();\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "161",
+          "isCorrect": false,
+          "answerText": "Usando `this.$store.commit('increment')` como en Vuex."
+        },
+        {
+          "id": "162",
+          "isCorrect": true,
+          "answerText": "Llamando la acción directamente desde la instancia del store."
+        },
+        {
+          "id": "163",
+          "isCorrect": false,
+          "answerText": "Creando una nueva función dentro del componente que modifique el estado manualmente."
+        },
+        {
+          "id": "164",
+          "isCorrect": false,
+          "answerText": "Pasando la acción como una prop desde el padre al hijo."
+        }
+      ]
+    },
+    {
+      "id": "42",
+      "questionText": "¿Cuál es la forma recomendada de reaccionar a cambios en una propiedad del estado de Pinia desde un componente de Vue?",
+      "correctAnswerExplanation": "La mejor opción es `store.$subscribe`, ya que detecta cambios en el estado globalmente y funciona incluso si la mutación ocurre fuera del componente.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "<script setup>\nimport { useCounterStore } from \"@/stores/counter\";\n\nconst counterStore = useCounterStore();\n\ncounterStore.$subscribe((mutation, state) => {\n  console.log(\"El estado cambió:\", state);\n});\n</script>",
+          "language": "handlebars"
+        }
+      ],
+      "answers": [
+        {
+          "id": "165",
+          "isCorrect": true,
+          "answerText": "Usando `store.$subscribe` para detectar cambios en el estado."
+        },
+        {
+          "id": "166",
+          "isCorrect": false,
+          "answerText": "Usando `watch()` para observar la propiedad del estado."
+        },
+        {
+          "id": "167",
+          "isCorrect": false,
+          "answerText": "Llamando manualmente una función después de cada actualización."
+        },
+        {
+          "id": "168",
+          "isCorrect": false,
+          "answerText": "No es posible escuchar cambios en el estado de Pinia."
+        }
+      ]
+    },
+    {
+      "id": "43",
+      "questionText": "¿Cómo puedes crear un store en Pinia que use acciones asíncronas?",
+      "correctAnswerExplanation": "Las acciones en Pinia pueden ser asíncronas, y para ello se puede usar la palabra clave `async` dentro de la función que define la acción.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// Setup Syntax\nexport const useUserStore = defineStore(\"user\", () => {\n  const user = ref(null);\n  const fetchUser = async () => {\n    const response = await fetch(\"/api/user\");\n    user.value = await response.json();\n  }\n  return {\n    user,\n    fetchUser,\n  }\n})",
+          "language": "javascript"
+        },
+        {
+          "code": "// Options Syntax\nexport const useUserStore = defineStore(\"user\", {\n  state: () => ({ user: null }),\n  actions: {\n    async fetchUser() {\n      const response = await fetch(\"/api/user\");\n      this.user = await response.json();\n    }\n  }\n})",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "169",
+          "isCorrect": false,
+          "answerText": "Usando un `setTimeout` para simular una espera."
+        },
+        {
+          "id": "170",
+          "isCorrect": true,
+          "answerText": "Marcando la función como `async` y usando `await` para manejar promesas."
+        },
+        {
+          "id": "171",
+          "isCorrect": false,
+          "answerText": "Haciendo la llamada a la API directamente en el componente."
+        },
+        {
+          "id": "172",
+          "isCorrect": false,
+          "answerText": "Usando `setState` para realizar la actualización en una sola acción."
+        }
+      ]
+    },
+    {
+      "id": "44",
+      "questionText": "¿Cuál es la forma correcta de modificar el estado de un store de Pinia dentro de otro store?",
+      "correctAnswerExplanation": "Para modificar el estado de un store desde otro, es recomendable usar las acciones definidas en el store objetivo. No se debe modificar el estado directamente fuera del contexto de reactividad de Vue.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// logger.js\nimport { useUserStore } from \"./user\";\n\nexport const useLoggerStore = defineStore(\"logger\", {\n  actions: {\n    logUserName() {\n      const userStore = useUserStore();\n      userStore.setName(\"Bob\");  \n    }\n  }\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "173",
+          "isCorrect": false,
+          "answerText": "Modificando el estado directamente sin usar acciones."
+        },
+        {
+          "id": "174",
+          "isCorrect": true,
+          "answerText": "Usando las acciones del store objetivo para modificar el estado."
+        },
+        {
+          "id": "175",
+          "isCorrect": false,
+          "answerText": "Accediendo al estado del store a través de la instancia global de Vue."
+        },
+        {
+          "id": "176",
+          "isCorrect": false,
+          "answerText": "Usando `this` directamente en el store importado."
+        }
+      ]
+    },
+    {
+      "id": "45",
+      "questionText": "¿Cómo puedes utilizar módulos dentro de un store de Pinia?",
+      "correctAnswerExplanation": "En Pinia, puedes organizar tu store en módulos utilizando `defineStore` en diferentes archivos y luego importarlos para gestionar distintas partes del estado de la aplicación. Esto permite una estructura más modular y reutilizable.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// stores/user.js\nimport { defineStore } from \"pinia\";\n\nexport const useUserStore = defineStore(\"user\", {\n  state: () => ({ user: null }),\n  actions: {\n    setUser(user) {\n      this.user = user;\n    }\n  }\n})",
+          "language": "javascript"
+        },
+        {
+          "code": "// stores/products.js\nimport { defineStore } from \"pinia\";\n\nexport const useProductsStore = defineStore(\"products\", {\n  state: () => ({ products: [] }),\n  actions: {\n    setProducts(products) {\n      this.products = products;\n    }\n  }\n})",
+          "language": "javascript"
+        },
+        {
+          "code": "// main.js\nimport { createPinia } from \"pinia\";\nimport { useUserStore } from \"./stores/user\";\nimport { useProductsStore } from \"./stores/products\";\n\nconst pinia = createPinia();\nconst userStore = useUserStore();\nconst productsStore = useProductsStore();",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "177",
+          "isCorrect": false,
+          "answerText": "Usando el sistema de módulos de Vuex."
+        },
+        {
+          "id": "178",
+          "isCorrect": true,
+          "answerText": "Definiendo stores independientes y luego combinándolos en el archivo principal."
+        },
+        {
+          "id": "179",
+          "isCorrect": false,
+          "answerText": "Utilizando un único store para toda la aplicación."
+        },
+        {
+          "id": "180",
+          "isCorrect": false,
+          "answerText": "Modificando directamente el estado de otros stores."
+        }
+      ]
+    },
+    {
+      "id": "46",
+      "questionText": "¿Qué opción es más eficiente para persistir el estado de un store de Pinia entre recargas de página?",
+      "correctAnswerExplanation": "La forma más eficiente de persistir el estado de un store de Pinia es utilizando plugins como `pinia-plugin-persistedstate` o `pinia-plugin-persist`. Estos plugins almacenan automáticamente el estado en `localStorage` o `sessionStorage`.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { createPinia } from \"pinia\";\nimport piniaPersistedstate from \"pinia-plugin-persistedstate\";\n\nconst pinia = createPinia();\npinia.use(piniaPersistedstate);",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "181",
+          "isCorrect": false,
+          "answerText": "Usando `localStorage` manualmente para guardar el estado."
+        },
+        {
+          "id": "182",
+          "isCorrect": true,
+          "answerText": "Utilizando un plugin como `pinia-plugin-persistedstate`."
+        },
+        {
+          "id": "183",
+          "isCorrect": false,
+          "answerText": "No es posible persistir el estado de un store de Pinia."
+        },
+        {
+          "id": "184",
+          "isCorrect": false,
+          "answerText": "Guardando el estado en una base de datos externa."
+        }
+      ]
+    },
+    {
+      "id": "47",
+      "questionText": "¿Cómo puedes utilizar un store de Pinia dentro de una función o archivo que no es un componente de Vue?",
+      "correctAnswerExplanation": "Para usar un store de Pinia fuera de un componente, debes asegurar que la instancia de Pinia esté creada y disponible. Puedes importar el store directamente y usarlo como lo harías en un componente.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// src/main.js\n\nimport { useUserStore } from \"@/stores/user\";\nimport { createPinia } from \"pinia\";\nimport { createApp } from \"vue\";\nimport App from \"./App.vue\";\n\n\n// Aquí falla ya que Pinia no está instalado aún\nconst userStore = useUserStore();\n\nconst pinia = createPinia();\nconst app = createApp(App);\n\n// Añades Pinia a la app\napp.use(pinia);\n\n// Aquí ya funciona correctamente porque Pinia está instalado\nconst userStore = useUserStore();",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "185",
+          "isCorrect": true,
+          "answerText": "Asegurándote de que la instancia de Pinia esté creada y disponible e importando el store directamente."
+        },
+        {
+          "id": "186",
+          "isCorrect": false,
+          "answerText": "No es posible usar un store de Pinia fuera de un componente."
+        },
+        {
+          "id": "187",
+          "isCorrect": false,
+          "answerText": "Usando `this.$store` como en Vuex."
+        },
+        {
+          "id": "188",
+          "isCorrect": false,
+          "answerText": "Creando una nueva instancia de Pinia cada vez que la necesites."
+        }
+      ]
+    },
+    {
+      "id": "48",
+      "questionText": "Usando la Setup Syntax, ¿cómo puedes utilizar un composable dentro de un store de Pinia?",
+      "correctAnswerExplanation": "Puedes importar el composable directamente dentro de la función del store y usarlo como lo harías en un componente.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// composables/useCounter.ts\n\nimport { ref } from \"vue\";\n\nexport function useCounter() {\n  const count = ref(0);\n  const increment = () => count.value++;\n  return { count, increment };\n}",
+          "language": "javascript"
+        },
+        {
+          "code": "// stores/counter.js\n\nimport { defineStore } from \"pinia\";\nimport { useCounter } from \"@/composables/useCounter\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const { count, increment } = useCounter();\n  return { count, increment };\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "189",
+          "isCorrect": true,
+          "answerText": "Importando el composable directamente dentro de la función del store."
+        },
+        {
+          "id": "190",
+          "isCorrect": false,
+          "answerText": "No es posible usar un composable dentro de un store."
+        },
+        {
+          "id": "191",
+          "isCorrect": false,
+          "answerText": "Usando `this.$composable` como en Vuex."
+        },
+        {
+          "id": "192",
+          "isCorrect": false,
+          "answerText": "Creando una nueva instancia del composable cada vez que lo necesites."
+        }
+      ]
+    },
+    {
+      "id": "49",
+      "questionText": "¿Para qué se utiliza los plugins en Pinia y cómo puedes registrar uno?",
+      "correctAnswerExplanation": "Los plugins en Pinia se utilizan para extender la funcionalidad del store, como la persistencia del estado o la integración con otras bibliotecas. Se registran usando el método `use` de la instancia de Pinia.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "import { createPinia } from \"pinia\";\nimport piniaPluginPersistedstate from \"pinia-plugin-persistedstate\";\n\nconst pinia = createPinia();\npinia.use(piniaPluginPersistedstate);",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "193",
+          "isCorrect": true,
+          "answerText": "Para extender la funcionalidad del store y se registra usando el método `use` de la instancia de Pinia."
+        },
+        {
+          "id": "194",
+          "isCorrect": false,
+          "answerText": "Para crear nuevos stores y se registra usando `createStore`."
+        },
+        {
+          "id": "195",
+          "isCorrect": false,
+          "answerText": "Para manejar el ciclo de vida de los componentes y se registra en el componente mismo."
+        },
+        {
+          "id": "196",
+          "isCorrect": false,
+          "answerText": "Para definir acciones y mutaciones y se registra dentro del store."
+        }
+      ]
+    },
+    {
+      "id": "50",
+      "questionText": "Usando la Setup Syntax, ¿cómo puedes resetear el estado de un store de Pinia?",
+      "correctAnswerExplanation": "Usando la Setup Syntax, debes crear una tu propio metodo `reset()` que restablezca el estado a su valor inicial. Pinia no proporciona un método de reinicio por defecto.",
+      "correctAnswerCodeExample": [
+        {
+          "code": "// stores/counter.js\nimport { defineStore } from \"pinia\";\n\nexport const useCounterStore = defineStore(\"counter\", () => {\n  const count = ref(0);\n  const increment = () => count.value++;\n  const $reset = () => { count.value = 0; };\n  return { count, increment, $reset };\n});",
+          "language": "javascript"
+        }
+      ],
+      "answers": [
+        {
+          "id": "197",
+          "isCorrect": false,
+          "answerText": "Usando el método `$reset()` que Pinia proporciona por defecto."
+        },
+        {
+          "id": "198",
+          "isCorrect": true,
+          "answerText": "Definiendo tu propio método `$reset()` dentro del store."
+        },
+        {
+          "id": "199",
+          "isCorrect": false,
+          "answerText": "No es posible resetear el estado de un store de Pinia."
+        },
+        {
+          "id": "200",
+          "isCorrect": false,
+          "answerText": "Usando `this.$reset()` como en Vuex."
+        }
+      ]
+    }
+  ]
+}

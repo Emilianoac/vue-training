@@ -1,0 +1,43 @@
+{
+  "documentId": "reactive-product-search",
+  "title": "Buscador de productos reactivo",
+  "slug": "reactive-product-search",
+  "level": "intermediate",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Filtra una lista de productos en tiempo real utilizando propiedades computadas.",
+  "description": [
+    "En este desafío, debes implementar la lógica de búsqueda para una lista de productos. El usuario escribirá en un campo de texto y la lista debe actualizarse automáticamente para mostrar solo los productos que coincidan con el nombre (ignorando mayúsculas y minúsculas).",
+    "Si el campo está vacío, se deben mostrar todos los productos. Si no hay coincidencias, se debe mostrar un mensaje informando que no se encontraron resultados."
+  ],
+  "cover": {
+    "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768226560/vue-training/reactive_product_search_cover_dfac0d781f.webp"
+  },
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1768226560/vue-training/reactive_product_search_cover_dfac0d781f.webp"
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Vincular el input de búsqueda con el estado usando v-model."
+    },
+    {
+      "data": "Implementar una propiedad computada que filtre el array de productos basándose en el término de búsqueda."
+    },
+    {
+      "data": "Asegurar que la búsqueda sea insensible a mayúsculas (case-insensitive)."
+    },
+    {
+      "data": "Mostrar condicionalmente el mensaje de 'No products found' cuando la lista filtrada esté vacía."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-reactive-product-search-challenge?embed=1&file=src%2Fcomponents%2FProductSearch.vue",
+    "solution": "https://stackblitz.com/edit/emi-reactive-product-search-solution?embed=1&file=src%2Fcomponents%2FProductSearch.vue"
+  }
+}

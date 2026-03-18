@@ -1,0 +1,31 @@
+{
+  "documentId": "use-definemodel-to-simplify-v-model-in-components",
+  "title": "Usa defineModel para simplificar el v-model en componentes",
+  "category": {
+    "name": "Vue",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Desde Vue 3.4 puedes usar defineModel para vincular v-model de forma más simple.",
+  "content": "## **Usa `defineModel` para simplificar el `v-model`**\nSi estás usando `<script setup>`, puedes usar la función `defineModel` en el componente hijo para recibir y actualizar el valor del `v-model` automáticamente.\n\nYa no necesitas declarar `props` ni emitir eventos manualmente.\nEsto hace tu código más limpio y fácil de mantener, especialmente cuando trabajas con formularios o inputs personalizados.\n\nAdemás, `defineModel` permite nombrar múltiples modelos para manejar varios `v-model` en un mismo componente.",
+  "code_examples": [
+    {
+      "code": "<!-- ✅ Componente padre -->\n<script setup>\nimport CustomInput from \"./CustomInput.vue\";\nimport { ref } from \"vue\";\n\nconst name = ref(\"Juan\");\n</script>\n\n<template>\n  <CustomInput v-model=\"name\" />\n</template>",
+      "lang": "handlebars"
+    },
+    {
+      "code": "<!-- ✅ Componente hijo (CustomInput.vue) -->\n<script setup>\nconst model = defineModel();\n</script>\n\n<template>\n  <input v-model=\"model\" />\n</template>",
+      "lang": "handlebars"
+    },
+    {
+      "code": "<!-- ✅ Componente padre con múltiples v-model -->\n<script setup>\nimport CustomInput from \"./CustomInput.vue\";\nimport { ref } from \"vue\";\n\nconst isChecked = ref(false);\nconst title = ref(\"Hola\");\n</script>\n\n<template>\n  <CustomInput v-model:checked=\"isChecked\" v-model:title=\"title\" />\n</template>",
+      "lang": "handlebars"
+    },
+    {
+      "code": "<!-- ✅ Componente hijo con múltiples defineModel (CustomInput.vue) -->\n<script setup>\nconst checked = defineModel(\"checked\");\nconst title = defineModel(\"title\");\n</script>\n\n<template>\n  <input type=\"checkbox\" v-model=\"checked\" />\n  <input type=\"text\" v-model=\"title\" />\n</template>",
+      "lang": "handlebars"
+    }
+  ],
+  "source_url": "https://vuejs.org/api/sfc-script-setup.html#definemodel"
+}
