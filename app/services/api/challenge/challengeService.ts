@@ -1,16 +1,24 @@
 
-import { dataFetcher } from "@/services/utils/dataFetcher";
-import type { Challenge } from "@/types/challenge";
-
 import type { ChallengeService } from "@/services/api/challenge/challengeService.interface";
 
 function createChallengeService(): ChallengeService {
   return {
-    async fetchChallenge(url) {
-      return dataFetcher<Challenge>(url);
+    async fetchChallenge(slug, locale) {
+      const collection = locale === "en" ? "challenges_en" : "challenges_es";
+      const data = await queryCollection(collection)
+      .where("slug", "=", slug)
+      .first();
+
+      if (!data) throw new Error("Challenge not found");
+      return data;
     },
-    async fetchChallenges(url) {
-      return dataFetcher<Challenge[]>(url)
+    async fetchChallenges(locale) {
+      const collection = locale === "en" ? "challenges_en" : "challenges_es";
+      const data = await queryCollection(collection)
+      .select("title", "slug", "level", "category", "short_description", "cover" )
+      .all();
+
+      return data;
     }
   }
 }

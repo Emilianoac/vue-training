@@ -1,6 +1,6 @@
-import type { Challenge } from "@/types/challenge";
+import type { Challenge, ChallengeListItem, } from "@/schemas/challenge.schema";
 
 export interface ChallengeService {
-  fetchChallenge(url: string): Promise<Challenge>;
-  fetchChallenges(url: string): Promise<Challenge[]>;
+  fetchChallenge(slug: string, locale: string): Promise<Challenge>;
+  fetchChallenges(locale: string): Promise<ChallengeListItem[]>;
 }

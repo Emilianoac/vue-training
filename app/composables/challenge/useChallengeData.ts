@@ -1,5 +1,5 @@
 import { challengeService } from "@/services/api/challenge/challengeService";
-import type { Challenge } from "@/types/challenge";
+import type { Challenge } from "@/schemas/challenge.schema";
 
 export default function useChallengeData() {
   const { locale } = useI18n();
@@ -13,11 +13,11 @@ export default function useChallengeData() {
   });
 
   async function getChallenge(slug: string) {
-    await loadAndSet(() => challengeService.fetchChallenge(`/api/challenge/${slug}?locale=${locale.value}`), challenge)
+    await loadAndSet(() => challengeService.fetchChallenge(slug, locale.value), challenge)
   }
 
   async function getChallenges() {
-    await loadAndSet(() => challengeService.fetchChallenges(`/api/challenge/all?locale=${locale.value}`), challenges)
+    await loadAndSet(() => challengeService.fetchChallenges(locale.value), challenges)
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
