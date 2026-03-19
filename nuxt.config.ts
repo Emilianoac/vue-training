@@ -33,6 +33,9 @@ export default defineNuxtConfig({
     preference: "dark",
     fallback: "dark"
   },
+  content: {
+    experimental: {sqliteConnector: "native"}
+  },
   runtimeConfig: {
     strapiUrl: process.env.STRAPI_URL,
     strapiToken: process.env.STRAPI_TOKEN
