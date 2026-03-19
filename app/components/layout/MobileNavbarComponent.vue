@@ -3,8 +3,10 @@
 
   const router = useRouter();
   
-  const menuItems = router.getRoutes().filter(route => {
-    return route.meta.menu === true
+  const menuItems = router.getRoutes().filter(route => route.meta.menu).sort((a, b) => {
+    const indexA = Number(a.meta.index ?? 0);
+    const indexB = Number(b.meta.index ?? 0);
+    return indexA - indexB;
   });
 </script>
 

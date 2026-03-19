@@ -7,6 +7,7 @@ import useDataListFilter  from "@/composables/useDataListFilter";
 
 definePageMeta({ 
   menu: true, 
+  index: 2,
   titleKey: "menu-label.quizzes",
   icon: IconList
 });

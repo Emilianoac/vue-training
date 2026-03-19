@@ -10,6 +10,7 @@ import IconHome from "@/components/assets/icons/IconHome.vue";
 
 definePageMeta({ 
   menu: true, 
+  index: 1,
   titleKey: "menu-label.home",
   icon: IconHome
 });

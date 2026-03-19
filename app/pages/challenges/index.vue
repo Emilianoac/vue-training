@@ -8,6 +8,7 @@ import useChallengeData from "@/composables/challenge/useChallengeData";
 
 definePageMeta({ 
   menu: true, 
+  index: 3,
   titleKey: "menu-label.challenges",
   icon: IconBoxGlove
 });

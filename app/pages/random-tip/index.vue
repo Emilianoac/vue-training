@@ -11,6 +11,7 @@
 
   definePageMeta({ 
     menu: true, 
+    index: 4,
     titleKey: "menu-label.randomTip",
     icon: IconDice
   });
