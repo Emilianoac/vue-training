@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import QuizCard from "@/components/quiz/QuizCard.vue";
-import type { Quiz } from "@/schemas/quiz.schema";
+import type { QuizListItem } from "@/schemas/quiz.schema";
 
 defineProps<{
-  quizzes: Quiz[];
+  quizzes: QuizListItem[];
 }>();
 
 </script>

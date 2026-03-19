@@ -2,10 +2,10 @@
 import ChipComponent from "@/components/ui/ChipComponent.vue";
 import CardComponent from"@/components/ui/CardComponent.vue";
 
-import type { Quiz } from "@/schemas/quiz.schema";
+import type { QuizListItem } from "@/schemas/quiz.schema";
 
 defineProps<{
-  quiz: Quiz;
+  quiz: QuizListItem;
 }>();
 </script>
 
