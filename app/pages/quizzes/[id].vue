@@ -46,11 +46,7 @@ const currentLayout = computed(() => {
   return "default";
 });
 
-watch(() => locale.value,
-  async () => {
-    await actions.loadQuiz(route.params.id as string);
-  }
-);
+await actions.loadQuiz(route.params.id as string);
 </script>
 
 <template>

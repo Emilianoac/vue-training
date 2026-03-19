@@ -21,6 +21,23 @@ export default function useQuizData() {
   }
 
   async function getQuizzes() {
+    isLoading.value = true;
+    error.value.status = false;
+    error.value.message = "";
+
+    try {
+      const { data } = await useAsyncData(`quizzes-${locale.value}`, () => quizService.fetchQuizzes(locale.value), {
+        watch: [locale]
+      });
+
+      if (!data.value) throw new Error("No quizzes found");
+
+      quizzes.value = data.value
+    } catch (err) {
+      error.value.status = true;
+      error.value.message = err instanceof Error ? err.message : "Unkown error"
+    }
+
     await loadAndSet(
       `quizzes-${locale.value}`,
       () => quizService.fetchQuizzes(locale.value), 
