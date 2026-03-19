@@ -17,14 +17,14 @@ useStaticPageSeo();
 
 const { locale } = useI18n();
 
-const { useQuizzes} = useQuizData();
+const { quizzes, getQuizzes} = useQuizData();
 const { challenges, getChallenges } = useChallengeData();
 
-const { data: quizzes, error: quizzesError } = useQuizzes();
+await getQuizzes();
 await getChallenges();
 
-
 watch(() => locale.value, async() => {
+  await getQuizzes();
   await getChallenges();
 });
 </script>
@@ -55,7 +55,7 @@ watch(() => locale.value, async() => {
     </section>
   
     <!-- Quizzes -->
-    <section class="mt-20" v-if="!quizzesError && quizzes">
+    <section class="mt-20">
       <h2 class="text-2xl md:text-3xl font-bold text-center">{{ $t("general.quiz.many") }}</h2>
       <SwiperComponent :items="quizzes">
         <template #slide="{ item }">

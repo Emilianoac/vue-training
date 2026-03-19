@@ -20,16 +20,6 @@ export default function useQuizData() {
     await loadAndSet(() => quizService.fetchQuizzes(locale.value), quizzes);
   }
 
-  function useQuizzes() {
-    return useAsyncData(
-      `quizzes-${locale.value}`,
-      () => quizService.fetchQuizzes(locale.value), {
-        watch: [locale],
-      }
-    )
-  }
-
-
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
     isLoading.value = true;
     error.value.status = false;
@@ -54,6 +44,5 @@ export default function useQuizData() {
 
     getQuiz,
     getQuizzes,
-    useQuizzes,
   };
 }
