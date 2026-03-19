@@ -13,49 +13,31 @@ export default function useQuizData() {
   });
 
   async function getQuiz(slug: string) {
-    await loadAndSet(
-      `quiz-${slug}-${locale.value}`, 
-      () => quizService.fetchQuiz(slug, locale.value), 
-      quiz
-    );
+    await loadAndSet(() => quizService.fetchQuiz(slug, locale.value), quiz);
   }
 
   async function getQuizzes() {
-    isLoading.value = true;
-    error.value.status = false;
-    error.value.message = "";
-
-    try {
-      const { data } = await useAsyncData(`quizzes-${locale.value}`, () => quizService.fetchQuizzes(locale.value), {
-        watch: [locale]
-      });
-
-      if (!data.value) throw new Error("No quizzes found");
-
-      quizzes.value = data.value
-    } catch (err) {
-      error.value.status = true;
-      error.value.message = err instanceof Error ? err.message : "Unkown error"
-    }
-
-    await loadAndSet(
-      `quizzes-${locale.value}`,
-      () => quizService.fetchQuizzes(locale.value), 
-      quizzes
-    );
+    await loadAndSet(() => quizService.fetchQuizzes(locale.value), quizzes);
   }
 
-  async function loadAndSet<T>(key: string, fetchFn: () => Promise<T>, targetRef: Ref<T>) {
+  function useQuizzes() {
+    return useAsyncData(
+      `quizzes-${locale.value}`,
+      () => quizService.fetchQuizzes(locale.value), {
+        watch: [locale],
+      }
+    )
+  }
+
+
+  async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
     isLoading.value = true;
     error.value.status = false;
     error.value.message = "";
 
     try {
-      const { data, error: fetchError } = await useAsyncData(key ,fetchFn);
-
-      if (fetchError.value) throw fetchError.value;
-
-      targetRef.value = data.value as T;
+      const data = await fetchFn();
+      targetRef.value = data;
     } catch (err) {
       error.value.status = true;
       error.value.message = err instanceof Error ? err.message : "Unkown error"
@@ -71,6 +53,7 @@ export default function useQuizData() {
     error,
 
     getQuiz,
-    getQuizzes
+    getQuizzes,
+    useQuizzes,
   };
 }
