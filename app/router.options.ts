@@ -5,15 +5,16 @@ export default <RouterOptions> {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
         if (savedPosition) {
-          resolve(savedPosition)
+          resolve({ ...savedPosition, behavior: "smooth" })
         } else {
           if (to.hash) {
             resolve({
               el: to.hash,
-              top: 0
+              top: 0,
+              behavior: "smooth"
             })
           } else {
-            resolve({ top: 0 })
+            resolve({ top: 0, behavior: "smooth" })
           }
         }
       }, 100)
