@@ -1,18 +1,26 @@
+import tailwindcss from "@tailwindcss/vite";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "nuxt-icon", "@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/test-utils/module","@nuxt/content"],
-  css: ["~/assets/css/main.css"],
+  modules: [
+    "@pinia/nuxt", 
+    "@nuxtjs/i18n", 
+    "nuxt-icon", 
+    "@nuxt/icon", 
+    "@nuxtjs/color-mode", 
+    "@nuxt/test-utils/module",
+    "@nuxt/content",
+    "shadcn-nuxt",
+  ],
+  css: ["~/assets/css/tailwind.css"],
+  vite: {
+    plugins: [tailwindcss()]
+  },
   app: {
     head: {
       title: "Vue Training"
-    },
-  },
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
     },
   },
   i18n: {
@@ -35,6 +43,10 @@ export default defineNuxtConfig({
   },
   content: {
     experimental: {sqliteConnector: "native"}
+  },
+  shadcn: {
+    prefix: "",
+    componentDir: "@/components/ui"
   },
   runtimeConfig: {
     strapiUrl: process.env.STRAPI_URL,
