@@ -1,82 +1,101 @@
 <script lang="ts" setup>
 import useRandomTipData from "@/composables/random-tip/useRandomTipData";
-import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
-import useMarkdownParser  from "@/composables/useMarkdownParser";
+import useRandomTipGame from "@/composables/random-tip/useRandomTipGame";
+import useMarkdownParser from "@/composables/useMarkdownParser";
 
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import IconBook from "@/components/assets/icons/IconBook.vue";
 import { Button } from "@/components/ui/button";
 import IconDice from "@/components/assets/icons/IconDice.vue";
 
-definePageMeta({ 
-  menu: true, 
+definePageMeta({
+  menu: true,
   index: 4,
   titleKey: "menu-label.randomTip",
-  icon: IconDice
+  icon: IconDice,
 });
 useStaticPageSeo("randomTips");
 
 const { locale } = useI18n();
-const { getRandomTips, randomTips} = useRandomTipData();
+const { getRandomTips, randomTips } = useRandomTipData();
 const { parse } = useMarkdownParser();
 
 await getRandomTips();
-const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips);
+const { selectTip, getRandomTip, currentRandomTip } = useRandomTipGame(randomTips);
 
 const parsedExplanation = computed(() => {
-  if (!currentRandomTip.value) return ""
-  return parse(currentRandomTip.value.content)
-})
-
-watch(() => locale.value, async () => {
-  await getRandomTips();
+  if (!currentRandomTip.value) return "";
+  return parse(currentRandomTip.value.content);
 });
+
+watch(
+  () => locale.value,
+  async () => {
+    await getRandomTips();
+  },
+);
 </script>
 
 <template>
   <div v-if="currentRandomTip">
     <!-- Hero Section -->
     <section class="mt-4">
-      <div class="grid grid-cols-1 lg:grid-cols-[400px_1fr] place-items-start justify-center mt-10 w-full gap-4">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[400px_1fr] place-items-start justify-center mt-10 w-full gap-4"
+      >
         <div class="w-full lg:sticky top-[100px]">
           <!-- Illustration -->
-          <Vuecito 
-            class="max-w-[100px] lg:max-w-[250px] w-full mx-auto h-auto" 
+          <Vuecito
+            class="max-w-[100px] lg:max-w-[250px] w-full mx-auto h-auto"
             mood="surprised"
             :tip-id="currentRandomTip.documentId"
           />
           <!-- Get a new tip button -->
-          <Button variant="secondary" size="xl" class="hidden lg:flex mx-auto mt-4" @click="getRandomTip">
-             {{ $t("randomTip.general.get_a_new_tip") }}
-            <IconBook  width="24" height="24"/>
+          <Button
+            variant="secondary"
+            size="xl"
+            class="hidden lg:flex mx-auto mt-4"
+            @click="getRandomTip"
+          >
+            {{ $t("randomTip.general.get_a_new_tip") }}
+            <IconBook width="24" height="24" />
           </Button>
         </div>
-  
+
         <!-- Tip Content -->
         <div class="w-full">
           <transition name="fade" mode="out-in">
-            <div 
-              class="tip-container bg-white border dark:bg-slate-800/50  border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5" 
-              :key="currentRandomTip.documentId" >
+            <div
+              class="tip-container bg-white border dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5"
+              :key="currentRandomTip.documentId"
+            >
               <div>
                 <!-- Tip explanation -->
                 <div v-html="parsedExplanation"></div>
                 <!-- Tip code examples -->
                 <ClientOnly>
                   <template v-if="currentRandomTip.code_examples.length">
-                    <highlightjs 
-                      v-for="(codeExample, index) in currentRandomTip.code_examples" 
+                    <highlightjs
+                      v-for="(codeExample, index) in currentRandomTip.code_examples"
                       :key="index"
-                      class="text-sm rounded-md overflow-hidden mt-4" 
-                      :language="codeExample.lang" 
+                      class="text-sm rounded-md overflow-hidden mt-4"
+                      :language="codeExample.lang"
                       :code="codeExample.code"
                     />
                   </template>
                 </ClientOnly>
                 <!-- Source link -->
-                <div v-if="currentRandomTip.source_url" class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <div
+                  v-if="currentRandomTip.source_url"
+                  class="mt-4 text-sm text-gray-500 dark:text-gray-400"
+                >
                   <span class="block">{{ $t("randomTip.general.source") }} </span>
-                  <a :href="currentRandomTip.source_url" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">
+                  <a
+                    :href="currentRandomTip.source_url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600 dark:text-blue-400 hover:underline"
+                  >
                     {{ currentRandomTip.source_url }}
                   </a>
                 </div>
@@ -87,36 +106,42 @@ watch(() => locale.value, async () => {
       </div>
 
       <!-- Get a new tip button mobile -->
-      <Button 
-        type="button" 
-        variant="secondary" 
-        @click="getRandomTip" 
-        class="mx-auto mt-8 lg:hidden! flex">
-          {{ $t("randomTip.general.get_a_new_tip") }}
-        <IconBook width="24" height="24"/>
+      <Button
+        type="button"
+        variant="secondary"
+        @click="getRandomTip"
+        class="mx-auto mt-8 lg:hidden! flex"
+      >
+        {{ $t("randomTip.general.get_a_new_tip") }}
+        <IconBook width="24" height="24" />
       </Button>
     </section>
-  
-    <hr class="my-10 w-full border-t border-gray-200 dark:border-gray-800"/>
-    
+
+    <hr class="my-10 w-full border-t border-gray-200 dark:border-gray-800" />
+
     <!-- List of tips -->
     <section class="mt-10">
       <h2 class="text-2xl font-bold mb-4">{{ $t("randomTip.general.list_of_tips") }}</h2>
       <ul class="space-y-4">
-        <li 
-          v-for="tip in randomTips" 
-          :key="tip.documentId" 
+        <li
+          v-for="tip in randomTips"
+          :key="tip.documentId"
           :class="{ '!outline-primary': currentRandomTip.documentId === tip.documentId }"
           class="block lg:flex items-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
-          @click="selectTip(tip)">
-            <div class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center">
-              <img :src="tip.category.image.url" alt="Category Icon"/>
-            </div>
-            <div>
-              <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">{{ tip.category.name}}</span>
-              <h4 class="font-bold mb-1"> {{ tip.title }} </h4>
-              <p class="text-[0.92em]"> {{ tip.short_description }} </p>
-            </div>
+          @click="selectTip(tip)"
+        >
+          <div
+            class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center"
+          >
+            <img :src="tip.category.image.url" alt="Category Icon" />
+          </div>
+          <div>
+            <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">{{
+              tip.category.name
+            }}</span>
+            <h4 class="font-bold mb-1">{{ tip.title }}</h4>
+            <p class="text-[0.92em]">{{ tip.short_description }}</p>
+          </div>
         </li>
       </ul>
     </section>
@@ -124,7 +149,6 @@ watch(() => locale.value, async () => {
 </template>
 
 <style lang="scss">
-
 .tip-container {
   h2 {
     font-size: 1.2em;
@@ -142,7 +166,7 @@ watch(() => locale.value, async () => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition:  0.4s ease;
+  transition: 0.4s ease;
   transition-delay: 0.3s;
 }
 .fade-enter-from,

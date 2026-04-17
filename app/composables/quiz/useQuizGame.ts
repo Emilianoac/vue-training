@@ -11,22 +11,22 @@ export default function useQuiz() {
     quizState: {
       isInitialized: false,
       isLoading: false,
-      isFinished: false
+      isFinished: false,
     },
     progress: {
       currentQuestionIndex: 0,
-      percentage: 0
+      percentage: 0,
     },
     answer: {
       selectedOptionId: null as string | null,
-      hasCheckedAnswer: false
+      hasCheckedAnswer: false,
     },
     result: {
       history: [] as AnswerRecord[],
-      stats: { correct: 0, wrong: 0, percentage: 0, total: 0 }
+      stats: { correct: 0, wrong: 0, percentage: 0, total: 0 },
     },
     startTime: null as number | null,
-    endTime: null as number | null
+    endTime: null as number | null,
   });
 
   // Derived
@@ -34,23 +34,23 @@ export default function useQuiz() {
 
   const displayQuestionIndex = computed(() => state.progress.currentQuestionIndex + 1);
 
-  const currentQuestion = computed(() =>
-    quiz.value?.questions[state.progress.currentQuestionIndex] ?? null
+  const currentQuestion = computed(
+    () => quiz.value?.questions[state.progress.currentQuestionIndex] ?? null,
   );
 
   const currentCorrectAnswer = computed(() => {
     const q = currentQuestion.value;
     if (!q) return null;
 
-    return q.answers.find(a => a.isCorrect) ?? null;
+    return q.answers.find((a) => a.isCorrect) ?? null;
   });
-  
+
   const isLastQuestion = computed(() =>
-    quiz.value ? state.progress.currentQuestionIndex === quiz.value.questions.length - 1 : false
+    quiz.value ? state.progress.currentQuestionIndex === quiz.value.questions.length - 1 : false,
   );
 
   const elapsedTime = computed(() =>
-    state.startTime && state.endTime ? Math.floor((state.endTime - state.startTime) / 1000) : 0
+    state.startTime && state.endTime ? Math.floor((state.endTime - state.startTime) / 1000) : 0,
   );
 
   // Actions
@@ -77,7 +77,10 @@ export default function useQuiz() {
         setError("No current question available.");
         return;
       }
-      const newAnswerRecord = recordAnswerUseCase(currentQuestion.value, state.answer.selectedOptionId);
+      const newAnswerRecord = recordAnswerUseCase(
+        currentQuestion.value,
+        state.answer.selectedOptionId,
+      );
       state.result.history.push(newAnswerRecord);
       state.answer.hasCheckedAnswer = true;
     },
@@ -102,7 +105,7 @@ export default function useQuiz() {
     },
     leaveQuiz: (message: string) => {
       if (window.confirm(message)) window.location.reload();
-    }
+    },
   };
 
   // Internal helpers
@@ -144,6 +147,6 @@ export default function useQuiz() {
     isLastQuestion,
     elapsedTime,
     // actions
-    actions
+    actions,
   };
 }

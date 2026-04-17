@@ -5,13 +5,12 @@ import FooterComponent from "~/components/layout/FooterComponent.vue";
 </script>
 
 <template>
-  <HeaderComponent/>
+  <HeaderComponent />
   <div class="container mx-auto px-4 mb-20 min-h-[80vh]">
     <slot />
   </div>
-  <FooterComponent/>
-  <MobileNavbarComponent/>
+  <FooterComponent />
+  <MobileNavbarComponent />
 </template>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>

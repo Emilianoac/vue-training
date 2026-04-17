@@ -5,35 +5,34 @@ import {
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 import IconBoxGlove from "@/components/assets/icons/IconBoxGlove.vue";
 import SelectComponent from "@/components/ui/SelectComponent.vue";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
-definePageMeta({ 
-  menu: true, 
+definePageMeta({
+  menu: true,
   index: 3,
   titleKey: "menu-label.challenges",
-  icon: IconBoxGlove
+  icon: IconBoxGlove,
 });
 useStaticPageSeo("challenges");
 
 const { locale } = useI18n();
-const {challenges, getChallenges} = useChallengeData();
+const { challenges, getChallenges } = useChallengeData();
 await getChallenges();
 
-const { 
-  difficulty,
-  selectedDifficulty,
-  difficulties,
-  currentDataList,
-} = useDataListFilter(challenges);
+const { difficulty, selectedDifficulty, difficulties, currentDataList } =
+  useDataListFilter(challenges);
 
-watch(() => locale.value, async() => {
-  await getChallenges();
-});
+watch(
+  () => locale.value,
+  async () => {
+    await getChallenges();
+  },
+);
 </script>
 
 <template>
@@ -44,26 +43,21 @@ watch(() => locale.value, async() => {
         <!-- Difficulty Filter -->
         <div class="flex items-center gap-3">
           <Label for="difficulty-select">{{ $t("general.difficulty") }}:</Label>
-          <Select 
-            v-model="difficulty"
-            id="difficulty-select">
-              <SelectTrigger size="sm" class="min-w-25">
-                <SelectValue :placeholder="$t('general.difficulty')">
-                  {{ selectedDifficulty.label }}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem 
-                    v-for="dif in difficulties"
-                    :key="dif.id"
-                    :value="dif.id"> 
-                    {{ dif.label }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
+          <Select v-model="difficulty" id="difficulty-select">
+            <SelectTrigger size="sm" class="min-w-25">
+              <SelectValue :placeholder="$t('general.difficulty')">
+                {{ selectedDifficulty.label }}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem v-for="dif in difficulties" :key="dif.id" :value="dif.id">
+                  {{ dif.label }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
           </Select>
-        </div>  
+        </div>
       </div>
     </div>
     <ChallengeListComponent :challenges="currentDataList" />
@@ -75,6 +69,4 @@ watch(() => locale.value, async() => {
   </div>
 </template>
 
-<style lang="postcss" scoped>
-  
-</style>
+<style lang="postcss" scoped></style>

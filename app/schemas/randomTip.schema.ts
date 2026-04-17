@@ -1,19 +1,18 @@
 import { z } from "zod";
 
 export const imageSchema = z.object({
-  url: z.string()
-})
+  url: z.string(),
+});
 
 export const categorySchema = z.object({
   name: z.string(),
-  image: imageSchema
-})
-
+  image: imageSchema,
+});
 
 export const codeExampleSchema = z.object({
   code: z.string(),
-  lang: z.string()
-})
+  lang: z.string(),
+});
 
 export const randomTipSchema = z.object({
   documentId: z.string(),
@@ -27,7 +26,7 @@ export const randomTipSchema = z.object({
 
   code_examples: z.array(codeExampleSchema).default([]),
 
-  source_url: z.string().url().optional()
-})
+  source_url: z.string().url().optional(),
+});
 
 export type RandomTip = z.infer<typeof randomTipSchema>;

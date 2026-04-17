@@ -2,14 +2,11 @@ import type { Ref } from "vue";
 import type { RandomTip } from "@/schemas/randomTip.schema";
 
 export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
-
   const currentTipId = ref<string | null>(null);
 
   const currentRandomTip = computed<RandomTip | null>(() => {
     if (!currentTipId.value) return null;
-    return (
-      randomTips.value.find( tip => tip.documentId === currentTipId.value ) ?? null
-    );
+    return randomTips.value.find((tip) => tip.documentId === currentTipId.value) ?? null;
   });
 
   function applyTip(tip: RandomTip | null) {
@@ -23,7 +20,7 @@ export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
     let newTipId: string;
 
     do {
-      const random = randomTips.value[Math.floor(Math.random() * randomTips.value.length)]!;      
+      const random = randomTips.value[Math.floor(Math.random() * randomTips.value.length)]!;
       newTipId = random.documentId;
     } while (newTipId === currentTipId.value && randomTips.value.length > 1);
 
@@ -43,20 +40,18 @@ export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
         return;
       }
 
-      if (
-        !currentTipId.value || !tips.some(t => t.documentId === currentTipId.value)
-      ) {
-        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId: null;
+      if (!currentTipId.value || !tips.some((t) => t.documentId === currentTipId.value)) {
+        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId : null;
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
-  
+
   return {
     currentRandomTip,
     currentTipId,
     randomTips,
     getRandomTip,
-    selectTip
+    selectTip,
   };
 }

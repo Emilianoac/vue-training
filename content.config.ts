@@ -4,7 +4,7 @@ import { challengeSchema } from "./app/schemas/challenge.schema";
 import { randomTipSchema } from "./app/schemas/randomTip.schema";
 
 export default defineContentConfig({
-  collections: {   
+  collections: {
     // Quizzes
     quizzes_en: defineCollection({
       type: "data",
@@ -12,7 +12,7 @@ export default defineContentConfig({
         include: "en/quizzes/**",
         prefix: "",
       },
-      schema: quizSchema
+      schema: quizSchema,
     }),
 
     quizzes_es: defineCollection({
@@ -21,7 +21,7 @@ export default defineContentConfig({
         include: "es/quizzes/**",
         prefix: "",
       },
-      schema: quizSchema
+      schema: quizSchema,
     }),
 
     // Challenges
@@ -31,7 +31,7 @@ export default defineContentConfig({
         include: "en/challenges/**",
         prefix: "",
       },
-      schema: challengeSchema
+      schema: challengeSchema,
     }),
 
     challenges_es: defineCollection({
@@ -40,7 +40,7 @@ export default defineContentConfig({
         include: "es/challenges/**",
         prefix: "",
       },
-      schema: challengeSchema
+      schema: challengeSchema,
     }),
 
     // Random Tips
@@ -50,7 +50,7 @@ export default defineContentConfig({
         include: "en/random-tips/**",
         prefix: "",
       },
-      schema: randomTipSchema
+      schema: randomTipSchema,
     }),
 
     randomTips_es: defineCollection({
@@ -59,7 +59,7 @@ export default defineContentConfig({
         include: "es/random-tips/**",
         prefix: "",
       },
-      schema: randomTipSchema
-    })
-  }
-})
+      schema: randomTipSchema,
+    }),
+  },
+});

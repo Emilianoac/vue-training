@@ -7,7 +7,7 @@ const show = ref(false);
 
 watch(loading, (newVal) => {
   if (newVal) {
-    show.value = true; 
+    show.value = true;
   } else {
     setTimeout(() => {
       show.value = false;
@@ -24,8 +24,7 @@ watch(loading, (newVal) => {
       width: `${progress}%`,
       opacity: show ? 1 : 0,
     }"
-  >
-  </div>
+  ></div>
 </template>
 
 <style lang="postcss">
@@ -34,7 +33,9 @@ watch(loading, (newVal) => {
   top: 0;
   left: 0;
   height: 4px;
-  transition: width 0.2s ease-out, opacity 0.5s ease-in-out;
+  transition:
+    width 0.2s ease-out,
+    opacity 0.5s ease-in-out;
   z-index: 9999;
   @apply bg-brand-main-500;
 }

@@ -7,18 +7,18 @@ export interface Quiz {
     id: string;
     name: string;
     image: {
-      url: string
-    }
+      url: string;
+    };
   };
-  title: string
-  description: string
+  title: string;
+  description: string;
   questions: Question[];
 }
 
 export interface Question {
   id: number;
-  questionText: string
-  correctAnswerExplanation: string
+  questionText: string;
+  correctAnswerExplanation: string;
   correctAnswerCodeExample: CodeExample[];
   answers: Answer[];
 }
@@ -30,14 +30,14 @@ export interface CodeExample {
 
 export interface Answer {
   id: string;
-  answerText: string
+  answerText: string;
   isCorrect: boolean;
 }
 
 export interface AnswerRecord {
-  question: string
+  question: string;
   answers: Array<Answer & { isSelected: boolean }>;
-  explanation: string
+  explanation: string;
   codeExample: CodeExample[];
 }
 

@@ -3,13 +3,13 @@ import type { Quiz, QuizListItem } from "@/schemas/quiz.schema";
 
 export default function useQuizData() {
   const { locale } = useI18n();
-  
+
   const quiz = ref<Quiz>();
   const quizzes = ref<QuizListItem[]>([]);
   const isLoading = ref(false);
-  const error = ref<{ status: boolean; message: string }>({ 
-    status: false, 
-    message: "" 
+  const error = ref<{ status: boolean; message: string }>({
+    status: false,
+    message: "",
   });
 
   async function getQuiz(slug: string) {
@@ -30,7 +30,7 @@ export default function useQuizData() {
       targetRef.value = data;
     } catch (err) {
       error.value.status = true;
-      error.value.message = err instanceof Error ? err.message : "Unkown error"
+      error.value.message = err instanceof Error ? err.message : "Unkown error";
     } finally {
       isLoading.value = false;
     }

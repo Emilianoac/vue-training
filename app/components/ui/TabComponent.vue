@@ -4,7 +4,7 @@ import { ref } from "vue";
 interface Tab {
   name: string;
   id: string;
-  icon? :string
+  icon?: string;
 }
 
 const props = defineProps<{
@@ -22,16 +22,19 @@ function openTab(tabiId: string) {
 <template>
   <div class="w-full" :id="id">
     <!-- Tab Header -->
-    <div class="flex justify-start items-center gap-3 border-b border-gray-300 dark:border-gray-700 overflow-x-auto">
+    <div
+      class="flex justify-start items-center gap-3 border-b border-gray-300 dark:border-gray-700 overflow-x-auto"
+    >
       <button
         v-for="(item, i) in items"
         @click="openTab(item.id)"
         :data-id="item.id"
         :key="i"
         class="inline-flex items-center gap-2 py-4 px-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-        :class="[activeTab === item.id ? 'border-blue-500  text-blue-500' : ' border-transparent' ]">
-          <Icon v-if="item.icon" :name="item.icon"></Icon>
-          {{ $t(item.name) }}
+        :class="[activeTab === item.id ? 'border-blue-500  text-blue-500' : ' border-transparent']"
+      >
+        <Icon v-if="item.icon" :name="item.icon"></Icon>
+        {{ $t(item.name) }}
       </button>
     </div>
     <!-- Tab Content -->
@@ -40,12 +43,12 @@ function openTab(tabiId: string) {
         v-for="(item, i) in items"
         :key="i"
         :id="`tab-${item.id}`"
-        v-show="activeTab === item.id">
-          <slot :name="item.id"></slot>
+        v-show="activeTab === item.id"
+      >
+        <slot :name="item.id"></slot>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>

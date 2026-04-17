@@ -3,16 +3,16 @@ import type { RandomTip } from "@/schemas/randomTip.schema";
 
 export default function useRandomTipData() {
   const { locale } = useI18n();
-  
+
   const randomTips = ref<RandomTip[]>([]);
   const isLoading = ref(false);
-  const error = ref<{ status: boolean; message: string }>({ 
-    status: false, 
-    message: "" 
+  const error = ref<{ status: boolean; message: string }>({
+    status: false,
+    message: "",
   });
 
   async function getRandomTips() {
-    await loadAndSet(() => randomTipService.fetchRandomTips(locale.value), randomTips)
+    await loadAndSet(() => randomTipService.fetchRandomTips(locale.value), randomTips);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
@@ -25,7 +25,7 @@ export default function useRandomTipData() {
       targetRef.value = data;
     } catch (err) {
       error.value.status = true;
-      error.value.message = err instanceof Error ? err.message : "Unkown error"
+      error.value.message = err instanceof Error ? err.message : "Unkown error";
     } finally {
       isLoading.value = false;
     }
@@ -36,6 +36,6 @@ export default function useRandomTipData() {
     isLoading,
     error,
 
-    getRandomTips
+    getRandomTips,
   };
 }

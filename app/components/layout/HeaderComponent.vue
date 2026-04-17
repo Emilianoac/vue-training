@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-  import { useRouter } from "vue-router"
-  import LangToggleComponent from "@/components/layout/LangToggleComponent.vue";
-  import SiteBrandComponent from "@/components/layout/SiteBrandComponent.vue";
-  import ThemeToggleComponent from "@/components/layout/ThemeToggleComponent.vue";
+import { useRouter } from "vue-router";
+import LangToggleComponent from "@/components/layout/LangToggleComponent.vue";
+import SiteBrandComponent from "@/components/layout/SiteBrandComponent.vue";
+import ThemeToggleComponent from "@/components/layout/ThemeToggleComponent.vue";
 
-  const router = useRouter();
-  
-  const menuItems = router.getRoutes().filter(route => route.meta.menu).sort((a, b) => {
+const router = useRouter();
+
+const menuItems = router
+  .getRoutes()
+  .filter((route) => route.meta.menu)
+  .sort((a, b) => {
     const indexA = Number(a.meta.index ?? 0);
     const indexB = Number(b.meta.index ?? 0);
     return indexA - indexB;
@@ -14,7 +17,9 @@
 </script>
 
 <template>
-  <header class=" bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+  <header
+    class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50"
+  >
     <div class="container mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/">
         <SiteBrandComponent class="max-w-[160px]" />
@@ -24,10 +29,11 @@
           <ul class="hidden md:flex space-x-6">
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <NuxtLink
-                :to="menuItem.path" 
+                :to="menuItem.path"
                 class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-primary/30"
-                active-class="border-b-primary hover:border-b-primary!">
-                  {{ $t(menuItem.meta.titleKey ?? '') }}
+                active-class="border-b-primary hover:border-b-primary!"
+              >
+                {{ $t(menuItem.meta.titleKey ?? "") }}
               </NuxtLink>
             </li>
           </ul>
@@ -41,5 +47,4 @@
   </header>
 </template>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>

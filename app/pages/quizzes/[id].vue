@@ -21,7 +21,7 @@ const {
   quiz,
 
   state,
-  
+
   totalQuestions,
   displayQuestionIndex,
   currentQuestion,
@@ -29,9 +29,8 @@ const {
   isLastQuestion,
   elapsedTime,
 
-  actions
+  actions,
 } = useQuizGame();
-
 
 await actions.loadQuiz(route.params.id as string);
 
@@ -46,9 +45,12 @@ const currentLayout = computed(() => {
   return "default";
 });
 
-watch(() => locale, async () => {
-  await actions.loadQuiz(route.params.id as string);
-});
+watch(
+  () => locale,
+  async () => {
+    await actions.loadQuiz(route.params.id as string);
+  },
+);
 </script>
 
 <template>
@@ -67,7 +69,7 @@ watch(() => locale, async () => {
       />
 
       <!-- Loading -->
-      <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading"/>
+      <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
 
       <!-- On progress -->
       <QuizOnProgress

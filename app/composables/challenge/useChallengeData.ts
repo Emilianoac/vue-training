@@ -3,21 +3,21 @@ import type { Challenge } from "@/schemas/challenge.schema";
 
 export default function useChallengeData() {
   const { locale } = useI18n();
-  
+
   const challenge = ref<Challenge>();
   const challenges = ref<Challenge[]>([]);
   const isLoading = ref(false);
-  const error = ref<{ status: boolean; message: string }>({ 
-    status: false, 
-    message: "" 
+  const error = ref<{ status: boolean; message: string }>({
+    status: false,
+    message: "",
   });
 
   async function getChallenge(slug: string) {
-    await loadAndSet(() => challengeService.fetchChallenge(slug, locale.value), challenge)
+    await loadAndSet(() => challengeService.fetchChallenge(slug, locale.value), challenge);
   }
 
   async function getChallenges() {
-    await loadAndSet(() => challengeService.fetchChallenges(locale.value), challenges)
+    await loadAndSet(() => challengeService.fetchChallenges(locale.value), challenges);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
@@ -30,7 +30,7 @@ export default function useChallengeData() {
       targetRef.value = data;
     } catch (err) {
       error.value.status = true;
-      error.value.message = err instanceof Error ? err.message : "Unkown error"
+      error.value.message = err instanceof Error ? err.message : "Unkown error";
     } finally {
       isLoading.value = false;
     }
@@ -43,6 +43,6 @@ export default function useChallengeData() {
     error,
 
     getChallenge,
-    getChallenges
+    getChallenges,
   };
 }

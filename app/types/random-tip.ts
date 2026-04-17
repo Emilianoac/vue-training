@@ -5,11 +5,11 @@ export interface RandomTip {
     id: string;
     name: string;
     image: {
-      url: string
-    }
-  },
+      url: string;
+    };
+  };
   short_description: string;
-  content: string
+  content: string;
   code_examples: CodeExamples[];
   source_url?: string;
 }
