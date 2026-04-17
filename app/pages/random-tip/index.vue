@@ -1,38 +1,36 @@
 <script lang="ts" setup>
-  
-  import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
-  import IconBook from "@/components/assets/icons/IconBook.vue";
-  import BaseButton from "@/components/ui/BaseButton.vue";
-  import IconDice from "@/components/assets/icons/IconDice.vue";
+import useRandomTipData from "@/composables/random-tip/useRandomTipData";
+import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
+import useMarkdownParser  from "@/composables/useMarkdownParser";
 
-  import useRandomTipData from "@/composables/random-tip/useRandomTipData";
-  import useRandomTipGame  from "@/composables/random-tip/useRandomTipGame";
-  import useMarkdownParser  from "@/composables/useMarkdownParser";
+import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
+import IconBook from "@/components/assets/icons/IconBook.vue";
+import { Button } from "@/components/ui/button";
+import IconDice from "@/components/assets/icons/IconDice.vue";
 
-  definePageMeta({ 
-    menu: true, 
-    index: 4,
-    titleKey: "menu-label.randomTip",
-    icon: IconDice
-  });
-  useStaticPageSeo("randomTips");
+definePageMeta({ 
+  menu: true, 
+  index: 4,
+  titleKey: "menu-label.randomTip",
+  icon: IconDice
+});
+useStaticPageSeo("randomTips");
 
-  const { locale } = useI18n();
-  const { getRandomTips, randomTips} = useRandomTipData();
-  const { parse } = useMarkdownParser();
+const { locale } = useI18n();
+const { getRandomTips, randomTips} = useRandomTipData();
+const { parse } = useMarkdownParser();
 
+await getRandomTips();
+const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips);
+
+const parsedExplanation = computed(() => {
+  if (!currentRandomTip.value) return ""
+  return parse(currentRandomTip.value.content)
+})
+
+watch(() => locale.value, async () => {
   await getRandomTips();
-
-  const { selectTip, getRandomTip, currentRandomTip  } = useRandomTipGame(randomTips);
-
-  const parsedExplanation = computed(() => {
-    if (!currentRandomTip.value) return ""
-    return parse(currentRandomTip.value.content)
-  })
-  
-  watch(() => locale.value, async () => {
-    await getRandomTips();
-  });
+});
 </script>
 
 <template>
@@ -48,21 +46,19 @@
             :tip-id="currentRandomTip.documentId"
           />
           <!-- Get a new tip button -->
-          <BaseButton 
-            type="button" 
-            variant="secondary"
-            @click="getRandomTip" 
-            class="mx-auto mt-8 !hidden lg:!flex">
-              {{ $t("randomTip.general.get_a_new_tip") }}
-            <IconBook class="inline-block ml-2" width="24" height="24"/>
-          </BaseButton>
+          <Button variant="secondary" size="xl" class="hidden lg:flex mx-auto mt-4" @click="getRandomTip">
+             {{ $t("randomTip.general.get_a_new_tip") }}
+            <IconBook  width="24" height="24"/>
+          </Button>
         </div>
   
         <!-- Tip Content -->
         <div class="w-full">
           <transition name="fade" mode="out-in">
-            <div class="tip-container" :key="currentRandomTip.documentId" >
-              <div class="tip-content">
+            <div 
+              class="tip-container bg-white border dark:bg-slate-800/50  border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5" 
+              :key="currentRandomTip.documentId" >
+              <div>
                 <!-- Tip explanation -->
                 <div v-html="parsedExplanation"></div>
                 <!-- Tip code examples -->
@@ -90,15 +86,15 @@
         </div>
       </div>
 
-      <!-- Get a new tip button -->
-      <BaseButton 
+      <!-- Get a new tip button mobile -->
+      <Button 
         type="button" 
         variant="secondary" 
         @click="getRandomTip" 
-        class="mx-auto mt-8 lg:!hidden !flex">
+        class="mx-auto mt-8 lg:hidden! flex">
           {{ $t("randomTip.general.get_a_new_tip") }}
-        <IconBook class="inline-block ml-2" width="24" height="24"/>
-      </BaseButton>
+        <IconBook width="24" height="24"/>
+      </Button>
     </section>
   
     <hr class="my-10 w-full border-t border-gray-200 dark:border-gray-800"/>
@@ -110,7 +106,7 @@
         <li 
           v-for="tip in randomTips" 
           :key="tip.documentId" 
-          :class="{ '!outline-brand-main-500': currentRandomTip.documentId === tip.documentId }"
+          :class="{ '!outline-primary': currentRandomTip.documentId === tip.documentId }"
           class="block lg:flex items-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
           @click="selectTip(tip)">
             <div class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center">
@@ -127,13 +123,12 @@
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="scss">
 
 .tip-container {
-  @apply bg-white border dark:bg-slate-800/50  border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5;
-
   h2 {
-    @apply text-[1.1em] lg:text-xl mb-4;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
   }
 
   p {
@@ -142,10 +137,6 @@
     code {
       white-space: nowrap;
     }
-  }
-
-  code:not(.hljs) {
-    @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-blue-200 px-1 py-0.5 rounded-md;
   }
 }
 
