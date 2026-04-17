@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -42,11 +43,11 @@
 }
 
 .dark {
---background: oklch(0.1868 0.0353 238.8348);
+--background: oklch(0.2077 0.0398 265.7549);
 --foreground: oklch(0.9205 0.0086 225.0879);
---card: oklch(0.2422 0.0413 232.135);
+--card: oklch(0.1933 0.0343 265.3725);
 --card-foreground: oklch(0.9205 0.0086 225.0879);
---popover: oklch(0.1914 0.0373 239.9035);
+--popover: oklch(0.1802 0.0325 266.6248);
 --popover-foreground: oklch(0.9205 0.0086 225.0879);
 --primary: oklch(0.815 0.1706 151.2684);
 --primary-foreground: oklch(0.1206 0.0243 231.0225);
@@ -54,7 +55,7 @@
 --secondary-foreground: oklch(0 0 0);
 --muted: oklch(0.1394 0.0106 220.3811);
 --muted-foreground: oklch(0.6498 0.03 229.4501);
---accent: oklch(0.1547 0.0159 266.3824);
+--accent: oklch(0.2552 0.0415 267.5355);
 --accent-foreground: oklch(0.9499 0.0195 260.1697);
 --destructive: oklch(0.5679 0.2323 28.2503);
 --destructive-foreground: oklch(0.9508 0.0198 25.1716);
