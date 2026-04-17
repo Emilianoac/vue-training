@@ -1,14 +1,12 @@
 {
   "en": "Inglés",
   "es": "Español",
-
-   "menu-label": {
+  "menu-label": {
     "home": "Inicio",
     "quizzes": "Cuestionarios",
     "challenges": "Desafios",
     "randomTip": "Tip Random"
   },
-
   "general": {
     "challenge": {
       "one": "Desafío",
@@ -42,7 +40,6 @@
     "duration": "Duración",
     "questions": "Preguntas"
   },
-
   "home": {
     "welcome-one": "Cuestionarios y",
     "welcome-two": "Desafios",
@@ -50,9 +47,30 @@
     "welcome-four": "practicar",
     "welcome-five": "con",
     "description": "Pon a prueba tu conocimiento y sigue mejorando con cada desafío.",
-    "hero_button_text": "Comenzar con cuestionarios"
+    "hero_button_text": "Comenzar con cuestionarios",
+    "features": {
+      "quizzes": {
+        "title": "Cuestionarios Interactivos",
+        "description": "Refuerza tu conocimiento fundamental y practica con cuestionarios que cubren la reactividad, la Composition API y las herramientas del ecosistema.",
+        "button_text": "Explorar cuestionarios"
+      },
+      "challenges": {
+        "title": "Desafíos Técnicos",
+        "description": "Problemas de codificación prácticos que van desde errores de gestión de estado hasta tareas de optimización de rendimiento.",
+        "button_text": "Explorar desafíos"
+      },
+      "tips": {
+        "title": "Una colección de tips de Vue",
+        "description": "Vuecito te ofrece una dosis diaria de sabiduría sobre Vue.js, desde características ocultas hasta mejores prácticas, todo en un formato divertido y atractivo.",
+        "button_text": "Explorar tips"
+      }
+    },
+    "call_to_action": {
+      "title": "¿Listo para mejorar tus habilidades en",
+      "description": "Prueba algunos cuestionarios y desafíos para poner a prueba tu conocimiento y seguir aprendiendo.",
+      "button_text": "Comenzar ahora"
+    }
   },
-
   "quiz": {
     "start_quiz": "Comenzar cuestionario",
     "question": "Pregunta",
@@ -74,7 +92,6 @@
     "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
     "return_to_quizzes": "Volver a cuestionarios",
     "quiz_duration": "Ilimitada",
-    
     "results": {
       "quiz_completed": "¡Cuestionario completado exitosamente!",
       "your_score": "Tu puntuación",
@@ -89,7 +106,6 @@
       "go_to_quizzes_list": "Ir a cuestionarios"
     }
   },
-
   "randomTip": {
     "general": {
       "get_a_new_tip": "Obtener un tip random",
@@ -97,7 +113,6 @@
       "source": "Fuente"
     }
   },
-
   "challenge": {
     "tabs": {
       "description": "Descripción",
@@ -108,7 +123,7 @@
       "objectives": "Objetivos"
     },
     "play": {
-      "info" : "El código que escribas en este editor no se guardará una vez que cierres o recargues la página.",
+      "info": "El código que escribas en este editor no se guardará una vez que cierres o recargues la página.",
       "instructions": "Para asegurarte que has completado el desafio, deber abrir una nueva terminal y ejecutar el comando:",
       "instructions_2": "Si todos los tests pasan, entonces has completado el desafio!",
       "expand_editor": "Expandir editor",

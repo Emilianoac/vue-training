@@ -1,14 +1,12 @@
 {
   "en": "English",
   "es": "Spanish",
-
   "menu-label": {
     "home": "Home",
     "quizzes": "Quizzes",
     "challenges": "Challenges",
     "randomTip": "Random tip"
   },
-
   "general": {
     "challenge": {
       "one": "Challenge",
@@ -42,7 +40,6 @@
     "duration": "Duration",
     "questions": "Questions"
   },
-
   "home": {
     "welcome-one": "Quizzes and",
     "welcome-two": "Challenges",
@@ -50,9 +47,30 @@
     "welcome-four": "practice",
     "welcome-five": "with",
     "description": "Test your knowledge and keep improving with each challenge.",
-    "hero_button_text": "Get started with quizzes"
+    "hero_button_text": "Get started with quizzes",
+    "features": {
+      "quizzes": {
+        "title": "Interactive Quizzes",
+        "description": "Practice and reinforce your fundamental knowledge with quizzes covering reactivity, the Composition API, and ecosystem tools.",
+        "button_text": "Explore quizzes"
+      },
+      "challenges": {
+        "title": "Technical Challenges",
+        "description": "Hands-on coding problems ranging from state management bugs to performance optimization tasks.",
+        "button_text": "Explore challenges"
+      },
+      "tips": {
+        "title": "A collection of Vue tips",
+        "description": "Vuecito gives you a daily dose of Vue.js wisdom, from hidden features to best practices, all in a fun and engaging format.",
+        "button_text": "Explore tips"
+      }
+    },
+    "call_to_action": {
+      "title": "Want to take some time to practice",
+      "description": "Try a few quizzes and challenges to test your knowledge and keep learning.",
+      "button_text": "Get started"
+    }
   },
-
   "quiz": {
     "start_quiz": "Start with the quiz",
     "question": "Question",
@@ -74,8 +92,6 @@
     "leave_quiz_confirm": "Are you sure you want to leave the quiz?",
     "return_to_quizzes": "Return to quizzes",
     "quiz_duration": "Unlimited",
-
-    
     "results": {
       "quiz_completed": "Quiz completed successfully!",
       "your_score": "Your score",
@@ -90,7 +106,6 @@
       "go_to_quizzes_list": "Go to quizzes list"
     }
   },
-
   "randomTip": {
     "general": {
       "get_a_new_tip": "Get a random tip",
@@ -98,7 +113,6 @@
       "source": "Source"
     }
   },
-
   "challenge": {
     "tabs": {
       "description": "Description",
@@ -109,7 +123,7 @@
       "objectives": "Objectives"
     },
     "play": {
-      "info" : "The code you write in this editor will not be saved once you close or reload the page.",
+      "info": "The code you write in this editor will not be saved once you close or reload the page.",
       "instructions": "To ensure you have completed the challenge, you should open a new terminal and run the command:",
       "instructions_2": "If all tests pass, then you have completed the challenge!",
       "expand_editor": "Expand editor",
