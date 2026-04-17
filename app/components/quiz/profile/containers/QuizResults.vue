@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { AnswerRecord } from "@/types/quiz";
 import BaseButton from "@/components/ui/BaseButton.vue";
+import { Button } from "@/components/ui/button";
 
 const emit = defineEmits<{
   (e: "resetQuiz"): void
@@ -151,21 +152,27 @@ function getStars(p: number ) {
             </p>
           </div>
         </div>
-  
-        <!-- Retake Quiz Button -->
-         <BaseButton 
-          type="button" 
-          variant="primary" 
-          @click="emit('resetQuiz')" 
-          class="w-full mt-6">
-          {{ $t("quiz.results.retake_quiz") }}
-          <Icon name="mdi:rotate-left" class="ms-2 text-xl"/>
-        </BaseButton>
 
-        <!-- Go to quiz list button -->
-         <BaseButton type="NuxtLink" variant="secondary" to="/quizzes" class="w-full mt-3">
-          {{ $t("quiz.results.go_to_quizzes_list") }}
-        </BaseButton>
+        <div class="space-y-2">
+          <!-- Retake Quiz Button -->
+          <Button 
+            type="button" 
+            @click="emit('resetQuiz')" 
+            class="w-full mt-6">
+              {{ $t("quiz.results.retake_quiz") }}
+              <Icon name="mdi:rotate-left" class="text-xl"/>
+          </Button>
+  
+          <!-- Go to quiz list button -->
+          <Button
+            type="NuxtLink" 
+            variant="secondary" 
+            to="/quizzes" 
+            class="w-full"
+            as-child>
+              <NuxtLink to="/quizzes">{{ $t("quiz.results.go_to_quizzes_list") }}</NuxtLink>
+          </Button>
+        </div>
       </div>
     </div>
   

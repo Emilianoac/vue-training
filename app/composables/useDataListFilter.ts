@@ -1,16 +1,28 @@
 import { computed, ref, type Ref } from "vue";
 
-export default function useDataListFilter<
-  T extends { category: { name: string }; level: string }
->(data: Ref<T[]>) {
+interface DataItem {
+  category: { name: string };
+  level: string;
+}
 
+export default function useDataListFilter<T extends DataItem>(data: Ref<T[]>) {
   const { t } = useI18n();
 
   const ALL = "all";
+  const difficulty = ref(ALL);
+  const category = ref(ALL);
 
-  const selectedCategory = ref(ALL);
-  const selectedDifficulty = ref(ALL);
-  
+  const selectedCategory = computed(() => {
+    if (category.value === ALL) {
+      return { id: ALL, label: t("general.all") };
+    }
+
+    return {
+      id: category.value,
+      label: category.value
+    };
+  });
+
   const categories = computed(() => {
     return [
       { id: ALL, label: t("general.all") },
@@ -31,25 +43,40 @@ export default function useDataListFilter<
     ];
   });
 
+  const selectedDifficulty = computed(() => {
+    if (difficulty.value === ALL) {
+      return { id: ALL, label: t("general.all") };
+    } 
+
+    return {
+      id: difficulty.value,
+      label: t(`general.levels.${difficulty.value}`)
+    };
+  });
+
   const currentDataList = computed(() => {
     return data.value.filter(item => {
       const categoryMatch =
-        selectedCategory.value === ALL ||
-        item.category.name === selectedCategory.value;
+        category.value === ALL ||
+        item.category.name === category.value;
 
       const difficultyMatch =
-        selectedDifficulty.value === ALL ||
-        item.level === selectedDifficulty.value;
+        difficulty.value === ALL ||
+        item.level === difficulty.value;
 
       return categoryMatch && difficultyMatch;
     });
   });
 
   return {
+    category,
     selectedCategory,
-    selectedDifficulty,
     categories,
+
+    difficulty,
+    selectedDifficulty,
     difficulties,
+
     currentDataList
   };
 }

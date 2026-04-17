@@ -269,7 +269,7 @@ withDefaults(defineProps<{
   </svg>
 </template>
 
-<style lang="postcss">
+<style lang="scss" scoped>
 
 #vuecito {
   animation: idle-animation 1.8s ease-in-out infinite;

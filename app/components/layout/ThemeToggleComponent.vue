@@ -1,6 +1,7 @@
 <script lang="ts" setup>
   import IconMoon from "@/components/assets/icons/IconMoon.vue";
   import IconSun from "@/components/assets/icons/IconSun.vue";
+  import { Button } from "@/components/ui/button";
 
   const colorMode = useColorMode();
 
@@ -11,12 +12,13 @@
 </script>
 
 <template>
-    <button 
+    <Button
       @click="toggleColorMode()" 
-      class="p-2 rounded-md bg-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none">
+      variant="outline"
+      size="icon-sm">
       <IconSun v-if="$colorMode.value === 'dark'" class="w-4 h-4 text-yellow-500" />
       <IconMoon v-else class="w-4 h-4 text-yellow-500" />
-    </button>
+    </Button>
 </template>
 
 <style lang="postcss" scoped>

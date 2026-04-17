@@ -2,6 +2,7 @@
 import type {Level } from "@/schemas/quiz.schema";
 import ChipComponent from "@/components/ui/ChipComponent.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
+import { Button } from "@/components/ui/button";
 
 defineEmits<{
   startQuiz: [];
@@ -34,14 +35,11 @@ defineProps<{
         <!-- Quiz Description -->
         <p class="opacity-85">{{ description }}</p>
   
-        <BaseButton
-          class="font-semibold mt-8"
-          type="button"
-          @click="$emit('startQuiz')">
-            {{ $t("quiz.start_quiz") }}
-            <Icon class="ms-1" name="mdi:arrow-right" size="24"/>
-        </BaseButton>
-  
+        <Button class="mt-8" size="xl" @click="$emit('startQuiz')">
+          {{ $t("quiz.start_quiz") }}
+          <Icon class="ms-1" name="mdi:arrow-right" size="24"/>
+        </Button>
+    
         <hr class="my-8 border-slate-200 dark:border-slate-800">
   
         <div class="flex gap-10">

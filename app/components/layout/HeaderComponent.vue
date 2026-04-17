@@ -25,8 +25,8 @@
             <li v-for="(menuItem, index) in menuItems" :key="index">
               <NuxtLink
                 :to="menuItem.path" 
-                class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-brand-main-500/30"
-                active-class="border-b-brand-main-500 hover:!border-b-brand-main-500">
+                class="border-b-[3px] border-transparent pb-1 hover:border-b-[3px] hover:border-b-primary/30"
+                active-class="border-b-primary hover:border-b-primary!">
                   {{ $t(menuItem.meta.titleKey ?? '') }}
               </NuxtLink>
             </li>

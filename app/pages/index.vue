@@ -5,8 +5,8 @@ import HeaderIllustration from "@/components/assets/illustrations/HeaderIllustra
 import QuizCard from "@/components/quiz/QuizCard.vue";
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
 import SwiperComponent from "@/components/ui/SwiperComponent.vue";
-import BaseButton from "@/components/ui/BaseButton.vue";
 import IconHome from "@/components/assets/icons/IconHome.vue";
+import { Button } from "@/components/ui/button";
 
 definePageMeta({ 
   menu: true, 
@@ -39,7 +39,7 @@ watch(() => locale.value, async() => {
           {{ $t("home.welcome-one") }} 
           {{ $t("home.welcome-two") }}
           {{ $t("home.welcome-three") }} 
-          <span class="text-brand-main-600">{{$t("home.welcome-four") }}</span>
+          <span class="text-primary">{{$t("home.welcome-four") }}</span>
           {{ $t("home.welcome-five") }} 
           <span class="text-brand-main-600">Vue.js</span>
         </h1>
@@ -47,9 +47,12 @@ watch(() => locale.value, async() => {
           {{ $t("home.description") }}
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:w-max gap-4 justify-center lg:justify-start">
-          <BaseButton type="NuxtLink" variant="primary" to="/quizzes" class="gap-1">
-            {{$t("home.hero_button_text")}} <Icon name="mdi:arrow-right" size="24"></Icon>
-          </BaseButton>
+          <Button size="lg" as-child>
+            <NuxtLink to="/quizzes">
+            {{$t("home.hero_button_text")}}
+            <Icon name="mdi:arrow-right" size="24"></Icon>
+            </NuxtLink>
+          </Button>
         </div>
       </div>
       <HeaderIllustration class="max-w-[500px] lg:max-w-none mx-auto" />
@@ -63,9 +66,13 @@ watch(() => locale.value, async() => {
           <QuizCard :quiz="item"/>
         </template>
       </SwiperComponent>
-      <BaseButton type="NuxtLink" to="/quizzes" class="w-max mx-auto mt-2">
-        {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
-      </BaseButton>
+      <div class="flex justify-center mt-2">
+        <Button size="lg" as-child>
+          <NuxtLink to="/quizzes">
+            {{$t("general.goTo")}} {{ $t("general.quiz.many") }}
+          </NuxtLink>
+        </Button>
+      </div>
     </section>
   
     <!-- Challenges -->
@@ -76,9 +83,13 @@ watch(() => locale.value, async() => {
           <ChallengeCard :challenge="item"/>
         </template>
       </SwiperComponent>
-      <BaseButton type="NuxtLink" to="/challenges" class="w-max mx-auto mt-2">
-        {{$t("general.goTo")}} {{$t("general.challenge.many") }}
-      </BaseButton>
+      <div class="flex justify-center mt-2">
+        <Button size="lg" as-child>
+          <NuxtLink to="/challenges">
+            {{$t("general.goTo")}} {{ $t("general.challenge.many") }}
+          </NuxtLink>
+        </Button>
+      </div>
     </section>
   </div>
 </template>

@@ -24,8 +24,8 @@ defineProps<{
   </div>
   <div 
     data-test="challenge-playground"
-    class="grid grid-cols-1 gap-6 mb-5"
-    :class="[expandeEditor ? 'expand-editor' : 'collapse-editor']">
+    class="grid gap-6 mb-5"
+    :class="[expandeEditor ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-[0.3fr_1fr]']">
 
     <div v-if="!expandeEditor">
       <!-- Objectives -->
@@ -74,13 +74,6 @@ defineProps<{
   </div>
 </template>
 
-<style lang="postcss" scoped>
+<style scoped>
 
-  .expand-editor {
-    grid-template-columns: 1fr;
-  }
-
-  .collapse-editor {
-    @apply grid-cols-1 lg:grid-cols-[0.3fr,1fr];
-  }
 </style>

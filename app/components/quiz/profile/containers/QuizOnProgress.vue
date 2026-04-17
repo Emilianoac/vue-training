@@ -1,9 +1,8 @@
 <script lang="ts" setup>
   import type { Question } from "@/schemas/quiz.schema";
-
   import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue"
   import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";
-  import BaseButton from "@/components/ui/BaseButton.vue";
+  import { Button } from "@/components/ui/button";
 
   defineProps<{
     totalQuestions: number,
@@ -69,32 +68,30 @@
     <div class="fixed lg:relative bottom-0 w-full left-0 bg-slate-100 dark:bg-slate-800 dark:lg:bg-transparent lg:bg-transparent rounded-md mt-4 z-[999]">
       <div class="container mx-auto flex justify-end items-center gap-3 lg:p-0 p-4">
         <!-- View Details button -->
-        <BaseButton 
+         <Button 
           v-if="hasCheckedAnswer && currentQuestion" 
           type="button"
           variant="secondary"
           @click="emits('update:showDetails', true)"
-          class="app-button secondary text-sm">
-          {{ $t('quiz.view_details') }}
-        </BaseButton>
+          >
+            {{ $t('quiz.view_details') }}
+        </Button>
         <!-- Verify Answer Button -->
-        <BaseButton
+        <Button
           v-if="!hasCheckedAnswer && currentQuestion"
           type="button"
           :disabled="!selectedOptionId"
-          class="app-button primary text-sm" 
           @click="emits('answerCurrentQuestion')">
-          {{ $t('quiz.verify_answer') }}
-        </BaseButton>
+            {{ $t('quiz.verify_answer') }}
+        </Button>
         <!-- Next Question Button -->
-        <BaseButton
+        <Button 
           v-else
-          type="button"
+          type="button"         
           :disabled="!selectedOptionId"
-          class="app-button primary text-sm"
           @click="emits('goToNextQuestion')">
-          {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
-        </BaseButton>
+            {{ isLastQuestion ? $t('quiz.finish_quiz') : $t('quiz.next_question') }}
+        </Button>
       </div>
     </div>
   </div>
