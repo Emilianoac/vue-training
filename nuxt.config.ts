@@ -2,25 +2,24 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   modules: [
-    "@pinia/nuxt", 
-    "@nuxtjs/i18n", 
-    "nuxt-icon", 
-    "@nuxt/icon", 
-    "@nuxtjs/color-mode", 
+    "@pinia/nuxt",
+    "@nuxtjs/i18n",
+    "@nuxt/icon",
+    "@nuxtjs/color-mode",
     "@nuxt/test-utils/module",
     "@nuxt/content",
     "shadcn-nuxt",
   ],
   css: ["~/assets/css/tailwind.css"],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
   app: {
     head: {
-      title: "Vue Training"
+      title: "Vue Training",
     },
   },
   i18n: {
@@ -30,7 +29,6 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_redirected",
-      
     },
     locales: [
       { code: "en", language: "en-US", name: "English", file: "en.json", displayName: "English" },
@@ -39,17 +37,17 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: "dark",
-    fallback: "dark"
+    fallback: "dark",
   },
   content: {
-    experimental: {sqliteConnector: "native"}
+    experimental: { sqliteConnector: "native" },
   },
   shadcn: {
     prefix: "",
-    componentDir: "@/components/ui"
+    componentDir: "@/components/ui",
   },
   runtimeConfig: {
     strapiUrl: process.env.STRAPI_URL,
-    strapiToken: process.env.STRAPI_TOKEN
-  }
-})
+    strapiToken: process.env.STRAPI_TOKEN,
+  },
+});

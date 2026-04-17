@@ -28,7 +28,6 @@
     "lucide-vue-next": "^1.0.0",
     "marked": "^17.0.1",
     "nuxt": "^4.2.1",
-    "nuxt-icon": "^1.0.0-beta.7",
     "pinia": "^3.0.4",
     "reka-ui": "^2.9.6",
     "shadcn-nuxt": "^2.6.2",
