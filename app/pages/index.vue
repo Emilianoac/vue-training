@@ -79,11 +79,11 @@ watch(
                 {{ $t("home.features.quizzes.description") }}
               </p>
             </div>
-            <Button size="xl" variant="secondary">
+            <Button size="xl" variant="secondary" as-child>
               <NuxtLink to="/quizzes">
                 {{ $t("home.features.quizzes.button_text") }}
+                <Icon name="mdi:arrow-right" size="24"></Icon>
               </NuxtLink>
-              <Icon name="mdi:arrow-right" size="24"></Icon>
             </Button>
           </div>
         </article>
@@ -98,11 +98,11 @@ watch(
               <h3 class="text-2xl font-bold">{{ $t("home.features.challenges.title") }}</h3>
               <p>{{ $t("home.features.challenges.description") }}</p>
             </div>
-            <Button size="xl" variant="secondary">
+            <Button size="xl" variant="secondary" as-child>
               <NuxtLink to="/quizzes">
                 {{ $t("home.features.challenges.button_text") }}
+                <Icon name="mdi:arrow-right" size="24"></Icon>
               </NuxtLink>
-              <Icon name="mdi:arrow-right" size="24"></Icon>
             </Button>
           </div>
         </article>
