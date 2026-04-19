@@ -45,9 +45,8 @@ watch(
 </script>
 
 <template>
-  <div class="mt-5 md:mt-10">
-    <div class="block md:flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-bold mb-6 md:mb-0">{{ $t("general.quiz.many") }}</h1>
+  <div>
+    <div class="block md:flex justify-end items-center mb-4">
       <div class="flex items-center justify-end gap-5">
         <!-- Category Filter -->
         <div class="flex items-center gap-3">

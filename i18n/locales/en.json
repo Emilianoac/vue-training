@@ -5,7 +5,7 @@
     "home": "Home",
     "quizzes": "Quizzes",
     "challenges": "Challenges",
-    "randomTip": "Random tip"
+    "tips": "Tips"
   },
   "general": {
     "challenge": {
@@ -47,7 +47,7 @@
     "welcome-four": "practice",
     "welcome-five": "with",
     "description": "Test your knowledge and keep improving with each challenge.",
-    "hero_button_text": "Get started with quizzes",
+    "hero_button_text": "Start now",
     "features": {
       "quizzes": {
         "title": "Interactive Quizzes",

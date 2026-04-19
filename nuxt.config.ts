@@ -22,6 +22,9 @@ export default defineNuxtConfig({
       title: "Vue Training",
     },
   },
+  routeRules: {
+    "/dashboard/**": { appLayout: "dashboard" },
+  },
   i18n: {
     langDir: "locales",
     strategy: "no_prefix",

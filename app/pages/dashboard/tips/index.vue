@@ -39,14 +39,14 @@ watch(
 <template>
   <div v-if="currentRandomTip">
     <!-- Hero Section -->
-    <section class="mt-4">
+    <section>
       <div
-        class="grid grid-cols-1 lg:grid-cols-[400px_1fr] place-items-start justify-center mt-10 w-full gap-4"
+        class="grid grid-cols-1 lg:grid-cols-[300px_1fr_300px] place-items-start justify-center w-full gap-4"
       >
-        <div class="w-full lg:sticky top-[100px]">
-          <!-- Illustration -->
+        <!-- Illustration -->
+        <div class="w-full">
           <Vuecito
-            class="max-w-[100px] lg:max-w-[250px] w-full mx-auto h-auto"
+            class="max-w-[100px] lg:max-w-[200px] w-full mx-auto h-auto"
             mood="surprised"
             :tip-id="currentRandomTip.documentId"
           />
@@ -63,46 +63,48 @@ watch(
         </div>
 
         <!-- Tip Content -->
-        <div class="w-full">
-          <transition name="fade" mode="out-in">
-            <div
-              class="tip-container bg-white border dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden p-5"
-              :key="currentRandomTip.documentId"
-            >
-              <div>
-                <!-- Tip explanation -->
-                <div v-html="parsedExplanation"></div>
-                <!-- Tip code examples -->
-                <ClientOnly>
-                  <template v-if="currentRandomTip.code_examples.length">
-                    <highlightjs
-                      v-for="(codeExample, index) in currentRandomTip.code_examples"
-                      :key="index"
-                      class="text-sm rounded-md overflow-hidden mt-4"
-                      :language="codeExample.lang"
-                      :code="codeExample.code"
-                    />
-                  </template>
-                </ClientOnly>
-                <!-- Source link -->
-                <div
-                  v-if="currentRandomTip.source_url"
-                  class="mt-4 text-sm text-gray-500 dark:text-gray-400"
+        <transition name="fade" mode="out-in">
+          <div
+            class="tip-container bg-card border md:max-h-[450px] w-full rounded-lg overflow-auto p-4 md:p-7"
+            :key="currentRandomTip.documentId"
+          >
+            <div>
+              <!-- Tip explanation -->
+              <div v-html="parsedExplanation"></div>
+
+              <!-- Source link -->
+              <div
+                v-if="currentRandomTip.source_url"
+                class="mt-4 text-sm text-gray-500 dark:text-gray-400"
+              >
+                <span class="block mb-1 text-sm">{{ $t("randomTip.general.source") }} </span>
+                <a
+                  :href="currentRandomTip.source_url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-blue-600 dark:text-blue-400 hover:underline"
                 >
-                  <span class="block">{{ $t("randomTip.general.source") }} </span>
-                  <a
-                    :href="currentRandomTip.source_url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-blue-600 dark:text-blue-400 hover:underline"
-                  >
-                    {{ currentRandomTip.source_url }}
-                  </a>
-                </div>
+                  {{ currentRandomTip.source_url }}
+                </a>
               </div>
+
+              <hr class="my-6 border-t border-gray-200 dark:border-gray-800" />
+
+              <!-- Tip code examples -->
+              <ClientOnly>
+                <template v-if="currentRandomTip.code_examples.length">
+                  <highlightjs
+                    v-for="(codeExample, index) in currentRandomTip.code_examples"
+                    :key="index"
+                    class="text-sm rounded-md overflow-hidden mt-4"
+                    :language="codeExample.lang"
+                    :code="codeExample.code"
+                  />
+                </template>
+              </ClientOnly>
             </div>
-          </transition>
-        </div>
+          </div>
+        </transition>
       </div>
 
       <!-- Get a new tip button mobile -->
@@ -121,13 +123,12 @@ watch(
 
     <!-- List of tips -->
     <section class="mt-10">
-      <h2 class="text-2xl font-bold mb-4">{{ $t("randomTip.general.list_of_tips") }}</h2>
-      <ul class="space-y-4">
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <li
           v-for="tip in randomTips"
           :key="tip.documentId"
-          :class="{ '!outline-primary': currentRandomTip.documentId === tip.documentId }"
-          class="block lg:flex items-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
+          :class="{ 'outline-primary!': currentRandomTip.documentId === tip.documentId }"
+          class="block items-center border bg-card rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
           @click="selectTip(tip)"
         >
           <div
@@ -136,9 +137,9 @@ watch(
             <img :src="tip.category.image.url" alt="Category Icon" />
           </div>
           <div>
-            <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">{{
-              tip.category.name
-            }}</span>
+            <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">
+              {{ tip.category.name }}
+            </span>
             <h4 class="font-bold mb-1">{{ tip.title }}</h4>
             <p class="text-[0.92em]">{{ tip.short_description }}</p>
           </div>

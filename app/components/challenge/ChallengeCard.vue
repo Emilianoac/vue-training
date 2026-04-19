@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <CardComponent>
-    <NuxtLink class="block" :to="`/challenges/${challenge.slug}`">
+    <NuxtLink class="block" :to="`/dashboard/challenges/${challenge.slug}`">
       <div class="relative">
         <!-- Image -->
         <img

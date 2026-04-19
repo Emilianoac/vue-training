@@ -64,13 +64,6 @@ function getStars(p: number) {
   <div>
     <div class="flex flex-col md:flex-row justify-between items-center">
       <h1 class="text-2xl md:text-4xl font-bold order-2 md:order-1 self-start">{{ title }}</h1>
-      <button
-        class="hover:opacity-30 order-1 md:order-2 self-end"
-        :title="$t('quiz.leave_quiz')"
-        @click="emit('leaveQuiz', $t('quiz.leave_quiz_confirm'))"
-      >
-        <Icon name="mdi:close" size="20" />
-      </button>
     </div>
 
     <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
@@ -170,14 +163,9 @@ function getStars(p: number) {
 
         <div class="space-y-2">
           <!-- Retake Quiz Button -->
-          <Button type="button" @click="emit('resetQuiz')" class="w-full mt-6">
+          <Button type="button" size="lg" @click="emit('resetQuiz')" class="w-full mt-6">
             {{ $t("quiz.results.retake_quiz") }}
             <Icon name="mdi:rotate-left" class="text-xl" />
-          </Button>
-
-          <!-- Go to quiz list button -->
-          <Button type="NuxtLink" variant="secondary" to="/quizzes" class="w-full" as-child>
-            <NuxtLink to="/quizzes">{{ $t("quiz.results.go_to_quizzes_list") }}</NuxtLink>
           </Button>
         </div>
       </div>

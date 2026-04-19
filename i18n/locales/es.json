@@ -5,7 +5,7 @@
     "home": "Inicio",
     "quizzes": "Cuestionarios",
     "challenges": "Desafios",
-    "randomTip": "Tip Random"
+    "tips": "Tips"
   },
   "general": {
     "challenge": {
@@ -47,7 +47,7 @@
     "welcome-four": "practicar",
     "welcome-five": "con",
     "description": "Pon a prueba tu conocimiento y sigue mejorando con cada desafío.",
-    "hero_button_text": "Comenzar con cuestionarios",
+    "hero_button_text": "Comenzar ahora",
     "features": {
       "quizzes": {
         "title": "Cuestionarios Interactivos",

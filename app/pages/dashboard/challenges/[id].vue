@@ -33,7 +33,7 @@ watch(
 
 <template>
   <template v-if="challenge">
-    <div class="mt-10">
+    <div>
       <ChipComponent
         class="mb-3"
         :type="challenge.level"

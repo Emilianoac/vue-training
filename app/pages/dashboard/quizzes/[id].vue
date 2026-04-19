@@ -39,10 +39,15 @@ useSeoMeta({
 });
 
 const currentLayout = computed(() => {
-  if (state.quizState.isInitialized || state.quizState.isFinished) {
+  if (state.quizState.isFinished) {
+    return "dashboard";
+  }
+
+  if (state.quizState.isInitialized) {
     return "blank";
   }
-  return "default";
+
+  return "dashboard";
 });
 
 watch(
@@ -55,7 +60,7 @@ watch(
 
 <template>
   <NuxtLayout :name="currentLayout">
-    <div class="mt-10" v-if="quiz">
+    <div v-if="quiz">
       <!-- Welcome -->
       <QuizWelcome
         v-if="!state.quizState.isInitialized"

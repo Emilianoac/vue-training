@@ -56,7 +56,7 @@ watch(
           class="md:text-xl h-auto py-3 px-5 mt-10 shadow-[0_0_30px_rgba(105,220,164,0.3)]"
           as-child
         >
-          <NuxtLink to="/quizzes">
+          <NuxtLink to="/dashboard">
             {{ $t("home.hero_button_text") }}
             <Icon name="mdi:arrow-right" size="24"></Icon>
           </NuxtLink>

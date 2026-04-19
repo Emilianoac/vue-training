@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <CardComponent>
-    <NuxtLink class="block" :to="`/quizzes/${quiz.slug}`">
+    <NuxtLink class="block" :to="`/dashboard/quizzes/${quiz.slug}`">
       <div class="flex justify-between items-start p-4 pb-0">
         <!-- Image -->
         <div
