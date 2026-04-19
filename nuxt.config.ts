@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/dashboard/**": { appLayout: "dashboard" },
+    "/dashboard/**": { appLayout: "dashboard", ssr: false },
   },
   i18n: {
     langDir: "locales",
