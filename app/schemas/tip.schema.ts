@@ -9,23 +9,11 @@ export const categorySchema = z.object({
   image: imageSchema,
 });
 
-export const codeExampleSchema = z.object({
-  code: z.string(),
-  lang: z.string(),
-});
-
 export const tipSchema = z.object({
   documentId: z.string(),
   title: z.string(),
-
   category: categorySchema,
-
   short_description: z.string(),
-
-  content: z.string(), // markdown
-
-  code_examples: z.array(codeExampleSchema).default([]),
-
   source_url: z.string().url().optional(),
 });
 

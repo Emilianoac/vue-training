@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselDots } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -57,9 +57,23 @@ watch(
                   <DialogContent class="sm:max-w-3xl w-full">
                     <DialogHeader>
                       <DialogTitle class="font-bold">{{ tip.title }}</DialogTitle>
+                      <Button
+                        variant="link"
+                        as-child
+                        class="p-0! text-blue-500 text-xs h-auto w-fit"
+                      >
+                        <a
+                          :href="tip.source_url"
+                          title="Source URL"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {{ tip.source_url }}
+                        </a>
+                      </Button>
                     </DialogHeader>
-                    <ScrollArea class="h-[80vh] pr-4 overflow-x-hidden">
-                      <TipDetails :tip="tip" />
+                    <ScrollArea class="overflow-x-hidden h-[60vh]">
+                      <TipDetails :tip="tip" class="p-6 bg-card h-full" />
                     </ScrollArea>
                   </DialogContent>
                 </Dialog>

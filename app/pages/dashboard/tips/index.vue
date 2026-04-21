@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import type { Tip } from "@/schemas/tip.schema";
-import { cn } from "@/lib/utils";
+import { DicesIcon } from "lucide-vue-next";
 import useTipData from "@/composables/tip/useTipData";
 import useRandomTip from "@/composables/tip/useRandomTip";
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import IconDice from "@/components/assets/icons/IconDice.vue";
 import TipList from "@/components/tip/TipList.vue";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 definePageMeta({
   menu: true,
@@ -32,7 +35,7 @@ watch(
 <template>
   <div v-if="currentRandomTip">
     <div
-      class="grid grid-cols-1 lg:grid-cols-[300px_1fr_300px] place-items-start justify-center w-full gap-4"
+      class="grid grid-cols-1 lg:grid-cols-[auto_1fr] md:h-87.5 max-w-225 mx-auto place-items-start justify-center w-full gap-4"
     >
       <div class="w-full">
         <Vuecito
@@ -47,15 +50,28 @@ watch(
           @click="getRandomTip()"
         >
           {{ $t("randomTip.general.get_a_new_tip") }}
+          <DicesIcon class="w-5 h-5" />
         </Button>
       </div>
 
       <transition name="fade" mode="out-in">
-        <TipDetails
-          :tip="currentRandomTip"
-          :key="currentRandomTip.documentId"
-          class="md:max-h-112.5 rounded-lg"
-        />
+        <Card class="w-full h-full overflow-auto gap-[1em]" :key="currentRandomTip.documentId">
+          <ScrollArea class="h-full">
+            <CardHeader>
+              <CardTitle class="text-xl font-bold">
+                {{ currentRandomTip.title }}
+              </CardTitle>
+              <Button variant="link" as-child class="p-0! text-blue-500 w-fit h-auto text-xs">
+                <a :href="currentRandomTip.source_url">
+                  {{ currentRandomTip.source_url }}
+                </a>
+              </Button>
+            </CardHeader>
+            <CardContent class="mt-5">
+              <TipDetails :tip="currentRandomTip" />
+            </CardContent>
+          </ScrollArea>
+        </Card>
       </transition>
     </div>
 

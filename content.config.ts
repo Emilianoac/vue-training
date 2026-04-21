@@ -45,7 +45,7 @@ export default defineContentConfig({
 
     // Tips
     tips_en: defineCollection({
-      type: "data",
+      type: "page",
       source: {
         include: "en/tips/**",
         prefix: "",
@@ -54,7 +54,7 @@ export default defineContentConfig({
     }),
 
     tips_es: defineCollection({
-      type: "data",
+      type: "page",
       source: {
         include: "es/tips/**",
         prefix: "",
