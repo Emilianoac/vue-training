@@ -14,7 +14,7 @@ export const codeExampleSchema = z.object({
   lang: z.string(),
 });
 
-export const randomTipSchema = z.object({
+export const tipSchema = z.object({
   documentId: z.string(),
   title: z.string(),
 
@@ -29,4 +29,4 @@ export const randomTipSchema = z.object({
   source_url: z.string().url().optional(),
 });
 
-export type RandomTip = z.infer<typeof randomTipSchema>;
+export type Tip = z.infer<typeof tipSchema>;

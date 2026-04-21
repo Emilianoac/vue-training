@@ -1,15 +1,15 @@
 import type { Ref } from "vue";
-import type { RandomTip } from "@/schemas/randomTip.schema";
+import type { Tip } from "@/schemas/tip.schema";
 
-export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
+export default function useRandomTipGame(randomTips: Ref<Tip[]>) {
   const currentTipId = ref<string | null>(null);
 
-  const currentRandomTip = computed<RandomTip | null>(() => {
+  const currentRandomTip = computed<Tip | null>(() => {
     if (!currentTipId.value) return null;
     return randomTips.value.find((tip) => tip.documentId === currentTipId.value) ?? null;
   });
 
-  function applyTip(tip: RandomTip | null) {
+  function applyTip(tip: Tip | null) {
     currentTipId.value = tip?.documentId ?? null;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -28,7 +28,7 @@ export default function useRandomTipGame(randomTips: Ref<RandomTip[]>) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function selectTip(tip: RandomTip) {
+  function selectTip(tip: Tip) {
     applyTip(tip);
   }
 

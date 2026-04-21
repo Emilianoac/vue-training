@@ -1,7 +1,7 @@
 import { defineContentConfig, defineCollection } from "@nuxt/content";
 import { quizSchema } from "./app/schemas/quiz.schema";
 import { challengeSchema } from "./app/schemas/challenge.schema";
-import { randomTipSchema } from "./app/schemas/randomTip.schema";
+import { tipSchema } from "./app/schemas/tip.schema";
 
 export default defineContentConfig({
   collections: {
@@ -43,23 +43,23 @@ export default defineContentConfig({
       schema: challengeSchema,
     }),
 
-    // Random Tips
-    randomTips_en: defineCollection({
+    // Tips
+    tips_en: defineCollection({
       type: "data",
       source: {
-        include: "en/random-tips/**",
+        include: "en/tips/**",
         prefix: "",
       },
-      schema: randomTipSchema,
+      schema: tipSchema,
     }),
 
-    randomTips_es: defineCollection({
+    tips_es: defineCollection({
       type: "data",
       source: {
-        include: "es/random-tips/**",
+        include: "es/tips/**",
         prefix: "",
       },
-      schema: randomTipSchema,
+      schema: tipSchema,
     }),
   },
 });
