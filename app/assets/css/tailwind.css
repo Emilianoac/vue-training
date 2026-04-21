@@ -128,7 +128,7 @@
 }
 
 @layer components {
-  code:not(.hljs) {
+  :not(pre)>code {
     @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-blue-200 px-1 py-0.5 rounded-md text-base font-normal font-mono;
   }
 }
