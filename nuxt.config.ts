@@ -43,6 +43,11 @@ export default defineNuxtConfig({
     fallback: "dark",
   },
   content: {
+    renderer: {
+      anchorLinks: {
+        h4: false,
+      },
+    },
     experimental: { sqliteConnector: "native" },
   },
   shadcn: {
