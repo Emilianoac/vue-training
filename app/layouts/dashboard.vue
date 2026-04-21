@@ -57,7 +57,7 @@ const isMenuActive = (url: string) => {
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem v-for="item in menuItems" :key="item.title">
-                  <SidebarMenuButton as-child :tooltip="item.title">
+                  <SidebarMenuButton as-child :tooltip="$t(item.title)">
                     <NuxtLink
                       :to="item.url"
                       :class="{ 'bg-sidebar-accent': isMenuActive(item.url) }"
