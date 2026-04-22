@@ -1,5 +1,5 @@
 export interface RandomTip {
-  documentId: string;
+  id: string;
   title: string;
   category: {
     id: string;

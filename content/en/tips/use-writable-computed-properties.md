@@ -1,5 +1,5 @@
 ---
-documentId: "use-writable-computed-properties"
+id: "use-writable-computed-properties"
 title: "Use Writable Computed Properties"
 category:
   name: "Vue"

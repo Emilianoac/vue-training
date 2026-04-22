@@ -15,8 +15,8 @@ const emit = defineEmits<{
   <ul v-if="tips.length && currentTip" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <li
       v-for="tip in tips"
-      :key="tip.documentId"
-      :class="{ 'outline-primary!': currentTip.documentId === tip.documentId }"
+      :key="tip.id"
+      :class="{ 'outline-primary!': currentTip.id === tip.id }"
       class="block items-center border bg-card rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
       @click="emit('select-tip', tip)"
     >

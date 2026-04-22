@@ -1,5 +1,5 @@
 ---
-documentId: "use-writable-computed-properties"
+id: "use-writable-computed-properties"
 title: "Usa Propiedades Computadas Editables"
 category:
   name: "Vue"

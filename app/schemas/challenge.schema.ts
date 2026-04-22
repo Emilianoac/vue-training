@@ -21,7 +21,7 @@ export const stackblitzSchema = z.object({
 export const levelSchema = z.enum(["basic", "intermediate", "advanced"]);
 
 export const challengeSchema = z.object({
-  documentId: z.string(),
+  id: z.string(),
   title: z.string(),
   slug: z.string(),
   level: levelSchema,

@@ -6,11 +6,11 @@ export default function useRandomTipGame(randomTips: Ref<Tip[]>) {
 
   const currentRandomTip = computed<Tip | null>(() => {
     if (!currentTipId.value) return null;
-    return randomTips.value.find((tip) => tip.documentId === currentTipId.value) ?? null;
+    return randomTips.value.find((tip) => tip.id === currentTipId.value) ?? null;
   });
 
   function applyTip(tip: Tip | null) {
-    currentTipId.value = tip?.documentId ?? null;
+    currentTipId.value = tip?.id ?? null;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -21,7 +21,7 @@ export default function useRandomTipGame(randomTips: Ref<Tip[]>) {
 
     do {
       const random = randomTips.value[Math.floor(Math.random() * randomTips.value.length)]!;
-      newTipId = random.documentId;
+      newTipId = random.id;
     } while (newTipId === currentTipId.value && randomTips.value.length > 1);
 
     currentTipId.value = newTipId;
@@ -40,8 +40,8 @@ export default function useRandomTipGame(randomTips: Ref<Tip[]>) {
         return;
       }
 
-      if (!currentTipId.value || !tips.some((t) => t.documentId === currentTipId.value)) {
-        currentTipId.value = tips[0]?.documentId ? tips[0]?.documentId : null;
+      if (!currentTipId.value || !tips.some((t) => t.id === currentTipId.value)) {
+        currentTipId.value = tips[0]?.id ? tips[0]?.id : null;
       }
     },
     { immediate: true },

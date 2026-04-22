@@ -41,7 +41,7 @@ watch(
         <Vuecito
           class="max-w-25 lg:max-w-50 w-full mx-auto h-auto"
           mood="surprised"
-          :tip-id="currentRandomTip.documentId"
+          :tip-id="currentRandomTip.id"
         />
         <Button
           variant="secondary"
@@ -55,7 +55,7 @@ watch(
       </div>
 
       <transition name="fade" mode="out-in">
-        <Card class="w-full h-full overflow-auto gap-[1em]" :key="currentRandomTip.documentId">
+        <Card class="w-full h-full overflow-auto gap-[1em]" :key="currentRandomTip.id">
           <ScrollArea class="h-full">
             <CardHeader>
               <CardTitle class="text-xl font-bold">
