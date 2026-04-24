@@ -1,5 +1,5 @@
 ---
-id: "dont-use-v-if-and-v-for-on-the-same-element"
+documentId: "dont-use-v-if-and-v-for-on-the-same-element"
 title: "Don't use v-if and v-for on the same element"
 category:
   name: "Vue"

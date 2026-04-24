@@ -10,7 +10,7 @@ export const categorySchema = z.object({
 });
 
 export const tipSchema = z.object({
-  id: z.string(),
+  documentId: z.string(),
   title: z.string(),
   category: categorySchema,
   short_description: z.string(),

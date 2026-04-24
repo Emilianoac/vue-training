@@ -28,7 +28,7 @@ export const categorySchema = z.object({
 export const levelSchema = z.enum(["basic", "intermediate", "advanced"]);
 
 export const quizSchema = z.object({
-  id: z.string(),
+  documentId: z.string(),
   title: z.string(),
   level: levelSchema,
   slug: z.string(),
@@ -40,7 +40,7 @@ export const quizSchema = z.object({
 export type Quiz = z.infer<typeof quizSchema>;
 export type QuizListItem = Pick<
   Quiz,
-  "id" | "title" | "slug" | "level" | "description" | "category"
+  "documentId" | "title" | "slug" | "level" | "description" | "category"
 >;
 export type Level = z.infer<typeof levelSchema>;
 export type Question = z.infer<typeof questionSchema>;

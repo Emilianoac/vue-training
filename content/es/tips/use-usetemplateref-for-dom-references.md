@@ -1,5 +1,5 @@
 ---
-id: "use-usetemplateref-for-dom-references"
+documentId: "use-usetemplateref-for-dom-references"
 title: "Usa useTemplateRef para referencias del DOM"
 category:
   name: "Vue"

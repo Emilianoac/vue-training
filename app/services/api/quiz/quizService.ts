@@ -12,7 +12,7 @@ function createQuizService(): QuizService {
     async fetchQuizzes(locale) {
       const collection = locale === "en" ? "quizzes_en" : "quizzes_es";
       const data = await queryCollection(collection)
-        .select("id", "title", "slug", "level", "description", "category")
+        .select("documentId", "title", "slug", "level", "description", "category")
         .all();
 
       if (!data) throw new Error("No quizzes found");

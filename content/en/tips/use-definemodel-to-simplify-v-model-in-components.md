@@ -1,5 +1,5 @@
 ---
-id: use-definemodel-to-simplify-v-model-in-components
+documentId: use-definemodel-to-simplify-v-model-in-components
 title: "Use defineModel to simplify v-model in components"
 category:
   name: "Vue"
