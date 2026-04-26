@@ -54,8 +54,4 @@ export default defineNuxtConfig({
     prefix: "",
     componentDir: "@/components/ui",
   },
-  runtimeConfig: {
-    strapiUrl: process.env.STRAPI_URL,
-    strapiToken: process.env.STRAPI_TOKEN,
-  },
 });
