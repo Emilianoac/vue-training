@@ -1,7 +1,7 @@
 import { calculateStatsUseCase } from "@/services/use-cases/quiz/calculate-stats/calculateStatsUseCase";
 import { recordAnswerUseCase } from "@/services/use-cases/quiz/record-answer/recordAnswerUseCase";
 import useQuizData from "./useQuizData";
-import type { AnswerRecord } from "@/types/quiz";
+import type { AnswerRecord } from "@/schemas/quiz.schema";
 
 export default function useQuiz() {
   const { getQuiz, quiz, error } = useQuizData();

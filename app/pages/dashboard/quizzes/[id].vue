@@ -111,10 +111,10 @@ watch(
     <Teleport to="body">
       <QuizQuestionDetailsModal
         v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
-        :question-text="currentQuestion.questionText"
-        :code-examples="currentQuestion.correctAnswerCodeExample"
-        :explanation="currentQuestion.correctAnswerExplanation"
-        :correct-answer="currentCorrectAnswer.answerText"
+        :question-text="currentQuestion.text"
+        :code-examples="currentQuestion.explanation_code"
+        :explanation="currentQuestion.explanation"
+        :correct-answer="currentCorrectAnswer.text"
         @close-modal="showQuestionDetails = false"
       />
     </Teleport>

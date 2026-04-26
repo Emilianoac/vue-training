@@ -9,12 +9,12 @@ category:
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
 questions:
-  - questionText: Which of the following options allows you to configure Vue Router
+  - text: Which of the following options allows you to configure Vue Router
       to use the HTML5 history mode?
-    correctAnswerExplanation: "The createWebHistory function allows you to configure
+    explanation: "The createWebHistory function allows you to configure
       Vue Router to use the HTML5 history mode, which removes the hash # in the
       URL and allows for clean routes."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -37,21 +37,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: "`createWebHashHistory()`"
+        text: "`createWebHashHistory()`"
       - id: "2"
         isCorrect: true
-        answerText: "`createWebHistory()`"
+        text: "`createWebHistory()`"
       - id: "3"
         isCorrect: false
-        answerText: "`useHistoryMode()`"
+        text: "`useHistoryMode()`"
       - id: "4"
         isCorrect: false
-        answerText: "`historyMode: 'html5'`"
-  - questionText: How do you programmatically navigate to a route in Vue Router?
-    correctAnswerExplanation: To navigate programmatically, you use `router.push()`,
+        text: "`historyMode: 'html5'`"
+  - text: How do you programmatically navigate to a route in Vue Router?
+    explanation: To navigate programmatically, you use `router.push()`,
       which allows you to change the current route to the one passed as an
       argument.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { useRouter } from "vue-router";
@@ -72,21 +72,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: Using `router.push()`.
+        text: Using `router.push()`.
       - id: "2"
         isCorrect: false
-        answerText: Calling `navigate()`.
+        text: Calling `navigate()`.
       - id: "3"
         isCorrect: false
-        answerText: Using `this.navigate()`
+        text: Using `this.navigate()`
       - id: "4"
         isCorrect: false
-        answerText: Modifying `window.location`.
-  - questionText: Which option allows you to define nested routes in Vue Router?
-    correctAnswerExplanation: The 'children' option allows you to define nested
+        text: Modifying `window.location`.
+  - text: Which option allows you to define nested routes in Vue Router?
+    explanation: The 'children' option allows you to define nested
       routes, where a parent route can have multiple child routes, making it
       easier to create complex navigation structures.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -101,38 +101,38 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: "`children`"
+        text: "`children`"
       - id: "2"
         isCorrect: false
-        answerText: "`nestedRoutes`"
+        text: "`nestedRoutes`"
       - id: "3"
         isCorrect: false
-        answerText: "`subRoutes`"
+        text: "`subRoutes`"
       - id: "4"
         isCorrect: false
-        answerText: "`parent`"
-  - questionText: What is the main purpose of Vue Router in a Vue application?
-    correctAnswerExplanation: Vue Router allows you to manage navigation between
+        text: "`parent`"
+  - text: What is the main purpose of Vue Router in a Vue application?
+    explanation: Vue Router allows you to manage navigation between
       different views or components in a Vue application, making it easier to
       create single-page applications (SPAs)
-    correctAnswerCodeExample: []
+    explanation_code: []
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Manage global state.
+        text: Manage global state.
       - id: "2"
         isCorrect: false
-        answerText: Perform unit tests.
+        text: Perform unit tests.
       - id: "3"
         isCorrect: true
-        answerText: Manage navigation between different views.
+        text: Manage navigation between different views.
       - id: "4"
         isCorrect: false
-        answerText: Improve application performance.
-  - questionText: How do you define a route in Vue Router?
-    correctAnswerExplanation: Routes in Vue Router are defined as objects inside an
+        text: Improve application performance.
+  - text: How do you define a route in Vue Router?
+    explanation: Routes in Vue Router are defined as objects inside an
       array, specifying the path and the component that should be rendered.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             { path: "/home", component: Home }
@@ -141,20 +141,20 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Using `defineRoute()`.
+        text: Using `defineRoute()`.
       - id: "2"
         isCorrect: true
-        answerText: By using an object in an array of routes.
+        text: By using an object in an array of routes.
       - id: "3"
         isCorrect: false
-        answerText: Using `createRoute()`.
+        text: Using `createRoute()`.
       - id: "4"
         isCorrect: false
-        answerText: Using `addRoute()` in the component.
-  - questionText: Which function is used to create a Vue Router instance?
-    correctAnswerExplanation: createRouter()` is the function used to create a new
+        text: Using `addRoute()` in the component.
+  - text: Which function is used to create a Vue Router instance?
+    explanation: createRouter()` is the function used to create a new
       Vue Router instance, allowing you to define the configuration and routes.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -173,21 +173,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: "`createRouter()`"
+        text: "`createRouter()`"
       - id: "2"
         isCorrect: false
-        answerText: "`createRouter()`"
+        text: "`createRouter()`"
       - id: "3"
         isCorrect: false
-        answerText: "`new Router()`"
+        text: "`new Router()`"
       - id: "4"
         isCorrect: false
-        answerText: "`setupRouter()`"
-  - questionText: How is navigation implemented with links in Vue Router?
-    correctAnswerExplanation: The `<router-link>` component is used to create
+        text: "`setupRouter()`"
+  - text: How is navigation implemented with links in Vue Router?
+    explanation: The `<router-link>` component is used to create
       navigation links that allow you to change routes without reloading the
       page.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <template>
             <div>
@@ -199,22 +199,22 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Using `<a href='/route'>`.
+        text: Using `<a href='/route'>`.
       - id: "2"
         isCorrect: true
-        answerText: Using the `<router-link>` component.
+        text: Using the `<router-link>` component.
       - id: "3"
         isCorrect: false
-        answerText: Calling `router.navigate()`.
+        text: Calling `router.navigate()`.
       - id: "4"
         isCorrect: false
-        answerText: Modifying `window.location`.
-  - questionText: How do you set a default subroute in a nested route in Vue Router?
-    correctAnswerExplanation: "To set a default subroute in a nested route, you
+        text: Modifying `window.location`.
+  - text: How do you set a default subroute in a nested route in Vue Router?
+    explanation: "To set a default subroute in a nested route, you
       define a subroute with an empty path `path: ''` inside children. This
       causes Vue Router to automatically load the default subroute when the user
       accesses the parent route without changing the URL."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -229,21 +229,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: "Defining a `default: true` property."
+        text: "Defining a `default: true` property."
       - id: "2"
         isCorrect: false
-        answerText: Using the `default` attribute in `children`.
+        text: Using the `default` attribute in `children`.
       - id: "3"
         isCorrect: true
-        answerText: "Defining a subroute with an empty path `path: ' '`."
+        text: "Defining a subroute with an empty path `path: ' '`."
       - id: "4"
         isCorrect: false
-        answerText: Using the `defaultRoute` attribute.
-  - questionText: How can you define a dynamic route in Vue Router?
-    correctAnswerExplanation: In Vue Router, a dynamic route is defined using
+        text: Using the `defaultRoute` attribute.
+  - text: How can you define a dynamic route in Vue Router?
+    explanation: In Vue Router, a dynamic route is defined using
       dynamic parameters, which are indicated with a colon `:` followed by the
       parameter name.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -265,20 +265,20 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Using brackets `[ ]`.
+        text: Using brackets `[ ]`.
       - id: "2"
         isCorrect: false
-        answerText: With an asterisk `*`.
+        text: With an asterisk `*`.
       - id: "3"
         isCorrect: false
-        answerText: Using parentheses `( )`.
+        text: Using parentheses `( )`.
       - id: "4"
         isCorrect: true
-        answerText: With a colon `:` followed by the parameter name.
-  - questionText: How can you lazily load a component in a Vue Router route?
-    correctAnswerExplanation: To lazily load a component in a Vue Router route, you
+        text: With a colon `:` followed by the parameter name.
+  - text: How can you lazily load a component in a Vue Router route?
+    explanation: To lazily load a component in a Vue Router route, you
       use a dynamic import function that returns a promise with the component.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -290,13 +290,13 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Importing the component with the `loadComponent()` function.
+        text: Importing the component with the `loadComponent()` function.
       - id: "2"
         isCorrect: false
-        answerText: Importing the component with the `dynamicImport()` function.
+        text: Importing the component with the `dynamicImport()` function.
       - id: "3"
         isCorrect: false
-        answerText: Importing the component with the `import()` function.
+        text: Importing the component with the `import()` function.
       - id: "4"
         isCorrect: true
-        answerText: Importing the component with `() => import(...)`.
+        text: Importing the component with `() => import(...)`.

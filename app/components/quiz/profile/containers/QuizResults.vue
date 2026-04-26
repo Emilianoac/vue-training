@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AnswerRecord } from "@/types/quiz";
+import type { AnswerRecord } from "@/schemas/quiz.schema";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { Button } from "@/components/ui/button";
 
@@ -28,7 +28,7 @@ const parsedHistory = computed(() =>
     parsedQuestion: parse(q.question),
     parsedAnswers: q.answers.map((a) => ({
       ...a,
-      parsedText: parse(a.answerText),
+      parsedText: parse(a.text),
     })),
     parsedExplanation: parse(q.explanation),
   })),

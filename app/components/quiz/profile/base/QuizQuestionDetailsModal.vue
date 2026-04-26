@@ -9,12 +9,12 @@ const props = defineProps<{
   questionText: string;
   correctAnswer: string;
   explanation: string;
-  codeExamples: Question["correctAnswerCodeExample"];
+  codeExamples: Question["explanation_code"];
 }>();
 
 const { parse } = useMarkdownParser();
 
-const parsedQuestionText = parse(props.questionText);
+const parsedtext = parse(props.questionText);
 const parsedCorrectAnswer = parse(props.correctAnswer);
 const parsedExplanation = parse(props.explanation);
 </script>
@@ -42,7 +42,7 @@ const parsedExplanation = parse(props.explanation);
 
         <dl class="mt-9 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">
           <dt class="font-bold">{{ $t("quiz.question") }}</dt>
-          <dd class="mt-1 text-sm" v-html="parsedQuestionText"></dd>
+          <dd class="mt-1 text-sm" v-html="parsedtext"></dd>
         </dl>
 
         <dl class="mt-4 bg-slate-100 dark:bg-slate-800/60 p-3 rounded-md">

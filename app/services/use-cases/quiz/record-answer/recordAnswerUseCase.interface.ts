@@ -1,4 +1,4 @@
-import type { Quiz, AnswerRecord, Question } from "@/types/quiz";
+import type { Quiz, AnswerRecord, Question } from "@/schemas/quiz.schema";
 
 export type RecordAnswerUseCase = (
   question: Question,

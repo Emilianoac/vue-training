@@ -10,12 +10,12 @@ category:
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
 questions:
-  - questionText: ¿Cuál de las siguientes opciones permite configurar Vue Router
+  - text: ¿Cuál de las siguientes opciones permite configurar Vue Router
       para usar el modo de historial HTML5?
-    correctAnswerExplanation: "La función createWebHistory permite configurar Vue
+    explanation: "La función createWebHistory permite configurar Vue
       Router para utilizar el historial HTML5, lo que elimina el hash # en la
       URL y permite rutas limpias."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -38,21 +38,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: "`createWebHashHistory()`"
+        text: "`createWebHashHistory()`"
       - id: "2"
         isCorrect: true
-        answerText: "`createWebHistory()`"
+        text: "`createWebHistory()`"
       - id: "3"
         isCorrect: false
-        answerText: "`useHistoryMode()`"
+        text: "`useHistoryMode()`"
       - id: "4"
         isCorrect: false
-        answerText: "`historyMode: 'html5'`"
-  - questionText: ¿Cómo se navega programáticamente a una ruta en Vue Router?
-    correctAnswerExplanation: Para navegar programáticamente, se utiliza
+        text: "`historyMode: 'html5'`"
+  - text: ¿Cómo se navega programáticamente a una ruta en Vue Router?
+    explanation: Para navegar programáticamente, se utiliza
       `router.push()`, que permite cambiar la ruta actual a la que se pasa como
       argumento.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { useRouter } from "vue-router";
@@ -73,21 +73,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: Usando `router.push()`.
+        text: Usando `router.push()`.
       - id: "2"
         isCorrect: false
-        answerText: Llamando a `navigate()`.
+        text: Llamando a `navigate()`.
       - id: "3"
         isCorrect: false
-        answerText: Usando `this.navigate()`.
+        text: Usando `this.navigate()`.
       - id: "4"
         isCorrect: false
-        answerText: Modificando `window.location`.
-  - questionText: ¿Qué opción permite definir rutas anidadas en Vue Router?
-    correctAnswerExplanation: La opción 'children' permite definir rutas anidadas,
+        text: Modificando `window.location`.
+  - text: ¿Qué opción permite definir rutas anidadas en Vue Router?
+    explanation: La opción 'children' permite definir rutas anidadas,
       donde una ruta padre puede tener varias rutas hijas, facilitando la
       creación de estructuras de navegación complejas.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -102,38 +102,38 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: "`children`"
+        text: "`children`"
       - id: "2"
         isCorrect: false
-        answerText: "`nestedRoutes`"
+        text: "`nestedRoutes`"
       - id: "3"
         isCorrect: false
-        answerText: "`subRoutes`"
+        text: "`subRoutes`"
       - id: "4"
         isCorrect: false
-        answerText: "`parent`"
-  - questionText: ¿Cuál es el propósito principal de Vue Router en una aplicación Vue?
-    correctAnswerExplanation: Vue Router permite gestionar la navegación entre
+        text: "`parent`"
+  - text: ¿Cuál es el propósito principal de Vue Router en una aplicación Vue?
+    explanation: Vue Router permite gestionar la navegación entre
       diferentes vistas o componentes en una aplicación Vue, facilitando la
       creación de aplicaciones de una sola página (SPA).
-    correctAnswerCodeExample: []
+    explanation_code: []
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Manejar el estado global.
+        text: Manejar el estado global.
       - id: "2"
         isCorrect: false
-        answerText: Realizar pruebas unitarias.
+        text: Realizar pruebas unitarias.
       - id: "3"
         isCorrect: true
-        answerText: Gestionar la navegación entre diferentes vistas.
+        text: Gestionar la navegación entre diferentes vistas.
       - id: "4"
         isCorrect: false
-        answerText: Mejorar el rendimiento de la aplicación.
-  - questionText: ¿Cómo se define una ruta en Vue Router?
-    correctAnswerExplanation: Las rutas en Vue Router se definen como objetos dentro
+        text: Mejorar el rendimiento de la aplicación.
+  - text: ¿Cómo se define una ruta en Vue Router?
+    explanation: Las rutas en Vue Router se definen como objetos dentro
       de un array, especificando la ruta y el componente que debe renderizarse.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             { path: "/home", component: Home }
@@ -142,21 +142,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Usando `defineRoute()`.
+        text: Usando `defineRoute()`.
       - id: "2"
         isCorrect: true
-        answerText: Mediante un objeto en un array de rutas.
+        text: Mediante un objeto en un array de rutas.
       - id: "3"
         isCorrect: false
-        answerText: Usando `createRoute()`.
+        text: Usando `createRoute()`.
       - id: "4"
         isCorrect: false
-        answerText: Usando `addRoute()` en el componente.
-  - questionText: ¿Qué función se utiliza para crear una instancia de Vue Router?
-    correctAnswerExplanation: "`createRouter()` es la función que se utiliza para
+        text: Usando `addRoute()` en el componente.
+  - text: ¿Qué función se utiliza para crear una instancia de Vue Router?
+    explanation: "`createRouter()` es la función que se utiliza para
       crear una nueva instancia de Vue Router, permitiendo definir la
       configuración y las rutas."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -175,20 +175,20 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: "`createRouter()`"
+        text: "`createRouter()`"
       - id: "2"
         isCorrect: false
-        answerText: "`initRouter()`"
+        text: "`initRouter()`"
       - id: "3"
         isCorrect: false
-        answerText: "`new Router()`"
+        text: "`new Router()`"
       - id: "4"
         isCorrect: false
-        answerText: "`setupRouter()`"
-  - questionText: ¿Cómo se implementa la navegación con enlaces en Vue Router?
-    correctAnswerExplanation: El componente `<router-link>` se utiliza para crear
+        text: "`setupRouter()`"
+  - text: ¿Cómo se implementa la navegación con enlaces en Vue Router?
+    explanation: El componente `<router-link>` se utiliza para crear
       enlaces de navegación que permiten cambiar de ruta sin recargar la página.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <template>
             <div>
@@ -200,23 +200,23 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Usando `<a href='/ruta'>`.
+        text: Usando `<a href='/ruta'>`.
       - id: "2"
         isCorrect: true
-        answerText: Con el componente `<router-link>`.
+        text: Con el componente `<router-link>`.
       - id: "3"
         isCorrect: false
-        answerText: Llamando a `router.navigate()`.
+        text: Llamando a `router.navigate()`.
       - id: "4"
         isCorrect: false
-        answerText: Modificando `window.location`.
-  - questionText: ¿Cómo se establece una subruta por defecto en una ruta anidada en
+        text: Modificando `window.location`.
+  - text: ¿Cómo se establece una subruta por defecto en una ruta anidada en
       Vue Router?
-    correctAnswerExplanation: "Para establecer una subruta por defecto en una ruta
+    explanation: "Para establecer una subruta por defecto en una ruta
       anidada, se define una subruta con un path vacio `path: ''` dentro de
       children. Esto hace que cuando el usuario acceda a la ruta padre, Vue
       Router cargue automáticamente la subruta por defecto sin cambiar la URL."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -231,21 +231,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: "Definiendo una propiedad `default: true`."
+        text: "Definiendo una propiedad `default: true`."
       - id: "2"
         isCorrect: false
-        answerText: Usando el atributo `default` en `children`.
+        text: Usando el atributo `default` en `children`.
       - id: "3"
         isCorrect: true
-        answerText: "Definiendo una subruta con un path vacío `path: ' '`."
+        text: "Definiendo una subruta con un path vacío `path: ' '`."
       - id: "4"
         isCorrect: false
-        answerText: Usando el atributo defaultRoute.
-  - questionText: ¿Cómo puedes definir una ruta dinámica en Vue Router?
-    correctAnswerExplanation: En Vue Router, una ruta dinámica se define usando
+        text: Usando el atributo defaultRoute.
+  - text: ¿Cómo puedes definir una ruta dinámica en Vue Router?
+    explanation: En Vue Router, una ruta dinámica se define usando
       parámetros dinámicos, que se indican con dos puntos `:` seguidos del
       nombre del parámetro.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           import { createRouter, createWebHistory } from "vue-router";
 
@@ -267,22 +267,22 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Usando corchetes `[ ]`.
+        text: Usando corchetes `[ ]`.
       - id: "2"
         isCorrect: false
-        answerText: Con un asterisco `*`.
+        text: Con un asterisco `*`.
       - id: "3"
         isCorrect: false
-        answerText: Usando paréntesis `( )`.
+        text: Usando paréntesis `( )`.
       - id: "4"
         isCorrect: true
-        answerText: Con dos puntos `:` seguidos del nombre del parámetro.
-  - questionText: ¿Cómo se puede cargar un componente de forma perezosa (lazy
+        text: Con dos puntos `:` seguidos del nombre del parámetro.
+  - text: ¿Cómo se puede cargar un componente de forma perezosa (lazy
       loading) en una ruta de Vue Router?
-    correctAnswerExplanation: Para cargar un componente de forma perezosa en una
+    explanation: Para cargar un componente de forma perezosa en una
       ruta de Vue Router, se utiliza una función de importación dinámica que
       devuelve una promesa con el componente.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           const routes = [
             {
@@ -294,13 +294,13 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Importando el componente con la función `loadComponent()`.
+        text: Importando el componente con la función `loadComponent()`.
       - id: "2"
         isCorrect: false
-        answerText: Importando el componente con la función `dynamicImport()`.
+        text: Importando el componente con la función `dynamicImport()`.
       - id: "3"
         isCorrect: false
-        answerText: Importando el componente con la función `import()`.
+        text: Importando el componente con la función `import()`.
       - id: "4"
         isCorrect: true
-        answerText: Importado el componente con `() => import(...)`.
+        text: Importado el componente con `() => import(...)`.

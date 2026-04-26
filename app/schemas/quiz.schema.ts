@@ -8,13 +8,13 @@ export const codeExampleSchema = z.object({
 export const answerSchema = z.object({
   id: z.string(),
   isCorrect: z.boolean(),
-  answerText: z.string(),
+  text: z.string(),
 });
 
 export const questionSchema = z.object({
-  questionText: z.string(),
-  correctAnswerExplanation: z.string(),
-  correctAnswerCodeExample: z.array(codeExampleSchema),
+  text: z.string(),
+  explanation: z.string(),
+  explanation_code: z.array(codeExampleSchema),
   answers: z.array(answerSchema),
 });
 
@@ -44,3 +44,12 @@ export type QuizListItem = Pick<
 >;
 export type Level = z.infer<typeof levelSchema>;
 export type Question = z.infer<typeof questionSchema>;
+export type Answer = z.infer<typeof answerSchema>;
+export type CodeExample = z.infer<typeof codeExampleSchema>;
+
+export type AnswerRecord = {
+  question: string;
+  answers: Array<Answer & { isSelected: boolean }>;
+  explanation: string;
+  codeExample: CodeExample[];
+};

@@ -7,9 +7,9 @@ export const recordAnswerUseCase: RecordAnswerUseCase = (question, selectedOptio
   }));
 
   return {
-    question: question.questionText,
+    question: question.text,
     answers: mappedAnswers,
-    explanation: question.correctAnswerExplanation,
-    codeExample: question.correctAnswerCodeExample,
+    explanation: question.explanation,
+    codeExample: question.explanation_code,
   };
 };

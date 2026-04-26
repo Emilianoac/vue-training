@@ -1,4 +1,4 @@
-import type { AnswerRecord } from "@/types/quiz";
+import type { AnswerRecord } from "@/schemas/quiz.schema";
 
 export type CalculateStatsUseCase = (userHistory: AnswerRecord[]) => {
   correct: number;

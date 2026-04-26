@@ -8,11 +8,11 @@ category:
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
 questions:
-  - questionText: ¿Cuál es el propósito de `computed()` en Vue?
-    correctAnswerExplanation: El metodo `computed()` permite definir propiedades que
+  - text: ¿Cuál es el propósito de `computed()` en Vue?
+    explanation: El metodo `computed()` permite definir propiedades que
       se recalculan cuando sus dependencias cambian, ayudando a optimizar el
       rendimiento.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { ref, computed } from "vue";
@@ -29,22 +29,22 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Ejecutar una acción al montarse el componente.
+        text: Ejecutar una acción al montarse el componente.
       - id: "2"
         isCorrect: true
-        answerText: Definir propiedades reactivas que se recalculan automáticamente.
+        text: Definir propiedades reactivas que se recalculan automáticamente.
       - id: "3"
         isCorrect: false
-        answerText: Actualizar el DOM de forma imperativa.
+        text: Actualizar el DOM de forma imperativa.
       - id: "4"
         isCorrect: false
-        answerText: Llamar a una API externa.
-  - questionText: Usando la Composition API, ¿cómo defines métodos dentro de
+        text: Llamar a una API externa.
+  - text: Usando la Composition API, ¿cómo defines métodos dentro de
       `<script setup>` en Vue?
-    correctAnswerExplanation: Los métodos se definen directamente como funciones
+    explanation: Los métodos se definen directamente como funciones
       dentro de `<script setup>`, donde pueden ser llamados o retornados según
       se necesiten.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup> 
           const sayHello = () => alert("¡Hola desde Vue 3!");
@@ -53,21 +53,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Usando la opción `methods`
+        text: Usando la opción `methods`
       - id: "2"
         isCorrect: true
-        answerText: Definiéndolos directamente dentro de `<script setup>`.
+        text: Definiéndolos directamente dentro de `<script setup>`.
       - id: "3"
         isCorrect: false
-        answerText: Asignando valores directamente en `data`.
+        text: Asignando valores directamente en `data`.
       - id: "4"
         isCorrect: false
-        answerText: Solo se pueden definir en `watch`.
-  - questionText: ¿Cómo funciona el lifecycle hook `onMounted()` en Vue 3?
-    correctAnswerExplanation: "`onMounted()` permite ejecutar código cuando el
+        text: Solo se pueden definir en `watch`.
+  - text: ¿Cómo funciona el lifecycle hook `onMounted()` en Vue 3?
+    explanation: "`onMounted()` permite ejecutar código cuando el
       componente se ha añadido al DOM, similar al hook mounted en la Options
       API."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { onMounted } from "vue";
@@ -79,21 +79,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Llama automáticamente a una API.
+        text: Llama automáticamente a una API.
       - id: "2"
         isCorrect: false
-        answerText: Define estilos para el componente.
+        text: Define estilos para el componente.
       - id: "3"
         isCorrect: false
-        answerText: Se ejecuta al inicializar un `ref()`.
+        text: Se ejecuta al inicializar un `ref()`.
       - id: "4"
         isCorrect: true
-        answerText: Ejecuta una función cuando el componente se ha montado.
-  - questionText: ¿Cuál es la función principal de `reactive()` en Vue?
-    correctAnswerExplanation: "`reactive()` convierte un objeto en reactivo,
+        text: Ejecuta una función cuando el componente se ha montado.
+  - text: ¿Cuál es la función principal de `reactive()` en Vue?
+    explanation: "`reactive()` convierte un objeto en reactivo,
       permitiendo que Vue detecte y actualice automáticamente los cambios en sus
       propiedades."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { reactive } from "vue";
@@ -104,21 +104,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Ejecutar funciones del ciclo de vida.
+        text: Ejecutar funciones del ciclo de vida.
       - id: "2"
         isCorrect: false
-        answerText: Crear una instancia de Vue.
+        text: Crear una instancia de Vue.
       - id: "3"
         isCorrect: true
-        answerText: Crear un objeto reactivo que detecta cambios en sus propiedades.
+        text: Crear un objeto reactivo que detecta cambios en sus propiedades.
       - id: "4"
         isCorrect: false
-        answerText: Definir rutas para la aplicación.
-  - questionText: ¿Para qué se utiliza `ref()` en Vue?
-    correctAnswerExplanation: "`ref()` se usa para crear una referencia reactiva de
+        text: Definir rutas para la aplicación.
+  - text: ¿Para qué se utiliza `ref()` en Vue?
+    explanation: "`ref()` se usa para crear una referencia reactiva de
       un valor, como números o strings, permitiendo que Vue reaccione a estos
       cambios."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { ref } from "vue";
@@ -129,20 +129,20 @@ questions:
     answers:
       - id: "1"
         isCorrect: true
-        answerText: Para crear una referencia reactiva de un valor primitivo.
+        text: Para crear una referencia reactiva de un valor primitivo.
       - id: "2"
         isCorrect: false
-        answerText: Para manipular el DOM directamente.
+        text: Para manipular el DOM directamente.
       - id: "3"
         isCorrect: false
-        answerText: Para ejecutar funciones asíncronas.
+        text: Para ejecutar funciones asíncronas.
       - id: "4"
         isCorrect: false
-        answerText: Para renderizar un componente condicionalmente.
-  - questionText: ¿Para qué sirve `watch()` en Vue?
-    correctAnswerExplanation: "`watch()` permite observar cambios en datos reactivos
+        text: Para renderizar un componente condicionalmente.
+  - text: ¿Para qué sirve `watch()` en Vue?
+    explanation: "`watch()` permite observar cambios en datos reactivos
       y ejecutar funciones en respuesta a estos cambios."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { ref, watch } from "vue";
@@ -156,21 +156,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Para modificar directamente el DOM.
+        text: Para modificar directamente el DOM.
       - id: "2"
         isCorrect: true
-        answerText: Para ejecutar código en respuesta a cambios en valores reactivos.
+        text: Para ejecutar código en respuesta a cambios en valores reactivos.
       - id: "3"
         isCorrect: false
-        answerText: Para ejecutar código solo al montar el componente.
+        text: Para ejecutar código solo al montar el componente.
       - id: "4"
         isCorrect: false
-        answerText: Para definir estilos dinámicos.
-  - questionText: ¿Usando la compostion API, cómo declaras un `v-model`?
-    correctAnswerExplanation: v-model` puede enlazarse con una variable reactiva
+        text: Para definir estilos dinámicos.
+  - text: ¿Usando la compostion API, cómo declaras un `v-model`?
+    explanation: v-model` puede enlazarse con una variable reactiva
       creada con `ref()`, permitiendo la reactividad bidireccional en el
       template.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { ref } from "vue";
@@ -185,22 +185,22 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Definiendo métodos dentro de setup
+        text: Definiendo métodos dentro de setup
       - id: "2"
         isCorrect: true
-        answerText: Declarando una variable con `ref()` y usándola en el template.
+        text: Declarando una variable con `ref()` y usándola en el template.
       - id: "3"
         isCorrect: false
-        answerText: No se puede usar `v-model` con la Composition API.
+        text: No se puede usar `v-model` con la Composition API.
       - id: "4"
         isCorrect: false
-        answerText: Definiendo el estado en data.
-  - questionText: ¿Cuál es la diferencia principal entre `ref()` y `reactive()` en Vue 3?
-    correctAnswerExplanation: "`ref()` es útil para valores primitivos, mientras que
+        text: Definiendo el estado en data.
+  - text: ¿Cuál es la diferencia principal entre `ref()` y `reactive()` en Vue 3?
+    explanation: "`ref()` es útil para valores primitivos, mientras que
       `reactive()` convierte objetos enteros en reactivos. Ambos permiten
       reactividad, pero `reactive()` es preferido para estructuras de datos
       complejas."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           import { ref, reactive } from "vue";
@@ -212,22 +212,22 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: "`ref()` solo funciona con tipos de datos primitivos."
+        text: "`ref()` solo funciona con tipos de datos primitivos."
       - id: "2"
         isCorrect: false
-        answerText: "`reactive()` crea una referencia mutable."
+        text: "`reactive()` crea una referencia mutable."
       - id: "3"
         isCorrect: true
-        answerText: "`ref()` se usa para valores primitivos y `reactive()` para objetos
+        text: "`ref()` se usa para valores primitivos y `reactive()` para objetos
           complejos."
       - id: "4"
         isCorrect: false
-        answerText: "`reactive()` no permite reactividad."
-  - questionText: ¿Cómo defines `props` en un componente usando `<script setup>` en Vue?
-    correctAnswerExplanation: Con `<script setup>`, las props se definen usando
+        text: "`reactive()` no permite reactividad."
+  - text: ¿Cómo defines `props` en un componente usando `<script setup>` en Vue?
+    explanation: Con `<script setup>`, las props se definen usando
       defineProps, lo cual permite recibir datos desde el componente padre de
       manera reactiva y fácil.
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <script setup>
           const props = defineProps({
@@ -244,21 +244,21 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Creándolas con `ref()`.
+        text: Creándolas con `ref()`.
       - id: "2"
         isCorrect: false
-        answerText: Importando `props` desde vue.
+        text: Importando `props` desde vue.
       - id: "3"
         isCorrect: true
-        answerText: Utilizando `defineProps()` dentro de `<script setup>`.
+        text: Utilizando `defineProps()` dentro de `<script setup>`.
       - id: "4"
         isCorrect: false
-        answerText: Usando la opción `props` en `export default`.
-  - questionText: ¿Para qué sirve `defineEmits()` en Vue?
-    correctAnswerExplanation: "`defineEmits()` permite declarar eventos que un
+        text: Usando la opción `props` en `export default`.
+  - text: ¿Para qué sirve `defineEmits()` en Vue?
+    explanation: "`defineEmits()` permite declarar eventos que un
       componente puede emitir, facilitando la comunicación desde el componente
       hijo hacia el componente padre."
-    correctAnswerCodeExample:
+    explanation_code:
       - code: |-
           <!-- src/components/Counter.vue -->
           <script setup>
@@ -296,13 +296,13 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        answerText: Para definir propiedades reactivas.
+        text: Para definir propiedades reactivas.
       - id: "2"
         isCorrect: false
-        answerText: Para capturar eventos emitidos por el componente.
+        text: Para capturar eventos emitidos por el componente.
       - id: "3"
         isCorrect: true
-        answerText: Para emitir eventos desde un componente hijo hacia su componente padre.
+        text: Para emitir eventos desde un componente hijo hacia su componente padre.
       - id: "4"
         isCorrect: false
-        answerText: Para importar variables reactivas desde el componente padre.
+        text: Para importar variables reactivas desde el componente padre.

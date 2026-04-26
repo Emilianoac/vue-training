@@ -16,12 +16,12 @@ const emit = defineEmits<{
   (e: "update:selectedOption", value: string | null): void;
 }>();
 
-const parsedQuestion = computed(() => parse(props.question.questionText));
+const parsedQuestion = computed(() => parse(props.question.text));
 
 const parsedAnswers = computed(() =>
   props.question.answers.map((a) => ({
     ...a,
-    parsedAnswerText: parse(a.answerText),
+    parsedtext: parse(a.text),
   })),
 );
 </script>
@@ -40,7 +40,7 @@ const parsedAnswers = computed(() =>
     >
       <QuizAnswerOption
         :answer-id="answer.id"
-        :answer-text="answer.parsedAnswerText"
+        :answer-text="answer.parsedtext"
         :isSelected="selectedOption === answer.id"
         :isCorrectAnswer="answer.isCorrect"
         :showAnswerResult="checkAnswer"
