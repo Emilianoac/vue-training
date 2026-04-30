@@ -1,0 +1,252 @@
+documentId: computed-properties
+title: Propiedades Computadas en Vue 3
+level: basic
+slug: computed-properties
+description: Evaluación sobre propiedades computadas, caché, diferencias con métodos y buenas prácticas.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+questions:
+  - text: ¿Cuál es la característica más importante de una propiedad computada en Vue 3?
+    explanation: El almacenamiento en caché (caching) es la característica clave de `computed()`. Solo se vuelve a evaluar cuando alguna de sus dependencias reactivas cambia, evitando cálculos innecesarios.
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+          // Solo se recalcula cuando 'count' cambia
+          const doubleCount = computed(() => count.value * 2);
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: El almacenamiento en caché (caching) basado en dependencias reactivas.
+      - id: "2"
+        isCorrect: false
+        text: Que puede recibir parámetros como argumento.
+      - id: "3"
+        isCorrect: false
+        text: Que se ejecuta en cada render del componente.
+      - id: "4"
+        isCorrect: false
+        text: Que modifica directamente el estado reactivo.
+
+  - text: ¿Qué devuelve la función `computed()` en Vue 3?
+    explanation: "`computed()` recibe una función getter y devuelve un objeto `ref` reactivo de solo lectura que contiene el valor calculado, accesible mediante `.value`.`"
+    explanation_code:
+      - code: |-
+          import { ref, computed } from 'vue';
+          const count = ref(2);
+          const doubled = computed(() => count.value * 2);
+          console.log(doubled.value); // 4
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Un objeto `reactive` con el valor calculado.
+      - id: "2"
+        isCorrect: true
+        text: Un objeto `ref` reactivo de solo lectura.
+      - id: "3"
+        isCorrect: false
+        text: El valor primitivo directamente.
+      - id: "4"
+        isCorrect: false
+        text: Una función que se ejecuta manualmente.
+
+  - text: ¿Cuándo se vuelve a evaluar una propiedad computada?
+    explanation: Una propiedad computada solo se recalcula cuando alguna de sus dependencias reactivas ha cambiado. Si las dependencias no cambian, devuelve el resultado en caché sin ejecutar el getter de nuevo.
+    explanation_code:
+      - code: |-
+          const a = ref(1);
+          const b = ref(2);
+          const sum = computed(() => a.value + b.value);
+          // sum solo se recalcula si 'a' o 'b' cambian
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: En cada render del componente.
+      - id: "2"
+        isCorrect: false
+        text: Cada vez que se accede a ella en el template.
+      - id: "3"
+        isCorrect: true
+        text: Solo cuando alguna de sus dependencias reactivas cambia.
+      - id: "4"
+        isCorrect: false
+        text: Solo cuando el componente se monta.
+
+  - text: ¿Cuál es la diferencia principal entre un método y una propiedad computada en términos de rendimiento?
+    explanation: Los métodos se ejecutan cada vez que se acceden o llaman, sin importar si las dependencias cambiaron. Las propiedades computadas tienen caché inteligente y solo se recalculan cuando sus dependencias reactivas cambian.
+    explanation_code:
+      - code: |-
+          // Método: se ejecuta en cada acceso
+          const double = () => count.value * 2;
+
+          // Computed: usa caché
+          const doubleComputed = computed(() => count.value * 2);
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Los métodos tienen caché y las computadas no.
+      - id: "2"
+        isCorrect: true
+        text: Las computadas tienen caché inteligente; los métodos se ejecutan siempre que se acceden.
+      - id: "3"
+        isCorrect: false
+        text: No hay diferencia de rendimiento entre ambos.
+      - id: "4"
+        isCorrect: false
+        text: Los métodos solo se ejecutan una vez al montarse el componente.
+
+  - text: ¿Qué tipo de operaciones son ideales para usar dentro de una propiedad computada?
+    explanation: Las propiedades computadas son ideales para operaciones costosas que dependen de estado reactivo, como filtrar arrays largos o cálculos complejos, ya que el caché evita recalcularlas innecesariamente.
+    explanation_code:
+      - code: |-
+          const filteredUsers = computed(() =>
+            users.value.filter(u => u.active)
+          );
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Peticiones fetch a una API.
+      - id: "2"
+        isCorrect: false
+        text: Manejo de eventos del DOM.
+      - id: "3"
+        isCorrect: true
+        text: Operaciones costosas como filtrar arrays o cálculos complejos basados en estado reactivo.
+      - id: "4"
+        isCorrect: false
+        text: Mutaciones directas del estado original.
+
+  - text: ¿Qué sucede si intentas asignar un valor a una propiedad computada por defecto? (ej. `myComputed.value = x`)
+    explanation: Por defecto, las propiedades computadas son de solo lectura. Intentar asignar un valor directamente fallará con un error en tiempo de ejecución, ya que no tienen un setter definido.
+    explanation_code:
+      - code: |-
+          const doubled = computed(() => count.value * 2);
+          // ❌ Esto fallará:
+          doubled.value = 10;
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: El valor se actualiza normalmente.
+      - id: "2"
+        isCorrect: false
+        text: Vue ignora la asignación silenciosamente.
+      - id: "3"
+        isCorrect: true
+        text: Fallará con un error porque las computadas son de solo lectura por defecto.
+      - id: "4"
+        isCorrect: false
+        text: Se recalcula la función getter automáticamente.
+
+  - text: ¿Por qué NO se deben realizar peticiones fetch dentro de una propiedad computada?
+    explanation: Las propiedades computadas deben ser funciones puras sin efectos secundarios. Su única misión es retornar un valor derivado. Las peticiones fetch son efectos secundarios que deben manejarse en `watch` o en funciones/métodos.
+    explanation_code:
+      - code: |-
+          // ❌ Incorrecto: efecto secundario en computed
+          const data = computed(async () => {
+            return await fetch('/api/data');
+          });
+
+          // ✅ Correcto: usar watch o un método
+          watch(id, async (newId) => {
+            data.value = await fetch(`/api/data/${newId}`);
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque computed no soporta funciones asíncronas técnicamente.
+      - id: "2"
+        isCorrect: true
+        text: Porque las computadas no deben tener efectos secundarios; su único propósito es retornar un valor derivado.
+      - id: "3"
+        isCorrect: false
+        text: Porque fetch es demasiado lento para el caché.
+      - id: "4"
+        isCorrect: false
+        text: Porque Vue bloquea automáticamente el acceso a fetch dentro de computed.
+
+  - text: Tienes una lista de usuarios y necesitas filtrarla según un input de búsqueda. ¿Cuál es la mejor opción?
+    explanation: Usar `computed` es ideal aquí porque la lista filtrada es un valor derivado del estado reactivo (`users` y `search`). Solo se recalculará cuando alguno de los dos cambie, optimizando el rendimiento.
+    explanation_code:
+      - code: |-
+          const search = ref('');
+          const users = ref(['Alice', 'Bob', 'Charlie']);
+
+          const filteredUsers = computed(() =>
+            users.value.filter(u =>
+              u.toLowerCase().includes(search.value.toLowerCase())
+            )
+          );
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Filtrar directamente en el template con una expresión inline.
+      - id: "2"
+        isCorrect: false
+        text: Usar un método que se llame en el template.
+      - id: "3"
+        isCorrect: true
+        text: Usar una propiedad computada que dependa de `search` y `users`.
+      - id: "4"
+        isCorrect: false
+        text: Usar `watch` para actualizar una variable con la lista filtrada cada vez.
+
+  - text: ¿Por qué se recomienda usar `.toSorted()` en lugar de `.sort()` dentro de una propiedad computada?
+    explanation: `.sort()` muta el array original, lo que puede alterar la fuente de verdad del estado reactivo. `.toSorted()` devuelve un nuevo array ordenado sin modificar el original, siguiendo la regla de no mutar el estado dentro de una computed.
+    explanation_code:
+      - code: |-
+          const items = ref([3, 1, 2]);
+
+          // ❌ Muta el array original:
+          const sorted = computed(() => items.value.sort());
+
+          // ✅ No muta el original:
+          const sorted = computed(() => items.value.toSorted());
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque `.sort()` no es compatible con Vue 3.
+      - id: "2"
+        isCorrect: false
+        text: Porque `.toSorted()` es más rápido que `.sort()`.
+      - id: "3"
+        isCorrect: true
+        text: Porque `.sort()` muta el array original y `.toSorted()` devuelve una copia sin alterar la fuente de verdad.
+      - id: "4"
+        isCorrect: false
+        text: No hay diferencia; ambos son equivalentes en una computed.
+
+  - text: ¿Cuál de los siguientes casos es el más adecuado para usar un método en lugar de una propiedad computada?
+    explanation: Las propiedades computadas no aceptan parámetros, por lo que formatear muchas fechas distintas (que requieren un argumento) debe hacerse con un método. Las computadas son ideales para valores derivados sin argumentos.
+    explanation_code:
+      - code: |-
+          // ✅ Método: acepta parámetros
+          const formatDate = (date) => {
+            return new Date(date).toLocaleDateString();
+          };
+
+          // ❌ Computed no puede hacer esto:
+          // const formattedDate = computed((date) => ...)
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Formatear una única fecha que depende de un ref reactivo.
+      - id: "2"
+        isCorrect: false
+        text: Calcular el total de un carrito de compras.
+      - id: "3"
+        isCorrect: false
+        text: Filtrar una lista de productos por categoría seleccionada.
+      - id: "4"
+        isCorrect: true
+        text: Formatear muchas fechas distintas que requieren un parámetro de entrada.
