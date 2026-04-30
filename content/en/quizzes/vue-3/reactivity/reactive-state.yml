@@ -1,0 +1,241 @@
+documentId: reactive-state
+title: Fundamentals of Reactivity in Vue 3
+level: basic
+slug: reactive-state
+description: Assessment on the mechanisms of ref, reactive, and shallow reactivity optimizations.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+questions:
+  - text: What mechanism does Vue 3 use internally to intercept changes in objects and achieve reactivity?
+    explanation: Vue 3 moved from using Object.defineProperty (used in Vue 2) to JavaScript Proxies, allowing it to detect property additions and deletions more efficiently.
+    explanation_code:
+      - code: |-
+          const data = { count: 0 };
+          const observed = new Proxy(data, {
+            set(target, key, value) {
+              console.log("Change detected");
+              return Reflect.set(...arguments);
+            }
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: JavaScript Proxies
+      - id: "2"
+        isCorrect: false
+        text: Object.defineProperty
+      - id: "3"
+        isCorrect: false
+        text: Virtual DOM Diffing
+      - id: "4"
+        isCorrect: false
+        text: Web Workers
+
+  - text: If you declare a constant with `ref(0)`, how should you modify its value inside the `<script>` block?
+    explanation: References created with ref wrap the value in an object. To access or modify the actual value, you must use the `.value` property.
+    explanation_code:
+      - code: |-
+          import { ref } from 'vue';
+          const count = ref(0);
+          
+          // Access and modification
+          count.value++;
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: `count++`
+      - id: "2"
+        isCorrect: true
+        text: `count.value++`
+      - id: "3"
+        isCorrect: false
+        text: `count.set(1)`
+      - id: "4"
+        isCorrect: false
+        text: `update(count, 1)`
+
+  - text: What is the main limitation of the `reactive()` function?
+    explanation: Unlike `ref()`, `reactive()` only accepts object types (objects, arrays, Map, Set). It cannot be used with primitive values like strings or numbers.
+    explanation_code:
+      - code: |-
+          // ❌ This will not work as expected:
+          const state = reactive(0); 
+          
+          // ✅ Correct:
+          const state = reactive({ count: 0 });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: It only works with objects and arrays, not with primitive values.
+      - id: "2"
+        isCorrect: false
+        text: It is not deeply reactive.
+      - id: "3"
+        isCorrect: false
+        text: It always requires the use of `.value`.
+      - id: "4"
+        isCorrect: false
+        text: It can only be used inside the `onMounted` lifecycle hook.
+
+  - text: What happens to reactivity if you destructure an object created with `reactive()`?
+    explanation: When destructuring a reactive object, the resulting variables become plain copies of the values at that moment and lose their connection to Vue's reactivity system.
+    explanation_code:
+      - code: |-
+          const state = reactive({ count: 0 });
+          let { count } = state; 
+          
+          // 'count' is now a plain number and will not react to changes
+          count++; 
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: It is preserved thanks to Proxies.
+      - id: "2"
+        isCorrect: true
+        text: The reactive link of destructured properties is lost.
+      - id: "3"
+        isCorrect: false
+        text: Vue throws a runtime error.
+      - id: "4"
+        isCorrect: false
+        text: The object is automatically converted into a `ref`.
+
+  - text: How does `shallowRef()` differ from a standard `ref()`?
+    explanation: "`shallowRef()` only tracks access and modification of the `.value` property. It does not make the internal value deeply reactive."
+    explanation_code:
+      - code: |-
+          const s = shallowRef({ n: 1 });
+          // This will NOT trigger UI updates:
+          s.value.n = 2; 
+          
+          // This WILL trigger updates:
+          s.value = { n: 2 };
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: It only allows primitive values.
+      - id: "2"
+        isCorrect: false
+        text: It is asynchronous by default.
+      - id: "3"
+        isCorrect: true
+        text: It is only reactive when the entire `.value` is reassigned.
+      - id: "4"
+        isCorrect: false
+        text: It is used exclusively for forms.
+
+  - text: If you use a `ref` in the `<template>`, how do you access its value?
+    explanation: In templates, Vue automatically unwraps refs, so you do not need to use `.value`.
+    explanation_code:
+      - code: |-
+          <p>{{ count }}</p>
+        language: html
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Directly by the variable name.
+      - id: "2"
+        isCorrect: false
+        text: Using `variable.value`.
+      - id: "3"
+        isCorrect: false
+        text: Using the `$` prefix.
+      - id: "4"
+        isCorrect: false
+        text: Invoking it as a function `variable()`.
+
+  - text: When is it recommended to use `shallowReactive()`?
+    explanation: It is useful for optimizing performance when handling large objects where only the top-level properties need to be reactive.
+    explanation_code:
+      - code: |-
+          const largeData = shallowReactive({
+            header: "Info",
+            items: [...] // Inner elements are not reactive
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: When handling large structures and only root-level reactivity is needed.
+      - id: "2"
+        isCorrect: false
+        text: To convert a `ref` into `reactive`.
+      - id: "3"
+        isCorrect: false
+        text: When the object contains functions.
+      - id: "4"
+        isCorrect: false
+        text: To hide data from developer tools.
+
+  - text: What happens when assigning a new object to a `ref()`?
+    explanation: Unlike `reactive()`, `ref()` allows full reassignment of the object while maintaining reactivity on the original variable.
+    explanation_code:
+      - code: |-
+          const user = ref({ name: 'Ana' });
+          // Reactivity is preserved
+          user.value = { name: 'Luis' }; 
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Reactivity is preserved through access to `.value`.
+      - id: "2"
+        isCorrect: false
+        text: Reactivity is permanently lost.
+      - id: "3"
+        isCorrect: false
+        text: The new object must be of the same type.
+      - id: "4"
+        isCorrect: false
+        text: It is necessary to call `triggerRef()`.
+
+  - text: What type of data does the `ref()` function return?
+    explanation: It returns a reactive and mutable object that acts as a reactive reference (RefImpl).
+    explanation_code:
+      - code: |-
+          const count = ref(10);
+          console.log(typeof count); // "object"
+          console.log(count); // RefImpl { _value: 10, ... }
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: A direct Proxy of the value.
+      - id: "2"
+        isCorrect: true
+        text: A wrapper object with a `.value` property.
+      - id: "3"
+        isCorrect: false
+        text: The same data type as the input.
+      - id: "4"
+        isCorrect: false
+        text: A getter function.
+
+  - text: What is the main difference between `reactive` and `shallowReactive`?
+    explanation: "`reactive` is recursive (makes all nested properties reactive), while `shallowReactive` only affects the first level of properties."
+    explanation_code:
+      - code: |-
+          const state = shallowReactive({ a: { b: 1 } });
+          state.a.b = 2; // Not reactive
+          state.a = { b: 3 }; // Reactive (top level)
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: The depth of change tracking.
+      - id: "2"
+        isCorrect: false
+        text: One is for arrays and the other for objects.
+      - id: "3"
+        isCorrect: false
+        text: Only the initial access speed.
+      - id: "4"
+        isCorrect: false
+        text: That `shallowReactive` does not allow methods.
