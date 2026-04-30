@@ -1,7 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import TipCarousel from "@/components/tip/TipCarousel.vue";
+import LearningPath from "@/components/learning-path/LearningPath.vue";
+</script>
 
 <template>
-  <h1 class="text-2xl font-bold">Dashboard Home</h1>
+  <div class="space-y-4">
+    <TipCarousel />
+    <LearningPath />
+  </div>
 </template>
 
 <style lang="postcss" scoped></style>
