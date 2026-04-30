@@ -92,7 +92,7 @@ const isMenuActive = (url: string) => {
         <header class="flex md:hidden sticky top-0 bg-background px-6 py-1 border-b">
           <SidebarTrigger />
         </header>
-        <div class="h-full overflow-auto p-6 border rounded-lg m-5">
+        <div class="h-full overflow-auto p-6">
           <slot />
         </div>
       </SidebarInset>
