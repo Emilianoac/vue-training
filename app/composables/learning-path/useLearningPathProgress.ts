@@ -1,4 +1,4 @@
-import type { ItemType } from "@/schemas/learningPath.schema";
+import type { ItemType, LearningPath } from "@/schemas/learningPath.schema";
 
 const STORAGE_KEY = "learning-path-progress";
 
@@ -43,5 +43,24 @@ export function useLearningPathProgress() {
     writeStorage(next);
   }
 
-  return { isCompleted, markComplete, markIncomplete };
+  function useProgress(
+    pathId: MaybeRefOrGetter<string>,
+    learningPath: MaybeRefOrGetter<LearningPath | null | undefined>,
+  ) {
+    const allItems = computed(() => toValue(learningPath)?.steps.flatMap((s) => s.items) ?? []);
+
+    const completedCount = computed(
+      () =>
+        allItems.value.filter((item) => isCompleted(toValue(pathId), item.type, item.id).value)
+          .length,
+    );
+
+    const progressPercent = computed(() =>
+      allItems.value.length ? Math.round((completedCount.value / allItems.value.length) * 100) : 0,
+    );
+
+    return { allItems, completedCount, progressPercent };
+  }
+
+  return { isCompleted, markComplete, markIncomplete, useProgress };
 }

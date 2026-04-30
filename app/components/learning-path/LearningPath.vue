@@ -37,11 +37,27 @@ function getActivityPath(type: ItemType, id: string) {
   return `/dashboard/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
 }
 
-const { isCompleted } = useLearningPathProgress();
+const { isCompleted, useProgress } = useLearningPathProgress();
+
+const { allItems, completedCount, progressPercent } = useProgress(() => props.pathId, test);
 </script>
 
 <template>
   <div v-if="test">
+    <!-- Progress Bar -->
+    <div class="mb-8 space-y-2">
+      <div class="flex items-center justify-between text-sm text-muted-foreground">
+        <span class="font-medium">Progreso general</span>
+        <span>{{ completedCount }} / {{ allItems.length }} completados</span>
+      </div>
+      <div class="h-3 w-full rounded-full bg-muted overflow-hidden">
+        <div
+          class="h-full rounded-full bg-green-500 transition-all duration-500"
+          :style="{ width: progressPercent + '%' }"
+        />
+      </div>
+      <p class="text-right text-xs text-muted-foreground">{{ progressPercent }}%</p>
+    </div>
     <div v-for="step in test.steps" class="space-y-4">
       <!-- Step Title -->
       <div class="flex items-center justify-center gap-6">
