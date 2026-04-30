@@ -1,0 +1,40 @@
+{
+  "documentId": "drone-telemetry-reactive-state",
+  "title": "Estado Reactivo de Telemetría de Dron",
+  "slug": "drone-telemetry-reactive-state",
+  "level": "básico",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Gestiona la energía del dron y la telemetría técnica usando el núcleo de reactividad de Vue 3 (ref y reactive).",
+  "description": [
+    "En este desafío, construirás la lógica para un panel de control de un dron. Necesitarás manejar el estado de los motores y datos de telemetría en tiempo real como la altitud y los niveles de batería.",
+    "Tu tarea es implementar un sistema de encendido/apagado de los motores y una lógica de vuelo donde el dron solo pueda ganar altitud si los motores están en funcionamiento, consumiendo batería al mismo tiempo."
+  ],
+  "cover": {
+    "url": ""
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "objectives": [
+    {
+      "data": "Definir estados reactivos usando ref para valores primitivos y reactive para objetos."
+    },
+    {
+      "data": "Implementar una función de alternancia para iniciar/detener los motores y reiniciar la altitud al apagarlos."
+    },
+    {
+      "data": "Desarrollar una función de despegue que actualice múltiples propiedades reactivas de forma condicional."
+    }
+  ],
+  "stackblitz": {
+    "challenge": "https://stackblitz.com/edit/emi-drone-telemetry-reactive-state?embed=1&file=src%2Fcomponents%2FDronePanel.vue",
+    "solution": "https://stackblitz.com/edit/emi-drone-telemetry-reactive-state-solution?embed=1&file=src%2Fcomponents%2FDronePanel.vue"
+  }
+}
