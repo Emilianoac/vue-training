@@ -3,13 +3,28 @@ title: "Camino de Aprendizaje: Vue 3"
 steps:
   - name: Reactividad
     items:
-      - id: reactive-state-lesson
+      - id: reactive-state
         type: lesson
         path: /lessons/reactive-state
         title: Reactividad en Vue 3
         subtitle: Fundamentos de la reactividad con ref, reactive y optimizaciones.
-      - id: reactive-state-quiz
+      - id: reactive-state
         type: quiz
         path: /quizzes/reactive-state
         title: Quiz de Reactividad
         subtitle: Evalúa tu comprensión de los conceptos de reactividad en Vue 3.
+      - id: drone-telemetry-reactive-state
+        type: challenge
+        path: /challenges/reactive-state
+        title: Desafío de Reactividad
+        subtitle: Resuelve un desafío práctico para aplicar tus conocimientos sobre reactividad en Vue 3.
+      - id: computed-properties
+        type: lesson
+        path: /lessons/computed-properties
+        title: Propiedades Computadas
+        subtitle: Aprende a usar computed properties para derivar estado de manera eficiente.
+      - id: computed-properties
+        type: quiz
+        path: /quizzes/computed-properties
+        title: Quiz de Propiedades Computadas
+        subtitle: Pon a prueba tu conocimiento sobre computed properties en Vue 3.
