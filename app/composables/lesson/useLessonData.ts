@@ -1,10 +1,13 @@
 import { lessonService } from "@/services/api/lesson/lessonService";
 import type { Lesson } from "@/schemas/lesson.schema";
+import type { LessonsEnCollectionItem, LessonsEsCollectionItem } from "@nuxt/content";
+
+export type LessonDocument = LessonsEnCollectionItem | LessonsEsCollectionItem;
 
 export default function useLessonData() {
   const { locale } = useI18n();
 
-  const lesson = ref<Lesson>();
+  const lesson = ref<LessonDocument>();
   const lessons = ref<Lesson[]>([]);
   const isLoading = ref(false);
   const error = ref<{ status: boolean; message: string }>({
