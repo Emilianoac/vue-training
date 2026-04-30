@@ -1,14 +1,19 @@
 <script lang="ts" setup>
 import type { ItemType } from "@/schemas/learningPath.schema";
-import { ArrowRightIcon, PlayCircleIcon } from "lucide-vue-next";
+import { ArrowRightIcon, PlayCircleIcon, CheckCircleIcon } from "lucide-vue-next";
 import useLearningPathData from "@/composables/learning-path/useLearningPathData";
+import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import IconTerminal from "@/components/assets/icons/IconTerminal.vue";
 import IconQuiz from "@/components/assets/icons/IconQuiz.vue";
 import IconBook from "@/components/assets/icons/IconBook.vue";
 
+const props = defineProps<{
+  pathId: string;
+}>();
+
 const { learningPath: test, getLearningPath } = useLearningPathData();
 
-await getLearningPath("vue-3-path");
+await getLearningPath(props.pathId);
 
 const iconMap = {
   quiz: IconQuiz,
@@ -20,6 +25,19 @@ const iconMap = {
 function getIcon(type: ItemType) {
   return iconMap[type] || IconBook;
 }
+
+const typeToSegment: Record<ItemType, string> = {
+  lesson: "lessons",
+  quiz: "quizzes",
+  challenge: "challenges",
+  tip: "tips",
+};
+
+function getActivityPath(type: ItemType, id: string) {
+  return `/dashboard/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
+}
+
+const { isCompleted } = useLearningPathProgress();
 </script>
 
 <template>
@@ -43,7 +61,13 @@ function getIcon(type: ItemType) {
           :class="index % 2 === 0 ? 'justify-start pr-10 md:pr-20' : 'justify-end pl-10 md:pl-20'"
         >
           <div class="w-full md:w-[calc(50%-2.5rem)]">
-            <Card>
+            <Card
+              :class="
+                isCompleted(pathId, item.type, item.id).value
+                  ? 'border-green-500 dark:border-green-600'
+                  : ''
+              "
+            >
               <CardHeader class="pb-2">
                 <div class="flex items-center gap-2 text-sm font-medium">
                   <div class="flex items-center justify-center size-10 rounded-full bg-background">
@@ -53,12 +77,18 @@ function getIcon(type: ItemType) {
                 </div>
                 <div class="flex items-center justify-between gap-2">
                   <CardTitle class="text-base">{{ item.title }}</CardTitle>
+                  <span
+                    v-if="isCompleted(pathId, item.type, item.id).value"
+                    class="text-xs font-medium text-green-600 dark:text-green-400 flex items-center gap-1"
+                  >
+                    <CheckCircleIcon class="size-3.5" /> Completado
+                  </span>
                 </div>
                 <CardDescription>{{ item.subtitle }}</CardDescription>
               </CardHeader>
               <CardFooter class="pt-0">
                 <NuxtLink
-                  :to="`/dashboard${item.path}`"
+                  :to="getActivityPath(item.type, item.id)"
                   class="inline-flex items-center gap-1 text-sm text-primary font-medium hover:underline"
                 >
                   <ArrowRightIcon class="size-4" />
@@ -69,9 +99,13 @@ function getIcon(type: ItemType) {
           </div>
 
           <div
-            class="absolute left-1/2 top-8 -translate-x-1/2 size-12 rounded-full border-4 border-background flex items-center justify-center bg-green-500 text-white"
+            class="absolute left-1/2 top-8 -translate-x-1/2 size-12 rounded-full border-4 border-background flex items-center justify-center text-white"
+            :class="
+              isCompleted(pathId, item.type, item.id).value ? 'bg-green-500' : 'bg-muted-foreground'
+            "
           >
-            <PlayCircleIcon class="size-5" />
+            <CheckCircleIcon v-if="isCompleted(pathId, item.type, item.id).value" class="size-5" />
+            <PlayCircleIcon v-else class="size-5" />
           </div>
         </div>
       </div>

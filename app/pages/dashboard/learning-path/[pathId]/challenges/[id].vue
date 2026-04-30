@@ -1,0 +1,107 @@
+<script lang="ts" setup>
+import useChallengeData from "@/composables/challenge/useChallengeData";
+import ChipComponent from "@/components/ui/ChipComponent.vue";
+import TabComponent from "@/components/ui/TabComponent.vue";
+import ChallengeCodeEditorLayout from "@/components/challenge/ChallengeCodeEditorLayout.vue";
+import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
+
+const route = useRoute();
+const router = useRouter();
+const { locale } = useI18n();
+
+const pathId = route.params.pathId as string;
+const challengeId = route.params.id as string;
+const { challenge, getChallenge } = useChallengeData();
+const { isCompleted, markComplete } = useLearningPathProgress();
+await getChallenge(challengeId);
+
+const done = isCompleted(pathId, "challenge", challengeId);
+
+function handleComplete() {
+  markComplete(pathId, "challenge", challengeId);
+  router.push(`/dashboard/learning-path/${pathId}`);
+}
+
+const tabsItems = [
+  { name: "challenge.tabs.description", id: "description", icon: "mdi:list-box" },
+  { name: "challenge.tabs.play", id: "play", icon: "mdi:gamepad-square" },
+  { name: "challenge.tabs.solution", id: "solution", icon: "mdi:crystal-ball" },
+];
+
+useSeoMeta({
+  title: computed(() => challenge.value?.title),
+});
+
+watch(
+  () => locale.value,
+  async () => {
+    await getChallenge(challengeId);
+  },
+);
+</script>
+
+<template>
+  <template v-if="challenge">
+    <div class="flex items-start justify-between mb-2">
+      <div>
+        <h1 class="text-2xl font-bold mb-2">{{ challenge.title }}</h1>
+      </div>
+      <Button :variant="done ? 'outline' : 'default'" @click="handleComplete">
+        {{ done ? "✓ Completado" : "Marcar como completado" }}
+      </Button>
+    </div>
+
+    <TabComponent :items="tabsItems" id="challenge-tab">
+      <template #description>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-5">
+          <div>
+            <!-- Description -->
+            <p class="mb-2 last-of-type:mb-0" v-for="par in challenge.description">
+              {{ par }}
+            </p>
+
+            <hr class="h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
+
+            <!-- Objectives -->
+            <h2 class="font-bold">{{ $t("challenge.description.objectives") }}</h2>
+            <ul
+              class="list-disc list-inside text-gray-900 dark:text-gray-300 text-sm p-4 rounded-md bg-slate-100 dark:bg-slate-800/50 mt-2"
+            >
+              <li
+                v-for="(item, i) in challenge?.objectives"
+                :key="i"
+                class="mb-4 last-of-type:mb-0"
+              >
+                {{ item.data }}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <!-- Gallery -->
+            <div v-if="challenge?.images.length" class="mt-4 bg-blue-50/80 p-3 rounded-md">
+              <img
+                v-for="(image, i) in challenge?.images"
+                :key="i"
+                :src="image.url"
+                alt="Gallery"
+                class="w-full rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+      </template>
+      <template #play>
+        <ChallengeCodeEditorLayout
+          :stackblitz-url="challenge.stackblitz.challenge"
+          :objectives="challenge.objectives"
+        />
+      </template>
+      <template #solution>
+        <ChallengeCodeEditorLayout
+          :stackblitz-url="challenge.stackblitz.solution"
+          :objectives="challenge.objectives"
+        />
+      </template>
+    </TabComponent>
+  </template>
+</template>

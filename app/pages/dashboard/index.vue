@@ -6,7 +6,7 @@ import LearningPath from "@/components/learning-path/LearningPath.vue";
 <template>
   <div class="space-y-4">
     <TipCarousel />
-    <LearningPath />
+    <LearningPath path-id="vue-3-path" />
   </div>
 </template>
 
