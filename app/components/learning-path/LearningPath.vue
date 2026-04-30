@@ -58,7 +58,7 @@ const { allItems, completedCount, progressPercent } = useProgress(() => props.pa
       </div>
       <p class="text-right text-xs text-muted-foreground">{{ progressPercent }}%</p>
     </div>
-    <div v-for="step in test.steps" class="space-y-4">
+    <div v-for="(step, stepIndex) in test.steps" class="space-y-4">
       <!-- Step Title -->
       <div class="flex items-center justify-center gap-6">
         <hr class="border w-full" />
@@ -74,7 +74,11 @@ const { allItems, completedCount, progressPercent } = useProgress(() => props.pa
           v-for="(item, index) in step.items"
           :key="item.title"
           class="relative mb-6 flex"
-          :class="index % 2 === 0 ? 'justify-start pr-10 md:pr-20' : 'justify-end pl-10 md:pl-20'"
+          :class="
+            (index + (stepIndex > 0 ? 1 : 0)) % 2 === 0
+              ? 'justify-start pr-10 md:pr-20'
+              : 'justify-end pl-10 md:pl-20'
+          "
         >
           <div class="w-full md:w-[calc(50%-2.5rem)]">
             <Card
