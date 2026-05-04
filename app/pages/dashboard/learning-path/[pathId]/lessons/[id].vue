@@ -29,8 +29,9 @@ function handleComplete() {
   <LessonView v-if="lesson" :lesson="lesson as unknown as Record<string, unknown>">
     <template #actions="{ currentSlide, totalSlides }">
       <Button
-        v-if="currentSlide === totalSlides"
+        v-if="currentSlide === totalSlides || done"
         class="w-full mt-2"
+        size="lg"
         :variant="done ? 'outline' : 'default'"
         @click="handleComplete"
       >
