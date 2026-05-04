@@ -169,7 +169,7 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
   font-weight: 700;
   font-size: 1.3rem;
   border-bottom: 5px solid var(--primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   padding-bottom: 0.25rem;
   width: fit-content;
 }
@@ -177,7 +177,10 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 :deep(h3) {
   font-weight: 600;
   font-size: 1.1rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
+  border-left: 6px solid var(--primary);
+  padding-left: 0.3rem;
+  line-height: 1;
 }
 
 :deep(p) {
