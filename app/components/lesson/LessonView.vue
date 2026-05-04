@@ -73,6 +73,7 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
         :opts="{
           align: 'start',
           loop: false,
+          watchDrag: false,
         }"
         @init-api="onCarouselInit"
       >
