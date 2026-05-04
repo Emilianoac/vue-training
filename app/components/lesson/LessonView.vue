@@ -167,19 +167,22 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 
 :deep(h2) {
   font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  border-bottom: 5px solid var(--primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.25rem;
+  width: fit-content;
 }
 
 :deep(h3) {
   font-weight: 600;
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
 }
 
 :deep(p) {
   margin-bottom: 1rem;
-  line-height: 1.6;
+  line-height: 1.9;
 
   & :last-of-type {
     margin-bottom: 0;
@@ -190,9 +193,15 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
   list-style: disc;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  padding-left: 2rem;
 
   li {
     margin-bottom: 0.5rem;
+    line-height: 1.9;
   }
 
   & :last-of-type {
