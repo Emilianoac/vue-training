@@ -13,7 +13,7 @@ const { copy, copied } = useClipboard({
 </script>
 
 <template>
-  <div class="border rounded-md overflow-hidden mb-5 last-of-type:mb-0">
+  <div class="border rounded-md overflow-hidden mb-5 last:mb-0">
     <div class="bg-background flex items-center justify-between px-4 py-1 border-b">
       <span class="text-sm">{{ filename || language }}</span>
       <TooltipProvider>
