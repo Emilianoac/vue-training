@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import type { UnwrapRefCarouselApi } from "@/components/ui/carousel/interface";
 
 const props = defineProps<{
@@ -69,14 +70,19 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
     <div class="lesson-card overflow-hidden bg-card rounded-md">
       <Carousel
         class="lesson-carousel w-full h-full"
-        :opts="{ align: 'start', loop: false }"
+        :opts="{
+          align: 'start',
+          loop: false,
+        }"
         @init-api="onCarouselInit"
       >
         <CarouselContent class="lesson-carousel-content h-full">
           <CarouselItem v-for="(blocks, index) in slideBlocks" :key="index" class="h-full">
-            <article class="lesson-slide p-5 pb-20">
-              <ContentRenderer :value="getSlideValue(blocks)" />
-            </article>
+            <ScrollArea class="h-full pr-4">
+              <article class="lesson-slide p-5 pb-20">
+                <ContentRenderer :value="getSlideValue(blocks)" />
+              </article>
+            </ScrollArea>
           </CarouselItem>
         </CarouselContent>
 
