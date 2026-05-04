@@ -61,10 +61,12 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 </script>
 
 <template>
-  <div class="max-w-200 mx-auto flex flex-col gap-4">
+  <div class="grid grid-cols-1 xl:grid-cols-[1fr_2fr] gap-6 h-200 md:h-full">
     <div>
       <h1 class="text-2xl font-bold mb-4">{{ lesson.title as string }}</h1>
       <p>{{ lesson.description as string }}</p>
+
+      <slot name="actions" :current-slide="currentSlide" :total-slides="totalSlides" />
     </div>
 
     <div class="lesson-card overflow-hidden bg-card rounded-md">
@@ -98,9 +100,6 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
             </div>
             <CarouselNext variant="default" class="static! translate-0" />
           </div>
-
-          <!-- Slot para acciones contextuales (ej: botón "Marcar como completado" en rutas del path) -->
-          <slot name="actions" :current-slide="currentSlide" :total-slides="totalSlides" />
         </div>
       </Carousel>
     </div>
@@ -108,11 +107,6 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 </template>
 
 <style lang="scss" scoped>
-.lesson-card {
-  position: relative;
-  height: clamp(28rem, 70vh, 44rem);
-}
-
 .lesson-bottom-nav {
   position: sticky;
   left: 1rem;
@@ -168,7 +162,7 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 :deep(h2) {
   font-weight: 700;
   font-size: 1.3rem;
-  border-bottom: 5px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
   margin-bottom: 2rem;
   padding-bottom: 0.25rem;
   width: fit-content;
