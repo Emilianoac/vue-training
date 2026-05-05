@@ -1,7 +1,7 @@
 documentId: computed-properties-quiz
 title: Computed Properties in Vue 3
 level: basic
-slug: computed-properties
+slug: computed-properties-quiz
 description: Assessment on computed properties, caching, differences from methods, and best practices.
 category:
   name: Vue 3

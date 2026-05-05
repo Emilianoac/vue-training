@@ -1,7 +1,7 @@
 documentId: reactive-state-quiz
 title: Fundamentals of Reactivity in Vue 3
 level: basic
-slug: reactive-state
+slug: reactive-state-quiz
 description: Assessment on the mechanisms of ref, reactive, and shallow reactivity optimizations.
 category:
   name: Vue 3
