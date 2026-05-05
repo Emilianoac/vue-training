@@ -1,5 +1,5 @@
 ---
-documentId: computed-properties
+documentId: computed-properties-lesson
 title: Fundamentos de la Reactividad en Vue 3
 level: basic
 description: Conceptos fundamentales sobre propiedades computadas, caché y diferencias clave con los métodos tradicionales.

@@ -1,5 +1,5 @@
 ---
-documentId: reactive-state
+documentId: reactive-state-lesson
 title: Fundamentos de la Reactividad en Vue 3
 level: basic
 description: Aprende los conceptos fundamentales de la reactividad en Vue 3.
