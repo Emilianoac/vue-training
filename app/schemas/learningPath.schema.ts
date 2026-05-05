@@ -5,7 +5,6 @@ export const itemType = z.enum(["lesson", "challenge", "tip", "quiz"]);
 export const itemSchema = z.object({
   type: itemType,
   id: z.string(),
-  path: z.string(),
   title: z.string(),
   subtitle: z.string(),
 });
