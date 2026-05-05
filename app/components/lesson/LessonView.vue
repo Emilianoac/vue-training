@@ -26,9 +26,9 @@ const slideBlocks = computed(() => {
   let current: unknown[] = [];
 
   for (const block of blocks) {
-    if ((block as unknown[])[0] === "hr") {
+    if ((block as unknown[])[0] === "h2") {
       if (current.length) slides.push(current);
-      current = [];
+      current = [block];
     } else {
       current.push(block);
     }
