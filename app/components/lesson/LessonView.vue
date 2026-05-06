@@ -198,7 +198,20 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 
   li {
     margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
     line-height: 1.9;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+
+    &::marker {
+      color: var(--primary);
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
   }
 
   & :last-of-type {
