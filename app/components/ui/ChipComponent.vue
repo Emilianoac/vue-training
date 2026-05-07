@@ -11,7 +11,7 @@ defineProps<{
 <template>
   <span
     title="Quiz Level"
-    class="block w-fit px-3 py-1 rounded-full text-xs font-semibold"
+    class="block w-fit px-2 py-0.5 rounded-full first-letter:capitalize text-xs"
     :class="[type ? levelColors[type].bg : '', type ? levelColors[type].text : '']"
   >
     {{ text }}

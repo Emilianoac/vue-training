@@ -1,17 +1,25 @@
 import { z } from "zod";
 
+export const itemLevel = z.enum(["basic", "intermediate", "advanced"]);
 export const itemType = z.enum(["lesson", "challenge", "tip", "quiz"]);
 
 export const itemSchema = z.object({
   type: itemType,
+  level: itemLevel,
   id: z.string(),
   title: z.string(),
   subtitle: z.string(),
 });
 
+export const subStepSchema = z.object({
+  name: z.string(),
+  id: z.string(),
+  items: z.array(itemSchema),
+});
+
 export const stepSchema = z.object({
   name: z.string(),
-  items: z.array(itemSchema),
+  sub_steps: z.array(subStepSchema),
 });
 
 export const learningPathSchema = z.object({

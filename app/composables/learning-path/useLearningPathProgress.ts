@@ -47,7 +47,12 @@ export function useLearningPathProgress() {
     pathId: MaybeRefOrGetter<string>,
     learningPath: MaybeRefOrGetter<LearningPath | null | undefined>,
   ) {
-    const allItems = computed(() => toValue(learningPath)?.steps.flatMap((s) => s.items) ?? []);
+    const allItems = computed(
+      () =>
+        toValue(learningPath)
+          ?.steps.flatMap((step) => step.sub_steps)
+          .flatMap((sub) => sub.items) ?? [],
+    );
 
     const completedCount = computed(
       () =>

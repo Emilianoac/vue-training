@@ -1,14 +1,14 @@
 export const levelColors = {
   basic: {
-    bg: "bg-green-300",
-    text: "text-green-800",
+    bg: "bg-blue-600 dark:bg-blue-500",
+    text: "text-blue-100",
   },
   intermediate: {
-    bg: "bg-yellow-500",
-    text: "text-yellow-800",
+    bg: "bg-yellow-700 dark:bg-yellow-800",
+    text: "text-yellow-100 dark:text-yellow-200",
   },
   advanced: {
-    bg: "bg-red-500",
-    text: "text-red-900",
+    bg: "bg-red-900",
+    text: "text-red-100 dark:text-red-200",
   },
 } as const;
