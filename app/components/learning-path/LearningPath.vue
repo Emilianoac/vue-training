@@ -9,6 +9,7 @@ const props = defineProps<{
   pathId: string;
 }>();
 
+const { locale } = useI18n();
 const { learningPath, getLearningPath } = useLearningPathData();
 
 await getLearningPath(props.pathId);
@@ -26,6 +27,10 @@ const { allItems, completedCount, progressPercent } = useProgress(() => props.pa
 function getActivityPath(type: ItemType, id: string) {
   return `/dashboard/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
 }
+
+watch(locale, async () => {
+  await getLearningPath(props.pathId);
+});
 </script>
 
 <template>
