@@ -3,6 +3,10 @@ import type { ItemType, LearningPath } from "@/schemas/learningPath.schema";
 const STORAGE_KEY = "learning-path-progress";
 
 type CompletedSet = Record<string, boolean>;
+type ProgressItem = {
+  type: ItemType;
+  id: string;
+};
 
 function storageKey(pathId: string, type: ItemType, id: string) {
   return `${pathId}:${type}:${id}`;
@@ -51,7 +55,8 @@ export function useLearningPathProgress() {
       () =>
         toValue(learningPath)
           ?.steps.flatMap((step) => step.sub_steps)
-          .flatMap((sub) => sub.items) ?? [],
+          .flatMap((sub) => sub.items ?? [])
+          .filter(isProgressItem) ?? [],
     );
 
     const completedCount = computed(
@@ -68,4 +73,15 @@ export function useLearningPathProgress() {
   }
 
   return { isCompleted, markComplete, markIncomplete, useProgress };
+}
+
+function isProgressItem(item: unknown): item is ProgressItem {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "type" in item &&
+    "id" in item &&
+    typeof item.type === "string" &&
+    typeof item.id === "string"
+  );
 }

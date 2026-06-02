@@ -12,6 +12,7 @@ import type { UnwrapRefCarouselApi } from "@/components/ui/carousel/interface";
 
 const props = defineProps<{
   lesson: Record<string, unknown>;
+  singleColumn?: boolean;
 }>();
 
 const currentSlide = ref(1);
@@ -61,48 +62,24 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 xl:grid-cols-[1fr_2fr] gap-6 h-200 md:h-full">
-    <div>
+  <div
+    class="grid grid-cols-1 gap-6 h-full overflow-hidden"
+    :class="singleColumn ? '' : 'xl:grid-cols-[1fr_1fr]'"
+  >
+    <div class="overflow-y-auto pr-4">
       <h1 class="text-2xl font-bold mb-4">{{ lesson.title as string }}</h1>
       <p>{{ lesson.description as string }}</p>
+
+      <ContentRenderer
+        v-for="(blocks, index) in slideBlocks"
+        :key="index"
+        :value="getSlideValue(blocks)"
+      />
 
       <slot name="actions" :current-slide="currentSlide" :total-slides="totalSlides" />
     </div>
 
-    <div class="lesson-card overflow-hidden bg-card rounded-md">
-      <Carousel
-        class="lesson-carousel w-full h-full"
-        :opts="{
-          align: 'start',
-          loop: false,
-          watchDrag: false,
-        }"
-        @init-api="onCarouselInit"
-      >
-        <CarouselContent class="lesson-carousel-content h-full">
-          <CarouselItem v-for="(blocks, index) in slideBlocks" :key="index" class="h-full">
-            <ScrollArea class="h-full pr-4">
-              <article class="lesson-slide p-5 pb-20">
-                <ContentRenderer :value="getSlideValue(blocks)" />
-              </article>
-            </ScrollArea>
-          </CarouselItem>
-        </CarouselContent>
-
-        <div class="lesson-bottom-nav">
-          <div class="flex justify-between items-center gap-4 w-full">
-            <CarouselPrevious variant="default" class="static! translate-0" />
-            <div class="space-y-1">
-              <CarouselDots class="lesson-bottom-nav__dots mt-0" />
-              <p class="text-xs text-muted-foreground text-center mb-0!" aria-live="polite">
-                {{ currentSlide }} / {{ totalSlides }}
-              </p>
-            </div>
-            <CarouselNext variant="default" class="static! translate-0" />
-          </div>
-        </div>
-      </Carousel>
-    </div>
+    <div v-if="!singleColumn"></div>
   </div>
 </template>
 
@@ -166,6 +143,7 @@ function onCarouselInit(api: UnwrapRefCarouselApi | undefined) {
   margin-bottom: 2rem;
   padding-bottom: 0.25rem;
   width: fit-content;
+  margin-top: 2em;
 }
 
 :deep(h3) {
