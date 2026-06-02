@@ -4,13 +4,14 @@ import SiteBrandComponent from "@/components/layout/SiteBrandComponent.vue";
 import ThemeToggleComponent from "@/components/layout/ThemeToggleComponent.vue";
 
 const props = defineProps<{
-  variant: "landing" | "dashboard";
+  variant: "landing" | "learn";
+  showLangToggle?: boolean;
 }>();
 </script>
 
 <template>
   <header class="bg-background border-b border-border flex items-center justify-between px-4">
-    <template v-if="variant == 'dashboard'">
+    <template v-if="variant == 'learn'">
       <div>
         <slot name="sidebarTrigger" />
         <SiteBrandComponent class="max-w-[150px]" />
@@ -19,7 +20,7 @@ const props = defineProps<{
       <div class="flex items-center gap-5">
         <div class="flex items-center gap-2">
           <ThemeToggleComponent />
-          <LangToggleComponent />
+          <LangToggleComponent v-if="props.showLangToggle !== false" />
         </div>
       </div>
     </template>
@@ -30,7 +31,7 @@ const props = defineProps<{
       <div class="flex items-center gap-5">
         <div class="flex items-center gap-2">
           <ThemeToggleComponent />
-          <LangToggleComponent />
+          <LangToggleComponent v-if="props.showLangToggle !== false" />
         </div>
       </div>
     </div>
