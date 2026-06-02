@@ -1,5 +1,10 @@
 import tailwindcss from "@tailwindcss/vite";
 
+const webContainerHeaders = {
+  "Cross-Origin-Embedder-Policy": "require-corp",
+  "Cross-Origin-Opener-Policy": "same-origin",
+};
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -13,7 +18,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "shadcn-nuxt",
   ],
-  css: ["~/assets/css/tailwind.css"],
+  css: ["~/assets/css/tailwind.css", "~/assets/css/editor.css"],
   vite: {
     plugins: [tailwindcss()],
   },
@@ -23,6 +28,26 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    "/dashboard/test/webcontainer-challenge": {
+      appLayout: "dashboard",
+      ssr: false,
+      headers: webContainerHeaders,
+    },
+    "/dashboard/challenges/**": {
+      appLayout: "dashboard",
+      ssr: false,
+      headers: webContainerHeaders,
+    },
+    "/dashboard/learning-path/*/challenges/**": {
+      appLayout: "dashboard",
+      ssr: false,
+      headers: webContainerHeaders,
+    },
+    "/dashboard/learning-path/**/challenges/**": {
+      appLayout: "dashboard",
+      ssr: false,
+      headers: webContainerHeaders,
+    },
     "/dashboard/**": { appLayout: "dashboard", ssr: false },
   },
   i18n: {
