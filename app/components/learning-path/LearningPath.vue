@@ -25,7 +25,7 @@ const { isCompleted, useProgress } = useLearningPathProgress();
 const { allItems, completedCount, progressPercent } = useProgress(() => props.pathId, learningPath);
 
 function getActivityPath(type: ItemType, id: string) {
-  return `/dashboard/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
+  return `/learn/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
 }
 
 watch(locale, async () => {

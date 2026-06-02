@@ -56,7 +56,7 @@ watch(
           class="md:text-xl h-auto py-3 px-5 mt-10 shadow-[0_0_30px_rgba(105,220,164,0.3)]"
           as-child
         >
-          <NuxtLink to="/dashboard">
+          <NuxtLink to="/learn">
             {{ $t("home.hero_button_text") }}
             <Icon name="mdi:arrow-right" size="24"></Icon>
           </NuxtLink>
@@ -80,7 +80,7 @@ watch(
               </p>
             </div>
             <Button size="xl" variant="secondary" as-child>
-              <NuxtLink to="/quizzes">
+              <NuxtLink to="/learn/challenges">
                 {{ $t("home.features.quizzes.button_text") }}
                 <Icon name="mdi:arrow-right" size="24"></Icon>
               </NuxtLink>
@@ -99,7 +99,7 @@ watch(
               <p>{{ $t("home.features.challenges.description") }}</p>
             </div>
             <Button size="xl" variant="secondary" as-child>
-              <NuxtLink to="/quizzes">
+              <NuxtLink to="/learn/quizzes">
                 {{ $t("home.features.challenges.button_text") }}
                 <Icon name="mdi:arrow-right" size="24"></Icon>
               </NuxtLink>
@@ -171,7 +171,7 @@ watch(
           class="md:text-xl h-auto py-3 px-5 mt-5 shadow-[0_0_30px_rgba(105,220,164,0.3)]"
           as-child
         >
-          <NuxtLink to="/quizzes">
+          <NuxtLink to="/learn/quizzes">
             {{ $t("home.call_to_action.button_text") }}
             <Icon name="mdi:arrow-right" size="24"></Icon>
           </NuxtLink>

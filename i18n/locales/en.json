@@ -3,6 +3,7 @@
   "es": "Spanish",
   "menu-label": {
     "home": "Home",
+    "learningPaths": "Learning paths",
     "quizzes": "Quizzes",
     "challenges": "Challenges",
     "tips": "Tips"
@@ -69,6 +70,35 @@
       "title": "Want to take some time to practice",
       "description": "Try a few quizzes and challenges to test your knowledge and keep learning.",
       "button_text": "Get started"
+    }
+  },
+  "learn": {
+    "home": {
+      "title": "Your learning space",
+      "description": "Continue your path, practice with quizzes and challenges, or review quick tips to keep ideas fresh.",
+      "continue": {
+        "title": "Continue with Vue 3",
+        "description": "Return to the main learning path and keep moving through lessons, quizzes, and challenges.",
+        "action": "Open learning path"
+      },
+      "sections": {
+        "learningPaths": {
+          "title": "Learning paths",
+          "description": "Follow a guided path with lessons, quizzes, and challenges."
+        },
+        "quizzes": {
+          "title": "Quizzes",
+          "description": "Test focused concepts and reinforce what you have already seen."
+        },
+        "challenges": {
+          "title": "Challenges",
+          "description": "Practice by writing code and validating your solution with tests."
+        },
+        "tips": {
+          "title": "Tips",
+          "description": "Review small ideas and useful reminders about Vue."
+        }
+      }
     }
   },
   "quiz": {

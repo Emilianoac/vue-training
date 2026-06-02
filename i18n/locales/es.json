@@ -3,6 +3,7 @@
   "es": "Español",
   "menu-label": {
     "home": "Inicio",
+    "learningPaths": "Rutas",
     "quizzes": "Cuestionarios",
     "challenges": "Desafios",
     "tips": "Tips"
@@ -69,6 +70,35 @@
       "title": "¿Listo para mejorar tus habilidades en",
       "description": "Prueba algunos cuestionarios y desafíos para poner a prueba tu conocimiento y seguir aprendiendo.",
       "button_text": "Comenzar ahora"
+    }
+  },
+  "learn": {
+    "home": {
+      "title": "Tu espacio de aprendizaje",
+      "description": "Continúa tu ruta, practica con cuestionarios y desafíos, o revisa algunos tips rápidos para mantener fresco lo aprendido.",
+      "continue": {
+        "title": "Continúa con Vue 3",
+        "description": "Vuelve al learning path principal y sigue avanzando por lecciones, quizzes y desafíos.",
+        "action": "Abrir learning path"
+      },
+      "sections": {
+        "learningPaths": {
+          "title": "Learning paths",
+          "description": "Sigue una ruta guiada con lecciones, cuestionarios y desafíos."
+        },
+        "quizzes": {
+          "title": "Cuestionarios",
+          "description": "Pon a prueba conceptos puntuales y refuerza lo que ya viste."
+        },
+        "challenges": {
+          "title": "Desafíos",
+          "description": "Practica escribiendo código y validando tu solución con tests."
+        },
+        "tips": {
+          "title": "Tips",
+          "description": "Revisa pequeñas ideas y recordatorios útiles sobre Vue."
+        }
+      }
     }
   },
   "quiz": {

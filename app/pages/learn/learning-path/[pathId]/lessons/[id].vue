@@ -21,7 +21,7 @@ const done = isCompleted(pathId, "lesson", lessonId);
 
 function handleComplete() {
   markComplete(pathId, "lesson", lessonId);
-  router.push(`/dashboard/learning-path/${pathId}`);
+  router.push(`/learn/learning-path/${pathId}`);
 }
 </script>
 

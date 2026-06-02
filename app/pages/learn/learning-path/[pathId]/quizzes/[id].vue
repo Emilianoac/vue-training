@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import useQuizGame from "~/composables/quiz/useQuizGame";
-
+import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
@@ -13,55 +12,52 @@ definePageMeta({
 });
 
 const route = useRoute();
+const router = useRouter();
 const { locale } = useI18n();
 
+const pathId = route.params.pathId as string;
+const quizId = route.params.id as string;
 const showQuestionDetails = ref(false);
+const { markComplete } = useLearningPathProgress();
 
 const {
   quiz,
-
   state,
-
   totalQuestions,
   displayQuestionIndex,
   currentQuestion,
   currentCorrectAnswer,
   isLastQuestion,
   elapsedTime,
-
   actions,
 } = useQuizGame();
 
-await actions.loadQuiz(route.params.id as string);
+await actions.loadQuiz(quizId);
 
 useSeoMeta({
   title: computed(() => quiz.value?.title),
 });
 
 const currentLayout = computed(() => {
-  if (state.quizState.isFinished) {
-    return "dashboard";
-  }
-
-  if (state.quizState.isInitialized) {
-    return "blank";
-  }
-
-  return "dashboard";
+  return "activity";
 });
 
 watch(
-  () => locale,
+  () => locale.value,
   async () => {
-    await actions.loadQuiz(route.params.id as string);
+    await actions.loadQuiz(quizId);
   },
 );
+
+function markCompleteAndReturn() {
+  markComplete(pathId, "quiz", quizId);
+  router.push(`/learn/learning-path/${pathId}`);
+}
 </script>
 
 <template>
   <NuxtLayout :name="currentLayout">
     <div v-if="quiz">
-      <!-- Welcome -->
       <QuizWelcome
         v-if="!state.quizState.isInitialized"
         :title="quiz.title"
@@ -73,10 +69,8 @@ watch(
         @startQuiz="actions.startQuiz()"
       />
 
-      <!-- Loading -->
       <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
 
-      <!-- On progress -->
       <QuizOnProgress
         v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
         :title="quiz.title"
@@ -96,16 +90,19 @@ watch(
         @leave-quiz="(message) => actions.leaveQuiz(message)"
       />
 
-      <!-- Results -->
-      <QuizResults
-        v-else
-        :title="quiz.title"
-        :elapsed-time="elapsedTime"
-        :userHistory="state.result.history"
-        :userStats="state.result.stats"
-        @leave-quiz="(message) => actions.leaveQuiz(message)"
-        @resetQuiz="actions.resetQuizState()"
-      />
+      <template v-else>
+        <QuizResults
+          :title="quiz.title"
+          :elapsed-time="elapsedTime"
+          :userHistory="state.result.history"
+          :userStats="state.result.stats"
+          @leave-quiz="(message) => actions.leaveQuiz(message)"
+          @resetQuiz="actions.resetQuizState()"
+        />
+        <div class="flex justify-center mt-4">
+          <Button @click="markCompleteAndReturn"> Marcar como completado y volver al path </Button>
+        </div>
+      </template>
     </div>
 
     <Teleport to="body">
@@ -120,5 +117,3 @@ watch(
     </Teleport>
   </NuxtLayout>
 </template>
-
-<style lang="postcss" scoped></style>

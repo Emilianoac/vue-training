@@ -2,6 +2,10 @@
 import ChallengeWorkspace from "@/components/challenge/ChallengeWorkspace.vue";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
+definePageMeta({
+  layout: "activity",
+});
+
 const route = useRoute();
 const { locale } = useI18n();
 

@@ -28,27 +28,26 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/dashboard/test/webcontainer-challenge": {
-      appLayout: "dashboard",
+    "/challenges/**": {
+      appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
-    "/dashboard/challenges/**": {
-      appLayout: "dashboard",
+    "/learn/learning-path/*/challenges/**": {
+      appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
-    "/dashboard/learning-path/*/challenges/**": {
-      appLayout: "dashboard",
+    "/learn/learning-path/**/challenges/**": {
+      appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
-    "/dashboard/learning-path/**/challenges/**": {
-      appLayout: "dashboard",
-      ssr: false,
-      headers: webContainerHeaders,
-    },
-    "/dashboard/**": { appLayout: "dashboard", ssr: false },
+    "/learn/learning-path/*/quizzes/**": { appLayout: "activity", ssr: false },
+    "/learn/learning-path/**/quizzes/**": { appLayout: "activity", ssr: false },
+    "/quizzes/**": { appLayout: "activity", ssr: false },
+    "/learn": { appLayout: "learn", ssr: false },
+    "/learn/**": { appLayout: "learn", ssr: false },
   },
   i18n: {
     langDir: "locales",
