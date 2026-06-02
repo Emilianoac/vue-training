@@ -18,11 +18,11 @@ steps:
             title: Reactivity Quiz
             subtitle: Test your understanding of reactivity concepts in Vue 3.
 
-          - id: drone-telemetry-reactive-state
+          - id: ref-counter-state
             type: challenge
             level: basic
-            title: Reactivity Challenge
-            subtitle: Solve a practical challenge to apply your knowledge of reactivity in Vue 3.
+            title: Challenge 1
+            subtitle: Complete a counter component to practice reactive state with ref.
 
       - name: Computed Properties
         id: computed-properties

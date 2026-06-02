@@ -18,7 +18,7 @@ steps:
             title: Cuestionario 1
             subtitle: Evalúa tu comprensión de los conceptos de reactividad en Vue 3.
 
-          - id: drone-telemetry-reactive-state
+          - id: ref-counter-state
             type: challenge
             level: basic
             title: Desafio 1

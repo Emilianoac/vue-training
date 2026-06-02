@@ -1,0 +1,45 @@
+{
+  "documentId": "ref-counter-state",
+  "title": "Estado de contador con ref",
+  "slug": "ref-counter-state",
+  "level": "basic",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica declarar estado primitivo reactivo con ref y actualizarlo con .value.",
+  "description": [
+    "En este desafío, completarás un pequeño componente de contador usando la función ref de Vue.",
+    "Concéntrate en la primera regla central de la lección: dentro de <script setup>, los refs se leen y actualizan con .value, mientras que el template puede mostrarlos directamente."
+  ],
+  "instructions": [
+    "Declara una variable count usando ref(0).",
+    "Haz que la función increment aumente count en 1 usando count.value.",
+    "Haz que la función reset vuelva count a 0 usando count.value.",
+    "Muestra el valor de count en el template sin escribir .value."
+  ],
+  "cover": {
+    "url": ""
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Empieza por el estado",
+      "body": "En <script setup>, importa ref desde vue y cambia el valor plano por const count = ref(0)."
+    },
+    {
+      "title": "Actualizar un ref",
+      "body": "Dentro de las funciones, count es un objeto ref. Por eso increment debe modificar count.value."
+    },
+    {
+      "title": "El template desempaqueta refs",
+      "body": "En el template puedes escribir {{ count }}. Vue muestra automáticamente el valor interno del ref."
+    }
+  ]
+}

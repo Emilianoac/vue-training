@@ -9,13 +9,9 @@ export const categorySchema = z.object({
   image: imageSchema,
 });
 
-export const objectiveSchema = z.object({
-  data: z.string(),
-});
-
-export const stackblitzSchema = z.object({
-  challenge: z.string(),
-  solution: z.string(),
+export const hintSchema = z.object({
+  title: z.string(),
+  body: z.string(),
 });
 
 export const levelSchema = z.enum(["basic", "intermediate", "advanced"]);
@@ -32,13 +28,13 @@ export const challengeSchema = z.object({
 
   description: z.array(z.string()),
 
+  instructions: z.array(z.string()),
+
   cover: imageSchema,
 
   images: z.array(imageSchema),
 
-  objectives: z.array(objectiveSchema),
-
-  stackblitz: stackblitzSchema,
+  hints: z.array(hintSchema),
 });
 
 export type Challenge = z.infer<typeof challengeSchema>;
