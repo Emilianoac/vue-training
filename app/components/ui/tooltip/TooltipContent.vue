@@ -17,10 +17,26 @@ const emits = defineEmits<TooltipContentEmits>()
 
 const delegatedProps = reactiveOmit(props, "class")
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const portalTarget = shallowRef<string | HTMLElement>("body")
+
+onMounted(() => {
+  syncPortalTarget()
+  document.addEventListener("fullscreenchange", syncPortalTarget)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener("fullscreenchange", syncPortalTarget)
+})
+
+function syncPortalTarget() {
+  portalTarget.value = document.fullscreenElement instanceof HTMLElement
+    ? document.fullscreenElement
+    : "body"
+}
 </script>
 
 <template>
-  <TooltipPortal>
+  <TooltipPortal :to="portalTarget">
     <TooltipContent
       data-slot="tooltip-content"
       v-bind="{ ...forwarded, ...$attrs }"

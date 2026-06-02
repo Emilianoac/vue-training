@@ -24,10 +24,25 @@ const emits = defineEmits<DialogContentEmits>();
 const delegatedProps = reactiveOmit(props, "class");
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const portalTarget = shallowRef<string | HTMLElement>("body");
+
+onMounted(() => {
+  syncPortalTarget();
+  document.addEventListener("fullscreenchange", syncPortalTarget);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("fullscreenchange", syncPortalTarget);
+});
+
+function syncPortalTarget() {
+  portalTarget.value =
+    document.fullscreenElement instanceof HTMLElement ? document.fullscreenElement : "body";
+}
 </script>
 
 <template>
-  <DialogPortal>
+  <DialogPortal :to="portalTarget">
     <DialogOverlay />
     <DialogContent
       data-slot="dialog-content"
