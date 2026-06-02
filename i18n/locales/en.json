@@ -120,7 +120,14 @@
       "solution": "Solution"
     },
     "description": {
-      "objectives": "Objectives"
+      "hints": "Hints",
+      "instructions": "Instructions"
+    },
+    "completion": {
+      "title": "Challenge completed!",
+      "message": "Nice work. All tests passed successfully.",
+      "continueLearningPath": "Continue learning path",
+      "close": "Close"
     },
     "play": {
       "info": "The code you write in this editor will not be saved once you close or reload the page.",
@@ -128,6 +135,61 @@
       "instructions_2": "If all tests pass, then you have completed the challenge!",
       "expand_editor": "Expand editor",
       "collapse_editor": "Collapse editor"
+    },
+    "runner": {
+      "actions": {
+        "save": "Save changes",
+        "reset": "Reset challenge",
+        "solution": "Load solution",
+        "runTests": "Run tests",
+        "runningTests": "Running tests",
+        "reloadPreview": "Reload preview",
+        "loadingPreview": "Loading preview",
+        "enterFullscreen": "Enter fullscreen",
+        "exitFullscreen": "Exit fullscreen"
+      },
+      "tabs": {
+        "editor": "Editor",
+        "preview": "Preview"
+      },
+      "preview": {
+        "title": "Challenge preview",
+        "empty": "Open or reload the preview to mount the component.",
+        "loading": "Starting preview..."
+      },
+      "status": {
+        "booting": "Initializing environment...",
+        "installing": "Installing dependencies...",
+        "idle": "Preparing environment...",
+        "ready": "Environment ready",
+        "saved": "Changes saved"
+      },
+      "terminal": {
+        "title": "Terminal",
+        "initialReady": "$ WebContainer runner ready.\r\n$ Preparing environment automatically.\r\n",
+        "booting": "$ Booting WebContainer...",
+        "notIsolated": "✗ This page is not cross-origin isolated.",
+        "notIsolatedHelp": "  Check COOP/COEP headers and restart the dev server.",
+        "ready": "✓ WebContainer ready.",
+        "mounted": "✓ Virtual project mounted.",
+        "install": "$ npm install",
+        "startPreview": "$ npm run dev",
+        "installFailed": "✗ npm install exited with code {code}.",
+        "installed": "✓ Dependencies installed.",
+        "runTests": "$ npm run test",
+        "testsPassed": "✓ Vitest passed.",
+        "testsFailed": "✗ Vitest failed with code {code}.",
+        "unknownError": "Unknown error."
+      },
+      "results": {
+        "title": "Results",
+        "total": "Total",
+        "passed": "Passed",
+        "failed": "Failed",
+        "empty": "Run the tests to see the summary.",
+        "pass": "PASS",
+        "fail": "FAIL"
+      }
     },
     "firefox_message": {
       "title": "Firefox Issues",

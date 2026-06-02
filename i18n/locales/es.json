@@ -120,7 +120,14 @@
       "solution": "Solución"
     },
     "description": {
-      "objectives": "Objetivos"
+      "hints": "Pistas",
+      "instructions": "Instrucciones"
+    },
+    "completion": {
+      "title": "¡Desafío completado!",
+      "message": "Buen trabajo. Todos los tests pasaron correctamente.",
+      "continueLearningPath": "Continuar learning path",
+      "close": "Cerrar"
     },
     "play": {
       "info": "El código que escribas en este editor no se guardará una vez que cierres o recargues la página.",
@@ -128,6 +135,61 @@
       "instructions_2": "Si todos los tests pasan, entonces has completado el desafio!",
       "expand_editor": "Expandir editor",
       "collapse_editor": "Colapsar editor"
+    },
+    "runner": {
+      "actions": {
+        "save": "Guardar cambios",
+        "reset": "Reiniciar desafio",
+        "solution": "Cargar solucion",
+        "runTests": "Ejecutar tests",
+        "runningTests": "Ejecutando tests",
+        "reloadPreview": "Recargar preview",
+        "loadingPreview": "Cargando preview",
+        "enterFullscreen": "Entrar a pantalla completa",
+        "exitFullscreen": "Salir de pantalla completa"
+      },
+      "tabs": {
+        "editor": "Editor",
+        "preview": "Preview"
+      },
+      "preview": {
+        "title": "Preview del desafio",
+        "empty": "Abre o recarga el preview para montar el componente.",
+        "loading": "Iniciando preview..."
+      },
+      "status": {
+        "booting": "Inicializando entorno...",
+        "installing": "Instalando dependencias...",
+        "idle": "Preparando entorno...",
+        "ready": "Entorno listo",
+        "saved": "Cambios guardados"
+      },
+      "terminal": {
+        "title": "Terminal",
+        "initialReady": "$ Runner WebContainer listo.\r\n$ Preparando entorno automaticamente.\r\n",
+        "booting": "$ Iniciando WebContainer...",
+        "notIsolated": "✗ Esta pagina no esta cross-origin isolated.",
+        "notIsolatedHelp": "  Revisa los headers COOP/COEP y reinicia el dev server.",
+        "ready": "✓ WebContainer listo.",
+        "mounted": "✓ Proyecto virtual montado.",
+        "install": "$ npm install",
+        "startPreview": "$ npm run dev",
+        "installFailed": "✗ npm install termino con codigo {code}.",
+        "installed": "✓ Dependencias instaladas.",
+        "runTests": "$ npm run test",
+        "testsPassed": "✓ Vitest paso.",
+        "testsFailed": "✗ Vitest fallo con codigo {code}.",
+        "unknownError": "Error desconocido."
+      },
+      "results": {
+        "title": "Resultados",
+        "total": "Total",
+        "passed": "Pasados",
+        "failed": "Fallidos",
+        "empty": "Ejecuta los tests para ver el resumen.",
+        "pass": "PASA",
+        "fail": "FALLA"
+      }
     },
     "firefox_message": {
       "title": "Problemas con Firefox",
