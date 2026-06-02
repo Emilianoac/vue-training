@@ -61,11 +61,13 @@ const editorTheme = EditorView.theme({
     backgroundColor: "var(--editor-background)",
     color: "var(--editor-foreground)",
     fontSize: "0.875rem",
+    height: "100%",
   },
   ".cm-scroller": {
     fontFamily:
       'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     lineHeight: "1.5rem",
+    overflow: "auto",
   },
   ".cm-content": {
     padding: "1rem 0",

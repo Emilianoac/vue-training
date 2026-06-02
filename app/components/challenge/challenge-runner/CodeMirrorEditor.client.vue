@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <ScrollArea class="h-full bg-(--editor-background)" type="always">
-    <div ref="editorRoot" class="h-full overflow-auto pr-4" />
+  <ScrollArea class="h-full min-h-0 bg-(--editor-background)" type="always">
+    <div ref="editorRoot" class="h-full min-h-0 overflow-auto pr-4" />
   </ScrollArea>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CheckIcon, Loader2Icon, PlayIcon, RefreshCwIcon } from "lucide-vue-next";
+import { useMediaQuery } from "@vueuse/core";
 import { useWebContainerRunner } from "@/lib/challenge-runners/webcontainer/composables/useWebContainerRunner";
 import CodeMirrorEditor from "./CodeMirrorEditor.client.vue";
 import ChallengeTerminal from "./ChallengeTerminal.client.vue";
@@ -51,6 +52,7 @@ const emit = defineEmits<{
 }>();
 
 const activeEditorTab = ref("editor");
+const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
 const runnerRoot = ref<HTMLElement | null>(null);
 
@@ -94,7 +96,7 @@ function syncFullscreenState() {
   <ClientOnly>
     <div
       ref="runnerRoot"
-      class="flex flex-col overflow-hidden rounded-sm border border-(--editor-panel-border)"
+      class="flex min-h-0 flex-col overflow-hidden rounded-sm border border-(--editor-panel-border)"
       :class="isFullscreen ? 'h-dvh bg-(--editor-background)' : 'h-full'"
     >
       <ChallengeToolbar
@@ -110,10 +112,13 @@ function syncFullscreenState() {
         @toggle-fullscreen="toggleFullscreen"
       />
 
-      <ResizablePanelGroup direction="vertical" class="flex-1">
-        <ResizablePanel :default-size="70" :min-size="20">
-          <Tabs v-model="activeEditorTab" class="h-full gap-0">
-            <TabsContent value="editor" class="relative m-0 h-full data-[state=inactive]:hidden">
+      <ResizablePanelGroup direction="vertical" class="min-h-0 flex-1">
+        <ResizablePanel :default-size="70" :min-size="20" class="min-h-0">
+          <Tabs v-model="activeEditorTab" class="h-full min-h-0 gap-0">
+            <TabsContent
+              value="editor"
+              class="relative m-0 h-full min-h-0 data-[state=inactive]:hidden"
+            >
               <CodeMirrorEditor v-model="code" :on-save="saveCode" />
               <div
                 class="absolute right-4 bottom-4 z-99 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
@@ -133,9 +138,9 @@ function syncFullscreenState() {
 
             <TabsContent
               value="preview"
-              class="m-0 h-full bg-(--editor-background) data-[state=inactive]:hidden"
+              class="m-0 h-full min-h-0 bg-(--editor-background) data-[state=inactive]:hidden"
             >
-              <div class="flex h-full flex-col">
+              <div class="flex h-full min-h-0 flex-col">
                 <div class="flex justify-end border-b border-(--editor-panel-border) p-2">
                   <Button size="sm" variant="outline" :disabled="!canLoadPreview" @click="loadPreview">
                     <template v-if="isPreviewStarting">
@@ -177,9 +182,16 @@ function syncFullscreenState() {
           :with-handle="true"
         />
 
-        <ResizablePanel :default-size="30" :min-size="30">
-          <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel :default-size="65" :min-size="35">
+        <ResizablePanel :default-size="30" :min-size="30" class="min-h-0">
+          <ResizablePanelGroup
+            :direction="isDesktop ? 'horizontal' : 'vertical'"
+            class="min-h-0"
+          >
+            <ResizablePanel
+              :default-size="isDesktop ? 65 : 55"
+              :min-size="isDesktop ? 35 : 30"
+              class="min-h-0"
+            >
               <ChallengeTerminal :output="terminalOutput" />
             </ResizablePanel>
 
@@ -188,7 +200,11 @@ function syncFullscreenState() {
               :with-handle="true"
             />
 
-            <ResizablePanel :default-size="35" :min-size="25">
+            <ResizablePanel
+              :default-size="isDesktop ? 35 : 45"
+              :min-size="isDesktop ? 25 : 30"
+              class="min-h-0"
+            >
               <ChallengeTestResults
                 :failed="testSummary.failed"
                 :passed="testSummary.passed"
