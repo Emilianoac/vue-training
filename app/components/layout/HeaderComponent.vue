@@ -3,14 +3,19 @@ import LangToggleComponent from "@/components/layout/LangToggleComponent.vue";
 import SiteBrandComponent from "@/components/layout/SiteBrandComponent.vue";
 import ThemeToggleComponent from "@/components/layout/ThemeToggleComponent.vue";
 
-const props = defineProps<{
-  variant: "landing" | "learn";
-  showLangToggle?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    variant: "landing" | "learn";
+    showLangToggle?: boolean;
+  }>(),
+  {
+    showLangToggle: true,
+  },
+);
 </script>
 
 <template>
-  <header class="bg-background border-b border-border flex items-center justify-between px-4">
+  <header class="flex items-center justify-between border-b border-border bg-background px-4 py-2">
     <template v-if="variant == 'learn'">
       <div>
         <slot name="sidebarTrigger" />

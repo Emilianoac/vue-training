@@ -5,7 +5,7 @@ import FooterComponent from "~/components/layout/FooterComponent.vue";
 </script>
 
 <template>
-  <HeaderComponent variant="landing" class="px-4 py-2" />
+  <HeaderComponent variant="landing" />
   <div class="container mx-auto px-4 mb-20 min-h-[80vh]">
     <slot />
   </div>
