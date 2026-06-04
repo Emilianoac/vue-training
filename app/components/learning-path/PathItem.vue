@@ -36,6 +36,7 @@ function getIcon(type: ItemType) {
     </div>
     <NuxtLink
       :to="path"
+      :external="item.type === 'challenge'"
       class="group rounded-md h-full flex flex-col py-4 gap-5 transition-colors duration-200 hover:opacity-90"
     >
       <CardHeader class="mb-0">
