@@ -48,7 +48,9 @@ const isMenuActive = (url: string) => {
         </div>
       </aside>
       <main class="min-w-0 overflow-y-auto p-4 md:p-6">
-        <slot />
+        <ScrollArea class="h-auto md:h-full md:pr-4">
+          <slot />
+        </ScrollArea>
       </main>
     </div>
 
