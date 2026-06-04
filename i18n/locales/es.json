@@ -101,6 +101,14 @@
       }
     }
   },
+  "lesson": {
+    "completed": "Completado",
+    "markAsCompleted": "Marcar como completado",
+    "sections": "Secciones"
+  },
+  "activity": {
+    "leave": "Abandonar actividad"
+  },
   "quiz": {
     "start_quiz": "Comenzar cuestionario",
     "question": "Pregunta",

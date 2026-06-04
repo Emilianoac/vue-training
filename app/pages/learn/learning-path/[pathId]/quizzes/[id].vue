@@ -38,10 +38,6 @@ useSeoMeta({
   title: computed(() => quiz.value?.title),
 });
 
-const currentLayout = computed(() => {
-  return "activity";
-});
-
 watch(
   () => locale.value,
   async () => {
@@ -51,15 +47,21 @@ watch(
 
 function markCompleteAndReturn() {
   markComplete(pathId, "quiz", quizId);
-  router.push(`/learn/learning-path/${pathId}`);
+  router.push("/learn/learning-paths");
 }
 </script>
 
 <template>
-  <NuxtLayout :name="currentLayout">
-    <div v-if="quiz">
+  <NuxtLayout name="activity">
+    <ActivityShell
+      v-if="quiz"
+      :title="quiz.title"
+      back-to="/learn/learning-paths"
+      content-class="p-4 flex-initial"
+    >
       <QuizWelcome
         v-if="!state.quizState.isInitialized"
+        class="max-w-full lg:max-w-[90%] mx-auto"
         :title="quiz.title"
         :description="quiz.description"
         :image="quiz.category.image.url"
@@ -73,7 +75,7 @@ function markCompleteAndReturn() {
 
       <QuizOnProgress
         v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
-        :title="quiz.title"
+        class="max-w-[1000px] mx-auto"
         :total-questions="totalQuestions"
         :currentQuestion="currentQuestion"
         :quizProgress="state.progress.percentage"
@@ -87,23 +89,18 @@ function markCompleteAndReturn() {
         @update:selectedOptionId="state.answer.selectedOptionId = $event"
         @answerCurrentQuestion="actions.answerCurrentQuestion()"
         @goToNextQuestion="actions.goToNextQuestion()"
-        @leave-quiz="(message) => actions.leaveQuiz(message)"
       />
 
       <template v-else>
         <QuizResults
-          :title="quiz.title"
+          class="max-w-[1000px] mx-auto"
           :elapsed-time="elapsedTime"
           :userHistory="state.result.history"
           :userStats="state.result.stats"
-          @leave-quiz="(message) => actions.leaveQuiz(message)"
           @resetQuiz="actions.resetQuizState()"
         />
-        <div class="flex justify-center mt-4">
-          <Button @click="markCompleteAndReturn"> Marcar como completado y volver al path </Button>
-        </div>
       </template>
-    </div>
+    </ActivityShell>
 
     <Teleport to="body">
       <QuizQuestionDetailsModal

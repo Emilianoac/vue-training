@@ -25,7 +25,14 @@ watch(
 </script>
 
 <template>
-  <ChallengeWorkspace v-if="challenge" :challenge="challenge" />
+  <ActivityShell
+    v-if="challenge"
+    :title="challenge.title"
+    back-to="/learn/challenges"
+    content-class="p-4"
+  >
+    <ChallengeWorkspace :challenge="challenge" />
+  </ActivityShell>
 </template>
 
 <style lang="postcss" scoped></style>

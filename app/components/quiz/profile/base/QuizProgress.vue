@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <!-- Quiz Progress -->
   <div class="flex justify-between items-center mb-4">
-    <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
+    <p class="text-sm text-gray-500 dark:text-gray-400">
       {{ $t("quiz.question") }} {{ currentQuestionIndex }} {{ $t("general.of") }} {{ quizLength }}
     </p>
   </div>

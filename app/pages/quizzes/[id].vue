@@ -38,10 +38,6 @@ useSeoMeta({
   title: computed(() => quiz.value?.title),
 });
 
-const currentLayout = computed(() => {
-  return "activity";
-});
-
 watch(
   () => locale.value,
   async () => {
@@ -51,11 +47,18 @@ watch(
 </script>
 
 <template>
-  <NuxtLayout :name="currentLayout">
-    <div v-if="quiz">
+  <NuxtLayout name="activity">
+    <ActivityShell
+      v-if="quiz"
+      :title="quiz.title"
+      back-to="/learn/quizzes"
+      class="lg:max-w-full"
+      content-class="p-4 flex-initial"
+    >
       <!-- Welcome -->
       <QuizWelcome
         v-if="!state.quizState.isInitialized"
+        class="max-w-full lg:max-w-[90%] mx-auto"
         :title="quiz.title"
         :description="quiz.description"
         :image="quiz.category.image.url"
@@ -71,7 +74,7 @@ watch(
       <!-- On progress -->
       <QuizOnProgress
         v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
-        :title="quiz.title"
+        class="max-w-[1000px] mx-auto"
         :total-questions="totalQuestions"
         :currentQuestion="currentQuestion"
         :quizProgress="state.progress.percentage"
@@ -85,20 +88,18 @@ watch(
         @update:selectedOptionId="state.answer.selectedOptionId = $event"
         @answerCurrentQuestion="actions.answerCurrentQuestion()"
         @goToNextQuestion="actions.goToNextQuestion()"
-        @leave-quiz="(message) => actions.leaveQuiz(message)"
       />
 
       <!-- Results -->
       <QuizResults
         v-else
-        :title="quiz.title"
+        class="max-w-[1000px] mx-auto"
         :elapsed-time="elapsedTime"
         :userHistory="state.result.history"
         :userStats="state.result.stats"
-        @leave-quiz="(message) => actions.leaveQuiz(message)"
         @resetQuiz="actions.resetQuizState()"
       />
-    </div>
+    </ActivityShell>
 
     <Teleport to="body">
       <QuizQuestionDetailsModal

@@ -101,6 +101,14 @@
       }
     }
   },
+  "lesson": {
+    "completed": "Completed",
+    "markAsCompleted": "Mark as completed",
+    "sections": "Sections"
+  },
+  "activity": {
+    "leave": "Leave activity"
+  },
   "quiz": {
     "start_quiz": "Start with the quiz",
     "question": "Question",

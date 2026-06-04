@@ -18,7 +18,7 @@ const { markComplete } = useLearningPathProgress();
 await getChallenge(challengeId);
 
 function goToLearningPath() {
-  router.push(`/learn/learning-path/${pathId}`);
+  router.push("/learn/learning-paths");
 }
 
 function markChallengeComplete() {
@@ -38,11 +38,17 @@ watch(
 </script>
 
 <template>
-  <ChallengeWorkspace
+  <ActivityShell
     v-if="challenge"
-    :challenge="challenge"
-    :continue-label="t('challenge.completion.continueLearningPath')"
-    @completed="markChallengeComplete"
-    @continue="goToLearningPath"
-  />
+    :title="challenge.title"
+    back-to="/learn/learning-paths"
+    content-class="p-4"
+  >
+    <ChallengeWorkspace
+      :challenge="challenge"
+      :continue-label="t('challenge.completion.continueLearningPath')"
+      @completed="markChallengeComplete"
+      @continue="goToLearningPath"
+    />
+  </ActivityShell>
 </template>

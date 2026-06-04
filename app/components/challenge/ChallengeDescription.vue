@@ -2,9 +2,15 @@
 import type { Challenge } from "@/schemas/challenge.schema";
 import ChipComponent from "@/components/ui/ChipComponent.vue";
 
-const props = defineProps<{
-  challenge: Challenge;
-}>();
+const props = withDefaults(
+  defineProps<{
+    challenge: Challenge;
+    showTitle?: boolean;
+  }>(),
+  {
+    showTitle: true,
+  },
+);
 
 const { t } = useI18n();
 </script>
@@ -16,7 +22,7 @@ const { t } = useI18n();
       :type="props.challenge.level"
       :text="t(`general.levels.${props.challenge.level}`)"
     />
-    <h1 class="mb-2 text-2xl font-bold">{{ props.challenge.title }}</h1>
+    <h1 v-if="props.showTitle" class="mb-2 text-2xl font-bold">{{ props.challenge.title }}</h1>
 
     <p
       v-for="paragraph in props.challenge.description"

@@ -27,7 +27,7 @@ const parsedAnswers = computed(() =>
 </script>
 
 <template>
-  <div class="block md:flex items-center text-xl font-bold mb-4">
+  <div class="block md:flex items-center md:text-[1.2rem] font-semibold mb-4">
     <span class="block me-1">{{ questionIndex }}.</span>
     <div class="question-text" v-html="parsedQuestion"></div>
   </div>
