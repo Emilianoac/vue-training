@@ -19,8 +19,10 @@ state.count++;
 // Vue detects the change and automatically updates the interface.
 </script>
 ```
+---
 
 ## How does reactivity work in Vue?
+
 In plain JavaScript, if you have `a = 1` and `b = a + 1`, and then you change `a = 5`, the value of `b` will still be 2.  
 There is no automatic link.
 
@@ -30,10 +32,10 @@ let b = a + 1; // b is 2
 a = 5; // b is still 2, it does not change automatically
 ```
 
-Vue uses JavaScript Proxies to "wrap" your data. This way, Vue can intercept when you access or modify a property.
+Vue uses JavaScript Proxies to "wrap" reactive data. This allows Vue to detect when you read a property and when you try to modify it.
 
-When you access a value, Vue uses `track` to save which functions are using it.  
-When that value changes, Vue uses `trigger` to re-run those functions.
+As a value is read, Vue uses `track` to record which effects depend on it, such as a component render or a `computed`.
+If that value changes later, Vue uses `trigger` to notify those effects and run them again.
 
 ``` javascript
 function reactive(target) {
@@ -50,18 +52,21 @@ function reactive(target) {
   });
 }
 ```
+---
 
 ## Reactive State
+
 In Vue, reactive state refers to the data in your application that can change over time and whose update is automatically reflected in the user interface.
 
 There are two main ways to declare reactive state in the Composition API: `ref` and `reactive`.
 
 ### ref()
+
 This is the most common approach. It can hold any type of data (primitives like strings and numbers, or objects).
 
 - **Access:** In the `<script>` block, you must always use `.value`. In the `<template>`, Vue automatically unwraps it.
 
-```vue
+``` vue
 <script setup>
 import { ref } from "vue";
 
@@ -75,13 +80,14 @@ count.value++;
 --- 
 
 ### reactive()
+
 It only works with objects or arrays. It does not support primitive types.
 
 - **Access:** It does not use `.value`. It behaves like a normal object.
 
 - **Limitation:** If you try to destructure it (e.g., `const { x } = reactive({...})`), you lose reactivity unless you use utilities like `toRefs`.
 
-```vue
+``` vue
 <script setup>
 import { reactive } from "vue";
 
@@ -94,14 +100,17 @@ const user = reactive({
 user.score += 5;
 </script>
 ```
+---
 
 ## Optimization: shallowRef and shallowReactive
+
 Sometimes, wrapping very large or complex objects (like a map instance or a data buffer) in deep reactivity can impact performance. For this, there are "shallow" versions.
 
 ### shallowRef()
+
 Unlike `ref`, Vue only tracks changes when you reassign `.value`. It does **not track changes** in the object's internal properties.
 
-```vue
+``` vue
 <script setup>
 const state = shallowRef({ count: 1 });
 
@@ -115,10 +124,11 @@ state.value = { count: 2 };
 --- 
 
 ### shallowReactive()
+
 Similar to `reactive`, but only the root level of the object is reactive. Nested properties are not converted into proxies.  
 It is ideal when working with read-only data structures or integrating third-party libraries.
 
-```vue
+``` vue
 <script setup>
 const state = shallowReactive({
   user: {
@@ -131,8 +141,10 @@ const state = shallowReactive({
 state.user.score += 5;
 </script>
 ```
+---
 
 ## Usage Comparison Table
+
 | Tool               | Data Type              | Script Access | Deep Reactivity |
 |--------------------|------------------------|---------------|-----------------|
 | `ref()`            | Primitives and objects | `.value`      | Yes             |
