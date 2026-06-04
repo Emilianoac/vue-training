@@ -52,9 +52,9 @@ const isMenuActive = (url: string) => {
       </main>
     </div>
 
-    <ScrollArea class="w-full p-4">
+    <ScrollArea class="w-full p-4 md:hidden">
       <nav
-        class="flex shrink-0 gap-1 overflow-x-auto bg-background/95 backdrop-blur md:hidden shadow"
+        class="flex justify-between shrink-0 gap-1 overflow-x-auto bg-background/95 backdrop-blur shadow"
         aria-label="Learn sections"
       >
         <Button
