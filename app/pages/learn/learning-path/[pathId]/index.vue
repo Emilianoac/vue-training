@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-const route = useRoute();
-const pathId = route.params.pathId as string;
-</script>
+definePageMeta({
+  layout: "learn",
+});
 
-<template>
-  <LearningPath :path-id="pathId" />
-</template>
+await navigateTo("/learn/learning-paths", { replace: true });
+</script>

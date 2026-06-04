@@ -35,6 +35,7 @@ const sections = computed(() => [
 
 <template>
   <div class="space-y-8">
+    <TipCarousel />
     <section class="space-y-3">
       <h1 class="text-3xl font-bold">{{ t("learn.home.title") }}</h1>
       <p class="max-w-2xl text-muted-foreground">
@@ -64,14 +65,12 @@ const sections = computed(() => [
           </p>
         </div>
         <Button as-child>
-          <NuxtLink to="/learn/learning-path/vue-3-path">
+          <NuxtLink to="/learn/learning-paths">
             {{ t("learn.home.continue.action") }}
           </NuxtLink>
         </Button>
       </div>
     </section>
-
-    <TipCarousel />
   </div>
 </template>
 
