@@ -54,28 +54,33 @@ const isMenuActive = (url: string) => {
       </main>
     </div>
 
-    <ScrollArea class="w-full p-4 md:hidden">
-      <nav
-        class="flex justify-between shrink-0 gap-1 overflow-x-auto bg-background/95 backdrop-blur shadow"
-        aria-label="Learn sections"
-      >
-        <Button
-          v-for="item in menuItems"
-          :key="item.title"
-          as-child
-          variant="ghost"
-          size="sm"
-          class="shrink-0 px-1.5! gap-1"
+    <div class="w-full px-4 bg-card border-t md:hidden">
+      <ScrollArea>
+        <nav
+          class="flex justify-between shrink-0 gap-1 overflow-x-auto shadow pt-2 pb-3"
+          aria-label="Learn sections"
         >
-          <NuxtLink :to="item.url" :class="{ 'bg-sidebar-accent': isMenuActive(item.url) }">
-            <component :is="item.icon" class="size-3" />
-            <span class="text-xs">{{ $t(item.title) }}</span>
-          </NuxtLink>
-        </Button>
-      </nav>
-
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+          <Button
+            v-for="item in menuItems"
+            :key="item.title"
+            as-child
+            variant="ghost"
+            size="sm"
+            class="shrink-0 px-1.5! gap-1"
+          >
+            <NuxtLink :to="item.url" :class="{ 'bg-sidebar-accent': isMenuActive(item.url) }">
+              <component
+                :is="item.icon"
+                class="size-3"
+                :class="{ 'text-primary': isMenuActive(item.url) }"
+              />
+              <span class="text-xs">{{ $t(item.title) }}</span>
+            </NuxtLink>
+          </Button>
+        </nav>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+    </div>
   </div>
 </template>
 
