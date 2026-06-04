@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { LightbulbIcon, RouteIcon, SwordsIcon, FileQuestion } from "lucide-vue-next";
+import { LightbulbIcon, RouteIcon, FileQuestion, SquareTerminalIcon } from "lucide-vue-next";
 import TipCarousel from "@/components/tip/TipCarousel.vue";
 import { Button } from "@/components/ui/button";
 
@@ -21,7 +21,7 @@ const sections = computed(() => [
   {
     title: t("learn.home.sections.challenges.title"),
     description: t("learn.home.sections.challenges.description"),
-    icon: SwordsIcon,
+    icon: SquareTerminalIcon,
     to: "/learn/challenges",
   },
   {

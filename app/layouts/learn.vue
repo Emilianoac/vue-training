@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { HomeIcon, LightbulbIcon, RouteIcon, SwordsIcon, FileQuestion } from "lucide-vue-next";
+import {
+  HomeIcon,
+  LightbulbIcon,
+  RouteIcon,
+  FileQuestion,
+  SquareTerminalIcon,
+} from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import HeaderComponent from "@/components/layout/HeaderComponent.vue";
@@ -10,7 +16,7 @@ const menuItems = [
   { title: "menu-label.home", icon: HomeIcon, url: "/learn" },
   { title: "menu-label.learningPaths", icon: RouteIcon, url: "/learn/learning-paths" },
   { title: "menu-label.quizzes", icon: FileQuestion, url: "/learn/quizzes" },
-  { title: "menu-label.challenges", icon: SwordsIcon, url: "/learn/challenges" },
+  { title: "menu-label.challenges", icon: SquareTerminalIcon, url: "/learn/challenges" },
   { title: "menu-label.tips", icon: LightbulbIcon, url: "/learn/tips" },
 ];
 
