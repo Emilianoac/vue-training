@@ -46,13 +46,13 @@ watch(
 
 <template>
   <div>
-    <div class="block md:flex justify-end items-center mb-4">
-      <div class="flex items-center justify-end gap-5">
+    <div class="block md:flex justify-end items-center mb-4 px-1">
+      <div class="flex flex-col items-start md:flex-row md:items-center md:justify-end gap-5">
         <!-- Category Filter -->
-        <div class="flex items-center gap-3">
+        <div class="flex flex-col items-start md:flex-row md:items-center gap-3 w-full">
           <Label for="category-select">{{ $t("general.category") }}:</Label>
           <Select v-model="category" id="category-select">
-            <SelectTrigger size="sm" class="min-w-25">
+            <SelectTrigger size="sm" class="min-w-25 w-full">
               <SelectValue :placeholder="$t('general.category')">
                 {{ selectedCategory.label }}
               </SelectValue>
@@ -68,10 +68,10 @@ watch(
         </div>
 
         <!-- Difficulty Filter -->
-        <div class="flex items-center gap-3">
+        <div class="flex flex-col items-start md:flex-row md:items-center gap-3 w-full">
           <Label for="difficulty-select">{{ $t("general.difficulty") }}:</Label>
           <Select v-model="difficulty" id="difficulty-select">
-            <SelectTrigger size="sm" class="min-w-25">
+            <SelectTrigger size="sm" class="min-w-25 w-full">
               <SelectValue :placeholder="$t('general.difficulty')">
                 {{ selectedDifficulty.label }}
               </SelectValue>
