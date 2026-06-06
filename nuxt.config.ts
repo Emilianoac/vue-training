@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    "/": {
+      prerender: true,
+    },
     "/challenges/**": {
       appLayout: "activity",
       ssr: false,
