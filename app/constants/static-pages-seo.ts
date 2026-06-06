@@ -56,19 +56,19 @@ export const staticPagesSeoData = {
     },
   },
 
-  randomTips: {
+  tips: {
     es: {
-      title: "Tip random",
+      title: "Tips",
       description: `
-        Descubre un tip aleatorio relacionado con Vue.js, buenas prácticas y desarrollo frontend.
+        Descubre tips relacionados con Vue.js, buenas prácticas y desarrollo frontend.
         Mejora tus habilidades aprendiendo pequeños trucos y recomendaciones útiles mientras navegas.
       `,
       keywords: "tips vue.js, consejos vue, buenas prácticas vue, tip aleatorio vue, frontend tips",
     },
     en: {
-      title: "Random Tip",
+      title: "Tips",
       description: `
-        Discover a random tip related to Vue.js, best practices, and frontend development.
+        Discover tips related to Vue.js, best practices, and frontend development.
         Improve your skills with small helpful insights and recommendations as you browse.
       `,
       keywords: "vue.js tips, vue advice, vue best practices, random vue tip, frontend tips",

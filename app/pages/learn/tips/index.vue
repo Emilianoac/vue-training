@@ -16,7 +16,7 @@ definePageMeta({
   titleKey: "menu-label.randomTip",
   icon: IconDice,
 });
-useStaticPageSeo("randomTips");
+useStaticPageSeo("tips");
 
 const { locale } = useI18n();
 const { getTips, tips } = useTipData();
