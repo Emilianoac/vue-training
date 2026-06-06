@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import LearningPath from "@/components/learning-path/LearningPath.vue";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+useStaticPageSeo("learning_path");
 </script>
 
 <template>
