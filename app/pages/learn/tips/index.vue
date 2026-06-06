@@ -33,70 +33,61 @@ watch(
 </script>
 
 <template>
-  <div v-if="currentRandomTip">
+  <div class="@container/tips h-full">
     <div
-      class="grid grid-cols-1 lg:grid-cols-[auto_1fr] md:h-87.5 max-w-225 mx-auto place-items-start justify-center w-full gap-4"
+      v-if="currentRandomTip"
+      class="grid grid-cols-1 @4xl:grid-cols-[auto_minmax(0,1fr)_300px] @4xl:h-full gap-8"
     >
-      <div class="w-full">
+      <div class="w-full @4xl:min-h-0">
         <Vuecito
-          class="max-w-25 lg:max-w-50 w-full mx-auto h-auto"
+          class="max-w-25 @4xl:max-w-50 w-full mx-auto h-auto"
           mood="surprised"
-          :tip-id="currentRandomTip.id"
+          :tip-id="currentRandomTip.documentId"
         />
-        <Button
-          variant="secondary"
-          size="xl"
-          class="hidden lg:flex mx-auto mt-4"
-          @click="getRandomTip()"
-        >
+        <Button variant="secondary" size="xl" class="flex mx-auto mt-4" @click="getRandomTip()">
           {{ $t("randomTip.general.get_a_new_tip") }}
           <DicesIcon class="w-5 h-5" />
         </Button>
       </div>
 
       <transition name="fade" mode="out-in">
-        <Card class="w-full h-full overflow-auto gap-[1em]" :key="currentRandomTip.id">
-          <ScrollArea class="h-full">
-            <CardHeader>
-              <CardTitle class="text-xl font-bold">
-                {{ currentRandomTip.title }}
-              </CardTitle>
-              <Button variant="link" as-child class="p-0! text-blue-500 w-fit h-auto text-xs">
-                <a :href="currentRandomTip.source_url">
-                  {{ currentRandomTip.source_url }}
-                </a>
-              </Button>
-            </CardHeader>
-            <CardContent class="mt-5">
+        <Card class="w-full @4xl:h-full min-h-10 pt-2" :key="currentRandomTip.documentId">
+          <CardHeader class="border-b pb-3!">
+            <CardTitle class="text-lg font-semibold">
+              {{ currentRandomTip.title }}
+            </CardTitle>
+            <Button
+              variant="link"
+              as-child
+              class="p-0 text-blue-500 w-fit h-auto text-xs whitespace-break-spaces"
+            >
+              <a :href="currentRandomTip.source_url">
+                {{ currentRandomTip.source_url }}
+              </a>
+            </Button>
+          </CardHeader>
+          <CardContent class="mt-5 overflow-hidden">
+            <ScrollArea class="h-full @4xl:pr-4">
               <TipDetails :tip="currentRandomTip" />
-            </CardContent>
-          </ScrollArea>
+            </ScrollArea>
+          </CardContent>
         </Card>
       </transition>
+      <div class="min-h-0 w-full @4xl:h-full">
+        <TipList
+          :currentTip="currentRandomTip"
+          :tips="tips"
+          @select-tip="(tip: Tip) => selectTip(tip)"
+        />
+      </div>
     </div>
-
-    <!-- Get a new tip button mobile -->
-    <Button
-      type="button"
-      variant="secondary"
-      @click="getRandomTip()"
-      class="mx-auto mt-8 lg:hidden! flex"
-    >
-      {{ $t("randomTip.general.get_a_new_tip") }}
-    </Button>
-
-    <hr class="my-10 w-full border-t border-gray-200 dark:border-gray-800" />
-    <TipList
-      :currentTip="currentRandomTip"
-      :tips="tips"
-      @select-tip="(tip: Tip) => selectTip(tip)"
-    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
+  transition-property: opacity, transform;
   transition: 0.4s ease;
   transition-delay: 0.3s;
 }

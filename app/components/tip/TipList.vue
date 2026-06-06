@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { Tip } from "~/schemas/tip.schema";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 const props = defineProps<{
   currentTip: Tip;
@@ -12,28 +14,27 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <ul v-if="tips.length && currentTip" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <li
-      v-for="tip in tips"
-      :key="tip.id"
-      :class="{ 'outline-primary!': currentTip.id === tip.id }"
-      class="block items-center border bg-card rounded-md p-4 cursor-pointer hover:opacity-85 hover:shadow-sm transition-all duration-200 outline outline-2 outline-transparent dark:outline-transparent"
-      @click="emit('select-tip', tip)"
-    >
-      <div
-        class="bg-gray-100 dark:bg-slate-900 rounded-md p-3 w-12 h-12 mr-4 flex items-center justify-center"
-      >
-        <img :src="tip.category.image.url" alt="Category Icon" />
-      </div>
-      <div>
-        <span class="text-sm text-gray-600 dark:text-gray-300 mb-1 mt-5 lg:mt-0 block">
-          {{ tip.category.name }}
-        </span>
-        <h4 class="font-bold mb-1">{{ tip.title }}</h4>
-        <p class="text-[0.92em]">{{ tip.short_description }}</p>
-      </div>
-    </li>
-  </ul>
+  <ScrollArea class="@4xl:h-full @4xl:pr-3">
+    <ul v-if="tips.length && currentTip" class="space-y-4 p-1">
+      <li v-for="tip in tips" :key="tip.documentId" @click="emit('select-tip', tip)">
+        <Button
+          variant="ghost"
+          class="bg-card w-full h-auto justify-start whitespace-break-spaces border p-4"
+          :class="{
+            'border-primary bg-accent text-accent-foreground dark:bg-accent/50 ':
+              tip.documentId === currentTip.documentId,
+          }"
+        >
+          <div class="text-start space-y-3">
+            <h3 class="text-sm font-semibold">{{ tip.title }}</h3>
+            <p class="text-sm font-normal text-muted-foreground line-clamp-3">
+              {{ tip.short_description }}
+            </p>
+          </div>
+        </Button>
+      </li>
+    </ul>
+  </ScrollArea>
 </template>
 
 <style lang="scss"></style>
