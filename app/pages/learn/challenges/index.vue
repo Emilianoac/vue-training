@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/select";
 import ChallengeListComponent from "@/components/challenge/ChallengeListComponent.vue";
 import IconBoxGlove from "@/components/assets/icons/IconBoxGlove.vue";
-import SelectComponent from "@/components/ui/SelectComponent.vue";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
