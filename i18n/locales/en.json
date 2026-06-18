@@ -132,6 +132,12 @@
     "leave_quiz_confirm": "Are you sure you want to leave the quiz?",
     "return_to_quizzes": "Return to quizzes",
     "quiz_duration": "Unlimited",
+    "completion": {
+      "title": "Quiz completed!",
+      "message": "You finished the quiz and it has been marked as completed in your learning path.",
+      "continueLearningPath": "Continue learning path",
+      "close": "Close"
+    },
     "results": {
       "quiz_completed": "Quiz completed successfully!",
       "your_score": "Your score",

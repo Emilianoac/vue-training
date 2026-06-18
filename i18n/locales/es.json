@@ -132,6 +132,12 @@
     "leave_quiz_confirm": "¿Estás seguro de que quieres abandorar el cuestionario?",
     "return_to_quizzes": "Volver a cuestionarios",
     "quiz_duration": "Ilimitada",
+    "completion": {
+      "title": "¡Cuestionario completado!",
+      "message": "Terminaste el cuestionario y quedó marcado como completado en tu learning path.",
+      "continueLearningPath": "Continuar learning path",
+      "close": "Cerrar"
+    },
     "results": {
       "quiz_completed": "¡Cuestionario completado exitosamente!",
       "your_score": "Tu puntuación",
