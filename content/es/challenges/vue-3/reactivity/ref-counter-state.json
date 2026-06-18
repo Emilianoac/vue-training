@@ -21,7 +21,7 @@
     "Muestra el valor de count en el template sin escribir .value."
   ],
   "cover": {
-    "url": ""
+    "url": "/images/challenges/vue-3/reactivity/ref-counter-state.webp"
   },
   "images": [
     {
