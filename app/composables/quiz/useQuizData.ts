@@ -16,8 +16,8 @@ export default function useQuizData() {
     await loadAndSet(() => quizService.fetchQuiz(slug, locale.value), quiz);
   }
 
-  async function getQuizzes() {
-    await loadAndSet(() => quizService.fetchQuizzes(locale.value), quizzes);
+  async function getQuizzes(limit?: number) {
+    await loadAndSet(() => quizService.fetchQuizzes(locale.value, limit), quizzes);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {

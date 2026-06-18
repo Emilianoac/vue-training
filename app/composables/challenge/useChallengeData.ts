@@ -16,8 +16,8 @@ export default function useChallengeData() {
     await loadAndSet(() => challengeService.fetchChallenge(slug, locale.value), challenge);
   }
 
-  async function getChallenges() {
-    await loadAndSet(() => challengeService.fetchChallenges(locale.value), challenges);
+  async function getChallenges(limit?: number) {
+    await loadAndSet(() => challengeService.fetchChallenges(locale.value, limit), challenges);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {

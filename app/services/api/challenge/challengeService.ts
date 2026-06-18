@@ -9,9 +9,14 @@ function createChallengeService(): ChallengeService {
       if (!data) throw new Error("Challenge not found");
       return data;
     },
-    async fetchChallenges(locale) {
+    async fetchChallenges(locale, limit) {
       const collection = locale === "en" ? "challenges_en" : "challenges_es";
-      const data = await queryCollection(collection)
+
+      const query = queryCollection(collection);
+
+      if (limit) query.limit(limit);
+
+      const data = await query
         .select("title", "slug", "level", "category", "short_description", "cover")
         .all();
 

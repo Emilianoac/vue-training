@@ -11,8 +11,8 @@ export default function useTipData() {
     message: "",
   });
 
-  async function getTips() {
-    await loadAndSet(() => tipService.fetchTips(locale.value), tips);
+  async function getTips(limit?: number) {
+    await loadAndSet(() => tipService.fetchTips(locale.value, limit), tips);
   }
 
   async function loadAndSet<T>(fetchFn: () => Promise<T>, targetRef: Ref<T>) {
