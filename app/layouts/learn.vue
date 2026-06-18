@@ -36,7 +36,7 @@ const isMenuActive = (url: string) => {
     <div class="grid min-h-0 flex-1 md:grid-cols-[220px_minmax(0,1fr)]">
       <aside class="hidden min-h-0 overflow-y-auto border-r bg-card/30 md:block">
         <div class="space-y-2 p-3">
-          <span class="block text-sm text-muted-foreground">Sections</span>
+          <span class="block text-sm text-muted-foreground">{{ $t("sections") }}</span>
           <nav>
             <ul class="space-y-2">
               <li v-for="item in menuItems" :key="item.title">

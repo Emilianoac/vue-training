@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { LightbulbIcon } from "lucide-vue-next";
 import useTipData from "@/composables/tip/useTipData";
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import TipDetails from "@/components/tip/TipDetails.vue";
@@ -18,12 +17,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 const { locale } = useI18n();
 const { getTips, tips } = useTipData();
 
-await getTips();
+await getTips(3);
 
 watch(
   () => locale.value,
   async () => {
-    await getTips();
+    await getTips(3);
   },
 );
 </script>
@@ -32,23 +31,27 @@ watch(
   <Card>
     <CardContent>
       <div class="grid md:grid-cols-[auto_1fr] items-center gap-4 col-span-2">
-        <Vuecito tip-id="tip-widget" class="max-w-20 h-auto" :show-code-editor="false" />
+        <Vuecito
+          tip-id="tip-widget"
+          class="mx-auto max-w-20 md:max-w-25 h-auto"
+          :show-code-editor="false"
+        />
 
         <Carousel
-          class="relative w-full overflow-hidden"
+          class="relative w-full overflow-hidden md:flex gap-4"
           :opts="{
             align: 'start',
+            loop: true,
           }"
         >
           <CarouselContent>
             <CarouselItem v-for="(tip, index) in tips" :key="index">
               <div class="p-1 space-y-3">
                 <div class="select-none">
-                  <h4 class="flex items-center gap-2 text-lg font-semibold mb-1">
-                    <LightbulbIcon class="text-yellow-500" />
+                  <h4 class="text-lg font-semibold mb-1">
                     {{ tip.title }}
                   </h4>
-                  <p class="text-[0.92em]">{{ tip.short_description }}</p>
+                  <p class="text-[0.85em]">{{ tip.short_description }}</p>
                 </div>
                 <Dialog>
                   <DialogTrigger :as-child="true">
@@ -80,7 +83,7 @@ watch(
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselDots />
+          <CarouselDots class="flex md:flex-col justify-center" />
         </Carousel>
       </div>
     </CardContent>

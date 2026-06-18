@@ -1,6 +1,7 @@
 {
   "en": "Inglés",
   "es": "Español",
+  "sections": "Secciones",
   "menu-label": {
     "home": "Inicio",
     "learningPaths": "Rutas",
@@ -96,7 +97,8 @@
         },
         "tips": {
           "title": "Tips",
-          "description": "Revisa pequeñas ideas y recordatorios útiles sobre Vue."
+          "description": "Revisa pequeñas ideas y recordatorios útiles sobre Vue.",
+          "seeMore": "Ver más tips"
         }
       }
     }

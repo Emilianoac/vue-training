@@ -28,7 +28,7 @@ watch(emblaApi, () => {
       </div>
     </div>
 
-    <div class="embla__dots mt-4">
+    <div class="embla__dots mt-4" v-if="scrollSnaps.length > 1">
       <button
         v-for="(dot, index) in scrollSnaps"
         @click="emblaApi?.scrollTo(index)"
@@ -39,7 +39,7 @@ watch(emblaApi, () => {
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="scss">
 .embla {
   overflow: hidden;
   padding: 1em 0;
