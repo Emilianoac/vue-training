@@ -1,0 +1,45 @@
+{
+  "documentId": "computed-user-filter",
+  "title": "Filter Users with computed",
+  "slug": "computed-user-filter",
+  "level": "basic",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice deriving filtered UI state with computed instead of manually updating a second value.",
+  "description": [
+    "In this challenge, you will complete a small user filter component using Vue's computed function.",
+    "The goal is to derive filteredUsers from search and users, letting Vue recalculate the list only when its reactive dependencies change."
+  ],
+  "instructions": [
+    "Import computed from vue.",
+    "Turn filteredUsers into a computed property.",
+    "Filter users by comparing each name against search.value in a case-insensitive way.",
+    "Keep clearSearch focused on resetting search.value."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/reactivity/computed-user-filter.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Import computed",
+      "body": "The import can include both ref and computed: import { computed, ref } from \"vue\"."
+    },
+    {
+      "title": "Derive, do not duplicate",
+      "body": "filteredUsers should be computed from users.value and search.value. You do not need another ref for the filtered list."
+    },
+    {
+      "title": "Normalize the search",
+      "body": "Use toLowerCase() on both the user's name and the search text so the filter works regardless of capitalization."
+    }
+  ]
+}

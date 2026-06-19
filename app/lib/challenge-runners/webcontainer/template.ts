@@ -36,12 +36,13 @@ const previewTheme = `<style type="text/tailwindcss">
 
 export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
   const projectFiles = createFileTree(challengeFiles);
+  const previewFilePath = getPreviewFilePath(challengeFiles);
 
   addFileToTree(
     projectFiles,
     ["src", "main.ts"],
     `import { createApp } from "vue";
-import Challenge from "./Counter.vue";
+import Challenge from "./${previewFilePath}";
 
 createApp(Challenge).mount("#app");
 `,
@@ -118,6 +119,11 @@ function createFileTree(files: ChallengeFile[]): FileSystemTree {
   }
 
   return tree;
+}
+
+function getPreviewFilePath(files: ChallengeFile[]) {
+  const editableVueFile = files.find((file) => file.editable && file.path.endsWith(".vue"));
+  return editableVueFile?.path.replace(/^src\//, "") ?? "Counter.vue";
 }
 
 function addFileToTree(tree: FileSystemTree, pathParts: string[], content: string) {

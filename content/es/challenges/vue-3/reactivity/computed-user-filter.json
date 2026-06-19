@@ -1,0 +1,45 @@
+{
+  "documentId": "computed-user-filter",
+  "title": "Filtrar usuarios con computed",
+  "slug": "computed-user-filter",
+  "level": "basic",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica derivar estado para la interfaz con computed en lugar de actualizar manualmente un segundo valor.",
+  "description": [
+    "En este desafío, completarás un pequeño componente para filtrar usuarios usando la función computed de Vue.",
+    "El objetivo es derivar filteredUsers desde search y users, dejando que Vue recalcule la lista solo cuando cambien sus dependencias reactivas."
+  ],
+  "instructions": [
+    "Importa computed desde vue.",
+    "Convierte filteredUsers en una propiedad computada.",
+    "Filtra los usuarios comparando cada nombre con search.value sin distinguir mayúsculas y minúsculas.",
+    "Mantén clearSearch enfocado solo en reiniciar search.value."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/reactivity/computed-user-filter.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Importa computed",
+      "body": "El import puede incluir ref y computed: import { computed, ref } from \"vue\"."
+    },
+    {
+      "title": "Deriva, no dupliques",
+      "body": "filteredUsers debe calcularse desde users.value y search.value. No necesitas otro ref para la lista filtrada."
+    },
+    {
+      "title": "Normaliza la búsqueda",
+      "body": "Usa toLowerCase() tanto en el nombre del usuario como en el texto de búsqueda para que el filtro funcione sin importar las mayúsculas."
+    }
+  ]
+}

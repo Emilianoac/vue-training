@@ -38,3 +38,9 @@ steps:
             level: basic
             title: Computed Properties Quiz
             subtitle: Test your knowledge of computed properties in Vue 3.
+
+          - id: computed-user-filter
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Complete a user filter component using computed properties.
