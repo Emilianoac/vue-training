@@ -142,7 +142,12 @@ function syncFullscreenState() {
             >
               <div class="flex h-full min-h-0 flex-col">
                 <div class="flex justify-end border-b border-(--editor-panel-border) p-2">
-                  <Button size="sm" variant="outline" :disabled="!canLoadPreview" @click="loadPreview">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    :disabled="!canLoadPreview"
+                    @click="loadPreview"
+                  >
                     <template v-if="isPreviewStarting">
                       {{ t("challenge.runner.actions.loadingPreview") }}
                       <Loader2Icon class="animate-spin" />
@@ -182,11 +187,8 @@ function syncFullscreenState() {
           :with-handle="true"
         />
 
-        <ResizablePanel :default-size="30" :min-size="30" class="min-h-0">
-          <ResizablePanelGroup
-            :direction="isDesktop ? 'horizontal' : 'vertical'"
-            class="min-h-0"
-          >
+        <ResizablePanel :default-size="30" :min-size="0" class="min-h-0">
+          <ResizablePanelGroup :direction="isDesktop ? 'horizontal' : 'vertical'" class="min-h-0">
             <ResizablePanel
               :default-size="isDesktop ? 65 : 55"
               :min-size="isDesktop ? 35 : 30"
