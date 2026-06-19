@@ -23,6 +23,7 @@ const count = ref(0);
 const doubleCount = computed(() => count.value * 2);
 </script>
 ```
+--- 
 
 ## How does computed() work?
 
@@ -55,6 +56,7 @@ const doubleCount = computed(() => count.value * 2);
   </div>
 </template>
 ```
+---
 
 ## Computed properties vs methods
 
@@ -96,12 +98,16 @@ Methods are designed to execute logic or actions inside the component.
 | Send data to a backend        | No             | Yes      | It is an action, not a derived value                          |
 | Execute user actions          | No             | Yes      | Methods represent behavior                                    |
 
+---
+
 ## Rules for using computed
 
 - **Read-only by default:** a normal computed property cannot be modified directly, although you can create a writable computed property using `get` and `set`.
 - **No side effects:** do not make `fetch` requests, modify the DOM, or change other reactive variables inside a computed property. Its only purpose is to return a value.
 - **Avoid mutating the original state:** if you are going to sort a list inside a computed property, use `.toSorted()` or a copy of the original array so you do not alter the source of truth.
 - **They must be deterministic:** avoid using values like `Math.random()` or `Date.now()` inside a computed property, since they do not depend on reactivity and caching loses its purpose.
+
+---
 
 ## Writable computed properties
 
@@ -149,6 +155,8 @@ const fullName = computed({
 In this example, `fullName` is still a derived value, but it can also update the original variables when it changes.
 
 Writable computed properties are useful when you need to expose a simple interface for reading and modifying several related reactive values.
+
+---
 
 ## Implementation example
 

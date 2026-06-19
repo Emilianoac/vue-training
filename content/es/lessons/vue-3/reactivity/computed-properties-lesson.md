@@ -24,6 +24,8 @@ const doubleCount = computed(() => count.value * 2);
 </script>
 ```
 
+---
+
 ## ¿Cómo funciona computed()?
 
 La función `computed()` toma una función getter y devuelve un ref reactivo de solo lectura para el valor retornado.
@@ -55,6 +57,8 @@ const doubleCount = computed(() => count.value * 2);
   </div>
 </template>
 ```
+
+---
 
 ## Propiedades computadas vs métodos
 
@@ -88,7 +92,7 @@ Los métodos están diseñados para ejecutar lógica o acciones dentro del compo
 
 ### Cuándo usar cada uno
 
-| Escenario                             | ¿Computed?        | ¿Method? | Razón                                                         |
+| Escenario                            | ¿Computed?        | ¿Method? | Razón                                                         |
 |--------------------------------------|-------------------|----------|---------------------------------------------------------------|
 | Formatear una fecha única            | Sí                | Opcional | Se beneficia del caché si depende de estado reactivo          |
 | Lógica con parámetros dinámicos      | No                | Sí       | Las computed no reciben argumentos                            |
@@ -96,12 +100,16 @@ Los métodos están diseñados para ejecutar lógica o acciones dentro del compo
 | Enviar datos a backend               | No                | Sí       | Es una acción, no un valor derivado                           |
 | Ejecutar acciones del usuario        | No                | Sí       | Los métodos representan comportamiento                        |
 
+---                   
+
 ## Reglas para usar computed
 
 - **Solo lectura por defecto:** una computada normal no puede modificarse directamente, aunque puedes crear una computed de escritura usando `get` y `set`.
 - **Sin efectos secundarios:** no realices peticiones `fetch`, no modifiques el DOM ni cambies otras variables reactivas dentro de una computada. Su única misión es retornar un valor.
 - **Evita mutar el estado original:** si vas a ordenar una lista en una computada, usa `.toSorted()` o una copia del array original para no alterar la fuente de verdad.
 - **Deben ser deterministas:** evita usar valores como `Math.random()` o `Date.now()` dentro de una computada, ya que no dependen de reactividad y el caché pierde sentido.
+
+--- 
 
 ## Computed de escritura
 
@@ -149,6 +157,8 @@ const fullName = computed({
 En este ejemplo, `fullName` sigue siendo un valor derivado, pero también puede actualizar las variables originales cuando cambia.
 
 Las computed de escritura son útiles cuando necesitas exponer una interfaz simple para leer y modificar varios valores reactivos relacionados.
+
+--- 
 
 ## Ejemplo de implementación
 
