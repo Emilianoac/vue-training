@@ -28,30 +28,39 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/": {
-      prerender: true,
-    },
+    "/**": { prerender: true },
+
     "/challenges/**": {
       appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
+
     "/learn/learning-path/*/challenges/**": {
       appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
+
     "/learn/learning-path/**/challenges/**": {
       appLayout: "activity",
       ssr: false,
       headers: webContainerHeaders,
     },
+
     "/learn/learning-path/*/quizzes/**": { appLayout: "activity", ssr: false },
     "/learn/learning-path/**/quizzes/**": { appLayout: "activity", ssr: false },
     "/quizzes/**": { appLayout: "activity", ssr: false },
     "/learn": { appLayout: "learn", ssr: false },
     "/learn/**": { appLayout: "learn", ssr: false },
   },
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+    },
+  },
+
   i18n: {
     langDir: "locales",
     strategy: "no_prefix",
