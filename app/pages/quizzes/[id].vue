@@ -9,7 +9,7 @@ import QuizOnLoading from "@/components/quiz/profile/containers/QuizOnLoading.vu
 import QuizQuestionDetailsModal from "@/components/quiz/profile/base/QuizQuestionDetailsModal.vue";
 
 definePageMeta({
-  layout: false,
+  layout: "activity",
 });
 
 const route = useRoute();
@@ -47,7 +47,6 @@ watch(
 </script>
 
 <template>
-  <NuxtLayout name="activity">
     <ActivityShell
       v-if="quiz"
       :title="quiz.title"
@@ -111,7 +110,6 @@ watch(
         @close-modal="showQuestionDetails = false"
       />
     </Teleport>
-  </NuxtLayout>
 </template>
 
 <style lang="postcss" scoped></style>

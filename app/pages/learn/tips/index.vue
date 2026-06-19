@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 definePageMeta({
+  layout: "learn",
   menu: true,
   index: 4,
   titleKey: "menu-label.randomTip",

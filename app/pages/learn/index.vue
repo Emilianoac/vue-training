@@ -14,6 +14,10 @@ import TipCarousel from "@/components/tip/TipCarousel.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+definePageMeta({
+  layout: "learn",
+});
+
 const { t, locale } = useI18n();
 
 const sections = computed(() => [

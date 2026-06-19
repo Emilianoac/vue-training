@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 
 definePageMeta({
-  layout: false,
+  layout: "activity",
 });
 
 const route = useRoute();
@@ -82,7 +82,6 @@ function continueToLearningPath() {
 </script>
 
 <template>
-  <NuxtLayout name="activity">
     <ActivityShell
       v-if="quiz"
       :title="quiz.title"
@@ -169,5 +168,4 @@ function continueToLearningPath() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  </NuxtLayout>
 </template>

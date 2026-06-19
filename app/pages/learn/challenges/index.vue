@@ -13,6 +13,7 @@ import useChallengeData from "@/composables/challenge/useChallengeData";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 definePageMeta({
+  layout: "learn",
   menu: true,
   index: 3,
   titleKey: "menu-label.challenges",
