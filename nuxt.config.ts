@@ -28,8 +28,6 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/**": { prerender: true },
-
     "/challenges/**": {
       ssr: false,
       headers: webContainerHeaders,
@@ -51,13 +49,6 @@ export default defineNuxtConfig({
     "/learn": { ssr: false },
     "/learn/**": { ssr: false },
   },
-
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-    },
-  },
-
   i18n: {
     langDir: "locales",
     strategy: "no_prefix",
