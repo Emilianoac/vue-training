@@ -37,17 +37,6 @@ export default defineNuxtConfig({
       ssr: false,
       headers: webContainerHeaders,
     },
-
-    "/learn/learning-path/**/challenges/**": {
-      ssr: false,
-      headers: webContainerHeaders,
-    },
-
-    "/learn/learning-path/*/quizzes/**": { ssr: false },
-    "/learn/learning-path/**/quizzes/**": { ssr: false },
-    "/quizzes/**": { ssr: false },
-    "/learn": { ssr: false },
-    "/learn/**": { ssr: false },
   },
   i18n: {
     langDir: "locales",
