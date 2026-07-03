@@ -6,7 +6,7 @@ export function calculateQuizStats(userHistory: AnswerRecord[]) {
   ).length;
   const wrong = userHistory.length - correct;
   const total = userHistory.length;
-  const percentage = total > 0 ? (correct / total) * 100 : 0;
+  const percentage = total > 0 ? Math.round((correct / total) * 10000) / 100 : 0;
 
   return {
     correct,
