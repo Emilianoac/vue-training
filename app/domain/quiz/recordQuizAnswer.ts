@@ -1,6 +1,9 @@
-import type { RecordAnswerUseCase } from "./recordAnswerUseCase.interface";
+import type { AnswerRecord, Question } from "@/schemas/quiz.schema";
 
-export const recordAnswerUseCase: RecordAnswerUseCase = (question, selectedOptionId) => {
+export function recordQuizAnswer(
+  question: Question,
+  selectedOptionId: string | null,
+): AnswerRecord {
   const mappedAnswers = question.answers.map((answer) => ({
     ...answer,
     isSelected: answer.id === selectedOptionId,
@@ -12,4 +15,4 @@ export const recordAnswerUseCase: RecordAnswerUseCase = (question, selectedOptio
     explanation: question.explanation,
     codeExample: question.explanation_code,
   };
-};
+}

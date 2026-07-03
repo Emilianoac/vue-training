@@ -1,5 +1,5 @@
-import { calculateStatsUseCase } from "@/services/use-cases/quiz/calculate-stats/calculateStatsUseCase";
-import { recordAnswerUseCase } from "@/services/use-cases/quiz/record-answer/recordAnswerUseCase";
+import { calculateQuizStats } from "@/domain/quiz/calculateQuizStats";
+import { recordQuizAnswer } from "@/domain/quiz/recordQuizAnswer";
 import useQuizData from "./useQuizData";
 import type { AnswerRecord } from "@/schemas/quiz.schema";
 
@@ -77,7 +77,7 @@ export default function useQuiz() {
         setError("No current question available.");
         return;
       }
-      const newAnswerRecord = recordAnswerUseCase(
+      const newAnswerRecord = recordQuizAnswer(
         currentQuestion.value,
         state.answer.selectedOptionId,
       );
@@ -127,7 +127,7 @@ export default function useQuiz() {
   function finishQuiz() {
     state.endTime = Date.now();
     state.quizState.isFinished = true;
-    state.result.stats = calculateStatsUseCase(state.result.history);
+    state.result.stats = calculateQuizStats(state.result.history);
   }
 
   function setError(err: unknown) {

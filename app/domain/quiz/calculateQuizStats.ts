@@ -1,6 +1,6 @@
-import type { CalculateStatsUseCase } from "./calculateStatsUseCase.interface";
+import type { AnswerRecord } from "@/schemas/quiz.schema";
 
-export const calculateStatsUseCase: CalculateStatsUseCase = (userHistory) => {
+export function calculateQuizStats(userHistory: AnswerRecord[]) {
   const correct = userHistory.filter((entry) =>
     entry.answers.some((answer) => answer.isSelected && answer.isCorrect),
   ).length;
@@ -14,4 +14,4 @@ export const calculateStatsUseCase: CalculateStatsUseCase = (userHistory) => {
     percentage,
     total,
   };
-};
+}
