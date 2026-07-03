@@ -2,17 +2,21 @@ import { fileURLToPath } from "node:url";
 import { defineVitestProject } from "@nuxt/test-utils/config";
 import { defineConfig } from "vitest/config";
 
+const appAliases = {
+  "@": fileURLToPath(new URL("./app", import.meta.url)),
+  "~": fileURLToPath(new URL("./app", import.meta.url)),
+};
+
 export default defineConfig({
   resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./app", import.meta.url)),
-      "~": fileURLToPath(new URL("./app", import.meta.url)),
-    },
+    alias: appAliases,
   },
   test: {
-    globals: true,
     projects: [
       {
+        resolve: {
+          alias: appAliases,
+        },
         test: {
           name: "unit",
           include: ["_tests_/unit/**/*.{test,spec}.ts"],
