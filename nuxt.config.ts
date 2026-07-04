@@ -28,6 +28,10 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    "/": {
+      prerender: true,
+    },
+
     "/challenges/**": {
       ssr: false,
       headers: webContainerHeaders,
