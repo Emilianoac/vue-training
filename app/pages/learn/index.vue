@@ -9,9 +9,14 @@ import {
 import useQuizData from "@/composables/quiz/useQuizData";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
-import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 import TipCarousel from "@/components/tip/TipCarousel.vue";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 definePageMeta({
@@ -107,11 +112,18 @@ watch(
             <Icon name="mdi:arrow-right" size="24"></Icon>
           </Button>
         </div>
-        <SwiperComponent class="p-0!" :items="quizzes">
-          <template #slide="{ item }">
-            <QuizCard :quiz="item" />
-          </template>
-        </SwiperComponent>
+        <Carousel>
+          <CarouselContent class="-ml-8">
+            <CarouselItem
+              v-for="quiz in quizzes"
+              :key="quiz.documentId"
+              class="pl-8 md:basis-1/2 xl:basis-1/3"
+            >
+              <QuizCard :quiz />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselDots />
+        </Carousel>
       </section>
 
       <section class="space-y-2">
@@ -122,11 +134,18 @@ watch(
             <Icon name="mdi:arrow-right" size="24"></Icon>
           </Button>
         </div>
-        <SwiperComponent class="p-0!" :items="challenges">
-          <template #slide="{ item }">
-            <ChallengeCard :challenge="item" />
-          </template>
-        </SwiperComponent>
+        <Carousel>
+          <CarouselContent class="-ml-8">
+            <CarouselItem
+              v-for="challenge in challenges"
+              :key="challenge.slug"
+              class="pl-8 md:basis-1/2 xl:basis-1/3"
+            >
+              <ChallengeCard :challenge />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselDots />
+        </Carousel>
       </section>
     </div>
   </ScrollArea>

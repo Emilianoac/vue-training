@@ -4,11 +4,16 @@ import useChallengeData from "@/composables/challenge/useChallengeData";
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import QuizCard from "@/components/quiz/QuizCard.vue";
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
-import SwiperComponent from "@/components/ui/SwiperComponent.vue";
 import IconHome from "@/components/assets/icons/IconHome.vue";
 import IconQuiz from "@/components/assets/icons/IconQuiz.vue";
 import IconTerminal from "@/components/assets/icons/IconTerminal.vue";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 definePageMeta({
   menu: true,
@@ -129,11 +134,18 @@ watch(
           <Icon name="mdi:arrow-right" size="24"></Icon>
         </Button>
       </div>
-      <SwiperComponent :items="quizzes">
-        <template #slide="{ item }">
-          <QuizCard :quiz="item" />
-        </template>
-      </SwiperComponent>
+      <Carousel class="py-4">
+        <CarouselContent class="-ml-8">
+          <CarouselItem
+            v-for="quiz in quizzes"
+            :key="quiz.documentId"
+            class="pl-8 md:basis-1/2 xl:basis-1/3"
+          >
+            <QuizCard :quiz />
+          </CarouselItem>
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
     </section>
 
     <!-- Challenges -->
@@ -145,11 +157,18 @@ watch(
           <Icon name="mdi:arrow-right" size="24"></Icon>
         </Button>
       </div>
-      <SwiperComponent :items="challenges">
-        <template #slide="{ item }">
-          <ChallengeCard :challenge="item" />
-        </template>
-      </SwiperComponent>
+      <Carousel class="py-4">
+        <CarouselContent class="-ml-8">
+          <CarouselItem
+            v-for="challenge in challenges"
+            :key="challenge.slug"
+            class="pl-8 md:basis-1/2 xl:basis-1/3"
+          >
+            <ChallengeCard :challenge />
+          </CarouselItem>
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
     </section>
 
     <!-- Call to Action -->
