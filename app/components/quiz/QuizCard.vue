@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { QuizListItem } from "@/schemas/quiz.schema";
 
-import ChipComponent from "@/components/ui/ChipComponent.vue";
+import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -26,8 +26,7 @@ defineProps<{
             >
               <img :src="quiz.category.image.url" alt="Quiz Image" class="w-7.5" />
             </div>
-            <!-- Level Chip -->
-            <ChipComponent :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level" />
+            <ActivityLevelBadge :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level" />
           </div>
           <div class="p-4">
             <!-- Category -->

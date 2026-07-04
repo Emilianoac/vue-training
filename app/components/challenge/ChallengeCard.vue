@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Challenge } from "@/schemas/challenge.schema";
 
-import ChipComponent from "@/components/ui/ChipComponent.vue";
+import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -26,8 +26,7 @@ defineProps<{
               alt="Challenge Image"
               class="w-full h-48 object-cover object-center"
             />
-            <!-- Level Chip -->
-            <ChipComponent
+            <ActivityLevelBadge
               :text="$t(`general.levels.${challenge.level}`)"
               :type="challenge.level"
               class="absolute top-3 right-3"

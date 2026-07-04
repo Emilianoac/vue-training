@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Challenge } from "@/schemas/challenge.schema";
-import ChipComponent from "@/components/ui/ChipComponent.vue";
+import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -17,7 +17,7 @@ const { t } = useI18n();
 
 <template>
   <aside class="h-full overflow-auto">
-    <ChipComponent
+    <ActivityLevelBadge
       class="mb-3"
       :type="props.challenge.level"
       :text="t(`general.levels.${props.challenge.level}`)"

@@ -2,7 +2,7 @@
 import type { Item, ItemType } from "@/schemas/learningPath.schema";
 import { ArrowRightIcon, CheckCircleIcon } from "lucide-vue-next";
 import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import ChipComponent from "@/components/ui/ChipComponent.vue";
+import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import IconTerminal from "@/components/assets/icons/IconTerminal.vue";
 import IconQuiz from "@/components/assets/icons/IconQuiz.vue";
 import IconBook from "@/components/assets/icons/IconBook.vue";
@@ -52,7 +52,7 @@ function getIcon(type: ItemType) {
         <CardDescription class="line-clamp-3">{{ item.subtitle }}</CardDescription>
       </CardHeader>
       <CardFooter class="pt-0 flex flex-col items-start gap-3">
-        <ChipComponent v-if="item.type !== 'lesson'" :text="item.level" :type="item.level" />
+        <ActivityLevelBadge v-if="item.type !== 'lesson'" :text="item.level" :type="item.level" />
 
         <div class="flex gap-2 transition-all duration-300 ease-out group-hover:translate-x-1">
           <ArrowRightIcon />

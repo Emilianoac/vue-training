@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Level } from "@/schemas/quiz.schema";
-import ChipComponent from "@/components/ui/ChipComponent.vue";
+import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -24,8 +24,11 @@ defineProps<{
       class="flex flex-col-reverse md:grid grid-cols-[1fr_0.6fr] bg-card border rounded-lg w-full"
     >
       <div class="p-4 md:p-10">
-        <!-- Quiz Level Chip -->
-        <ChipComponent :type="level" :text="$t(`general.levels.${level}`)" class="mb-3" />
+        <ActivityLevelBadge
+          :type="level"
+          :text="$t(`general.levels.${level}`)"
+          class="mb-3"
+        />
         <span class="inline-block opacity-75 text-sm">{{ category }}</span>
         <!-- Quiz Title -->
         <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">{{ title }}</h1>
