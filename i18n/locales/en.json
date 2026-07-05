@@ -210,6 +210,12 @@
         "ready": "Environment ready",
         "saved": "Changes saved"
       },
+      "firstSetup": {
+        "title": "Preparing your coding environment",
+        "description": "The first load may take a moment while we prepare your environment. Future challenges will load much faster.",
+        "elapsed": "{seconds}s elapsed",
+        "tip": "While you wait"
+      },
       "terminal": {
         "title": "Terminal",
         "initialReady": "$ WebContainer runner ready.\r\n$ Preparing environment automatically.\r\n",
@@ -218,6 +224,12 @@
         "notIsolatedHelp": "  Check COOP/COEP headers and restart the dev server.",
         "ready": "✓ WebContainer ready.",
         "mounted": "✓ Virtual project mounted.",
+        "cacheMiss": "  No cached environment found.",
+        "cacheHit": "✓ Cached environment restored.",
+        "cacheInvalid": "  Cached environment was invalid. Rebuilding it.",
+        "cacheUnavailable": "  Browser cache is unavailable. Continuing without it.",
+        "cacheSaved": "✓ Environment cached for future challenges.",
+        "cacheSaveFailed": "  Environment could not be cached.",
         "install": "$ npm install",
         "startPreview": "$ npm run dev",
         "installFailed": "✗ npm install exited with code {code}.",
@@ -225,9 +237,12 @@
         "runTests": "$ npm run test",
         "testsPassed": "✓ Vitest passed.",
         "testsFailed": "✗ Vitest failed with code {code}.",
+        "testReportMissing": "✗ Vitest did not produce a test report.",
         "timing": "  {stage}: {duration} ms",
         "timings": {
           "boot": "Boot",
+          "cacheRead": "Cache lookup",
+          "cacheWrite": "Cache creation",
           "mount": "Mount",
           "install": "Install",
           "preview": "Vite startup",

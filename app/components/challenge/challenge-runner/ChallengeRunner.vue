@@ -3,6 +3,7 @@ import { CheckIcon, Loader2Icon, PlayIcon, RefreshCwIcon } from "lucide-vue-next
 import { useMediaQuery } from "@vueuse/core";
 import { useWebContainerRunner } from "@/lib/challenge-runners/webcontainer/composables/useWebContainerRunner";
 import CodeMirrorEditor from "./CodeMirrorEditor.client.vue";
+import ChallengeSetupOverlay from "./ChallengeSetupOverlay.vue";
 import ChallengeTerminal from "./ChallengeTerminal.client.vue";
 import ChallengeTestResults from "./ChallengeTestResults.vue";
 import ChallengeToolbar from "./ChallengeToolbar.vue";
@@ -30,7 +31,9 @@ const {
   canRunTests,
   canSaveCode,
   code,
+  isColdStart,
   isReady,
+  isFirstSetupLoading,
   isPreviewStarting,
   isRunning,
   loadPreview,
@@ -54,7 +57,9 @@ const emit = defineEmits<{
 const activeEditorTab = ref("editor");
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
+const showSetupOverlay = ref(false);
 const runnerRoot = ref<HTMLElement | null>(null);
+let setupOverlayTimer: number | undefined;
 
 watch(
   () => testSummary.value,
@@ -67,12 +72,30 @@ watch(activeEditorTab, (tab) => {
   if (tab === "preview") void loadPreview();
 });
 
+watch(isFirstSetupLoading, (isLoading) => {
+  if (isLoading) {
+    if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
+    showSetupOverlay.value = true;
+    return;
+  }
+
+  if (isColdStart.value && isReady.value && showSetupOverlay.value) {
+    setupOverlayTimer = window.setTimeout(() => {
+      showSetupOverlay.value = false;
+    }, 800);
+    return;
+  }
+
+  showSetupOverlay.value = false;
+});
+
 onMounted(() => {
   document.addEventListener("fullscreenchange", syncFullscreenState);
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener("fullscreenchange", syncFullscreenState);
+  if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
 });
 
 async function toggleFullscreen() {
@@ -96,7 +119,7 @@ function syncFullscreenState() {
   <ClientOnly>
     <div
       ref="runnerRoot"
-      class="flex min-h-0 flex-col overflow-hidden rounded-sm border border-(--editor-panel-border)"
+      class="relative flex min-h-0 flex-col overflow-hidden rounded-sm border border-(--editor-panel-border)"
       :class="isFullscreen ? 'h-dvh bg-(--editor-background)' : 'h-full'"
     >
       <ChallengeToolbar
@@ -239,6 +262,8 @@ function syncFullscreenState() {
           </span>
         </div>
       </footer>
+
+      <ChallengeSetupOverlay v-if="showSetupOverlay" :complete="isReady" :stage="setupLabel" />
     </div>
 
     <template #fallback>

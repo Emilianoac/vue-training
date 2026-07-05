@@ -210,6 +210,12 @@
         "ready": "Entorno listo",
         "saved": "Cambios guardados"
       },
+      "firstSetup": {
+        "title": "Preparando tu entorno de codigo",
+        "description": "La primera carga puede tardar un poco mientras preparamos tu entorno. Los siguientes challenges cargaran mucho mas rapido.",
+        "elapsed": "{seconds}s transcurridos",
+        "tip": "Mientras esperas"
+      },
       "terminal": {
         "title": "Terminal",
         "initialReady": "$ Runner WebContainer listo.\r\n$ Preparando entorno automaticamente.\r\n",
@@ -218,6 +224,12 @@
         "notIsolatedHelp": "  Revisa los headers COOP/COEP y reinicia el dev server.",
         "ready": "✓ WebContainer listo.",
         "mounted": "✓ Proyecto virtual montado.",
+        "cacheMiss": "  No se encontro un entorno en cache.",
+        "cacheHit": "✓ Entorno restaurado desde cache.",
+        "cacheInvalid": "  El entorno en cache no era valido. Se volvera a crear.",
+        "cacheUnavailable": "  La cache del navegador no esta disponible. Se continuara sin ella.",
+        "cacheSaved": "✓ Entorno guardado para futuros challenges.",
+        "cacheSaveFailed": "  No se pudo guardar el entorno en cache.",
         "install": "$ npm install",
         "startPreview": "$ npm run dev",
         "installFailed": "✗ npm install termino con codigo {code}.",
@@ -225,9 +237,12 @@
         "runTests": "$ npm run test",
         "testsPassed": "✓ Vitest paso.",
         "testsFailed": "✗ Vitest fallo con codigo {code}.",
+        "testReportMissing": "✗ Vitest no genero un reporte de tests.",
         "timing": "  {stage}: {duration} ms",
         "timings": {
           "boot": "Inicio",
+          "cacheRead": "Lectura de cache",
+          "cacheWrite": "Creacion de cache",
           "mount": "Montaje",
           "install": "Instalacion",
           "preview": "Inicio de Vite",

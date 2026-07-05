@@ -7,22 +7,9 @@ import previewTheme from "./project-template/preview-theme.css?raw";
 import viteConfig from "./project-template/vite.config.ts?raw";
 import vitestConfig from "./project-template/vitest.config.ts?raw";
 
-export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-07";
+export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-07-1";
 
-export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
-  const projectFiles = createFileTree(challengeFiles);
-  const previewFilePath = getPreviewFilePath(challengeFiles);
-
-  // The preview entry must import the editable Vue file selected by each challenge.
-  addFileToTree(
-    projectFiles,
-    ["src", "main.ts"],
-    mainSource.replace("__CHALLENGE_FILE__", previewFilePath),
-  );
-
-  // Mount the shared theme as a real file so Vite can load it without template placeholders.
-  addFileToTree(projectFiles, ["src", "preview-theme.css"], previewTheme);
-
+export function createBaseProjectFiles(): FileSystemTree {
   return {
     "package.json": {
       file: {
@@ -44,7 +31,32 @@ export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemT
         contents: indexHtml,
       },
     },
+  };
+}
+
+export function createChallengeProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
+  const projectFiles = createFileTree(challengeFiles);
+  const previewFilePath = getPreviewFilePath(challengeFiles);
+
+  // The preview entry must import the editable Vue file selected by each challenge.
+  addFileToTree(
+    projectFiles,
+    ["src", "main.ts"],
+    mainSource.replace("__CHALLENGE_FILE__", previewFilePath),
+  );
+
+  // Mount the shared theme as a real file so Vite can load it without template placeholders.
+  addFileToTree(projectFiles, ["src", "preview-theme.css"], previewTheme);
+
+  return {
     ...projectFiles,
+  };
+}
+
+export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
+  return {
+    ...createBaseProjectFiles(),
+    ...createChallengeProjectFiles(challengeFiles),
   };
 }
 

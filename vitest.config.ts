@@ -32,6 +32,13 @@ export default defineConfig({
           include: ["_tests_/integration/**/*.{test,spec}.ts"],
           environment: "nuxt",
           setupFiles: ["./_tests_/integration/setup.ts"],
+          environmentOptions: {
+            nuxt: {
+              mock: {
+                indexedDb: true,
+              },
+            },
+          },
         },
       }),
     ],

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { createProjectFiles } from "@/lib/challenge-runners/webcontainer/template";
+import {
+  createBaseProjectFiles,
+  createChallengeProjectFiles,
+  createProjectFiles,
+} from "@/lib/challenge-runners/webcontainer/template";
+import type { FileSystemTree } from "@webcontainer/api";
 import type { ChallengeFile } from "@/lib/challenge-runners/webcontainer/types";
 
-function readFile(
-  tree: ReturnType<typeof createProjectFiles>,
-  ...path: string[]
-): string {
+function readFile(tree: FileSystemTree, ...path: string[]): string {
   let current = tree;
 
   for (const [index, segment] of path.entries()) {
@@ -25,13 +27,23 @@ function readFile(
 }
 
 describe("createProjectFiles", () => {
+  it("keeps shared dependencies separate from challenge source files", () => {
+    const baseFiles = createBaseProjectFiles();
+    const challengeFiles = createChallengeProjectFiles([]);
+
+    expect(baseFiles).toHaveProperty("package.json");
+    expect(baseFiles).not.toHaveProperty("src");
+    expect(challengeFiles).not.toHaveProperty("package.json");
+    expect(challengeFiles).toHaveProperty("src");
+  });
+
   it("creates the shared Vue and Vitest project files", () => {
     const tree = createProjectFiles([]);
     const packageJson = JSON.parse(readFile(tree, "package.json"));
 
     expect(packageJson.scripts).toMatchObject({
-      dev: "vite --host 0.0.0.0",
-      test: expect.stringContaining("vitest run"),
+      dev: "node ./node_modules/vite/bin/vite.js --host 0.0.0.0",
+      test: expect.stringContaining("vitest.mjs run"),
     });
     expect(readFile(tree, "index.html")).toContain('href="/src/preview-theme.css"');
     expect(readFile(tree, "index.html")).toContain('src="/src/main.ts"');

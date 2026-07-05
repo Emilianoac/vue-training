@@ -25,6 +25,8 @@ export type TestSummary = {
 
 export type RunnerTimings = {
   boot: number | null;
+  cacheRead: number | null;
+  cacheWrite: number | null;
   install: number | null;
   mount: number | null;
   preview: number | null;

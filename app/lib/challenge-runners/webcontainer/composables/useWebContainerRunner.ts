@@ -1,8 +1,13 @@
 import type { WebContainer } from "@webcontainer/api";
 import { getWebContainerChallenge } from "../registry";
-import { createProjectFiles } from "../template";
+import {
+  createChallengeProjectFiles,
+  createProjectFiles,
+  WEB_CONTAINER_TEMPLATE_VERSION,
+} from "../template";
 import type { RunnerStatus, RunnerTimings, TestCaseResult, TestSummary } from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
+import { getSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
 
 export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const { locale, t } = useI18n();
@@ -14,6 +19,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const savedCode = ref(editableFile?.content ?? "");
   const terminalOutput = ref(t("challenge.runner.terminal.initialReady"));
   const status = ref<RunnerStatus>("idle");
+  const isColdStart = ref(false);
   const isRunning = ref(false);
   const isPreviewStarting = ref(false);
   const saveFeedback = ref("");
@@ -28,6 +34,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   let resolvePreviewServerReady: ((url: string) => void) | null = null;
 
   const isReady = computed(() => status.value === "ready");
+  const isFirstSetupLoading = computed(
+    () => isColdStart.value && (status.value === "booting" || status.value === "installing"),
+  );
   const hasUnsavedChanges = computed(() => code.value !== savedCode.value);
   const canRunTests = computed(() => isReady.value && !isRunning.value && !isPreviewStarting.value);
   const canLoadPreview = computed(() => isReady.value && !isPreviewStarting.value && !isRunning.value);
@@ -57,6 +66,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     if (webcontainer.value || status.value === "booting" || status.value === "installing") return;
 
     Object.assign(timings, createEmptyTimings());
+    isColdStart.value = false;
     const totalStartedAt = performance.now();
     terminalOutput.value = "";
     appendLine(t("challenge.runner.terminal.booting"));
@@ -70,6 +80,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     status.value = "booting";
 
     try {
+      const cachedSnapshot = await loadCachedSnapshot();
       const { WebContainer } = await import("@webcontainer/api");
       const bootStartedAt = performance.now();
       const container = await WebContainer.boot();
@@ -83,37 +94,29 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       appendLine(t("challenge.runner.terminal.ready"));
 
       const mountStartedAt = performance.now();
-      await container.mount(createProjectFiles(challenge.files));
+      const restoredFromCache = await restoreCachedProject(container, cachedSnapshot);
+
+      if (!restoredFromCache) {
+        await container.mount(createProjectFiles(challenge.files));
+      }
+
       recordTiming("mount", mountStartedAt);
       appendLine(t("challenge.runner.terminal.mounted"));
 
-      status.value = "installing";
-      appendLine(t("challenge.runner.terminal.install"));
-      const installStartedAt = performance.now();
-      const install = await container.spawn(
-        "npm",
-        ["install", "--no-progress", "--no-audit", "--no-fund"],
-        {
-          env: {
-            CI: "true",
-            NO_COLOR: "1",
-          },
-        },
-      );
-      pipeProcessOutput(install);
-      const installExitCode = await install.exit;
-      recordTiming("install", installStartedAt);
+      if (!restoredFromCache) {
+        const installed = await installDependencies(container);
 
-      if (installExitCode !== 0) {
-        recordTiming("total", totalStartedAt);
-        appendLine(t("challenge.runner.terminal.installFailed", { code: installExitCode }));
-        container.teardown();
-        webcontainer.value = null;
-        status.value = "idle";
-        return;
+        if (!installed) {
+          recordTiming("total", totalStartedAt);
+          container.teardown();
+          webcontainer.value = null;
+          status.value = "idle";
+          return;
+        }
+
+        await cacheInstalledProject(container);
       }
 
-      appendLine(t("challenge.runner.terminal.installed"));
       recordTiming("total", totalStartedAt);
       status.value = "ready";
     } catch (error) {
@@ -139,6 +142,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       if (editableFile) {
         await writeEditableFile(container);
       }
+      await container.fs.rm("/vitest-results.json", { force: true });
       const test = await container.spawn("npm", ["run", "test"], {
         env: {
           CI: "true",
@@ -146,13 +150,17 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       });
       pipeProcessOutput(test);
       const testExitCode = await test.exit;
-      await updateTestReport(container);
+      const hasTestReport = await updateTestReport(container);
 
-      appendLine(
-        testExitCode === 0
-          ? t("challenge.runner.terminal.testsPassed")
-          : t("challenge.runner.terminal.testsFailed", { code: testExitCode }),
-      );
+      if (!hasTestReport) {
+        appendLine(t("challenge.runner.terminal.testReportMissing"));
+      } else {
+        appendLine(
+          testExitCode === 0
+            ? t("challenge.runner.terminal.testsPassed")
+            : t("challenge.runner.terminal.testsFailed", { code: testExitCode }),
+        );
+      }
     } catch (error) {
       appendLine(`✗ ${getErrorMessage(error, t("challenge.runner.terminal.unknownError"))}`);
     } finally {
@@ -247,6 +255,91 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     return url;
   }
 
+  async function loadCachedSnapshot() {
+    const cacheStartedAt = performance.now();
+
+    try {
+      const snapshot = await getSnapshot(WEB_CONTAINER_TEMPLATE_VERSION);
+      isColdStart.value = !snapshot;
+      recordTiming("cacheRead", cacheStartedAt);
+      return snapshot;
+    } catch {
+      isColdStart.value = true;
+      recordTiming("cacheRead", cacheStartedAt);
+      appendLine(t("challenge.runner.terminal.cacheUnavailable"));
+      return null;
+    }
+  }
+
+  async function restoreCachedProject(container: WebContainer, snapshot: ArrayBuffer | null) {
+    if (!snapshot) {
+      appendLine(t("challenge.runner.terminal.cacheMiss"));
+      return false;
+    }
+
+    try {
+      await container.mount(snapshot);
+    } catch {
+      await removeSnapshot(WEB_CONTAINER_TEMPLATE_VERSION);
+      isColdStart.value = true;
+      appendLine(t("challenge.runner.terminal.cacheInvalid"));
+      return false;
+    }
+
+    await container.mount(createChallengeProjectFiles(challenge.files));
+    appendLine(t("challenge.runner.terminal.cacheHit"));
+    return true;
+  }
+
+  async function installDependencies(container: WebContainer) {
+    status.value = "installing";
+    appendLine(t("challenge.runner.terminal.install"));
+    const installStartedAt = performance.now();
+    const install = await container.spawn(
+      "npm",
+      ["install", "--no-progress", "--no-audit", "--no-fund"],
+      {
+        env: {
+          CI: "true",
+          NO_COLOR: "1",
+        },
+      },
+    );
+
+    pipeProcessOutput(install);
+    const installExitCode = await install.exit;
+    recordTiming("install", installStartedAt);
+
+    if (installExitCode !== 0) {
+      appendLine(t("challenge.runner.terminal.installFailed", { code: installExitCode }));
+      return false;
+    }
+
+    appendLine(t("challenge.runner.terminal.installed"));
+    return true;
+  }
+
+  async function cacheInstalledProject(container: WebContainer) {
+    const cacheStartedAt = performance.now();
+
+    try {
+      const exported = await container.export(".", {
+        format: "binary",
+        excludes: ["src/**", "vitest-results.json"],
+      });
+
+      if (!(exported instanceof Uint8Array)) return;
+
+      const snapshot = new Uint8Array(exported).slice().buffer;
+      await saveSnapshot(WEB_CONTAINER_TEMPLATE_VERSION, snapshot);
+      appendLine(t("challenge.runner.terminal.cacheSaved"));
+    } catch {
+      appendLine(t("challenge.runner.terminal.cacheSaveFailed"));
+    } finally {
+      recordTiming("cacheWrite", cacheStartedAt);
+    }
+  }
+
   function pipeProcessOutput(process: Awaited<ReturnType<WebContainer["spawn"]>>) {
     process.output.pipeTo(
       new WritableStream({
@@ -271,9 +364,11 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       const parsedReport = parseReport(JSON.parse(report));
       testSummary.value = parsedReport.summary;
       testCases.value = parsedReport.testCases;
+      return true;
     } catch {
       testSummary.value = { ...emptyTestSummary };
       testCases.value = [];
+      return false;
     }
   }
 
@@ -303,9 +398,11 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     canResetCode,
     canRunTests,
     code,
+    isColdStart,
     isReady,
     isRunning,
     isPreviewStarting,
+    isFirstSetupLoading,
     loadPreview,
     loadSolution,
     previewFrameKey,
@@ -325,6 +422,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
 function createEmptyTimings(): RunnerTimings {
   return {
     boot: null,
+    cacheRead: null,
+    cacheWrite: null,
     install: null,
     mount: null,
     preview: null,
