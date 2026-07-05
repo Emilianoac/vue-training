@@ -33,7 +33,9 @@ describe("createProjectFiles", () => {
       dev: "vite --host 0.0.0.0",
       test: expect.stringContaining("vitest run"),
     });
+    expect(readFile(tree, "index.html")).toContain('href="/src/preview-theme.css"');
     expect(readFile(tree, "index.html")).toContain('src="/src/main.ts"');
+    expect(readFile(tree, "src", "preview-theme.css")).toContain("--background:");
     expect(readFile(tree, "vite.config.ts")).toContain("vue()");
     expect(readFile(tree, "vitest.config.ts")).toContain('environment: "happy-dom"');
   });

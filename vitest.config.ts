@@ -21,6 +21,9 @@ export default defineConfig({
           name: "unit",
           include: ["_tests_/unit/**/*.{test,spec}.ts"],
           environment: "node",
+          css: {
+            include: [/preview-theme\.css/],
+          },
         },
       },
       await defineVitestProject({
