@@ -23,4 +23,12 @@ export type TestSummary = {
   total: number;
 };
 
+export type RunnerTimings = {
+  boot: number | null;
+  install: number | null;
+  mount: number | null;
+  preview: number | null;
+  total: number | null;
+};
+
 export type RunnerStatus = "booting" | "installing" | "ready" | "idle";

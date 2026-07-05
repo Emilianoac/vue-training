@@ -225,6 +225,14 @@
         "runTests": "$ npm run test",
         "testsPassed": "✓ Vitest passed.",
         "testsFailed": "✗ Vitest failed with code {code}.",
+        "timing": "  {stage}: {duration} ms",
+        "timings": {
+          "boot": "Boot",
+          "mount": "Mount",
+          "install": "Install",
+          "preview": "Vite startup",
+          "total": "Total"
+        },
         "unknownError": "Unknown error."
       },
       "results": {

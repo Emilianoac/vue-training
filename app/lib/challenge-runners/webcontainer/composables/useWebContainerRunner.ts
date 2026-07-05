@@ -1,7 +1,7 @@
 import type { WebContainer } from "@webcontainer/api";
 import { getWebContainerChallenge } from "../registry";
 import { createProjectFiles } from "../template";
-import type { RunnerStatus, TestCaseResult, TestSummary } from "../types";
+import type { RunnerStatus, RunnerTimings, TestCaseResult, TestSummary } from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
 
 export function useWebContainerRunner(challengeId = "ref-counter-state") {
@@ -21,6 +21,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const previewFrameKey = ref(0);
   const testSummary = ref<TestSummary>({ ...emptyTestSummary });
   const testCases = ref<TestCaseResult[]>([]);
+  const timings = reactive<RunnerTimings>(createEmptyTimings());
   const webcontainer = shallowRef<WebContainer | null>(null);
   let previewServerProcess: Awaited<ReturnType<WebContainer["spawn"]>> | null = null;
   let previewServerReadyPromise: Promise<string> | null = null;
@@ -55,6 +56,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   async function initializeContainer() {
     if (webcontainer.value || status.value === "booting" || status.value === "installing") return;
 
+    Object.assign(timings, createEmptyTimings());
+    const totalStartedAt = performance.now();
     terminalOutput.value = "";
     appendLine(t("challenge.runner.terminal.booting"));
 
@@ -68,7 +71,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
 
     try {
       const { WebContainer } = await import("@webcontainer/api");
+      const bootStartedAt = performance.now();
       const container = await WebContainer.boot();
+      recordTiming("boot", bootStartedAt);
       webcontainer.value = container;
       container.on("server-ready", (_port, url) => {
         previewUrl.value = url;
@@ -77,11 +82,14 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       });
       appendLine(t("challenge.runner.terminal.ready"));
 
+      const mountStartedAt = performance.now();
       await container.mount(createProjectFiles(challenge.files));
+      recordTiming("mount", mountStartedAt);
       appendLine(t("challenge.runner.terminal.mounted"));
 
       status.value = "installing";
       appendLine(t("challenge.runner.terminal.install"));
+      const installStartedAt = performance.now();
       const install = await container.spawn(
         "npm",
         ["install", "--no-progress", "--no-audit", "--no-fund"],
@@ -94,8 +102,10 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       );
       pipeProcessOutput(install);
       const installExitCode = await install.exit;
+      recordTiming("install", installStartedAt);
 
       if (installExitCode !== 0) {
+        recordTiming("total", totalStartedAt);
         appendLine(t("challenge.runner.terminal.installFailed", { code: installExitCode }));
         container.teardown();
         webcontainer.value = null;
@@ -104,8 +114,10 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       }
 
       appendLine(t("challenge.runner.terminal.installed"));
+      recordTiming("total", totalStartedAt);
       status.value = "ready";
     } catch (error) {
+      recordTiming("total", totalStartedAt);
       appendLine(`✗ ${getErrorMessage(error, t("challenge.runner.terminal.unknownError"))}`);
       webcontainer.value?.teardown();
       webcontainer.value = null;
@@ -205,6 +217,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   async function ensurePreviewServer(container: WebContainer) {
     if (previewUrl.value) return previewUrl.value;
 
+    const previewStartedAt = performance.now();
+
     if (!previewServerReadyPromise) {
       previewServerReadyPromise = new Promise<string>((resolve) => {
         resolvePreviewServerReady = resolve;
@@ -228,7 +242,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       });
     }
 
-    return previewServerReadyPromise;
+    const url = await previewServerReadyPromise;
+    recordTiming("preview", previewStartedAt);
+    return url;
   }
 
   function pipeProcessOutput(process: Awaited<ReturnType<WebContainer["spawn"]>>) {
@@ -266,6 +282,17 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     testCases.value = [];
   }
 
+  function recordTiming(stage: keyof RunnerTimings, startedAt: number) {
+    const duration = Math.round((performance.now() - startedAt) * 100) / 100;
+    timings[stage] = duration;
+    appendLine(
+      t("challenge.runner.terminal.timing", {
+        duration,
+        stage: t(`challenge.runner.terminal.timings.${stage}`),
+      }),
+    );
+  }
+
   return {
     activeFileIcon,
     activeFileLabel,
@@ -291,6 +318,17 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     terminalOutput,
     testCases,
     testSummary,
+    timings,
+  };
+}
+
+function createEmptyTimings(): RunnerTimings {
+  return {
+    boot: null,
+    install: null,
+    mount: null,
+    preview: null,
+    total: null,
   };
 }
 
