@@ -132,7 +132,12 @@ export default function useQuiz() {
 
   function setError(err: unknown) {
     error.value.status = true;
-    error.value.message = err instanceof Error ? err.message : "An unexpected error occurred";
+    error.value.message =
+      err instanceof Error
+        ? err.message
+        : typeof err === "string"
+          ? err
+          : "An unexpected error occurred";
   }
 
   return {
