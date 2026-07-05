@@ -30,6 +30,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const testCases = ref<TestCaseResult[]>([]);
   const timings = reactive<RunnerTimings>(createEmptyTimings());
   const webcontainer = shallowRef<WebContainer | null>(null);
+  let testWatcherProcess: Awaited<ReturnType<WebContainer["spawn"]>> | null = null;
   let previewServerProcess: Awaited<ReturnType<WebContainer["spawn"]>> | null = null;
   let previewServerReadyPromise: Promise<string> | null = null;
   let resolvePreviewServerReady: ((url: string) => void) | null = null;
@@ -140,26 +141,25 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     appendLine(t("challenge.runner.terminal.runTests"));
 
     try {
+      await container.fs.rm("/vitest-results.json", { force: true });
+
       if (editableFile) {
         await writeEditableFile(container);
       }
-      await container.fs.rm("/vitest-results.json", { force: true });
-      const test = await container.spawn("npm", ["run", "test"], {
-        env: {
-          CI: "true",
-        },
-      });
-      pipeProcessOutput(test);
-      const testExitCode = await test.exit;
-      const hasTestReport = await updateTestReport(container);
+
+      if (!testWatcherProcess) {
+        testWatcherProcess = await startTestWatcher(container);
+      }
+
+      const hasTestReport = await waitForTestReport(container);
 
       if (!hasTestReport) {
         appendLine(t("challenge.runner.terminal.testReportMissing"));
       } else {
         appendLine(
-          testExitCode === 0
+          testSummary.value.total > 0 && testSummary.value.failed === 0
             ? t("challenge.runner.terminal.testsPassed")
-            : t("challenge.runner.terminal.testsFailed", { code: testExitCode }),
+            : t("challenge.runner.terminal.testsFailed", { code: 1 }),
         );
       }
     } catch (error) {
@@ -254,6 +254,33 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     const url = await previewServerReadyPromise;
     recordTiming("preview", previewStartedAt);
     return url;
+  }
+
+  async function startTestWatcher(container: WebContainer) {
+    const process = await container.spawn(
+      "node",
+      [
+        "./node_modules/vitest/vitest.mjs",
+        "--watch",
+        "--pool=threads",
+        "--maxWorkers=1",
+        "--no-isolate",
+        "--reporter=verbose",
+        "--reporter=json",
+        "--outputFile=vitest-results.json",
+      ],
+      {
+        env: {
+          NO_COLOR: "1",
+        },
+      },
+    );
+
+    pipeProcessOutput(process);
+    void process.exit.then(() => {
+      if (testWatcherProcess === process) testWatcherProcess = null;
+    });
+    return process;
   }
 
   async function loadCachedSnapshot() {
@@ -380,6 +407,17 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       testCases.value = [];
       return false;
     }
+  }
+
+  async function waitForTestReport(container: WebContainer) {
+    const timeoutAt = performance.now() + 30_000;
+
+    while (performance.now() < timeoutAt) {
+      if (await updateTestReport(container)) return true;
+      await new Promise((resolve) => window.setTimeout(resolve, 50));
+    }
+
+    return false;
   }
 
   function resetTestState() {
