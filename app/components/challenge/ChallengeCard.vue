@@ -15,7 +15,7 @@ defineProps<{
     <Button
       as-child
       variant="link"
-      class="h-auto w-full block p-0 whitespace-break-spaces rounded-xl text-foreground decoration-0"
+      class="h-auto w-full block p-0 whitespace-break-spaces rounded-xl text-foreground hover:no-underline"
     >
       <NuxtLink class="block" :to="`/challenges/${challenge.slug}`" external>
         <CardContent class="px-0">
