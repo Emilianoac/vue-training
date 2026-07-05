@@ -7,7 +7,7 @@ import previewTheme from "./project-template/preview-theme.css?raw";
 import viteConfig from "./project-template/vite.config.ts?raw";
 import vitestConfig from "./project-template/vitest.config.ts?raw";
 
-export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-05";
+export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-07";
 
 export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
   const projectFiles = createFileTree(challengeFiles);
