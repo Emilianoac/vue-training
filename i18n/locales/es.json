@@ -226,6 +226,7 @@
         "mounted": "✓ Proyecto virtual montado.",
         "cacheMiss": "  No se encontro un entorno en cache.",
         "cacheHit": "✓ Entorno restaurado desde cache.",
+        "staticSnapshot": "✓ Entorno preconstruido descargado.",
         "cacheInvalid": "  El entorno en cache no era valido. Se volvera a crear.",
         "cacheUnavailable": "  La cache del navegador no esta disponible. Se continuara sin ella.",
         "cacheSaved": "✓ Entorno guardado para futuros challenges.",

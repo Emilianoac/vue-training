@@ -9,8 +9,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import HeaderComponent from "@/components/layout/HeaderComponent.vue";
+import { prepareSnapshot } from "@/lib/challenge-runners/webcontainer/services/snapshotCache";
+import {
+  WEB_CONTAINER_SNAPSHOT_PATH,
+  WEB_CONTAINER_TEMPLATE_VERSION,
+} from "@/lib/challenge-runners/webcontainer/template";
 
 const route = useRoute();
+
+onMounted(() => {
+  void prepareSnapshot(WEB_CONTAINER_TEMPLATE_VERSION, WEB_CONTAINER_SNAPSHOT_PATH).catch(() => {
+    // The challenge runner will install dependencies if preloading is unavailable.
+  });
+});
 
 const menuItems = [
   { title: "menu-label.home", icon: HomeIcon, url: "/learn" },

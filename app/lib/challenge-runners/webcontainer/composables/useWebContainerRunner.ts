@@ -3,11 +3,12 @@ import { getWebContainerChallenge } from "../registry";
 import {
   createChallengeProjectFiles,
   createProjectFiles,
+  WEB_CONTAINER_SNAPSHOT_PATH,
   WEB_CONTAINER_TEMPLATE_VERSION,
 } from "../template";
 import type { RunnerStatus, RunnerTimings, TestCaseResult, TestSummary } from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
-import { getSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
+import { prepareSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
 
 export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const { locale, t } = useI18n();
@@ -257,12 +258,21 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
 
   async function loadCachedSnapshot() {
     const cacheStartedAt = performance.now();
+    isColdStart.value = true;
 
     try {
-      const snapshot = await getSnapshot(WEB_CONTAINER_TEMPLATE_VERSION);
-      isColdStart.value = !snapshot;
+      const preparedSnapshot = await prepareSnapshot(
+        WEB_CONTAINER_TEMPLATE_VERSION,
+        WEB_CONTAINER_SNAPSHOT_PATH,
+      );
+      isColdStart.value = preparedSnapshot?.source !== "indexeddb";
       recordTiming("cacheRead", cacheStartedAt);
-      return snapshot;
+
+      if (preparedSnapshot?.source === "static") {
+        appendLine(t("challenge.runner.terminal.staticSnapshot"));
+      }
+
+      return preparedSnapshot?.snapshot ?? null;
     } catch {
       isColdStart.value = true;
       recordTiming("cacheRead", cacheStartedAt);

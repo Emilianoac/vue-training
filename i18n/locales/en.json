@@ -226,6 +226,7 @@
         "mounted": "✓ Virtual project mounted.",
         "cacheMiss": "  No cached environment found.",
         "cacheHit": "✓ Cached environment restored.",
+        "staticSnapshot": "✓ Prebuilt environment downloaded.",
         "cacheInvalid": "  Cached environment was invalid. Rebuilding it.",
         "cacheUnavailable": "  Browser cache is unavailable. Continuing without it.",
         "cacheSaved": "✓ Environment cached for future challenges.",

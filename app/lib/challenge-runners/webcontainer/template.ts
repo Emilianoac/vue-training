@@ -8,6 +8,8 @@ import viteConfig from "./project-template/vite.config.ts?raw";
 import vitestConfig from "./project-template/vitest.config.ts?raw";
 
 export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-07-1";
+export const WEB_CONTAINER_SNAPSHOT_PATH =
+  `/webcontainer/${WEB_CONTAINER_TEMPLATE_VERSION}.snapshot`;
 
 export function createBaseProjectFiles(): FileSystemTree {
   return {

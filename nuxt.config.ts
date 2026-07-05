@@ -32,6 +32,12 @@ export default defineNuxtConfig({
       prerender: true,
     },
 
+    "/webcontainer/**": {
+      headers: {
+        "cache-control": "public, max-age=31536000, immutable",
+      },
+    },
+
     "/challenges/**": {
       ssr: false,
       headers: webContainerHeaders,

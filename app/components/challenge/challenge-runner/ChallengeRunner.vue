@@ -2,6 +2,8 @@
 import { CheckIcon, Loader2Icon, PlayIcon, RefreshCwIcon } from "lucide-vue-next";
 import { useMediaQuery } from "@vueuse/core";
 import { useWebContainerRunner } from "@/lib/challenge-runners/webcontainer/composables/useWebContainerRunner";
+import { hasPreparedSnapshotHint } from "@/lib/challenge-runners/webcontainer/services/snapshotCache";
+import { WEB_CONTAINER_TEMPLATE_VERSION } from "@/lib/challenge-runners/webcontainer/template";
 import CodeMirrorEditor from "./CodeMirrorEditor.client.vue";
 import ChallengeSetupOverlay from "./ChallengeSetupOverlay.vue";
 import ChallengeTerminal from "./ChallengeTerminal.client.vue";
@@ -31,7 +33,6 @@ const {
   canRunTests,
   canSaveCode,
   code,
-  isColdStart,
   isReady,
   isFirstSetupLoading,
   isPreviewStarting,
@@ -57,7 +58,7 @@ const emit = defineEmits<{
 const activeEditorTab = ref("editor");
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
-const showSetupOverlay = ref(false);
+const showSetupOverlay = ref(!hasPreparedSnapshotHint(WEB_CONTAINER_TEMPLATE_VERSION));
 const runnerRoot = ref<HTMLElement | null>(null);
 let setupOverlayTimer: number | undefined;
 
@@ -75,17 +76,13 @@ watch(activeEditorTab, (tab) => {
 watch(isFirstSetupLoading, (isLoading) => {
   if (isLoading) {
     if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
-    showSetupOverlay.value = true;
-    return;
-  }
-
-  if (isColdStart.value && isReady.value && showSetupOverlay.value) {
     setupOverlayTimer = window.setTimeout(() => {
-      showSetupOverlay.value = false;
-    }, 800);
+      if (isFirstSetupLoading.value) showSetupOverlay.value = true;
+    }, 500);
     return;
   }
 
+  if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
   showSetupOverlay.value = false;
 });
 
