@@ -28,6 +28,7 @@ export default defineConfig({
           name: "integration",
           include: ["_tests_/integration/**/*.{test,spec}.ts"],
           environment: "nuxt",
+          setupFiles: ["./_tests_/integration/setup.ts"],
         },
       }),
     ],
