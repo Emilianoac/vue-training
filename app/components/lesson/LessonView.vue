@@ -76,9 +76,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 </script>
 
 <template>
-  <article class="flex h-full min-h-0 flex-col">
-    <div class="grid grid-cols-1 xl:grid-cols-[350px_1fr] gap-6 overflow-hidden p-4">
-      <aside class="hidden xl:block">
+  <div class="flex h-full min-h-0 flex-col">
+    <div class="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-10 overflow-hidden p-4">
+      <aside class="hidden lg:block">
         <div class="sticky flex flex-col justify-between top-0 rounded-md border bg-card p-6">
           <nav class="space-y-1">
             <ul>
@@ -97,8 +97,8 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         </div>
       </aside>
 
-      <main class="lesson-container overflow-hidden">
-        <div class="bg-card rounded-md border p-6 h-full">
+      <main class="lesson-container overflow-hidden rounded-md border p-6">
+        <div class="h-full">
           <ScrollArea class="h-full pr-4">
             <ContentRenderer
               v-for="(blocks, index) in sectionBlocks"
@@ -112,7 +112,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         <slot name="actions" :total-sections="totalSections" />
       </main>
     </div>
-  </article>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -149,7 +149,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
     list-style: disc;
     padding-left: 1.5rem;
     margin-bottom: 1rem;
-    background: var(--background);
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 0.375rem;
     padding: 1rem;

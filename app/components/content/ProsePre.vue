@@ -14,8 +14,8 @@ const { copy, copied } = useClipboard({
 
 <template>
   <div class="border rounded-md overflow-hidden mb-5 last:mb-0">
-    <div class="bg-background flex items-center justify-between px-4 py-1 border-b">
-      <span class="text-sm">{{ filename || language }}</span>
+    <div class="bg-card flex items-center justify-between px-4 py-1 border-b">
+      <span class="text-sm text-muted-foreground">{{ filename || language }}</span>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
@@ -30,7 +30,7 @@ const { copy, copied } = useClipboard({
       </TooltipProvider>
     </div>
     <ScrollArea>
-      <pre class="bg-black/5 p-4 overflow-x-auto" :class="$props.class"><slot /></pre>
+      <pre class="bg-card/50 p-4 overflow-x-auto" :class="$props.class"><slot /></pre>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   </div>
