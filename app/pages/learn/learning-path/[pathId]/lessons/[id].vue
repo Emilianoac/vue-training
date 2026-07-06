@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { CheckIcon } from "lucide-vue-next";
 import useLessonData from "@/composables/lesson/useLessonData";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 
@@ -30,12 +31,8 @@ function handleComplete() {
 </script>
 
 <template>
-  <ActivityShell
-    v-if="lesson"
-    :title="lesson.title as string"
-    back-to="/learn/learning-paths"
-  >
-    <LessonView :lesson="lesson as unknown as Record<string, unknown>">
+  <ActivityShell v-if="lesson" :title="lesson.title" back-to="/learn/learning-paths">
+    <LessonView :lesson="lesson">
       <template #actions>
         <Button
           class="mt-4 w-full xl:hidden"
@@ -54,6 +51,7 @@ function handleComplete() {
           :variant="done ? 'outline' : 'default'"
           @click="handleComplete"
         >
+          <CheckIcon v-if="done" />
           {{ done ? t("lesson.completed") : t("lesson.markAsCompleted") }}
         </Button>
       </template>

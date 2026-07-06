@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import type { LessonDocument } from "@/composables/lesson/useLessonData";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const props = defineProps<{
-  lesson: Record<string, unknown>;
+  lesson: LessonDocument;
 }>();
 
 const { t } = useI18n();
