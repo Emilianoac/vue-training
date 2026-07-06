@@ -44,7 +44,11 @@ function getIcon(type: ItemType) {
           <div class="flex items-center justify-center size-10 rounded-full bg-background">
             <component :is="getIcon(item.type)" class="size-4" />
           </div>
-          <ActivityLevelBadge v-if="item.type !== 'lesson'" :text="item.level" :type="item.level" />
+          <ActivityLevelBadge
+            v-if="item.type !== 'lesson'"
+            :text="$t(`general.levels.${item.level}`)"
+            :type="item.level"
+          />
         </div>
 
         <div class="flex items-center justify-between gap-2">
