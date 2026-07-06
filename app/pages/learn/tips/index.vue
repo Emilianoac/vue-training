@@ -52,11 +52,14 @@ watch(
       </div>
 
       <transition name="fade" mode="out-in">
-        <Card class="w-full @4xl:h-full min-h-10 pt-2" :key="currentRandomTip.documentId">
-          <CardHeader class="border-b pb-3!">
-            <CardTitle class="text-lg font-semibold">
+        <article
+          class="flex flex-col w-full @4xl:h-full min-h-10 pt-2 bg-transparent gap-0"
+          :key="currentRandomTip.documentId"
+        >
+          <header class="border-b pb-3!">
+            <h3 class="text-lg font-semibold">
               {{ currentRandomTip.title }}
-            </CardTitle>
+            </h3>
             <Button
               variant="link"
               as-child
@@ -66,13 +69,13 @@ watch(
                 {{ currentRandomTip.source_url }}
               </a>
             </Button>
-          </CardHeader>
-          <CardContent class="mt-5 overflow-hidden">
+          </header>
+          <main class="mt-5 overflow-hidden">
             <ScrollArea class="h-full @4xl:pr-4">
               <TipDetails :tip="currentRandomTip" />
             </ScrollArea>
-          </CardContent>
-        </Card>
+          </main>
+        </article>
       </transition>
       <div class="min-h-0 w-full @4xl:h-full">
         <TipList

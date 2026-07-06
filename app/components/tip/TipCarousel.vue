@@ -57,8 +57,8 @@ watch(
                   <DialogTrigger :as-child="true">
                     <Button size="sm" variant="outline"> Read more </Button>
                   </DialogTrigger>
-                  <DialogContent class="sm:max-w-3xl w-full">
-                    <DialogHeader>
+                  <DialogContent class="sm:max-w-3xl w-full gap-3">
+                    <DialogHeader class="border-b pb-5">
                       <DialogTitle class="font-bold">{{ tip.title }}</DialogTitle>
                       <Button
                         variant="link"
@@ -75,8 +75,8 @@ watch(
                         </a>
                       </Button>
                     </DialogHeader>
-                    <ScrollArea class="overflow-x-hidden h-[60vh]">
-                      <TipDetails :tip="tip" class="p-6 bg-card h-full" />
+                    <ScrollArea class="overflow-x-hidden h-[60vh] pr-6">
+                      <TipDetails :tip="tip" class="h-full" />
                     </ScrollArea>
                   </DialogContent>
                 </Dialog>
