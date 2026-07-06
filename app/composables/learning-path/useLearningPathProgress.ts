@@ -28,6 +28,18 @@ function writeStorage(data: CompletedSet) {
 
 export function useLearningPathProgress() {
   const completed = useState<CompletedSet>("lp-progress", () => readStorage());
+  const isHydrated = useState("lp-progress-hydrated", () => false);
+
+  function hydrateProgress() {
+    if (isHydrated.value) return;
+    completed.value = readStorage();
+    isHydrated.value = true;
+  }
+
+  if (import.meta.client) {
+    if (getCurrentInstance()) onMounted(hydrateProgress);
+    else hydrateProgress();
+  }
 
   function isCompleted(pathId: string, type: ItemType, id: string) {
     return computed(() => !!completed.value[storageKey(pathId, type, id)]);

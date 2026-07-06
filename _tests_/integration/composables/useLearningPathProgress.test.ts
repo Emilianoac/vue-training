@@ -1,5 +1,7 @@
+import { mount } from "@vue/test-utils";
+import { defineComponent, nextTick } from "vue";
 import { beforeEach, describe, expect, it } from "vitest";
-import { clearNuxtState } from "#imports";
+import { clearNuxtState, useState } from "#imports";
 import type { LearningPath } from "@/schemas/learningPath.schema";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 
@@ -38,6 +40,7 @@ const learningPath: LearningPath = {
 describe("useLearningPathProgress", () => {
   beforeEach(() => {
     clearNuxtState("lp-progress");
+    clearNuxtState("lp-progress-hydrated");
     localStorage.clear();
   });
 
@@ -50,6 +53,31 @@ describe("useLearningPathProgress", () => {
     expect(JSON.parse(localStorage.getItem("learning-path-progress") ?? "{}")).toEqual({
       "vue-path:lesson:reactive-state": true,
     });
+  });
+
+  it("hydrates persisted progress after SSR initializes empty state", async () => {
+    useState("lp-progress", () => ({}));
+    localStorage.setItem(
+      "learning-path-progress",
+      JSON.stringify({ "vue-path:lesson:reactive-state": true }),
+    );
+
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          const { isCompleted } = useLearningPathProgress();
+          return {
+            completed: isCompleted("vue-path", "lesson", "reactive-state"),
+          };
+        },
+        template: "<div />",
+      }),
+    );
+
+    await nextTick();
+
+    expect(wrapper.vm.completed).toBe(true);
+    wrapper.unmount();
   });
 
   it("marks a completed activity as incomplete", () => {
