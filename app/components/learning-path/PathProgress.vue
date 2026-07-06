@@ -14,10 +14,13 @@ defineProps<{
         <CardTitle> Progreso general </CardTitle>
       </CardHeader>
       <CardContent>
-        <div class="space-y-1">
-          <span class="text-sm text-muted-foreground block">
-            {{ completedCount }} / {{ totalCount }} completados
-          </span>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-muted-foreground block">
+              {{ completedCount }} / {{ totalCount }} completados
+            </span>
+            <p class="text-right text-xs text-muted-foreground">{{ progressPercent }}%</p>
+          </div>
 
           <div class="h-3 w-full rounded-full bg-muted overflow-hidden">
             <div
@@ -25,7 +28,6 @@ defineProps<{
               :style="{ width: progressPercent + '%' }"
             />
           </div>
-          <p class="text-right text-xs text-muted-foreground">{{ progressPercent }}%</p>
         </div>
       </CardContent>
     </Card>
