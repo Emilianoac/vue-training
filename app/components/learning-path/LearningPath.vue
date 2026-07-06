@@ -35,9 +35,9 @@ watch(locale, async () => {
 
 <template>
   <div v-if="learningPath" class="space-y-4">
-    <h1 class="text-2xl font-bold">{{ learningPath.title }}</h1>
-    <div class="grid grid-cols-1 xl:grid-cols-[1fr_400px] gap-6">
+    <div class="grid grid-cols-1 xl:grid-cols-[1fr_450px] gap-6">
       <div class="order-1 xl:order-0">
+        <h1 class="text-center md:text-start text-xl font-bold mb-8">{{ learningPath.title }}</h1>
         <div v-for="step in learningPath.steps" class="space-y-4">
           <!-- Step Title -->
           <div class="flex items-center justify-center gap-6">
@@ -50,12 +50,12 @@ watch(locale, async () => {
           <div class="mx-auto my-10 space-y-6">
             <div v-for="(subStep, index) in step.sub_steps" :key="subStep.name">
               <h3 class="whitespace-nowrap mb-2 text-center">{{ subStep.name }}</h3>
-              <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <PathItem
                   v-for="item in subStep.items"
                   :key="item.id"
                   :item="item"
-                  class="lg:first-of-type:col-span-3"
+                  class="lg:first-of-type:col-span-2"
                   :is-completed="isCompleted(pathId, item.type, item.id).value"
                   :path="getActivityPath(item.type, item.id)"
                 />
