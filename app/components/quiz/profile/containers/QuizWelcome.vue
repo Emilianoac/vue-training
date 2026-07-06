@@ -24,12 +24,8 @@ defineProps<{
       class="flex flex-col-reverse md:grid grid-cols-[1fr_0.6fr] bg-card border rounded-lg w-full"
     >
       <div class="p-4 md:p-10">
-        <ActivityLevelBadge
-          :type="level"
-          :text="$t(`general.levels.${level}`)"
-          class="mb-3"
-        />
-        <span class="inline-block opacity-75 text-sm">{{ category }}</span>
+        <ActivityLevelBadge :type="level" :text="$t(`general.levels.${level}`)" class="mb-3" />
+        <span class="block opacity-75 text-sm">{{ category }}</span>
         <!-- Quiz Title -->
         <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">{{ title }}</h1>
         <!-- Quiz Description -->
