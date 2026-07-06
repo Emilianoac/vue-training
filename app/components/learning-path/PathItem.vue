@@ -37,13 +37,14 @@ function getIcon(type: ItemType) {
     <NuxtLink
       :to="path"
       :external="item.type === 'challenge'"
-      class="group rounded-md h-full flex flex-col py-4 gap-5 transition-colors duration-200 hover:opacity-90"
+      class="group rounded-md h-full flex flex-col py-4 gap-6 transition-colors duration-200 hover:opacity-90"
     >
       <CardHeader class="mb-0">
         <div class="flex items-center justify-between gap-2 text-sm font-medium">
           <div class="flex items-center justify-center size-10 rounded-full bg-background">
             <component :is="getIcon(item.type)" class="size-4" />
           </div>
+          <ActivityLevelBadge v-if="item.type !== 'lesson'" :text="item.level" :type="item.level" />
         </div>
 
         <div class="flex items-center justify-between gap-2">
@@ -52,10 +53,9 @@ function getIcon(type: ItemType) {
         <CardDescription class="line-clamp-3">{{ item.subtitle }}</CardDescription>
       </CardHeader>
       <CardFooter class="pt-0 flex flex-col items-start gap-3">
-        <ActivityLevelBadge v-if="item.type !== 'lesson'" :text="item.level" :type="item.level" />
-
         <div class="flex gap-2 transition-all duration-300 ease-out group-hover:translate-x-1">
-          <ArrowRightIcon />
+          <span class="text-sm">{{ $t("general.start") }}</span>
+          <ArrowRightIcon class="text-primary" />
         </div>
       </CardFooter>
     </NuxtLink>
