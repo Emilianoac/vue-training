@@ -1,22 +1,11 @@
 <script lang="ts" setup>
-import {
-  LightbulbIcon,
-  RouteIcon,
-  FileQuestion,
-  SquareTerminalIcon,
-  DicesIcon,
-} from "lucide-vue-next";
+import { LightbulbIcon, RouteIcon, FileQuestion, SquareTerminalIcon } from "lucide-vue-next";
 import useQuizData from "@/composables/quiz/useQuizData";
 import useChallengeData from "@/composables/challenge/useChallengeData";
 
 import TipCarousel from "@/components/tip/TipCarousel.vue";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselDots,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselDots, CarouselItem } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 definePageMeta({
@@ -107,9 +96,11 @@ watch(
       <section class="space-y-2">
         <div class="flex items-center justify-between">
           <h2 class="font-semibold">{{ $t("general.quiz.many") }}</h2>
-          <Button variant="link" class="text-foreground">
-            {{ $t("general.goTo") }} {{ $t("general.quiz.many") }}
-            <Icon name="mdi:arrow-right" size="24"></Icon>
+          <Button variant="link" class="text-foreground" as-child>
+            <NuxtLink to="/learn/quizzes">
+              {{ $t("general.goTo") }} {{ $t("general.quiz.many") }}
+              <Icon name="mdi:arrow-right" size="24"></Icon>
+            </NuxtLink>
           </Button>
         </div>
         <Carousel>
@@ -129,9 +120,11 @@ watch(
       <section class="space-y-2">
         <div class="flex items-center justify-between">
           <h2 class="font-semibold">{{ $t("general.challenge.many") }}</h2>
-          <Button variant="link" class="text-foreground">
-            {{ $t("general.goTo") }} {{ $t("general.challenge.many") }}
-            <Icon name="mdi:arrow-right" size="24"></Icon>
+          <Button variant="link" class="text-foreground" as-child>
+            <NuxtLink to="/learn/challenges">
+              {{ $t("general.goTo") }} {{ $t("general.challenge.many") }}
+              <Icon name="mdi:arrow-right" size="24"></Icon>
+            </NuxtLink>
           </Button>
         </div>
         <Carousel>

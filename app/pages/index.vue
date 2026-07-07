@@ -8,12 +8,7 @@ import IconHome from "@/components/assets/icons/IconHome.vue";
 import IconQuiz from "@/components/assets/icons/IconQuiz.vue";
 import IconTerminal from "@/components/assets/icons/IconTerminal.vue";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselDots,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselDots, CarouselItem } from "@/components/ui/carousel";
 
 definePageMeta({
   menu: true,
@@ -129,9 +124,11 @@ watch(
     <section class="mt-20">
       <div class="flex items-center justify-between">
         <h2 class="text-xl md:text-2xl font-bold">{{ $t("general.quiz.many") }}</h2>
-        <Button variant="link" class="text-foreground">
-          {{ $t("general.goTo") }} {{ $t("general.quiz.many") }}
-          <Icon name="mdi:arrow-right" size="24"></Icon>
+        <Button variant="link" class="text-foreground" as-child>
+          <NuxtLink to="/learn/quizzes">
+            {{ $t("general.goTo") }} {{ $t("general.quiz.many") }}
+            <Icon name="mdi:arrow-right" size="24"></Icon>
+          </NuxtLink>
         </Button>
       </div>
       <Carousel class="py-4">
@@ -152,9 +149,11 @@ watch(
     <section class="mt-20">
       <div class="flex items-center justify-between">
         <h2 class="text-xl md:text-2xl font-bold">{{ $t("general.challenge.many") }}</h2>
-        <Button variant="link" class="text-foreground">
-          {{ $t("general.goTo") }} {{ $t("general.challenge.many") }}
-          <Icon name="mdi:arrow-right" size="24"></Icon>
+        <Button variant="link" class="text-foreground" as-child>
+          <NuxtLink to="/learn/challenges">
+            {{ $t("general.goTo") }} {{ $t("general.challenge.many") }}
+            <Icon name="mdi:arrow-right" size="24"></Icon>
+          </NuxtLink>
         </Button>
       </div>
       <Carousel class="py-4">
