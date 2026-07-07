@@ -109,6 +109,12 @@
     "markAsCompleted": "Marcar como completado",
     "sections": "Secciones"
   },
+  "learningPath": {
+    "status": {
+      "planned": "Pronto"
+    },
+    "plannedDescription": "Esta sección está planificada y se añadirá más adelante."
+  },
   "activity": {
     "leave": "Abandonar actividad"
   },

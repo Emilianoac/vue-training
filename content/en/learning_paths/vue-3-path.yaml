@@ -65,3 +65,86 @@ steps:
             level: basic
             title: Challenge 1
             subtitle: Complete a component that reacts to question changes using watch.
+
+      - name: Reactivity and Lifecycle
+        id: reactivity-lifecycle
+        status: planned
+        items: []
+
+  - name: Components
+    sub_steps:
+      - name: Component Communication
+        id: component-communication
+        status: planned
+        items: []
+
+      - name: Slots and Layouts
+        id: slots-layouts
+        status: planned
+        items: []
+
+      - name: Provide / Inject
+        id: provide-inject
+        status: planned
+        items: []
+
+      - name: Render Control
+        id: render-control
+        status: planned
+        items: []
+
+      - name: Component Design
+        id: component-design
+        status: planned
+        items: []
+
+  - name: Composables
+    sub_steps:
+      - name: Basic Composables
+        id: basic-composables
+        status: planned
+        items: []
+
+      - name: Shared State
+        id: shared-state
+        status: planned
+        items: []
+
+      - name: Effects and Lifecycle
+        id: composable-effects
+        status: planned
+        items: []
+
+      - name: Logic Abstraction
+        id: logic-abstraction
+        status: planned
+        items: []
+
+      - name: Advanced Patterns
+        id: advanced-patterns
+        status: planned
+        items: []
+
+  - name: Ecosystem
+    sub_steps:
+      - name: Routing
+        id: routing
+        status: planned
+        items: []
+
+      - name: Global State
+        id: global-state
+        status: planned
+        items: []
+
+  - name: Quality
+    sub_steps:
+      - name: Testing
+        id: testing
+        status: planned
+        items: []
+
+      - name: TypeScript and Typing
+        id: typescript-typing
+        status: planned
+        items: []

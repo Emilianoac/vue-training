@@ -4,6 +4,8 @@ import useLearningPathData from "@/composables/learning-path/useLearningPathData
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import PathItem from "./PathItem.vue";
 import PathProgress from "./PathProgress.vue";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const props = defineProps<{
   pathId: string;
@@ -28,6 +30,14 @@ function getActivityPath(type: ItemType, id: string) {
   return `/learn/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
 }
 
+function isPlannedSubStep(subStep: { status?: string; items?: unknown[] }) {
+  return subStep.status === "planned" || !subStep.items?.length;
+}
+
+function isPlannedStep(step: { sub_steps: Array<{ status?: string; items?: unknown[] }> }) {
+  return step.sub_steps.every(isPlannedSubStep);
+}
+
 watch(locale, async () => {
   await getLearningPath(props.pathId);
 });
@@ -42,15 +52,36 @@ watch(locale, async () => {
           <!-- Step Title -->
           <div class="flex items-center justify-center gap-6">
             <hr class="border w-full" />
-            <h2 class="text-xl font-semibold text-center whitespace-nowrap">{{ step.name }}</h2>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-semibold text-center whitespace-nowrap">{{ step.name }}</h2>
+              <Badge v-if="isPlannedStep(step)" variant="secondary">
+                {{ $t("learningPath.status.planned") }}
+              </Badge>
+            </div>
             <hr class="w-full" />
           </div>
 
           <!--Step -->
           <div class="mx-auto my-10 space-y-6">
             <div v-for="(subStep, index) in step.sub_steps" :key="subStep.name">
-              <h3 class="whitespace-nowrap mb-2 text-center">{{ subStep.name }}</h3>
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div
+                class="mb-2 flex items-center justify-center gap-2"
+                :class="{ 'opacity-60': isPlannedSubStep(subStep) }"
+              >
+                <h3 class="whitespace-nowrap text-center">{{ subStep.name }}</h3>
+              </div>
+              <Card
+                v-if="isPlannedSubStep(subStep)"
+                class="border-dashed bg-muted/30 text-muted-foreground opacity-60"
+              >
+                <CardHeader>
+                  <CardTitle class="text-base">{{ subStep.name }}</CardTitle>
+                  <CardDescription>
+                    {{ $t("learningPath.plannedDescription") }}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+              <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <PathItem
                   v-for="item in subStep.items"
                   :key="item.id"

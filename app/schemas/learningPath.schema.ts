@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const itemLevel = z.enum(["basic", "intermediate", "advanced"]);
 export const itemType = z.enum(["lesson", "challenge", "tip", "quiz"]);
+export const subStepStatus = z.enum(["available", "planned"]);
 
 export const itemSchema = z.object({
   type: itemType,
@@ -14,6 +15,7 @@ export const itemSchema = z.object({
 export const subStepSchema = z.object({
   name: z.string(),
   id: z.string(),
+  status: subStepStatus.optional(),
   items: z.array(itemSchema),
 });
 

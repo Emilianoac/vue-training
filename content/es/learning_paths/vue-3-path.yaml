@@ -65,3 +65,86 @@ steps:
             level: basic
             title: Desafío 1
             subtitle: Completa un componente que reacciona a cambios de una pregunta usando watch.
+
+      - name: Reactividad y Ciclo de Vida
+        id: reactivity-lifecycle
+        status: planned
+        items: []
+
+  - name: Componentes
+    sub_steps:
+      - name: Comunicación entre Componentes
+        id: component-communication
+        status: planned
+        items: []
+
+      - name: Slots y Layouts
+        id: slots-layouts
+        status: planned
+        items: []
+
+      - name: Provide / Inject
+        id: provide-inject
+        status: planned
+        items: []
+
+      - name: Control de Render
+        id: render-control
+        status: planned
+        items: []
+
+      - name: Diseño de Componentes
+        id: component-design
+        status: planned
+        items: []
+
+  - name: Composables
+    sub_steps:
+      - name: Composables Básicos
+        id: basic-composables
+        status: planned
+        items: []
+
+      - name: Estado Compartido
+        id: shared-state
+        status: planned
+        items: []
+
+      - name: Efectos y Lifecycle
+        id: composable-effects
+        status: planned
+        items: []
+
+      - name: Abstracción de Lógica
+        id: logic-abstraction
+        status: planned
+        items: []
+
+      - name: Patrones Avanzados
+        id: advanced-patterns
+        status: planned
+        items: []
+
+  - name: Ecosistema
+    sub_steps:
+      - name: Routing
+        id: routing
+        status: planned
+        items: []
+
+      - name: Estado Global
+        id: global-state
+        status: planned
+        items: []
+
+  - name: Calidad
+    sub_steps:
+      - name: Testing
+        id: testing
+        status: planned
+        items: []
+
+      - name: TypeScript y Tipado
+        id: typescript-typing
+        status: planned
+        items: []
