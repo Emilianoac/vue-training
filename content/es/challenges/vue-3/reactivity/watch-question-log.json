@@ -1,0 +1,45 @@
+{
+  "documentId": "watch-question-log",
+  "title": "Registrar cambios con watch",
+  "slug": "watch-question-log",
+  "level": "basic",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica el uso de watch para reaccionar a cambios de un input y registrar eventos.",
+  "description": [
+    "En este desafío, completarás un componente inspirado en el ejemplo de watchers de la documentación de Vue.",
+    "El objetivo es observar question con watch, actualizar answer y guardar un pequeño registro cada vez que el usuario escriba una pregunta."
+  ],
+  "instructions": [
+    "Importa watch desde vue.",
+    "Observa el ref question usando watch.",
+    "Actualiza answer según si el texto está vacío, termina con ? o todavía no parece una pregunta.",
+    "Agrega una entrada a changeLog por cada cambio no vacío."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/reactivity/watch-question-log.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Importa watch",
+      "body": "El import puede incluir ref y watch: import { ref, watch } from \"vue\"."
+    },
+    {
+      "title": "Observa question directamente",
+      "body": "Como question es un ref, puedes pasarlo como primera fuente: watch(question, callback)."
+    },
+    {
+      "title": "Registra un efecto",
+      "body": "changeLog no es un valor derivado para mostrar solamente: es un registro que se modifica como efecto de cada cambio."
+    }
+  ]
+}

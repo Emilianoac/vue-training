@@ -1,0 +1,232 @@
+documentId: watchers-quiz
+title: Watchers in Vue 3
+level: basic
+slug: watchers-quiz
+description: Quiz about the fundamentals of watch, reactive sources, callbacks, and good practices.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+questions:
+  - text: What problem does a watcher solve in a Vue component?
+    explanation: A watcher lets you react when a reactive source changes and run an action as a result. It is useful for side effects, not for calculating values that are displayed directly.
+    explanation_code:
+      - code: |-
+          const search = ref("");
+
+          watch(search, (newSearch) => {
+            console.log("Search:", newSearch);
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Automatically creating reactive variables.
+      - id: "2"
+        isCorrect: true
+        text: Running an action when a reactive value changes.
+      - id: "3"
+        isCorrect: false
+        text: Replacing the use of templates.
+      - id: "4"
+        isCorrect: false
+        text: Preventing the component from re-rendering.
+
+  - text: Which case is a good example of a side effect for watch?
+    explanation: A side effect is an action that happens as a consequence of a change, such as saving data, calling an API, writing to localStorage, or sending analytics.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Calculating a full name from first and last name.
+      - id: "2"
+        isCorrect: false
+        text: Filtering a list to display it in the template.
+      - id: "3"
+        isCorrect: true
+        text: Saving a preference to localStorage when it changes.
+      - id: "4"
+        isCorrect: false
+        text: Converting a price to text for display.
+
+  - text: When does watch run for the first time with its default configuration?
+    explanation: By default, watch is lazy. It does not run the callback when it is created; it waits until the watched source changes.
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+
+          watch(count, () => {
+            console.log("count changed");
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: When the watched source changes for the first time.
+      - id: "2"
+        isCorrect: false
+        text: Immediately when the watcher is created.
+      - id: "3"
+        isCorrect: false
+        text: On every component render.
+      - id: "4"
+        isCorrect: false
+        text: Only when the component is unmounted.
+
+  - text: How do you correctly watch a ref with watch?
+    explanation: To watch a ref, pass the ref itself as the first source of watch. Vue takes care of reading its reactive value.
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+
+          watch(count, (newCount) => {
+            console.log(newCount);
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: By passing the ref directly as the first argument.
+      - id: "2"
+        isCorrect: false
+        text: By always passing count.value as the first argument.
+      - id: "3"
+        isCorrect: false
+        text: By passing the ref name as a string.
+      - id: "4"
+        isCorrect: false
+        text: By using watch only inside the template.
+
+  - text: What do newValue and oldValue represent inside the watch callback?
+    explanation: The watch callback receives the new value and the previous value of the watched source. This lets you compare what changed.
+    explanation_code:
+      - code: |-
+          watch(count, (newValue, oldValue) => {
+            console.log(oldValue, "->", newValue);
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The parent component and the child component.
+      - id: "2"
+        isCorrect: true
+        text: The current value and the previous value of the watched source.
+      - id: "3"
+        isCorrect: false
+        text: The template value before and after rendering.
+      - id: "4"
+        isCorrect: false
+        text: Two independent copies of the same ref.
+
+  - text: When should you use .value when working with a watched ref?
+    explanation: In script, you use .value to read or update a ref. In the template, Vue unwraps it automatically.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Always in the template and never in script.
+      - id: "2"
+        isCorrect: false
+        text: Never, because Vue always unwraps it.
+      - id: "3"
+        isCorrect: true
+        text: In script, when reading or updating the ref value.
+      - id: "4"
+        isCorrect: false
+        text: Only inside computed properties.
+
+  - text: How do you watch a specific property of a reactive object without watching the whole object?
+    explanation: To watch a specific property of a reactive object, use a getter function that returns that property.
+    explanation_code:
+      - code: |-
+          const user = reactive({ name: "Ada", age: 28 });
+
+          watch(
+            () => user.age,
+            (newAge) => {
+              console.log(newAge);
+            }
+          );
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`watch(user.age, callback)`"
+      - id: "2"
+        isCorrect: true
+        text: "`watch(() => user.age, callback)`"
+      - id: "3"
+        isCorrect: false
+        text: '`watch("user.age", callback)`'
+      - id: "4"
+        isCorrect: false
+        text: '`watch(user, callback, { only: "age" })`'
+
+  - text: How can watch observe more than one reactive source at the same time?
+    explanation: watch can receive an array of reactive sources. The callback receives arrays with the new and previous values.
+    explanation_code:
+      - code: |-
+          const firstName = ref("");
+          const lastName = ref("");
+
+          watch([firstName, lastName], ([newFirst, newLast]) => {
+            console.log(newFirst, newLast);
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: By passing an array of sources as the first argument.
+      - id: "2"
+        isCorrect: false
+        text: By creating one watch on every render.
+      - id: "3"
+        isCorrect: false
+        text: By separating sources with commas as loose arguments.
+      - id: "4"
+        isCorrect: false
+        text: By using only reactive, because ref does not work with multiple sources.
+
+  - text: Which option lets the watch callback run when the watcher is created?
+    explanation: 'The immediate: true option makes the callback run once when the watcher is created, and then again whenever the source changes.'
+    explanation_code:
+      - code: |-
+          watch(search, fetchResults, {
+            immediate: true
+          });
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`lazy: false`"
+      - id: "2"
+        isCorrect: true
+        text: "`immediate: true`"
+      - id: "3"
+        isCorrect: false
+        text: "`once: true`"
+      - id: "4"
+        isCorrect: false
+        text: "`mounted: true`"
+
+  - text: When should you use computed instead of a watcher?
+    explanation: computed is better for derived values that are used in the template. watch is better for side effects that should happen when something changes.
+    explanation_code:
+      - code: |-
+          const price = ref(100);
+          const tax = ref(0.19);
+
+          const total = computed(() => price.value * (1 + tax.value));
+        language: javascript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: When you need to save data to localStorage.
+      - id: "2"
+        isCorrect: false
+        text: When you need to call an API after a change.
+      - id: "3"
+        isCorrect: true
+        text: When you need to get a derived value for display or reuse.
+      - id: "4"
+        isCorrect: false
+        text: When you always need to compare newValue and oldValue.

@@ -44,3 +44,24 @@ steps:
             level: basic
             title: Challenge 1
             subtitle: Complete a user filter component using computed properties.
+
+      - name: Watchers
+        id: watchers
+        items:
+          - id: watchers-lesson
+            type: lesson
+            level: basic
+            title: Watchers in Vue 3
+            subtitle: Learn to react to state changes with watch and watchEffect.
+
+          - id: watchers-quiz
+            type: quiz
+            level: basic
+            title: Watchers Quiz
+            subtitle: Test your understanding of watchers and side effects in Vue 3.
+
+          - id: watch-question-log
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Complete a component that reacts to question changes using watch.
