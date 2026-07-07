@@ -23,14 +23,14 @@ const { locale } = useI18n();
 const { quizzes, getQuizzes } = useQuizData();
 const { challenges, getChallenges } = useChallengeData();
 
-await getQuizzes();
-await getChallenges();
+await getQuizzes(4);
+await getChallenges(4);
 
 watch(
   () => locale.value,
   async () => {
-    await getQuizzes();
-    await getChallenges();
+    await getQuizzes(4);
+    await getChallenges(4);
   },
 );
 </script>
