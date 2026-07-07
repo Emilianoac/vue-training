@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 const props = defineProps<{
   modelValue: string;
   onSave?: () => void;
+  readonly?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -24,6 +25,7 @@ onMounted(() => {
     extensions: createCodeMirrorExtensions(
       (value) => emit("update:modelValue", value),
       () => props.onSave?.(),
+      { readonly: props.readonly },
     ),
   });
 });

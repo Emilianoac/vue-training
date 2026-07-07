@@ -22,10 +22,10 @@ defineProps<{
 }>();
 
 defineEmits<{
-  loadSolution: [];
   resetCode: [];
   saveCode: [];
   toggleFullscreen: [];
+  viewSolution: [];
 }>();
 
 const { t } = useI18n();
@@ -86,7 +86,7 @@ const { t } = useI18n();
                 :disabled="!canLoadSolution"
                 size="icon-sm"
                 variant="ghost"
-                @click="$emit('loadSolution')"
+                @click="$emit('viewSolution')"
               >
                 <EyeIcon class="size-3.5" />
               </Button>

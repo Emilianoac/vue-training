@@ -156,9 +156,15 @@ const editorSetup = [
   ]),
 ];
 
-export function createCodeMirrorExtensions(onChange: (value: string) => void, onSave?: () => void) {
+export function createCodeMirrorExtensions(
+  onChange: (value: string) => void,
+  onSave?: () => void,
+  options: { readonly?: boolean } = {},
+) {
   return [
     ...editorSetup,
+    EditorState.readOnly.of(Boolean(options.readonly)),
+    EditorView.editable.of(!options.readonly),
     keymap.of([
       {
         key: "Mod-s",
@@ -173,6 +179,7 @@ export function createCodeMirrorExtensions(onChange: (value: string) => void, on
     editorTheme,
     syntaxHighlighting(syntaxTheme),
     EditorView.updateListener.of((update: ViewUpdate) => {
+      if (options.readonly) return;
       if (!update.docChanged) return;
       onChange(update.state.doc.toString());
     }),

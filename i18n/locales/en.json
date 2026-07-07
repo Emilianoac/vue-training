@@ -187,7 +187,8 @@
       "actions": {
         "save": "Save changes",
         "reset": "Reset challenge",
-        "solution": "Load solution",
+        "solution": "View solution",
+        "loadSolution": "Load solution into editor",
         "runTests": "Run tests",
         "runningTests": "Running tests",
         "reloadPreview": "Reload preview",
@@ -203,6 +204,10 @@
         "title": "Challenge preview",
         "empty": "Open or reload the preview to mount the component.",
         "loading": "Starting preview..."
+      },
+      "solution": {
+        "title": "Solution",
+        "description": "Review the solution without replacing your code. If you want to use it, load it manually into the editor."
       },
       "status": {
         "booting": "Initializing environment...",

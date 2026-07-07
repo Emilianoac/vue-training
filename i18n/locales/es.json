@@ -187,7 +187,8 @@
       "actions": {
         "save": "Guardar cambios",
         "reset": "Reiniciar desafio",
-        "solution": "Cargar solucion",
+        "solution": "Ver solución",
+        "loadSolution": "Cargar solución en el editor",
         "runTests": "Ejecutar tests",
         "runningTests": "Ejecutando tests",
         "reloadPreview": "Recargar preview",
@@ -203,6 +204,10 @@
         "title": "Preview del desafio",
         "empty": "Abre o recarga el preview para montar el componente.",
         "loading": "Iniciando preview..."
+      },
+      "solution": {
+        "title": "Solución",
+        "description": "Revisa la solución sin reemplazar tu código. Si quieres usarla, cárgala manualmente en el editor."
       },
       "status": {
         "booting": "Inicializando entorno...",

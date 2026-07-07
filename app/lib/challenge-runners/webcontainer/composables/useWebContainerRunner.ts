@@ -48,6 +48,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const activeFileIcon = computed(() => editableFile?.icon ?? "vue");
   const activeFileLabel = computed(() => editableFile?.label ?? editableFile?.path ?? "Challenge.vue");
   const canLoadSolution = computed(() => Boolean(editableFile?.solution) && !isRunning.value);
+  const solutionCode = computed(() => editableFile?.solution ?? "");
   const canResetCode = computed(() => Boolean(editableFile) && !isRunning.value);
   const setupLabel = computed(() => {
     if (status.value === "installing") return t("challenge.runner.status.installing");
@@ -446,6 +447,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     canResetCode,
     canRunTests,
     code,
+    solutionCode,
     isColdStart,
     isReady,
     isRunning,

@@ -10,6 +10,14 @@ import ChallengeTerminal from "./ChallengeTerminal.client.vue";
 import ChallengeTestResults from "./ChallengeTestResults.vue";
 import ChallengeToolbar from "./ChallengeToolbar.vue";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -46,6 +54,7 @@ const {
   saveCode,
   saveFeedback,
   setupLabel,
+  solutionCode,
   terminalOutput,
   testCases,
   testSummary,
@@ -59,6 +68,7 @@ const activeEditorTab = ref("editor");
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
 const showSetupOverlay = ref(!hasPreparedSnapshotHint(WEB_CONTAINER_TEMPLATE_VERSION));
+const showSolutionDialog = ref(false);
 const runnerRoot = ref<HTMLElement | null>(null);
 let setupOverlayTimer: number | undefined;
 
@@ -110,6 +120,11 @@ async function toggleFullscreen() {
 function syncFullscreenState() {
   isFullscreen.value = document.fullscreenElement === runnerRoot.value;
 }
+
+function applySolution() {
+  loadSolution();
+  showSolutionDialog.value = false;
+}
 </script>
 
 <template>
@@ -126,10 +141,10 @@ function syncFullscreenState() {
         :file-icon="activeFileIcon"
         :file-label="activeFileLabel"
         :is-fullscreen="isFullscreen"
-        @load-solution="loadSolution"
         @reset-code="resetCode"
         @save-code="saveCode"
         @toggle-fullscreen="toggleFullscreen"
+        @view-solution="showSolutionDialog = true"
       />
 
       <ResizablePanelGroup direction="vertical" class="min-h-0 flex-1">
@@ -141,7 +156,7 @@ function syncFullscreenState() {
             >
               <CodeMirrorEditor v-model="code" :on-save="saveCode" />
               <div
-                class="absolute right-4 bottom-4 z-99 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
+                class="absolute right-4 bottom-4 z-10 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
               >
                 <Button :disabled="!canRunTests" @click="runTests">
                   <template v-if="isRunning">
@@ -261,6 +276,30 @@ function syncFullscreenState() {
       </footer>
 
       <ChallengeSetupOverlay v-if="showSetupOverlay" :complete="isReady" :stage="setupLabel" />
+
+      <Dialog v-model:open="showSolutionDialog">
+        <DialogContent
+          class="flex max-h-[85dvh] w-[min(96vw,1200px)] max-w-none flex-col overflow-hidden p-0 sm:max-w-[1200px]"
+          @close-auto-focus.prevent
+        >
+          <DialogHeader class="border-b border-(--editor-panel-border) px-5 py-4">
+            <DialogTitle>{{ t("challenge.runner.solution.title") }}</DialogTitle>
+            <DialogDescription>
+              {{ t("challenge.runner.solution.description") }}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div class="min-h-0 flex-1 basis-[55dvh] bg-(--editor-background)">
+            <CodeMirrorEditor :model-value="solutionCode" readonly />
+          </div>
+
+          <DialogFooter class="shrink-0 border-t border-(--editor-panel-border) px-5 py-4">
+            <Button :disabled="!canLoadSolution" @click="applySolution">
+              {{ t("challenge.runner.actions.loadSolution") }}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
 
     <template #fallback>
