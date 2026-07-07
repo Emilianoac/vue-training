@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Autoplay from "embla-carousel-autoplay";
 import useTipData from "@/composables/tip/useTipData";
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import TipDetails from "@/components/tip/TipDetails.vue";
@@ -43,6 +44,7 @@ watch(
             align: 'start',
             loop: true,
           }"
+          :plugins="[Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]"
         >
           <CarouselContent>
             <CarouselItem v-for="(tip, index) in tips" :key="index">
