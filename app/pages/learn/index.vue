@@ -61,7 +61,6 @@ watch(
     <div class="space-y-6">
       <h1 class="text-xl md:text-2xl font-bold">{{ t("learn.home.title") }}</h1>
       <section class="space-y-2">
-        <h2 class="font-semibold">Tips</h2>
         <div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
           <TipCarousel />
           <Card class="h-full flex flex-col items-center justify-center p-3 gap-2">
@@ -74,22 +73,6 @@ watch(
               {{ $t("learn.home.sections.tips.description") }}
             </p>
           </Card>
-        </div>
-      </section>
-
-      <section class="space-y-2">
-        <h2 class="font-semibold">{{ $t("sections") }}</h2>
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <NuxtLink
-            v-for="section in sections"
-            :key="section.to"
-            :to="section.to"
-            class="rounded-md border bg-card p-5 transition-colors hover:bg-accent"
-          >
-            <component :is="section.icon" class="mb-4 size-5 text-primary" />
-            <h2 class="font-semibold">{{ section.title }}</h2>
-            <p class="mt-2 text-sm text-muted-foreground">{{ section.description }}</p>
-          </NuxtLink>
         </div>
       </section>
 
