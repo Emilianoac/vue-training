@@ -12,13 +12,22 @@ function createChallengeService(): ChallengeService {
     async fetchChallenges(locale, limit) {
       const collection = locale === "en" ? "challenges_en" : "challenges_es";
 
-      const query = queryCollection(collection);
+      let query = queryCollection(collection).select(
+        "title",
+        "slug",
+        "level",
+        "category",
+        "short_description",
+        "cover",
+      );
 
-      if (limit) query.limit(limit);
+      if (limit) query = query.limit(limit);
 
-      const data = await query
-        .select("title", "slug", "level", "category", "short_description", "cover")
-        .all();
+      const data = await query.all();
+
+      if (!data) {
+        throw new Error("No data found");
+      }
 
       return data;
     },
