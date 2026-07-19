@@ -92,6 +92,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     () => isReady.value && hasUnsavedChanges.value && !isRunning.value && !isPreviewStarting.value,
   );
   const canLoadSolution = computed(() => Boolean(activeFile.value?.solution) && !isRunning.value);
+  const canLoadCompleteSolution = computed(() => solutionFiles.length > 1 && !isRunning.value);
   const canResetCode = computed(() => Boolean(activeFile.value) && !isRunning.value);
   const setupLabel = computed(() => {
     if (status.value === "installing") return t("challenge.runner.status.installing");
@@ -273,6 +274,16 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     if (!file?.solution || isRunning.value) return;
 
     fileContents[file.path] = file.solution;
+    resetTestState();
+  }
+
+  function loadCompleteSolution() {
+    if (!canLoadCompleteSolution.value) return;
+
+    for (const file of solutionFiles) {
+      fileContents[file.path] = file.solution;
+    }
+
     resetTestState();
   }
 
@@ -509,6 +520,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     hasUnsavedChanges,
     canSaveCode,
     canLoadSolution,
+    canLoadCompleteSolution,
     canLoadPreview,
     canResetCode,
     canRunTests,
@@ -522,6 +534,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     isFirstSetupLoading,
     loadPreview,
     loadSolution,
+    loadCompleteSolution,
     previewFrameKey,
     previewUrl,
     resetCode,

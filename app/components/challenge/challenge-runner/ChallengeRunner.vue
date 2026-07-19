@@ -35,6 +35,7 @@ const { t } = useI18n();
 const {
   activeFilePath,
   canLoadPreview,
+  canLoadCompleteSolution,
   canLoadSolution,
   canResetCode,
   canRunTests,
@@ -47,6 +48,7 @@ const {
   isPreviewStarting,
   isRunning,
   loadPreview,
+  loadCompleteSolution,
   loadSolution,
   previewFrameKey,
   previewUrl,
@@ -130,6 +132,11 @@ function syncFullscreenState() {
 function applySolution() {
   loadSolution(activeSolutionPath.value);
   selectFile(activeSolutionPath.value);
+  showSolutionDialog.value = false;
+}
+
+function applyCompleteSolution() {
+  loadCompleteSolution();
   showSolutionDialog.value = false;
 }
 
@@ -328,8 +335,15 @@ function openSolutionDialog() {
           </div>
 
           <DialogFooter class="shrink-0 border-t border-(--editor-panel-border) px-5 py-4">
-            <Button :disabled="!canLoadSolution" @click="applySolution">
+            <Button variant="outline" :disabled="!canLoadSolution" @click="applySolution">
               {{ t("challenge.runner.actions.loadSolution") }}
+            </Button>
+            <Button
+              v-if="solutionFiles.length > 1"
+              :disabled="!canLoadCompleteSolution"
+              @click="applyCompleteSolution"
+            >
+              {{ t("challenge.runner.actions.loadCompleteSolution") }}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -195,6 +195,7 @@
         "reset": "Reiniciar desafio",
         "solution": "Ver solución",
         "loadSolution": "Cargar solución en el editor",
+        "loadCompleteSolution": "Cargar solución completa",
         "runTests": "Ejecutar tests",
         "runningTests": "Ejecutando tests",
         "reloadPreview": "Recargar preview",

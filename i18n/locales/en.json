@@ -195,6 +195,7 @@
         "reset": "Reset challenge",
         "solution": "View solution",
         "loadSolution": "Load solution into editor",
+        "loadCompleteSolution": "Load complete solution",
         "runTests": "Run tests",
         "runningTests": "Running tests",
         "reloadPreview": "Reload preview",
