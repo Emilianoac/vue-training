@@ -140,10 +140,24 @@ function isRecord(value: unknown): value is Record<string, unknown> {
     font-size: 0.95rem;
     margin-bottom: 1rem;
     line-height: 1.8;
+  }
 
-    & :last-of-type {
-      margin-bottom: 0;
-    }
+  :deep([data-slot="table-container"]) {
+    margin-bottom: 1.5rem;
+  }
+
+  :deep([data-slot="table-container"] + p),
+  :deep([data-slot="table-container"] + blockquote) {
+    margin-top: 1rem;
+  }
+
+  :deep(pre) {
+    margin-bottom: 1.5rem;
+  }
+
+  :deep(p + pre),
+  :deep(p + blockquote) {
+    margin-top: 1rem;
   }
 
   :deep(ul) {
@@ -174,14 +188,17 @@ function isRecord(value: unknown): value is Record<string, unknown> {
       }
     }
 
-    & :last-of-type {
-      margin-bottom: 0;
-    }
   }
 
   :deep(hr) {
     margin: 2rem 0;
     border-bottom: 1px solid var(--border);
+  }
+
+  :deep(> :last-child),
+  :deep([data-slot="scroll-area-viewport"] > :last-child),
+  :deep([data-slot="scroll-area-viewport"] > div > :last-child) {
+    margin-bottom: 0;
   }
 }
 </style>
