@@ -70,6 +70,30 @@ describe("createProjectFiles", () => {
     );
   });
 
+  it("mounts the file explicitly selected for a multi-file preview", () => {
+    const files: ChallengeFile[] = [
+      {
+        path: "src/Child.vue",
+        content: "<template>Child</template>",
+        editable: true,
+        icon: "vue",
+        label: "Child.vue",
+      },
+      {
+        path: "src/App.vue",
+        content: "<template>App</template>",
+        editable: true,
+        icon: "vue",
+        label: "App.vue",
+        preview: true,
+      },
+    ];
+
+    const tree = createProjectFiles(files);
+
+    expect(readFile(tree, "src", "main.ts")).toContain('import Challenge from "./App.vue"');
+  });
+
   it("preserves nested challenge files and their contents", () => {
     const files: ChallengeFile[] = [
       {
@@ -83,9 +107,7 @@ describe("createProjectFiles", () => {
 
     const tree = createProjectFiles(files);
 
-    expect(readFile(tree, "src", "utils", "counter.ts")).toBe(
-      "export const count = 0;",
-    );
+    expect(readFile(tree, "src", "utils", "counter.ts")).toBe("export const count = 0;");
   });
 
   it("falls back to Counter.vue when there is no editable Vue file", () => {

@@ -4,7 +4,14 @@ export type ChallengeFile = {
   icon: "js" | "test" | "ts" | "vue";
   label: string;
   path: string;
+  preview?: boolean;
   solution?: string;
+};
+
+export type EditorFileTab = Pick<ChallengeFile, "icon" | "label" | "path">;
+
+export type EditorSolutionFile = EditorFileTab & {
+  solution: string;
 };
 
 export type WebContainerChallenge = {

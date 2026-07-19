@@ -8,7 +8,7 @@ import {
   RotateCcwIcon,
   SaveIcon,
 } from "lucide-vue-next";
-import type { ChallengeFile } from "@/lib/challenge-runners/webcontainer/types";
+import type { EditorFileTab } from "@/lib/challenge-runners/webcontainer/types";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -16,14 +16,16 @@ defineProps<{
   canLoadSolution: boolean;
   canResetCode: boolean;
   canSaveCode: boolean;
-  fileIcon: ChallengeFile["icon"];
-  fileLabel: string;
+  activeFilePath: string;
+  dirtyFilePaths: string[];
+  files: EditorFileTab[];
   isFullscreen: boolean;
 }>();
 
 defineEmits<{
   resetCode: [];
   saveCode: [];
+  selectFile: [path: string];
   toggleFullscreen: [];
   viewSolution: [];
 }>();
@@ -35,11 +37,27 @@ const { t } = useI18n();
   <div
     class="z-1 flex items-center justify-between border-b border-(--editor-panel-border) bg-(--editor-panel-surface-background) p-2 shadow-(--editor-panel-shadow)"
   >
-    <ul class="w-fit text-xs">
-      <li class="flex items-center gap-1 border-b-2 border-(--editor-panel-tab-accent) pb-1">
-        <FlaskConicalIcon v-if="fileIcon === 'test'" class="size-3" />
-        <FileCodeIcon v-else class="size-3" />
-        {{ fileLabel }}
+    <ul class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto text-xs">
+      <li v-for="file in files" :key="file.path" class="shrink-0">
+        <button
+          class="flex h-7 items-center gap-1.5 border-b-2 px-2 transition-colors"
+          :class="
+            file.path === activeFilePath
+              ? 'border-(--editor-panel-tab-accent) text-foreground'
+              : 'border-transparent text-muted-foreground hover:text-foreground'
+          "
+          type="button"
+          @click="$emit('selectFile', file.path)"
+        >
+          <FlaskConicalIcon v-if="file.icon === 'test'" class="size-3" />
+          <FileCodeIcon v-else class="size-3" />
+          {{ file.label }}
+          <span
+            v-if="dirtyFilePaths.includes(file.path)"
+            class="size-1.5 rounded-full bg-(--editor-panel-tab-accent)"
+            aria-hidden="true"
+          />
+        </button>
       </li>
     </ul>
     <div class="flex items-center gap-2">

@@ -6,7 +6,14 @@ import {
   WEB_CONTAINER_SNAPSHOT_PATH,
   WEB_CONTAINER_TEMPLATE_VERSION,
 } from "../template";
-import type { RunnerStatus, RunnerTimings, TestCaseResult, TestSummary } from "../types";
+import type {
+  EditorFileTab,
+  EditorSolutionFile,
+  RunnerStatus,
+  RunnerTimings,
+  TestCaseResult,
+  TestSummary,
+} from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
 import { prepareSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
 
@@ -14,10 +21,42 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const { locale, t } = useI18n();
   const { parseReport } = useVitestReporter();
   const challenge = getWebContainerChallenge(challengeId, locale.value);
-  const editableFile = challenge.files.find((file) => file.editable);
+  const editableChallengeFiles = challenge.files.filter((file) => file.editable);
+  const editableFiles: EditorFileTab[] = editableChallengeFiles.map(({ icon, label, path }) => ({
+    icon,
+    label,
+    path,
+  }));
+  const solutionFiles: EditorSolutionFile[] = editableChallengeFiles.flatMap((file) =>
+    file.solution
+      ? [
+          {
+            icon: file.icon,
+            label: file.label,
+            path: file.path,
+            solution: file.solution,
+          },
+        ]
+      : [],
+  );
+  const activeFilePath = ref(editableChallengeFiles[0]?.path ?? "");
+  const fileContents = reactive<Record<string, string>>(
+    Object.fromEntries(editableChallengeFiles.map((file) => [file.path, file.content])),
+  );
+  const savedFileContents = reactive<Record<string, string>>(
+    Object.fromEntries(editableChallengeFiles.map((file) => [file.path, file.content])),
+  );
 
-  const code = ref(editableFile?.content ?? "");
-  const savedCode = ref(editableFile?.content ?? "");
+  const activeFile = computed(() =>
+    editableChallengeFiles.find((file) => file.path === activeFilePath.value),
+  );
+  const code = computed({
+    get: () => fileContents[activeFilePath.value] ?? "",
+    set: (value: string) => {
+      if (!activeFilePath.value) return;
+      fileContents[activeFilePath.value] = value;
+    },
+  });
   const terminalOutput = ref(t("challenge.runner.terminal.initialReady"));
   const status = ref<RunnerStatus>("idle");
   const isColdStart = ref(false);
@@ -39,17 +78,21 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const isFirstSetupLoading = computed(
     () => isColdStart.value && (status.value === "booting" || status.value === "installing"),
   );
-  const hasUnsavedChanges = computed(() => code.value !== savedCode.value);
+  const dirtyFilePaths = computed(() =>
+    editableChallengeFiles
+      .filter((file) => fileContents[file.path] !== savedFileContents[file.path])
+      .map((file) => file.path),
+  );
+  const hasUnsavedChanges = computed(() => dirtyFilePaths.value.length > 0);
   const canRunTests = computed(() => isReady.value && !isRunning.value && !isPreviewStarting.value);
-  const canLoadPreview = computed(() => isReady.value && !isPreviewStarting.value && !isRunning.value);
+  const canLoadPreview = computed(
+    () => isReady.value && !isPreviewStarting.value && !isRunning.value,
+  );
   const canSaveCode = computed(
     () => isReady.value && hasUnsavedChanges.value && !isRunning.value && !isPreviewStarting.value,
   );
-  const activeFileIcon = computed(() => editableFile?.icon ?? "vue");
-  const activeFileLabel = computed(() => editableFile?.label ?? editableFile?.path ?? "Challenge.vue");
-  const canLoadSolution = computed(() => Boolean(editableFile?.solution) && !isRunning.value);
-  const solutionCode = computed(() => editableFile?.solution ?? "");
-  const canResetCode = computed(() => Boolean(editableFile) && !isRunning.value);
+  const canLoadSolution = computed(() => Boolean(activeFile.value?.solution) && !isRunning.value);
+  const canResetCode = computed(() => Boolean(activeFile.value) && !isRunning.value);
   const setupLabel = computed(() => {
     if (status.value === "installing") return t("challenge.runner.status.installing");
     if (status.value === "booting") return t("challenge.runner.status.booting");
@@ -144,9 +187,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     try {
       await container.fs.rm("/vitest-results.json", { force: true });
 
-      if (editableFile) {
-        await writeEditableFile(container);
-      }
+      await writeEditableFiles(container);
 
       if (!testWatcherProcess) {
         testWatcherProcess = await startTestWatcher(container);
@@ -177,7 +218,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     isPreviewStarting.value = true;
 
     try {
-      await writeEditableFile(container);
+      await writeEditableFiles(container);
       await ensurePreviewServer(container);
       previewFrameKey.value++;
     } catch (error) {
@@ -191,37 +232,63 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     const container = webcontainer.value;
     if (!container || !canSaveCode.value) return;
 
+    const shouldRefreshTestReport = Boolean(testWatcherProcess);
+
     try {
-      await writeEditableFile(container);
+      if (shouldRefreshTestReport) {
+        isRunning.value = true;
+        await container.fs.rm("/vitest-results.json", { force: true });
+      }
+
+      await writeEditableFiles(container);
       saveFeedback.value = t("challenge.runner.status.saved");
       window.setTimeout(() => {
         saveFeedback.value = "";
       }, 2500);
+
+      if (shouldRefreshTestReport) {
+        const hasTestReport = await waitForTestReport(container);
+
+        if (!hasTestReport) {
+          appendLine(t("challenge.runner.terminal.testReportMissing"));
+        }
+      }
     } catch (error) {
       appendLine(`✗ ${getErrorMessage(error, t("challenge.runner.terminal.unknownError"))}`);
+    } finally {
+      if (shouldRefreshTestReport) isRunning.value = false;
     }
   }
 
   function resetCode() {
-    if (!editableFile || isRunning.value) return;
+    const file = activeFile.value;
+    if (!file || isRunning.value) return;
 
-    code.value = editableFile.content;
-    savedCode.value = editableFile.content;
+    fileContents[file.path] = file.content;
     resetTestState();
   }
 
-  function loadSolution() {
-    if (!editableFile?.solution || isRunning.value) return;
+  function loadSolution(path = activeFilePath.value) {
+    const file = editableChallengeFiles.find((candidate) => candidate.path === path);
+    if (!file?.solution || isRunning.value) return;
 
-    code.value = editableFile.solution;
-    savedCode.value = editableFile.solution;
+    fileContents[file.path] = file.solution;
     resetTestState();
   }
 
-  async function writeEditableFile(container: WebContainer) {
-    if (!editableFile) return;
-    await container.fs.writeFile(`/${editableFile.path}`, code.value);
-    savedCode.value = code.value;
+  function selectFile(path: string) {
+    if (!editableChallengeFiles.some((file) => file.path === path)) return;
+    activeFilePath.value = path;
+  }
+
+  async function writeEditableFiles(container: WebContainer) {
+    await Promise.all(
+      editableChallengeFiles.map(async (file) => {
+        const content = fileContents[file.path] ?? file.content;
+        await container.fs.writeFile(`/${file.path}`, content);
+        savedFileContents[file.path] = content;
+      }),
+    );
   }
 
   async function ensurePreviewServer(container: WebContainer) {
@@ -438,8 +505,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   }
 
   return {
-    activeFileIcon,
-    activeFileLabel,
+    activeFilePath,
     hasUnsavedChanges,
     canSaveCode,
     canLoadSolution,
@@ -447,7 +513,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     canResetCode,
     canRunTests,
     code,
-    solutionCode,
+    dirtyFilePaths,
+    editableFiles,
     isColdStart,
     isReady,
     isRunning,
@@ -461,7 +528,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     runTests,
     saveCode,
     saveFeedback,
+    selectFile,
     setupLabel,
+    solutionFiles,
     terminalOutput,
     testCases,
     testSummary,

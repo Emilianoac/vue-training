@@ -8,8 +8,7 @@ import viteConfig from "./project-template/vite.config.ts?raw";
 import vitestConfig from "./project-template/vitest.config.ts?raw";
 
 export const WEB_CONTAINER_TEMPLATE_VERSION = "vue-vitest-2026-07-1";
-export const WEB_CONTAINER_SNAPSHOT_PATH =
-  `/webcontainer/${WEB_CONTAINER_TEMPLATE_VERSION}.snapshot`;
+export const WEB_CONTAINER_SNAPSHOT_PATH = `/webcontainer/${WEB_CONTAINER_TEMPLATE_VERSION}.snapshot`;
 
 export function createBaseProjectFiles(): FileSystemTree {
   return {
@@ -73,8 +72,9 @@ function createFileTree(files: ChallengeFile[]): FileSystemTree {
 }
 
 function getPreviewFilePath(files: ChallengeFile[]) {
+  const previewFile = files.find((file) => file.preview);
   const editableVueFile = files.find((file) => file.editable && file.path.endsWith(".vue"));
-  return editableVueFile?.path.replace(/^src\//, "") ?? "Counter.vue";
+  return (previewFile ?? editableVueFile)?.path.replace(/^src\//, "") ?? "Counter.vue";
 }
 
 function addFileToTree(tree: FileSystemTree, pathParts: string[], content: string) {

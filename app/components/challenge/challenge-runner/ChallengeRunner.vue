@@ -33,14 +33,15 @@ const props = withDefaults(
 const { t } = useI18n();
 
 const {
-  activeFileIcon,
-  activeFileLabel,
+  activeFilePath,
   canLoadPreview,
   canLoadSolution,
   canResetCode,
   canRunTests,
   canSaveCode,
   code,
+  dirtyFilePaths,
+  editableFiles,
   isReady,
   isFirstSetupLoading,
   isPreviewStarting,
@@ -53,8 +54,9 @@ const {
   runTests,
   saveCode,
   saveFeedback,
+  selectFile,
   setupLabel,
-  solutionCode,
+  solutionFiles,
   terminalOutput,
   testCases,
   testSummary,
@@ -65,6 +67,10 @@ const emit = defineEmits<{
 }>();
 
 const activeEditorTab = ref("editor");
+const activeSolutionPath = ref("");
+const activeSolutionFile = computed(() =>
+  solutionFiles.find((file) => file.path === activeSolutionPath.value),
+);
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
 const showSetupOverlay = ref(!hasPreparedSnapshotHint(WEB_CONTAINER_TEMPLATE_VERSION));
@@ -122,8 +128,16 @@ function syncFullscreenState() {
 }
 
 function applySolution() {
-  loadSolution();
+  loadSolution(activeSolutionPath.value);
+  selectFile(activeSolutionPath.value);
   showSolutionDialog.value = false;
+}
+
+function openSolutionDialog() {
+  activeSolutionPath.value = solutionFiles.some((file) => file.path === activeFilePath.value)
+    ? activeFilePath.value
+    : (solutionFiles[0]?.path ?? "");
+  showSolutionDialog.value = true;
 }
 </script>
 
@@ -135,16 +149,18 @@ function applySolution() {
       :class="isFullscreen ? 'h-dvh bg-(--editor-background)' : 'h-full'"
     >
       <ChallengeToolbar
+        :active-file-path="activeFilePath"
         :can-load-solution="canLoadSolution"
         :can-reset-code="canResetCode"
         :can-save-code="canSaveCode"
-        :file-icon="activeFileIcon"
-        :file-label="activeFileLabel"
+        :dirty-file-paths="dirtyFilePaths"
+        :files="editableFiles"
         :is-fullscreen="isFullscreen"
         @reset-code="resetCode"
         @save-code="saveCode"
+        @select-file="selectFile"
         @toggle-fullscreen="toggleFullscreen"
-        @view-solution="showSolutionDialog = true"
+        @view-solution="openSolutionDialog"
       />
 
       <ResizablePanelGroup direction="vertical" class="min-h-0 flex-1">
@@ -154,7 +170,7 @@ function applySolution() {
               value="editor"
               class="relative m-0 h-full min-h-0 data-[state=inactive]:hidden"
             >
-              <CodeMirrorEditor v-model="code" :on-save="saveCode" />
+              <CodeMirrorEditor :key="activeFilePath" v-model="code" :on-save="saveCode" />
               <div
                 class="absolute right-4 bottom-4 z-10 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
               >
@@ -282,15 +298,33 @@ function applySolution() {
           class="flex max-h-[85dvh] w-[min(96vw,1200px)] max-w-none flex-col overflow-hidden p-0 sm:max-w-[1200px]"
           @close-auto-focus.prevent
         >
-          <DialogHeader class="border-b border-(--editor-panel-border) px-5 py-4">
+          <DialogHeader class="border-b border-(--editor-panel-border) px-5 pt-4">
             <DialogTitle>{{ t("challenge.runner.solution.title") }}</DialogTitle>
             <DialogDescription>
               {{ t("challenge.runner.solution.description") }}
             </DialogDescription>
+
+            <Tabs v-model="activeSolutionPath" class="mt-2 gap-0">
+              <TabsList class="h-auto justify-start rounded-none bg-transparent p-0">
+                <TabsTrigger
+                  v-for="file in solutionFiles"
+                  :key="file.path"
+                  class="rounded-none border-b-2 border-transparent px-3 py-2 text-xs data-[state=active]:border-(--editor-panel-tab-accent) data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                  :value="file.path"
+                >
+                  {{ file.label }}
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </DialogHeader>
 
           <div class="min-h-0 flex-1 basis-[55dvh] bg-(--editor-background)">
-            <CodeMirrorEditor :model-value="solutionCode" readonly />
+            <CodeMirrorEditor
+              v-if="activeSolutionFile"
+              :key="activeSolutionFile.path"
+              :model-value="activeSolutionFile.solution"
+              readonly
+            />
           </div>
 
           <DialogFooter class="shrink-0 border-t border-(--editor-panel-border) px-5 py-4">
