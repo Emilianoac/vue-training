@@ -78,23 +78,32 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 <template>
   <div class="flex h-full min-h-0 flex-col">
-    <div class="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-10 overflow-hidden p-4">
-      <aside class="hidden lg:block">
-        <div class="sticky flex flex-col justify-between top-0 rounded-md border bg-card p-6">
-          <nav class="space-y-1">
-            <ul>
-              <li v-for="section in lessonSections" :key="section.id" class="border-b pb-2 mb-2">
-                <Button
-                  class="text-foreground w-full justify-start px-1 h-auto whitespace-break-spaces"
-                  variant="link"
-                  as-child
-                >
-                  <a :href="`#${section.id}`"> {{ section.title }} </a>
-                </Button>
-              </li>
-            </ul>
+    <div
+      class="grid min-h-0 flex-1 grid-cols-1 gap-10 overflow-hidden p-4 lg:grid-cols-[400px_1fr]"
+    >
+      <aside class="hidden h-full min-h-0 lg:block">
+        <div
+          class="sticky top-0 flex max-h-full h-full min-h-0 flex-col rounded-md border bg-card p-6"
+        >
+          <nav class="space-y-1 flex-1 overflow-hidden">
+            <ScrollArea class="h-full pr-3">
+              <ul>
+                <li v-for="section in lessonSections" :key="section.id" class="mb-2 border-b pb-2">
+                  <Button
+                    class="h-auto w-full justify-start px-1 text-foreground whitespace-break-spaces"
+                    variant="link"
+                    as-child
+                  >
+                    <a :href="`#${section.id}`"> {{ section.title }} </a>
+                  </Button>
+                </li>
+              </ul>
+            </ScrollArea>
           </nav>
-          <slot name="aside-actions" :total-sections="totalSections" :sections="lessonSections" />
+
+          <div class="shrink-0">
+            <slot name="aside-actions" :total-sections="totalSections" :sections="lessonSections" />
+          </div>
         </div>
       </aside>
 
@@ -187,7 +196,6 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         border-bottom: none;
       }
     }
-
   }
 
   :deep(hr) {
