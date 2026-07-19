@@ -220,7 +220,8 @@
         "installing": "Installing dependencies...",
         "idle": "Preparing environment...",
         "ready": "Environment ready",
-        "saved": "Changes saved"
+        "saved": "Changes saved",
+        "unsaved": "Unsaved changes"
       },
       "firstSetup": {
         "title": "Preparing your coding environment",

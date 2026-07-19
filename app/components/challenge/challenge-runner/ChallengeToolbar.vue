@@ -80,6 +80,13 @@ const { t } = useI18n();
             </TooltipContent>
           </Tooltip>
 
+          <span
+            v-if="dirtyFilePaths.length > 0"
+            class="hidden whitespace-nowrap text-xs text-muted-foreground sm:inline"
+          >
+            {{ t("challenge.runner.status.unsaved") }}
+          </span>
+
           <Tooltip>
             <TooltipTrigger as-child>
               <Button

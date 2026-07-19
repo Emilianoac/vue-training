@@ -220,7 +220,8 @@
         "installing": "Instalando dependencias...",
         "idle": "Preparando entorno...",
         "ready": "Entorno listo",
-        "saved": "Cambios guardados"
+        "saved": "Cambios guardados",
+        "unsaved": "Cambios sin guardar"
       },
       "firstSetup": {
         "title": "Preparando tu entorno de codigo",
