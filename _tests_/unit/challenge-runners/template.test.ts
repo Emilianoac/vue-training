@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   createBaseProjectFiles,
+  createChallengePackageFiles,
   createChallengeProjectFiles,
   createProjectFiles,
 } from "@/lib/challenge-runners/webcontainer/template";
@@ -52,6 +53,16 @@ describe("createProjectFiles", () => {
     expect(readFile(tree, "vitest.config.ts")).toContain('environment: "happy-dom"');
   });
 
+  it("extends the package file with challenge-specific dependencies", () => {
+    const tree = createChallengePackageFiles({ "vue-router": "5.1.0" });
+    const packageJson = JSON.parse(readFile(tree, "package.json"));
+
+    expect(packageJson.dependencies).toMatchObject({
+      vue: "3.5.38",
+      "vue-router": "5.1.0",
+    });
+  });
+
   it("mounts the editable Vue file in the preview", () => {
     const files: ChallengeFile[] = [
       {
@@ -92,6 +103,13 @@ describe("createProjectFiles", () => {
     const tree = createProjectFiles(files);
 
     expect(readFile(tree, "src", "main.ts")).toContain('import Challenge from "./App.vue"');
+  });
+
+  it("uses a challenge-specific project entry when provided", () => {
+    const entry = 'import { createApp } from "vue";\ncreateApp({}).mount("#app");';
+    const tree = createProjectFiles([], entry);
+
+    expect(readFile(tree, "src", "main.ts")).toBe(entry);
   });
 
   it("preserves nested challenge files and their contents", () => {

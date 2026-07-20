@@ -35,7 +35,10 @@ export function createBaseProjectFiles(): FileSystemTree {
   };
 }
 
-export function createChallengeProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
+export function createChallengeProjectFiles(
+  challengeFiles: ChallengeFile[],
+  entrySource?: string,
+): FileSystemTree {
   const projectFiles = createFileTree(challengeFiles);
   const previewFilePath = getPreviewFilePath(challengeFiles);
 
@@ -43,7 +46,7 @@ export function createChallengeProjectFiles(challengeFiles: ChallengeFile[]): Fi
   addFileToTree(
     projectFiles,
     ["src", "main.ts"],
-    mainSource.replace("__CHALLENGE_FILE__", previewFilePath),
+    entrySource ?? mainSource.replace("__CHALLENGE_FILE__", previewFilePath),
   );
 
   // Mount the shared theme as a real file so Vite can load it without template placeholders.
@@ -54,10 +57,40 @@ export function createChallengeProjectFiles(challengeFiles: ChallengeFile[]): Fi
   };
 }
 
-export function createProjectFiles(challengeFiles: ChallengeFile[]): FileSystemTree {
+export function createChallengePackageFiles(
+  dependencies: Record<string, string>,
+): FileSystemTree {
+  const projectPackage = JSON.parse(packageJson) as {
+    dependencies?: Record<string, string>;
+    [key: string]: unknown;
+  };
+
+  return {
+    "package.json": {
+      file: {
+        contents: JSON.stringify(
+          {
+            ...projectPackage,
+            dependencies: {
+              ...projectPackage.dependencies,
+              ...dependencies,
+            },
+          },
+          null,
+          2,
+        ),
+      },
+    },
+  };
+}
+
+export function createProjectFiles(
+  challengeFiles: ChallengeFile[],
+  entrySource?: string,
+): FileSystemTree {
   return {
     ...createBaseProjectFiles(),
-    ...createChallengeProjectFiles(challengeFiles),
+    ...createChallengeProjectFiles(challengeFiles, entrySource),
   };
 }
 

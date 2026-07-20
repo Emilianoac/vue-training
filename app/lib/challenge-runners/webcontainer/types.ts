@@ -1,3 +1,5 @@
+import type { WebContainerAddonId } from "./addons";
+
 export type ChallengeFile = {
   content: string;
   editable: boolean;
@@ -15,6 +17,8 @@ export type EditorSolutionFile = EditorFileTab & {
 };
 
 export type WebContainerChallenge = {
+  addons?: WebContainerAddonId[];
+  entry?: string;
   files: ChallengeFile[];
   id: string;
 };

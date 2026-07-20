@@ -1,6 +1,8 @@
 import type { WebContainer } from "@webcontainer/api";
+import { WEB_CONTAINER_ADDONS } from "../addons";
 import { getWebContainerChallenge } from "../registry";
 import {
+  createChallengePackageFiles,
   createChallengeProjectFiles,
   createProjectFiles,
   WEB_CONTAINER_SNAPSHOT_PATH,
@@ -16,6 +18,10 @@ import type {
 } from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
 import { prepareSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
+import {
+  cacheInstalledAddon,
+  restoreAddonSnapshot,
+} from "../services/addonSnapshot";
 
 export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const { locale, t } = useI18n();
@@ -144,7 +150,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       const restoredFromCache = await restoreCachedProject(container, cachedSnapshot);
 
       if (!restoredFromCache) {
-        await container.mount(createProjectFiles(challenge.files));
+        await container.mount(createProjectFiles(challenge.files, challenge.entry));
       }
 
       recordTiming("mount", mountStartedAt);
@@ -162,6 +168,16 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
         }
 
         await cacheInstalledProject(container);
+      }
+
+      const challengeAddonsReady = await prepareChallengeAddons(container);
+
+      if (!challengeAddonsReady) {
+        recordTiming("total", totalStartedAt);
+        container.teardown();
+        webcontainer.value = null;
+        status.value = "idle";
+        return;
       }
 
       recordTiming("total", totalStartedAt);
@@ -402,18 +418,28 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       return false;
     }
 
-    await container.mount(createChallengeProjectFiles(challenge.files));
+    await container.mount(createChallengeProjectFiles(challenge.files, challenge.entry));
     appendLine(t("challenge.runner.terminal.cacheHit"));
     return true;
   }
 
-  async function installDependencies(container: WebContainer) {
+  async function installDependencies(
+    container: WebContainer,
+    packageSpecs: string[] = [],
+    installOptions: string[] = [],
+  ) {
     status.value = "installing";
     appendLine(t("challenge.runner.terminal.install"));
     const installStartedAt = performance.now();
+    const installArgs = ["install", "--no-progress", "--no-audit", "--no-fund"];
+
+    if (packageSpecs.length) {
+      installArgs.push("--no-save", "--package-lock=false", ...installOptions, ...packageSpecs);
+    }
+
     const install = await container.spawn(
       "npm",
-      ["install", "--no-progress", "--no-audit", "--no-fund"],
+      installArgs,
       {
         env: {
           CI: "true",
@@ -432,6 +458,31 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     }
 
     appendLine(t("challenge.runner.terminal.installed"));
+    return true;
+  }
+
+  async function prepareChallengeAddons(container: WebContainer) {
+    const addons = (challenge.addons ?? []).map((id) => WEB_CONTAINER_ADDONS[id]);
+    if (!addons.length) return true;
+
+    const dependencies = Object.assign({}, ...addons.map((addon) => addon.dependencies));
+    await container.mount(createChallengePackageFiles(dependencies));
+
+    for (const addon of addons) {
+      if (await restoreAddonSnapshot(container, addon)) continue;
+
+      const packageSpecs = Object.entries(addon.dependencies).map(
+        ([name, version]) => `${name}@${version}`,
+      );
+      const installed = await installDependencies(container, packageSpecs, [
+        "--install-strategy=nested",
+      ]);
+      if (!installed) return false;
+
+      const cached = await cacheInstalledAddon(container, addon);
+      if (!cached) appendLine(t("challenge.runner.terminal.cacheSaveFailed"));
+    }
+
     return true;
   }
 

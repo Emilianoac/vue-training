@@ -57,7 +57,6 @@ export async function saveSnapshot(key: string, snapshot: ArrayBuffer): Promise<
     await new Promise<void>((resolve, reject) => {
       const transaction = database.transaction(STORE_NAME, "readwrite");
       const store = transaction.objectStore(STORE_NAME);
-      store.clear();
       store.put(snapshot, key);
       transaction.addEventListener("complete", () => {
         setPreparedSnapshotHint(key, true);
