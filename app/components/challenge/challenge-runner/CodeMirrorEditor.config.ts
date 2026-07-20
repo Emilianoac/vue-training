@@ -159,8 +159,15 @@ const editorSetup = [
 export function createCodeMirrorExtensions(
   onChange: (value: string) => void,
   onSave?: () => void,
-  options: { readonly?: boolean } = {},
+  options: {
+    language?: "javascript" | "typescript" | "vue";
+    readonly?: boolean;
+  } = {},
 ) {
+  const language = options.language ?? "vue";
+  const languageExtension =
+    language === "vue" ? vue() : javascript({ typescript: language === "typescript" });
+
   return [
     ...editorSetup,
     EditorState.readOnly.of(Boolean(options.readonly)),
@@ -174,8 +181,7 @@ export function createCodeMirrorExtensions(
         },
       },
     ]),
-    vue(),
-    javascript({ typescript: true }),
+    languageExtension,
     editorTheme,
     syntaxHighlighting(syntaxTheme),
     EditorView.updateListener.of((update: ViewUpdate) => {

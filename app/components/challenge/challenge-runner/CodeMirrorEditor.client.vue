@@ -4,6 +4,7 @@ import { createCodeMirrorExtensions } from "./CodeMirrorEditor.config";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const props = defineProps<{
+  filePath?: string;
   modelValue: string;
   onSave?: () => void;
   readonly?: boolean;
@@ -16,6 +17,12 @@ const emit = defineEmits<{
 const editorRoot = ref<HTMLElement | null>(null);
 let editorView: EditorView | null = null;
 
+const language = computed(() => {
+  if (props.filePath?.endsWith(".js")) return "javascript" as const;
+  if (props.filePath?.endsWith(".ts")) return "typescript" as const;
+  return "vue" as const;
+});
+
 onMounted(() => {
   if (!editorRoot.value) return;
 
@@ -25,7 +32,10 @@ onMounted(() => {
     extensions: createCodeMirrorExtensions(
       (value) => emit("update:modelValue", value),
       () => props.onSave?.(),
-      { readonly: props.readonly },
+      {
+        language: language.value,
+        readonly: props.readonly,
+      },
     ),
   });
 });

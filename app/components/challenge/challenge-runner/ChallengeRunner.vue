@@ -177,7 +177,12 @@ function openSolutionDialog() {
               value="editor"
               class="relative m-0 h-full min-h-0 data-[state=inactive]:hidden"
             >
-              <CodeMirrorEditor :key="activeFilePath" v-model="code" :on-save="saveCode" />
+              <CodeMirrorEditor
+                :key="activeFilePath"
+                v-model="code"
+                :file-path="activeFilePath"
+                :on-save="saveCode"
+              />
               <div
                 class="absolute right-4 bottom-4 z-10 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
               >
@@ -330,6 +335,7 @@ function openSolutionDialog() {
               v-if="activeSolutionFile"
               :key="activeSolutionFile.path"
               :model-value="activeSolutionFile.solution"
+              :file-path="activeSolutionFile.path"
               readonly
             />
           </div>
