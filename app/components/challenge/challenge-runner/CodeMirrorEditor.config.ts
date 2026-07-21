@@ -4,7 +4,13 @@ import {
   closeBracketsKeymap,
   completionKeymap,
 } from "@codemirror/autocomplete";
-import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
+import {
+  defaultKeymap,
+  history,
+  historyKeymap,
+  indentWithTab,
+  insertNewline,
+} from "@codemirror/commands";
 import { javascript } from "@codemirror/lang-javascript";
 import { vue } from "@codemirror/lang-vue";
 import {
@@ -148,6 +154,7 @@ const editorSetup = [
   highlightActiveLine(),
   keymap.of([
     ...closeBracketsKeymap,
+    { key: "Enter", run: insertNewline },
     ...defaultKeymap,
     ...historyKeymap,
     ...foldKeymap,
