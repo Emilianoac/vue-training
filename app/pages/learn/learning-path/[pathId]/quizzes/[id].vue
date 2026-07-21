@@ -2,6 +2,7 @@
 import { CheckCircleIcon } from "lucide-vue-next";
 import useQuizGame from "~/composables/quiz/useQuizGame";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
+import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
@@ -32,6 +33,7 @@ const showQuestionDetails = ref(false);
 const completionDialogOpen = ref(false);
 const hasCompleted = ref(false);
 const { markComplete } = useLearningPathProgress();
+const learningPathReturnPath = getLearningPathReturnPath();
 
 const {
   quiz,
@@ -77,7 +79,7 @@ function handleQuizCompleted() {
 }
 
 function continueToLearningPath() {
-  router.push("/learn/learning-paths");
+  router.push(learningPathReturnPath);
 }
 </script>
 
@@ -85,7 +87,7 @@ function continueToLearningPath() {
     <ActivityShell
       v-if="quiz"
       :title="quiz.title"
-      back-to="/learn/learning-paths"
+      :back-to="learningPathReturnPath"
       content-class="p-4 flex-initial"
     >
       <QuizWelcome

@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import type { ItemType } from "@/schemas/learningPath.schema";
 import useLearningPathData from "@/composables/learning-path/useLearningPathData";
+import {
+  consumeLearningPathSection,
+  createActivityPath,
+  rememberLearningPathSection,
+} from "@/composables/learning-path/useLearningPathNavigation";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import PathItem from "./PathItem.vue";
 import PathProgress from "./PathProgress.vue";
@@ -16,18 +21,11 @@ const { learningPath, getLearningPath } = useLearningPathData();
 
 await getLearningPath(props.pathId);
 
-const typeToSegment: Record<ItemType, string> = {
-  lesson: "lessons",
-  quiz: "quizzes",
-  challenge: "challenges",
-  tip: "tips",
-};
-
 const { isCompleted, useProgress } = useLearningPathProgress();
 const { allItems, completedCount, progressPercent } = useProgress(() => props.pathId, learningPath);
 
 function getActivityPath(type: ItemType, id: string) {
-  return `/learn/learning-path/${props.pathId}/${typeToSegment[type]}/${id}`;
+  return createActivityPath(props.pathId, type, id);
 }
 
 function isPlannedSubStep(subStep: { status?: string; items?: unknown[] }) {
@@ -41,6 +39,19 @@ function isPlannedStep(step: { sub_steps: Array<{ status?: string; items?: unkno
 watch(locale, async () => {
   await getLearningPath(props.pathId);
 });
+
+onMounted(() => {
+  scrollToSection(consumeLearningPathSection(props.pathId));
+});
+
+async function scrollToSection(sectionId: string | null) {
+  if (!sectionId) return;
+
+  await nextTick();
+  window.requestAnimationFrame(() => {
+    document.getElementById(sectionId)?.scrollIntoView({ block: "start" });
+  });
+}
 </script>
 
 <template>
@@ -63,7 +74,12 @@ watch(locale, async () => {
 
           <!--Step -->
           <div class="mx-auto my-10 space-y-6">
-            <div v-for="(subStep, index) in step.sub_steps" :key="subStep.name">
+            <div
+              v-for="(subStep, index) in step.sub_steps"
+              :id="subStep.id"
+              :key="subStep.id"
+              class="scroll-mt-4"
+            >
               <div
                 class="mb-2 flex items-center justify-center gap-2"
                 :class="{ 'opacity-60': isPlannedSubStep(subStep) }"
@@ -89,6 +105,7 @@ watch(locale, async () => {
                   class="lg:first-of-type:col-span-2"
                   :is-completed="isCompleted(pathId, item.type, item.id).value"
                   :path="getActivityPath(item.type, item.id)"
+                  @select="rememberLearningPathSection(pathId, subStep.id)"
                 />
               </div>
               <hr v-if="index !== step.sub_steps.length - 1" class="my-10" />

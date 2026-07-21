@@ -2,6 +2,7 @@
 import { CheckIcon } from "lucide-vue-next";
 import useLessonData from "@/composables/lesson/useLessonData";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
+import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
 
 definePageMeta({
   layout: "activity",
@@ -12,6 +13,7 @@ const router = useRouter();
 const { locale, t } = useI18n();
 const { lesson, getLesson } = useLessonData();
 const { isCompleted, markComplete } = useLearningPathProgress();
+const learningPathReturnPath = getLearningPathReturnPath();
 
 const pathId = route.params.pathId as string;
 const lessonId = route.params.id as string;
@@ -26,12 +28,12 @@ const done = isCompleted(pathId, "lesson", lessonId);
 
 function handleComplete() {
   markComplete(pathId, "lesson", lessonId);
-  router.push("/learn/learning-paths");
+  router.push(learningPathReturnPath);
 }
 </script>
 
 <template>
-  <ActivityShell v-if="lesson" :title="lesson.title" back-to="/learn/learning-paths">
+  <ActivityShell v-if="lesson" :title="lesson.title" :back-to="learningPathReturnPath">
     <LessonView :lesson="lesson">
       <template #actions>
         <Button

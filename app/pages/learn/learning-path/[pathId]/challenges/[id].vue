@@ -2,6 +2,7 @@
 import useChallengeData from "@/composables/challenge/useChallengeData";
 import ChallengeWorkspace from "@/components/challenge/ChallengeWorkspace.vue";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
+import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
 
 definePageMeta({
   layout: "activity",
@@ -15,10 +16,11 @@ const pathId = route.params.pathId as string;
 const challengeId = route.params.id as string;
 const { challenge, getChallenge } = useChallengeData();
 const { markComplete } = useLearningPathProgress();
+const learningPathReturnPath = getLearningPathReturnPath();
 await getChallenge(challengeId);
 
 function goToLearningPath() {
-  router.push("/learn/learning-paths");
+  router.push(learningPathReturnPath);
 }
 
 function markChallengeComplete() {
@@ -41,7 +43,7 @@ watch(
   <ActivityShell
     v-if="challenge"
     :title="challenge.title"
-    back-to="/learn/learning-paths"
+    :back-to="learningPathReturnPath"
     content-class="p-4"
   >
     <ChallengeWorkspace

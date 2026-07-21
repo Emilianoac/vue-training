@@ -13,6 +13,10 @@ defineProps<{
   path: string;
 }>();
 
+const emit = defineEmits<{
+  select: [];
+}>();
+
 const iconMap = {
   quiz: IconQuiz,
   challenge: IconTerminal,
@@ -38,6 +42,7 @@ function getIcon(type: ItemType) {
       :to="path"
       :external="item.type === 'challenge'"
       class="group rounded-md h-full flex flex-col py-4 gap-6 transition-colors duration-200 hover:opacity-90"
+      @click="emit('select')"
     >
       <CardHeader class="mb-0">
         <div class="flex items-center justify-between gap-2 text-sm font-medium">
