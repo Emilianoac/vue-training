@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { LessonDocument } from "@/composables/lesson/useLessonData";
+import { useLessonScrollSpy } from "@/composables/lesson/useLessonScrollSpy";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -8,6 +9,9 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+const lessonContent = useTemplateRef<HTMLElement>("lessonContent");
+const lessonNavigation = useTemplateRef<HTMLElement>("lessonNavigation");
+const { activeSectionId, refresh: refreshScrollSpy } = useLessonScrollSpy(lessonContent);
 
 const sectionBlocks = computed(() => {
   const body = props.lesson.body as { value?: unknown[] } | undefined;
@@ -36,6 +40,28 @@ const totalSections = computed(() => sectionBlocks.value.length);
 const lessonSections = computed(() =>
   sectionBlocks.value.map((blocks, index) => getSectionDetails(blocks, index)),
 );
+
+watch(
+  () => props.lesson,
+  () => refreshScrollSpy(),
+  { flush: "post" },
+);
+
+watch(activeSectionId, async (sectionId) => {
+  await nextTick();
+  const sectionLinks = lessonNavigation.value?.querySelectorAll<HTMLElement>(
+    "[data-toc-section]",
+  );
+  const activeLink = Array.from(sectionLinks ?? []).find(
+    (link) => link.dataset.tocSection === sectionId,
+  );
+
+  activeLink?.scrollIntoView({ block: "nearest" });
+});
+
+onMounted(() => {
+  refreshScrollSpy();
+});
 
 function getSectionValue(blocks: unknown[]) {
   const body = props.lesson.body as Record<string, unknown> | undefined;
@@ -85,16 +111,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         <div
           class="sticky top-0 flex max-h-full h-full min-h-0 flex-col rounded-md border bg-card p-6"
         >
-          <nav class="space-y-1 flex-1 overflow-hidden">
+          <nav ref="lessonNavigation" class="space-y-1 flex-1 overflow-hidden">
             <ScrollArea class="h-full pr-3">
               <ul>
                 <li v-for="section in lessonSections" :key="section.id" class="mb-2 border-b pb-2">
                   <Button
-                    class="h-auto w-full justify-start px-1 text-foreground whitespace-break-spaces"
-                    variant="link"
+                    class="h-auto w-full justify-start whitespace-break-spaces px-2"
+                    :variant="activeSectionId === section.id ? 'secondary' : 'ghost'"
                     as-child
                   >
-                    <a :href="`#${section.id}`"> {{ section.title }} </a>
+                    <a
+                      :href="`#${section.id}`"
+                      :data-toc-section="section.id"
+                      :aria-current="activeSectionId === section.id ? 'location' : undefined"
+                      @click="activeSectionId = section.id"
+                    >
+                      {{ section.title }}
+                    </a>
                   </Button>
                 </li>
               </ul>
@@ -107,15 +140,19 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         </div>
       </aside>
 
-      <main class="lesson-container overflow-hidden rounded-md border p-6">
+      <main ref="lessonContent" class="lesson-container overflow-hidden rounded-md border p-6">
         <div class="h-full">
           <ScrollArea class="h-full pr-4">
-            <ContentRenderer
+            <section
               v-for="(blocks, index) in sectionBlocks"
-              :key="index"
-              :id="lessonSections[index]?.usesHeadingId ? undefined : lessonSections[index]?.id"
-              :value="getSectionValue(blocks)"
-            />
+              :key="lessonSections[index]?.id ?? index"
+              :data-lesson-section="lessonSections[index]?.id"
+            >
+              <ContentRenderer
+                :id="lessonSections[index]?.usesHeadingId ? undefined : lessonSections[index]?.id"
+                :value="getSectionValue(blocks)"
+              />
+            </section>
           </ScrollArea>
         </div>
 
