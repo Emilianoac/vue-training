@@ -68,8 +68,24 @@ steps:
 
       - name: Reactividad y Ciclo de Vida
         id: reactivity-lifecycle
-        status: planned
-        items: []
+        items:
+          - id: lifecycle-lesson
+            type: lesson
+            level: basic
+            title: Reactividad y Ciclo de Vida
+            subtitle: Comprende cómo el estado reactivo se conecta al montaje y desmontaje del componente.
+
+          - id: lifecycle-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa cuándo usar onMounted, onUnmounted y cómo limpiar efectos externos.
+
+          - id: lifecycle-session-monitor
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Completa un componente que inicia y limpia recursos externos con hooks de ciclo de vida.
 
   - name: Componentes
     sub_steps:

@@ -68,8 +68,24 @@ steps:
 
       - name: Reactivity and Lifecycle
         id: reactivity-lifecycle
-        status: planned
-        items: []
+        items:
+          - id: lifecycle-lesson
+            type: lesson
+            level: basic
+            title: Reactivity and the Component Lifecycle
+            subtitle: Understand how reactive state connects to component mounting and unmounting.
+
+          - id: lifecycle-quiz
+            type: quiz
+            level: basic
+            title: Lifecycle Quiz
+            subtitle: Test when to use onMounted, onUnmounted, and how to clean up external effects.
+
+          - id: lifecycle-session-monitor
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Complete a component that starts and cleans up external resources with lifecycle hooks.
 
   - name: Components
     sub_steps:

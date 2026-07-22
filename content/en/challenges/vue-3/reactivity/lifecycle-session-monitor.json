@@ -1,0 +1,46 @@
+{
+  "documentId": "lifecycle-session-monitor",
+  "title": "Clean Up Resources with onUnmounted",
+  "slug": "lifecycle-session-monitor",
+  "level": "basic",
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice starting external effects when a component mounts and cleaning them up when it unmounts.",
+  "description": [
+    "In this challenge, you will complete a session monitor that activates when the component appears on screen.",
+    "The goal is to use onMounted to start an interval and listen for resize changes, and onUnmounted to clean up those external resources."
+  ],
+  "instructions": [
+    "Import onMounted and onUnmounted from vue.",
+    "Use onMounted to run startSession when the component mounts.",
+    "Inside startSession, change isSessionActive to true, update viewportWidth, and register the resize listener.",
+    "Start an interval that increases secondsOnline every second.",
+    "Use onUnmounted to run stopSession and clean up both the interval and the resize listener."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/reactivity/lifecycle-session-monitor.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Import the hooks",
+      "body": "The import can include ref, onMounted, and onUnmounted: import { ref, onMounted, onUnmounted } from \"vue\"."
+    },
+    {
+      "title": "Initialize from onMounted",
+      "body": "Do not call startSession at the top level of setup. Register it with onMounted(startSession) so it runs once the component is mounted."
+    },
+    {
+      "title": "Clean up external work",
+      "body": "Vue does not clean up setInterval or window.addEventListener for you. Use clearInterval and removeEventListener inside stopSession."
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+documentId: "lifecycle-quiz"
+title: "Reactividad y Ciclo de Vida en Vue 3"
+level: "basic"
+slug: "lifecycle-quiz"
+description: "Evaluación sobre cómo el sistema reactivo de Vue se vincula al ciclo de vida del componente con onMounted y onUnmounted."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "¿En qué momento se crea e inicializa el estado reactivo en un componente Vue?"
+    explanation: "Cuando Vue ejecuta `<script setup>`, el estado reactivo (`ref`, `reactive`, `computed`, `watch`) se crea e inicializa inmediatamente, incluso antes de que el componente exista en el DOM."
+    explanation_code:
+      - code: |-
+          // El estado se crea aquí, antes del DOM
+          const count = ref(0);
+          const doubled = computed(() => count.value * 2);
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "En el hook `onMounted`, cuando el DOM ya está disponible."
+      - id: "2"
+        isCorrect: true
+        text: "Al ejecutarse `<script setup>`, antes de que el componente exista en el DOM."
+      - id: "3"
+        isCorrect: false
+        text: "En el primer render del componente."
+      - id: "4"
+        isCorrect: false
+        text: "Cuando el componente recibe su primera prop."
+
+  - text: "¿Por qué no puedes acceder a elementos del DOM en el nivel superior de `<script setup>`?"
+    explanation: "Cuando se ejecuta el nivel superior de `<script setup>`, el componente aún no ha sido montado en el DOM. El DOM solo está disponible a partir de `onMounted`."
+    explanation_code:
+      - code: |-
+          const el = ref(null);
+
+          // ❌ null aquí, el DOM no existe todavía
+          console.log(el.value);
+
+          onMounted(() => {
+            // ✅ El DOM ya está disponible
+            console.log(el.value); // <div>...</div>
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Porque `<script setup>` no permite usar `ref`."
+      - id: "2"
+        isCorrect: false
+        text: "Porque el DOM se monta en un worker separado."
+      - id: "3"
+        isCorrect: true
+        text: "Porque el componente aún no ha sido montado en el DOM al ejecutarse el nivel superior de setup."
+      - id: "4"
+        isCorrect: false
+        text: "Porque los template refs solo funcionan dentro de funciones async."
+
+  - text: "¿Cuál es el momento correcto para hacer una llamada a una API que alimentará el estado reactivo?"
+    explanation: "`onMounted` es el lugar ideal para cargar datos externos, ya que en ese momento el DOM ya está disponible y el estado reactivo está activo. Al actualizar el estado, Vue re-renderizará automáticamente el componente."
+    explanation_code:
+      - code: |-
+          const users = ref([]);
+
+          onMounted(async () => {
+            const response = await fetch("/api/users");
+            users.value = await response.json(); // Vue re-renderiza
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "En el nivel superior de `<script setup>` para que los datos estén listos antes del primer render."
+      - id: "2"
+        isCorrect: true
+        text: "En `onMounted`, donde el estado reactivo ya está activo y el DOM disponible."
+      - id: "3"
+        isCorrect: false
+        text: "En `onUnmounted`, para optimizar el rendimiento."
+      - id: "4"
+        isCorrect: false
+        text: "En `onBeforeMount`, para que los datos lleguen antes de que Vue monte el componente."
+
+  - text: "¿Qué ocurre automáticamente con los watchers cuando un componente es desmontado?"
+    explanation: "Los watchers creados con `watch` o `watchEffect` dentro de `<script setup>` se detienen automáticamente cuando el componente se desmonta. Vue los vincula al ciclo de vida del componente durante su creación."
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+
+          // Se detiene automáticamente al desmontar el componente
+          watchEffect(() => {
+            console.log("count:", count.value);
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Siguen ejecutándose en segundo plano indefinidamente."
+      - id: "2"
+        isCorrect: false
+        text: "Deben detenerse siempre manualmente con su valor de retorno."
+      - id: "3"
+        isCorrect: true
+        text: "Se detienen automáticamente porque Vue los vincula al ciclo de vida del componente."
+      - id: "4"
+        isCorrect: false
+        text: "Se pausan hasta que el componente vuelve a montarse."
+
+  - text: "¿Cuándo es necesario detener un watcher manualmente?"
+    explanation: "Si un watcher se crea fuera del contexto de setup sincrónico (por ejemplo, dentro de un `setTimeout` o una función async llamada desde `onMounted`), Vue no puede vincularlo al ciclo de vida del componente y debe detenerse manualmente."
+    explanation_code:
+      - code: |-
+          let stopWatcher;
+
+          onMounted(() => {
+            // Creado fuera del contexto de setup inicial
+            stopWatcher = watchEffect(() => {
+              console.log(count.value);
+            });
+          });
+
+          onUnmounted(() => {
+            stopWatcher(); // Necesario detenerlo manualmente
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Siempre, sin importar dónde se cree el watcher."
+      - id: "2"
+        isCorrect: false
+        text: "Nunca, Vue siempre lo gestiona automáticamente."
+      - id: "3"
+        isCorrect: false
+        text: "Solo cuando se usa `watch`, no con `watchEffect`."
+      - id: "4"
+        isCorrect: true
+        text: "Cuando se crea fuera del contexto de setup sincrónico, como dentro de onMounted o un setTimeout."
+
+  - text: "¿Qué tipo de recursos deben limpiarse manualmente en `onUnmounted`?"
+    explanation: "Vue gestiona automáticamente los watchers y efectos reactivos que creó, pero los efectos secundarios externos como `setInterval`, event listeners del DOM o suscripciones a servicios externos deben limpiarse manualmente en `onUnmounted`."
+    explanation_code:
+      - code: |-
+          onMounted(() => {
+            window.addEventListener("resize", handleResize);
+          });
+
+          onUnmounted(() => {
+            // Vue no gestiona esto; debe limpiarse manualmente
+            window.removeEventListener("resize", handleResize);
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Los watchers creados con `watch` o `watchEffect` en el nivel superior de setup."
+      - id: "2"
+        isCorrect: false
+        text: "Las propiedades computadas."
+      - id: "3"
+        isCorrect: true
+        text: "Intervalos, event listeners externos y suscripciones a servicios no gestionados por Vue."
+      - id: "4"
+        isCorrect: false
+        text: "Los valores `ref` y `reactive`."
+
+  - text: "¿Qué sucede con el estado reactivo cuando se actualiza dentro de `onMounted`?"
+    explanation: "El sistema reactivo de Vue detecta cualquier cambio en `ref` o `reactive`, sin importar desde dónde se haga la actualización. Al actualizar el estado en `onMounted`, Vue programa un re-render y actualiza el DOM automáticamente."
+    explanation_code:
+      - code: |-
+          const title = ref("Cargando...");
+
+          onMounted(async () => {
+            const data = await fetch("/api/config").then(r => r.json());
+            title.value = data.title; // → Vue re-renderiza el template
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "No se detecta el cambio porque `onMounted` corre fuera del ciclo reactivo."
+      - id: "2"
+        isCorrect: false
+        text: "El cambio se aplica pero el DOM no se actualiza hasta el próximo tick manual."
+      - id: "3"
+        isCorrect: false
+        text: "Lanza un error porque el DOM ya está montado."
+      - id: "4"
+        isCorrect: true
+        text: "Vue detecta el cambio y actualiza el DOM automáticamente."
+
+  - text: "Estás creando un componente que carga datos al aparecer en pantalla y limpia un recurso al salir. ¿Dónde debería ir cada parte?"
+    explanation: "El estado reactivo se declara en el nivel superior de `<script setup>`. La carga de datos puede hacerse en `onMounted`, cuando el componente ya está montado, y la limpieza de recursos externos debe hacerse en `onUnmounted`."
+    explanation_code:
+      - code: |-
+          const data = ref(null);
+          let intervalId;
+
+          onMounted(() => {
+            data.value = "listo";
+            intervalId = setInterval(() => {}, 1000);
+          });
+
+          onUnmounted(() => {
+            clearInterval(intervalId);
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Declarar el estado en `onMounted` y limpiar el recurso en el nivel superior de setup."
+      - id: "2"
+        isCorrect: false
+        text: "Declarar el estado en `onUnmounted`, cargar datos en setup y limpiar en `onMounted`."
+      - id: "3"
+        isCorrect: true
+        text: "Declarar el estado en setup, cargar datos en `onMounted` y limpiar el recurso en `onUnmounted`."
+      - id: "4"
+        isCorrect: false
+        text: "Hacer todo en `onMounted`, porque Vue limpiará automáticamente cualquier recurso externo."
+
+  - text: "¿Qué ventaja ofrece crear un composable que combine estado reactivo con `onMounted` y `onUnmounted`?"
+    explanation: "Un composable puede encapsular el estado reactivo junto con su inicialización en `onMounted` y su limpieza en `onUnmounted`. Al llamarlo desde `<script setup>`, los hooks se registran correctamente en el ciclo de vida del componente que lo consume."
+    explanation_code:
+      - code: |-
+          // useOnlineStatus.ts
+          export function useOnlineStatus() {
+            const isOnline = ref(navigator.onLine);
+            const handleOnline = () => { isOnline.value = true; };
+            const handleOffline = () => { isOnline.value = false; };
+
+            onMounted(() => {
+              window.addEventListener("online", handleOnline);
+              window.addEventListener("offline", handleOffline);
+            });
+
+            onUnmounted(() => {
+              window.removeEventListener("online", handleOnline);
+              window.removeEventListener("offline", handleOffline);
+            });
+
+            return { isOnline };
+          }
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Ninguna, los hooks no funcionan fuera de un componente."
+      - id: "2"
+        isCorrect: false
+        text: "Permite llamar a onMounted varias veces desde el mismo componente."
+      - id: "3"
+        isCorrect: true
+        text: "Encapsula estado y efectos del ciclo de vida, reutilizables en cualquier componente."
+      - id: "4"
+        isCorrect: false
+        text: "Evita que el componente necesite importar `ref` o `reactive`."
+
+  - text: "¿Por qué es importante limpiar un `setInterval` en `onUnmounted`?"
+    explanation: "Si no se limpia el intervalo al desmontar el componente, este seguirá ejecutándose en memoria aunque el componente ya no esté en pantalla. Esto puede causar fugas de memoria y actualizar estado de un componente destruido, generando errores."
+    explanation_code:
+      - code: |-
+          const time = ref(new Date().toLocaleTimeString());
+          let intervalId;
+
+          onMounted(() => {
+            intervalId = setInterval(() => {
+              time.value = new Date().toLocaleTimeString();
+            }, 1000);
+          });
+
+          onUnmounted(() => {
+            clearInterval(intervalId); // Evita fuga de memoria
+          });
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Porque Vue lanza un error si detecta un intervalo activo al desmontar."
+      - id: "2"
+        isCorrect: false
+        text: "Porque el intervalo deja de funcionar automáticamente al desmontar el componente."
+      - id: "3"
+        isCorrect: false
+        text: "Porque `setInterval` no es compatible con el sistema reactivo de Vue."
+      - id: "4"
+        isCorrect: true
+        text: "Para evitar fugas de memoria y que se actualice estado de un componente ya destruido."
