@@ -17,10 +17,12 @@ export function useVitestReporter() {
   function parseVitestSummary(report: unknown): TestSummary {
     if (!isObject(report)) return emptyTestSummary;
 
+    const suiteFailures = countSuiteFailures(report);
+
     return {
-      failed: readNumber(report, "numFailedTests"),
+      failed: readNumber(report, "numFailedTests") + suiteFailures,
       passed: readNumber(report, "numPassedTests"),
-      total: readNumber(report, "numTotalTests"),
+      total: readNumber(report, "numTotalTests") + suiteFailures,
     };
   }
 
@@ -35,6 +37,15 @@ export function useVitestReporter() {
       const assertionResults = Array.isArray(testFile.assertionResults)
         ? testFile.assertionResults
         : [];
+
+      if (assertionResults.length === 0 && isFailedStatus(testFile.status)) {
+        return [
+          {
+            name: readSuiteName(testFile),
+            status: "failed",
+          },
+        ];
+      }
 
       return assertionResults.flatMap((assertion) => {
         if (!isObject(assertion)) return [];
@@ -55,6 +66,22 @@ export function useVitestReporter() {
   return { parseReport };
 }
 
+function countSuiteFailures(report: Record<string, unknown>) {
+  if (!Array.isArray(report.testResults)) return 0;
+
+  return report.testResults.filter(
+    (testFile) =>
+      isObject(testFile) &&
+      isFailedStatus(testFile.status) &&
+      (!Array.isArray(testFile.assertionResults) || testFile.assertionResults.length === 0),
+  ).length;
+}
+
+function readSuiteName(testFile: Record<string, unknown>) {
+  const name = typeof testFile.name === "string" ? testFile.name : "Test suite";
+  return name.split(/[\\/]/).at(-1) || name;
+}
+
 function readTestName(assertion: Record<string, unknown>) {
   if (typeof assertion.fullName === "string") return assertion.fullName;
   if (typeof assertion.title === "string") return assertion.title;
@@ -71,8 +98,11 @@ function readTestName(assertion: Record<string, unknown>) {
 }
 
 function readTestStatus(assertion: Record<string, unknown>): TestCaseResult["status"] {
-  const status = assertion.status;
-  return status === "failed" || status === "fail" ? "failed" : "passed";
+  return isFailedStatus(assertion.status) ? "failed" : "passed";
+}
+
+function isFailedStatus(status: unknown) {
+  return status === "failed" || status === "fail";
 }
 
 function readNumber(source: Record<string, unknown>, key: string) {

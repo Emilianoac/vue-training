@@ -48,6 +48,30 @@ describe("useVitestReporter", () => {
     });
   });
 
+  it("represents a failed suite when no tests can run", () => {
+    const report = {
+      numFailedTests: 0,
+      numPassedTests: 0,
+      numTotalTests: 0,
+      testResults: [
+        {
+          assertionResults: [],
+          name: "/home/project/src/SessionMonitor.test.ts",
+          status: "failed",
+        },
+      ],
+    };
+
+    expect(parseReport(report)).toEqual({
+      summary: {
+        failed: 1,
+        passed: 0,
+        total: 1,
+      },
+      testCases: [{ name: "SessionMonitor.test.ts", status: "failed" }],
+    });
+  });
+
   it("ignores malformed test files and assertions", () => {
     const report = {
       testResults: [
