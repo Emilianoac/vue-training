@@ -9,6 +9,7 @@ import {
   WEB_CONTAINER_TEMPLATE_VERSION,
 } from "../template";
 import type {
+  EditorCodeViewerFile,
   EditorFileTab,
   EditorSolutionFile,
   RunnerStatus,
@@ -45,6 +46,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
         ]
       : [],
   );
+  const testFiles: EditorCodeViewerFile[] = challenge.files
+    .filter((file) => file.icon === "test")
+    .map(({ content, icon, label, path }) => ({ content, icon, label, path }));
   const activeFilePath = ref(editableChallengeFiles[0]?.path ?? "");
   const fileContents = reactive<Record<string, string>>(
     Object.fromEntries(editableChallengeFiles.map((file) => [file.path, file.content])),
@@ -597,6 +601,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     solutionFiles,
     terminalOutput,
     testCases,
+    testFiles,
     testSummary,
     timings,
   };

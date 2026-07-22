@@ -193,7 +193,8 @@
       "actions": {
         "save": "Save changes",
         "reset": "Reset challenge",
-        "solution": "View solution",
+      "solution": "View solution",
+      "tests": "View tests",
         "loadSolution": "Load solution into editor",
         "loadCompleteSolution": "Load complete solution",
         "runTests": "Run tests",
@@ -212,10 +213,14 @@
         "empty": "Open or reload the preview to mount the component.",
         "loading": "Starting preview..."
       },
-      "solution": {
-        "title": "Solution",
-        "description": "Review the solution without replacing your code. If you want to use it, load it manually into the editor."
-      },
+    "solution": {
+      "title": "Solution",
+      "description": "Review the solution without replacing your code. If you want to use it, load it manually into the editor."
+    },
+    "tests": {
+      "title": "Tests",
+      "description": "Review the tests used to evaluate this challenge. These files are read-only."
+    },
       "status": {
         "booting": "Initializing environment...",
         "installing": "Installing dependencies...",

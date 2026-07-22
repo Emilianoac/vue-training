@@ -193,7 +193,8 @@
       "actions": {
         "save": "Guardar cambios",
         "reset": "Reiniciar desafio",
-        "solution": "Ver solución",
+      "solution": "Ver solución",
+      "tests": "Ver tests",
         "loadSolution": "Cargar solución en el editor",
         "loadCompleteSolution": "Cargar solución completa",
         "runTests": "Ejecutar tests",
@@ -212,10 +213,14 @@
         "empty": "Abre o recarga el preview para montar el componente.",
         "loading": "Iniciando preview..."
       },
-      "solution": {
-        "title": "Solución",
-        "description": "Revisa la solución sin reemplazar tu código. Si quieres usarla, cárgala manualmente en el editor."
-      },
+    "solution": {
+      "title": "Solución",
+      "description": "Revisa la solución sin reemplazar tu código. Si quieres usarla, cárgala manualmente en el editor."
+    },
+    "tests": {
+      "title": "Tests",
+      "description": "Revisa los tests utilizados para evaluar este challenge. Estos archivos son de solo lectura."
+    },
       "status": {
         "booting": "Inicializando entorno...",
         "installing": "Instalando dependencias...",

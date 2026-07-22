@@ -5,19 +5,12 @@ import { useWebContainerRunner } from "@/lib/challenge-runners/webcontainer/comp
 import { hasPreparedSnapshotHint } from "@/lib/challenge-runners/webcontainer/services/snapshotCache";
 import { WEB_CONTAINER_TEMPLATE_VERSION } from "@/lib/challenge-runners/webcontainer/template";
 import CodeMirrorEditor from "./CodeMirrorEditor.client.vue";
+import ChallengeCodeViewerDialog from "./ChallengeCodeViewerDialog.vue";
 import ChallengeSetupOverlay from "./ChallengeSetupOverlay.vue";
 import ChallengeTerminal from "./ChallengeTerminal.client.vue";
 import ChallengeTestResults from "./ChallengeTestResults.vue";
 import ChallengeToolbar from "./ChallengeToolbar.vue";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -61,6 +54,7 @@ const {
   solutionFiles,
   terminalOutput,
   testCases,
+  testFiles,
   testSummary,
 } = useWebContainerRunner(props.challengeId);
 
@@ -70,13 +64,20 @@ const emit = defineEmits<{
 
 const activeEditorTab = ref("editor");
 const activeSolutionPath = ref("");
-const activeSolutionFile = computed(() =>
-  solutionFiles.find((file) => file.path === activeSolutionPath.value),
+const solutionViewerFiles = computed(() =>
+  solutionFiles.map(({ icon, label, path, solution }) => ({
+    content: solution,
+    icon,
+    label,
+    path,
+  })),
 );
+const activeTestPath = ref("");
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const isFullscreen = ref(false);
 const showSetupOverlay = ref(!hasPreparedSnapshotHint(WEB_CONTAINER_TEMPLATE_VERSION));
 const showSolutionDialog = ref(false);
+const showTestsDialog = ref(false);
 const runnerRoot = ref<HTMLElement | null>(null);
 let setupOverlayTimer: number | undefined;
 
@@ -146,6 +147,11 @@ function openSolutionDialog() {
     : (solutionFiles[0]?.path ?? "");
   showSolutionDialog.value = true;
 }
+
+function openTestsDialog() {
+  activeTestPath.value = testFiles[0]?.path ?? "";
+  showTestsDialog.value = true;
+}
 </script>
 
 <template>
@@ -158,6 +164,7 @@ function openSolutionDialog() {
       <ChallengeToolbar
         :active-file-path="activeFilePath"
         :can-load-solution="canLoadSolution"
+        :can-view-tests="testFiles.length > 0"
         :can-reset-code="canResetCode"
         :can-save-code="canSaveCode"
         :dirty-file-paths="dirtyFilePaths"
@@ -168,6 +175,7 @@ function openSolutionDialog() {
         @select-file="selectFile"
         @toggle-fullscreen="toggleFullscreen"
         @view-solution="openSolutionDialog"
+        @view-tests="openTestsDialog"
       />
 
       <ResizablePanelGroup direction="vertical" class="min-h-0 flex-1">
@@ -305,55 +313,34 @@ function openSolutionDialog() {
 
       <ChallengeSetupOverlay v-if="showSetupOverlay" :complete="isReady" :stage="setupLabel" />
 
-      <Dialog v-model:open="showSolutionDialog">
-        <DialogContent
-          class="flex max-h-[85dvh] w-[min(96vw,1200px)] max-w-none flex-col overflow-hidden p-0 sm:max-w-[1200px]"
-          @close-auto-focus.prevent
-        >
-          <DialogHeader class="border-b border-(--editor-panel-border) px-5 pt-4">
-            <DialogTitle>{{ t("challenge.runner.solution.title") }}</DialogTitle>
-            <DialogDescription>
-              {{ t("challenge.runner.solution.description") }}
-            </DialogDescription>
+      <ChallengeCodeViewerDialog
+        v-model:active-path="activeSolutionPath"
+        v-model:open="showSolutionDialog"
+        :description="t('challenge.runner.solution.description')"
+        :files="solutionViewerFiles"
+        :title="t('challenge.runner.solution.title')"
+      >
+        <template #footer>
+          <Button variant="outline" :disabled="!canLoadSolution" @click="applySolution">
+            {{ t("challenge.runner.actions.loadSolution") }}
+          </Button>
+          <Button
+            v-if="solutionFiles.length > 1"
+            :disabled="!canLoadCompleteSolution"
+            @click="applyCompleteSolution"
+          >
+            {{ t("challenge.runner.actions.loadCompleteSolution") }}
+          </Button>
+        </template>
+      </ChallengeCodeViewerDialog>
 
-            <Tabs v-model="activeSolutionPath" class="mt-2 gap-0">
-              <TabsList class="h-auto justify-start rounded-none bg-transparent p-0">
-                <TabsTrigger
-                  v-for="file in solutionFiles"
-                  :key="file.path"
-                  class="rounded-none border-b-2 border-transparent px-3 py-2 text-xs data-[state=active]:border-(--editor-panel-tab-accent) data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-                  :value="file.path"
-                >
-                  {{ file.label }}
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </DialogHeader>
-
-          <div class="min-h-0 flex-1 basis-[55dvh] bg-(--editor-background)">
-            <CodeMirrorEditor
-              v-if="activeSolutionFile"
-              :key="activeSolutionFile.path"
-              :model-value="activeSolutionFile.solution"
-              :file-path="activeSolutionFile.path"
-              readonly
-            />
-          </div>
-
-          <DialogFooter class="shrink-0 border-t border-(--editor-panel-border) px-5 py-4">
-            <Button variant="outline" :disabled="!canLoadSolution" @click="applySolution">
-              {{ t("challenge.runner.actions.loadSolution") }}
-            </Button>
-            <Button
-              v-if="solutionFiles.length > 1"
-              :disabled="!canLoadCompleteSolution"
-              @click="applyCompleteSolution"
-            >
-              {{ t("challenge.runner.actions.loadCompleteSolution") }}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ChallengeCodeViewerDialog
+        v-model:active-path="activeTestPath"
+        v-model:open="showTestsDialog"
+        :description="t('challenge.runner.tests.description')"
+        :files="testFiles"
+        :title="t('challenge.runner.tests.title')"
+      />
     </div>
 
     <template #fallback>

@@ -14,6 +14,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 defineProps<{
   canLoadSolution: boolean;
+  canViewTests: boolean;
   canResetCode: boolean;
   canSaveCode: boolean;
   activeFilePath: string;
@@ -28,6 +29,7 @@ defineEmits<{
   selectFile: [path: string];
   toggleFullscreen: [];
   viewSolution: [];
+  viewTests: [];
 }>();
 
 const { t } = useI18n();
@@ -101,6 +103,23 @@ const { t } = useI18n();
             </TooltipTrigger>
             <TooltipContent>
               <p>{{ t("challenge.runner.actions.reset") }}</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <Button
+                :aria-label="t('challenge.runner.actions.tests')"
+                :disabled="!canViewTests"
+                size="icon-sm"
+                variant="ghost"
+                @click="$emit('viewTests')"
+              >
+                <FlaskConicalIcon class="size-3.5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{{ t("challenge.runner.actions.tests") }}</p>
             </TooltipContent>
           </Tooltip>
 

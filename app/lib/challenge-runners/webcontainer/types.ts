@@ -12,6 +12,10 @@ export type ChallengeFile = {
 
 export type EditorFileTab = Pick<ChallengeFile, "icon" | "label" | "path">;
 
+export type EditorCodeViewerFile = EditorFileTab & {
+  content: string;
+};
+
 export type EditorSolutionFile = EditorFileTab & {
   solution: string;
 };
