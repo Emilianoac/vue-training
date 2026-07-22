@@ -208,6 +208,9 @@
         "editor": "Editor",
         "preview": "Preview"
       },
+      "editor": {
+        "syntaxError": "Syntax error"
+      },
       "preview": {
         "title": "Challenge preview",
         "empty": "Open or reload the preview to mount the component.",

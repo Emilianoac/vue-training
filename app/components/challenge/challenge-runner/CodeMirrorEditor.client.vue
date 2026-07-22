@@ -14,6 +14,7 @@ const emit = defineEmits<{
   "update:modelValue": [value: string];
 }>();
 
+const { t } = useI18n();
 const editorRoot = ref<HTMLElement | null>(null);
 let editorView: EditorView | null = null;
 
@@ -35,6 +36,7 @@ onMounted(() => {
       {
         language: language.value,
         readonly: props.readonly,
+        syntaxErrorMessage: t("challenge.runner.editor.syntaxError"),
       },
     ),
   });

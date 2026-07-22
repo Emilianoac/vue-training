@@ -36,6 +36,7 @@ import {
   type ViewUpdate,
 } from "@codemirror/view";
 import { tags as t } from "@lezer/highlight";
+import { createSyntaxLintExtension } from "./CodeMirrorEditor.lint";
 
 const syntaxTheme = HighlightStyle.define([
   { tag: t.comment, color: "var(--editor-syntax-comment)", fontStyle: "italic" },
@@ -169,6 +170,7 @@ export function createCodeMirrorExtensions(
   options: {
     language?: "javascript" | "typescript" | "vue";
     readonly?: boolean;
+    syntaxErrorMessage?: string;
   } = {},
 ) {
   const language = options.language ?? "vue";
@@ -189,6 +191,9 @@ export function createCodeMirrorExtensions(
       },
     ]),
     languageExtension,
+    ...(options.readonly
+      ? []
+      : [createSyntaxLintExtension(options.syntaxErrorMessage ?? "Syntax error")]),
     editorTheme,
     syntaxHighlighting(syntaxTheme),
     EditorView.updateListener.of((update: ViewUpdate) => {

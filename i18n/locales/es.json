@@ -208,6 +208,9 @@
         "editor": "Editor",
         "preview": "Preview"
       },
+      "editor": {
+        "syntaxError": "Error de sintaxis"
+      },
       "preview": {
         "title": "Preview del desafio",
         "empty": "Abre o recarga el preview para montar el componente.",
