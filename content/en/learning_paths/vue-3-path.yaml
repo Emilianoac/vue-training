@@ -91,8 +91,24 @@ steps:
     sub_steps:
       - name: Component Communication
         id: component-communication
-        status: planned
-        items: []
+        items:
+          - id: props-emits-lesson
+            type: lesson
+            level: basic
+            title: Basic Component Communication
+            subtitle: Learn how to pass data with props and notify changes with emits.
+
+          - id: props-emits-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test your understanding of props, emits, and parent-child communication.
+
+          - id: props-emits-quantity-stepper
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Complete a controlled component that communicates changes with update:modelValue.
 
       - name: Slots and Layouts
         id: slots-layouts

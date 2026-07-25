@@ -1,0 +1,256 @@
+documentId: "props-emits-quiz"
+title: "Basic Component Communication in Vue 3"
+level: "basic"
+slug: "props-emits-quiz"
+description: "Quiz about typed and validated props, emits with clear contracts, and the parent-child communication pattern in Vue 3."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "What is the correct direction of data flow between props and emits in Vue 3?"
+    explanation: "Vue follows a one-way data flow: the parent passes data to the child via props, and the child notifies the parent via emits. This makes the flow predictable and easy to trace."
+    explanation_code:
+      - code: |-
+          // Parent → Child (props)
+          <UserCard :name="userName" :age="28" />
+
+          // Child → Parent (emits)
+          <LoginForm @submit="onLogin" />
+        language: "html"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "The child passes data to the parent via props and the parent notifies the child via emits."
+      - id: "2"
+        isCorrect: true
+        text: "The parent passes data to the child via props, and the child notifies the parent via emits."
+      - id: "3"
+        isCorrect: false
+        text: "Both props and emits flow freely in both directions."
+      - id: "4"
+        isCorrect: false
+        text: "Props and emits can only be used between sibling components."
+
+  - text: "How do you define an optional prop with TypeScript in `<script setup>`?"
+    explanation: "To mark a prop as optional in the TypeScript generic syntax, add `?` after the property name in the type interface or object."
+    explanation_code:
+      - code: |-
+          const props = defineProps<{
+            name: string       // required
+            isActive?: boolean // optional
+          }>()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "By adding `required: false` in the prop definition."
+      - id: "2"
+        isCorrect: false
+        text: "Using `undefined` as the type: `isActive: boolean | undefined`."
+      - id: "3"
+        isCorrect: true
+        text: "By adding `?` after the prop name in the TypeScript type."
+      - id: "4"
+        isCorrect: false
+        text: "By passing `null` as the default value from the parent."
+
+  - text: "What is `withDefaults` used for alongside `defineProps`?"
+    explanation: "`withDefaults` lets you assign default values to optional props when using the TypeScript generic syntax with `defineProps`. It is the correct way to combine typing and initial values."
+    explanation_code:
+      - code: |-
+          const props = withDefaults(defineProps<{
+            role?: string
+            isActive?: boolean
+          }>(), {
+            role: "viewer",
+            isActive: false,
+          })
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "To validate prop values with custom functions."
+      - id: "2"
+        isCorrect: false
+        text: "To make all props required automatically."
+      - id: "3"
+        isCorrect: false
+        text: "To convert props into internal reactive state of the component."
+      - id: "4"
+        isCorrect: true
+        text: "To define default values for optional props with TypeScript typing."
+
+  - text: "How is a prop named `isActive` (camelCase) passed from the parent's template?"
+    explanation: "Vue automatically converts camelCase props to kebab-case in templates. By convention and HTML compatibility, `isActive` should be passed as `is-active` in the template."
+    explanation_code:
+      - code: |-
+          <!-- ✅ Correct: kebab-case in template -->
+          <UserCard :is-active="true" />
+
+          <!-- ❌ Also works but not the convention -->
+          <UserCard :isActive="true" />
+        language: "html"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "As `isActive` exactly as in the script."
+      - id: "2"
+        isCorrect: false
+        text: "As `IsActive` in PascalCase."
+      - id: "3"
+        isCorrect: true
+        text: "As `is-active` in kebab-case."
+      - id: "4"
+        isCorrect: false
+        text: "As `is_active` with an underscore."
+
+  - text: "What happens when a prop fails the `validator` function defined in `defineProps`?"
+    explanation: "If a prop fails validation, Vue emits a warning in the browser console during development. The application does not stop, but the issue is logged."
+    explanation_code:
+      - code: |-
+          defineProps({
+            role: {
+              type: String,
+              validator: (value) => ["admin", "editor", "viewer"].includes(value),
+            },
+          })
+          // If role="superuser" is passed, Vue shows a warning in the console
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "The application throws an error and stops."
+      - id: "2"
+        isCorrect: false
+        text: "Vue silently ignores the invalid prop."
+      - id: "3"
+        isCorrect: false
+        text: "The component does not render."
+      - id: "4"
+        isCorrect: true
+        text: "Vue emits a warning in the console during development."
+
+  - text: "What is the correct way to define emits with TypeScript typing in `<script setup>`?"
+    explanation: "With the TypeScript generic syntax, `defineEmits` accepts a type object where keys are event names and values are arrays with the argument types."
+    explanation_code:
+      - code: |-
+          const emit = defineEmits<{
+            submit: [email: string, password: string]
+            cancel: []
+          }>()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`defineEmits(['submit', 'cancel'])` passing an array of strings."
+      - id: "2"
+        isCorrect: false
+        text: "`defineEmits({ submit: Function, cancel: Function })`."
+      - id: "3"
+        isCorrect: true
+        text: "`defineEmits<{ submit: [email: string, password: string]; cancel: [] }>()`."
+      - id: "4"
+        isCorrect: false
+        text: "`defineEmits<[submit: string, cancel: void]>()`."
+
+  - text: "Why should you never mutate a prop directly inside the child component?"
+    explanation: "Vue follows a one-way data flow. If the child mutated the prop directly, the parent and child state would become out of sync and it would be impossible to trace where changes come from. The correct approach is to emit an event so the parent decides whether to update the state."
+    explanation_code:
+      - code: |-
+          // ❌ Never do this
+          props.name = "Another name"
+
+          // ✅ Emit an event so the parent updates it
+          emit("update:name", "Another name")
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Because props are `readonly` at the TypeScript level and cause a compile error."
+      - id: "2"
+        isCorrect: false
+        text: "Because Vue removes the prop if it detects it was mutated."
+      - id: "3"
+        isCorrect: true
+        text: "Because it breaks the one-way data flow and makes it impossible to trace the origin of changes."
+      - id: "4"
+        isCorrect: false
+        text: "Because direct changes to props are not reflected in the template."
+
+  - text: "How does the parent component listen to the `submit` event emitted by a child?"
+    explanation: "In the parent's template, events emitted by the child are listened to with the `@event-name` or `v-on:event-name` directive, passing a handler as the value."
+    explanation_code:
+      - code: |-
+          <!-- Parent listens to the 'submit' event -->
+          <LoginForm @submit="onLogin" />
+
+          <script setup lang="ts">
+          function onLogin(email: string, password: string) {
+            console.log(email, password)
+          }
+          </script>
+        language: "html"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Using `props.onSubmit` in the parent's script."
+      - id: "2"
+        isCorrect: false
+        text: "Using `watch` to observe the emit value."
+      - id: "3"
+        isCorrect: false
+        text: "Importing the child component and calling its `emit` function directly."
+      - id: "4"
+        isCorrect: true
+        text: 'With `@submit="handler"` in the parent''s template.'
+
+  - text: "In the 'controlled component' pattern, who owns the state?"
+    explanation: "In the controlled component pattern, the parent owns the state. The child only receives the current value via props and requests changes by emitting events. This centralizes the state and makes it easier to manage."
+    explanation_code:
+      - code: |-
+          <!-- Parent: owns the state -->
+          <Counter :count="count" @change="count = $event" />
+
+          <!-- Child: only displays and emits -->
+          <button @click="emit('change', props.count + 1)">+</button>
+        language: "html"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "The child component, which maintains its own internal state."
+      - id: "2"
+        isCorrect: false
+        text: "Both, the parent and child share the same reactive reference."
+      - id: "3"
+        isCorrect: true
+        text: "The parent component, which passes the value to the child and updates state when receiving emits."
+      - id: "4"
+        isCorrect: false
+        text: "A global store like Pinia."
+
+  - text: "What advantage does using descriptive names for emits offer over generic names?"
+    explanation: "Descriptive names like `submit`, `delete`, or `update:modelValue` clearly communicate the intent of the event. Generic names like `click` or `change` are ambiguous and make it hard to understand the component's contract without reading its implementation."
+    explanation_code:
+      - code: |-
+          // ❌ Generic: what does this 'change' mean?
+          emit("change", value)
+
+          // ✅ Descriptive: clear intent
+          emit("update:modelValue", value)
+          emit("delete", itemId)
+          emit("submit", formData)
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "The component runs faster when processing events."
+      - id: "2"
+        isCorrect: false
+        text: "Vue can automatically validate the event arguments."
+      - id: "3"
+        isCorrect: false
+        text: "Descriptive emits do not need to be declared in `defineEmits`."
+      - id: "4"
+        isCorrect: true
+        text: "They clearly communicate the event's intent, creating understandable contracts without reading the implementation."
