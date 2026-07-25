@@ -3,6 +3,10 @@
   "title": "Clean Up Resources with onUnmounted",
   "slug": "lifecycle-session-monitor",
   "level": "basic",
+  "topics": [
+    { "id": "on-mounted", "label": "onMounted" },
+    { "id": "on-unmounted", "label": "onUnmounted" }
+  ],
   "category": {
     "name": "Vue 3",
     "image": {

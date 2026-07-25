@@ -16,6 +16,7 @@ function createChallengeService(): ChallengeService {
         "title",
         "slug",
         "level",
+        "topics",
         "category",
         "short_description",
         "cover",

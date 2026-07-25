@@ -3,6 +3,10 @@
   "title": "Registrar cambios con watch",
   "slug": "watch-question-log",
   "level": "basic",
+  "topics": [
+    { "id": "watch", "label": "watch" },
+    { "id": "ref", "label": "ref" }
+  ],
   "category": {
     "name": "Vue 3",
     "image": {

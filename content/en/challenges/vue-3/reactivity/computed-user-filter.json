@@ -3,6 +3,10 @@
   "title": "Filter Users with computed",
   "slug": "computed-user-filter",
   "level": "basic",
+  "topics": [
+    { "id": "computed", "label": "computed" },
+    { "id": "ref", "label": "ref" }
+  ],
   "category": {
     "name": "Vue 3",
     "image": {

@@ -3,6 +3,7 @@
   "title": "Counter State with ref",
   "slug": "ref-counter-state",
   "level": "basic",
+  "topics": [{ "id": "ref", "label": "ref" }],
   "category": {
     "name": "Vue 3",
     "image": {

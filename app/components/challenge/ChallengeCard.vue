@@ -4,6 +4,7 @@ import type { Challenge } from "@/schemas/challenge.schema";
 import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 defineProps<{
   challenge: Challenge;
@@ -37,11 +38,20 @@ defineProps<{
             <h3 class="text-sm font-bold line-clamp-1">{{ challenge.title }}</h3>
             <!-- Description -->
             <p
-              class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-3"
+              class="mt-3 line-clamp-2 text-sm text-gray-500 dark:text-gray-400"
               :title="challenge.short_description"
             >
               {{ challenge.short_description }}
             </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <Badge
+                v-for="topic in challenge.topics"
+                :key="topic.id"
+                class="border-transparent bg-black text-xs font-normal text-white dark:bg-white dark:text-black"
+              >
+                {{ topic.label }}
+              </Badge>
+            </div>
           </div>
         </CardContent>
       </NuxtLink>

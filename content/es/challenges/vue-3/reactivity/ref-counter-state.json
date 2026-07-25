@@ -3,6 +3,7 @@
   "title": "Estado de contador con ref",
   "slug": "ref-counter-state",
   "level": "basic",
+  "topics": [{ "id": "ref", "label": "ref" }],
   "category": {
     "name": "Vue 3",
     "image": {
