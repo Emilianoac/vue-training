@@ -176,6 +176,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   :deep(h3) {
     font-weight: 600;
     font-size: 1.1rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     border-left: 6px solid var(--primary);
     padding-left: 0.3rem;
