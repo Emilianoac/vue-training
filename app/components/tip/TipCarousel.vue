@@ -50,10 +50,10 @@ watch(
             <CarouselItem v-for="(tip, index) in tips" :key="index">
               <div class="p-1 space-y-3">
                 <div class="select-none">
-                  <h4 class="text-lg font-semibold mb-1">
+                  <h4 class="text-lg font-semibold mb-1 line-clamp-2">
                     {{ tip.title }}
                   </h4>
-                  <p class="text-[0.85em]">{{ tip.short_description }}</p>
+                  <p class="text-[0.85em] line-clamp-2">{{ tip.short_description }}</p>
                 </div>
                 <Dialog>
                   <DialogTrigger :as-child="true">
