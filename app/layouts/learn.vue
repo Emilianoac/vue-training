@@ -52,7 +52,12 @@ const isMenuActive = (url: string) => {
             <ul class="space-y-2">
               <li v-for="item in menuItems" :key="item.title">
                 <Button as-child variant="ghost" class="w-full justify-start">
-                  <NuxtLink :to="item.url" :class="{ 'bg-sidebar-accent': isMenuActive(item.url) }">
+                  <NuxtLink
+                    :to="item.url"
+                    :class="{
+                      'bg-sidebar-accent hover:bg-sidebar-accent!': isMenuActive(item.url),
+                    }"
+                  >
                     <div class="flex items-center gap-2">
                       <component :is="item.icon" class="size-4" />
                       <span>{{ $t(item.title) }}</span>
@@ -64,7 +69,7 @@ const isMenuActive = (url: string) => {
           </nav>
         </div>
       </aside>
-      <main class="min-h-0 min-w-0 overflow-y-auto p-4 md:p-6">
+      <main class="min-h-0 min-w-0 overflow-y-auto p-4 pr-0">
         <slot />
       </main>
     </div>

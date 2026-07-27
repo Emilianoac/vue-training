@@ -57,7 +57,7 @@ watch(
 </script>
 
 <template>
-  <ScrollArea class="h-full md:pr-4">
+  <ScrollArea class="h-full pr-4" type="auto">
     <div class="space-y-6">
       <h1 class="text-xl md:text-2xl font-bold">{{ t("learn.home.title") }}</h1>
       <section class="space-y-2">

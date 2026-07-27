@@ -10,7 +10,7 @@ useStaticPageSeo("learning_path");
 </script>
 
 <template>
-  <ScrollArea class="h-full md:pr-4">
+  <ScrollArea class="h-full pr-4" type="auto">
     <LearningPath path-id="vue-3-path" />
   </ScrollArea>
 </template>

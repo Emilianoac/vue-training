@@ -14,7 +14,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <ScrollArea class="@4xl:h-full @4xl:pr-3">
+  <ScrollArea class="@4xl:h-full @4xl:pr-3" type="hover">
     <ul v-if="tips.length && currentTip" class="space-y-4 p-1">
       <li v-for="tip in tips" :key="tip.documentId" @click="emit('select-tip', tip)">
         <Button

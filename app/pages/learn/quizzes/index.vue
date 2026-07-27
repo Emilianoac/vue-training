@@ -47,7 +47,7 @@ watch(
 </script>
 
 <template>
-  <ScrollArea class="h-full md:pr-4">
+  <ScrollArea class="h-full pr-4">
     <div>
       <div class="block md:flex justify-end items-center mb-4 px-1">
         <div class="flex flex-col items-start md:flex-row md:items-center md:justify-end gap-5">

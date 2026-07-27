@@ -61,7 +61,7 @@ async function scrollToSection(sectionId: string | null) {
         <h1 class="text-center md:text-start text-xl font-bold mb-8">{{ learningPath.title }}</h1>
         <div v-for="step in learningPath.steps" class="space-y-4">
           <!-- Step Title -->
-          <div class="flex items-center justify-center gap-6">
+          <div class="flex items-center justify-center gap-6 sticky top-0 z-200 bg-background py-2">
             <hr class="border w-full" />
             <div class="flex items-center gap-2">
               <h2 class="text-xl font-semibold text-center whitespace-nowrap">{{ step.name }}</h2>
@@ -73,7 +73,7 @@ async function scrollToSection(sectionId: string | null) {
           </div>
 
           <!--Step -->
-          <div class="mx-auto my-10 space-y-6">
+          <div class="mx-auto my-10 space-y-6 px-2">
             <div
               v-for="(subStep, index) in step.sub_steps"
               :id="subStep.id"

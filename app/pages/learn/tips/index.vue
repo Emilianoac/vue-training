@@ -6,7 +6,6 @@ import useRandomTip from "@/composables/tip/useRandomTip";
 import Vuecito from "@/components/assets/illustrations/Vuecito.vue";
 import IconDice from "@/components/assets/icons/IconDice.vue";
 import TipList from "@/components/tip/TipList.vue";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -34,58 +33,65 @@ watch(
 </script>
 
 <template>
-  <div class="@container/tips h-full">
-    <div
-      v-if="currentRandomTip"
-      class="grid grid-cols-1 @4xl:grid-cols-[auto_minmax(0,1fr)_300px] @4xl:h-full gap-8"
-    >
-      <div class="w-full @4xl:min-h-0">
-        <Vuecito
-          class="max-w-25 @4xl:max-w-50 w-full mx-auto h-auto"
-          mood="surprised"
-          :tip-id="currentRandomTip.documentId"
-        />
-        <Button variant="secondary" size="xl" class="flex mx-auto mt-4" @click="getRandomTip()">
-          {{ $t("randomTip.general.get_a_new_tip") }}
-          <DicesIcon class="w-5 h-5" />
-        </Button>
-      </div>
+  <ScrollArea
+    class="@container/tips h-full"
+    viewport-class="overflow-y-scroll! @4xl:overflow-hidden! @4xl:[&>div]:h-full"
+    scrollbar-class="@4xl:hidden!"
+    type="auto"
+  >
+    <div class="h-full pr-4 @4xl:pr-0">
+      <div
+        v-if="currentRandomTip"
+        class="grid grid-cols-1 gap-8 @4xl:h-full @4xl:min-h-0 @4xl:grid-cols-[auto_minmax(0,1fr)_300px] @4xl:grid-rows-[minmax(0,1fr)]"
+      >
+        <div class="w-full @4xl:min-h-0">
+          <Vuecito
+            class="max-w-25 @4xl:max-w-50 w-full mx-auto h-auto"
+            mood="surprised"
+            :tip-id="currentRandomTip.documentId"
+          />
+          <Button variant="secondary" size="xl" class="flex mx-auto mt-4" @click="getRandomTip()">
+            {{ $t("randomTip.general.get_a_new_tip") }}
+            <DicesIcon class="w-5 h-5" />
+          </Button>
+        </div>
 
-      <transition name="fade" mode="out-in">
-        <article
-          class="flex flex-col w-full @4xl:h-full min-h-10 pt-2 bg-transparent gap-0"
-          :key="currentRandomTip.documentId"
-        >
-          <header class="border-b pb-3!">
-            <h3 class="text-lg font-semibold">
-              {{ currentRandomTip.title }}
-            </h3>
-            <Button
-              variant="link"
-              as-child
-              class="p-0 text-blue-500 w-fit h-auto text-xs whitespace-break-spaces"
-            >
-              <a :href="currentRandomTip.source_url">
-                {{ currentRandomTip.source_url }}
-              </a>
-            </Button>
-          </header>
-          <main class="mt-5 overflow-hidden">
-            <ScrollArea class="h-full @4xl:pr-4">
-              <TipDetails :tip="currentRandomTip" />
-            </ScrollArea>
-          </main>
-        </article>
-      </transition>
-      <div class="min-h-0 w-full @4xl:h-full">
-        <TipList
-          :currentTip="currentRandomTip"
-          :tips="tips"
-          @select-tip="(tip: Tip) => selectTip(tip)"
-        />
+        <transition name="fade" mode="out-in">
+          <article
+            class="flex flex-col w-full @4xl:h-full min-h-10 pt-2 bg-transparent gap-0"
+            :key="currentRandomTip.documentId"
+          >
+            <header class="border-b pb-3!">
+              <h3 class="text-lg font-semibold">
+                {{ currentRandomTip.title }}
+              </h3>
+              <Button
+                variant="link"
+                as-child
+                class="p-0 text-blue-500 w-fit h-auto text-xs whitespace-break-spaces"
+              >
+                <a :href="currentRandomTip.source_url">
+                  {{ currentRandomTip.source_url }}
+                </a>
+              </Button>
+            </header>
+            <main class="mt-5 min-h-0 flex-1 overflow-hidden">
+              <ScrollArea class="h-full @4xl:pr-4" type="auto">
+                <TipDetails :tip="currentRandomTip" />
+              </ScrollArea>
+            </main>
+          </article>
+        </transition>
+        <div class="min-h-0 w-full @4xl:h-full">
+          <TipList
+            :currentTip="currentRandomTip"
+            :tips="tips"
+            @select-tip="(tip: Tip) => selectTip(tip)"
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </ScrollArea>
 </template>
 
 <style lang="scss" scoped>

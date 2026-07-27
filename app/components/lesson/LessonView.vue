@@ -49,9 +49,7 @@ watch(
 
 watch(activeSectionId, async (sectionId) => {
   await nextTick();
-  const sectionLinks = lessonNavigation.value?.querySelectorAll<HTMLElement>(
-    "[data-toc-section]",
-  );
+  const sectionLinks = lessonNavigation.value?.querySelectorAll<HTMLElement>("[data-toc-section]");
   const activeLink = Array.from(sectionLinks ?? []).find(
     (link) => link.dataset.tocSection === sectionId,
   );
@@ -140,9 +138,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
         </div>
       </aside>
 
-      <main ref="lessonContent" class="lesson-container overflow-hidden rounded-md border p-6">
+      <main ref="lessonContent" class="lesson-container overflow-hidden rounded-md border">
         <div class="h-full">
-          <ScrollArea class="h-full pr-4">
+          <ScrollArea class="h-full p-6" type="auto">
             <section
               v-for="(blocks, index) in sectionBlocks"
               :key="lessonSections[index]?.id ?? index"
@@ -153,10 +151,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
                 :value="getSectionValue(blocks)"
               />
             </section>
+            <slot name="actions" :total-sections="totalSections" />
           </ScrollArea>
         </div>
-
-        <slot name="actions" :total-sections="totalSections" />
       </main>
     </div>
   </div>
