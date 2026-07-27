@@ -3,7 +3,6 @@ import type { Question } from "@/schemas/quiz.schema";
 import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue";
 import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 defineProps<{
   totalQuestions: number;
@@ -35,7 +34,7 @@ const emits = defineEmits<{
     />
 
     <!-- Quiz Container -->
-    <div class="bg-card border p-4 rounded-md mx-auto flex-1 overflow-hidden w-full">
+    <div class="mx-auto min-h-0 w-full flex-1 overflow-hidden rounded-md border bg-card p-4">
       <!-- Question -->
       <QuizQuestion
         v-if="currentQuestion"

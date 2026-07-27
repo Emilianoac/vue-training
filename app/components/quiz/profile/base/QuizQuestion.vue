@@ -2,6 +2,7 @@
 import type { Question } from "@/schemas/quiz.schema";
 import useMarkdownParser from "@/composables/useMarkdownParser";
 import QuizAnswerOption from "./QuizAnswerOption.vue";
+import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
 
 const { parse } = useMarkdownParser();
 
@@ -27,29 +28,31 @@ const parsedAnswers = computed(() =>
 </script>
 
 <template>
-  <div class="flex flex-col h-full gap-2">
-    <div class="block md:flex items-center md:text-[1.2rem] font-semibold flex-1">
+  <div class="flex h-full min-h-0 flex-col gap-2">
+    <div class="block shrink-0 font-semibold md:flex md:items-center md:text-[1.2rem]">
       <span class="block me-1">{{ questionIndex }}.</span>
       <div class="question-text" v-html="parsedQuestion"></div>
     </div>
 
-    <ul class="overflow-scroll h-full flex flex-col gap-3">
-      <li
-        v-for="answer in parsedAnswers"
-        :key="answer.id"
-        class="flex items-center rounded-md gap-2 cursor-pointer relative"
-      >
-        <QuizAnswerOption
-          :answer-id="answer.id"
-          :answer-text="answer.parsedtext"
-          :isSelected="selectedOption === answer.id"
-          :isCorrectAnswer="answer.isCorrect"
-          :showAnswerResult="checkAnswer"
-          :isDisabled="checkAnswer"
-          @select="(option) => emit('update:selectedOption', option)"
-        />
-      </li>
-    </ul>
+    <ScrollArea type="auto" class="min-h-0 flex-1 pr-4">
+      <ul class="flex flex-col gap-3">
+        <li
+          v-for="answer in parsedAnswers"
+          :key="answer.id"
+          class="relative flex cursor-pointer items-center gap-2 rounded-md"
+        >
+          <QuizAnswerOption
+            :answer-id="answer.id"
+            :answer-text="answer.parsedtext"
+            :isSelected="selectedOption === answer.id"
+            :isCorrectAnswer="answer.isCorrect"
+            :showAnswerResult="checkAnswer"
+            :isDisabled="checkAnswer"
+            @select="(option) => emit('update:selectedOption', option)"
+          />
+        </li>
+      </ul>
+    </ScrollArea>
   </div>
 </template>
 
