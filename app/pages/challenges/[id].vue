@@ -29,7 +29,7 @@ watch(
     v-if="challenge"
     :title="challenge.title"
     back-to="/learn/challenges"
-    content-class="p-4"
+    content-class="p-4 pr-0 lg:pr-4"
   >
     <ChallengeWorkspace :challenge="challenge" />
   </ActivityShell>

@@ -45,7 +45,7 @@ function handleCompleted() {
 <template>
   <ResizablePanelGroup v-if="isDesktop" direction="horizontal" class="flex-1">
     <ResizablePanel :default-size="30" :min-size="20" class="pr-4">
-      <ScrollArea class="h-full pr-4">
+      <ScrollArea class="h-full pr-4" type="auto">
         <ChallengeDescription :challenge="props.challenge" :show-title="false" />
       </ScrollArea>
     </ResizablePanel>
@@ -59,14 +59,16 @@ function handleCompleted() {
     </ResizablePanel>
   </ResizablePanelGroup>
 
-  <div v-else class="flex flex-col gap-4">
-    <section class="rounded-md border bg-card p-4">
-      <ChallengeDescription :challenge="props.challenge" :show-title="false" />
-    </section>
-    <div class="h-[calc(100dvh-7rem)] min-h-[640px]">
-      <ChallengeRunner :challenge-id="props.challenge.documentId" @completed="handleCompleted" />
+  <ScrollArea v-else class="h-full pr-4" viewport-class="overflow-y-scroll!" type="auto">
+    <div class="flex flex-col gap-4">
+      <section class="rounded-md border bg-card p-4">
+        <ChallengeDescription :challenge="props.challenge" :show-title="false" />
+      </section>
+      <div class="h-[calc(100dvh-7rem)] min-h-[640px]">
+        <ChallengeRunner :challenge-id="props.challenge.documentId" @completed="handleCompleted" />
+      </div>
     </div>
-  </div>
+  </ScrollArea>
 
   <Dialog v-model:open="completionDialogOpen">
     <DialogContent>
