@@ -7,19 +7,21 @@ defineProps<{
 </script>
 
 <template>
-  <!-- Quiz Progress -->
-  <div class="flex justify-between items-center mb-4">
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-      {{ $t("quiz.question") }} {{ currentQuestionIndex }} {{ $t("general.of") }} {{ quizLength }}
-    </p>
-  </div>
+  <div>
+    <!-- Quiz Progress -->
+    <div class="flex justify-between items-center mb-4">
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        {{ $t("quiz.question") }} {{ currentQuestionIndex }} {{ $t("general.of") }} {{ quizLength }}
+      </p>
+    </div>
 
-  <!-- Progress Bar -->
-  <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mb-6">
-    <div
-      class="bg-primary h-2.5 rounded-full transition-[width] duration-500 ease-in-out"
-      :style="{ width: `${progress}%` }"
-    ></div>
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div
+        class="bg-primary h-2.5 rounded-full transition-[width] duration-500 ease-in-out"
+        :style="{ width: `${progress}%` }"
+      ></div>
+    </div>
   </div>
 </template>
 

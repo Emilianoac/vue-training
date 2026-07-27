@@ -27,28 +27,30 @@ const parsedAnswers = computed(() =>
 </script>
 
 <template>
-  <div class="block md:flex items-center md:text-[1.2rem] font-semibold mb-4">
-    <span class="block me-1">{{ questionIndex }}.</span>
-    <div class="question-text" v-html="parsedQuestion"></div>
-  </div>
+  <div class="flex flex-col h-full gap-2">
+    <div class="block md:flex items-center md:text-[1.2rem] font-semibold flex-1">
+      <span class="block me-1">{{ questionIndex }}.</span>
+      <div class="question-text" v-html="parsedQuestion"></div>
+    </div>
 
-  <ul>
-    <li
-      v-for="answer in parsedAnswers"
-      :key="answer.id"
-      class="flex items-center rounded-md gap-2 cursor-pointer relative mb-2"
-    >
-      <QuizAnswerOption
-        :answer-id="answer.id"
-        :answer-text="answer.parsedtext"
-        :isSelected="selectedOption === answer.id"
-        :isCorrectAnswer="answer.isCorrect"
-        :showAnswerResult="checkAnswer"
-        :isDisabled="checkAnswer"
-        @select="(option) => emit('update:selectedOption', option)"
-      />
-    </li>
-  </ul>
+    <ul class="overflow-scroll h-full flex flex-col gap-3">
+      <li
+        v-for="answer in parsedAnswers"
+        :key="answer.id"
+        class="flex items-center rounded-md gap-2 cursor-pointer relative"
+      >
+        <QuizAnswerOption
+          :answer-id="answer.id"
+          :answer-text="answer.parsedtext"
+          :isSelected="selectedOption === answer.id"
+          :isCorrectAnswer="answer.isCorrect"
+          :showAnswerResult="checkAnswer"
+          :isDisabled="checkAnswer"
+          @select="(option) => emit('update:selectedOption', option)"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="postcss"></style>
