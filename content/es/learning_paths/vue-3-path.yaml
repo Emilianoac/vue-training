@@ -112,8 +112,24 @@ steps:
 
       - name: Slots y Layouts
         id: slots-layouts
-        status: planned
-        items: []
+        items:
+          - id: slots-layout-lesson
+            type: lesson
+            level: basic
+            title: Slots y composición de interfaces
+            subtitle: Aprende a crear componentes flexibles con slots por defecto, slots con nombre y scoped slots.
+
+          - id: slots-layout-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa cómo se define, proporciona y organiza contenido mediante slots.
+
+          - id: slots-profile-panel
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Construye un panel reutilizable y completa sus regiones desde el componente padre.
 
       - name: Provide / Inject
         id: provide-inject

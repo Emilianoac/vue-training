@@ -112,8 +112,24 @@ steps:
 
       - name: Slots and Layouts
         id: slots-layouts
-        status: planned
-        items: []
+        items:
+          - id: slots-layout-lesson
+            type: lesson
+            level: basic
+            title: Slots and Interface Composition
+            subtitle: Learn to create flexible components with default, named, and scoped slots.
+
+          - id: slots-layout-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test how content is defined, provided, and organized through slots.
+
+          - id: slots-profile-panel
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Build a reusable panel and fill its regions from the parent component.
 
       - name: Provide / Inject
         id: provide-inject

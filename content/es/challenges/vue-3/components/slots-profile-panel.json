@@ -1,0 +1,50 @@
+{
+  "documentId": "slots-profile-panel",
+  "title": "Componer un panel con slots",
+  "slug": "slots-profile-panel",
+  "level": "basic",
+  "topics": [
+    { "id": "slots", "label": "slots" },
+    { "id": "named-slots", "label": "named slots" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica cómo definir slots en un componente reutilizable y proporcionar su contenido desde el padre.",
+  "description": [
+    "En este desafío, completarás BasePanel.vue con tres regiones: encabezado, contenido principal y acciones.",
+    "Luego usarás esas regiones desde App.vue para construir un panel de perfil sin acoplar su contenido a la estructura del componente hijo."
+  ],
+  "instructions": [
+    "En BasePanel.vue, añade un slot header con el título Panel como contenido de respaldo.",
+    "Añade el slot por defecto dentro de la región de contenido.",
+    "Añade un slot actions dentro del pie del panel.",
+    "En App.vue, coloca el título Perfil de Ana que ya existe dentro de #header.",
+    "Coloca los botones Cancelar y Guardar que ya existen dentro de #actions."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/components/slots-profile-panel.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Contenido de respaldo",
+      "body": "El contenido escrito dentro de <slot name=\"header\"> se muestra cuando el padre no proporciona ese slot."
+    },
+    {
+      "title": "Contenido principal",
+      "body": "El slot por defecto no necesita un atributo name: puedes declararlo con <slot />."
+    },
+    {
+      "title": "Regiones desde el padre",
+      "body": "Dentro de BasePanel, usa <template #header> y <template #actions> para proporcionar los slots con nombre."
+    }
+  ]
+}

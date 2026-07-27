@@ -1,0 +1,50 @@
+{
+  "documentId": "slots-profile-panel",
+  "title": "Compose a Panel with Slots",
+  "slug": "slots-profile-panel",
+  "level": "basic",
+  "topics": [
+    { "id": "slots", "label": "slots" },
+    { "id": "named-slots", "label": "named slots" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice defining slots in a reusable component and providing their content from the parent.",
+  "description": [
+    "In this challenge, you will complete BasePanel.vue with three regions: a header, main content, and actions.",
+    "You will then use those regions from App.vue to build a profile panel without coupling its content to the child component structure."
+  ],
+  "instructions": [
+    "In BasePanel.vue, add a header slot with Panel as its fallback title.",
+    "Add the default slot inside the content region.",
+    "Add an actions slot inside the panel footer.",
+    "In App.vue, place the existing Ana's profile title inside #header.",
+    "Place the existing Cancel and Save buttons inside #actions."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/components/slots-profile-panel.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Fallback content",
+      "body": "Content written inside <slot name=\"header\"> is displayed when the parent does not provide that slot."
+    },
+    {
+      "title": "Main content",
+      "body": "The default slot does not need a name attribute: you can declare it with <slot />."
+    },
+    {
+      "title": "Regions from the parent",
+      "body": "Inside BasePanel, use <template #header> and <template #actions> to provide the named slots."
+    }
+  ]
+}

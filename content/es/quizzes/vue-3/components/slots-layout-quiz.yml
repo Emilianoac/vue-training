@@ -1,0 +1,239 @@
+documentId: "slots-layout-quiz"
+title: "Slots y composición de interfaces"
+level: "basic"
+slug: "slots-layout-quiz"
+description: "Evalúa tu comprensión de slots por defecto, slots con nombre, scoped slots y componentes contenedores reutilizables."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "¿Para qué se usan los slots en Vue 3?"
+    explanation: "Los slots permiten pasar estructura de interfaz desde el padre al hijo. Son ideales para componentes contenedores reutilizables como cards, paneles o modales."
+    explanation_code:
+      - code: |-
+          <BaseCard>
+            <h2>Título</h2>
+            <p>Contenido personalizado</p>
+          </BaseCard>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Para inyectar estructura de UI personalizada dentro de un componente hijo."
+      - id: "2"
+        isCorrect: false
+        text: "Para reemplazar por completo las props en todos los casos."
+      - id: "3"
+        isCorrect: false
+        text: "Para definir rutas dinámicas en el router."
+      - id: "4"
+        isCorrect: false
+        text: "Para acceder al store global sin imports."
+
+  - text: "¿Qué representa el slot default?"
+    explanation: "El slot default es el contenido principal que el padre coloca entre las etiquetas del componente hijo cuando no se especifica un nombre de slot."
+    explanation_code:
+      - code: |-
+          <template>
+            <article>
+              <slot />
+            </article>
+          </template>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Una prop booleana para mostrar contenido opcional."
+      - id: "2"
+        isCorrect: true
+        text: "El contenido principal sin nombre inyectado por el padre."
+      - id: "3"
+        isCorrect: false
+        text: "Un evento que el hijo emite al padre."
+      - id: "4"
+        isCorrect: false
+        text: "Un slot exclusivo para estilos CSS."
+
+  - text: "¿Cómo defines contenido de fallback para un slot?"
+    explanation: "Puedes escribir contenido dentro de la etiqueta `<slot>`. Ese contenido se renderiza solo si el padre no proporciona contenido para ese slot."
+    explanation_code:
+      - code: |-
+          <slot>
+            <p>Contenido por defecto</p>
+          </slot>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Con `v-if` en el componente padre únicamente."
+      - id: "2"
+        isCorrect: false
+        text: "Con `defineProps({ fallback: true })`."
+      - id: "3"
+        isCorrect: true
+        text: "Escribiendo contenido interno dentro de `<slot>...</slot>`."
+      - id: "4"
+        isCorrect: false
+        text: "Con `@fallback` en la invocación del componente."
+
+  - text: "¿Cuál es el propósito de los named slots?"
+    explanation: "Permiten dividir un layout en regiones específicas, por ejemplo header, contenido y acciones, manteniendo una API clara en el componente reutilizable."
+    explanation_code:
+      - code: |-
+          <header><slot name="header" /></header>
+          <main><slot /></main>
+          <footer><slot name="actions" /></footer>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Definir zonas específicas de UI en un componente contenedor."
+      - id: "2"
+        isCorrect: false
+        text: "Reemplazar automáticamente la reactividad del componente."
+      - id: "3"
+        isCorrect: false
+        text: "Evitar el uso de `<template>` en el padre."
+      - id: "4"
+        isCorrect: false
+        text: "Crear watchers implícitos para cada sección."
+
+  - text: "¿Cómo se consume un named slot desde el padre?"
+    explanation: "Se utiliza `template` con la directiva `#nombre` (o `v-slot:nombre`) para inyectar contenido en la región correspondiente."
+    explanation_code:
+      - code: |-
+          <AppPanel>
+            <template #header>
+              <h3>Perfil</h3>
+            </template>
+          </AppPanel>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Con `@header` como si fuera un evento emitido."
+      - id: "2"
+        isCorrect: true
+        text: "Con `<template #header>...</template>` dentro del componente."
+      - id: "3"
+        isCorrect: false
+        text: 'Con `:header="..."` como prop reactiva.'
+      - id: "4"
+        isCorrect: false
+        text: "Con `defineSlots()` en el componente padre."
+
+  - text: "¿Qué son los scoped slots?"
+    explanation: "Los scoped slots permiten que el hijo exponga datos al padre a través de slot props, para que el padre decida cómo renderizar cada elemento."
+    explanation_code:
+      - code: |-
+          <slot name="item" :user="user">
+            {{ user.name }}
+          </slot>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Slots que solo pueden usarse dentro de `<style scoped>`."
+      - id: "2"
+        isCorrect: false
+        text: "Slots exclusivos de Nuxt, no de Vue."
+      - id: "3"
+        isCorrect: true
+        text: "Slots donde el hijo pasa datos al padre para render personalizado."
+      - id: "4"
+        isCorrect: false
+        text: "Slots que solo aceptan un nodo HTML."
+
+  - text: 'En `#item="{ user }"`, ¿de dónde proviene `user`?'
+    explanation: '`user` proviene del componente hijo, que lo envía como slot prop (`:user="user"`) en la declaración del slot.'
+    explanation_code:
+      - code: |-
+          <UserList>
+            <template #item="{ user }">
+              {{ user.name }}
+            </template>
+          </UserList>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "De una prop definida en el padre con `defineProps`."
+      - id: "2"
+        isCorrect: true
+        text: "Del hijo, a través de las slot props del scoped slot."
+      - id: "3"
+        isCorrect: false
+        text: "De una variable global inyectada por Vue."
+      - id: "4"
+        isCorrect: false
+        text: "De un emit llamado automáticamente `item`."
+
+  - text: "¿Qué patrón describe mejor un 'Layout Shell' reutilizable?"
+    explanation: "Un Layout Shell encapsula regiones estructurales fijas (sidebar, topbar, main) y deja el contenido variable a slots."
+    explanation_code:
+      - code: |-
+          <aside><slot name="sidebar" /></aside>
+          <header><slot name="topbar" /></header>
+          <main><slot /></main>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Un componente que solo recibe texto por props."
+      - id: "2"
+        isCorrect: false
+        text: "Un composable que maneja estado remoto."
+      - id: "3"
+        isCorrect: true
+        text: "Un layout con zonas fijas y contenido inyectable mediante slots."
+      - id: "4"
+        isCorrect: false
+        text: "Un plugin global para registrar componentes automáticamente."
+
+  - text: "¿Cuándo conviene usar props en lugar de slots?"
+    explanation: "Usa props cuando necesites pasar datos simples o configuración. Usa slots cuando necesites pasar estructura visual personalizada."
+    explanation_code:
+      - code: |-
+          // Props: datos/configuración
+          <Badge variant="success" label="Activo" />
+
+          // Slots: estructura personalizada
+          <Card><strong>Contenido</strong></Card>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Cuando quieres pasar datos simples como flags, textos o configuración."
+      - id: "2"
+        isCorrect: false
+        text: "Cuando quieres inyectar múltiples regiones de UI."
+      - id: "3"
+        isCorrect: false
+        text: "Cuando necesitas exponer datos del hijo al padre."
+      - id: "4"
+        isCorrect: false
+        text: "Cuando quieres reutilizar layouts con header/footer dinámicos."
+
+  - text: "¿Cuál es una buena práctica al diseñar componentes basados en slots?"
+    explanation: "Una API de slots clara mejora la mantenibilidad. Nombres como `header`, `actions` o `item` comunican intención y reducen ambigüedad."
+    explanation_code:
+      - code: |-
+          <!-- API clara -->
+          <slot name="header" />
+          <slot />
+          <slot name="actions" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Crear la mayor cantidad posible de slots, aunque no se usen."
+      - id: "2"
+        isCorrect: false
+        text: "Usar nombres genéricos como `one`, `two`, `three` para simplificar."
+      - id: "3"
+        isCorrect: false
+        text: "Evitar cualquier contenido por defecto en slots."
+      - id: "4"
+        isCorrect: true
+        text: "Definir nombres de slots descriptivos y exponer solo la data necesaria en scoped slots."
