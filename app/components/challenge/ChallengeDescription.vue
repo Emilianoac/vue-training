@@ -33,7 +33,7 @@ const { t } = useI18n();
       {{ paragraph }}
     </p>
 
-    <hr class="my-8 h-px border-0 bg-gray-300 dark:bg-gray-700" />
+    <hr class="my-8" />
 
     <h2 class="font-bold">{{ t("challenge.description.instructions") }}</h2>
     <ol class="mt-2 list-inside list-decimal list">

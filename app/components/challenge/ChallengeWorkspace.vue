@@ -61,7 +61,7 @@ function handleCompleted() {
 
   <ScrollArea v-else class="h-full pr-4" viewport-class="overflow-y-scroll!" type="auto">
     <div class="flex flex-col gap-4">
-      <section class="rounded-md border bg-card p-4">
+      <section>
         <ChallengeDescription :challenge="props.challenge" :show-title="false" />
       </section>
       <div class="h-[calc(100dvh-7rem)] min-h-[640px]">
