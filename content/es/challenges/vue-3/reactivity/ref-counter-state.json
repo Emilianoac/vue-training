@@ -32,15 +32,15 @@
   "hints": [
     {
       "title": "Empieza por el estado",
-      "body": "En <script setup>, importa ref desde vue y cambia el valor plano por const count = ref(0)."
+      "body": "En `<script setup>`, importa `ref` desde `vue` y cambia el valor plano por `const count = ref(0)`"
     },
     {
       "title": "Actualizar un ref",
-      "body": "Dentro de las funciones, count es un objeto ref. Por eso increment debe modificar count.value."
+      "body": "Dentro de las funciones, `count` es un objeto ref. Por eso `increment` debe modificar `count.value`"
     },
     {
       "title": "El template desempaqueta refs",
-      "body": "En el template puedes escribir {{ count }}. Vue muestra automáticamente el valor interno del ref."
+      "body": "En el template puedes escribir `{{ count }}`. Vue muestra automáticamente el valor interno del ref."
     }
   ]
 }

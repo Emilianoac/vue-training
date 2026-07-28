@@ -36,15 +36,15 @@
   "hints": [
     {
       "title": "Fallback content",
-      "body": "Content written inside <slot name=\"header\"> is displayed when the parent does not provide that slot."
+      "body": "Content written inside `<slot name=\"header\">` is displayed when the parent does not provide that slot."
     },
     {
       "title": "Main content",
-      "body": "The default slot does not need a name attribute: you can declare it with <slot />."
+      "body": "The default slot does not need a `name` attribute: you can declare it with `<slot />`"
     },
     {
       "title": "Regions from the parent",
-      "body": "Inside BasePanel, use <template #header> and <template #actions> to provide the named slots."
+      "body": "Inside `BasePanel`, use `<template #header>` and `<template #actions>` to provide the named slots."
     }
   ]
 }

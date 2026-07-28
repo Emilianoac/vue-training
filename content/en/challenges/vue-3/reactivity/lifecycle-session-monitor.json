@@ -36,15 +36,15 @@
   "hints": [
     {
       "title": "Import the hooks",
-      "body": "The import can include ref, onMounted, and onUnmounted: import { ref, onMounted, onUnmounted } from \"vue\"."
+      "body": "The import can include `ref`, `onMounted`, and `onUnmounted`: `import { ref, onMounted, onUnmounted } from \"vue\"`"
     },
     {
       "title": "Initialize from onMounted",
-      "body": "Do not call startSession at the top level of setup. Register it with onMounted(startSession) so it runs once the component is mounted."
+      "body": "Do not call `startSession` at the top level of `setup`. Register it with `onMounted(startSession)` so it runs once the component is mounted."
     },
     {
       "title": "Clean up external work",
-      "body": "Vue does not clean up setInterval or window.addEventListener for you. Use clearInterval and removeEventListener inside stopSession."
+      "body": "Vue does not clean up `setInterval` or `window.addEventListener` for you. Use `clearInterval` and `removeEventListener` inside `stopSession`"
     }
   ]
 }

@@ -37,19 +37,19 @@
   "hints": [
     {
       "title": "Declare the emit",
-      "body": "You can declare the event with const emit = defineEmits([\"update:modelValue\"])."
+      "body": "You can declare the event with `const emit = defineEmits([\"update:modelValue\"])`"
     },
     {
       "title": "Emit the new value",
-      "body": "The child does not store the final quantity. It only requests the change with emit(\"update:modelValue\", nextValue)."
+      "body": "The child does not store the final quantity. It only requests the change with `emit(\"update:modelValue\", nextValue)`"
     },
     {
       "title": "Respect the limits",
-      "body": "Before emitting, compare props.modelValue with props.min or props.max to avoid leaving the allowed range."
+      "body": "Before emitting, compare `props.modelValue` with `props.min` or `props.max` to avoid leaving the allowed range."
     },
     {
       "title": "Connect the parent component",
-      "body": "In App.vue, v-model passes quantity as modelValue and listens for update:modelValue with a single directive."
+      "body": "In `App.vue`, `v-model` passes `quantity` as `modelValue` and listens for `update:modelValue` with a single directive."
     }
   ]
 }

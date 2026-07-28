@@ -36,15 +36,15 @@
   "hints": [
     {
       "title": "Contenido de respaldo",
-      "body": "El contenido escrito dentro de <slot name=\"header\"> se muestra cuando el padre no proporciona ese slot."
+      "body": "El contenido escrito dentro de `<slot name=\"header\">` se muestra cuando el padre no proporciona ese slot."
     },
     {
       "title": "Contenido principal",
-      "body": "El slot por defecto no necesita un atributo name: puedes declararlo con <slot />."
+      "body": "El slot por defecto no necesita un atributo `name`: puedes declararlo con `<slot />`"
     },
     {
       "title": "Regiones desde el padre",
-      "body": "Dentro de BasePanel, usa <template #header> y <template #actions> para proporcionar los slots con nombre."
+      "body": "Dentro de `BasePanel`, usa `<template #header>` y `<template #actions>` para proporcionar los slots con nombre."
     }
   ]
 }

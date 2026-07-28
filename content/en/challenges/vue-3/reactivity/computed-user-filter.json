@@ -35,15 +35,15 @@
   "hints": [
     {
       "title": "Import computed",
-      "body": "The import can include both ref and computed: import { computed, ref } from \"vue\"."
+      "body": "The import can include both `ref` and `computed`: `import { computed, ref } from \"vue\"`"
     },
     {
       "title": "Derive, do not duplicate",
-      "body": "filteredUsers should be computed from users.value and search.value. You do not need another ref for the filtered list."
+      "body": "`filteredUsers` should be computed from `users.value` and `search.value`. You do not need another `ref` for the filtered list."
     },
     {
       "title": "Normalize the search",
-      "body": "Use toLowerCase() on both the user's name and the search text so the filter works regardless of capitalization."
+      "body": "Use `toLowerCase()` on both the user's name and the search text so the filter works regardless of capitalization."
     }
   ]
 }

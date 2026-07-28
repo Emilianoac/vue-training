@@ -35,15 +35,15 @@
   "hints": [
     {
       "title": "Importa watch",
-      "body": "El import puede incluir ref y watch: import { ref, watch } from \"vue\"."
+      "body": "El import puede incluir `ref` y `watch`: `import { ref, watch } from \"vue\"`"
     },
     {
       "title": "Observa question directamente",
-      "body": "Como question es un ref, puedes pasarlo como primera fuente: watch(question, callback)."
+      "body": "Como `question` es un ref, puedes pasarlo como primera fuente: `watch(question, callback)`"
     },
     {
       "title": "Registra un efecto",
-      "body": "changeLog no es un valor derivado para mostrar solamente: es un registro que se modifica como efecto de cada cambio."
+      "body": "`changeLog` no es un valor derivado para mostrar solamente: es un registro que se modifica como efecto de cada cambio."
     }
   ]
 }

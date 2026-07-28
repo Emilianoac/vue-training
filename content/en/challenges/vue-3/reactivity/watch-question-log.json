@@ -35,15 +35,15 @@
   "hints": [
     {
       "title": "Import watch",
-      "body": "The import can include both ref and watch: import { ref, watch } from \"vue\"."
+      "body": "The import can include both `ref` and `watch`: `import { ref, watch } from \"vue\"`"
     },
     {
       "title": "Watch question directly",
-      "body": "Because question is a ref, you can pass it as the first source: watch(question, callback)."
+      "body": "Because `question` is a ref, you can pass it as the first source: `watch(question, callback)`"
     },
     {
       "title": "Record an effect",
-      "body": "changeLog is not just a derived value for display: it is a record modified as an effect of each change."
+      "body": "`changeLog` is not just a derived value for display: it is a record modified as an effect of each change."
     }
   ]
 }

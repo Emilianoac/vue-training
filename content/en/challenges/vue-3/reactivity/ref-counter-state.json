@@ -32,15 +32,15 @@
   "hints": [
     {
       "title": "Start with state",
-      "body": "Inside <script setup>, import ref from vue and replace the plain value with const count = ref(0)."
+      "body": "Inside `<script setup>`, import `ref` from `vue` and replace the plain value with `const count = ref(0)`"
     },
     {
       "title": "Update a ref",
-      "body": "Inside functions, count is a ref object. That means increment needs to change count.value."
+      "body": "Inside functions, `count` is a ref object. That means `increment` needs to change `count.value`"
     },
     {
       "title": "Templates unwrap refs",
-      "body": "In the template you can write {{ count }}. Vue automatically displays the inner ref value."
+      "body": "In the template you can write `{{ count }}`. Vue automatically displays the inner ref value."
     }
   ]
 }

@@ -37,19 +37,19 @@
   "hints": [
     {
       "title": "Declara el emit",
-      "body": "Puedes declarar el evento con const emit = defineEmits([\"update:modelValue\"])."
+      "body": "Puedes declarar el evento con `const emit = defineEmits([\"update:modelValue\"])`"
     },
     {
       "title": "Emite el nuevo valor",
-      "body": "El hijo no guarda la cantidad final. Solo solicita el cambio con emit(\"update:modelValue\", nuevoValor)."
+      "body": "El hijo no guarda la cantidad final. Solo solicita el cambio con `emit(\"update:modelValue\", nuevoValor)`"
     },
     {
       "title": "Respeta los limites",
-      "body": "Antes de emitir, compara props.modelValue con props.min o props.max para evitar salir del rango."
+      "body": "Antes de emitir, compara `props.modelValue` con `props.min` o `props.max` para evitar salir del rango."
     },
     {
       "title": "Conecta el componente padre",
-      "body": "En App.vue, v-model permite pasar quantity como modelValue y escuchar update:modelValue con una sola directiva."
+      "body": "En `App.vue`, `v-model` permite pasar `quantity` como `modelValue` y escuchar `update:modelValue` con una sola directiva."
     }
   ]
 }

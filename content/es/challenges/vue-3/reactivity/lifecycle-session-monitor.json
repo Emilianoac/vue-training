@@ -36,15 +36,15 @@
   "hints": [
     {
       "title": "Importa los hooks",
-      "body": "El import puede incluir ref, onMounted y onUnmounted: import { ref, onMounted, onUnmounted } from \"vue\"."
+      "body": "El import puede incluir `ref`, `onMounted` y `onUnmounted`: `import { ref, onMounted, onUnmounted } from \"vue\"`"
     },
     {
       "title": "Inicializa desde onMounted",
-      "body": "No llames startSession en el nivel superior de setup. Registrala con onMounted(startSession) para ejecutarla cuando el componente ya este montado."
+      "body": "No llames `startSession` en el nivel superior de `setup`. Regístrala con `onMounted(startSession)` para ejecutarla cuando el componente ya esté montado."
     },
     {
       "title": "Limpia lo externo",
-      "body": "Vue no limpia por ti setInterval ni window.addEventListener. Usa clearInterval y removeEventListener dentro de stopSession."
+      "body": "Vue no limpia por ti `setInterval` ni `window.addEventListener`. Usa `clearInterval` y `removeEventListener` dentro de `stopSession`"
     }
   ]
 }
