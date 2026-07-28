@@ -1,6 +1,7 @@
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
 import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-session-monitor/config";
 import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emits-quantity-stepper/config";
+import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
 import { createWatchQuestionLogChallenge } from "./challenges/watch-question-log/config";
@@ -10,6 +11,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "computed-user-filter": createComputedUserFilterChallenge,
   "lifecycle-session-monitor": createLifecycleSessionMonitorChallenge,
   "props-emits-quantity-stepper": createPropsEmitsQuantityStepperChallenge,
+  "provide-inject-theme": createProvideInjectThemeChallenge,
   "ref-counter-state": createRefCounterStateChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,
   "watch-question-log": createWatchQuestionLogChallenge,

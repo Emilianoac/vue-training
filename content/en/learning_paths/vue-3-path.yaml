@@ -133,8 +133,24 @@ steps:
 
       - name: Provide / Inject
         id: provide-inject
-        status: planned
-        items: []
+        items:
+          - id: provide-inject-lesson
+            type: lesson
+            level: basic
+            title: Sharing Context with Provide and Inject
+            subtitle: Share reactive values between ancestors and descendants without props drilling.
+
+          - id: provide-inject-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test provide, inject, reactivity, and usage decisions.
+
+          - id: provide-inject-theme
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Connect a theme provider to a reactive descendant.
 
       - name: Render Control
         id: render-control

@@ -1,0 +1,30 @@
+{
+  "documentId": "provide-inject-theme",
+  "title": "Share a Theme with Provide and Inject",
+  "slug": "provide-inject-theme",
+  "level": "basic",
+  "topics": [{ "id": "provide-inject", "label": "provide / inject" }],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice providing a reactive ref from an ancestor and injecting it into a descendant.",
+  "description": [
+    "App.vue controls the theme and ThemeStatus.vue must consume it without receiving props.",
+    "When the provider changes the theme, the descendant must update automatically."
+  ],
+  "instructions": [
+    "In App.vue, provide theme using the theme key.",
+    "In ThemeStatus.vue, inject theme using light as the fallback.",
+    "Keep the ref intact to preserve the reactive connection."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/provide-inject-theme.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Provider", "body": "Use `provide(\"theme\", theme)` after creating the ref" },
+    { "title": "Descendant", "body": "The second `inject` argument defines the fallback value." },
+    { "title": "Reactivity", "body": "Provide the complete ref, not `theme.value`" }
+  ]
+}

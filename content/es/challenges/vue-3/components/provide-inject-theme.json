@@ -1,0 +1,33 @@
+{
+  "documentId": "provide-inject-theme",
+  "title": "Compartir un tema con Provide e Inject",
+  "slug": "provide-inject-theme",
+  "level": "basic",
+  "topics": [{ "id": "provide-inject", "label": "provide / inject" }],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica cómo proporcionar un ref reactivo desde un ancestro e inyectarlo en un descendiente.",
+  "description": [
+    "App.vue controla el tema y ThemeStatus.vue debe consumirlo sin recibir props.",
+    "Al cambiar el tema en el proveedor, el descendiente debe actualizarse automáticamente."
+  ],
+  "instructions": [
+    "En App.vue, proporciona theme usando la clave theme.",
+    "En ThemeStatus.vue, inyecta theme usando light como respaldo.",
+    "Conserva el ref para mantener la conexión reactiva."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/provide-inject-theme.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Proveedor", "body": "Usa `provide(\"theme\", theme)` después de crear el ref" },
+    {
+      "title": "Descendiente",
+      "body": "El segundo argumento de `inject` define el valor de respaldo."
+    },
+    { "title": "Reactividad", "body": "Proporciona el ref completo, no `theme.value`" }
+  ]
+}

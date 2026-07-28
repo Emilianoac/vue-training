@@ -1,0 +1,226 @@
+documentId: "provide-inject-quiz"
+title: "Provide, Inject y contexto compartido"
+level: "basic"
+slug: "provide-inject-quiz"
+description: "Evalúa cómo compartir contexto reactivo entre ancestros y descendientes y cuándo evitar props drilling."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "¿Qué problema busca resolver principalmente `provide` / `inject`?"
+    explanation: "`provide` / `inject` reduce el props drilling: evita pasar datos por múltiples componentes intermedios que no los usan directamente."
+    explanation_code:
+      - code: |-
+          // En lugar de pasar props por cada nivel:
+          App -> Layout -> Sidebar -> Menu -> MenuItem
+          // Puedes proveer en App e inyectar en MenuItem
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Evitar props drilling en árboles profundos de componentes."
+      - id: "2"
+        isCorrect: false
+        text: "Reemplazar completamente el uso de props y emits."
+      - id: "3"
+        isCorrect: false
+        text: "Sincronizar rutas automáticamente entre páginas."
+      - id: "4"
+        isCorrect: false
+        text: "Crear estado global persistente sin librerías."
+
+  - text: "¿Cuál es la dirección correcta entre `provide` e `inject`?"
+    explanation: "`provide` se declara en un ancestro (proveedor) y `inject` en un descendiente (consumidor)."
+    explanation_code:
+      - code: |-
+          // Ancestro
+          provide("currentUser", currentUser)
+
+          // Descendiente
+          const currentUser = inject("currentUser")
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "El descendiente hace provide y el ancestro inject."
+      - id: "2"
+        isCorrect: true
+        text: "El ancestro hace provide y el descendiente inject."
+      - id: "3"
+        isCorrect: false
+        text: "Ambos deben ejecutarse en el mismo componente."
+      - id: "4"
+        isCorrect: false
+        text: "Solo funciona entre componentes hermanos."
+
+  - text: "¿Qué devuelve `inject` cuando no encuentra la clave y no hay valor por defecto?"
+    explanation: "Si no existe un proveedor para esa clave y no se pasa fallback, `inject` devuelve `undefined`."
+    explanation_code:
+      - code: |-
+          const theme = inject("theme")
+          // theme será undefined si no hay provide("theme", ...)
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Lanza una excepción automáticamente."
+      - id: "2"
+        isCorrect: false
+        text: "Devuelve `null` siempre."
+      - id: "3"
+        isCorrect: true
+        text: "Devuelve `undefined`."
+      - id: "4"
+        isCorrect: false
+        text: "Devuelve un `ref` vacío."
+
+  - text: "¿Cómo puedes definir un valor de respaldo al usar `inject`?"
+    explanation: "El segundo argumento de inject se utiliza cuando ningún ancestro proporciona la clave solicitada."
+    explanation_code:
+      - code: |-
+          const theme = inject("theme", "light")
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Declarando una prop llamada fallback."
+      - id: "2"
+        isCorrect: true
+        text: "Pasándolo como segundo argumento de `inject`."
+      - id: "3"
+        isCorrect: false
+        text: "Añadiéndolo como tercer argumento de `provide`."
+      - id: "4"
+        isCorrect: false
+        text: "Usando `inject.default()` después de inyectar."
+
+  - text: "¿Cuándo es razonable preferir props sobre `provide` / `inject`?"
+    explanation: "Para comunicación directa padre-hijo, props y emits son más explícitos y trazables."
+    explanation_code:
+      - code: |-
+          // Padre -> Hijo directo
+          <UserBadge :name="user.name" @rename="onRename" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Cuando la comunicación es directa padre-hijo."
+      - id: "2"
+        isCorrect: false
+        text: "Cuando hay más de cinco niveles de anidación siempre."
+      - id: "3"
+        isCorrect: false
+        text: "Cuando varios descendientes consumen la misma dependencia."
+      - id: "4"
+        isCorrect: false
+        text: "Cuando necesitas desacoplar componentes de layout."
+
+  - text: "Si provees un `ref`, ¿el valor inyectado mantiene reactividad?"
+    explanation: "Sí. Al proveer un `ref` o `reactive`, los descendientes consumen una referencia reactiva compartida."
+    explanation_code:
+      - code: |-
+          const theme = ref("dark")
+          provide("theme", theme)
+          // inject("theme") verá cambios de theme.value
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Sí, los cambios se propagan de forma reactiva."
+      - id: "2"
+        isCorrect: false
+        text: "No, inject siempre devuelve una copia no reactiva."
+      - id: "3"
+        isCorrect: false
+        text: "Solo si se usa `watchEffect` en ambos componentes."
+      - id: "4"
+        isCorrect: false
+        text: "Solo en componentes de clase, no con `<script setup>`."
+
+  - text: "¿Qué situación describe mejor props drilling?"
+    explanation: "Props drilling ocurre cuando datos pasan por componentes que no los usan, solo para llegar a uno profundo."
+    explanation_code:
+      - code: |-
+          App(currentUser)
+            -> Layout(currentUser)
+              -> Sidebar(currentUser)
+                -> MenuItem(usa currentUser)
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Pasar una prop por múltiples capas intermedias que no la consumen."
+      - id: "2"
+        isCorrect: false
+        text: "Usar una prop opcional con valor por defecto."
+      - id: "3"
+        isCorrect: false
+        text: "Emitir eventos desde un hijo hacia su padre."
+      - id: "4"
+        isCorrect: false
+        text: "Definir props con tipos en TypeScript."
+
+  - text: "¿Cuál es un buen uso de `provide` / `inject` en UI?"
+    explanation: "Es útil para contexto compartido de subárboles, como tema, estado de formulario o configuración local de un layout."
+    explanation_code:
+      - code: |-
+          provide("uiTheme", ref("dark"))
+          provide("formContext", { errors, registerField })
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Reemplazar completamente un store global de aplicación."
+      - id: "2"
+        isCorrect: true
+        text: "Compartir contexto de UI o formulario entre ancestro y descendientes."
+      - id: "3"
+        isCorrect: false
+        text: "Enviar eventos del hijo al padre sin emits."
+      - id: "4"
+        isCorrect: false
+        text: "Definir rutas privadas automáticamente."
+
+  - text: "¿Qué riesgo existe al abusar de `provide` / `inject`?"
+    explanation: "Puede ocultar el origen de datos y dificultar la trazabilidad del flujo si todo se vuelve implícito."
+    explanation_code:
+      - code: |-
+          // Demasiadas dependencias implícitas
+          const a = inject(keyA)
+          const b = inject(keyB)
+          const c = inject(keyC)
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Rompe automáticamente la reactividad del componente."
+      - id: "2"
+        isCorrect: false
+        text: "Impide usar TypeScript en componentes hijos."
+      - id: "3"
+        isCorrect: true
+        text: "Reduce claridad sobre de dónde vienen los datos si se usa en exceso."
+      - id: "4"
+        isCorrect: false
+        text: "Obliga a crear watchers para cada valor inyectado."
+
+  - text: "¿Quién debería controlar normalmente las mutaciones de un estado proporcionado?"
+    explanation: "Mantener las mutaciones en el proveedor hace más claro dónde cambia el estado. El proveedor puede exponer funciones específicas junto con el valor."
+    explanation_code:
+      - code: |-
+          provide("themeContext", { theme, toggleTheme })
+        language: "javascript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "El proveedor, exponiendo operaciones específicas cuando sean necesarias."
+      - id: "2"
+        isCorrect: false
+        text: "Cualquier descendiente, modificando siempre el ref directamente."
+      - id: "3"
+        isCorrect: false
+        text: "El componente intermedio más cercano, aunque no use el estado."
+      - id: "4"
+        isCorrect: false
+        text: "Vue, porque los valores proporcionados no pueden modificarse manualmente."

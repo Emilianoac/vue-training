@@ -133,8 +133,24 @@ steps:
 
       - name: Provide / Inject
         id: provide-inject
-        status: planned
-        items: []
+        items:
+          - id: provide-inject-lesson
+            type: lesson
+            level: basic
+            title: Compartir contexto con Provide e Inject
+            subtitle: Comparte valores reactivos entre ancestros y descendientes sin props drilling.
+
+          - id: provide-inject-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa provide, inject, reactividad y decisiones de uso.
+
+          - id: provide-inject-theme
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Conecta un proveedor de tema con un descendiente reactivo.
 
       - name: Control de Render
         id: render-control
