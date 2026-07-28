@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Challenge } from "@/schemas/challenge.schema";
 import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
+import ChallengeHint from "@/components/challenge/ChallengeHint.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -35,30 +36,23 @@ const { t } = useI18n();
     <hr class="my-8 h-px border-0 bg-gray-300 dark:bg-gray-700" />
 
     <h2 class="font-bold">{{ t("challenge.description.instructions") }}</h2>
-    <ol
-      class="mt-2 list-inside list-decimal rounded-md bg-slate-100 p-4 text-sm text-gray-900 dark:bg-slate-800/50 dark:text-gray-300"
-    >
+    <ol class="mt-2 list-inside list-decimal list">
       <li
         v-for="instruction in props.challenge.instructions"
         :key="instruction"
-        class="mb-4 last-of-type:mb-0"
+        class="mb-4 last-of-type:mb-0 rounded-md border bg-card p-4 text-sm marker:font-bold marker:text-primary marker:text-base"
       >
         {{ instruction }}
       </li>
     </ol>
 
     <template v-if="props.challenge.hints.length">
-      <hr class="my-8 h-px border-0 bg-gray-300 dark:bg-gray-700" />
+      <hr class="my-8" />
 
       <h2 class="font-bold">{{ t("challenge.description.hints") }}</h2>
-      <ul class="mt-2 space-y-3">
-        <li
-          v-for="hint in props.challenge.hints"
-          :key="hint.title"
-          class="rounded-md border bg-card p-4 text-sm"
-        >
-          <h3 class="font-semibold text-foreground">{{ hint.title }}</h3>
-          <p class="mt-1 text-muted-foreground">{{ hint.body }}</p>
+      <ul class="mt-2 space-y-3 px-1">
+        <li v-for="(hint, index) in props.challenge.hints" :key="hint.title" class="text-sm">
+          <ChallengeHint :hint :number="index + 1" />
         </li>
       </ul>
     </template>

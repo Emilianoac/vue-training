@@ -173,6 +173,7 @@
       "solution": "Solution"
     },
     "description": {
+      "hint": "Hint {number}",
       "hints": "Hints",
       "instructions": "Instructions"
     },
