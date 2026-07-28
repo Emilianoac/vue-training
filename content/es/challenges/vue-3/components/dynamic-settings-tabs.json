@@ -1,0 +1,48 @@
+{
+  "documentId": "dynamic-settings-tabs",
+  "title": "Crear pestañas con componentes dinámicos",
+  "slug": "dynamic-settings-tabs",
+  "level": "basic",
+  "topics": [
+    { "id": "dynamic-components", "label": "dynamic components" },
+    { "id": "keep-alive", "label": "KeepAlive" },
+    { "id": "v-show", "label": "v-show" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica componentes dinámicos y KeepAlive construyendo una vista de configuración con pestañas.",
+  "description": [
+    "Completa App.vue para alternar entre ProfileTab y SecurityTab mediante component :is.",
+    "Después, completa SecurityTab.vue para controlar la visibilidad de los códigos de recuperación."
+  ],
+  "instructions": [
+    "En App.vue, renderiza tabs[currentTab] mediante <component :is>.",
+    "En App.vue, envuelve el componente dinámico con KeepAlive.",
+    "En SecurityTab.vue, usa v-show para ocultar o mostrar el panel de códigos de recuperación.",
+    "No reemplaces las pestañas por ramas v-if independientes ni el panel por v-if."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/dynamic-settings-tabs.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Componente activo",
+      "body": "`tabs[currentTab]` contiene la definición del componente que debe renderizarse."
+    },
+    {
+      "title": "Componente dinámico",
+      "body": "Pasa la definición a `<component :is=\"tabs[currentTab]\" />`"
+    },
+    {
+      "title": "Conservar estado",
+      "body": "`KeepAlive` debe envolver directamente el componente dinámico."
+    },
+    {
+      "title": "Visibilidad del panel",
+      "body": "Aplica `v-show` al elemento que tiene `data-testid=\"recovery-codes\"` usando `showRecoveryCodes`"
+    }
+  ]
+}

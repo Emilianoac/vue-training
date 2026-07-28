@@ -154,8 +154,24 @@ steps:
 
       - name: Control de Render
         id: render-control
-        status: planned
-        items: []
+        items:
+          - id: render-control-lesson
+            type: lesson
+            level: basic
+            title: Control de render en Vue 3
+            subtitle: Controla existencia, visibilidad e identidad con directivas y componentes dinámicos.
+
+          - id: render-control-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa v-if, v-show, key, componentes dinámicos y KeepAlive.
+
+          - id: dynamic-settings-tabs
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Construye pestañas dinámicas que conserven el estado de sus componentes.
 
       - name: Diseño de Componentes
         id: component-design

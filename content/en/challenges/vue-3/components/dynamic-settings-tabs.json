@@ -1,0 +1,45 @@
+{
+  "documentId": "dynamic-settings-tabs",
+  "title": "Build Tabs with Dynamic Components",
+  "slug": "dynamic-settings-tabs",
+  "level": "basic",
+  "topics": [
+    { "id": "dynamic-components", "label": "dynamic components" },
+    { "id": "keep-alive", "label": "KeepAlive" },
+    { "id": "v-show", "label": "v-show" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice dynamic components and KeepAlive by building a tabbed settings view.",
+  "description": [
+    "Complete App.vue to switch between ProfileTab and SecurityTab through component :is.",
+    "Then complete SecurityTab.vue to control the visibility of the recovery codes."
+  ],
+  "instructions": [
+    "In App.vue, render tabs[currentTab] through <component :is>.",
+    "In App.vue, wrap the dynamic component with KeepAlive.",
+    "In SecurityTab.vue, use v-show to hide or display the recovery codes panel.",
+    "Do not replace the tabs with independent v-if branches or the panel with v-if."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/dynamic-settings-tabs.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Active component",
+      "body": "`tabs[currentTab]` contains the component definition to render."
+    },
+    {
+      "title": "Dynamic component",
+      "body": "Pass the definition to `<component :is=\"tabs[currentTab]\" />`"
+    },
+    { "title": "Preserve state", "body": "`KeepAlive` must directly wrap the dynamic component." },
+    {
+      "title": "Panel visibility",
+      "body": "Apply `v-show` to the element with `data-testid=\"recovery-codes\"` using `showRecoveryCodes`"
+    }
+  ]
+}

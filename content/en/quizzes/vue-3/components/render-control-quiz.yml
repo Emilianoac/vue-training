@@ -1,0 +1,223 @@
+documentId: "render-control-quiz"
+title: "Render Control in Vue 3"
+level: "basic"
+slug: "render-control-quiz"
+description: "Test how to control existence, visibility, and identity with v-if, v-show, key, and dynamic components."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "What is the main difference between `v-if` and `v-show`?"
+    explanation: "`v-if` adds/removes nodes from the DOM based on the condition. `v-show` keeps the node in the DOM and only toggles visibility with CSS (`display: none`)."
+    explanation_code:
+      - code: |-
+          <UserPanel v-if="isVisible" />
+          <UserPanel v-show="isVisible" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "`v-if` mounts/unmounts nodes; `v-show` only toggles CSS visibility."
+      - id: "2"
+        isCorrect: false
+        text: "`v-if` and `v-show` work exactly the same internally."
+      - id: "3"
+        isCorrect: false
+        text: "`v-show` destroys the component and `v-if` hides it with CSS."
+      - id: "4"
+        isCorrect: false
+        text: "`v-if` works only with components and `v-show` only with native HTML."
+
+  - text: "Which directive is usually better for a panel that toggles very frequently?"
+    explanation: "When toggling is frequent, `v-show` is usually more efficient because it avoids repeated mount/unmount cycles."
+    explanation_code:
+      - code: |-
+          <!-- Frequent toggle -->
+          <DropdownMenu v-show="isOpen" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`v-if`, because it is always faster."
+      - id: "2"
+        isCorrect: true
+        text: "`v-show`, because it avoids recreating the node on each change."
+      - id: "3"
+        isCorrect: false
+        text: "Neither, only `v-model` can control visibility."
+      - id: "4"
+        isCorrect: false
+        text: "`v-for`, because it automatically recycles components."
+
+  - text: "When is `v-if` usually better than `v-show`?"
+    explanation: "`v-if` can be better if the condition changes rarely and the content should not always exist in the DOM."
+    explanation_code:
+      - code: |-
+          <!-- Modal rarely opened -->
+          <HeavyModal v-if="showAdvancedModal" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "When the block is shown rarely and should not stay mounted all the time."
+      - id: "2"
+        isCorrect: false
+        text: "When visibility toggles many times per second."
+      - id: "3"
+        isCorrect: false
+        text: "When you want to avoid conditions in templates."
+      - id: "4"
+        isCorrect: false
+        text: "When you always need to preserve hidden component state."
+
+  - text: "What is `key` used for in a `v-for` list?"
+    explanation: "`key` gives each node a stable identity so Vue can update the DOM correctly and avoid incorrect node reuse."
+    explanation_code:
+      - code: |-
+          <li v-for="todo in todos" :key="todo.id">
+            {{ todo.text }}
+          </li>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "To sort the list visually without extra logic."
+      - id: "2"
+        isCorrect: false
+        text: "To avoid importing `ref` in the component."
+      - id: "3"
+        isCorrect: true
+        text: "To provide stable identity for each node during list updates."
+      - id: "4"
+        isCorrect: false
+        text: "To automatically convert each item into a dynamic component."
+
+  - text: "What risk appears when using array index as `key` in reorderable lists?"
+    explanation: "If order changes, index no longer represents true identity, and Vue may reuse wrong nodes, causing UI/state glitches."
+    explanation_code:
+      - code: |-
+          <li v-for="(item, index) in items" :key="index">
+            {{ item.name }}
+          </li>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "No risk, it is always Vue's recommended option."
+      - id: "2"
+        isCorrect: true
+        text: "It can cause incorrect node reuse when items are reordered."
+      - id: "3"
+        isCorrect: false
+        text: "It breaks global component reactivity."
+      - id: "4"
+        isCorrect: false
+        text: "It prevents using events on list elements."
+
+  - text: "What happens when you intentionally change a component `key`?"
+    explanation: "Changing `key` forces Vue to destroy the old instance and create a new one, resetting local state."
+    explanation_code:
+      - code: |-
+          <UserForm :key="formVersion" />
+          <button @click="formVersion++">Reset</button>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "It only updates styles without touching internal state."
+      - id: "2"
+        isCorrect: false
+        text: "It prevents lifecycle hooks from running."
+      - id: "3"
+        isCorrect: true
+        text: "It recreates the component and resets state, refs, and lifecycle."
+      - id: "4"
+        isCorrect: false
+        text: "It turns the component static until page reload."
+
+  - text: 'What is `<component :is="...">` used for?'
+    explanation: "It allows rendering different components dynamically at runtime based on state or configuration."
+    explanation_code:
+      - code: |-
+          <component :is="tabMap[currentTab]" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "To replace `v-for` in any list."
+      - id: "2"
+        isCorrect: false
+        text: "To emit events without `defineEmits`."
+      - id: "3"
+        isCorrect: true
+        text: "To switch which component is rendered dynamically."
+      - id: "4"
+        isCorrect: false
+        text: "To import components without a bundler."
+
+  - text: "What happens by default when switching dynamic components?"
+    explanation: "By default, Vue unmounts the previous instance and mounts the new one. The previous component's local state is lost."
+    explanation_code:
+      - code: |-
+          <component :is="currentView" />
+          <!-- switching currentView destroys the previous instance -->
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Vue always preserves all previous view states."
+      - id: "2"
+        isCorrect: true
+        text: "The previous component is unmounted and a new one is mounted."
+      - id: "3"
+        isCorrect: false
+        text: "Vue blocks the switch if no `key` is provided."
+      - id: "4"
+        isCorrect: false
+        text: "Only the template changes, but not the JavaScript instance."
+
+  - text: "What does `KeepAlive` do with dynamic components?"
+    explanation: "`KeepAlive` caches component instances to preserve state across switches, avoiding recreation every time."
+    explanation_code:
+      - code: |-
+          <KeepAlive>
+            <component :is="currentView" />
+          </KeepAlive>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "It preserves dynamic component state while switching between views."
+      - id: "2"
+        isCorrect: false
+        text: "It automatically converts `v-if` into `v-show`."
+      - id: "3"
+        isCorrect: false
+        text: "It disables the reactivity system completely."
+      - id: "4"
+        isCorrect: false
+        text: "It forces a full tree re-render on every switch."
+
+  - text: "What is a correct strategy to fully reset a child form from the parent?"
+    explanation: "Incrementing a parent-controlled `key` is an explicit way to recreate the child form instance and clear its internal state."
+    explanation_code:
+      - code: |-
+          const formVersion = ref(1)
+          const reset = () => formVersion.value++
+
+          <UserForm :key="formVersion" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Apply `v-show` to the form to reset its state."
+      - id: "2"
+        isCorrect: false
+        text: "Use `v-once` so Vue regenerates the component."
+      - id: "3"
+        isCorrect: true
+        text: "Change `key` to force instance recreation."
+      - id: "4"
+        isCorrect: false
+        text: "Use `v-for` index as key for resetting."

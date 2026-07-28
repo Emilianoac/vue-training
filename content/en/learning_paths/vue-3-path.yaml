@@ -154,8 +154,24 @@ steps:
 
       - name: Render Control
         id: render-control
-        status: planned
-        items: []
+        items:
+          - id: render-control-lesson
+            type: lesson
+            level: basic
+            title: Render Control in Vue 3
+            subtitle: Control existence, visibility, and identity with directives and dynamic components.
+
+          - id: render-control-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test v-if, v-show, key, dynamic components, and KeepAlive.
+
+          - id: dynamic-settings-tabs
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Build dynamic tabs that preserve their component state.
 
       - name: Component Design
         id: component-design

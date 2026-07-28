@@ -1,0 +1,223 @@
+documentId: "render-control-quiz"
+title: "Control de render en Vue 3"
+level: "basic"
+slug: "render-control-quiz"
+description: "Evalúa cómo controlar existencia, visibilidad e identidad con v-if, v-show, key y componentes dinámicos."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "¿Cuál es la diferencia principal entre `v-if` y `v-show`?"
+    explanation: "`v-if` agrega o elimina nodos del DOM según la condición. `v-show` mantiene el nodo en el DOM y solo cambia su visibilidad con CSS (`display: none`)."
+    explanation_code:
+      - code: |-
+          <UserPanel v-if="isVisible" />
+          <UserPanel v-show="isVisible" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "`v-if` monta/desmonta nodos; `v-show` solo alterna visibilidad CSS."
+      - id: "2"
+        isCorrect: false
+        text: "`v-if` y `v-show` hacen exactamente lo mismo internamente."
+      - id: "3"
+        isCorrect: false
+        text: "`v-show` destruye el componente y `v-if` lo oculta con CSS."
+      - id: "4"
+        isCorrect: false
+        text: "`v-if` solo funciona con componentes y `v-show` solo con HTML nativo."
+
+  - text: "¿Qué conviene usar para mostrar/ocultar un panel que cambia muy seguido?"
+    explanation: "Cuando el toggle es frecuente, `v-show` suele rendir mejor porque evita montajes y desmontajes repetidos."
+    explanation_code:
+      - code: |-
+          <!-- Toggle frecuente -->
+          <DropdownMenu v-show="isOpen" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`v-if`, porque siempre es más rápido."
+      - id: "2"
+        isCorrect: true
+        text: "`v-show`, porque evita recrear el nodo en cada cambio."
+      - id: "3"
+        isCorrect: false
+        text: "Ninguno, solo `v-model` puede controlar visibilidad."
+      - id: "4"
+        isCorrect: false
+        text: "`v-for`, porque recicla componentes automáticamente."
+
+  - text: "¿Cuándo suele ser mejor `v-if` que `v-show`?"
+    explanation: "`v-if` puede ser mejor si la condición cambia poco y el contenido no debe existir siempre en el DOM."
+    explanation_code:
+      - code: |-
+          <!-- Modal rara vez abierto -->
+          <HeavyModal v-if="showAdvancedModal" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Cuando el bloque se muestra rara vez y no conviene mantenerlo montado."
+      - id: "2"
+        isCorrect: false
+        text: "Cuando se necesita alternar visibilidad muchas veces por segundo."
+      - id: "3"
+        isCorrect: false
+        text: "Cuando quieres evitar condiciones en templates."
+      - id: "4"
+        isCorrect: false
+        text: "Cuando necesitas preservar estado de componentes ocultos siempre."
+
+  - text: "¿Para qué sirve `key` en un `v-for`?"
+    explanation: "`key` ayuda a Vue a identificar de forma estable cada elemento para actualizar el DOM correctamente y evitar reutilización incorrecta."
+    explanation_code:
+      - code: |-
+          <li v-for="todo in todos" :key="todo.id">
+            {{ todo.text }}
+          </li>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Para ordenar visualmente la lista sin lógica adicional."
+      - id: "2"
+        isCorrect: false
+        text: "Para evitar importar `ref` en el componente."
+      - id: "3"
+        isCorrect: true
+        text: "Para darle identidad estable a cada nodo al actualizar listas."
+      - id: "4"
+        isCorrect: false
+        text: "Para convertir automáticamente cada item en componente dinámico."
+
+  - text: "¿Qué riesgo hay al usar índice (`index`) como `key` en listas que se reordenan?"
+    explanation: "Si el orden cambia, el índice deja de representar identidad real y Vue puede reutilizar nodos equivocados, causando glitches de estado o UI."
+    explanation_code:
+      - code: |-
+          <li v-for="(item, index) in items" :key="index">
+            {{ item.name }}
+          </li>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "No hay riesgo, es siempre la opción recomendada por Vue."
+      - id: "2"
+        isCorrect: true
+        text: "Puede provocar reutilización incorrecta de nodos al reordenar elementos."
+      - id: "3"
+        isCorrect: false
+        text: "Rompe la reactividad global del componente."
+      - id: "4"
+        isCorrect: false
+        text: "Impide el uso de eventos en los elementos de la lista."
+
+  - text: "¿Qué efecto tiene cambiar intencionalmente la `key` de un componente?"
+    explanation: "Cambiar la `key` fuerza a Vue a destruir la instancia previa y crear una nueva, reiniciando su estado local."
+    explanation_code:
+      - code: |-
+          <UserForm :key="formVersion" />
+          <button @click="formVersion++">Reset</button>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Solo actualiza estilos, sin tocar el estado interno."
+      - id: "2"
+        isCorrect: false
+        text: "Evita que se ejecuten lifecycle hooks."
+      - id: "3"
+        isCorrect: true
+        text: "Recrea el componente y reinicia estado, refs y ciclo de vida."
+      - id: "4"
+        isCorrect: false
+        text: "Convierte el componente en estático hasta recargar la página."
+
+  - text: '¿Para qué se usa `<component :is="...">`?'
+    explanation: "Permite renderizar dinámicamente distintos componentes según estado o configuración en tiempo de ejecución."
+    explanation_code:
+      - code: |-
+          <component :is="tabMap[currentTab]" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Para reemplazar `v-for` en cualquier lista."
+      - id: "2"
+        isCorrect: false
+        text: "Para emitir eventos sin `defineEmits`."
+      - id: "3"
+        isCorrect: true
+        text: "Para cambiar el componente renderizado de forma dinámica."
+      - id: "4"
+        isCorrect: false
+        text: "Para importar componentes sin bundler."
+
+  - text: "¿Qué ocurre por defecto al cambiar entre componentes dinámicos?"
+    explanation: "Por defecto, Vue desmonta la instancia anterior y monta la nueva. El estado local del componente anterior se pierde."
+    explanation_code:
+      - code: |-
+          <component :is="currentView" />
+          <!-- al cambiar currentView, se destruye la instancia anterior -->
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Vue conserva siempre el estado de todas las vistas previas."
+      - id: "2"
+        isCorrect: true
+        text: "Se desmonta el componente anterior y se monta uno nuevo."
+      - id: "3"
+        isCorrect: false
+        text: "Vue bloquea el cambio si no hay `key`."
+      - id: "4"
+        isCorrect: false
+        text: "Solo cambia el template, pero no la instancia JavaScript."
+
+  - text: "¿Qué hace `KeepAlive` en componentes dinámicos?"
+    explanation: "`KeepAlive` cachea instancias para preservar estado entre cambios, evitando recrear el componente cada vez."
+    explanation_code:
+      - code: |-
+          <KeepAlive>
+            <component :is="currentView" />
+          </KeepAlive>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Conserva estado de componentes dinámicos al alternar entre ellos."
+      - id: "2"
+        isCorrect: false
+        text: "Convierte automáticamente `v-if` en `v-show`."
+      - id: "3"
+        isCorrect: false
+        text: "Desactiva por completo el sistema de reactividad."
+      - id: "4"
+        isCorrect: false
+        text: "Fuerza re-render completo del árbol en cada cambio."
+
+  - text: "¿Cuál es una estrategia correcta para 'resetear' un formulario hijo desde el padre?"
+    explanation: "Incrementar una `key` controlada por el padre es una forma explícita de recrear la instancia del formulario y limpiar su estado interno."
+    explanation_code:
+      - code: |-
+          const formVersion = ref(1)
+          const reset = () => formVersion.value++
+
+          <UserForm :key="formVersion" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Aplicar `v-show` al formulario para reiniciar su estado."
+      - id: "2"
+        isCorrect: false
+        text: "Usar `v-once` para que Vue regenere el componente."
+      - id: "3"
+        isCorrect: true
+        text: "Cambiar la `key` para forzar recreación de la instancia."
+      - id: "4"
+        isCorrect: false
+        text: "Usar índice de un `v-for` como key para el reset."
