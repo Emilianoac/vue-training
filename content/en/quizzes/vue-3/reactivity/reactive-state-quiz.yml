@@ -7,6 +7,20 @@ category:
   name: Vue 3
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: reactivity
+  name: Reactivity
+  image:
+    url: /images/quizzes/categories/reactivity.webp
+topics:
+  - id: ref
+    label: ref
+  - id: reactive
+    label: reactive
+  - id: shallow-ref
+    label: shallowRef
+  - id: shallow-reactive
+    label: shallowReactive
 questions:
   - text: What mechanism does Vue 3 use internally to intercept changes in objects and achieve reactivity?
     explanation: Vue 3 moved from using Object.defineProperty (used in Vue 2) to JavaScript Proxies, allowing it to detect property additions and deletions more efficiently.
@@ -47,16 +61,16 @@ questions:
     answers:
       - id: "1"
         isCorrect: false
-        text: `count++`
+        text: "`count++`"
       - id: "2"
         isCorrect: true
-        text: `count.value++`
+        text: "`count.value++`"
       - id: "3"
         isCorrect: false
-        text: `count.set(1)`
+        text: "`count.set(1)`"
       - id: "4"
         isCorrect: false
-        text: `update(count, 1)`
+        text: "`update(count, 1)`"
 
   - text: What is the main limitation of the `reactive()` function?
     explanation: Unlike `ref()`, `reactive()` only accepts object types (objects, arrays, Map, Set). It cannot be used with primitive values like strings or numbers.

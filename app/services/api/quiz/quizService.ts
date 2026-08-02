@@ -16,7 +16,16 @@ function createQuizService(): QuizService {
 
       if (limit) query = query.limit(limit);
       const data = await query
-        .select("documentId", "title", "slug", "level", "description", "category")
+        .select(
+          "documentId",
+          "title",
+          "slug",
+          "level",
+          "description",
+          "category",
+          "subCategory",
+          "topics",
+        )
         .all();
 
       if (!data) throw new Error("No quizzes found");

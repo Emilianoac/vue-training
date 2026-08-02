@@ -7,6 +7,16 @@ category:
   name: Vue 3
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: reactivity
+  name: Reactivity
+  image:
+    url: /images/quizzes/categories/reactivity.webp
+topics:
+  - id: watch
+    label: watch
+  - id: ref
+    label: ref
 questions:
   - text: What problem does a watcher solve in a Vue component?
     explanation: A watcher lets you react when a reactive source changes and run an action as a result. It is useful for side effects, not for calculating values that are displayed directly.

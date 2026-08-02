@@ -7,6 +7,16 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "reactivity"
+  name: "Reactivity"
+  image:
+    url: "/images/quizzes/categories/reactivity.webp"
+topics:
+  - id: "on-mounted"
+    label: "onMounted"
+  - id: "on-unmounted"
+    label: "onUnmounted"
 questions:
   - text: "When is reactive state created and initialized in a Vue component?"
     explanation: "When Vue executes `<script setup>`, reactive state (`ref`, `reactive`, `computed`, `watch`) is created and initialized immediately, even before the component exists in the DOM."

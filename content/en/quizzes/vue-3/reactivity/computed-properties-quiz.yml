@@ -7,6 +7,16 @@ category:
   name: Vue 3
   image:
     url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: reactivity
+  name: Reactivity
+  image:
+    url: /images/quizzes/categories/reactivity.webp
+topics:
+  - id: computed
+    label: computed
+  - id: ref
+    label: ref
 questions:
   - text: What is the most important characteristic of a computed property in Vue 3?
     explanation: Caching is the key feature of `computed()`. It only re-evaluates when one of its reactive dependencies changes, avoiding unnecessary recalculations.
@@ -442,7 +452,7 @@ questions:
         text: Usar `watch` para actualizar una variable con la lista filtrada cada vez.
 
   - text: ¿Por qué se recomienda usar `.toSorted()` en lugar de `.sort()` dentro de una propiedad computada?
-    explanation: `.sort()` muta el array original, lo que puede alterar la fuente de verdad del estado reactivo. `.toSorted()` devuelve un nuevo array ordenado sin modificar el original, siguiendo la regla de no mutar el estado dentro de una computed.
+    explanation: "`.sort()` muta el array original, lo que puede alterar la fuente de verdad del estado reactivo. `.toSorted()` devuelve un nuevo array ordenado sin modificar el original, siguiendo la regla de no mutar el estado dentro de una computed."
     explanation_code:
       - code: |-
           const items = ref([3, 1, 2]);

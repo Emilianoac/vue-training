@@ -7,6 +7,18 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "components"
+  name: "Componentes"
+  image:
+    url: "/images/quizzes/categories/components.webp"
+topics:
+  - id: "props"
+    label: "props"
+  - id: "emits"
+    label: "emits"
+  - id: "v-model"
+    label: "v-model"
 questions:
   - text: "¿Cuál es la dirección correcta del flujo de datos entre props y emits en Vue 3?"
     explanation: "Vue sigue un flujo de datos unidireccional: el padre pasa datos al hijo mediante props, y el hijo notifica al padre mediante emits. Esto hace que el flujo sea predecible y fácil de rastrear."

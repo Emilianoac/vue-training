@@ -47,69 +47,71 @@ watch(
 </script>
 
 <template>
-    <ActivityShell
-      v-if="quiz"
+  <ActivityShell
+    v-if="quiz"
+    :title="quiz.title"
+    back-to="/learn/quizzes"
+    class="lg:max-w-full"
+    content-class="p-4 flex-initial"
+  >
+    <!-- Welcome -->
+    <QuizWelcome
+      v-if="!state.quizState.isInitialized"
+      class="max-w-full lg:max-w-[90%] mx-auto"
       :title="quiz.title"
-      back-to="/learn/quizzes"
-      class="lg:max-w-full"
-      content-class="p-4 flex-initial"
-    >
-      <!-- Welcome -->
-      <QuizWelcome
-        v-if="!state.quizState.isInitialized"
-        class="max-w-full lg:max-w-[90%] mx-auto"
-        :title="quiz.title"
-        :description="quiz.description"
-        :image="quiz.category.image.url"
-        :category="quiz.category.name"
-        :level="quiz.level"
-        :number-of-questions="totalQuestions"
-        @startQuiz="actions.startQuiz()"
-      />
+      :description="quiz.description"
+      :image="quiz.subCategory.image.url"
+      :category="
+        quiz.subCategory ? quiz.category.name + ' - ' + quiz.subCategory.name : quiz.category.name
+      "
+      :level="quiz.level"
+      :number-of-questions="totalQuestions"
+      @startQuiz="actions.startQuiz()"
+    />
 
-      <!-- Loading -->
-      <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
+    <!-- Loading -->
+    <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
 
-      <!-- On progress -->
-      <QuizOnProgress
-        v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
-        class="max-w-[1000px] mx-auto"
-        :total-questions="totalQuestions"
-        :currentQuestion="currentQuestion"
-        :quizProgress="state.progress.percentage"
-        :currentQuestionIndex="displayQuestionIndex"
-        :selectedOptionId="state.answer.selectedOptionId"
-        :hasCheckedAnswer="state.answer.hasCheckedAnswer"
-        :isLastQuestion="isLastQuestion"
-        :is-finished="state.quizState.isFinished"
-        :is-quiz-initialized="state.quizState.isInitialized"
-        @update:showDetails="showQuestionDetails = $event"
-        @update:selectedOptionId="state.answer.selectedOptionId = $event"
-        @answerCurrentQuestion="actions.answerCurrentQuestion()"
-        @goToNextQuestion="actions.goToNextQuestion()"
-      />
+    <!-- On progress -->
+    <QuizOnProgress
+      v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
+      class="max-w-[1000px] mx-auto"
+      :total-questions="totalQuestions"
+      :currentQuestion="currentQuestion"
+      :quizProgress="state.progress.percentage"
+      :currentQuestionIndex="displayQuestionIndex"
+      :selectedOptionId="state.answer.selectedOptionId"
+      :hasCheckedAnswer="state.answer.hasCheckedAnswer"
+      :isLastQuestion="isLastQuestion"
+      :is-finished="state.quizState.isFinished"
+      :is-quiz-initialized="state.quizState.isInitialized"
+      @update:showDetails="showQuestionDetails = $event"
+      @update:selectedOptionId="state.answer.selectedOptionId = $event"
+      @answerCurrentQuestion="actions.answerCurrentQuestion()"
+      @goToNextQuestion="actions.goToNextQuestion()"
+    />
 
-      <!-- Results -->
-      <QuizResults
-        v-else
-        class="max-w-[1000px] mx-auto"
-        :elapsed-time="elapsedTime"
-        :userHistory="state.result.history"
-        :userStats="state.result.stats"
-        @resetQuiz="actions.resetQuizState()"
-      />
-    </ActivityShell>
+    <!-- Results -->
+    <QuizResults
+      v-else
+      class="max-w-[1000px] mx-auto"
+      :elapsed-time="elapsedTime"
+      :userHistory="state.result.history"
+      :userStats="state.result.stats"
+      @resetQuiz="actions.resetQuizState()"
+    />
+  </ActivityShell>
 
-    <Teleport to="body">
-      <QuizQuestionDetailsModal
-        v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
-        :question-text="currentQuestion.text"
-        :code-examples="currentQuestion.explanation_code"
-        :explanation="currentQuestion.explanation"
-        :correct-answer="currentCorrectAnswer.text"
-        @close-modal="showQuestionDetails = false"
-      />
-    </Teleport>
+  <Teleport to="body">
+    <QuizQuestionDetailsModal
+      v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
+      :question-text="currentQuestion.text"
+      :code-examples="currentQuestion.explanation_code"
+      :explanation="currentQuestion.explanation"
+      :correct-answer="currentCorrectAnswer.text"
+      @close-modal="showQuestionDetails = false"
+    />
+  </Teleport>
 </template>
 
 <style lang="postcss" scoped></style>

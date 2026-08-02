@@ -7,6 +7,18 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "components"
+  name: "Components"
+  image:
+    url: "/images/quizzes/categories/components.webp"
+topics:
+  - id: "props"
+    label: "props"
+  - id: "emits"
+    label: "emits"
+  - id: "v-model"
+    label: "v-model"
 questions:
   - text: "What is the correct direction of data flow between props and emits in Vue 3?"
     explanation: "Vue follows a one-way data flow: the parent passes data to the child via props, and the child notifies the parent via emits. This makes the flow predictable and easy to trace."

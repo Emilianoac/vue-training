@@ -25,6 +25,19 @@ export const categorySchema = z.object({
   }),
 });
 
+export const subCategorySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  image: z.object({
+    url: z.string(),
+  }),
+});
+
+export const quizTopicSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+});
+
 export const levelSchema = z.enum(["basic", "intermediate", "advanced"]);
 
 export const quizSchema = z.object({
@@ -34,13 +47,22 @@ export const quizSchema = z.object({
   slug: z.string(),
   description: z.string(),
   category: categorySchema,
+  subCategory: subCategorySchema,
+  topics: z.array(quizTopicSchema).min(1),
   questions: z.array(questionSchema),
 });
 
 export type Quiz = z.infer<typeof quizSchema>;
 export type QuizListItem = Pick<
   Quiz,
-  "documentId" | "title" | "slug" | "level" | "description" | "category"
+  | "documentId"
+  | "title"
+  | "slug"
+  | "level"
+  | "description"
+  | "category"
+  | "subCategory"
+  | "topics"
 >;
 export type Level = z.infer<typeof levelSchema>;
 export type Question = z.infer<typeof questionSchema>;

@@ -7,6 +7,16 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "composables"
+    label: "composables"
+  - id: "ref"
+    label: "ref"
 questions:
   - text: "What best defines a composable in Vue 3?"
     explanation: "A composable is a function that encapsulates reusable logic with reactive state, separate from the visual layer."

@@ -19,7 +19,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="bg-card border rounded-lg w-full h-full">
+  <div class="bg-card border rounded-lg w-full h-full overflow-hidden">
     <ScrollArea class="h-full w-full" type="auto">
       <div class="flex flex-col-reverse md:grid grid-cols-[1fr_0.6fr]">
         <div class="p-4 md:p-10">
@@ -51,13 +51,7 @@ defineProps<{
           </div>
         </div>
         <div>
-          <div class="bg-accent flex justify-center items-center w-full h-full p-4">
-            <img
-              class="max-w-[140px] md:max-w-[200px] drop-shadow-md"
-              :src="image"
-              alt="Quiz Image"
-            />
-          </div>
+          <img :src="image" alt="Quiz Image" class="h-full w-full object-cover" />
         </div>
       </div>
     </ScrollArea>

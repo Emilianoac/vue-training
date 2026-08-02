@@ -7,6 +7,18 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "components"
+  name: "Componentes"
+  image:
+    url: "/images/quizzes/categories/components.webp"
+topics:
+  - id: "slots"
+    label: "slots"
+  - id: "named-slots"
+    label: "named slots"
+  - id: "scoped-slots"
+    label: "scoped slots"
 questions:
   - text: "¿Para qué se usan los slots en Vue 3?"
     explanation: "Los slots permiten pasar estructura de interfaz desde el padre al hijo. Son ideales para componentes contenedores reutilizables como cards, paneles o modales."

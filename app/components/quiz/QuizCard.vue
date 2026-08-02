@@ -4,6 +4,7 @@ import type { QuizListItem } from "@/schemas/quiz.schema";
 import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 defineProps<{
   quiz: QuizListItem;
@@ -17,22 +18,27 @@ defineProps<{
       variant="link"
       class="h-auto w-full block p-0 whitespace-break-spaces rounded-xl text-foreground hover:no-underline"
     >
-      <NuxtLink class="block" :to="`/quizzes/${quiz.slug}`">
+      <NuxtLink class="block overflow-hidden" :to="`/quizzes/${quiz.slug}`">
+        <div class="relative">
+          <ActivityLevelBadge
+            class="absolute top-2 right-2"
+            :text="$t(`general.levels.${quiz.level}`)"
+            :type="quiz.level"
+          />
+          <img
+            :src="quiz.subCategory.image.url"
+            :alt="quiz.subCategory.name"
+            class="h-[150px] w-full object-cover aspect-21/19"
+          />
+        </div>
         <CardContent class="px-4">
-          <div class="flex justify-between items-start py-4 pb-0">
-            <!-- Image -->
-            <div
-              class="w-12.5 h-12.5 bg-slate-200 dark:bg-slate-800 p-1 rounded-full flex justify-center items-center"
-            >
-              <img :src="quiz.category.image.url" alt="Quiz Image" class="w-7.5" />
-            </div>
-            <ActivityLevelBadge :text="$t(`general.levels.${quiz.level}`)" :type="quiz.level" />
-          </div>
-          <div class="p-4">
+          <div class="p-4 px-0">
             <!-- Category -->
-            <p class="text-sm opacity-70 mb-1">{{ quiz.category.name }}</p>
+            <p class="text-sm opacity-70 mb-2">
+              {{ quiz.category.name }} - {{ quiz.subCategory.name }}
+            </p>
             <!-- Title -->
-            <h3 class="text-sm font-bold line-clamp-1">{{ quiz.title }}</h3>
+            <h3 class="text-base font-bold line-clamp-1" :title="quiz.title">{{ quiz.title }}</h3>
             <!-- Description -->
             <p
               class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-3"
@@ -40,6 +46,15 @@ defineProps<{
             >
               {{ quiz.description }}
             </p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <Badge
+                v-for="topic in quiz.topics"
+                :key="topic.id"
+                class="border-transparent bg-black text-xs font-normal text-white dark:bg-white dark:text-black"
+              >
+                {{ topic.label }}
+              </Badge>
+            </div>
           </div>
         </CardContent>
       </NuxtLink>

@@ -7,6 +7,20 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "components"
+  name: "Componentes"
+  image:
+    url: "/images/quizzes/categories/components.webp"
+topics:
+  - id: "v-if"
+    label: "v-if"
+  - id: "v-show"
+    label: "v-show"
+  - id: "dynamic-components"
+    label: "dynamic components"
+  - id: "keep-alive"
+    label: "KeepAlive"
 questions:
   - text: "¿Cuál es la diferencia principal entre `v-if` y `v-show`?"
     explanation: "`v-if` agrega o elimina nodos del DOM según la condición. `v-show` mantiene el nodo en el DOM y solo cambia su visibilidad con CSS (`display: none`)."

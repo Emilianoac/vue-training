@@ -7,6 +7,16 @@ category:
   name: "Vue 3"
   image:
     url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "reactivity"
+  name: "Reactividad"
+  image:
+    url: "/images/quizzes/categories/reactivity.webp"
+topics:
+  - id: "on-mounted"
+    label: "onMounted"
+  - id: "on-unmounted"
+    label: "onUnmounted"
 questions:
   - text: "¿En qué momento se crea e inicializa el estado reactivo en un componente Vue?"
     explanation: "Cuando Vue ejecuta `<script setup>`, el estado reactivo (`ref`, `reactive`, `computed`, `watch`) se crea e inicializa inmediatamente, incluso antes de que el componente exista en el DOM."
