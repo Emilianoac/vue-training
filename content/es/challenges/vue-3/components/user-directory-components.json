@@ -1,0 +1,40 @@
+{
+  "documentId": "user-directory-components",
+  "title": "Separar un directorio de usuarios",
+  "slug": "user-directory-components",
+  "level": "basic",
+  "topics": [{ "id": "props", "label": "props" }],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica la separación de responsabilidades entre un contenedor y un componente presentacional.",
+  "description": [
+    "App.vue ya controla la búsqueda y la selección del directorio.",
+    "Completa el contrato de UserList.vue y conecta ambos componentes mediante props y eventos."
+  ],
+  "instructions": [
+    "En UserList.vue, declara users como una prop Array requerida.",
+    "En UserList.vue, declara el evento select.",
+    "En App.vue, entrega filteredUsers a la prop users de UserList.",
+    "En App.vue, escucha select y ejecuta selectUser con el identificador emitido."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/user-directory-components.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Contrato presentacional",
+      "body": "UserList debe declarar users con defineProps y select con defineEmits."
+    },
+    {
+      "title": "Flujo descendente",
+      "body": "Usa :users para entregar filteredUsers desde App.vue."
+    },
+    {
+      "title": "Flujo ascendente",
+      "body": "Escucha @select en App.vue y pasa selectUser como manejador."
+    }
+  ]
+}

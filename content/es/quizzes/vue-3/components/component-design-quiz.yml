@@ -1,0 +1,223 @@
+documentId: "component-design-quiz"
+title: "Diseño de componentes en Vue 3"
+level: "basic"
+slug: "component-design-quiz"
+description: "Evaluación sobre responsabilidades, componentes contenedores y presentacionales, contratos y organización en Vue 3."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "¿Cuál describe mejor un componente contenedor?"
+    explanation: "Un componente contenedor orquesta datos y lógica de pantalla, y delega la representación a componentes presentacionales."
+    explanation_code:
+      - code: |-
+          // Componente contenedor
+          onMounted(fetchUsers);
+          <UserList :users="users" :loading="loading" />
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Coordina el estado y el flujo de datos, delegando la UI a componentes presentacionales."
+      - id: "2"
+        isCorrect: false
+        text: "Solo renderiza HTML estático sin props ni eventos."
+      - id: "3"
+        isCorrect: false
+        text: "Es un componente que no usa Composition API."
+      - id: "4"
+        isCorrect: false
+        text: "Se limita a estilos y clases CSS reutilizables."
+
+  - text: "¿Cuál es el enfoque principal de un componente presentacional?"
+    explanation: "Un componente presentacional recibe datos por props y emite interacciones sin decidir de dónde provienen los datos ni qué consecuencias tendrán las acciones."
+    explanation_code:
+      - code: |-
+          defineProps<{ users: User[]; loading: boolean }>();
+          defineEmits<{ select: [id: number] }>();
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Hacer fetch a APIs y normalizar respuestas del backend."
+      - id: "2"
+        isCorrect: true
+        text: "Renderizar UI a partir de props y emitir eventos de interacción."
+      - id: "3"
+        isCorrect: false
+        text: "Centralizar estado global de la aplicación."
+      - id: "4"
+        isCorrect: false
+        text: "Registrar rutas y middlewares de navegación."
+
+  - text: "¿Qué indica mejor una buena separación de responsabilidades?"
+    explanation: "La separación saludable distribuye roles: componente para UI, composable para lógica reutilizable y servicio para IO/infraestructura."
+    explanation_code:
+      - code: |-
+          UI Component -> useFeature() -> feature.service.ts
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "UI en componentes, lógica reusable en composables y acceso externo en servicios."
+      - id: "2"
+        isCorrect: false
+        text: "Toda la lógica en un solo componente para simplificar navegación."
+      - id: "3"
+        isCorrect: false
+        text: "Toda la lógica en servicios, sin composables ni estado local."
+      - id: "4"
+        isCorrect: false
+        text: "Toda la lógica en el template para evitar scripts largos."
+
+  - text: "¿Cuál es una señal típica de un componente sobrecargado?"
+    explanation: "Muchísimas props, dominios mezclados y alta fragilidad al cambio suelen indicar mala cohesión y exceso de responsabilidad."
+    explanation_code:
+      - code: |-
+          // smell: demasiadas responsabilidades juntas
+          props: auth + analytics + billing + filters + ui state
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Tener menos de 3 props tipadas."
+      - id: "2"
+        isCorrect: true
+        text: "Combinar muchos dominios y volverse difícil de testear y mantener."
+      - id: "3"
+        isCorrect: false
+        text: "Usar emits con nombres semánticos."
+      - id: "4"
+        isCorrect: false
+        text: "Dividir la UI en componentes pequeños."
+
+  - text: "¿Qué naming es más recomendable para componentes?"
+    explanation: "Nombres por feature + rol mejoran intención y discoverability, por ejemplo `UserListContainer` o `CheckoutSummaryPanel`."
+    explanation_code:
+      - code: |-
+          UserListContainer.vue
+          UserListItem.vue
+          CheckoutSummaryPanel.vue
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Nombres genéricos como `Widget` o `Thing` para máxima reutilización."
+      - id: "2"
+        isCorrect: true
+        text: "Nombres por dominio y rol, como Feature + Role."
+      - id: "3"
+        isCorrect: false
+        text: "Nombrar todos los componentes con prefijo `Base` siempre."
+      - id: "4"
+        isCorrect: false
+        text: "Nombres de una sola letra para reducir longitud de import."
+
+  - text: "¿Qué estructura suele escalar mejor en apps grandes?"
+    explanation: "Agrupar por feature suele escalar mejor que carpetas planas por tipo, porque acerca componentes, composables y servicios del mismo dominio."
+    explanation_code:
+      - code: |-
+          components/user/*
+          composables/user/*
+          services/api/user.service.ts
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Agrupar por feature/dominio con roles claros."
+      - id: "2"
+        isCorrect: false
+        text: "Una sola carpeta con todos los componentes de la app."
+      - id: "3"
+        isCorrect: false
+        text: "Separar solo por tamaño de archivo (small/large)."
+      - id: "4"
+        isCorrect: false
+        text: "Guardar componentes dentro de `public/` para acceso rápido."
+
+  - text: "¿Qué contrato de API de componente es más saludable?"
+    explanation: "Contratos explícitos con props tipadas y emits semánticos reducen ambigüedad y errores de integración."
+    explanation_code:
+      - code: |-
+          defineProps<{ items: Item[]; loading: boolean }>()
+          defineEmits<{ select: [id: number]; remove: [id: number] }>()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Una sola prop `data` con todo mezclado para simplificar."
+      - id: "2"
+        isCorrect: false
+        text: "Eventos genéricos `change` para cualquier acción."
+      - id: "3"
+        isCorrect: true
+        text: "Props enfocadas y emits con intención semántica clara."
+      - id: "4"
+        isCorrect: false
+        text: "Sin props ni emits, solo acceso directo a estado global."
+
+  - text: "¿Cuándo conviene extraer lógica a un composable?"
+    explanation: "Cuando la misma lógica aparece en múltiples componentes o crece en complejidad, moverla a composable evita duplicación y mejora pruebas."
+    explanation_code:
+      - code: |-
+          // useUserList.ts
+          export function useUserList() { ... }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Cuando hay lógica repetida o compleja que debe reutilizarse."
+      - id: "2"
+        isCorrect: false
+        text: "Cuando el componente solo tiene markup estático."
+      - id: "3"
+        isCorrect: false
+        text: "Solo si el componente usa Options API."
+      - id: "4"
+        isCorrect: false
+        text: "Nunca, porque los composables aumentan acoplamiento siempre."
+
+  - text: "¿Qué combinación distribuye mejor las responsabilidades de una funcionalidad?"
+    explanation: "El contenedor coordina datos y estado, mientras los componentes presentacionales renderizan la interfaz y emiten eventos."
+    explanation_code:
+      - code: |-
+          <UserListContainer>
+            <UserFilterForm />
+            <UserList />
+          </UserListContainer>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Container con orquestación + componentes presentacionales especializados."
+      - id: "2"
+        isCorrect: false
+        text: "Un único componente gigante con toda la feature."
+      - id: "3"
+        isCorrect: false
+        text: "Solo componentes presentacionales sin flujo de datos."
+      - id: "4"
+        isCorrect: false
+        text: "Solo servicios sin componentes de UI."
+
+  - text: "¿Cuál es una buena razón para renombrar `Widget.vue` a `UserProfileCard.vue`?"
+    explanation: "Un nombre específico comunica intención, contexto y facilita mantenimiento, onboarding y búsqueda en código."
+    explanation_code:
+      - code: |-
+          // Antes: Widget.vue
+          // Después: UserProfileCard.vue
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "Porque los nombres largos mejoran rendimiento en runtime."
+      - id: "2"
+        isCorrect: false
+        text: "Porque Vue no soporta nombres genéricos."
+      - id: "3"
+        isCorrect: true
+        text: "Porque hace explícita la intención y reduce ambigüedad del componente."
+      - id: "4"
+        isCorrect: false
+        text: "Porque así no necesitas tipar props ni emits."

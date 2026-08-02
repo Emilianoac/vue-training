@@ -5,6 +5,7 @@ import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emi
 import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
+import { createUserDirectoryComponentsChallenge } from "./challenges/user-directory-components/config";
 import { createWatchQuestionLogChallenge } from "./challenges/watch-question-log/config";
 import type { WebContainerChallenge } from "./types";
 
@@ -16,6 +17,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "provide-inject-theme": createProvideInjectThemeChallenge,
   "ref-counter-state": createRefCounterStateChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,
+  "user-directory-components": createUserDirectoryComponentsChallenge,
   "watch-question-log": createWatchQuestionLogChallenge,
 };
 

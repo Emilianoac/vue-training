@@ -1,0 +1,40 @@
+{
+  "documentId": "user-directory-components",
+  "title": "Split a User Directory",
+  "slug": "user-directory-components",
+  "level": "basic",
+  "topics": [{ "id": "props", "label": "props" }],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice separating responsibilities between a container and a presentational component.",
+  "description": [
+    "App.vue already controls directory search and selection.",
+    "Complete the UserList.vue contract and connect both components through props and events."
+  ],
+  "instructions": [
+    "In UserList.vue, declare users as a required Array prop.",
+    "In UserList.vue, declare the select event.",
+    "In App.vue, pass filteredUsers to the UserList users prop.",
+    "In App.vue, listen for select and run selectUser with the emitted identifier."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/components/user-directory-components.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Presentational contract",
+      "body": "UserList must declare users with defineProps and select with defineEmits."
+    },
+    {
+      "title": "Downward flow",
+      "body": "Use :users to pass filteredUsers from App.vue."
+    },
+    {
+      "title": "Upward flow",
+      "body": "Listen for @select in App.vue and pass selectUser as its handler."
+    }
+  ]
+}
