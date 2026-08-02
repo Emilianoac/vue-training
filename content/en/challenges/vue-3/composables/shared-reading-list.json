@@ -1,0 +1,44 @@
+{
+  "documentId": "shared-reading-list",
+  "title": "Share a Reading List",
+  "slug": "shared-reading-list",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "ref", "label": "ref" },
+    { "id": "readonly", "label": "readonly" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice synchronizing multiple consumers through a composable with module state.",
+  "description": [
+    "LessonCatalog and ReadingList already consume useReadingList, but currently receive independent lists.",
+    "Fix the scope of savedLessons so saving a lesson updates both components."
+  ],
+  "instructions": [
+    "In useReadingList.ts, move savedLessons outside the useReadingList function.",
+    "Keep savedLessons in module scope as one shared ref.",
+    "Do not remove readonly or the saveLesson, removeLesson, and reset actions.",
+    "You only need to modify useReadingList.ts."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/composables/shared-reading-list.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Current scope",
+      "body": "Everything declared inside `useReadingList` is created again on every call."
+    },
+    {
+      "title": "Shared source",
+      "body": "Declare `savedLessons` after the imports and before exporting `useReadingList`."
+    },
+    {
+      "title": "API",
+      "body": "Keep returning the same `readonly` ref and the same actions from the composable."
+    }
+  ]
+}

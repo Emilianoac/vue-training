@@ -1,0 +1,44 @@
+{
+  "documentId": "shared-reading-list",
+  "title": "Compartir una lista de lectura",
+  "slug": "shared-reading-list",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "ref", "label": "ref" },
+    { "id": "readonly", "label": "readonly" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica cómo sincronizar varios consumidores mediante un composable con estado de módulo.",
+  "description": [
+    "LessonCatalog y ReadingList ya consumen useReadingList, pero actualmente reciben listas independientes.",
+    "Corrige el alcance de savedLessons para que guardar una lección actualice ambos componentes."
+  ],
+  "instructions": [
+    "En useReadingList.ts, mueve savedLessons fuera de la función useReadingList.",
+    "Conserva savedLessons en el scope del módulo como una única ref compartida.",
+    "No elimines readonly ni las acciones saveLesson, removeLesson y reset.",
+    "Solo necesitas modificar useReadingList.ts."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/composables/shared-reading-list.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Alcance actual",
+      "body": "Todo lo declarado dentro de `useReadingList` se crea nuevamente en cada llamada."
+    },
+    {
+      "title": "Fuente compartida",
+      "body": "Declara `savedLessons` después de los imports y antes de exportar `useReadingList`."
+    },
+    {
+      "title": "API",
+      "body": "Mantén la misma ref `readonly` y las mismas acciones en el retorno del composable."
+    }
+  ]
+}

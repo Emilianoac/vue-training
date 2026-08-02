@@ -219,8 +219,24 @@ steps:
 
       - name: Estado Compartido
         id: shared-state
-        status: planned
-        items: []
+        items:
+          - id: shared-state-lesson
+            type: lesson
+            level: basic
+            title: Estado compartido con composables
+            subtitle: Decide cuándo cada consumidor necesita una instancia o una fuente reactiva común.
+
+          - id: shared-state-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa alcance, tiempo de vida, SSR y elección de herramientas de estado.
+
+          - id: shared-reading-list
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Sincroniza dos consumidores mediante un composable con estado compartido.
 
       - name: Efectos y Lifecycle
         id: composable-effects

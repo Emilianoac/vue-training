@@ -4,6 +4,7 @@ import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-s
 import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emits-quantity-stepper/config";
 import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
+import { createSharedReadingListChallenge } from "./challenges/shared-reading-list/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
 import { createUserDirectoryComponentsChallenge } from "./challenges/user-directory-components/config";
 import { createUseDisclosurePanelChallenge } from "./challenges/use-disclosure-panel/config";
@@ -17,6 +18,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "props-emits-quantity-stepper": createPropsEmitsQuantityStepperChallenge,
   "provide-inject-theme": createProvideInjectThemeChallenge,
   "ref-counter-state": createRefCounterStateChallenge,
+  "shared-reading-list": createSharedReadingListChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,
   "user-directory-components": createUserDirectoryComponentsChallenge,
   "use-disclosure-panel": createUseDisclosurePanelChallenge,

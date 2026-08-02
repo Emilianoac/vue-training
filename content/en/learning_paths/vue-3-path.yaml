@@ -219,8 +219,24 @@ steps:
 
       - name: Shared State
         id: shared-state
-        status: planned
-        items: []
+        items:
+          - id: shared-state-lesson
+            type: lesson
+            level: basic
+            title: Shared State with Composables
+            subtitle: Decide when each consumer needs an instance or a shared reactive source.
+
+          - id: shared-state-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test state scope, lifetime, SSR, and state tool selection.
+
+          - id: shared-reading-list
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Synchronize two consumers through a shared-state composable.
 
       - name: Effects and Lifecycle
         id: composable-effects
