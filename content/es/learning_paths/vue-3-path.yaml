@@ -175,8 +175,24 @@ steps:
 
       - name: Diseño de Componentes
         id: component-design
-        status: planned
-        items: []
+        items:
+          - id: component-design-lesson
+            type: lesson
+            level: basic
+            title: Diseño de componentes en Vue 3
+            subtitle: Distribuye responsabilidades y define contratos claros entre componentes.
+
+          - id: component-design-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa responsabilidades, contratos, nombres y organización de componentes.
+
+          - id: user-directory-components
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Separa un directorio de usuarios en un contenedor y un componente presentacional.
 
   - name: Composables
     sub_steps:

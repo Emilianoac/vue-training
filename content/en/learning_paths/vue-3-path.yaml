@@ -175,8 +175,24 @@ steps:
 
       - name: Component Design
         id: component-design
-        status: planned
-        items: []
+        items:
+          - id: component-design-lesson
+            type: lesson
+            level: basic
+            title: Component Design in Vue 3
+            subtitle: Distribute responsibilities and define clear contracts between components.
+
+          - id: component-design-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test component responsibilities, contracts, naming, and organization.
+
+          - id: user-directory-components
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Split a user directory into a container and a presentational component.
 
   - name: Composables
     sub_steps:
