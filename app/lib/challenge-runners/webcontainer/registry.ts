@@ -6,6 +6,7 @@ import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-t
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
 import { createUserDirectoryComponentsChallenge } from "./challenges/user-directory-components/config";
+import { createUseDisclosurePanelChallenge } from "./challenges/use-disclosure-panel/config";
 import { createWatchQuestionLogChallenge } from "./challenges/watch-question-log/config";
 import type { WebContainerChallenge } from "./types";
 
@@ -18,6 +19,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "ref-counter-state": createRefCounterStateChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,
   "user-directory-components": createUserDirectoryComponentsChallenge,
+  "use-disclosure-panel": createUseDisclosurePanelChallenge,
   "watch-question-log": createWatchQuestionLogChallenge,
 };
 

@@ -198,8 +198,24 @@ steps:
     sub_steps:
       - name: Basic Composables
         id: basic-composables
-        status: planned
-        items: []
+        items:
+          - id: basic-composables-lesson
+            type: lesson
+            level: basic
+            title: Basic Composables in Vue 3
+            subtitle: Encapsulate reactive logic behind functions with a clear API.
+
+          - id: basic-composables-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test composable definitions, conventions, encapsulation, and consumption.
+
+          - id: use-disclosure-panel
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Extract a panel's state and actions into a composable.
 
       - name: Shared State
         id: shared-state

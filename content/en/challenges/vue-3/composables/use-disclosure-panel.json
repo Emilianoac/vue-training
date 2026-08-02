@@ -1,0 +1,43 @@
+{
+  "documentId": "use-disclosure-panel",
+  "title": "Extract Panel Logic",
+  "slug": "use-disclosure-panel",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "ref", "label": "ref" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practice encapsulating reactive state and actions inside your first composable.",
+  "description": [
+    "The panel interface currently works with local state and actions in App.vue.",
+    "Complete useDisclosure.ts and refactor the component to consume its API."
+  ],
+  "instructions": [
+    "In useDisclosure.ts, implement open, close, and toggle by modifying isOpen.value.",
+    "Keep isOpen and all three actions in the returned API.",
+    "In App.vue, remove the local state and actions.",
+    "Call useDisclosure and destructure isOpen, open, close, and toggle."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/composables/use-disclosure-panel.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Reactive state",
+      "body": "The composable owns a `ref` named `isOpen`; its actions update `isOpen.value`."
+    },
+    {
+      "title": "Toggle",
+      "body": "Implement `toggle` by assigning the opposite of the current `isOpen.value`."
+    },
+    {
+      "title": "Consume the API",
+      "body": "In `App.vue`, destructure `isOpen`, `open`, `close`, and `toggle` from `useDisclosure()`."
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+documentId: "basic-composables-quiz"
+title: "Basic Composables in Vue 3"
+level: "basic"
+slug: "basic-composables-quiz"
+description: "Assessment on composables, encapsulation, reactive APIs, and their use inside Vue components."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+questions:
+  - text: "What best defines a composable in Vue 3?"
+    explanation: "A composable is a function that encapsulates reusable logic with reactive state, separate from the visual layer."
+    explanation_code:
+      - code: |-
+          export function useCounter() {
+            const count = ref(0)
+            return { count }
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "A reusable function that encapsulates reactive logic with Composition API."
+      - id: "2"
+        isCorrect: false
+        text: "A visual component without template that replaces slots."
+      - id: "3"
+        isCorrect: false
+        text: "A custom directive for event handling."
+      - id: "4"
+        isCorrect: false
+        text: "A global plugin registered in nuxt.config.ts."
+
+  - text: "What naming convention is recommended for composables?"
+    explanation: "The `use` prefix clearly signals reusable composable logic."
+    explanation_code:
+      - code: |-
+          useUsers()
+          useFormValidation()
+          useTheme()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`get` prefix, like `getUsersLogic`."
+      - id: "2"
+        isCorrect: true
+        text: "`use` prefix, like `useUsers`."
+      - id: "3"
+        isCorrect: false
+        text: "`Composable` suffix, like `usersComposable`."
+      - id: "4"
+        isCorrect: false
+        text: "There is no naming convention in Vue 3."
+
+  - text: "What does encapsulation mean in a composable?"
+    explanation: "It means hiding internal implementation details and exposing only a minimal useful public API."
+    explanation_code:
+      - code: |-
+          function useX() {
+            const internal = ref(0)
+            const publicValue = computed(() => internal.value * 2)
+            return { publicValue }
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Expose only what is needed and hide internal implementation details."
+      - id: "2"
+        isCorrect: false
+        text: "Return all internal variables for permanent debugging."
+      - id: "3"
+        isCorrect: false
+        text: "Move component templates inside the composable."
+      - id: "4"
+        isCorrect: false
+        text: "Avoid any `ref` or `computed` inside composables."
+
+  - text: "Which responsibility best fits a composable?"
+    explanation: "Composables are intended for reusable logic, reactive state, and shareable side effects, not for visual rendering."
+    explanation_code:
+      - code: |-
+          export function useUsers() {
+            const users = ref([])
+            async function loadUsers() { ... }
+            return { users, loadUsers }
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Managing reusable state and feature logic."
+      - id: "2"
+        isCorrect: false
+        text: "Rendering an HTML table with styles and slots."
+      - id: "3"
+        isCorrect: false
+        text: "Defining routes and navigation middleware."
+      - id: "4"
+        isCorrect: false
+        text: "Replacing presentational components entirely."
+
+  - text: "What signal suggests logic should be extracted into a composable?"
+    explanation: "When the same logic appears in multiple components, extraction improves reuse and testability."
+    explanation_code:
+      - code: |-
+          // same fetch logic repeated in 3 components
+          onMounted(loadUsers)
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "The logic is duplicated across multiple components."
+      - id: "2"
+        isCorrect: false
+        text: "The component only contains static markup."
+      - id: "3"
+        isCorrect: false
+        text: "There are fewer than two refs in the component."
+      - id: "4"
+        isCorrect: false
+        text: "A new CSS class must be added."
+
+  - text: "Which composable API is clearer?"
+    explanation: "A clear API communicates state and actions with semantic names: `users`, `loading`, `error`, `loadUsers`."
+    explanation_code:
+      - code: |-
+          return { users, loading, error, loadUsers }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`return { a, b, c, fn1 }`"
+      - id: "2"
+        isCorrect: true
+        text: "`return { users, loading, error, loadUsers }`"
+      - id: "3"
+        isCorrect: false
+        text: "`return { state }` with everything deeply nested"
+      - id: "4"
+        isCorrect: false
+        text: "Return nothing and rely on globals."
+
+  - text: "Why does a composable commonly return independent refs?"
+    explanation: "Refs preserve their reactive connection when consumers destructure the returned object."
+    explanation_code:
+      - code: |-
+          const { value, toggle } = useToggle();
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "They allow destructuring the result while preserving reactivity."
+      - id: "2"
+        isCorrect: false
+        text: "They automatically turn every value into a prop."
+      - id: "3"
+        isCorrect: false
+        text: "They prevent consumers from modifying state."
+      - id: "4"
+        isCorrect: false
+        text: "They remove the need for `.value` inside scripts."
+
+  - text: "What is the key difference between a component and a composable?"
+    explanation: "A component renders interface; a composable encapsulates reusable logic without template."
+    explanation_code:
+      - code: |-
+          // component => template + script
+          // composable => logic function
+        language: "text"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "A component renders UI; a composable encapsulates reusable logic and state."
+      - id: "2"
+        isCorrect: false
+        text: "A composable renders UI and a component handles only data."
+      - id: "3"
+        isCorrect: false
+        text: "Both require templates to work."
+      - id: "4"
+        isCorrect: false
+        text: "There is no practical difference."
+
+  - text: "Which practice helps keep composables decoupled?"
+    explanation: "Using explicit arguments and avoiding hidden dependencies makes composables easier to test and reuse."
+    explanation_code:
+      - code: |-
+          function useSearch(initialQuery = "") { ... }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Use explicit parameters and minimize implicit dependencies."
+      - id: "2"
+        isCorrect: false
+        text: "Depend on undocumented global variables."
+      - id: "3"
+        isCorrect: false
+        text: "Read directly from the DOM in every function."
+      - id: "4"
+        isCorrect: false
+        text: "Couple the composable to router state without need."
+
+  - text: "Where should a composable that uses Vue hooks be called?"
+    explanation: "It must be called synchronously inside `<script setup>` or `setup()` so Vue can associate it with the active instance."
+    explanation_code:
+      - code: |-
+          <script setup>
+          const { value, toggle } = useToggle();
+          </script>
+        language: "vue"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Synchronously inside `<script setup>` or `setup()`."
+      - id: "2"
+        isCorrect: false
+        text: "Only inside DOM events after the component mounts."
+      - id: "3"
+        isCorrect: false
+        text: "In any global module, even when it depends on lifecycle context."
+      - id: "4"
+        isCorrect: false
+        text: "Exclusively inside the component template."

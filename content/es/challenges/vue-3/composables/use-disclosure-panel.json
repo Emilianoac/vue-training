@@ -1,0 +1,43 @@
+{
+  "documentId": "use-disclosure-panel",
+  "title": "Extraer la lógica de un panel",
+  "slug": "use-disclosure-panel",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "ref", "label": "ref" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica cómo encapsular estado reactivo y acciones dentro de tu primer composable.",
+  "description": [
+    "La interfaz del panel funciona actualmente con estado y acciones locales en App.vue.",
+    "Completa useDisclosure.ts y refactoriza el componente para consumir su API."
+  ],
+  "instructions": [
+    "En useDisclosure.ts, implementa open, close y toggle modificando isOpen.value.",
+    "Conserva isOpen y las tres acciones como parte de la API retornada.",
+    "En App.vue, elimina el estado y las acciones locales.",
+    "Invoca useDisclosure y desestructura isOpen, open, close y toggle."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/composables/use-disclosure-panel.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Estado reactivo",
+      "body": "El composable tiene un `ref` llamado `isOpen`; sus acciones actualizan `isOpen.value`."
+    },
+    {
+      "title": "Alternar",
+      "body": "Implementa `toggle` asignando el valor opuesto del `isOpen.value` actual."
+    },
+    {
+      "title": "Consumir la API",
+      "body": "En `App.vue`, desestructura `isOpen`, `open`, `close` y `toggle` desde `useDisclosure()`."
+    }
+  ]
+}
