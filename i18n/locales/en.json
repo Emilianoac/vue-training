@@ -110,6 +110,10 @@
     "sections": "Sections"
   },
   "learningPath": {
+    "progress": {
+      "title": "Overall progress",
+      "completed": "{completedCount} / {totalCount} completed"
+    },
     "status": {
       "planned": "Coming soon"
     },

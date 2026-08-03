@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const { t } = useI18n();
+
 defineProps<{
   completedCount: number;
   progressPercent: number;
@@ -11,13 +14,13 @@ defineProps<{
   <div class="space-y-2">
     <Card class="gap-3">
       <CardHeader>
-        <CardTitle> Progreso general </CardTitle>
+        <CardTitle>{{ t("learningPath.progress.title") }}</CardTitle>
       </CardHeader>
       <CardContent>
         <div class="space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-sm text-muted-foreground block">
-              {{ completedCount }} / {{ totalCount }} completados
+              {{ t("learningPath.progress.completed", { completedCount, totalCount }) }}
             </span>
             <p class="text-right text-xs text-muted-foreground">{{ progressPercent }}%</p>
           </div>

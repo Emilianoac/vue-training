@@ -110,6 +110,10 @@
     "sections": "Secciones"
   },
   "learningPath": {
+    "progress": {
+      "title": "Progreso general",
+      "completed": "{completedCount} / {totalCount} completados"
+    },
     "status": {
       "planned": "Pronto"
     },
