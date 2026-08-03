@@ -127,6 +127,47 @@
   }
 }
 
+.page-enter-active {
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.page-leave-active {
+  transition:
+    opacity 120ms ease-in,
+    transform 120ms ease-in;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 160ms ease;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active,
+  .layout-enter-active,
+  .layout-leave-active {
+    transition: none;
+  }
+}
+
 @layer components {
   :not(pre)>code {
     @apply bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-blue-200 px-1 rounded-md text-base font-normal font-mono inline-block;
