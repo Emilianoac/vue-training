@@ -14,6 +14,8 @@ definePageMeta({
 
 const { t, locale } = useI18n();
 
+useStaticPageSeo("learn");
+
 const sections = computed(() => [
   {
     title: t("learn.home.sections.learningPaths.title"),

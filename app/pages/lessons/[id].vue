@@ -7,6 +7,10 @@ const { lesson, getLesson } = useLessonData();
 
 await getLesson(route.params.id as string);
 
+useSeoMeta({
+  title: computed(() => lesson.value?.title),
+});
+
 watch(locale, async () => {
   await getLesson(route.params.id as string);
 });

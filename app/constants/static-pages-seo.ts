@@ -17,6 +17,20 @@ export const staticPagesSeoData = {
       keywords: "vue.js quiz, vue challenges, learn vue, vue.js tests, vue exercises",
     },
   },
+  learn: {
+    es: {
+      title: "Aprende Vue.js",
+      description:
+        "Aprende Vue.js con rutas guiadas, lecciones, cuestionarios, desafíos y tips prácticos.",
+      keywords: "aprender vue.js, curso vue, lecciones vue, ejercicios vue, ruta de aprendizaje vue",
+    },
+    en: {
+      title: "Learn Vue.js",
+      description:
+        "Learn Vue.js with guided paths, lessons, quizzes, challenges, and practical tips.",
+      keywords: "learn vue.js, vue course, vue lessons, vue exercises, vue learning path",
+    },
+  },
   learning_path: {
     es: {
       title: "Ruta de Aprendizaje",
