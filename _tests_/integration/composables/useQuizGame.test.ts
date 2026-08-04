@@ -103,6 +103,9 @@ describe("useQuiz", () => {
 
     game.state.answer.selectedOptionId = "ref";
     game.actions.answerCurrentQuestion();
+
+    expect(game.state.progress.percentage).toBe(0);
+
     game.actions.goToNextQuestion();
 
     expect(game.state.result.history).toHaveLength(1);
@@ -110,7 +113,7 @@ describe("useQuiz", () => {
       "ref",
     );
     expect(game.state.progress.currentQuestionIndex).toBe(1);
-    expect(game.state.progress.percentage).toBe(100);
+    expect(game.state.progress.percentage).toBe(50);
     expect(game.state.answer).toEqual({
       selectedOptionId: null,
       hasCheckedAnswer: false,
@@ -130,6 +133,7 @@ describe("useQuiz", () => {
     game.actions.goToNextQuestion();
 
     expect(game.state.quizState.isFinished).toBe(true);
+    expect(game.state.progress.percentage).toBe(100);
     expect(game.state.result.stats).toEqual({
       correct: 1,
       wrong: 1,

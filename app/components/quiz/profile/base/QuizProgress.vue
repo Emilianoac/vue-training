@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
   progress: number;
   currentQuestionIndex: number;
   quizLength: number;
 }>();
+
+const completedQuestions = computed(() => Math.round((props.progress / 100) * props.quizLength));
 </script>
 
 <template>
@@ -16,10 +18,22 @@ defineProps<{
     </div>
 
     <!-- Progress Bar -->
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+    <div
+      class="flex w-full gap-1"
+      role="progressbar"
+      :aria-valuenow="completedQuestions"
+      aria-valuemin="0"
+      :aria-valuemax="quizLength"
+    >
       <div
-        class="bg-primary h-2.5 rounded-full transition-[width] duration-500 ease-in-out"
-        :style="{ width: `${progress}%` }"
+        v-for="questionNumber in quizLength"
+        :key="questionNumber"
+        class="h-2.5 flex-1 rounded-full border-1 border-transparent transition-colors duration-500 ease-in-out"
+        :class="[
+          questionNumber <= completedQuestions ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700',
+          questionNumber === currentQuestionIndex ? 'border-primary!' : '',
+        ]"
+        :aria-current="questionNumber === currentQuestionIndex ? 'step' : undefined"
       ></div>
     </div>
   </div>

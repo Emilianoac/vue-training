@@ -85,6 +85,9 @@ export default function useQuiz() {
       state.answer.hasCheckedAnswer = true;
     },
     goToNextQuestion: () => {
+      state.progress.percentage =
+        (state.result.history.length / totalQuestions.value) * 100;
+
       if (isLastQuestion.value) {
         finishQuiz();
         return;
@@ -115,8 +118,6 @@ export default function useQuiz() {
       return;
     }
     state.progress.currentQuestionIndex++;
-    state.progress.percentage =
-      ((state.progress.currentQuestionIndex + 1) / quiz.value.questions.length) * 100;
   }
 
   function resetQuestionState() {
