@@ -33,7 +33,7 @@ const showWrongSelected = computed(
 
   <label
     :for="`answer-${answerId}`"
-    class="grid grid-cols-1 md:grid-cols-[1fr_max-content] items-center w-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500!"
+    class="grid grid-cols-1 md:grid-cols-[1fr_max-content] items-center w-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500! peer-focus-visible:border-primary! peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"
     :class="{
       '!border-green-500 bg-green-800/10': showCorrect,
 
