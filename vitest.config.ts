@@ -14,6 +14,13 @@ export default defineConfig({
   test: {
     projects: [
       {
+        test: {
+          name: "content",
+          include: ["_tests_/content/**/*.{test,spec}.ts"],
+          environment: "node",
+        },
+      },
+      {
         resolve: {
           alias: appAliases,
         },

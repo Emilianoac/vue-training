@@ -6,6 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "test": "vitest run",
+    "test:content": "vitest run --project content",
     "test:unit": "vitest run _tests_/unit",
     "test:integration": "vitest run _tests_/integration",
     "test:watch": "vitest",
