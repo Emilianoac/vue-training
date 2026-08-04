@@ -61,10 +61,6 @@ function getStars(p: number) {
 <template>
   <ScrollArea class="h-full pr-2 w-full">
     <div class="w-full overflow-y-auto">
-      <p class="text-slate-500 dark:text-slate-400 mt-2 mb-6">
-        {{ $t("quiz.results.quiz_completed") }}
-      </p>
-
       <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_0.8fr] gap-6">
         <!-- Quiz Results Summary -->
         <div
@@ -127,7 +123,7 @@ function getStars(p: number) {
             </div>
             <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
               <div
-                class="bg-brand-main-500 h-2.5 rounded-full"
+                class="bg-primary h-2.5 rounded-full"
                 :style="{ width: `${userStats.percentage}%` }"
               ></div>
             </div>
