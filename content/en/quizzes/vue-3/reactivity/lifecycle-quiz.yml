@@ -30,12 +30,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "In the `onMounted` hook, when the DOM is already available."
-      - id: "2"
-        isCorrect: true
-        text: "When `<script setup>` runs, before the component exists in the DOM."
       - id: "3"
         isCorrect: false
         text: "On the first render of the component."
+      - id: "2"
+        isCorrect: true
+        text: "When `<script setup>` runs, before the component exists in the DOM."
       - id: "4"
         isCorrect: false
         text: "When the component receives its first prop."
@@ -61,13 +61,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Because the DOM is mounted in a separate worker."
-      - id: "3"
-        isCorrect: true
-        text: "Because the component has not been mounted in the DOM yet when the top level of setup runs."
       - id: "4"
         isCorrect: false
         text: "Because template refs only work inside async functions."
 
+      - id: "3"
+        isCorrect: true
+        text: "Because the component has not been mounted in the DOM yet when the top level of setup runs."
   - text: "What is the correct place to make an API call that will feed reactive state?"
     explanation: "`onMounted` is the ideal place to fetch external data, since at that point the DOM is available and reactive state is active. When the state is updated, Vue will automatically re-render the component."
     explanation_code:
@@ -80,12 +80,12 @@ questions:
           });
         language: "javascript"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "At the top level of `<script setup>` so data is ready before the first render."
       - id: "2"
         isCorrect: true
         text: "In `onMounted`, where reactive state is already active and the DOM is available."
+      - id: "1"
+        isCorrect: false
+        text: "At the top level of `<script setup>` so data is ready before the first render."
       - id: "3"
         isCorrect: false
         text: "In `onUnmounted`, to optimize performance."
@@ -108,12 +108,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "They keep running in the background indefinitely."
-      - id: "2"
-        isCorrect: false
-        text: "They must always be stopped manually using their return value."
       - id: "3"
         isCorrect: true
         text: "They stop automatically because Vue binds them to the component lifecycle."
+      - id: "2"
+        isCorrect: false
+        text: "They must always be stopped manually using their return value."
       - id: "4"
         isCorrect: false
         text: "They pause until the component mounts again."
@@ -166,12 +166,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Watchers created with `watch` or `watchEffect` at the top level of setup."
-      - id: "2"
-        isCorrect: false
-        text: "Computed properties."
       - id: "3"
         isCorrect: true
         text: "Intervals, external event listeners, and subscriptions to services not managed by Vue."
+      - id: "2"
+        isCorrect: false
+        text: "Computed properties."
       - id: "4"
         isCorrect: false
         text: "`ref` and `reactive` values."
@@ -194,13 +194,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: "The change is applied but the DOM is not updated until the next manual tick."
-      - id: "3"
-        isCorrect: false
-        text: "It throws an error because the DOM is already mounted."
       - id: "4"
         isCorrect: true
         text: "Vue detects the change and updates the DOM automatically."
 
+      - id: "3"
+        isCorrect: false
+        text: "It throws an error because the DOM is already mounted."
   - text: "You are building a component that loads data when it appears on screen and cleans up a resource when it leaves. Where should each part go?"
     explanation: "Reactive state is declared at the top level of `<script setup>`. Data loading can happen in `onMounted`, once the component is mounted, and external resource cleanup belongs in `onUnmounted`."
     explanation_code:
@@ -218,15 +218,15 @@ questions:
           });
         language: "javascript"
     answers:
+      - id: "3"
+        isCorrect: true
+        text: "Declare state in setup, load data in `onMounted`, and clean up the resource in `onUnmounted`."
       - id: "1"
         isCorrect: false
         text: "Declare state in `onMounted` and clean up the resource at the top level of setup."
       - id: "2"
         isCorrect: false
         text: "Declare state in `onUnmounted`, load data in setup, and clean up in `onMounted`."
-      - id: "3"
-        isCorrect: true
-        text: "Declare state in setup, load data in `onMounted`, and clean up the resource in `onUnmounted`."
       - id: "4"
         isCorrect: false
         text: "Do everything in `onMounted`, because Vue automatically cleans up any external resource."
@@ -258,12 +258,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "None, hooks do not work outside a component."
-      - id: "2"
-        isCorrect: false
-        text: "It allows calling onMounted multiple times from the same component."
       - id: "3"
         isCorrect: true
         text: "It encapsulates state and lifecycle effects, reusable in any component."
+      - id: "2"
+        isCorrect: false
+        text: "It allows calling onMounted multiple times from the same component."
       - id: "4"
         isCorrect: false
         text: "It prevents the component from needing to import `ref` or `reactive`."

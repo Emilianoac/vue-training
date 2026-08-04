@@ -35,9 +35,6 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: Proxies de JavaScript
       - id: "2"
         isCorrect: false
         text: Object.defineProperty
@@ -48,6 +45,9 @@ questions:
         isCorrect: false
         text: Web Workers
 
+      - id: "1"
+        isCorrect: true
+        text: Proxies de JavaScript
   - text: Si declaras una constante con `ref(0)`, ¿cómo debes modificar su valor dentro del bloque `<script>`?
     explanation: Las referencias creadas con `ref` envuelven el valor en un objeto. Para acceder o modificar el valor real, se debe utilizar la propiedad `.value`.
     explanation_code:
@@ -59,12 +59,12 @@ questions:
           count.value++;
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "`count++`"
       - id: "2"
         isCorrect: true
         text: "`count.value++`"
+      - id: "1"
+        isCorrect: false
+        text: "`count++`"
       - id: "3"
         isCorrect: false
         text: "`count.set(1)`"
@@ -83,12 +83,12 @@ questions:
           const state = reactive({ count: 0 });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: Solo funciona con objetos y arrays, no con valores primitivos.
       - id: "2"
         isCorrect: false
         text: No es reactiva en profundidad.
+      - id: "1"
+        isCorrect: true
+        text: Solo funciona con objetos y arrays, no con valores primitivos.
       - id: "3"
         isCorrect: false
         text: Requiere el uso de `.value` siempre.
@@ -110,12 +110,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: Se mantiene gracias a los Proxies.
-      - id: "2"
-        isCorrect: true
-        text: Se pierde el vínculo reactivo de las propiedades desestructuradas.
       - id: "3"
         isCorrect: false
         text: Vue lanza un error en tiempo de ejecución.
+      - id: "2"
+        isCorrect: true
+        text: Se pierde el vínculo reactivo de las propiedades desestructuradas.
       - id: "4"
         isCorrect: false
         text: El objeto se convierte automáticamente en un `ref`.
@@ -132,15 +132,15 @@ questions:
           s.value = { n: 2 };
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: Solo es reactivo ante la reasignación total del valor `.value`.
       - id: "1"
         isCorrect: false
         text: Solo permite valores primitivos.
       - id: "2"
         isCorrect: false
         text: Es asíncrono por defecto.
-      - id: "3"
-        isCorrect: true
-        text: Solo es reactivo ante la reasignación total del valor `.value`.
       - id: "4"
         isCorrect: false
         text: Se utiliza exclusivamente para formularios.
@@ -152,15 +152,15 @@ questions:
           <p>{{ count }}</p> 
           language: html
     answers:
-      - id: "1"
-        isCorrect: true
-        text: Directamente por el nombre de la variable.
       - id: "2"
         isCorrect: false
         text: Usando `variable.value`.
       - id: "3"
         isCorrect: false
         text: Usando el prefijo `$`.
+      - id: "1"
+        isCorrect: true
+        text: Directamente por el nombre de la variable.
       - id: "4"
         isCorrect: false
         text: Invocándolo como una función `variable()`.
@@ -175,9 +175,6 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: Cuando se manejan grandes estructuras y solo se necesita reactividad en la raíz.
       - id: "2"
         isCorrect: false
         text: Para convertir un `ref` en `reactive`.
@@ -188,6 +185,9 @@ questions:
         isCorrect: false
         text: Para ocultar datos de las herramientas de desarrollo.
 
+      - id: "1"
+        isCorrect: true
+        text: Cuando se manejan grandes estructuras y solo se necesita reactividad en la raíz.
   - text: ¿Qué ocurre al asignar un objeto nuevo a un `ref()`?
     explanation: A diferencia de `reactive()`, `ref()` permite la reasignación completa del objeto manteniendo la reactividad en la variable original.
     explanation_code:
@@ -197,12 +197,12 @@ questions:
           user.value = { name: 'Luis' }; 
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: La reactividad se preserva a través del acceso a `.value`.
       - id: "2"
         isCorrect: false
         text: Se pierde la reactividad permanentemente.
+      - id: "1"
+        isCorrect: true
+        text: La reactividad se preserva a través del acceso a `.value`.
       - id: "3"
         isCorrect: false
         text: El objeto nuevo debe ser obligatoriamente del mismo tipo.
@@ -222,12 +222,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: Un Proxy directo del valor.
-      - id: "2"
-        isCorrect: true
-        text: Un objeto contenedor con la propiedad `.value`.
       - id: "3"
         isCorrect: false
         text: El mismo tipo de dato que recibe por parámetro.
+      - id: "2"
+        isCorrect: true
+        text: Un objeto contenedor con la propiedad `.value`.
       - id: "4"
         isCorrect: false
         text: Una función getter.

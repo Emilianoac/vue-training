@@ -30,9 +30,6 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Each consumer gets its own isolated instance."
       - id: "2"
         isCorrect: false
         text: "All consumers share the same state by default."
@@ -43,6 +40,9 @@ questions:
         isCorrect: false
         text: "The state is destroyed after first render."
 
+      - id: "1"
+        isCorrect: true
+        text: "Each consumer gets its own isolated instance."
   - text: "What is the effect of declaring `ref` outside the composable?"
     explanation: "If state lives in module scope, every composable call reuses the same shared reference (singleton-like pattern)."
     explanation_code:
@@ -53,12 +53,12 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "It creates a new copy on each `useSharedCounter()` call."
       - id: "2"
         isCorrect: true
         text: "It shares the same reference across all consumers."
+      - id: "1"
+        isCorrect: false
+        text: "It creates a new copy on each `useSharedCounter()` call."
       - id: "3"
         isCorrect: false
         text: "It prevents reactivity in child components."
@@ -74,12 +74,12 @@ questions:
           export function useTheme() { return { theme } }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "It keeps state synchronized across multiple consumers."
       - id: "2"
         isCorrect: false
         text: "It completely eliminates coupling between modules."
+      - id: "1"
+        isCorrect: true
+        text: "It keeps state synchronized across multiple consumers."
       - id: "3"
         isCorrect: false
         text: "It removes the need for mutation actions."
@@ -98,12 +98,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "It disables reactivity."
-      - id: "2"
-        isCorrect: true
-        text: "It may increase coupling and reduce change traceability."
       - id: "3"
         isCorrect: false
         text: "It only works with class components."
+      - id: "2"
+        isCorrect: true
+        text: "It may increase coupling and reduce change traceability."
       - id: "4"
         isCorrect: false
         text: "It automatically breaks Vue lifecycle hooks."
@@ -137,15 +137,15 @@ questions:
           const state = useState("reading-list", () => [])
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "It can leak state across requests unless a request-isolated mechanism is used."
       - id: "2"
         isCorrect: false
         text: "It automatically turns every ref into a non-reactive value."
       - id: "3"
         isCorrect: false
         text: "It prevents the server from rendering components that use Composition API."
+      - id: "1"
+        isCorrect: true
+        text: "It can leak state across requests unless a request-isolated mechanism is used."
       - id: "4"
         isCorrect: false
         text: "It creates an isolated copy for every request without additional configuration."
@@ -158,9 +158,6 @@ questions:
           return { count, inc, reset }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Include a reset action to clear shared state in tests."
       - id: "2"
         isCorrect: false
         text: "Skip tests when singleton state exists."
@@ -171,6 +168,9 @@ questions:
         isCorrect: false
         text: "Use `v-if` to reset module-level state."
 
+      - id: "1"
+        isCorrect: true
+        text: "Include a reset action to clear shared state in tests."
   - text: "Which option best describes the recommended hybrid pattern?"
     explanation: "Combining local composables for per-instance state and shared composables for cross-cutting context balances isolation and synchronization."
     explanation_code:
@@ -179,12 +179,12 @@ questions:
           useSharedTheme()
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Use local state per component and shared state for cross-cutting context."
       - id: "2"
         isCorrect: false
         text: "Make everything singleton to avoid duplicates."
+      - id: "1"
+        isCorrect: true
+        text: "Use local state per component and shared state for cross-cutting context."
       - id: "3"
         isCorrect: false
         text: "Make everything local even when global sync is required."
@@ -200,15 +200,15 @@ questions:
           // => store
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "When complexity grows and better structure/traceability is needed."
       - id: "2"
         isCorrect: false
         text: "When there is only one consuming component."
       - id: "3"
         isCorrect: false
         text: "When state is temporary and local to one modal."
+      - id: "1"
+        isCorrect: true
+        text: "When complexity grows and better structure/traceability is needed."
       - id: "4"
         isCorrect: false
         text: "Never, because Pinia does not work with Composition API."

@@ -27,12 +27,12 @@ questions:
           const doubleCount = computed(() => count.value * 2);
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: Caching based on reactive dependencies.
       - id: "2"
         isCorrect: false
         text: That it can receive parameters as arguments.
+      - id: "1"
+        isCorrect: true
+        text: Caching based on reactive dependencies.
       - id: "3"
         isCorrect: false
         text: That it runs on every component render.
@@ -53,12 +53,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: A `reactive` object with the computed value.
-      - id: "2"
-        isCorrect: true
-        text: A read-only reactive `ref` object.
       - id: "3"
         isCorrect: false
         text: The primitive value directly.
+      - id: "2"
+        isCorrect: true
+        text: A read-only reactive `ref` object.
       - id: "4"
         isCorrect: false
         text: A function that must be called manually.
@@ -79,13 +79,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: Every time it is accessed in the template.
-      - id: "3"
-        isCorrect: true
-        text: Only when one of its reactive dependencies changes.
       - id: "4"
         isCorrect: false
         text: Only when the component mounts.
 
+      - id: "3"
+        isCorrect: true
+        text: Only when one of its reactive dependencies changes.
   - text: What is the main performance difference between a method and a computed property?
     explanation: Methods run every time they are accessed or called, regardless of whether dependencies changed. Computed properties have smart caching and only recalculate when their reactive dependencies change.
     explanation_code:
@@ -97,12 +97,12 @@ questions:
           const doubleComputed = computed(() => count.value * 2);
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: false
-        text: Methods have caching and computed properties do not.
       - id: "2"
         isCorrect: true
         text: Computed properties have smart caching; methods run every time they are accessed.
+      - id: "1"
+        isCorrect: false
+        text: Methods have caching and computed properties do not.
       - id: "3"
         isCorrect: false
         text: There is no performance difference between the two.
@@ -141,15 +141,15 @@ questions:
           doubled.value = 10;
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: It will fail with an error because computed properties are read-only by default.
       - id: "1"
         isCorrect: false
         text: The value updates normally.
       - id: "2"
         isCorrect: false
         text: Vue silently ignores the assignment.
-      - id: "3"
-        isCorrect: true
-        text: It will fail with an error because computed properties are read-only by default.
       - id: "4"
         isCorrect: false
         text: The getter function is automatically recalculated.
@@ -202,13 +202,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: Use a method called from the template.
-      - id: "3"
-        isCorrect: true
-        text: Use a computed property that depends on `search` and `users`.
       - id: "4"
         isCorrect: false
         text: Use `watch` to update a variable with the filtered list every time.
 
+      - id: "3"
+        isCorrect: true
+        text: Use a computed property that depends on `search` and `users`.
   - text: Why is it recommended to use `.toSorted()` instead of `.sort()` inside a computed property?
     explanation: "`.sort()` mutates the original array, which can alter the reactive state source of truth. `.toSorted()` returns a new sorted array without modifying the original, following the rule of not mutating state inside a computed."
     explanation_code:
@@ -222,15 +222,15 @@ questions:
           const sorted = computed(() => items.value.toSorted());
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: Because `.sort()` mutates the original array and `.toSorted()` returns a copy without altering the source of truth.
       - id: "1"
         isCorrect: false
         text: Because `.sort()` is not compatible with Vue 3.
       - id: "2"
         isCorrect: false
         text: Because `.toSorted()` is faster than `.sort()`.
-      - id: "3"
-        isCorrect: true
-        text: Because `.sort()` mutates the original array and `.toSorted()` returns a copy without altering the source of truth.
       - id: "4"
         isCorrect: false
         text: There is no difference; both are equivalent inside a computed.
@@ -254,12 +254,12 @@ questions:
       - id: "2"
         isCorrect: false
         text: Calculating the total of a shopping cart.
-      - id: "3"
-        isCorrect: false
-        text: Filtering a product list by selected category.
       - id: "4"
         isCorrect: true
         text: Formatting many different dates that require an input parameter.
+      - id: "3"
+        isCorrect: false
+        text: Filtering a product list by selected category.
   - text: ¿Cuál es la característica más importante de una propiedad computada en Vue 3?
     explanation: El almacenamiento en caché (caching) es la característica clave de `computed()`. Solo se vuelve a evaluar cuando alguna de sus dependencias reactivas cambia, evitando cálculos innecesarios.
     explanation_code:
@@ -269,12 +269,12 @@ questions:
           const doubleCount = computed(() => count.value * 2);
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: El almacenamiento en caché (caching) basado en dependencias reactivas.
       - id: "2"
         isCorrect: false
         text: Que puede recibir parámetros como argumento.
+      - id: "1"
+        isCorrect: true
+        text: El almacenamiento en caché (caching) basado en dependencias reactivas.
       - id: "3"
         isCorrect: false
         text: Que se ejecuta en cada render del componente.
@@ -295,12 +295,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: Un objeto `reactive` con el valor calculado.
-      - id: "2"
-        isCorrect: true
-        text: Un objeto `ref` reactivo de solo lectura.
       - id: "3"
         isCorrect: false
         text: El valor primitivo directamente.
+      - id: "2"
+        isCorrect: true
+        text: Un objeto `ref` reactivo de solo lectura.
       - id: "4"
         isCorrect: false
         text: Una función que se ejecuta manualmente.
@@ -321,13 +321,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: Cada vez que se accede a ella en el template.
-      - id: "3"
-        isCorrect: true
-        text: Solo cuando alguna de sus dependencias reactivas cambia.
       - id: "4"
         isCorrect: false
         text: Solo cuando el componente se monta.
 
+      - id: "3"
+        isCorrect: true
+        text: Solo cuando alguna de sus dependencias reactivas cambia.
   - text: ¿Cuál es la diferencia principal entre un método y una propiedad computada en términos de rendimiento?
     explanation: Los métodos se ejecutan cada vez que se acceden o llaman, sin importar si las dependencias cambiaron. Las propiedades computadas tienen caché inteligente y solo se recalculan cuando sus dependencias reactivas cambian.
     explanation_code:
@@ -339,12 +339,12 @@ questions:
           const doubleComputed = computed(() => count.value * 2);
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: false
-        text: Los métodos tienen caché y las computadas no.
       - id: "2"
         isCorrect: true
         text: Las computadas tienen caché inteligente; los métodos se ejecutan siempre que se acceden.
+      - id: "1"
+        isCorrect: false
+        text: Los métodos tienen caché y las computadas no.
       - id: "3"
         isCorrect: false
         text: No hay diferencia de rendimiento entre ambos.
@@ -383,15 +383,15 @@ questions:
           doubled.value = 10;
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: Fallará con un error porque las computadas son de solo lectura por defecto.
       - id: "1"
         isCorrect: false
         text: El valor se actualiza normalmente.
       - id: "2"
         isCorrect: false
         text: Vue ignora la asignación silenciosamente.
-      - id: "3"
-        isCorrect: true
-        text: Fallará con un error porque las computadas son de solo lectura por defecto.
       - id: "4"
         isCorrect: false
         text: Se recalcula la función getter automáticamente.
@@ -444,13 +444,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: Usar un método que se llame en el template.
-      - id: "3"
-        isCorrect: true
-        text: Usar una propiedad computada que dependa de `search` y `users`.
       - id: "4"
         isCorrect: false
         text: Usar `watch` para actualizar una variable con la lista filtrada cada vez.
 
+      - id: "3"
+        isCorrect: true
+        text: Usar una propiedad computada que dependa de `search` y `users`.
   - text: ¿Por qué se recomienda usar `.toSorted()` en lugar de `.sort()` dentro de una propiedad computada?
     explanation: "`.sort()` muta el array original, lo que puede alterar la fuente de verdad del estado reactivo. `.toSorted()` devuelve un nuevo array ordenado sin modificar el original, siguiendo la regla de no mutar el estado dentro de una computed."
     explanation_code:
@@ -464,15 +464,15 @@ questions:
           const sorted = computed(() => items.value.toSorted());
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: Porque `.sort()` muta el array original y `.toSorted()` devuelve una copia sin alterar la fuente de verdad.
       - id: "1"
         isCorrect: false
         text: Porque `.sort()` no es compatible con Vue 3.
       - id: "2"
         isCorrect: false
         text: Porque `.toSorted()` es más rápido que `.sort()`.
-      - id: "3"
-        isCorrect: true
-        text: Porque `.sort()` muta el array original y `.toSorted()` devuelve una copia sin alterar la fuente de verdad.
       - id: "4"
         isCorrect: false
         text: No hay diferencia; ambos son equivalentes en una computed.
@@ -496,9 +496,9 @@ questions:
       - id: "2"
         isCorrect: false
         text: Calcular el total de un carrito de compras.
-      - id: "3"
-        isCorrect: false
-        text: Filtrar una lista de productos por categoría seleccionada.
       - id: "4"
         isCorrect: true
         text: Formatear muchas fechas distintas que requieren un parámetro de entrada.
+      - id: "3"
+        isCorrect: false
+        text: Filtrar una lista de productos por categoría seleccionada.

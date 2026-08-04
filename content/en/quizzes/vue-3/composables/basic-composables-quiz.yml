@@ -28,12 +28,12 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "A reusable function that encapsulates reactive logic with Composition API."
       - id: "2"
         isCorrect: false
         text: "A visual component without template that replaces slots."
+      - id: "1"
+        isCorrect: true
+        text: "A reusable function that encapsulates reactive logic with Composition API."
       - id: "3"
         isCorrect: false
         text: "A custom directive for event handling."
@@ -53,12 +53,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "`get` prefix, like `getUsersLogic`."
-      - id: "2"
-        isCorrect: true
-        text: "`use` prefix, like `useUsers`."
       - id: "3"
         isCorrect: false
         text: "`Composable` suffix, like `usersComposable`."
+      - id: "2"
+        isCorrect: true
+        text: "`use` prefix, like `useUsers`."
       - id: "4"
         isCorrect: false
         text: "There is no naming convention in Vue 3."
@@ -74,9 +74,6 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Expose only what is needed and hide internal implementation details."
       - id: "2"
         isCorrect: false
         text: "Return all internal variables for permanent debugging."
@@ -87,6 +84,9 @@ questions:
         isCorrect: false
         text: "Avoid any `ref` or `computed` inside composables."
 
+      - id: "1"
+        isCorrect: true
+        text: "Expose only what is needed and hide internal implementation details."
   - text: "Which responsibility best fits a composable?"
     explanation: "Composables are intended for reusable logic, reactive state, and shareable side effects, not for visual rendering."
     explanation_code:
@@ -119,15 +119,15 @@ questions:
           onMounted(loadUsers)
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "The logic is duplicated across multiple components."
       - id: "2"
         isCorrect: false
         text: "The component only contains static markup."
       - id: "3"
         isCorrect: false
         text: "There are fewer than two refs in the component."
+      - id: "1"
+        isCorrect: true
+        text: "The logic is duplicated across multiple components."
       - id: "4"
         isCorrect: false
         text: "A new CSS class must be added."
@@ -139,12 +139,12 @@ questions:
           return { users, loading, error, loadUsers }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "`return { a, b, c, fn1 }`"
       - id: "2"
         isCorrect: true
         text: "`return { users, loading, error, loadUsers }`"
+      - id: "1"
+        isCorrect: false
+        text: "`return { a, b, c, fn1 }`"
       - id: "3"
         isCorrect: false
         text: "`return { state }` with everything deeply nested"
@@ -159,12 +159,12 @@ questions:
           const { value, toggle } = useToggle();
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "They allow destructuring the result while preserving reactivity."
       - id: "2"
         isCorrect: false
         text: "They automatically turn every value into a prop."
+      - id: "1"
+        isCorrect: true
+        text: "They allow destructuring the result while preserving reactivity."
       - id: "3"
         isCorrect: false
         text: "They prevent consumers from modifying state."
@@ -180,9 +180,6 @@ questions:
           // composable => logic function
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "A component renders UI; a composable encapsulates reusable logic and state."
       - id: "2"
         isCorrect: false
         text: "A composable renders UI and a component handles only data."
@@ -193,6 +190,9 @@ questions:
         isCorrect: false
         text: "There is no practical difference."
 
+      - id: "1"
+        isCorrect: true
+        text: "A component renders UI; a composable encapsulates reusable logic and state."
   - text: "Which practice helps keep composables decoupled?"
     explanation: "Using explicit arguments and avoiding hidden dependencies makes composables easier to test and reuse."
     explanation_code:
@@ -222,15 +222,15 @@ questions:
           </script>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Synchronously inside `<script setup>` or `setup()`."
       - id: "2"
         isCorrect: false
         text: "Only inside DOM events after the component mounts."
       - id: "3"
         isCorrect: false
         text: "In any global module, even when it depends on lifecycle context."
+      - id: "1"
+        isCorrect: true
+        text: "Synchronously inside `<script setup>` or `setup()`."
       - id: "4"
         isCorrect: false
         text: "Exclusively inside the component template."

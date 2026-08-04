@@ -25,9 +25,6 @@ questions:
           // You can provide in App and inject in MenuItem
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Avoiding props drilling in deep component trees."
       - id: "2"
         isCorrect: false
         text: "Completely replacing props and emits."
@@ -38,6 +35,9 @@ questions:
         isCorrect: false
         text: "Creating persistent global state without libraries."
 
+      - id: "1"
+        isCorrect: true
+        text: "Avoiding props drilling in deep component trees."
   - text: "What is the correct direction for `provide` and `inject`?"
     explanation: "`provide` is declared in an ancestor (provider), and `inject` is used in a descendant (consumer)."
     explanation_code:
@@ -49,12 +49,12 @@ questions:
           const currentUser = inject("currentUser")
         language: "javascript"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "The descendant provides and the ancestor injects."
       - id: "2"
         isCorrect: true
         text: "The ancestor provides and the descendant injects."
+      - id: "1"
+        isCorrect: false
+        text: "The descendant provides and the ancestor injects."
       - id: "3"
         isCorrect: false
         text: "Both must run in the same component."
@@ -73,12 +73,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "It throws an exception automatically."
-      - id: "2"
-        isCorrect: false
-        text: "It always returns `null`."
       - id: "3"
         isCorrect: true
         text: "It returns `undefined`."
+      - id: "2"
+        isCorrect: false
+        text: "It always returns `null`."
       - id: "4"
         isCorrect: false
         text: "It returns an empty `ref`."
@@ -93,12 +93,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "By declaring a prop named fallback."
-      - id: "2"
-        isCorrect: true
-        text: "By passing it as the second argument to `inject`."
       - id: "3"
         isCorrect: false
         text: "By adding it as the third argument to `provide`."
+      - id: "2"
+        isCorrect: true
+        text: "By passing it as the second argument to `inject`."
       - id: "4"
         isCorrect: false
         text: "By calling `inject.default()` after injecting."
@@ -133,15 +133,15 @@ questions:
           // inject("theme") will reflect theme.value changes
         language: "javascript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Yes, changes are propagated reactively."
       - id: "2"
         isCorrect: false
         text: "No, inject always returns a non-reactive copy."
       - id: "3"
         isCorrect: false
         text: "Only if both components use `watchEffect`."
+      - id: "1"
+        isCorrect: true
+        text: "Yes, changes are propagated reactively."
       - id: "4"
         isCorrect: false
         text: "Only in class components, not with `<script setup>`."
@@ -156,9 +156,6 @@ questions:
                 -> MenuItem(uses currentUser)
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Passing a prop through multiple intermediate layers that do not consume it."
       - id: "2"
         isCorrect: false
         text: "Using an optional prop with a default value."
@@ -169,6 +166,9 @@ questions:
         isCorrect: false
         text: "Defining typed props in TypeScript."
 
+      - id: "1"
+        isCorrect: true
+        text: "Passing a prop through multiple intermediate layers that do not consume it."
   - text: "What is a good use case for `provide` / `inject` in UI architecture?"
     explanation: "It is useful for shared subtree context, such as theme, form context, or local layout configuration."
     explanation_code:

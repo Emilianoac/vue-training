@@ -30,15 +30,15 @@ questions:
           <UserPanel v-show="isVisible" />
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "`v-if` monta/desmonta nodos; `v-show` solo alterna visibilidad CSS."
       - id: "2"
         isCorrect: false
         text: "`v-if` y `v-show` hacen exactamente lo mismo internamente."
       - id: "3"
         isCorrect: false
         text: "`v-show` destruye el componente y `v-if` lo oculta con CSS."
+      - id: "1"
+        isCorrect: true
+        text: "`v-if` monta/desmonta nodos; `v-show` solo alterna visibilidad CSS."
       - id: "4"
         isCorrect: false
         text: "`v-if` solo funciona con componentes y `v-show` solo con HTML nativo."
@@ -54,9 +54,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "`v-if`, porque siempre es más rápido."
-      - id: "2"
-        isCorrect: true
-        text: "`v-show`, porque evita recrear el nodo en cada cambio."
       - id: "3"
         isCorrect: false
         text: "Ninguno, solo `v-model` puede controlar visibilidad."
@@ -64,6 +61,9 @@ questions:
         isCorrect: false
         text: "`v-for`, porque recicla componentes automáticamente."
 
+      - id: "2"
+        isCorrect: true
+        text: "`v-show`, porque evita recrear el nodo en cada cambio."
   - text: "¿Cuándo suele ser mejor `v-if` que `v-show`?"
     explanation: "`v-if` puede ser mejor si la condición cambia poco y el contenido no debe existir siempre en el DOM."
     explanation_code:
@@ -97,12 +97,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Para ordenar visualmente la lista sin lógica adicional."
-      - id: "2"
-        isCorrect: false
-        text: "Para evitar importar `ref` en el componente."
       - id: "3"
         isCorrect: true
         text: "Para darle identidad estable a cada nodo al actualizar listas."
+      - id: "2"
+        isCorrect: false
+        text: "Para evitar importar `ref` en el componente."
       - id: "4"
         isCorrect: false
         text: "Para convertir automáticamente cada item en componente dinámico."
@@ -119,9 +119,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "No hay riesgo, es siempre la opción recomendada por Vue."
-      - id: "2"
-        isCorrect: true
-        text: "Puede provocar reutilización incorrecta de nodos al reordenar elementos."
       - id: "3"
         isCorrect: false
         text: "Rompe la reactividad global del componente."
@@ -129,6 +126,9 @@ questions:
         isCorrect: false
         text: "Impide el uso de eventos en los elementos de la lista."
 
+      - id: "2"
+        isCorrect: true
+        text: "Puede provocar reutilización incorrecta de nodos al reordenar elementos."
   - text: "¿Qué efecto tiene cambiar intencionalmente la `key` de un componente?"
     explanation: "Cambiar la `key` fuerza a Vue a destruir la instancia previa y crear una nueva, reiniciando su estado local."
     explanation_code:
@@ -140,12 +140,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Solo actualiza estilos, sin tocar el estado interno."
-      - id: "2"
-        isCorrect: false
-        text: "Evita que se ejecuten lifecycle hooks."
       - id: "3"
         isCorrect: true
         text: "Recrea el componente y reinicia estado, refs y ciclo de vida."
+      - id: "2"
+        isCorrect: false
+        text: "Evita que se ejecuten lifecycle hooks."
       - id: "4"
         isCorrect: false
         text: "Convierte el componente en estático hasta recargar la página."
@@ -178,12 +178,12 @@ questions:
           <!-- al cambiar currentView, se destruye la instancia anterior -->
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "Vue conserva siempre el estado de todas las vistas previas."
       - id: "2"
         isCorrect: true
         text: "Se desmonta el componente anterior y se monta uno nuevo."
+      - id: "1"
+        isCorrect: false
+        text: "Vue conserva siempre el estado de todas las vistas previas."
       - id: "3"
         isCorrect: false
         text: "Vue bloquea el cambio si no hay `key`."
@@ -200,12 +200,12 @@ questions:
           </KeepAlive>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Conserva estado de componentes dinámicos al alternar entre ellos."
       - id: "2"
         isCorrect: false
         text: "Convierte automáticamente `v-if` en `v-show`."
+      - id: "1"
+        isCorrect: true
+        text: "Conserva estado de componentes dinámicos al alternar entre ellos."
       - id: "3"
         isCorrect: false
         text: "Desactiva por completo el sistema de reactividad."
@@ -229,9 +229,9 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Usar `v-once` para que Vue regenere el componente."
-      - id: "3"
-        isCorrect: true
-        text: "Cambiar la `key` para forzar recreación de la instancia."
       - id: "4"
         isCorrect: false
         text: "Usar índice de un `v-for` como key para el reset."
+      - id: "3"
+        isCorrect: true
+        text: "Cambiar la `key` para forzar recreación de la instancia."

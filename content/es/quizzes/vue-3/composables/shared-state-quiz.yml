@@ -30,9 +30,6 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Cada consumidor obtiene su propia instancia aislada."
       - id: "2"
         isCorrect: false
         text: "Todos los consumidores comparten el mismo estado por defecto."
@@ -43,6 +40,9 @@ questions:
         isCorrect: false
         text: "El estado se destruye al primer render."
 
+      - id: "1"
+        isCorrect: true
+        text: "Cada consumidor obtiene su propia instancia aislada."
   - text: "¿Qué efecto tiene declarar `ref` fuera del composable?"
     explanation: "Si el estado está en el scope de módulo, todas las llamadas al composable reutilizan la misma referencia compartida (patrón singleton)."
     explanation_code:
@@ -53,12 +53,12 @@ questions:
           }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "Crea una copia nueva en cada llamada a `useSharedCounter()`."
       - id: "2"
         isCorrect: true
         text: "Comparte la misma referencia entre todos los consumidores."
+      - id: "1"
+        isCorrect: false
+        text: "Crea una copia nueva en cada llamada a `useSharedCounter()`."
       - id: "3"
         isCorrect: false
         text: "Impide reactividad en componentes hijos."
@@ -74,12 +74,12 @@ questions:
           export function useTheme() { return { theme } }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Mantiene sincronizado el estado entre múltiples consumidores."
       - id: "2"
         isCorrect: false
         text: "Evita totalmente el acoplamiento entre módulos."
+      - id: "1"
+        isCorrect: true
+        text: "Mantiene sincronizado el estado entre múltiples consumidores."
       - id: "3"
         isCorrect: false
         text: "Elimina la necesidad de acciones para mutar estado."
@@ -98,12 +98,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "No permite reactividad."
-      - id: "2"
-        isCorrect: true
-        text: "Puede incrementar acoplamiento y dificultar trazabilidad de cambios."
       - id: "3"
         isCorrect: false
         text: "Solo funciona con componentes de clase."
+      - id: "2"
+        isCorrect: true
+        text: "Puede incrementar acoplamiento y dificultar trazabilidad de cambios."
       - id: "4"
         isCorrect: false
         text: "Rompe el ciclo de vida de Vue automáticamente."
@@ -137,15 +137,15 @@ questions:
           const state = useState("reading-list", () => [])
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Puede filtrar estado entre solicitudes si no se utiliza un mecanismo aislado por request."
       - id: "2"
         isCorrect: false
         text: "Convierte automáticamente todas las refs en valores no reactivos."
       - id: "3"
         isCorrect: false
         text: "Impide que el servidor renderice componentes que utilizan Composition API."
+      - id: "1"
+        isCorrect: true
+        text: "Puede filtrar estado entre solicitudes si no se utiliza un mecanismo aislado por request."
       - id: "4"
         isCorrect: false
         text: "Crea una copia aislada para cada solicitud sin configuración adicional."
@@ -158,9 +158,6 @@ questions:
           return { count, inc, reset }
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Incluir una acción de reset para limpiar estado compartido en pruebas."
       - id: "2"
         isCorrect: false
         text: "Evitar tests cuando hay singleton."
@@ -171,6 +168,9 @@ questions:
         isCorrect: false
         text: "Usar `v-if` para reiniciar el estado del módulo."
 
+      - id: "1"
+        isCorrect: true
+        text: "Incluir una acción de reset para limpiar estado compartido en pruebas."
   - text: "¿Qué opción describe mejor el patrón híbrido recomendado?"
     explanation: "Combinar composables locales para estado de instancia y composables compartidos para contexto transversal ofrece equilibrio entre aislamiento y sincronización."
     explanation_code:
@@ -179,12 +179,12 @@ questions:
           useSharedTheme()
         language: "typescript"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Usar local para estado por componente y shared para contexto transversal."
       - id: "2"
         isCorrect: false
         text: "Hacer todo singleton para evitar duplicación."
+      - id: "1"
+        isCorrect: true
+        text: "Usar local para estado por componente y shared para contexto transversal."
       - id: "3"
         isCorrect: false
         text: "Hacer todo local aunque se requiera sincronización global."
@@ -200,15 +200,15 @@ questions:
           // => store
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Cuando aumenta complejidad y se necesita mejor trazabilidad/estructura."
       - id: "2"
         isCorrect: false
         text: "Cuando hay un solo componente consumidor."
       - id: "3"
         isCorrect: false
         text: "Cuando el estado es temporal y local de un modal."
+      - id: "1"
+        isCorrect: true
+        text: "Cuando aumenta complejidad y se necesita mejor trazabilidad/estructura."
       - id: "4"
         isCorrect: false
         text: "Nunca, Pinia no aplica con Composition API."

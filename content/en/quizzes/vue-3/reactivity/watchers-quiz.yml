@@ -32,9 +32,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: Automatically creating reactive variables.
-      - id: "2"
-        isCorrect: true
-        text: Running an action when a reactive value changes.
       - id: "3"
         isCorrect: false
         text: Replacing the use of templates.
@@ -42,18 +39,21 @@ questions:
         isCorrect: false
         text: Preventing the component from re-rendering.
 
+      - id: "2"
+        isCorrect: true
+        text: Running an action when a reactive value changes.
   - text: Which case is a good example of a side effect for watch?
     explanation: A side effect is an action that happens as a consequence of a change, such as saving data, calling an API, writing to localStorage, or sending analytics.
     answers:
+      - id: "3"
+        isCorrect: true
+        text: Saving a preference to localStorage when it changes.
       - id: "1"
         isCorrect: false
         text: Calculating a full name from first and last name.
       - id: "2"
         isCorrect: false
         text: Filtering a list to display it in the template.
-      - id: "3"
-        isCorrect: true
-        text: Saving a preference to localStorage when it changes.
       - id: "4"
         isCorrect: false
         text: Converting a price to text for display.
@@ -69,12 +69,12 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: When the watched source changes for the first time.
       - id: "2"
         isCorrect: false
         text: Immediately when the watcher is created.
+      - id: "1"
+        isCorrect: true
+        text: When the watched source changes for the first time.
       - id: "3"
         isCorrect: false
         text: On every component render.
@@ -93,15 +93,15 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: By passing the ref directly as the first argument.
       - id: "2"
         isCorrect: false
         text: By always passing count.value as the first argument.
       - id: "3"
         isCorrect: false
         text: By passing the ref name as a string.
+      - id: "1"
+        isCorrect: true
+        text: By passing the ref directly as the first argument.
       - id: "4"
         isCorrect: false
         text: By using watch only inside the template.
@@ -115,12 +115,12 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: false
-        text: The parent component and the child component.
       - id: "2"
         isCorrect: true
         text: The current value and the previous value of the watched source.
+      - id: "1"
+        isCorrect: false
+        text: The parent component and the child component.
       - id: "3"
         isCorrect: false
         text: The template value before and after rendering.
@@ -161,9 +161,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "`watch(user.age, callback)`"
-      - id: "2"
-        isCorrect: true
-        text: "`watch(() => user.age, callback)`"
       - id: "3"
         isCorrect: false
         text: '`watch("user.age", callback)`'
@@ -171,6 +168,9 @@ questions:
         isCorrect: false
         text: '`watch(user, callback, { only: "age" })`'
 
+      - id: "2"
+        isCorrect: true
+        text: "`watch(() => user.age, callback)`"
   - text: How can watch observe more than one reactive source at the same time?
     explanation: watch can receive an array of reactive sources. The callback receives arrays with the new and previous values.
     explanation_code:
@@ -183,12 +183,12 @@ questions:
           });
         language: javascript
     answers:
-      - id: "1"
-        isCorrect: true
-        text: By passing an array of sources as the first argument.
       - id: "2"
         isCorrect: false
         text: By creating one watch on every render.
+      - id: "1"
+        isCorrect: true
+        text: By passing an array of sources as the first argument.
       - id: "3"
         isCorrect: false
         text: By separating sources with commas as loose arguments.
@@ -208,12 +208,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "`lazy: false`"
-      - id: "2"
-        isCorrect: true
-        text: "`immediate: true`"
       - id: "3"
         isCorrect: false
         text: "`once: true`"
+      - id: "2"
+        isCorrect: true
+        text: "`immediate: true`"
       - id: "4"
         isCorrect: false
         text: "`mounted: true`"
@@ -228,15 +228,15 @@ questions:
           const total = computed(() => price.value * (1 + tax.value));
         language: javascript
     answers:
+      - id: "3"
+        isCorrect: true
+        text: When you need to get a derived value for display or reuse.
       - id: "1"
         isCorrect: false
         text: When you need to save data to localStorage.
       - id: "2"
         isCorrect: false
         text: When you need to call an API after a change.
-      - id: "3"
-        isCorrect: true
-        text: When you need to get a derived value for display or reuse.
       - id: "4"
         isCorrect: false
         text: When you always need to compare newValue and oldValue.

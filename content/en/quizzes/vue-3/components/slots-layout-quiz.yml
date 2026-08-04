@@ -98,9 +98,6 @@ questions:
           <footer><slot name="actions" /></footer>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "To define specific UI regions in a container component."
       - id: "2"
         isCorrect: false
         text: "To automatically replace component reactivity."
@@ -111,6 +108,9 @@ questions:
         isCorrect: false
         text: "To create implicit watchers for each section."
 
+      - id: "1"
+        isCorrect: true
+        text: "To define specific UI regions in a container component."
   - text: "How do you consume a named slot from the parent?"
     explanation: "Use `template` with the `#name` (or `v-slot:name`) directive to inject content into the corresponding region."
     explanation_code:
@@ -150,13 +150,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Slots exclusive to Nuxt, not Vue."
-      - id: "3"
-        isCorrect: true
-        text: "Slots where the child passes data to the parent for custom rendering."
       - id: "4"
         isCorrect: false
         text: "Slots that only accept one HTML node."
 
+      - id: "3"
+        isCorrect: true
+        text: "Slots where the child passes data to the parent for custom rendering."
   - text: 'In `#item="{ user }"`, where does `user` come from?'
     explanation: '`user` comes from the child component, which sends it as a slot prop (`:user="user"`) in the slot declaration.'
     explanation_code:
@@ -168,12 +168,12 @@ questions:
           </UserList>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: false
-        text: "From a prop defined in the parent with `defineProps`."
       - id: "2"
         isCorrect: true
         text: "From the child, through scoped slot props."
+      - id: "1"
+        isCorrect: false
+        text: "From a prop defined in the parent with `defineProps`."
       - id: "3"
         isCorrect: false
         text: "From a global variable injected by Vue."
@@ -214,9 +214,6 @@ questions:
           <Card><strong>Content</strong></Card>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "When you want to pass simple data like flags, text, or configuration."
       - id: "2"
         isCorrect: false
         text: "When you want to inject multiple UI regions."
@@ -227,6 +224,9 @@ questions:
         isCorrect: false
         text: "When you want reusable layouts with dynamic header/footer content."
 
+      - id: "1"
+        isCorrect: true
+        text: "When you want to pass simple data like flags, text, or configuration."
   - text: "What is a good practice when designing slot-based components?"
     explanation: "A clear slot API improves maintainability. Names like `header`, `actions`, or `item` communicate intent and reduce ambiguity."
     explanation_code:
@@ -240,12 +240,12 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Create as many slots as possible, even if unused."
+      - id: "4"
+        isCorrect: true
+        text: "Define descriptive slot names and expose only the needed data in scoped slots."
       - id: "2"
         isCorrect: false
         text: "Use generic names like `one`, `two`, `three` for simplicity."
       - id: "3"
         isCorrect: false
         text: "Avoid any default slot content."
-      - id: "4"
-        isCorrect: true
-        text: "Define descriptive slot names and expose only the needed data in scoped slots."

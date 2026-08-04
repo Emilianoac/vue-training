@@ -34,9 +34,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "El hijo pasa datos al padre mediante props y el padre notifica al hijo mediante emits."
-      - id: "2"
-        isCorrect: true
-        text: "El padre pasa datos al hijo mediante props, y el hijo notifica al padre mediante emits."
       - id: "3"
         isCorrect: false
         text: "Tanto props como emits fluyen en ambas direcciones libremente."
@@ -44,6 +41,9 @@ questions:
         isCorrect: false
         text: "Props y emits solo pueden usarse entre componentes hermanos."
 
+      - id: "2"
+        isCorrect: true
+        text: "El padre pasa datos al hijo mediante props, y el hijo notifica al padre mediante emits."
   - text: "¿Cómo se define una prop opcional con TypeScript en `<script setup>`?"
     explanation: "Para marcar una prop como opcional en la sintaxis genérica de TypeScript, se añade `?` después del nombre de la propiedad en la interfaz o el objeto de tipo."
     explanation_code:
@@ -54,15 +54,15 @@ questions:
           }>()
         language: "typescript"
     answers:
+      - id: "3"
+        isCorrect: true
+        text: "Añadiendo `?` después del nombre de la prop en el tipo TypeScript."
       - id: "1"
         isCorrect: false
         text: "Añadiendo `required: false` en la definición de la prop."
       - id: "2"
         isCorrect: false
         text: "Usando `undefined` como tipo: `isActive: boolean | undefined`."
-      - id: "3"
-        isCorrect: true
-        text: "Añadiendo `?` después del nombre de la prop en el tipo TypeScript."
       - id: "4"
         isCorrect: false
         text: "Pasando `null` como valor por defecto en el padre."
@@ -83,16 +83,16 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Para validar los valores de las props con funciones personalizadas."
+      - id: "4"
+        isCorrect: true
+        text: "Para definir valores por defecto para las props opcionales con tipado TypeScript."
+
       - id: "2"
         isCorrect: false
         text: "Para hacer que todas las props sean requeridas automáticamente."
       - id: "3"
         isCorrect: false
         text: "Para convertir las props en estado reactivo interno del componente."
-      - id: "4"
-        isCorrect: true
-        text: "Para definir valores por defecto para las props opcionales con tipado TypeScript."
-
   - text: "¿Cómo se pasa una prop llamada `isActive` (camelCase) desde el template del padre?"
     explanation: "Vue convierte automáticamente las props en camelCase a kebab-case en el template. Por convención y compatibilidad con HTML, `isActive` debe pasarse como `is-active` en el template."
     explanation_code:
@@ -130,6 +130,10 @@ questions:
           // Si se pasa role="superuser", Vue muestra un warning en consola
         language: "javascript"
     answers:
+      - id: "4"
+        isCorrect: true
+        text: "Vue emite una advertencia en la consola durante el desarrollo."
+
       - id: "1"
         isCorrect: false
         text: "La aplicación lanza un error y se detiene."
@@ -139,10 +143,6 @@ questions:
       - id: "3"
         isCorrect: false
         text: "El componente no se renderiza."
-      - id: "4"
-        isCorrect: true
-        text: "Vue emite una advertencia en la consola durante el desarrollo."
-
   - text: "¿Cuál es la forma correcta de definir emits con tipado TypeScript en `<script setup>`?"
     explanation: "Con la sintaxis genérica de TypeScript, `defineEmits` acepta un objeto tipo donde las claves son los nombres de los eventos y los valores son arrays con los tipos de los argumentos."
     explanation_code:
@@ -183,13 +183,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Porque Vue elimina la prop si detecta que fue mutada."
-      - id: "3"
-        isCorrect: true
-        text: "Porque rompe el flujo unidireccional y hace imposible rastrear el origen de los cambios."
       - id: "4"
         isCorrect: false
         text: "Porque los cambios directos en props no se reflejan en el template."
 
+      - id: "3"
+        isCorrect: true
+        text: "Porque rompe el flujo unidireccional y hace imposible rastrear el origen de los cambios."
   - text: "¿Cómo escucha el componente padre el evento `submit` emitido por un hijo?"
     explanation: "En el template del padre, los eventos emitidos por el hijo se escuchan con la directiva `@nombre-del-evento` o `v-on:nombre-del-evento`, pasando un handler como valor."
     explanation_code:
@@ -207,16 +207,16 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Usando `props.onSubmit` en el script del padre."
+      - id: "4"
+        isCorrect: true
+        text: 'Con `@submit="handler"` en el template del padre.'
+
       - id: "2"
         isCorrect: false
         text: "Usando `watch` para observar el valor del emit."
       - id: "3"
         isCorrect: false
         text: "Importando el componente hijo y llamando a su función `emit` directamente."
-      - id: "4"
-        isCorrect: true
-        text: 'Con `@submit="handler"` en el template del padre.'
-
   - text: "En el patrón 'controlled component', ¿quién controla el estado?"
     explanation: "En el patrón controlled component, el padre es el dueño del estado. El hijo solo recibe el valor actual mediante props y solicita cambios emitiendo eventos. Esto centraliza el estado y facilita su gestión."
     explanation_code:
@@ -254,6 +254,9 @@ questions:
           emit("submit", formData)
         language: "javascript"
     answers:
+      - id: "4"
+        isCorrect: true
+        text: "Comunican la intención del evento claramente, generando contratos comprensibles sin leer la implementación."
       - id: "1"
         isCorrect: false
         text: "Que el componente se ejecuta más rápido al procesar los eventos."
@@ -263,6 +266,3 @@ questions:
       - id: "3"
         isCorrect: false
         text: "Que los emits descriptivos no necesitan ser declarados en `defineEmits`."
-      - id: "4"
-        isCorrect: true
-        text: "Comunican la intención del evento claramente, generando contratos comprensibles sin leer la implementación."

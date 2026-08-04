@@ -27,15 +27,15 @@ questions:
           <UserList :users="users" :loading="loading" />
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "It coordinates state and data flow, delegating UI rendering to presentational components."
       - id: "2"
         isCorrect: false
         text: "It only renders static HTML without props or events."
       - id: "3"
         isCorrect: false
         text: "It is any component that does not use Composition API."
+      - id: "1"
+        isCorrect: true
+        text: "It coordinates state and data flow, delegating UI rendering to presentational components."
       - id: "4"
         isCorrect: false
         text: "It only contains reusable CSS classes."
@@ -51,9 +51,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Fetching APIs and normalizing backend responses."
-      - id: "2"
-        isCorrect: true
-        text: "Rendering UI from props and emitting interaction events."
       - id: "3"
         isCorrect: false
         text: "Managing full app global state."
@@ -61,6 +58,9 @@ questions:
         isCorrect: false
         text: "Registering routes and navigation middleware."
 
+      - id: "2"
+        isCorrect: true
+        text: "Rendering UI from props and emitting interaction events."
   - text: "Which option best reflects separation of responsibilities?"
     explanation: "Healthy separation distributes roles: component for UI, composable for reusable logic, and service for IO/infrastructure."
     explanation_code:
@@ -114,9 +114,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Generic names like `Widget` or `Thing` for maximum reuse."
-      - id: "2"
-        isCorrect: true
-        text: "Domain + role naming, such as Feature + Role."
       - id: "3"
         isCorrect: false
         text: "Always prefix every component with `Base`."
@@ -124,6 +121,9 @@ questions:
         isCorrect: false
         text: "Single-letter names to shorten imports."
 
+      - id: "2"
+        isCorrect: true
+        text: "Domain + role naming, such as Feature + Role."
   - text: "Which structure usually scales better in larger apps?"
     explanation: "Feature-based grouping often scales better than flat type-based folders, because it keeps related components/composables/services close."
     explanation_code:
@@ -133,12 +133,12 @@ questions:
           services/api/user.service.ts
         language: "text"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Group by feature/domain with clear roles."
       - id: "2"
         isCorrect: false
         text: "One flat folder for all components in the app."
+      - id: "1"
+        isCorrect: true
+        text: "Group by feature/domain with clear roles."
       - id: "3"
         isCorrect: false
         text: "Group only by file size (small/large)."
@@ -198,12 +198,12 @@ questions:
           </UserListContainer>
         language: "vue"
     answers:
-      - id: "1"
-        isCorrect: true
-        text: "Container orchestration + specialized presentational components."
       - id: "2"
         isCorrect: false
         text: "One giant component with the whole feature."
+      - id: "1"
+        isCorrect: true
+        text: "Container orchestration + specialized presentational components."
       - id: "3"
         isCorrect: false
         text: "Only presentational components without data flow."
@@ -225,9 +225,9 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Because Vue does not support generic names."
-      - id: "3"
-        isCorrect: true
-        text: "Because it makes intent explicit and reduces ambiguity."
       - id: "4"
         isCorrect: false
         text: "Because then you no longer need typed props/emits."
+      - id: "3"
+        isCorrect: true
+        text: "Because it makes intent explicit and reduces ambiguity."

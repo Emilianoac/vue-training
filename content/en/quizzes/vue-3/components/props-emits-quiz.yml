@@ -34,9 +34,6 @@ questions:
       - id: "1"
         isCorrect: false
         text: "The child passes data to the parent via props and the parent notifies the child via emits."
-      - id: "2"
-        isCorrect: true
-        text: "The parent passes data to the child via props, and the child notifies the parent via emits."
       - id: "3"
         isCorrect: false
         text: "Both props and emits flow freely in both directions."
@@ -44,6 +41,9 @@ questions:
         isCorrect: false
         text: "Props and emits can only be used between sibling components."
 
+      - id: "2"
+        isCorrect: true
+        text: "The parent passes data to the child via props, and the child notifies the parent via emits."
   - text: "How do you define an optional prop with TypeScript in `<script setup>`?"
     explanation: "To mark a prop as optional in the TypeScript generic syntax, add `?` after the property name in the type interface or object."
     explanation_code:
@@ -54,15 +54,15 @@ questions:
           }>()
         language: "typescript"
     answers:
+      - id: "3"
+        isCorrect: true
+        text: "By adding `?` after the prop name in the TypeScript type."
       - id: "1"
         isCorrect: false
         text: "By adding `required: false` in the prop definition."
       - id: "2"
         isCorrect: false
         text: "Using `undefined` as the type: `isActive: boolean | undefined`."
-      - id: "3"
-        isCorrect: true
-        text: "By adding `?` after the prop name in the TypeScript type."
       - id: "4"
         isCorrect: false
         text: "By passing `null` as the default value from the parent."
@@ -83,16 +83,16 @@ questions:
       - id: "1"
         isCorrect: false
         text: "To validate prop values with custom functions."
+      - id: "4"
+        isCorrect: true
+        text: "To define default values for optional props with TypeScript typing."
+
       - id: "2"
         isCorrect: false
         text: "To make all props required automatically."
       - id: "3"
         isCorrect: false
         text: "To convert props into internal reactive state of the component."
-      - id: "4"
-        isCorrect: true
-        text: "To define default values for optional props with TypeScript typing."
-
   - text: "How is a prop named `isActive` (camelCase) passed from the parent's template?"
     explanation: "Vue automatically converts camelCase props to kebab-case in templates. By convention and HTML compatibility, `isActive` should be passed as `is-active` in the template."
     explanation_code:
@@ -130,6 +130,10 @@ questions:
           // If role="superuser" is passed, Vue shows a warning in the console
         language: "javascript"
     answers:
+      - id: "4"
+        isCorrect: true
+        text: "Vue emits a warning in the console during development."
+
       - id: "1"
         isCorrect: false
         text: "The application throws an error and stops."
@@ -139,10 +143,6 @@ questions:
       - id: "3"
         isCorrect: false
         text: "The component does not render."
-      - id: "4"
-        isCorrect: true
-        text: "Vue emits a warning in the console during development."
-
   - text: "What is the correct way to define emits with TypeScript typing in `<script setup>`?"
     explanation: "With the TypeScript generic syntax, `defineEmits` accepts a type object where keys are event names and values are arrays with the argument types."
     explanation_code:
@@ -183,13 +183,13 @@ questions:
       - id: "2"
         isCorrect: false
         text: "Because Vue removes the prop if it detects it was mutated."
-      - id: "3"
-        isCorrect: true
-        text: "Because it breaks the one-way data flow and makes it impossible to trace the origin of changes."
       - id: "4"
         isCorrect: false
         text: "Because direct changes to props are not reflected in the template."
 
+      - id: "3"
+        isCorrect: true
+        text: "Because it breaks the one-way data flow and makes it impossible to trace the origin of changes."
   - text: "How does the parent component listen to the `submit` event emitted by a child?"
     explanation: "In the parent's template, events emitted by the child are listened to with the `@event-name` or `v-on:event-name` directive, passing a handler as the value."
     explanation_code:
@@ -207,16 +207,16 @@ questions:
       - id: "1"
         isCorrect: false
         text: "Using `props.onSubmit` in the parent's script."
+      - id: "4"
+        isCorrect: true
+        text: 'With `@submit="handler"` in the parent''s template.'
+
       - id: "2"
         isCorrect: false
         text: "Using `watch` to observe the emit value."
       - id: "3"
         isCorrect: false
         text: "Importing the child component and calling its `emit` function directly."
-      - id: "4"
-        isCorrect: true
-        text: 'With `@submit="handler"` in the parent''s template.'
-
   - text: "In the 'controlled component' pattern, who owns the state?"
     explanation: "In the controlled component pattern, the parent owns the state. The child only receives the current value via props and requests changes by emitting events. This centralizes the state and makes it easier to manage."
     explanation_code:
@@ -254,6 +254,9 @@ questions:
           emit("submit", formData)
         language: "javascript"
     answers:
+      - id: "4"
+        isCorrect: true
+        text: "They clearly communicate the event's intent, creating understandable contracts without reading the implementation."
       - id: "1"
         isCorrect: false
         text: "The component runs faster when processing events."
@@ -263,6 +266,3 @@ questions:
       - id: "3"
         isCorrect: false
         text: "Descriptive emits do not need to be declared in `defineEmits`."
-      - id: "4"
-        isCorrect: true
-        text: "They clearly communicate the event's intent, creating understandable contracts without reading the implementation."
