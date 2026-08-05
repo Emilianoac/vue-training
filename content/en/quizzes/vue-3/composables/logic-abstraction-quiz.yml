@@ -1,0 +1,228 @@
+documentId: "logic-abstraction-quiz"
+title: "Logic Abstraction with Composables"
+level: "basic"
+slug: "logic-abstraction-quiz"
+description: "Assess how to extract responsibilities, design clear APIs, and avoid premature abstraction with composables."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "composables"
+    label: "composables"
+  - id: "ref"
+    label: "ref"
+  - id: "computed"
+    label: "computed"
+questions:
+  - text: "What is the main goal of logic abstraction in composables?"
+    explanation: "A good abstraction simplifies its consumer by encapsulating a recognizable responsibility."
+    explanation_code:
+      - code: |-
+          // UI consumes API
+          const { data, loading, fetch } = useUsers()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Separate reusable behavior from presentation concerns."
+      - id: "2"
+        isCorrect: false
+        text: "Completely remove the need for components."
+      - id: "3"
+        isCorrect: false
+        text: "Move all templates into TypeScript files."
+      - id: "4"
+        isCorrect: false
+        text: "Avoid Vue reactivity altogether."
+  - text: "What should a UI component mainly decide?"
+    explanation: "A component should focus on what to render and delegate business rules to composables."
+    explanation_code:
+      - code: |-
+          <template>
+            <UserCard v-for="u in users" :key="u.id" />
+          </template>
+        language: "vue"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "How to implement low-level HTTP requests."
+      - id: "1"
+        isCorrect: true
+        text: "What to render and how state is presented to the user."
+      - id: "3"
+        isCorrect: false
+        text: "How to maintain module-level global state."
+      - id: "4"
+        isCorrect: false
+        text: "How to parse backend payloads in each template."
+  - text: "What should live inside a composable in a clean separation?"
+    explanation: "State, effects, and reusable domain actions generally belong in composables rather than templates."
+    explanation_code:
+      - code: |-
+          export function useUsers() {
+            const users = ref([])
+            async function fetchUsers() {}
+            return { users, fetchUsers }
+          }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Only CSS styles and conditional classes."
+      - id: "3"
+        isCorrect: false
+        text: "Only raw DOM nodes."
+      - id: "1"
+        isCorrect: true
+        text: "Reusable state, actions, and transformations."
+      - id: "4"
+        isCorrect: false
+        text: "Static text for i18n resources."
+  - text: "What does cross-component reuse mean?"
+    explanation: "It means applying one composable across different components without duplicating implementation."
+    explanation_code:
+      - code: |-
+          const list = usePagination()
+          const cards = usePagination()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Copy and paste functions into every component."
+      - id: "3"
+        isCorrect: false
+        text: "Use a composable only once in the whole app."
+      - id: "4"
+        isCorrect: false
+        text: "Avoid shared imports across components."
+      - id: "1"
+        isCorrect: true
+        text: "Apply the same logic in different components through one shared API."
+  - text: "Which API style usually makes a composable more reusable?"
+    explanation: "A small, stable API with clear state and actions minimizes consumer coupling."
+    explanation_code:
+      - code: |-
+          return { data, loading, error, fetch, refresh }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Expose relevant state and actions while hiding internal details."
+      - id: "2"
+        isCorrect: false
+        text: "Expose every private variable for maximum flexibility."
+      - id: "3"
+        isCorrect: false
+        text: "Return only one anonymous function without a contract."
+      - id: "4"
+        isCorrect: false
+        text: "Return nothing and mutate global state implicitly."
+  - text: "What is a smell of poor abstraction?"
+    explanation: "If a composable depends on visual details, it is no longer reusable across different UIs."
+    explanation_code:
+      - code: |-
+          // anti-pattern
+          if (cardClass === "large") { ... }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Using computed values to derive state."
+      - id: "1"
+        isCorrect: true
+        text: "Dependency on CSS classes or specific visual structure."
+      - id: "3"
+        isCorrect: false
+        text: "Encapsulating fetch and loading in a composable."
+      - id: "4"
+        isCorrect: false
+        text: "Using the `use` prefix in naming."
+  - text: "How does abstraction improve testing?"
+    explanation: "It lets you test business behavior directly in composables without mounting full views."
+    explanation_code:
+      - code: |-
+          // direct composable test
+          const { fetchUsers, users } = useUsers()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It removes the need for unit testing."
+      - id: "3"
+        isCorrect: false
+        text: "It forces end-to-end testing only."
+      - id: "1"
+        isCorrect: true
+        text: "You can test behavior without depending on full UI rendering."
+      - id: "4"
+        isCorrect: false
+        text: "It prevents mocking external services."
+  - text: "When should you extract logic into a composable?"
+    explanation: "Duplication is one signal, but a recognizable complex responsibility may also deserve extraction even with one consumer."
+    explanation_code:
+      - code: |-
+          // a responsibility with a clear boundary
+          // can be extracted to useX()
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Only when the app has more than 100 components."
+      - id: "3"
+        isCorrect: false
+        text: "Never, because logic should stay in each view."
+      - id: "4"
+        isCorrect: false
+        text: "Only when using a global store for everything."
+      - id: "1"
+        isCorrect: true
+        text: "When there is a clear responsibility and extraction reduces what the consumer must understand."
+  - text: "What risk appears when exposing too many internal composable details?"
+    explanation: "Consumers become coupled to implementation details, making safe refactoring harder."
+    explanation_code:
+      - code: |-
+          return {
+            _internalCache,
+            _requestQueue,
+            // ...internal details
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "It increases coupling and reduces implementation flexibility."
+      - id: "2"
+        isCorrect: false
+        text: "It automatically improves encapsulation."
+      - id: "3"
+        isCorrect: false
+        text: "It removes the need to document APIs."
+      - id: "4"
+        isCorrect: false
+        text: "It makes Vue ignore reactivity."
+  - text: "What is a practical rule for logic abstraction?"
+    explanation: "A concrete responsibility can be abstracted behind explicit inputs and a use-oriented API."
+    explanation_code:
+      - code: |-
+          // small API + clear responsibility
+          useUserList()
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Concentrate all app logic into one giant composable."
+      - id: "1"
+        isCorrect: true
+        text: "Extract concrete responsibilities into small composables with clear contracts."
+      - id: "3"
+        isCorrect: false
+        text: "Avoid composables to reduce file fragmentation."
+      - id: "4"
+        isCorrect: false
+        text: "Prefer props drilling for all shared behavior."

@@ -261,8 +261,24 @@ steps:
 
       - name: Abstracción de Lógica
         id: logic-abstraction
-        status: planned
-        items: []
+        items:
+          - id: logic-abstraction-lesson
+            type: lesson
+            level: basic
+            title: Abstracción de lógica con composables
+            subtitle: Extrae responsabilidades y diseña APIs reutilizables sin abstraer antes de tiempo.
+
+          - id: logic-abstraction-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa responsabilidades, contratos claros y el costo de crear abstracciones.
+
+          - id: async-resource-loader
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Abstrae la carga asíncrona detrás de una API reutilizable con dependencias explícitas.
 
       - name: Patrones Avanzados
         id: advanced-patterns

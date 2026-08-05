@@ -1,0 +1,228 @@
+documentId: "logic-abstraction-quiz"
+title: "Abstracción de lógica con composables"
+level: "basic"
+slug: "logic-abstraction-quiz"
+description: "Evalúa cómo extraer responsabilidades, diseñar APIs claras y evitar abstracciones prematuras con composables."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "composables"
+    label: "composables"
+  - id: "ref"
+    label: "ref"
+  - id: "computed"
+    label: "computed"
+questions:
+  - text: "¿Cuál es el objetivo principal de abstraer lógica en composables?"
+    explanation: "Una buena abstracción simplifica al consumidor al encapsular una responsabilidad reconocible."
+    explanation_code:
+      - code: |-
+          // UI consume API
+          const { data, loading, fetch } = useUsers()
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Separar una responsabilidad reutilizable de la capa de presentación."
+      - id: "2"
+        isCorrect: false
+        text: "Eliminar por completo el uso de componentes."
+      - id: "3"
+        isCorrect: false
+        text: "Mover todo el template a archivos TypeScript."
+      - id: "4"
+        isCorrect: false
+        text: "Evitar el uso de reactividad en Vue."
+  - text: "¿Qué debería decidir principalmente el componente de UI?"
+    explanation: "El componente debería enfocarse en qué mostrar y delegar las reglas independientes de la interfaz al composable."
+    explanation_code:
+      - code: |-
+          <template>
+            <UserCard v-for="u in users" :key="u.id" />
+          </template>
+        language: "vue"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Cómo implementar peticiones HTTP de bajo nivel."
+      - id: "1"
+        isCorrect: true
+        text: "Qué renderizar y cómo presentar el estado al usuario."
+      - id: "3"
+        isCorrect: false
+        text: "Cómo almacenar estado global en un módulo."
+      - id: "4"
+        isCorrect: false
+        text: "Cómo procesar respuestas del backend en cada template."
+  - text: "¿Qué debería vivir en el composable en una buena separación?"
+    explanation: "El estado, los efectos y las acciones de una responsabilidad reutilizable pueden vivir en el composable, lejos del template."
+    explanation_code:
+      - code: |-
+          export function useUsers() {
+            const users = ref([])
+            async function fetchUsers() {}
+            return { users, fetchUsers }
+          }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Solo estilos CSS y clases condicionales."
+      - id: "3"
+        isCorrect: false
+        text: "Únicamente nodos del DOM."
+      - id: "1"
+        isCorrect: true
+        text: "Estado, acciones y transformaciones reutilizables."
+      - id: "4"
+        isCorrect: false
+        text: "Texto estático para internacionalización."
+  - text: "¿Qué significa reutilizar lógica entre componentes?"
+    explanation: "Implica usar el mismo composable en distintos componentes sin duplicar su implementación."
+    explanation_code:
+      - code: |-
+          const list = usePagination()
+          const cards = usePagination()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Copiar y pegar funciones en cada componente."
+      - id: "3"
+        isCorrect: false
+        text: "Usar un composable solo una vez por aplicación."
+      - id: "4"
+        isCorrect: false
+        text: "Evitar que dos componentes compartan imports."
+      - id: "1"
+        isCorrect: true
+        text: "Aplicar la misma lógica en componentes diferentes mediante una API común."
+  - text: "¿Qué API suele hacer que un composable sea más reutilizable?"
+    explanation: "Una API pequeña y estable, con estado y acciones claras, reduce el acoplamiento del consumidor."
+    explanation_code:
+      - code: |-
+          return { data, loading, error, fetch, refresh }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Exponer estado y acciones relevantes, ocultando detalles internos."
+      - id: "2"
+        isCorrect: false
+        text: "Exponer todas las variables privadas para obtener flexibilidad total."
+      - id: "3"
+        isCorrect: false
+        text: "Retornar solo una función anónima sin contrato."
+      - id: "4"
+        isCorrect: false
+        text: "No retornar nada y modificar estado global implícitamente."
+  - text: "¿Cuál es una señal de una mala abstracción?"
+    explanation: "Si el composable depende de detalles visuales, deja de ser reutilizable entre interfaces distintas."
+    explanation_code:
+      - code: |-
+          // antipatrón
+          if (cardClass === "large") { ... }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Uso de computed para derivar estado."
+      - id: "1"
+        isCorrect: true
+        text: "Depender de clases CSS o de una estructura visual específica."
+      - id: "3"
+        isCorrect: false
+        text: "Encapsular fetch y loading en un composable."
+      - id: "4"
+        isCorrect: false
+        text: "Nombrar con prefijo `use`."
+  - text: "¿Qué beneficio aporta la abstracción a los tests?"
+    explanation: "Puedes probar el contrato del composable sin montar toda la capa visual."
+    explanation_code:
+      - code: |-
+          // test directo del composable
+          const { fetchUsers, users } = useUsers()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Elimina la necesidad de pruebas unitarias."
+      - id: "3"
+        isCorrect: false
+        text: "Hace obligatorias únicamente las pruebas end-to-end."
+      - id: "1"
+        isCorrect: true
+        text: "Permite probar el comportamiento sin depender del render completo de la vista."
+      - id: "4"
+        isCorrect: false
+        text: "Impide mockear servicios externos."
+  - text: "¿Cuándo conviene extraer lógica a un composable?"
+    explanation: "La duplicación es una señal, pero una responsabilidad compleja y reconocible también puede justificar la extracción aunque todavía tenga un solo consumidor."
+    explanation_code:
+      - code: |-
+          // una responsabilidad con un límite claro
+          // puede extraerse a useX()
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Solo cuando la aplicación supera los 100 componentes."
+      - id: "3"
+        isCorrect: false
+        text: "Nunca, porque la lógica debe quedarse en cada vista."
+      - id: "4"
+        isCorrect: false
+        text: "Solo si usas store global para todo."
+      - id: "1"
+        isCorrect: true
+        text: "Cuando existe una responsabilidad clara y extraerla reduce lo que el consumidor debe comprender."
+  - text: "¿Qué riesgo aparece si expones demasiados detalles internos del composable?"
+    explanation: "Los consumidores quedan acoplados a la implementación y resulta más difícil modificarla sin romperlos."
+    explanation_code:
+      - code: |-
+          return {
+            _internalCache,
+            _requestQueue,
+            // ...detalles internos
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Aumenta el acoplamiento y reduce la capacidad de evolucionar la implementación."
+      - id: "2"
+        isCorrect: false
+        text: "Mejora la encapsulación automáticamente."
+      - id: "3"
+        isCorrect: false
+        text: "Elimina la necesidad de documentar la API."
+      - id: "4"
+        isCorrect: false
+        text: "Hace que Vue ignore reactividad."
+  - text: "¿Cuál es una regla práctica para abstraer lógica?"
+    explanation: "Conviene abstraer una responsabilidad concreta mediante entradas explícitas y una API orientada a su uso."
+    explanation_code:
+      - code: |-
+          // small API + clear responsibility
+          useUserList()
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Concentrar toda la lógica de la aplicación en un solo composable gigante."
+      - id: "1"
+        isCorrect: true
+        text: "Extraer responsabilidades concretas a composables pequeños y con un contrato claro."
+      - id: "3"
+        isCorrect: false
+        text: "Evitar composables para no fragmentar archivos."
+      - id: "4"
+        isCorrect: false
+        text: "Preferir props drilling para cualquier comportamiento compartido."

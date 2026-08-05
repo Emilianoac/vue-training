@@ -261,8 +261,24 @@ steps:
 
       - name: Logic Abstraction
         id: logic-abstraction
-        status: planned
-        items: []
+        items:
+          - id: logic-abstraction-lesson
+            type: lesson
+            level: basic
+            title: Logic Abstraction with Composables
+            subtitle: Extract responsibilities and design reusable APIs without abstracting too early.
+
+          - id: logic-abstraction-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test responsibilities, clear contracts, and the cost of creating abstractions.
+
+          - id: async-resource-loader
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Abstract asynchronous loading behind a reusable API with explicit dependencies.
 
       - name: Advanced Patterns
         id: advanced-patterns

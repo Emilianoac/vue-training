@@ -1,3 +1,4 @@
+import { createAsyncResourceLoaderChallenge } from "./challenges/async-resource-loader/config";
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
 import { createDynamicSettingsTabsChallenge } from "./challenges/dynamic-settings-tabs/config";
 import { createKeyboardShortcutListenerChallenge } from "./challenges/keyboard-shortcut-listener/config";
@@ -13,6 +14,7 @@ import { createWatchQuestionLogChallenge } from "./challenges/watch-question-log
 import type { WebContainerChallenge } from "./types";
 
 const challengeFactories: Record<string, (locale: string) => WebContainerChallenge> = {
+  "async-resource-loader": createAsyncResourceLoaderChallenge,
   "computed-user-filter": createComputedUserFilterChallenge,
   "dynamic-settings-tabs": createDynamicSettingsTabsChallenge,
   "keyboard-shortcut-listener": createKeyboardShortcutListenerChallenge,

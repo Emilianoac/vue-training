@@ -1,0 +1,51 @@
+{
+  "documentId": "async-resource-loader",
+  "title": "Abstraer la carga de productos",
+  "slug": "async-resource-loader",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "ref", "label": "ref" },
+    { "id": "dependency-injection", "label": "inyección de dependencias" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Crea una API clara para cargar productos mediante una dependencia intercambiable.",
+  "description": [
+    "App.vue ya entrega una función fetchProducts al composable y consume su estado público.",
+    "Completa useProductLoader para encapsular la carga, sus estados y el manejo de errores sin conocer la interfaz ni el origen de los datos."
+  ],
+  "instructions": [
+    "Activa loading y limpia cualquier error anterior al comenzar una carga.",
+    "Ejecuta la función loadProducts recibida y guarda su resultado en products.",
+    "Si la operación falla, asigna el mensaje indicado al ref error.",
+    "Asegúrate de desactivar loading tanto al completar como al fallar la operación.",
+    "Solo necesitas modificar useProductLoader.ts."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/composables/async-resource-loader.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Dependencia explícita",
+      "body": "No uses `fetch` directamente: llama a `loadProducts`, que ya llega como argumento del composable."
+    },
+    {
+      "title": "Estados de la operación",
+      "body": "Antes del `await`, establece `loading.value` en `true` y `error.value` en una cadena vacía."
+    },
+    {
+      "title": "Finalización garantizada",
+      "body": "Un bloque `try/catch/finally` permite manejar el resultado, el error y la limpieza de `loading` por separado."
+    }
+  ]
+}
