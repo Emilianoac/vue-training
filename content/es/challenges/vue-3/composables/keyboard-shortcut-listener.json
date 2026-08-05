@@ -1,0 +1,44 @@
+{
+  "documentId": "keyboard-shortcut-listener",
+  "title": "Registrar un atajo de teclado",
+  "slug": "keyboard-shortcut-listener",
+  "level": "basic",
+  "topics": [
+    { "id": "composables", "label": "composables" },
+    { "id": "on-mounted", "label": "onMounted" },
+    { "id": "on-unmounted", "label": "onUnmounted" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Practica cómo vincular un atajo de teclado al ciclo de vida del componente consumidor.",
+  "description": [
+    "App.vue ya usa useKeyboardShortcut para cerrar un panel con Ctrl + Alt + M.",
+    "Completa el composable para registrar el listener al montar y eliminarlo al desmontar."
+  ],
+  "instructions": [
+    "En onMounted, registra handleKeydown en el evento keydown de window.",
+    "En onUnmounted, elimina handleKeydown del mismo evento.",
+    "Usa la misma referencia handleKeydown al registrar y eliminar el listener.",
+    "Solo necesitas modificar useKeyboardShortcut.ts."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/composables/keyboard-shortcut-listener.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    {
+      "title": "Montaje",
+      "body": "Llama a `window.addEventListener` dentro de `onMounted`."
+    },
+    {
+      "title": "Limpieza",
+      "body": "Llama a `window.removeEventListener` dentro de `onUnmounted`."
+    },
+    {
+      "title": "Referencia",
+      "body": "Entrega `handleKeydown` directamente a ambos métodos; no crees funciones anónimas diferentes."
+    }
+  ]
+}

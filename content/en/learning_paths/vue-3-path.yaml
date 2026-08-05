@@ -240,8 +240,24 @@ steps:
 
       - name: Effects and Lifecycle
         id: composable-effects
-        status: planned
-        items: []
+        items:
+          - id: composable-effects-lesson
+            type: lesson
+            level: basic
+            title: Effects and Lifecycle in Composables
+            subtitle: Bind watchers and external resources to each consumer's lifecycle.
+
+          - id: composable-effects-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test internal watchers, lifecycle, SSR, and effect cleanup.
+
+          - id: keyboard-shortcut-listener
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Register and clean up a keyboard shortcut from a composable.
 
       - name: Logic Abstraction
         id: logic-abstraction

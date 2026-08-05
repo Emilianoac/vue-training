@@ -1,0 +1,15 @@
+import { onMounted, onUnmounted } from "vue";
+
+export function useKeyboardShortcut(onShortcut: () => void) {
+  function handleKeydown(event: KeyboardEvent) {
+    const matchesShortcut = event.ctrlKey && event.altKey && event.key.toLowerCase() === "m";
+
+    if (matchesShortcut) {
+      onShortcut();
+    }
+  }
+
+  // TODO: register handleKeydown on window when the consumer mounts.
+
+  // TODO: remove the same listener when the consumer unmounts.
+}

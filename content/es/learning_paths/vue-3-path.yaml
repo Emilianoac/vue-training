@@ -240,8 +240,24 @@ steps:
 
       - name: Efectos y Lifecycle
         id: composable-effects
-        status: planned
-        items: []
+        items:
+          - id: composable-effects-lesson
+            type: lesson
+            level: basic
+            title: Efectos y ciclo de vida en composables
+            subtitle: Vincula watchers y recursos externos al ciclo de vida de cada consumidor.
+
+          - id: composable-effects-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa watchers internos, ciclo de vida, SSR y limpieza de efectos.
+
+          - id: keyboard-shortcut-listener
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Registra y limpia un atajo de teclado desde un composable.
 
       - name: Abstracción de Lógica
         id: logic-abstraction

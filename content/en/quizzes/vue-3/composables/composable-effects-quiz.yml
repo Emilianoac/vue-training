@@ -1,0 +1,243 @@
+documentId: "composable-effects-quiz"
+title: "Effects and Lifecycle in Composables"
+level: "basic"
+slug: "composable-effects-quiz"
+description: "Assessment on watchers, lifecycle, browser access, and effect cleanup inside composables."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "watch"
+    label: "watch"
+  - id: "watch-effect"
+    label: "watchEffect"
+  - id: "on-mounted"
+    label: "onMounted"
+  - id: "on-unmounted"
+    label: "onUnmounted"
+questions:
+  - text: "What is the main benefit of using watchers inside a composable?"
+    explanation: "It encapsulates automatic reactions near state and reduces duplicated logic in consuming components."
+    explanation_code:
+      - code: |-
+          export function useSearch() {
+            const query = ref("")
+            watch(query, () => {/* effect */})
+            return { query }
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "It keeps effects close to state and avoids duplication across components."
+      - id: "2"
+        isCorrect: false
+        text: "It disables reactivity to improve performance."
+      - id: "3"
+        isCorrect: false
+        text: "It prevents consumers from using lifecycle hooks."
+      - id: "4"
+        isCorrect: false
+        text: "It automatically turns the composable into a global store."
+
+  - text: "When is `watch` preferred over `watchEffect` inside a composable?"
+    explanation: "`watch` is best when you need explicit sources, previous/current comparison, and fine-grained options."
+    explanation_code:
+      - code: |-
+          watch(sourceRef, (newValue, oldValue) => {
+            // compare changes
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "When you do not want to declare any dependency."
+      - id: "1"
+        isCorrect: true
+        text: "When you need an explicit source and previous/current value comparison."
+      - id: "3"
+        isCorrect: false
+        text: "Only when Vue reactivity is disabled."
+      - id: "4"
+        isCorrect: false
+        text: "Never, because `watchEffect` should always be used."
+
+  - text: "Which statement best describes `watchEffect`?"
+    explanation: "`watchEffect` automatically tracks reactive dependencies accessed during execution."
+    explanation_code:
+      - code: |-
+          watchEffect(() => {
+            console.log(query.value)
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It requires all sources to be declared in a mandatory array."
+      - id: "3"
+        isCorrect: false
+        text: "It only works in components, not composables."
+      - id: "1"
+        isCorrect: true
+        text: "It auto-tracks dependencies based on what the effect reads."
+      - id: "4"
+        isCorrect: false
+        text: "It does not react to ref changes."
+
+  - text: "What happens to `onMounted` declared inside a composable?"
+    explanation: "It is registered in the lifecycle of the component that calls the composable."
+    explanation_code:
+      - code: |-
+          export function useWindowWidth() {
+            onMounted(() => {
+              // per-consumer setup
+            })
+          }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It runs globally only once for the whole app."
+      - id: "3"
+        isCorrect: false
+        text: "It works only when using Pinia."
+      - id: "4"
+        isCorrect: false
+        text: "It cannot be used outside the component file."
+
+      - id: "1"
+        isCorrect: true
+        text: "It runs in each consuming component lifecycle."
+  - text: "Why is `onUnmounted` important in composables with listeners?"
+    explanation: "It removes listeners and prevents memory leaks when the consumer component is destroyed."
+    explanation_code:
+      - code: |-
+          onMounted(() => window.addEventListener("resize", onResize))
+          onUnmounted(() => window.removeEventListener("resize", onResize))
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It blocks further component renders."
+      - id: "1"
+        isCorrect: true
+        text: "It cleans resources and prevents memory leaks."
+      - id: "3"
+        isCorrect: false
+        text: "It replaces the need for `watch`."
+      - id: "4"
+        isCorrect: false
+        text: "It manually clears refs from the garbage collector."
+
+  - text: "What issue does `onCleanup` prevent in async watchers?"
+    explanation: "It cancels stale work to avoid race conditions and out-of-order updates."
+    explanation_code:
+      - code: |-
+          watch(query, (value, _old, onCleanup) => {
+            const controller = new AbortController()
+            onCleanup(() => controller.abort())
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It turns any fetch into a synchronous request."
+      - id: "3"
+        isCorrect: false
+        text: "It makes `watch` run only once."
+      - id: "4"
+        isCorrect: false
+        text: "It disables reactivity during requests."
+
+      - id: "1"
+        isCorrect: true
+        text: "It prevents race conditions by canceling outdated tasks."
+  - text: "How should `window` be read inside an SSR-compatible composable?"
+    explanation: "Browser APIs must be read after mounting because they do not exist during server-side rendering."
+    explanation_code:
+      - code: |-
+          const width = ref(0)
+          onMounted(() => {
+            width.value = window.innerWidth
+          })
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Inside `onMounted`, after initializing state with a safe value."
+      - id: "2"
+        isCorrect: false
+        text: "While creating a module-level ref with `ref(window.innerWidth)`."
+      - id: "3"
+        isCorrect: false
+        text: "During module import so the value is shared across requests."
+      - id: "4"
+        isCorrect: false
+        text: "Directly in the template before the component mounts."
+
+  - text: "If two components use a composable with internal `onMounted`, what happens?"
+    explanation: "Each consumer gets its own setup and its own cleanup when unmounted."
+    explanation_code:
+      - code: |-
+          const a = useWindowWidth()
+          const b = useWindowWidth()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Only the first consumer activates lifecycle hooks."
+      - id: "3"
+        isCorrect: false
+        text: "Vue merges them into a single global listener automatically."
+      - id: "1"
+        isCorrect: true
+        text: "Each consumer runs its own setup and cleanup."
+      - id: "4"
+        isCorrect: false
+        text: "Hooks are ignored in reused composables."
+
+  - text: "What API should a composable with internal effects expose?"
+    explanation: "It should expose meaningful state and actions while hiding internal synchronization details."
+    explanation_code:
+      - code: |-
+          return { query, resultCount, refresh }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "All internal variables for debugging from any component."
+      - id: "3"
+        isCorrect: false
+        text: "Functions only, no state, to avoid reactivity."
+      - id: "4"
+        isCorrect: false
+        text: "No return values, only side effects."
+
+      - id: "1"
+        isCorrect: true
+        text: "Relevant state and actions, not internal effect implementation details."
+  - text: "What is a practical rule for effects in composables?"
+    explanation: "Keep effects where the related logic belongs and always clean them up per consumer lifecycle."
+    explanation_code:
+      - code: |-
+          // keep effect close to state + proper cleanup
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Move every effect to the root component."
+      - id: "1"
+        isCorrect: true
+        text: "Keep effects inside composables and clean them up correctly per consumer."
+      - id: "3"
+        isCorrect: false
+        text: "Remove `onUnmounted` to simplify code."
+      - id: "4"
+        isCorrect: false
+        text: "Replace watchers with computed in all scenarios."

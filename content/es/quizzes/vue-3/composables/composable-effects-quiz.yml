@@ -1,0 +1,243 @@
+documentId: "composable-effects-quiz"
+title: "Efectos y ciclo de vida en composables"
+level: "basic"
+slug: "composable-effects-quiz"
+description: "Evaluación sobre watchers, ciclo de vida, acceso al navegador y limpieza de efectos dentro de composables."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "watch"
+    label: "watch"
+  - id: "watch-effect"
+    label: "watchEffect"
+  - id: "on-mounted"
+    label: "onMounted"
+  - id: "on-unmounted"
+    label: "onUnmounted"
+questions:
+  - text: "¿Qué ventaja principal tiene usar watchers dentro de un composable?"
+    explanation: "Permite encapsular reacciones automáticas junto al estado, reduciendo lógica repetida en componentes consumidores."
+    explanation_code:
+      - code: |-
+          export function useSearch() {
+            const query = ref("")
+            watch(query, () => {/* efecto */})
+            return { query }
+          }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Encapsula efectos junto al estado y evita duplicación en componentes."
+      - id: "2"
+        isCorrect: false
+        text: "Desactiva la reactividad para mejorar el rendimiento."
+      - id: "3"
+        isCorrect: false
+        text: "Impide que el componente consumidor use hooks."
+      - id: "4"
+        isCorrect: false
+        text: "Convierte automáticamente el composable en una store global."
+
+  - text: "¿Cuándo es preferible `watch` sobre `watchEffect` dentro de un composable?"
+    explanation: "`watch` es ideal cuando quieres una fuente explícita, comparación de valores y opciones de control fino."
+    explanation_code:
+      - code: |-
+          watch(sourceRef, (newValue, oldValue) => {
+            // comparar cambios
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Cuando no quieres declarar ninguna dependencia."
+      - id: "1"
+        isCorrect: true
+        text: "Cuando necesitas una fuente explícita y comparar el valor nuevo con el anterior."
+      - id: "3"
+        isCorrect: false
+        text: "Solo cuando no existe reactividad en Vue."
+      - id: "4"
+        isCorrect: false
+        text: "Nunca, siempre debe usarse `watchEffect`."
+
+  - text: "¿Qué describe mejor a `watchEffect`?"
+    explanation: "`watchEffect` rastrea automáticamente las dependencias reactivas usadas dentro del callback."
+    explanation_code:
+      - code: |-
+          watchEffect(() => {
+            console.log(query.value)
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Necesita declarar todas las fuentes en un array obligatorio."
+      - id: "3"
+        isCorrect: false
+        text: "Solo funciona dentro de componentes, no composables."
+      - id: "1"
+        isCorrect: true
+        text: "Rastrea dependencias automáticamente según lo que se lea en el efecto."
+      - id: "4"
+        isCorrect: false
+        text: "No responde a cambios de refs."
+
+  - text: "¿Qué ocurre con `onMounted` dentro de un composable?"
+    explanation: "Se registra en el ciclo de vida del componente que invoca ese composable."
+    explanation_code:
+      - code: |-
+          export function useWindowWidth() {
+            onMounted(() => {
+              // setup por consumidor
+            })
+          }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Se ejecuta una sola vez globalmente para toda la app."
+      - id: "3"
+        isCorrect: false
+        text: "Solo funciona si el composable usa Pinia."
+      - id: "4"
+        isCorrect: false
+        text: "No puede declararse dentro de un composable."
+
+      - id: "1"
+        isCorrect: true
+        text: "Se registra en el componente consumidor que usa el composable."
+  - text: "¿Por qué es importante `onUnmounted` en composables con listeners?"
+    explanation: "Permite eliminar listeners y evitar fugas de memoria cuando el consumidor se desmonta."
+    explanation_code:
+      - code: |-
+          onMounted(() => window.addEventListener("resize", onResize))
+          onUnmounted(() => window.removeEventListener("resize", onResize))
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Porque bloquea nuevos renders del componente."
+      - id: "1"
+        isCorrect: true
+        text: "Porque limpia recursos y previene fugas de memoria."
+      - id: "3"
+        isCorrect: false
+        text: "Porque reemplaza la necesidad de `watch`."
+      - id: "4"
+        isCorrect: false
+        text: "Porque elimina refs del garbage collector manualmente."
+
+  - text: "¿Qué problema evita `onCleanup` dentro de un watcher asíncrono?"
+    explanation: "Cancela trabajo obsoleto para evitar condiciones de carrera y resultados tardíos sobre el estado actual."
+    explanation_code:
+      - code: |-
+          watch(query, (value, _old, onCleanup) => {
+            const controller = new AbortController()
+            onCleanup(() => controller.abort())
+          })
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Convierte cualquier fetch en síncrono."
+      - id: "3"
+        isCorrect: false
+        text: "Hace que `watch` solo se ejecute una vez."
+      - id: "4"
+        isCorrect: false
+        text: "Desactiva reactividad mientras hay peticiones."
+
+      - id: "1"
+        isCorrect: true
+        text: "Evita race conditions cancelando tareas viejas."
+  - text: "¿Cómo debe leerse `window` dentro de un composable compatible con SSR?"
+    explanation: "Las APIs del navegador deben leerse después del montaje, porque no existen durante el renderizado del servidor."
+    explanation_code:
+      - code: |-
+          const width = ref(0)
+          onMounted(() => {
+            width.value = window.innerWidth
+          })
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Dentro de `onMounted`, inicializando antes el estado con un valor seguro."
+      - id: "2"
+        isCorrect: false
+        text: "Al crear el ref en el scope superior con `ref(window.innerWidth)`."
+      - id: "3"
+        isCorrect: false
+        text: "Durante la importación del módulo para compartir el valor entre solicitudes."
+      - id: "4"
+        isCorrect: false
+        text: "Directamente en el template antes de montar el componente."
+
+  - text: "Si dos componentes usan un composable con `onMounted` interno, ¿qué pasa?"
+    explanation: "Cada componente registra su propia instancia del efecto y limpia su propia instancia al desmontar."
+    explanation_code:
+      - code: |-
+          const a = useWindowWidth()
+          const b = useWindowWidth()
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Solo el primer consumidor activa los hooks."
+      - id: "3"
+        isCorrect: false
+        text: "Vue los fusiona automáticamente en un único listener global."
+      - id: "1"
+        isCorrect: true
+        text: "Cada consumidor ejecuta su propio setup y cleanup."
+      - id: "4"
+        isCorrect: false
+        text: "Los hooks se ignoran en composables reutilizados."
+
+  - text: "¿Qué API conviene exponer desde un composable con efectos internos?"
+    explanation: "Se recomienda exponer estado y acciones, ocultando detalles internos de sincronización para mantener contratos claros."
+    explanation_code:
+      - code: |-
+          return { query, resultCount, refresh }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Todas las variables internas para depurar desde cualquier componente."
+      - id: "3"
+        isCorrect: false
+        text: "Solo funciones sin estado para evitar reactividad."
+      - id: "4"
+        isCorrect: false
+        text: "Ningún valor retornado, solo efectos secundarios."
+
+      - id: "1"
+        isCorrect: true
+        text: "Estado y acciones relevantes, no la implementación interna del efecto."
+  - text: "¿Cuál es una regla práctica para efectos en composables?"
+    explanation: "Los efectos deben vivir junto a la lógica relacionada y limpiarse en el ciclo de vida del consumidor."
+    explanation_code:
+      - code: |-
+          // mantener efecto junto al estado + cleanup correcto
+        language: "text"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Mover todos los efectos al componente raiz."
+      - id: "1"
+        isCorrect: true
+        text: "Mantener efecto dentro del composable y limpiar correctamente por consumidor."
+      - id: "3"
+        isCorrect: false
+        text: "Eliminar `onUnmounted` para simplificar código."
+      - id: "4"
+        isCorrect: false
+        text: "Reemplazar watchers por computed en todos los casos."

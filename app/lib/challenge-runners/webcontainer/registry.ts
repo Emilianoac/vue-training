@@ -1,5 +1,6 @@
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
 import { createDynamicSettingsTabsChallenge } from "./challenges/dynamic-settings-tabs/config";
+import { createKeyboardShortcutListenerChallenge } from "./challenges/keyboard-shortcut-listener/config";
 import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-session-monitor/config";
 import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emits-quantity-stepper/config";
 import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
@@ -14,6 +15,7 @@ import type { WebContainerChallenge } from "./types";
 const challengeFactories: Record<string, (locale: string) => WebContainerChallenge> = {
   "computed-user-filter": createComputedUserFilterChallenge,
   "dynamic-settings-tabs": createDynamicSettingsTabsChallenge,
+  "keyboard-shortcut-listener": createKeyboardShortcutListenerChallenge,
   "lifecycle-session-monitor": createLifecycleSessionMonitorChallenge,
   "props-emits-quantity-stepper": createPropsEmitsQuantityStepperChallenge,
   "provide-inject-theme": createProvideInjectThemeChallenge,
