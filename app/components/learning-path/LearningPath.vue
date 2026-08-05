@@ -2,7 +2,6 @@
 import type { ItemType } from "@/schemas/learningPath.schema";
 import useLearningPathData from "@/composables/learning-path/useLearningPathData";
 import {
-  consumeLearningPathSection,
   createActivityPath,
   rememberLearningPathSection,
 } from "@/composables/learning-path/useLearningPathNavigation";
@@ -39,19 +38,6 @@ function isPlannedStep(step: { sub_steps: Array<{ status?: string; items?: unkno
 watch(locale, async () => {
   await getLearningPath(props.pathId);
 });
-
-onMounted(() => {
-  scrollToSection(consumeLearningPathSection(props.pathId));
-});
-
-async function scrollToSection(sectionId: string | null) {
-  if (!sectionId) return;
-
-  await nextTick();
-  window.requestAnimationFrame(() => {
-    document.getElementById(sectionId)?.scrollIntoView({ block: "start" });
-  });
-}
 </script>
 
 <template>
