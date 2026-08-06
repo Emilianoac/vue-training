@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { CheckIcon, Loader2Icon, PlayIcon, RefreshCwIcon } from "lucide-vue-next";
+import {
+  AlertTriangleIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  Loader2Icon,
+  PlayIcon,
+  RefreshCwIcon,
+} from "lucide-vue-next";
 import { useMediaQuery } from "@vueuse/core";
 import { useWebContainerRunner } from "@/lib/challenge-runners/webcontainer/composables/useWebContainerRunner";
 import { hasPreparedSnapshotHint } from "@/lib/challenge-runners/webcontainer/services/snapshotCache";
@@ -11,6 +18,7 @@ import ChallengeTerminal from "./ChallengeTerminal.client.vue";
 import ChallengeTestResults from "./ChallengeTestResults.vue";
 import ChallengeToolbar from "./ChallengeToolbar.vue";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -37,6 +45,7 @@ const {
   dirtyFilePaths,
   editableFiles,
   isReady,
+  isStaticMode,
   isFirstSetupLoading,
   isPreviewStarting,
   isRunning,
@@ -51,6 +60,8 @@ const {
   saveFeedback,
   selectFile,
   setupLabel,
+  initializeContainer,
+  runnerError,
   solutionFiles,
   terminalOutput,
   testCases,
@@ -59,7 +70,7 @@ const {
 } = useWebContainerRunner(props.challengeId);
 
 const emit = defineEmits<{
-  completed: [];
+  completed: [method: "tests" | "manual"];
 }>();
 
 const activeEditorTab = ref("editor");
@@ -84,7 +95,7 @@ let setupOverlayTimer: number | undefined;
 watch(
   () => testSummary.value,
   (summary) => {
-    if (summary.total > 0 && summary.failed === 0) emit("completed");
+    if (summary.total > 0 && summary.failed === 0) emit("completed", "tests");
   },
 );
 
@@ -103,6 +114,14 @@ watch(isFirstSetupLoading, (isLoading) => {
 
   if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
   showSetupOverlay.value = false;
+});
+
+watch(isStaticMode, (staticMode) => {
+  if (!staticMode) return;
+
+  if (setupOverlayTimer) window.clearTimeout(setupOverlayTimer);
+  showSetupOverlay.value = false;
+  activeEditorTab.value = "editor";
 });
 
 onMounted(() => {
@@ -178,6 +197,47 @@ function openTestsDialog() {
         @view-tests="openTestsDialog"
       />
 
+      <Collapsible
+        v-if="isStaticMode"
+        v-slot="{ open }"
+        class="border-b border-(--editor-panel-border) bg-amber-500/10 text-sm"
+        role="status"
+      >
+        <div class="flex min-h-11 items-center px-3 py-2">
+          <CollapsibleTrigger as-child>
+            <button
+              class="flex w-full min-w-0 items-center gap-2 rounded-sm text-left font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              type="button"
+            >
+              <AlertTriangleIcon class="size-4 shrink-0 text-amber-600 dark:text-amber-400" />
+              <span class="truncate">{{ t("challenge.runner.static.title") }}</span>
+              <ChevronDownIcon
+                class="ml-auto size-4 shrink-0 text-muted-foreground transition-transform"
+                :class="open && 'rotate-180'"
+              />
+            </button>
+          </CollapsibleTrigger>
+        </div>
+
+        <CollapsibleContent class="px-3 pb-3 pl-9 text-muted-foreground">
+          <p>{{ t("challenge.runner.static.description") }}</p>
+          <details v-if="runnerError" class="mt-2 text-xs">
+            <summary class="cursor-pointer">{{ t("challenge.runner.static.details") }}</summary>
+            <code class="mt-1 block break-all">{{ runnerError }}</code>
+          </details>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <Button size="sm" variant="outline" @click="initializeContainer">
+              {{ t("challenge.runner.actions.retry") }}
+              <RefreshCwIcon />
+            </Button>
+            <Button size="sm" @click="emit('completed', 'manual')">
+              {{ t("challenge.runner.actions.markCompleted") }}
+              <CheckIcon />
+            </Button>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
       <ResizablePanelGroup direction="vertical" class="min-h-0 flex-1">
         <ResizablePanel :default-size="70" :min-size="20" class="min-h-0">
           <Tabs v-model="activeEditorTab" class="h-full min-h-0 gap-0">
@@ -192,6 +252,7 @@ function openTestsDialog() {
                 :on-save="saveCode"
               />
               <div
+                v-if="!isStaticMode"
                 class="absolute right-4 bottom-4 z-10 flex gap-2 rounded-md bg-(--editor-panel-background) p-2 shadow-(--editor-panel-shadow)"
               >
                 <Button :disabled="!canRunTests" @click="runTests">
@@ -208,6 +269,7 @@ function openTestsDialog() {
             </TabsContent>
 
             <TabsContent
+              v-if="!isStaticMode"
               value="preview"
               class="m-0 h-full min-h-0 bg-(--editor-background) data-[state=inactive]:hidden"
             >
@@ -254,11 +316,12 @@ function openTestsDialog() {
         </ResizablePanel>
 
         <ResizableHandle
+          v-if="!isStaticMode"
           class="bg-(--editor-panel-border) data-[resize-handle-state=drag]:outline-3 data-[resize-handle-state=drag]:outline-[color-mix(in_oklch,var(--editor-panel-tab-accent)_40%,transparent)]"
           :with-handle="true"
         />
 
-        <ResizablePanel :default-size="30" :min-size="0" class="min-h-0">
+        <ResizablePanel v-if="!isStaticMode" :default-size="30" :min-size="0" class="min-h-0">
           <ResizablePanelGroup :direction="isDesktop ? 'horizontal' : 'vertical'" class="min-h-0">
             <ResizablePanel
               :default-size="isDesktop ? 65 : 55"
@@ -296,7 +359,7 @@ function openTestsDialog() {
             <TabsTrigger class="rounded-sm px-3 text-xs" value="editor">
               {{ t("challenge.runner.tabs.editor") }}
             </TabsTrigger>
-            <TabsTrigger class="rounded-sm px-3 text-xs" value="preview">
+            <TabsTrigger v-if="!isStaticMode" class="rounded-sm px-3 text-xs" value="preview">
               {{ t("challenge.runner.tabs.preview") }}
             </TabsTrigger>
           </TabsList>

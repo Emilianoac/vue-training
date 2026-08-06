@@ -31,8 +31,10 @@ const { t } = useI18n();
 const isDesktop = useMediaQuery("(min-width: 1024px)");
 const completionDialogOpen = ref(false);
 const hasCompleted = ref(false);
+const completionMethod = ref<"tests" | "manual">("tests");
 
-function handleCompleted() {
+function handleCompleted(method: "tests" | "manual") {
+  completionMethod.value = method;
   completionDialogOpen.value = true;
 
   if (!hasCompleted.value) {
@@ -80,7 +82,13 @@ function handleCompleted() {
         </div>
         <DialogTitle>{{ t("challenge.completion.title") }}</DialogTitle>
         <DialogDescription>
-          {{ t("challenge.completion.message") }}
+          {{
+            t(
+              completionMethod === "manual"
+                ? "challenge.completion.manualMessage"
+                : "challenge.completion.message",
+            )
+          }}
         </DialogDescription>
       </DialogHeader>
 

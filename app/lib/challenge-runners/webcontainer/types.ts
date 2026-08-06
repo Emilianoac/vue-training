@@ -48,4 +48,4 @@ export type RunnerTimings = {
   total: number | null;
 };
 
-export type RunnerStatus = "booting" | "installing" | "ready" | "idle";
+export type RunnerStatus = "booting" | "installing" | "ready" | "idle" | "unsupported" | "failed";

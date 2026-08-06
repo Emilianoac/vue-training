@@ -19,10 +19,7 @@ import type {
 } from "../types";
 import { emptyTestSummary, useVitestReporter } from "./useVitestReporter";
 import { prepareSnapshot, removeSnapshot, saveSnapshot } from "../services/snapshotCache";
-import {
-  cacheInstalledAddon,
-  restoreAddonSnapshot,
-} from "../services/addonSnapshot";
+import { cacheInstalledAddon, restoreAddonSnapshot } from "../services/addonSnapshot";
 
 export function useWebContainerRunner(challengeId = "ref-counter-state") {
   const { locale, t } = useI18n();
@@ -69,6 +66,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   });
   const terminalOutput = ref(t("challenge.runner.terminal.initialReady"));
   const status = ref<RunnerStatus>("idle");
+  const runnerError = ref("");
   const isColdStart = ref(false);
   const isRunning = ref(false);
   const isPreviewStarting = ref(false);
@@ -85,6 +83,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
   let resolvePreviewServerReady: ((url: string) => void) | null = null;
 
   const isReady = computed(() => status.value === "ready");
+  const isStaticMode = computed(() => status.value === "unsupported" || status.value === "failed");
   const isFirstSetupLoading = computed(
     () => isColdStart.value && (status.value === "booting" || status.value === "installing"),
   );
@@ -99,7 +98,11 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     () => isReady.value && !isPreviewStarting.value && !isRunning.value,
   );
   const canSaveCode = computed(
-    () => isReady.value && hasUnsavedChanges.value && !isRunning.value && !isPreviewStarting.value,
+    () =>
+      (isReady.value || isStaticMode.value) &&
+      hasUnsavedChanges.value &&
+      !isRunning.value &&
+      !isPreviewStarting.value,
   );
   const canLoadSolution = computed(() => Boolean(activeFile.value?.solution) && !isRunning.value);
   const canLoadCompleteSolution = computed(() => solutionFiles.length > 1 && !isRunning.value);
@@ -108,6 +111,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     if (status.value === "installing") return t("challenge.runner.status.installing");
     if (status.value === "booting") return t("challenge.runner.status.booting");
     if (status.value === "ready") return t("challenge.runner.status.ready");
+    if (isStaticMode.value) return t("challenge.runner.status.static");
     return t("challenge.runner.status.idle");
   });
 
@@ -123,6 +127,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     if (webcontainer.value || status.value === "booting" || status.value === "installing") return;
 
     Object.assign(timings, createEmptyTimings());
+    runnerError.value = "";
     isColdStart.value = false;
     const totalStartedAt = performance.now();
     terminalOutput.value = "";
@@ -131,6 +136,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     if (!globalThis.crossOriginIsolated) {
       appendLine(t("challenge.runner.terminal.notIsolated"));
       appendLine(t("challenge.runner.terminal.notIsolatedHelp"));
+      status.value = "unsupported";
       return;
     }
 
@@ -167,7 +173,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
           recordTiming("total", totalStartedAt);
           container.teardown();
           webcontainer.value = null;
-          status.value = "idle";
+          runnerError.value = t("challenge.runner.terminal.installFailed", { code: 1 });
+          status.value = "failed";
           return;
         }
 
@@ -180,7 +187,8 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
         recordTiming("total", totalStartedAt);
         container.teardown();
         webcontainer.value = null;
-        status.value = "idle";
+        runnerError.value = t("challenge.runner.static.addonError");
+        status.value = "failed";
         return;
       }
 
@@ -188,10 +196,11 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       status.value = "ready";
     } catch (error) {
       recordTiming("total", totalStartedAt);
-      appendLine(`✗ ${getErrorMessage(error, t("challenge.runner.terminal.unknownError"))}`);
+      runnerError.value = getErrorMessage(error, t("challenge.runner.terminal.unknownError"));
+      appendLine(`✗ ${runnerError.value}`);
       webcontainer.value?.teardown();
       webcontainer.value = null;
-      status.value = "idle";
+      status.value = "failed";
     }
   }
 
@@ -251,7 +260,17 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
 
   async function saveCode() {
     const container = webcontainer.value;
-    if (!container || !canSaveCode.value) return;
+    if (!canSaveCode.value) return;
+
+    if (!container && isStaticMode.value) {
+      for (const file of editableChallengeFiles) {
+        savedFileContents[file.path] = fileContents[file.path] ?? file.content;
+      }
+      showSaveFeedback();
+      return;
+    }
+
+    if (!container) return;
 
     const shouldRefreshTestReport = Boolean(testWatcherProcess);
 
@@ -262,10 +281,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       }
 
       await writeEditableFiles(container);
-      saveFeedback.value = t("challenge.runner.status.saved");
-      window.setTimeout(() => {
-        saveFeedback.value = "";
-      }, 2500);
+      showSaveFeedback();
 
       if (shouldRefreshTestReport) {
         const hasTestReport = await waitForTestReport(container);
@@ -279,6 +295,13 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     } finally {
       if (shouldRefreshTestReport) isRunning.value = false;
     }
+  }
+
+  function showSaveFeedback() {
+    saveFeedback.value = t("challenge.runner.status.saved");
+    window.setTimeout(() => {
+      saveFeedback.value = "";
+    }, 2500);
   }
 
   function resetCode() {
@@ -441,16 +464,12 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       installArgs.push("--no-save", "--package-lock=false", ...installOptions, ...packageSpecs);
     }
 
-    const install = await container.spawn(
-      "npm",
-      installArgs,
-      {
-        env: {
-          CI: "true",
-          NO_COLOR: "1",
-        },
+    const install = await container.spawn("npm", installArgs, {
+      env: {
+        CI: "true",
+        NO_COLOR: "1",
       },
-    );
+    });
 
     pipeProcessOutput(install);
     const installExitCode = await install.exit;
@@ -584,6 +603,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     editableFiles,
     isColdStart,
     isReady,
+    isStaticMode,
     isRunning,
     isPreviewStarting,
     isFirstSetupLoading,
@@ -598,6 +618,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
     saveFeedback,
     selectFile,
     setupLabel,
+    initializeContainer,
+    runnerError,
+    status,
     solutionFiles,
     terminalOutput,
     testCases,

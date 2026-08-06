@@ -183,6 +183,7 @@
     "completion": {
       "title": "¡Desafío completado!",
       "message": "Buen trabajo. Todos los tests pasaron correctamente.",
+      "manualMessage": "Marcaste este desafío como completado manualmente.",
       "continueLearningPath": "Continuar learning path",
       "close": "Cerrar"
     },
@@ -197,8 +198,8 @@
       "actions": {
         "save": "Guardar cambios",
         "reset": "Reiniciar desafio",
-      "solution": "Ver solución",
-      "tests": "Ver tests",
+        "solution": "Ver solución",
+        "tests": "Ver tests",
         "loadSolution": "Cargar solución en el editor",
         "loadCompleteSolution": "Cargar solución completa",
         "runTests": "Ejecutar tests",
@@ -206,7 +207,9 @@
         "reloadPreview": "Recargar preview",
         "loadingPreview": "Cargando preview",
         "enterFullscreen": "Entrar a pantalla completa",
-        "exitFullscreen": "Salir de pantalla completa"
+        "exitFullscreen": "Salir de pantalla completa",
+        "retry": "Reintentar",
+        "markCompleted": "Marcar como completado"
       },
       "tabs": {
         "editor": "Editor",
@@ -220,21 +223,28 @@
         "empty": "Abre o recarga el preview para montar el componente.",
         "loading": "Iniciando preview..."
       },
-    "solution": {
-      "title": "Solución",
-      "description": "Revisa la solución sin reemplazar tu código. Si quieres usarla, cárgala manualmente en el editor."
-    },
-    "tests": {
-      "title": "Tests",
-      "description": "Revisa los tests utilizados para evaluar este challenge. Estos archivos son de solo lectura."
-    },
+      "solution": {
+        "title": "Solución",
+        "description": "Revisa la solución sin reemplazar tu código. Si quieres usarla, cárgala manualmente en el editor."
+      },
+      "tests": {
+        "title": "Tests",
+        "description": "Revisa los tests utilizados para evaluar este challenge. Estos archivos son de solo lectura."
+      },
       "status": {
         "booting": "Inicializando entorno...",
         "installing": "Instalando dependencias...",
         "idle": "Preparando entorno...",
         "ready": "Entorno listo",
         "saved": "Cambios guardados",
-        "unsaved": "Cambios sin guardar"
+        "unsaved": "Cambios sin guardar",
+        "static": "Edición sin ejecución"
+      },
+      "static": {
+        "title": "No se pudo iniciar el entorno interactivo",
+        "description": "Puedes continuar editando el código y revisar los tests y la solución, pero no podrás ejecutar el challenge ni abrir el preview en este dispositivo. Cuando termines, puedes marcarlo como completado manualmente.",
+        "details": "Detalles técnicos",
+        "addonError": "No se pudieron preparar las dependencias adicionales del challenge."
       },
       "firstSetup": {
         "title": "Preparando tu entorno de codigo",

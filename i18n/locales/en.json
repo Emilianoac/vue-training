@@ -183,6 +183,7 @@
     "completion": {
       "title": "Challenge completed!",
       "message": "Nice work. All tests passed successfully.",
+      "manualMessage": "You marked this challenge as completed manually.",
       "continueLearningPath": "Continue learning path",
       "close": "Close"
     },
@@ -197,8 +198,8 @@
       "actions": {
         "save": "Save changes",
         "reset": "Reset challenge",
-      "solution": "View solution",
-      "tests": "View tests",
+        "solution": "View solution",
+        "tests": "View tests",
         "loadSolution": "Load solution into editor",
         "loadCompleteSolution": "Load complete solution",
         "runTests": "Run tests",
@@ -206,7 +207,9 @@
         "reloadPreview": "Reload preview",
         "loadingPreview": "Loading preview",
         "enterFullscreen": "Enter fullscreen",
-        "exitFullscreen": "Exit fullscreen"
+        "exitFullscreen": "Exit fullscreen",
+        "retry": "Retry",
+        "markCompleted": "Mark as completed"
       },
       "tabs": {
         "editor": "Editor",
@@ -220,21 +223,28 @@
         "empty": "Open or reload the preview to mount the component.",
         "loading": "Starting preview..."
       },
-    "solution": {
-      "title": "Solution",
-      "description": "Review the solution without replacing your code. If you want to use it, load it manually into the editor."
-    },
-    "tests": {
-      "title": "Tests",
-      "description": "Review the tests used to evaluate this challenge. These files are read-only."
-    },
+      "solution": {
+        "title": "Solution",
+        "description": "Review the solution without replacing your code. If you want to use it, load it manually into the editor."
+      },
+      "tests": {
+        "title": "Tests",
+        "description": "Review the tests used to evaluate this challenge. These files are read-only."
+      },
       "status": {
         "booting": "Initializing environment...",
         "installing": "Installing dependencies...",
         "idle": "Preparing environment...",
         "ready": "Environment ready",
         "saved": "Changes saved",
-        "unsaved": "Unsaved changes"
+        "unsaved": "Unsaved changes",
+        "static": "Editing without execution"
+      },
+      "static": {
+        "title": "The interactive environment could not start",
+        "description": "You can continue editing the code and review the tests and solution, but you won't be able to run the challenge or open its preview on this device. When you finish, you can mark it as completed manually.",
+        "details": "Technical details",
+        "addonError": "The challenge's additional dependencies could not be prepared."
       },
       "firstSetup": {
         "title": "Preparing your coding environment",
