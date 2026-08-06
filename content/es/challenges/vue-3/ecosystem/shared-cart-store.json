@@ -1,0 +1,51 @@
+{
+  "documentId": "shared-cart-store",
+  "title": "Compartir un carrito con Pinia",
+  "slug": "shared-cart-store",
+  "level": "basic",
+  "topics": [
+    { "id": "pinia", "label": "Pinia" },
+    { "id": "define-store", "label": "defineStore" },
+    { "id": "store-to-refs", "label": "storeToRefs" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Construye un store de Pinia y comparte sus datos reactivos entre un catálogo y el resumen del carrito.",
+  "description": [
+    "En este desafío completarás el store que conecta un catálogo de cursos con el resumen de un carrito.",
+    "El catálogo agregará productos mediante actions y CartSummary consumirá los getters reactivos del mismo store con storeToRefs."
+  ],
+  "instructions": [
+    "En stores/cart.ts, implementa itemCount y total como getters derivados de items.",
+    "Completa addItem para agregar el producto recibido al carrito.",
+    "Completa clearCart para vaciar el arreglo items.",
+    "En CartSummary.vue, usa storeToRefs para obtener itemCount y total sin perder reactividad.",
+    "Obtén clearCart desde el store para que el botón pueda vaciar el carrito."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/ecosystem/shared-cart-store.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Deriva los getters",
+      "body": "`itemCount` puede usar `state.items.length` y `total` puede reducir `state.items` sumando cada `price`."
+    },
+    {
+      "title": "Modifica el store desde actions",
+      "body": "Dentro de una action de una Options Store puedes acceder a `items` mediante `this.items`."
+    },
+    {
+      "title": "Conserva la reactividad",
+      "body": "Importa `storeToRefs` desde `pinia` y pásale `cart`. Las actions, como `clearCart`, sí pueden desestructurarse directamente."
+    }
+  ]
+}

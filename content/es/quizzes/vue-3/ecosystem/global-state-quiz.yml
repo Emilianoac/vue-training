@@ -1,0 +1,189 @@
+documentId: global-state-quiz
+title: Estado global con Pinia
+level: basic
+slug: global-state-quiz
+description: Evaluación sobre stores, state, getters, actions y consumo reactivo con Pinia.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: ecosystem
+  name: Ecosistema
+  image:
+    url: /images/quizzes/categories/ecosystem.webp
+topics:
+  - id: pinia
+    label: Pinia
+  - id: define-store
+    label: defineStore
+  - id: store-to-refs
+    label: storeToRefs
+questions:
+  - text: ¿Cuándo suele ser apropiado mover un estado a un store de Pinia?
+    explanation: Un store resulta útil cuando distintas partes de la aplicación necesitan compartir la misma fuente de verdad. El estado exclusivo de un componente normalmente puede permanecer local.
+    answers:
+      - id: "2"
+        isCorrect: true
+        text: Cuando varios componentes o pantallas necesitan leer y modificar el mismo estado.
+      - id: "1"
+        isCorrect: false
+        text: Cuando una variable solo controla un detalle interno de un componente.
+      - id: "3"
+        isCorrect: false
+        text: Cuando se quiere evitar por completo el uso de refs.
+      - id: "4"
+        isCorrect: false
+        text: Cuando cualquier valor cambia más de una vez.
+  - text: ¿Cómo se conecta una instancia de Pinia con una aplicación Vue?
+    explanation: Pinia se registra como plugin antes de montar la aplicación. Esto permite que los stores encuentren la instancia correspondiente.
+    explanation_code:
+      - code: |-
+          const app = createApp(App);
+          const pinia = createPinia();
+
+          app.use(pinia);
+          app.mount("#app");
+        language: typescript
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`app.mount(createPinia())`"
+      - id: "3"
+        isCorrect: true
+        text: "`app.use(createPinia())`"
+      - id: "2"
+        isCorrect: false
+        text: "`createPinia().mount(app)`"
+      - id: "4"
+        isCorrect: false
+        text: "`app.component(createPinia())`"
+  - text: ¿Qué devuelve defineStore() al declarar un store?
+    explanation: defineStore crea una función useStore. Al ejecutarla dentro de una aplicación con Pinia activa, se obtiene la instancia del store.
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: Un componente que debe renderizarse en el template.
+      - id: "3"
+        isCorrect: false
+        text: Una copia estática del estado inicial.
+      - id: "1"
+        isCorrect: true
+        text: Una función que permite obtener la instancia del store.
+      - id: "4"
+        isCorrect: false
+        text: Una instancia independiente para cada llamada.
+  - text: ¿Cuál es la forma correcta de declarar el state en una Options Store?
+    explanation: El state se declara como una función que retorna el objeto inicial. Esto permite crear una instancia de estado adecuada para cada aplicación.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`state: { count: 0 }`"
+      - id: "2"
+        isCorrect: false
+        text: "`state() => ({ count: 0 })`"
+      - id: "3"
+        isCorrect: false
+        text: "`state: ref({ count: 0 })`"
+      - id: "4"
+        isCorrect: true
+        text: "`state: () => ({ count: 0 })`"
+  - text: ¿Para qué se utiliza un getter en Pinia?
+    explanation: Los getters representan valores derivados del state y se comportan como propiedades computadas del store.
+    explanation_code:
+      - code: |-
+          getters: {
+            total: (state) => state.items.reduce(
+              (sum, item) => sum + item.price,
+              0,
+            ),
+          }
+        language: typescript
+    answers:
+      - id: "2"
+        isCorrect: true
+        text: Para obtener un valor derivado y reactivo a partir del state.
+      - id: "1"
+        isCorrect: false
+        text: Para instalar el store como plugin de Vue.
+      - id: "3"
+        isCorrect: false
+        text: Para reemplazar los eventos emitidos por componentes.
+      - id: "4"
+        isCorrect: false
+        text: Para guardar automáticamente el state en localStorage.
+  - text: ¿Cuál es una responsabilidad adecuada para una action?
+    explanation: Una action puede agrupar una operación con intención propia, realizar varias mutaciones o coordinar trabajo asíncrono.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Declarar el HTML que renderiza el store.
+      - id: "3"
+        isCorrect: true
+        text: Coordinar una operación de negocio que modifica uno o más valores del state.
+      - id: "2"
+        isCorrect: false
+        text: Registrar Pinia después de montar la aplicación.
+      - id: "4"
+        isCorrect: false
+        text: Convertir automáticamente cada propiedad en un componente.
+  - text: Dos componentes ejecutan useCartStore() dentro de la misma aplicación. ¿Qué ocurre?
+    explanation: Ambas llamadas acceden a la misma instancia del store, por lo que los cambios realizados desde un componente son observados por el otro.
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: Cada componente recibe una copia aislada del carrito.
+      - id: "3"
+        isCorrect: false
+        text: Solo el primer componente puede modificar el store.
+      - id: "1"
+        isCorrect: true
+        text: Ambos componentes comparten el mismo estado reactivo del carrito.
+      - id: "4"
+        isCorrect: false
+        text: El segundo componente reemplaza la instancia del primero.
+  - text: ¿Cómo se desestructuran propiedades de state y getters sin perder reactividad?
+    explanation: storeToRefs convierte las propiedades reactivas del store en refs. Las actions pueden desestructurarse directamente desde el store.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: "`const { total } = reactive(cart.total)`"
+      - id: "2"
+        isCorrect: false
+        text: "`const { total } = computed(cart)`"
+      - id: "3"
+        isCorrect: false
+        text: "`const { total } = toRaw(cart)`"
+      - id: "4"
+        isCorrect: true
+        text: "`const { total } = storeToRefs(cart)`"
+  - text: ¿Pinia exige que toda modificación del state ocurra dentro de una action?
+    explanation: Pinia permite mutaciones directas como cart.items = []. Las actions son útiles para expresar operaciones y reglas, pero no son un requisito para cada cambio.
+    answers:
+      - id: "2"
+        isCorrect: true
+        text: No, permite mutaciones directas, aunque una action puede expresar mejor operaciones complejas.
+      - id: "1"
+        isCorrect: false
+        text: Sí, cualquier mutación externa produce un error.
+      - id: "3"
+        isCorrect: false
+        text: Sí, excepto cuando el store no contiene getters.
+      - id: "4"
+        isCorrect: false
+        text: No, porque el state de Pinia no es reactivo.
+  - text: ¿Dónde conviene guardar un valor que solo controla si un menú local está abierto?
+    explanation: Si el valor pertenece exclusivamente a un componente y no necesita compartirse, un ref local mantiene su alcance y responsabilidad claros.
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Siempre en un store global llamado useAppStore.
+      - id: "3"
+        isCorrect: true
+        text: En un ref local del componente, salvo que realmente deba compartirse.
+      - id: "2"
+        isCorrect: false
+        text: En un getter sin state asociado.
+      - id: "4"
+        isCorrect: false
+        text: En la instancia creada por `createPinia()`.

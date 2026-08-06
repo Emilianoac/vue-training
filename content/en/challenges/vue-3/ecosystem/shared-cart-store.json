@@ -1,0 +1,51 @@
+{
+  "documentId": "shared-cart-store",
+  "title": "Share a Cart with Pinia",
+  "slug": "shared-cart-store",
+  "level": "basic",
+  "topics": [
+    { "id": "pinia", "label": "Pinia" },
+    { "id": "define-store", "label": "defineStore" },
+    { "id": "store-to-refs", "label": "storeToRefs" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Build a Pinia store and share its reactive data between a catalog and the cart summary.",
+  "description": [
+    "In this challenge, you will complete the store connecting a course catalog to a cart summary.",
+    "The catalog will add products through actions, and CartSummary will consume reactive getters from the same store with storeToRefs."
+  ],
+  "instructions": [
+    "In stores/cart.ts, implement itemCount and total as getters derived from items.",
+    "Complete addItem so it adds the received product to the cart.",
+    "Complete clearCart so it empties the items array.",
+    "In CartSummary.vue, use storeToRefs to get itemCount and total without losing reactivity.",
+    "Get clearCart from the store so the button can empty the cart."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/ecosystem/shared-cart-store.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Derive the getters",
+      "body": "`itemCount` can use `state.items.length`, and `total` can reduce `state.items` by adding each `price`."
+    },
+    {
+      "title": "Change the store from actions",
+      "body": "Inside an Option Store action, you can access `items` through `this.items`."
+    },
+    {
+      "title": "Preserve reactivity",
+      "body": "Import `storeToRefs` from `pinia` and pass `cart` to it. Actions such as `clearCart` can be destructured directly."
+    }
+  ]
+}

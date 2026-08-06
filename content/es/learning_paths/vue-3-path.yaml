@@ -326,8 +326,24 @@ steps:
 
       - name: Estado Global
         id: global-state
-        status: planned
-        items: []
+        items:
+          - id: global-state-lesson
+            type: lesson
+            level: basic
+            title: Estado global con Pinia
+            subtitle: Comparte estado, getters y acciones entre componentes mediante stores de Pinia.
+
+          - id: global-state-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa stores, state, getters, actions y consumo reactivo con Pinia.
+
+          - id: shared-cart-store
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Construye un carrito cuyo estado se comparta entre varios componentes.
 
   - name: Calidad
     sub_steps:

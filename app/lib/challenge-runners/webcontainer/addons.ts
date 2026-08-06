@@ -1,4 +1,13 @@
 export const WEB_CONTAINER_ADDONS = {
+  pinia: {
+    cacheKey: "webcontainer-addon-pinia-3.0.4",
+    dependencies: {
+      pinia: "3.0.4",
+    },
+    exportPath: "node_modules/pinia",
+    mountPoint: "node_modules/pinia",
+    snapshotPath: "/webcontainer/addons/pinia-3.0.4.snapshot",
+  },
   "vue-router": {
     cacheKey: "webcontainer-addon-vue-router-5.1.0",
     dependencies: {

@@ -326,8 +326,24 @@ steps:
 
       - name: Global State
         id: global-state
-        status: planned
-        items: []
+        items:
+          - id: global-state-lesson
+            type: lesson
+            level: basic
+            title: Global State with Pinia
+            subtitle: Share state, getters, and actions across components through Pinia stores.
+
+          - id: global-state-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test stores, state, getters, actions, and reactive consumption with Pinia.
+
+          - id: shared-cart-store
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Build a shopping cart whose state is shared across multiple components.
 
   - name: Quality
     sub_steps:
