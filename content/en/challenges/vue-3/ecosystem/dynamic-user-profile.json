@@ -1,0 +1,51 @@
+{
+  "documentId": "dynamic-user-profile",
+  "title": "React to a Route Parameter",
+  "slug": "dynamic-user-profile",
+  "level": "basic",
+  "topics": [
+    { "id": "vue-router", "label": "Vue Router" },
+    { "id": "use-route", "label": "useRoute" },
+    { "id": "computed", "label": "computed" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Render the correct profile and update it when Vue Router's dynamic parameter changes.",
+  "description": [
+    "The environment already configures a /users/:id route and App.vue provides navigation between profiles.",
+    "Complete UserProfile.vue to read the current id through useRoute and reactively derive the visible user."
+  ],
+  "instructions": [
+    "Use the route instance provided by useRoute.",
+    "Inside computed, find the users entry whose id matches route.params.id.",
+    "Convert the parameter to a string before comparing it.",
+    "Keep the profile-not-found state for unknown identifiers.",
+    "You only need to modify UserProfile.vue."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/ecosystem/dynamic-user-profile.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Reactive route",
+      "body": "Read `route.params.id` inside `computed` so the profile updates when the URL changes."
+    },
+    {
+      "title": "Find the profile",
+      "body": "Use `users.find` and compare `candidate.id` with `String(route.params.id)`."
+    },
+    {
+      "title": "No match",
+      "body": "`find` returns `undefined` when no profile exists; the template already uses that result to render the empty state."
+    }
+  ]
+}

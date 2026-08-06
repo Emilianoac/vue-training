@@ -1,0 +1,51 @@
+{
+  "documentId": "dynamic-user-profile",
+  "title": "Reaccionar a un parámetro de ruta",
+  "slug": "dynamic-user-profile",
+  "level": "basic",
+  "topics": [
+    { "id": "vue-router", "label": "Vue Router" },
+    { "id": "use-route", "label": "useRoute" },
+    { "id": "computed", "label": "computed" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Muestra el perfil correcto y actualízalo cuando cambie el parámetro dinámico de Vue Router.",
+  "description": [
+    "El entorno ya configura una ruta /users/:id y App.vue permite navegar entre varios perfiles.",
+    "Completa UserProfile.vue para obtener el id actual desde useRoute y derivar reactivamente el usuario visible."
+  ],
+  "instructions": [
+    "Usa la instancia route que entrega useRoute.",
+    "Dentro de computed, busca en users el elemento cuyo id coincida con route.params.id.",
+    "Convierte el parámetro a string antes de compararlo.",
+    "Conserva el estado de perfil no encontrado para identificadores desconocidos.",
+    "Solo necesitas modificar UserProfile.vue."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/ecosystem/dynamic-user-profile.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Ruta reactiva",
+      "body": "`route.params.id` puede leerse dentro de `computed` para que el perfil se actualice cuando cambie la URL."
+    },
+    {
+      "title": "Buscar el perfil",
+      "body": "Usa `users.find` y compara `candidate.id` con `String(route.params.id)`."
+    },
+    {
+      "title": "Sin coincidencia",
+      "body": "`find` retorna `undefined` cuando no existe un perfil; el template ya utiliza ese resultado para mostrar el estado vacío."
+    }
+  ]
+}

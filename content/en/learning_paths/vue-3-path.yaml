@@ -305,8 +305,24 @@ steps:
     sub_steps:
       - name: Routing
         id: routing
-        status: planned
-        items: []
+        items:
+          - id: routing-lesson
+            type: lesson
+            level: basic
+            title: Routing with Vue Router
+            subtitle: Connect URLs to views and handle params, query, navigation, and guards.
+
+          - id: routing-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test dynamic routes, nested views, history, and navigation with Vue Router.
+
+          - id: dynamic-user-profile
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Build a profile that reacts to a dynamic route parameter.
 
       - name: Global State
         id: global-state

@@ -1,0 +1,185 @@
+documentId: "routing-quiz"
+title: "Routing con Vue Router"
+level: "basic"
+slug: "routing-quiz"
+description: "Evalúa rutas, parámetros, query, navegación, vistas anidadas y guards con Vue Router."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "ecosystem"
+  name: "Ecosistema"
+  image:
+    url: "/images/quizzes/categories/ecosystem.webp"
+topics:
+  - id: "vue-router"
+    label: "Vue Router"
+  - id: "use-route"
+    label: "useRoute"
+  - id: "use-router"
+    label: "useRouter"
+questions:
+  - text: "¿Cuál es el propósito principal de Vue Router en una SPA?"
+    explanation: "Vue Router relaciona URLs con vistas y conserva una navegación compatible con el historial sin recargar el documento completo."
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Representar vistas mediante URLs y navegar entre ellas en el cliente."
+      - id: "2"
+        isCorrect: false
+        text: "Reemplazar el sistema reactivo de Vue."
+      - id: "3"
+        isCorrect: false
+        text: "Almacenar todos los datos de la aplicación."
+      - id: "4"
+        isCorrect: false
+        text: "Evitar que el navegador mantenga un historial."
+  - text: "¿Qué función cumple RouterView?"
+    explanation: "RouterView actúa como el punto donde se renderiza el componente asociado a la ruta activa."
+    explanation_code:
+      - code: |-
+          <RouterView />
+        language: "vue"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Crea automáticamente enlaces para todas las rutas."
+      - id: "1"
+        isCorrect: true
+        text: "Indica dónde debe aparecer el componente de la ruta actual."
+      - id: "3"
+        isCorrect: false
+        text: "Guarda parámetros en localStorage."
+      - id: "4"
+        isCorrect: false
+        text: "Impide la navegación programática."
+  - text: "¿Cuál es la diferencia entre useRoute y useRouter?"
+    explanation: "useRoute describe reactivamente la ubicación actual; useRouter entrega los métodos que inician navegaciones."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "useRoute solo funciona en templates y useRouter solo en CSS."
+      - id: "3"
+        isCorrect: false
+        text: "Ambos retornan exactamente el mismo objeto."
+      - id: "1"
+        isCorrect: true
+        text: "useRoute lee la ruta actual y useRouter permite cambiarla."
+      - id: "4"
+        isCorrect: false
+        text: "useRouter lee params y useRoute instala el plugin."
+  - text: "¿Cómo se define y se lee el id de la ruta /users/:id?"
+    explanation: "Los segmentos dinámicos comienzan con dos puntos y sus valores aparecen en route.params."
+    explanation_code:
+      - code: |-
+          { path: "/users/:id", component: UserPage }
+          const id = route.params.id
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Se define con ?id y se lee desde route.meta.id."
+      - id: "3"
+        isCorrect: false
+        text: "Se define con #id y se lee desde router.history.id."
+      - id: "4"
+        isCorrect: false
+        text: "Se define con [id] y Vue Router lo entrega como una prop automática."
+      - id: "1"
+        isCorrect: true
+        text: "Se define con :id y se lee desde route.params.id."
+  - text: "¿Qué información suele encajar mejor en la query de una URL?"
+    explanation: "La query representa opciones de una vista, como filtros o paginación, sin cambiar el recurso principal del path."
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Filtros, orden y número de página."
+      - id: "2"
+        isCorrect: false
+        text: "El componente que RouterView debe importar."
+      - id: "3"
+        isCorrect: false
+        text: "Las credenciales privadas del usuario."
+      - id: "4"
+        isCorrect: false
+        text: "La configuración interna de createWebHistory."
+  - text: "¿Por qué conviene observar route.params.id al navegar entre dos usuarios?"
+    explanation: "Vue Router puede reutilizar la misma instancia cuando cambia solo un parámetro, por lo que onMounted no vuelve a ejecutarse."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Porque los params nunca están disponibles durante el montaje."
+      - id: "1"
+        isCorrect: true
+        text: "Porque el componente puede conservarse mientras cambia el parámetro reactivo."
+      - id: "3"
+        isCorrect: false
+        text: "Porque watch desmonta el componente antes de cada navegación."
+      - id: "4"
+        isCorrect: false
+        text: "Porque useRoute no es reactivo."
+  - text: "¿Qué necesita una vista padre para mostrar una ruta hija?"
+    explanation: "La vista del padre debe incluir otro RouterView, que funciona como salida para el componente hijo."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Un segundo createRouter dentro del componente."
+      - id: "3"
+        isCorrect: false
+        text: "Un iframe con la URL de la ruta hija."
+      - id: "1"
+        isCorrect: true
+        text: "Un RouterView dentro del componente padre."
+      - id: "4"
+        isCorrect: false
+        text: "Un guard global que importe la vista hija."
+  - text: "¿Cuándo resulta apropiado usar router.replace en lugar de router.push?"
+    explanation: "replace evita agregar una nueva entrada cuando la pantalla actual es transitoria o no debería visitarse al volver atrás."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Cuando se quiere conservar ambas ubicaciones en el historial."
+      - id: "3"
+        isCorrect: false
+        text: "Solo cuando la ruta contiene parámetros."
+      - id: "4"
+        isCorrect: false
+        text: "Únicamente para enlaces externos."
+      - id: "1"
+        isCorrect: true
+        text: "Cuando la navegación debe reemplazar la entrada actual del historial."
+  - text: "¿Qué debe hacer un guard para redirigir una navegación?"
+    explanation: "Un guard puede retornar una ubicación de ruta; false cancela y no retornar nada permite continuar."
+    explanation_code:
+      - code: |-
+          if (!isAuthenticated) return { name: "login" }
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Retornar la ubicación a la que debe dirigirse el router."
+      - id: "2"
+        isCorrect: false
+        text: "Modificar directamente window.location en todos los casos."
+      - id: "3"
+        isCorrect: false
+        text: "Retornar siempre true y cambiar route.params."
+      - id: "4"
+        isCorrect: false
+        text: "Renderizar un RouterLink desde el guard."
+  - text: "¿Qué relación existe entre el routing de Nuxt y Vue Router?"
+    explanation: "Nuxt usa Vue Router internamente y genera sus registros desde app/pages, además de ofrecer componentes y utilidades propias."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Nuxt reemplaza Vue Router por un sistema sin URLs."
+      - id: "1"
+        isCorrect: true
+        text: "Nuxt genera rutas por archivos sobre Vue Router."
+      - id: "3"
+        isCorrect: false
+        text: "Nuxt solo permite navegación mediante recargas completas."
+      - id: "4"
+        isCorrect: false
+        text: "Vue Router funciona en Nuxt únicamente para rutas del servidor."
