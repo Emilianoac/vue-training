@@ -1,6 +1,7 @@
 import { createAsyncResourceLoaderChallenge } from "./challenges/async-resource-loader/config";
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
 import { createDynamicSettingsTabsChallenge } from "./challenges/dynamic-settings-tabs/config";
+import { createFlexibleTaskFilterChallenge } from "./challenges/flexible-task-filter/config";
 import { createKeyboardShortcutListenerChallenge } from "./challenges/keyboard-shortcut-listener/config";
 import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-session-monitor/config";
 import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emits-quantity-stepper/config";
@@ -17,6 +18,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "async-resource-loader": createAsyncResourceLoaderChallenge,
   "computed-user-filter": createComputedUserFilterChallenge,
   "dynamic-settings-tabs": createDynamicSettingsTabsChallenge,
+  "flexible-task-filter": createFlexibleTaskFilterChallenge,
   "keyboard-shortcut-listener": createKeyboardShortcutListenerChallenge,
   "lifecycle-session-monitor": createLifecycleSessionMonitorChallenge,
   "props-emits-quantity-stepper": createPropsEmitsQuantityStepperChallenge,

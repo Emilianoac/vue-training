@@ -282,8 +282,24 @@ steps:
 
       - name: Advanced Patterns
         id: advanced-patterns
-        status: planned
-        items: []
+        items:
+          - id: advanced-patterns-lesson
+            type: lesson
+            level: basic
+            title: Advanced Composable Patterns
+            subtitle: Design flexible inputs, protected state, and configurable composables with clear contracts.
+
+          - id: advanced-patterns-quiz
+            type: quiz
+            level: basic
+            title: Quiz 1
+            subtitle: Test reactive inputs, readonly, factories, composition, and effect scopes.
+
+          - id: flexible-task-filter
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Create a filter that accepts values, refs, or getters without losing reactivity.
 
   - name: Ecosystem
     sub_steps:

@@ -1,0 +1,51 @@
+{
+  "documentId": "flexible-task-filter",
+  "title": "Build a Filter with Flexible Inputs",
+  "slug": "flexible-task-filter",
+  "level": "basic",
+  "topics": [
+    { "id": "maybe-ref-or-getter", "label": "MaybeRefOrGetter" },
+    { "id": "to-value", "label": "toValue" },
+    { "id": "computed", "label": "computed" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Filter tasks from values, refs, or getters without losing reactive tracking.",
+  "description": [
+    "App.vue already consumes useTaskFilter with a reactive collection and query.",
+    "Complete the composable to normalize both inputs with toValue and derive visible tasks through computed."
+  ],
+  "instructions": [
+    "Read tasks and query with toValue inside computed.",
+    "Normalize the query by trimming outer whitespace and converting it to lowercase.",
+    "Return every task when the query is empty.",
+    "Filter by title without case sensitivity when a query exists.",
+    "You only need to modify useTaskFilter.ts."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/composables/flexible-task-filter.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Normalize each input",
+      "body": "`toValue(tasks)` obtains the current collection and `toValue(query)` obtains the current text, whether they arrive as values, refs, or getters."
+    },
+    {
+      "title": "Keep reactive tracking",
+      "body": "Call `toValue` inside the `computed` callback so Vue tracks any refs or getters that are used."
+    },
+    {
+      "title": "Empty query",
+      "body": "After trimming, you can return `currentTasks` immediately when `normalizedQuery` is an empty string."
+    }
+  ]
+}

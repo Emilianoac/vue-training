@@ -282,8 +282,24 @@ steps:
 
       - name: Patrones Avanzados
         id: advanced-patterns
-        status: planned
-        items: []
+        items:
+          - id: advanced-patterns-lesson
+            type: lesson
+            level: basic
+            title: Patrones avanzados para composables
+            subtitle: Diseña entradas flexibles, estado protegido y composables configurables con contratos claros.
+
+          - id: advanced-patterns-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario 1
+            subtitle: Evalúa entradas reactivas, readonly, factories, composición y scopes de efectos.
+
+          - id: flexible-task-filter
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Crea un filtro que acepte valores, refs o getters sin perder reactividad.
 
   - name: Ecosistema
     sub_steps:

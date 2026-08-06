@@ -1,0 +1,51 @@
+{
+  "documentId": "flexible-task-filter",
+  "title": "Crear un filtro con entradas flexibles",
+  "slug": "flexible-task-filter",
+  "level": "basic",
+  "topics": [
+    { "id": "maybe-ref-or-getter", "label": "MaybeRefOrGetter" },
+    { "id": "to-value", "label": "toValue" },
+    { "id": "computed", "label": "computed" }
+  ],
+  "category": {
+    "name": "Vue 3",
+    "image": {
+      "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+    }
+  },
+  "short_description": "Filtra tareas desde valores, refs o getters sin perder el seguimiento reactivo.",
+  "description": [
+    "App.vue ya consume useTaskFilter con una colección y una búsqueda reactivas.",
+    "Completa el composable para normalizar ambas entradas con toValue y derivar las tareas visibles mediante computed."
+  ],
+  "instructions": [
+    "Lee tasks y query con toValue dentro de computed.",
+    "Normaliza la búsqueda eliminando espacios exteriores y convirtiéndola a minúsculas.",
+    "Devuelve todas las tareas cuando la búsqueda esté vacía.",
+    "Filtra por title sin distinguir entre mayúsculas y minúsculas cuando exista una búsqueda.",
+    "Solo necesitas modificar useTaskFilter.ts."
+  ],
+  "cover": {
+    "url": "/images/challenges/vue-3/composables/flexible-task-filter.webp"
+  },
+  "images": [
+    {
+      "url": ""
+    }
+  ],
+  "hints": [
+    {
+      "title": "Normaliza cada entrada",
+      "body": "`toValue(tasks)` obtiene la colección actual y `toValue(query)` obtiene el texto actual, sin importar si llegaron como valor, ref o getter."
+    },
+    {
+      "title": "Conserva el seguimiento",
+      "body": "Llama a `toValue` dentro del callback de `computed` para que Vue rastree los refs o getters utilizados."
+    },
+    {
+      "title": "Búsqueda vacía",
+      "body": "Después de `trim`, puedes retornar `currentTasks` inmediatamente si `normalizedQuery` es una cadena vacía."
+    }
+  ]
+}

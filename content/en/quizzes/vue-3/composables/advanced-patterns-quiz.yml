@@ -1,0 +1,197 @@
+documentId: "advanced-patterns-quiz"
+title: "Advanced Composable Patterns"
+level: "basic"
+slug: "advanced-patterns-quiz"
+description: "Assess flexible reactive inputs, protected state, factories, composition, and effect scopes."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "to-value"
+    label: "toValue"
+  - id: "readonly"
+    label: "readonly"
+  - id: "effect-scope"
+    label: "effectScope"
+questions:
+  - text: "What problem does toValue solve inside a composable?"
+    explanation: "toValue provides a uniform way to read a plain value, ref, or getter."
+    explanation_code:
+      - code: |-
+          const currentQuery = toValue(query)
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "It normalizes different input forms to obtain their current value."
+      - id: "2"
+        isCorrect: false
+        text: "It turns every value into global state."
+      - id: "3"
+        isCorrect: false
+        text: "It automatically creates a deep watcher."
+      - id: "4"
+        isCorrect: false
+        text: "It prevents a ref from changing again."
+  - text: "Where should toValue run to track a reactive input?"
+    explanation: "When it runs inside computed or watch, Vue can register the read ref or getter as a dependency."
+    explanation_code:
+      - code: |-
+          const normalized = computed(() => toValue(query).trim())
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Only inside onMounted."
+      - id: "1"
+        isCorrect: true
+        text: "Inside a reactive context such as `computed` or `watch`."
+      - id: "3"
+        isCorrect: false
+        text: "Outside the composable before calling the function."
+      - id: "4"
+        isCorrect: false
+        text: "Only inside the component template."
+  - text: "When can requiring a Ref be better than accepting MaybeRefOrGetter?"
+    explanation: "A Ref clearly communicates that consumers must provide a mutable reactive source."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "When the composable does not use the input."
+      - id: "3"
+        isCorrect: false
+        text: "Always, because getters cannot be reactive."
+      - id: "1"
+        isCorrect: true
+        text: "When input reactivity is an essential part of the contract."
+      - id: "4"
+        isCorrect: false
+        text: "Only when TypeScript is not used."
+  - text: "What does readonly add to state returned by a composable?"
+    explanation: "readonly allows consumers to observe state while reserving changes for actions defined by the composable."
+    explanation_code:
+      - code: |-
+          return { selectedId: readonly(selectedId), select }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It removes reactivity from the returned value."
+      - id: "3"
+        isCorrect: false
+        text: "It turns state into a JavaScript constant."
+      - id: "4"
+        isCorrect: false
+        text: "It shares state across every component."
+      - id: "1"
+        isCorrect: true
+        text: "It prevents external mutation and keeps transitions inside the API."
+  - text: "When is a composable factory useful?"
+    explanation: "A factory configures real variations that share the same structure and contract."
+    explanation_code:
+      - code: |-
+          const useUsers = createUseResource(userApi.list)
+          const useCourses = createUseResource(courseApi.list)
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "When several variants share an API and differ in configuration."
+      - id: "2"
+        isCorrect: false
+        text: "When there is one case that will never vary."
+      - id: "3"
+        isCorrect: false
+        text: "When every component should be replaced by functions."
+      - id: "4"
+        isCorrect: false
+        text: "When no reactive state or behavior is needed."
+  - text: "What happens to state when a composable created by a factory is called several times?"
+    explanation: "The factory shares configuration, while each composable call creates its own state instance."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Every call automatically shares the same state."
+      - id: "1"
+        isCorrect: true
+        text: "Each call creates independent state unless the factory declares it outside."
+      - id: "3"
+        isCorrect: false
+        text: "Vue keeps only the first instance."
+      - id: "4"
+        isCorrect: false
+        text: "State stops being reactive after the second call."
+  - text: "Why group services in a typed dependency context?"
+    explanation: "A context avoids long signatures without hiding which services a composable family requires."
+    explanation_code:
+      - code: |-
+          type AppServices = { api: UserApi; logger: Logger }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "It turns every service into a global variable."
+      - id: "3"
+        isCorrect: false
+        text: "It removes the need to define service contracts."
+      - id: "1"
+        isCorrect: true
+        text: "It keeps dependencies explicit and lets them be replaced as a group."
+      - id: "4"
+        isCorrect: false
+        text: "It requires provide and inject in every component."
+  - text: "What should a composable that coordinates other capabilities expose?"
+    explanation: "An orchestrator should present the use-case contract while hiding details its consumer does not need."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Every internal value from each composable it uses."
+      - id: "3"
+        isCorrect: false
+        text: "Only the original infrastructure services."
+      - id: "4"
+        isCorrect: false
+        text: "A copy of every implementation it composes."
+      - id: "1"
+        isCorrect: true
+        text: "An API focused on the use case it coordinates."
+  - text: "What is the purpose of onScopeDispose in a composable?"
+    explanation: "onScopeDispose runs cleanup when the reactive scope that owns an effect ends."
+    explanation_code:
+      - code: |-
+          onScopeDispose(() => clearInterval(intervalId))
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Bind resource cleanup to the active reactive scope."
+      - id: "2"
+        isCorrect: false
+        text: "Manually unmount every component in the application."
+      - id: "3"
+        isCorrect: false
+        text: "Reset refs whenever any dependency changes."
+      - id: "4"
+        isCorrect: false
+        text: "Keep intervals active after leaving a view."
+  - text: "What is a practical rule when adopting advanced patterns?"
+    explanation: "Patterns should answer concrete variations or boundaries rather than add speculative flexibility."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Apply every pattern from the project's first composable."
+      - id: "1"
+        isCorrect: true
+        text: "Use them when they clarify the contract or solve a real need."
+      - id: "3"
+        isCorrect: false
+        text: "Always prefer the API that accepts the most input types."
+      - id: "4"
+        isCorrect: false
+        text: "Hide effect ownership to simplify the code."

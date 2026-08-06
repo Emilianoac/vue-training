@@ -1,0 +1,197 @@
+documentId: "advanced-patterns-quiz"
+title: "Patrones avanzados para composables"
+level: "basic"
+slug: "advanced-patterns-quiz"
+description: "Evalúa entradas reactivas flexibles, estado protegido, factories, composición y scopes de efectos."
+category:
+  name: "Vue 3"
+  image:
+    url: "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
+subCategory:
+  id: "composables"
+  name: "Composables"
+  image:
+    url: "/images/quizzes/categories/composables.webp"
+topics:
+  - id: "to-value"
+    label: "toValue"
+  - id: "readonly"
+    label: "readonly"
+  - id: "effect-scope"
+    label: "effectScope"
+questions:
+  - text: "¿Qué problema resuelve toValue dentro de un composable?"
+    explanation: "toValue permite leer de forma uniforme un valor directo, un ref o un getter."
+    explanation_code:
+      - code: |-
+          const currentQuery = toValue(query)
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Normaliza distintas formas de entrada para obtener su valor actual."
+      - id: "2"
+        isCorrect: false
+        text: "Convierte cualquier valor en estado global."
+      - id: "3"
+        isCorrect: false
+        text: "Crea automáticamente un watcher profundo."
+      - id: "4"
+        isCorrect: false
+        text: "Impide que un ref vuelva a cambiar."
+  - text: "¿Dónde debería ejecutarse toValue para rastrear una entrada reactiva?"
+    explanation: "Al ejecutarse dentro de computed o watch, Vue puede registrar el ref o getter leído como dependencia."
+    explanation_code:
+      - code: |-
+          const normalized = computed(() => toValue(query).trim())
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Únicamente dentro de onMounted."
+      - id: "1"
+        isCorrect: true
+        text: "Dentro de un contexto reactivo como `computed` o `watch`."
+      - id: "3"
+        isCorrect: false
+        text: "Fuera del composable, antes de llamar a la función."
+      - id: "4"
+        isCorrect: false
+        text: "Solo dentro del template del componente."
+  - text: "¿Cuándo puede ser mejor exigir un Ref en lugar de aceptar MaybeRefOrGetter?"
+    explanation: "Un Ref comunica con claridad que el consumidor debe entregar una fuente mutable y reactiva."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Cuando el composable no utiliza la entrada."
+      - id: "3"
+        isCorrect: false
+        text: "Siempre, porque los getters no pueden ser reactivos."
+      - id: "1"
+        isCorrect: true
+        text: "Cuando la reactividad de la entrada forma parte esencial del contrato."
+      - id: "4"
+        isCorrect: false
+        text: "Solo cuando no se usa TypeScript."
+  - text: "¿Qué aporta readonly al estado retornado por un composable?"
+    explanation: "readonly permite observar el estado, pero reserva sus cambios para las acciones definidas por el composable."
+    explanation_code:
+      - code: |-
+          return { selectedId: readonly(selectedId), select }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Elimina la reactividad del valor retornado."
+      - id: "3"
+        isCorrect: false
+        text: "Convierte el estado en una constante de JavaScript."
+      - id: "4"
+        isCorrect: false
+        text: "Hace que el estado se comparta entre todos los componentes."
+      - id: "1"
+        isCorrect: true
+        text: "Evita mutaciones externas y conserva las transiciones dentro de la API."
+  - text: "¿Cuándo resulta útil una factory de composables?"
+    explanation: "Una factory configura variaciones reales que comparten la misma estructura y contrato."
+    explanation_code:
+      - code: |-
+          const useUsers = createUseResource(userApi.list)
+          const useCourses = createUseResource(courseApi.list)
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Cuando varias variantes comparten una API y difieren en su configuración."
+      - id: "2"
+        isCorrect: false
+        text: "Cuando existe un solo caso que nunca cambiará."
+      - id: "3"
+        isCorrect: false
+        text: "Cuando se quiere reemplazar todos los componentes por funciones."
+      - id: "4"
+        isCorrect: false
+        text: "Cuando no se necesita estado ni comportamiento reactivo."
+  - text: "¿Qué ocurre con el estado cuando se llama varias veces al composable creado por una factory?"
+    explanation: "La factory comparte configuración, pero cada llamada al composable crea su propia instancia de estado."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Todas las llamadas comparten estado automáticamente."
+      - id: "1"
+        isCorrect: true
+        text: "Cada llamada crea estado independiente salvo que la factory lo declare fuera."
+      - id: "3"
+        isCorrect: false
+        text: "Vue conserva únicamente la primera instancia."
+      - id: "4"
+        isCorrect: false
+        text: "El estado deja de ser reactivo después de la segunda llamada."
+  - text: "¿Para qué sirve agrupar servicios en un contexto de dependencias tipado?"
+    explanation: "El contexto evita firmas extensas sin ocultar qué servicios necesita la familia de composables."
+    explanation_code:
+      - code: |-
+          type AppServices = { api: UserApi; logger: Logger }
+        language: "typescript"
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Convierte todos los servicios en variables globales."
+      - id: "3"
+        isCorrect: false
+        text: "Evita tener que definir contratos para los servicios."
+      - id: "1"
+        isCorrect: true
+        text: "Mantiene dependencias explícitas y permite reemplazarlas como conjunto."
+      - id: "4"
+        isCorrect: false
+        text: "Obliga a usar provide e inject en cada componente."
+  - text: "¿Qué debería exponer un composable que coordina otras capacidades?"
+    explanation: "Un orquestador debería presentar el contrato del caso de uso y mantener ocultos los detalles que no necesita su consumidor."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Todos los valores internos de cada composable utilizado."
+      - id: "3"
+        isCorrect: false
+        text: "Solo los servicios de infraestructura originales."
+      - id: "4"
+        isCorrect: false
+        text: "Una copia de cada implementación que compone."
+      - id: "1"
+        isCorrect: true
+        text: "Una API enfocada en el caso de uso que está coordinando."
+  - text: "¿Cuál es el propósito de onScopeDispose en un composable?"
+    explanation: "onScopeDispose ejecuta la limpieza cuando termina el scope reactivo que posee el efecto."
+    explanation_code:
+      - code: |-
+          onScopeDispose(() => clearInterval(intervalId))
+        language: "typescript"
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: "Vincular la limpieza de recursos al scope reactivo activo."
+      - id: "2"
+        isCorrect: false
+        text: "Desmontar manualmente todos los componentes de la aplicación."
+      - id: "3"
+        isCorrect: false
+        text: "Reiniciar refs cuando cambia cualquier dependencia."
+      - id: "4"
+        isCorrect: false
+        text: "Mantener intervalos activos después de abandonar una vista."
+  - text: "¿Cuál es una regla práctica al adoptar patrones avanzados?"
+    explanation: "Los patrones deberían responder a variaciones o límites concretos, no añadir flexibilidad especulativa."
+    answers:
+      - id: "2"
+        isCorrect: false
+        text: "Aplicarlos todos desde el primer composable del proyecto."
+      - id: "1"
+        isCorrect: true
+        text: "Usarlos cuando hacen más explícito el contrato o resuelven una necesidad real."
+      - id: "3"
+        isCorrect: false
+        text: "Preferir siempre la API que acepte más tipos de entrada."
+      - id: "4"
+        isCorrect: false
+        text: "Ocultar el propietario de los efectos para simplificar el código."
