@@ -1,0 +1,19 @@
+{
+  "name": "Vue Training",
+  "short_name": "Vue Training",
+  "description": "Learn Vue with lessons, quizzes and coding challenges.",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

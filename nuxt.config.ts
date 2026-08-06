@@ -33,6 +33,16 @@ export default defineNuxtConfig({
     },
     head: {
       title: "Vue Training",
+      link: [
+        { rel: "manifest", href: "/manifest.webmanifest" },
+        { rel: "icon", href: "/pwa-icon.svg", type: "image/svg+xml" },
+      ],
+      meta: [
+        { name: "theme-color", content: "#0f172a" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+        { name: "apple-mobile-web-app-title", content: "Vue Training" },
+      ],
     },
   },
   routeRules: {

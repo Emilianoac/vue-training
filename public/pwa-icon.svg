@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Vue Training">
+  <rect width="512" height="512" rx="112" fill="#0f172a" />
+  <path d="M96 120h82l78 135 78-135h82L256 400 96 120Z" fill="#42b883" />
+  <path d="M178 120h60l18 31 18-31h60l-78 136-78-136Z" fill="#e2e8f0" />
+</svg>
