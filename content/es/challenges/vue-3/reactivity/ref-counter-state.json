@@ -10,6 +10,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "reactivity",
+    "name": "Reactividad"
+  },
   "short_description": "Practica declarar estado primitivo reactivo con ref y actualizarlo con .value.",
   "description": [
     "En este desafío, completarás un pequeño componente de contador usando la función ref de Vue.",

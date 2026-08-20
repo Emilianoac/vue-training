@@ -10,6 +10,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "reactivity",
+    "name": "Reactivity"
+  },
   "short_description": "Practice declaring reactive primitive state with ref and updating it with .value.",
   "description": [
     "In this challenge, you will complete a small counter component using Vue's ref function.",

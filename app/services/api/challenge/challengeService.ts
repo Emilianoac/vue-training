@@ -18,6 +18,7 @@ function createChallengeService(): ChallengeService {
         "level",
         "topics",
         "category",
+        "subCategory",
         "short_description",
         "cover",
       );

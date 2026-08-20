@@ -13,6 +13,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "reactivity",
+    "name": "Reactividad"
+  },
   "short_description": "Practica el uso de watch para reaccionar a cambios de un input y registrar eventos.",
   "description": [
     "En este desafío, completarás un componente inspirado en el ejemplo de watchers de la documentación de Vue.",

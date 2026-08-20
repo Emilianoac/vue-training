@@ -13,6 +13,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "composables",
+    "name": "Composables"
+  },
   "short_description": "Practica cómo encapsular estado reactivo y acciones dentro de tu primer composable.",
   "description": [
     "La interfaz del panel funciona actualmente con estado y acciones locales en App.vue.",

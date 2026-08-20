@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Challenge } from "@/schemas/challenge.schema";
+import type { ChallengeListItem } from "@/schemas/challenge.schema";
 
 import ActivityLevelBadge from "@/components/activity/ActivityLevelBadge.vue";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 defineProps<{
-  challenge: Challenge;
+  challenge: ChallengeListItem;
 }>();
 </script>
 
@@ -34,6 +34,10 @@ defineProps<{
             />
           </div>
           <div class="p-4">
+            <!-- Category -->
+            <p class="text-sm opacity-70 mb-2">
+              {{ challenge.category.name }} - {{ challenge.subCategory.name }}
+            </p>
             <!-- Title -->
             <h3 class="text-sm font-bold line-clamp-1">{{ challenge.title }}</h3>
             <!-- Description -->

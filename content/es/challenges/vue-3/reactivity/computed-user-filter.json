@@ -13,6 +13,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "reactivity",
+    "name": "Reactividad"
+  },
   "short_description": "Practica derivar estado para la interfaz con computed en lugar de actualizar manualmente un segundo valor.",
   "description": [
     "En este desafío, completarás un pequeño componente para filtrar usuarios usando la función computed de Vue.",

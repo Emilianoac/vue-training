@@ -14,6 +14,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "composables",
+    "name": "Composables"
+  },
   "short_description": "Practice synchronizing multiple consumers through a composable with module state.",
   "description": [
     "LessonCatalog and ReadingList already consume useReadingList, but currently receive independent lists.",

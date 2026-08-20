@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import ChallengeCard from "@/components/challenge/ChallengeCard.vue";
-import type { Challenge } from "@/schemas/challenge.schema";
+import type { ChallengeListItem } from "@/schemas/challenge.schema";
 
 defineProps<{
-  challenges: Challenge[];
+  challenges: ChallengeListItem[];
 }>();
 </script>
 

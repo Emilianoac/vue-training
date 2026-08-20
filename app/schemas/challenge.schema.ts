@@ -9,6 +9,11 @@ export const categorySchema = z.object({
   image: imageSchema,
 });
 
+export const challengeSubCategorySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
 export const hintSchema = z.object({
   title: z.string(),
   body: z.string(),
@@ -29,6 +34,7 @@ export const challengeSchema = z.object({
   topics: z.array(challengeTopicSchema).min(1),
 
   category: categorySchema,
+  subCategory: challengeSubCategorySchema,
 
   short_description: z.string(),
 
@@ -46,6 +52,13 @@ export const challengeSchema = z.object({
 export type Challenge = z.infer<typeof challengeSchema>;
 export type ChallengeListItem = Pick<
   Challenge,
-  "title" | "slug" | "level" | "topics" | "category" | "short_description" | "cover"
+  | "title"
+  | "slug"
+  | "level"
+  | "topics"
+  | "category"
+  | "subCategory"
+  | "short_description"
+  | "cover"
 >;
 export type Level = z.infer<typeof levelSchema>;

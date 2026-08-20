@@ -14,6 +14,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "ecosystem",
+    "name": "Ecosystem"
+  },
   "short_description": "Build a Pinia store and share its reactive data between a catalog and the cart summary.",
   "description": [
     "In this challenge, you will complete the store connecting a course catalog to a cart summary.",

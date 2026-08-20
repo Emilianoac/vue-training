@@ -10,6 +10,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "components",
+    "name": "Componentes"
+  },
   "short_description": "Practica cómo proporcionar un ref reactivo desde un ancestro e inyectarlo en un descendiente.",
   "description": [
     "App.vue controla el tema y ThemeStatus.vue debe consumirlo sin recibir props.",

@@ -13,6 +13,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "reactivity",
+    "name": "Reactivity"
+  },
   "short_description": "Practice starting external effects when a component mounts and cleaning them up when it unmounts.",
   "description": [
     "In this challenge, you will complete a session monitor that activates when the component appears on screen.",

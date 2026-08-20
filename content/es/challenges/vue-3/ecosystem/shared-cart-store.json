@@ -14,6 +14,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "ecosystem",
+    "name": "Ecosistema"
+  },
   "short_description": "Construye un store de Pinia y comparte sus datos reactivos entre un catálogo y el resumen del carrito.",
   "description": [
     "En este desafío completarás el store que conecta un catálogo de cursos con el resumen de un carrito.",

@@ -14,6 +14,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "ecosystem",
+    "name": "Ecosystem"
+  },
   "short_description": "Render the correct profile and update it when Vue Router's dynamic parameter changes.",
   "description": [
     "The environment already configures a /users/:id route and App.vue provides navigation between profiles.",

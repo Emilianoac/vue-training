@@ -14,6 +14,10 @@
       "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png"
     }
   },
+  "subCategory": {
+    "id": "components",
+    "name": "Componentes"
+  },
   "short_description": "Practica cómo un componente recibe un valor por props y solicita cambios usando emits.",
   "description": [
     "En este desafío, completarás un selector de cantidad que funciona como componente controlado.",
