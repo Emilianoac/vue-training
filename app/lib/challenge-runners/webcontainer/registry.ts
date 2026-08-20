@@ -2,6 +2,7 @@ import { createAsyncResourceLoaderChallenge } from "./challenges/async-resource-
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
 import { createDynamicSettingsTabsChallenge } from "./challenges/dynamic-settings-tabs/config";
 import { createDynamicUserProfileChallenge } from "./challenges/dynamic-user-profile/config";
+import { createEffectDependencyTrackingChallenge } from "./challenges/effect-dependency-tracking/config";
 import { createFlexibleTaskFilterChallenge } from "./challenges/flexible-task-filter/config";
 import { createKeyboardShortcutListenerChallenge } from "./challenges/keyboard-shortcut-listener/config";
 import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-session-monitor/config";
@@ -21,6 +22,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "computed-user-filter": createComputedUserFilterChallenge,
   "dynamic-settings-tabs": createDynamicSettingsTabsChallenge,
   "dynamic-user-profile": createDynamicUserProfileChallenge,
+  "effect-dependency-tracking": createEffectDependencyTrackingChallenge,
   "flexible-task-filter": createFlexibleTaskFilterChallenge,
   "keyboard-shortcut-listener": createKeyboardShortcutListenerChallenge,
   "lifecycle-session-monitor": createLifecycleSessionMonitorChallenge,

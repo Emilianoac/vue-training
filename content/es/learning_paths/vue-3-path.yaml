@@ -345,6 +345,29 @@ steps:
             title: Desafío 1
             subtitle: Construye un carrito cuyo estado se comparta entre varios componentes.
 
+  - name: Vue en profundidad
+    sub_steps:
+      - name: Efectos y seguimiento de dependencias
+        id: effect-dependency-tracking
+        items:
+          - id: effect-dependency-tracking-lesson
+            type: lesson
+            level: basic
+            title: Efectos y seguimiento de dependencias
+            subtitle: Reconstruye el vínculo entre una lectura reactiva, un efecto y una actualización posterior.
+
+          - id: effect-dependency-tracking-quiz
+            type: quiz
+            level: basic
+            title: Cuestionario de efectos
+            subtitle: Evalúa cómo el seguimiento de dependencias conecta lecturas con actualizaciones.
+
+          - id: effect-dependency-tracking
+            type: challenge
+            level: basic
+            title: Desafío 1
+            subtitle: Implementa un grafo básico de dependencias con effect, track, trigger y Proxy.
+
   - name: Calidad
     sub_steps:
       - name: Testing

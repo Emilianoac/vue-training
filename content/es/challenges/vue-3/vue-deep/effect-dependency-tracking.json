@@ -1,0 +1,35 @@
+{
+  "documentId": "effect-dependency-tracking",
+  "title": "Construir un efecto reactivo",
+  "slug": "effect-dependency-tracking",
+  "level": "basic",
+  "topics": [
+    { "id": "reactive", "label": "reactive" },
+    { "id": "reactive-effect", "label": "reactive effect" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue en profundidad"
+  },
+  "short_description": "Construye un modelo reducido que conecta propiedades reactivas con sus efectos dependientes.",
+  "description": [
+    "El sistema de reactividad de Vue relaciona cada objeto y propiedad con los efectos que la leen.",
+    "Implementa versiones pedagógicas de effect, track, trigger y reactive para formar ese grafo y usarlo automáticamente mediante un Proxy."
+  ],
+  "instructions": [
+    "Haz que effect(fn) ejecute fn mientras su runner es el efecto activo y que lo limpie después.",
+    "Haz que track(target, key) relacione el efecto activo con la propiedad correcta mediante WeakMap, Map y Set.",
+    "Haz que trigger(target, key) vuelva a ejecutar solo los efectos registrados para esa propiedad.",
+    "Haz que reactive(target) use los traps get y set de un Proxy para llamar a track y trigger.",
+    "Conserva resetReactivity para que cada test comience con un grafo vacío."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/effect-dependency-tracking.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "El efecto activo", "body": "Crea un `runner`, asígnalo a `activeEffect` y ejecuta `fn` dentro de `try`. Usa `finally` para limpiar el efecto activo." },
+    { "title": "Tres niveles del grafo", "body": "Usa `targetMap.get(target)` para obtener el `Map` de propiedades y luego `dependenciesMap.get(key)` para obtener el `Set` de efectos. Crea cada nivel cuando todavía no exista." },
+    { "title": "Notificación selectiva", "body": "En `trigger`, busca el `Set` usando el mismo `target` y `key`. Recorre una copia con `new Set(effects)` para mantener estable la iteración." },
+    { "title": "Automatizar con Proxy", "body": "El trap `get` debe llamar a `track(object, key)` antes de retornar la propiedad. El trap `set` debe asignar el valor, llamar a `trigger(object, key)` y retornar `true`." }
+  ]
+}

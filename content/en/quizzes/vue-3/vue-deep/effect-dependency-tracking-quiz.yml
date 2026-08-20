@@ -1,0 +1,255 @@
+documentId: effect-dependency-tracking-quiz
+title: Effects and Dependency Tracking
+level: basic
+slug: effect-dependency-tracking-quiz
+description: Test how Vue connects reactive reads with the work that needs to update.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: reactivity
+    label: reactivity
+  - id: reactive-effect
+    label: reactive effect
+questions:
+  - text: What is a reactive effect?
+    explanation: A reactive effect is a function whose dependencies are collected while it runs. When one of those dependencies changes, the effect can run again.
+    explanation_code:
+      - code: |-
+          effect(() => {
+            total = state.price * state.quantity;
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: A function that records the reactive values it reads and can run again when they change.
+      - id: "2"
+        isCorrect: false
+        text: An object that turns every function into an asynchronous one.
+      - id: "3"
+        isCorrect: false
+        text: A property reserved exclusively for components.
+      - id: "4"
+        isCorrect: false
+        text: An immutable copy of all application state.
+
+  - text: When are an effect's dependencies collected?
+    explanation: Dependencies are collected while the effect runs. Its reads happen while the runner is marked as the active effect.
+    explanation_code:
+      - code: |-
+          activeEffect = runner;
+          fn(); // Reads made here can be tracked.
+          activeEffect = undefined;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: When the original object is created, before it is wrapped in a Proxy.
+      - id: "2"
+        isCorrect: true
+        text: While the effect function is running.
+      - id: "3"
+        isCorrect: false
+        text: Only when the component is unmounted.
+      - id: "4"
+        isCorrect: false
+        text: After trigger finishes running every effect.
+
+  - text: What does track(target, key) record?
+    explanation: track connects the active effect to one specific property, identified by its target object and key.
+    explanation_code:
+      - code: |-
+          function track(target, key) {
+            if (!activeEffect) return;
+            getEffects(target, key).add(activeEffect);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The new value that will be assigned to the property.
+      - id: "2"
+        isCorrect: false
+        text: The order in which every component should render.
+      - id: "3"
+        isCorrect: true
+        text: That the active effect depends on the property identified by target and key.
+      - id: "4"
+        isCorrect: false
+        text: That the property must be converted into a ref.
+
+  - text: What does trigger(target, key) do after a property changes?
+    explanation: trigger finds the effects subscribed to that property in the graph and notifies them so they can run again.
+    explanation_code:
+      - code: |-
+          function trigger(target, key) {
+            const effects = getEffects(target, key);
+            new Set(effects).forEach((effect) => effect());
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: It registers the property as a dependency of the active effect.
+      - id: "2"
+        isCorrect: false
+        text: It replaces the target object with a new Proxy.
+      - id: "3"
+        isCorrect: false
+        text: It removes every dependency in the application.
+      - id: "4"
+        isCorrect: true
+        text: It finds and re-runs the effects associated with that property.
+
+  - text: Which Proxy traps connect reads and writes to track and trigger?
+    explanation: The get trap can track a read, while the set trap can notify a write through trigger.
+    explanation_code:
+      - code: |-
+          new Proxy(target, {
+            get(object, key) {
+              track(object, key);
+              return object[key];
+            },
+            set(object, key, value) {
+              object[key] = value;
+              trigger(object, key);
+              return true;
+            },
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: get for reads and set for writes.
+      - id: "2"
+        isCorrect: false
+        text: apply for reads and construct for writes.
+      - id: "3"
+        isCorrect: false
+        text: ownKeys for reads and deleteProperty for writes.
+      - id: "4"
+        isCorrect: false
+        text: getPrototypeOf for reads and preventExtensions for writes.
+
+  - text: Why does the model need an activeEffect?
+    explanation: When a getter calls track, activeEffect identifies which work is reading the property and must subscribe to it.
+    explanation_code:
+      - code: |-
+          let activeEffect;
+
+          function track(target, key) {
+            if (!activeEffect) return;
+            getEffects(target, key).add(activeEffect);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: To store the previous value of every reactive property.
+      - id: "2"
+        isCorrect: true
+        text: To identify which function should be associated with a reactive read.
+      - id: "3"
+        isCorrect: false
+        text: To prevent two objects from having the same key.
+      - id: "4"
+        isCorrect: false
+        text: To turn synchronous executions into promises.
+
+  - text: Why does a reactive read outside an effect create no dependency?
+    explanation: Without an active effect, there is no work to associate with the read, so track returns without registering a subscription.
+    explanation_code:
+      - code: |-
+          function track(target, key) {
+            if (!activeEffect) return;
+            // Register only when there is an active subscriber.
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Because proxies can only be read from templates.
+      - id: "2"
+        isCorrect: false
+        text: Because each property accepts only one dependency.
+      - id: "3"
+        isCorrect: true
+        text: Because there is no active effect to subscribe to that property.
+      - id: "4"
+        isCorrect: false
+        text: Because trigger creates all dependencies after a write.
+
+  - text: Which three elements does the dependency graph connect?
+    explanation: The graph distinguishes the target object, the key read on that object, and the set of effects that depend on that property.
+    explanation_code:
+      - code: |-
+          // target → key → effects
+          WeakMap<object, Map<PropertyKey, Set<Effect>>>
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Component, template, and DOM node.
+      - id: "2"
+        isCorrect: false
+        text: Ref, computed, and watcher.
+      - id: "3"
+        isCorrect: false
+        text: Event, callback, and promise.
+      - id: "4"
+        isCorrect: true
+        text: Target object, property key, and dependent effects.
+
+  - text: Why are effects stored in a Set for each property?
+    explanation: An effect can read the same property multiple times during one run. A Set keeps only one subscription for that effect.
+    explanation_code:
+      - code: |-
+          const effects = new Set();
+          effects.add(renderEffect);
+          effects.add(renderEffect);
+
+          console.log(effects.size); // 1
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: To prevent the same effect from being registered twice for one property.
+      - id: "2"
+        isCorrect: false
+        text: To automatically run effects in alphabetical order.
+      - id: "3"
+        isCorrect: false
+        text: To make every property share the same effects.
+      - id: "4"
+        isCorrect: false
+        text: To store the property's current value alongside the effect.
+
+  - text: If one effect depends on count and another on name, which one should a change to count notify?
+    explanation: The graph can select only the subscribers of the changed property. The name effect does not depend on count and should not run.
+    explanation_code:
+      - code: |-
+          effect(() => renderCount(state.count));
+          effect(() => renderName(state.name));
+
+          state.count += 1; // Only notifies the first effect.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Both effects because they belong to the same object.
+      - id: "2"
+        isCorrect: true
+        text: Only the effect that depends on count.
+      - id: "3"
+        isCorrect: false
+        text: Only the effect that depends on name.
+      - id: "4"
+        isCorrect: false
+        text: Neither until both properties change.

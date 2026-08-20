@@ -1,0 +1,35 @@
+{
+  "documentId": "effect-dependency-tracking",
+  "title": "Build a Reactive Effect",
+  "slug": "effect-dependency-tracking",
+  "level": "basic",
+  "topics": [
+    { "id": "reactive", "label": "reactive" },
+    { "id": "reactive-effect", "label": "reactive effect" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue in Depth"
+  },
+  "short_description": "Build a reduced model that connects reactive properties with their dependent effects.",
+  "description": [
+    "Vue's reactivity system connects each object and property with the effects that read it.",
+    "Implement pedagogical versions of effect, track, trigger, and reactive to build that graph and use it automatically through a Proxy."
+  ],
+  "instructions": [
+    "Make effect(fn) run fn while its runner is the active effect, and clear it afterwards.",
+    "Make track(target, key) connect the active effect to the correct property through a WeakMap, Map, and Set.",
+    "Make trigger(target, key) re-run only the effects registered for that property.",
+    "Make reactive(target) use a Proxy's get and set traps to call track and trigger.",
+    "Keep resetReactivity working so each test starts with an empty graph."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/effect-dependency-tracking.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "The active effect", "body": "Create a `runner`, assign it to `activeEffect`, and execute `fn` inside `try`. Use `finally` to clear the active effect." },
+    { "title": "Three graph levels", "body": "Use `targetMap.get(target)` to obtain the property `Map`, then `dependenciesMap.get(key)` to obtain the effect `Set`. Create each level when it does not exist yet." },
+    { "title": "Selective notification", "body": "In `trigger`, find the `Set` with the same `target` and `key`. Iterate over a copy with `new Set(effects)` to keep the iteration stable." },
+    { "title": "Automate with Proxy", "body": "The `get` trap should call `track(object, key)` before returning the property. The `set` trap should assign the value, call `trigger(object, key)`, and return `true`." }
+  ]
+}

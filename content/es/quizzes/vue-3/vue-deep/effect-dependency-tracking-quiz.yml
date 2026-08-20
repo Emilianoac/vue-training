@@ -1,0 +1,255 @@
+documentId: effect-dependency-tracking-quiz
+title: Efectos y seguimiento de dependencias
+level: basic
+slug: effect-dependency-tracking-quiz
+description: Evalúa cómo Vue conecta lecturas reactivas con el trabajo que debe actualizarse.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue en profundidad
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: reactivity
+    label: reactivity
+  - id: reactive-effect
+    label: reactive effect
+questions:
+  - text: ¿Qué es un efecto reactivo?
+    explanation: Un efecto reactivo es una función cuyas dependencias se recopilan mientras se ejecuta. Cuando una de esas dependencias cambia, el efecto puede ejecutarse otra vez.
+    explanation_code:
+      - code: |-
+          effect(() => {
+            total = state.price * state.quantity;
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Una función que registra los valores reactivos que lee y puede volver a ejecutarse cuando cambian.
+      - id: "2"
+        isCorrect: false
+        text: Un objeto que convierte cualquier función en asíncrona.
+      - id: "3"
+        isCorrect: false
+        text: Una propiedad reservada exclusivamente para componentes.
+      - id: "4"
+        isCorrect: false
+        text: Una copia inmutable de todo el estado de la aplicación.
+
+  - text: ¿Cuándo se recopilan las dependencias de un efecto?
+    explanation: Las dependencias se recopilan durante la ejecución del efecto. Sus lecturas ocurren mientras el runner está marcado como efecto activo.
+    explanation_code:
+      - code: |-
+          activeEffect = runner;
+          fn(); // Las lecturas realizadas aquí pueden registrarse.
+          activeEffect = undefined;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Cuando se crea el objeto original, antes de envolverlo con un Proxy.
+      - id: "2"
+        isCorrect: true
+        text: Mientras la función del efecto se está ejecutando.
+      - id: "3"
+        isCorrect: false
+        text: Únicamente cuando el componente se desmonta.
+      - id: "4"
+        isCorrect: false
+        text: Después de que trigger termina de ejecutar todos los efectos.
+
+  - text: ¿Qué registra track(target, key)?
+    explanation: track relaciona el efecto activo con una propiedad concreta, identificada por su objeto objetivo y su clave.
+    explanation_code:
+      - code: |-
+          function track(target, key) {
+            if (!activeEffect) return;
+            getEffects(target, key).add(activeEffect);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: El nuevo valor que se asignará a la propiedad.
+      - id: "2"
+        isCorrect: false
+        text: El orden en que deben renderizarse todos los componentes.
+      - id: "3"
+        isCorrect: true
+        text: Que el efecto activo depende de la propiedad indicada por target y key.
+      - id: "4"
+        isCorrect: false
+        text: Que la propiedad debe convertirse en un ref.
+
+  - text: ¿Qué hace trigger(target, key) después de que cambia una propiedad?
+    explanation: trigger localiza en el grafo los efectos suscritos a esa propiedad y los notifica para que vuelvan a ejecutarse.
+    explanation_code:
+      - code: |-
+          function trigger(target, key) {
+            const effects = getEffects(target, key);
+            new Set(effects).forEach((effect) => effect());
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Registra la propiedad como dependencia del efecto activo.
+      - id: "2"
+        isCorrect: false
+        text: Reemplaza el objeto objetivo por un nuevo Proxy.
+      - id: "3"
+        isCorrect: false
+        text: Elimina todas las dependencias de la aplicación.
+      - id: "4"
+        isCorrect: true
+        text: Localiza y vuelve a ejecutar los efectos asociados con esa propiedad.
+
+  - text: ¿Qué traps de Proxy conectan las lecturas y escrituras con track y trigger?
+    explanation: El trap get puede registrar una lectura mediante track y el trap set puede notificar una escritura mediante trigger.
+    explanation_code:
+      - code: |-
+          new Proxy(target, {
+            get(object, key) {
+              track(object, key);
+              return object[key];
+            },
+            set(object, key, value) {
+              object[key] = value;
+              trigger(object, key);
+              return true;
+            },
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: get para las lecturas y set para las escrituras.
+      - id: "2"
+        isCorrect: false
+        text: apply para las lecturas y construct para las escrituras.
+      - id: "3"
+        isCorrect: false
+        text: ownKeys para las lecturas y deleteProperty para las escrituras.
+      - id: "4"
+        isCorrect: false
+        text: getPrototypeOf para las lecturas y preventExtensions para las escrituras.
+
+  - text: ¿Por qué necesita el modelo un activeEffect?
+    explanation: Cuando un getter llama a track, activeEffect identifica qué trabajo está leyendo la propiedad y debe quedar suscrito a ella.
+    explanation_code:
+      - code: |-
+          let activeEffect;
+
+          function track(target, key) {
+            if (!activeEffect) return;
+            getEffects(target, key).add(activeEffect);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para almacenar el valor anterior de cada propiedad reactiva.
+      - id: "2"
+        isCorrect: true
+        text: Para identificar qué función debe asociarse con una lectura reactiva.
+      - id: "3"
+        isCorrect: false
+        text: Para impedir que dos objetos tengan la misma clave.
+      - id: "4"
+        isCorrect: false
+        text: Para convertir las ejecuciones síncronas en promesas.
+
+  - text: ¿Por qué una lectura reactiva fuera de un efecto no crea una dependencia?
+    explanation: Sin un efecto activo no existe ningún trabajo que asociar con la lectura, por lo que track retorna sin registrar una suscripción.
+    explanation_code:
+      - code: |-
+          function track(target, key) {
+            if (!activeEffect) return;
+            // Solo se registra cuando existe un suscriptor activo.
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque los proxies solo pueden leerse desde templates.
+      - id: "2"
+        isCorrect: false
+        text: Porque cada propiedad solo admite una dependencia.
+      - id: "3"
+        isCorrect: true
+        text: Porque no hay un efecto activo al que suscribir esa propiedad.
+      - id: "4"
+        isCorrect: false
+        text: Porque trigger crea todas las dependencias después de la escritura.
+
+  - text: ¿Qué tres elementos conecta el grafo de dependencias?
+    explanation: El grafo distingue el objeto objetivo, la clave leída dentro de ese objeto y el conjunto de efectos que dependen de esa propiedad.
+    explanation_code:
+      - code: |-
+          // target → key → effects
+          WeakMap<object, Map<PropertyKey, Set<Effect>>>
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Componente, template y nodo DOM.
+      - id: "2"
+        isCorrect: false
+        text: Ref, computed y watcher.
+      - id: "3"
+        isCorrect: false
+        text: Evento, callback y promesa.
+      - id: "4"
+        isCorrect: true
+        text: Objeto objetivo, clave de propiedad y efectos dependientes.
+
+  - text: ¿Por qué se guardan los efectos en un Set para cada propiedad?
+    explanation: Un efecto puede leer la misma propiedad varias veces durante una ejecución. Un Set conserva una sola suscripción para ese efecto.
+    explanation_code:
+      - code: |-
+          const effects = new Set();
+          effects.add(renderEffect);
+          effects.add(renderEffect);
+
+          console.log(effects.size); // 1
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Para evitar registrar dos veces el mismo efecto para una propiedad.
+      - id: "2"
+        isCorrect: false
+        text: Para ejecutar automáticamente los efectos en orden alfabético.
+      - id: "3"
+        isCorrect: false
+        text: Para que todas las propiedades compartan los mismos efectos.
+      - id: "4"
+        isCorrect: false
+        text: Para almacenar el valor actual de la propiedad junto al efecto.
+
+  - text: Si un efecto depende de count y otro de name, ¿a cuál debe notificar un cambio en count?
+    explanation: El grafo permite seleccionar únicamente los suscriptores de la propiedad modificada. El efecto de name no depende de count y no debe ejecutarse.
+    explanation_code:
+      - code: |-
+          effect(() => renderCount(state.count));
+          effect(() => renderName(state.name));
+
+          state.count += 1; // Solo notifica al primer efecto.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: A ambos efectos porque pertenecen al mismo objeto.
+      - id: "2"
+        isCorrect: true
+        text: Solo al efecto que depende de count.
+      - id: "3"
+        isCorrect: false
+        text: Solo al efecto que depende de name.
+      - id: "4"
+        isCorrect: false
+        text: A ninguno hasta que cambien ambas propiedades.

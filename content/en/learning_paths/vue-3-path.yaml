@@ -345,6 +345,29 @@ steps:
             title: Challenge 1
             subtitle: Build a shopping cart whose state is shared across multiple components.
 
+  - name: Vue in Depth
+    sub_steps:
+      - name: Effects and Dependency Tracking
+        id: effect-dependency-tracking
+        items:
+          - id: effect-dependency-tracking-lesson
+            type: lesson
+            level: basic
+            title: Effects and Dependency Tracking
+            subtitle: Rebuild the link between a reactive read, an effect, and a later update.
+
+          - id: effect-dependency-tracking-quiz
+            type: quiz
+            level: basic
+            title: Effects Quiz
+            subtitle: Test how dependency tracking connects reads to updates.
+
+          - id: effect-dependency-tracking
+            type: challenge
+            level: basic
+            title: Challenge 1
+            subtitle: Implement a basic dependency graph with effect, track, trigger, and Proxy.
+
   - name: Quality
     sub_steps:
       - name: Testing

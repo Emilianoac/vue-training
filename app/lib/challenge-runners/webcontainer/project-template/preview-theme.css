@@ -11,6 +11,8 @@
   --accent-foreground: oklch(0 0 0);
   --border: oklch(0.9477 0.0085 225.084);
   --ring: oklch(0.6126 0.1866 252.6519);
+  --preview-card-radius: 0.5rem;
+  --preview-control-radius: 0.375rem;
 }
 
 .dark {
