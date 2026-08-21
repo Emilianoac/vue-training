@@ -1,6 +1,6 @@
 documentId: "advanced-patterns-quiz"
 title: "Advanced Composable Patterns"
-level: "basic"
+level: advanced
 slug: "advanced-patterns-quiz"
 description: "Assess flexible reactive inputs, protected state, factories, composition, and effect scopes."
 category:

@@ -1,6 +1,6 @@
 documentId: "shared-state-quiz"
 title: "Shared State with Composables"
-level: "basic"
+level: advanced
 slug: "shared-state-quiz"
 description: "Assessment on per-instance state, module state, controlled APIs, SSR, and stores."
 category:

@@ -1,6 +1,6 @@
 documentId: "provide-inject-quiz"
 title: "Provide, Inject, and Shared Context"
-level: "basic"
+level: intermediate
 slug: "provide-inject-quiz"
 description: "Test how to share reactive context between ancestors and descendants and when to avoid props drilling."
 category:

@@ -1,6 +1,6 @@
 documentId: watchers-quiz
 title: Watchers en Vue 3
-level: basic
+level: intermediate
 slug: watchers-quiz
 description: Evaluación sobre los fundamentos de watch, fuentes reactivas, callbacks y buenas prácticas.
 category:

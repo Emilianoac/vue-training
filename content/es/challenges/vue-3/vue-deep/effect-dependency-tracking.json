@@ -2,7 +2,7 @@
   "documentId": "effect-dependency-tracking",
   "title": "Construir un efecto reactivo",
   "slug": "effect-dependency-tracking",
-  "level": "basic",
+  "level": "advanced",
   "topics": [
     { "id": "reactive", "label": "reactive" },
     { "id": "reactive-effect", "label": "reactive effect" }

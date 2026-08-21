@@ -1,6 +1,6 @@
 documentId: "composable-effects-quiz"
 title: "Efectos y ciclo de vida en composables"
-level: "basic"
+level: intermediate
 slug: "composable-effects-quiz"
 description: "Evaluación sobre watchers, ciclo de vida, acceso al navegador y limpieza de efectos dentro de composables."
 category:

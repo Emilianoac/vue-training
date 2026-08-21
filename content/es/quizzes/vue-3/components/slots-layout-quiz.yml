@@ -1,6 +1,6 @@
 documentId: "slots-layout-quiz"
 title: "Slots y composición de interfaces"
-level: "basic"
+level: intermediate
 slug: "slots-layout-quiz"
 description: "Evalúa tu comprensión de slots por defecto, slots con nombre, scoped slots y componentes contenedores reutilizables."
 category:

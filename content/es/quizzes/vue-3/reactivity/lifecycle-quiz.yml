@@ -1,6 +1,6 @@
 documentId: "lifecycle-quiz"
 title: "Reactividad y Ciclo de Vida en Vue 3"
-level: "basic"
+level: intermediate
 slug: "lifecycle-quiz"
 description: "Evaluación sobre cómo el sistema reactivo de Vue se vincula al ciclo de vida del componente con onMounted y onUnmounted."
 category:

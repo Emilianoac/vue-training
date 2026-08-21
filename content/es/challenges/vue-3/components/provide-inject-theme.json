@@ -2,7 +2,7 @@
   "documentId": "provide-inject-theme",
   "title": "Compartir un tema con Provide e Inject",
   "slug": "provide-inject-theme",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [{ "id": "provide-inject", "label": "provide / inject" }],
   "category": {
     "name": "Vue 3",

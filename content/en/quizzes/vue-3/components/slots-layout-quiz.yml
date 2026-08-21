@@ -1,6 +1,6 @@
 documentId: "slots-layout-quiz"
 title: "Slots and Interface Composition"
-level: "basic"
+level: intermediate
 slug: "slots-layout-quiz"
 description: "Test your understanding of default, named, and scoped slots, along with reusable container components."
 category:

@@ -2,7 +2,7 @@
   "documentId": "props-emits-quantity-stepper",
   "title": "Comunicar cambios con props y emits",
   "slug": "props-emits-quantity-stepper",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "props", "label": "props" },
     { "id": "emits", "label": "emits" },

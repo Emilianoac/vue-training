@@ -56,13 +56,13 @@ steps:
 
           - id: watchers-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Watchers Quiz
             subtitle: Test your understanding of watchers and side effects in Vue 3.
 
           - id: watch-question-log
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Complete a component that reacts to question changes using watch.
 
@@ -77,13 +77,13 @@ steps:
 
           - id: lifecycle-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Lifecycle Quiz
             subtitle: Test when to use onMounted, onUnmounted, and how to clean up external effects.
 
           - id: lifecycle-session-monitor
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Complete a component that starts and cleans up external resources with lifecycle hooks.
 
@@ -106,7 +106,7 @@ steps:
 
           - id: props-emits-quantity-stepper
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Complete a controlled component that communicates changes with update:modelValue.
 
@@ -121,13 +121,13 @@ steps:
 
           - id: slots-layout-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test how content is defined, provided, and organized through slots.
 
           - id: slots-profile-panel
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Build a reusable panel and fill its regions from the parent component.
 
@@ -142,13 +142,13 @@ steps:
 
           - id: provide-inject-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test provide, inject, reactivity, and usage decisions.
 
           - id: provide-inject-theme
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Connect a theme provider to a reactive descendant.
 
@@ -163,13 +163,13 @@ steps:
 
           - id: render-control-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test v-if, v-show, key, dynamic components, and KeepAlive.
 
           - id: dynamic-settings-tabs
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Build dynamic tabs that preserve their component state.
 
@@ -184,7 +184,7 @@ steps:
 
           - id: component-design-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test component responsibilities, contracts, naming, and organization.
 
@@ -207,7 +207,7 @@ steps:
 
           - id: basic-composables-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test composable definitions, conventions, encapsulation, and consumption.
 
@@ -228,13 +228,13 @@ steps:
 
           - id: shared-state-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Quiz 1
             subtitle: Test state scope, lifetime, SSR, and state tool selection.
 
           - id: shared-reading-list
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Synchronize two consumers through a shared-state composable.
 
@@ -249,13 +249,13 @@ steps:
 
           - id: composable-effects-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test internal watchers, lifecycle, SSR, and effect cleanup.
 
           - id: keyboard-shortcut-listener
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Register and clean up a keyboard shortcut from a composable.
 
@@ -270,13 +270,13 @@ steps:
 
           - id: logic-abstraction-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test responsibilities, clear contracts, and the cost of creating abstractions.
 
           - id: async-resource-loader
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Abstract asynchronous loading behind a reusable API with explicit dependencies.
 
@@ -291,13 +291,13 @@ steps:
 
           - id: advanced-patterns-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Quiz 1
             subtitle: Test reactive inputs, readonly, factories, composition, and effect scopes.
 
           - id: flexible-task-filter
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Create a filter that accepts values, refs, or getters without losing reactivity.
 
@@ -314,13 +314,13 @@ steps:
 
           - id: routing-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test dynamic routes, nested views, history, and navigation with Vue Router.
 
           - id: dynamic-user-profile
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Build a profile that reacts to a dynamic route parameter.
 
@@ -335,13 +335,13 @@ steps:
 
           - id: global-state-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Quiz 1
             subtitle: Test stores, state, getters, actions, and reactive consumption with Pinia.
 
           - id: shared-cart-store
             type: challenge
-            level: basic
+            level: intermediate
             title: Challenge 1
             subtitle: Build a shopping cart whose state is shared across multiple components.
 
@@ -358,13 +358,13 @@ steps:
 
           - id: effect-dependency-tracking-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Effects Quiz
             subtitle: Test how dependency tracking connects reads to updates.
 
           - id: effect-dependency-tracking
             type: challenge
-            level: basic
+            level: advanced
             title: Challenge 1
             subtitle: Implement a basic dependency graph with effect, track, trigger, and Proxy.
 

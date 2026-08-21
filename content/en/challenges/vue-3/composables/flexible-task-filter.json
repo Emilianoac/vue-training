@@ -2,7 +2,7 @@
   "documentId": "flexible-task-filter",
   "title": "Build a Filter with Flexible Inputs",
   "slug": "flexible-task-filter",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "maybe-ref-or-getter", "label": "MaybeRefOrGetter" },
     { "id": "to-value", "label": "toValue" },

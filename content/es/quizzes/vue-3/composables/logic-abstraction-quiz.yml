@@ -1,6 +1,6 @@
 documentId: "logic-abstraction-quiz"
 title: "Abstracción de lógica con composables"
-level: "basic"
+level: intermediate
 slug: "logic-abstraction-quiz"
 description: "Evalúa cómo extraer responsabilidades, diseñar APIs claras y evitar abstracciones prematuras con composables."
 category:

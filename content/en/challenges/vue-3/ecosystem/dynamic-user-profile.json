@@ -2,7 +2,7 @@
   "documentId": "dynamic-user-profile",
   "title": "React to a Route Parameter",
   "slug": "dynamic-user-profile",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "vue-router", "label": "Vue Router" },
     { "id": "use-route", "label": "useRoute" },

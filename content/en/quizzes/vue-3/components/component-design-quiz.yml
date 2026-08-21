@@ -1,6 +1,6 @@
 documentId: "component-design-quiz"
 title: "Component Design in Vue 3"
-level: "basic"
+level: intermediate
 slug: "component-design-quiz"
 description: "Assessment on responsibilities, container and presentational components, contracts, and organization in Vue 3."
 category:

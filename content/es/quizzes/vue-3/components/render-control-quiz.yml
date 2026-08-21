@@ -1,6 +1,6 @@
 documentId: "render-control-quiz"
 title: "Control de render en Vue 3"
-level: "basic"
+level: intermediate
 slug: "render-control-quiz"
 description: "Evalúa cómo controlar existencia, visibilidad e identidad con v-if, v-show, key y componentes dinámicos."
 category:

@@ -2,7 +2,7 @@
   "documentId": "async-resource-loader",
   "title": "Abstraer la carga de productos",
   "slug": "async-resource-loader",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "composables", "label": "composables" },
     { "id": "ref", "label": "ref" },

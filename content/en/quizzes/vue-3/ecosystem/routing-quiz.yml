@@ -1,6 +1,6 @@
 documentId: "routing-quiz"
 title: "Routing with Vue Router"
-level: "basic"
+level: intermediate
 slug: "routing-quiz"
 description: "Assess routes, params, query, navigation, nested views, and guards with Vue Router."
 category:

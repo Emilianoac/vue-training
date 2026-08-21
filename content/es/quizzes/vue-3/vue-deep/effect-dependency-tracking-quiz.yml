@@ -1,6 +1,6 @@
 documentId: effect-dependency-tracking-quiz
 title: Efectos y seguimiento de dependencias
-level: basic
+level: advanced
 slug: effect-dependency-tracking-quiz
 description: Evalúa cómo Vue conecta lecturas reactivas con el trabajo que debe actualizarse.
 category:

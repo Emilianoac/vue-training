@@ -1,6 +1,6 @@
 documentId: "basic-composables-quiz"
 title: "Basic Composables in Vue 3"
-level: "basic"
+level: intermediate
 slug: "basic-composables-quiz"
 description: "Assessment on composables, encapsulation, reactive APIs, and their use inside Vue components."
 category:

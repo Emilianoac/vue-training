@@ -2,7 +2,7 @@
   "documentId": "slots-profile-panel",
   "title": "Compose a Panel with Slots",
   "slug": "slots-profile-panel",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "slots", "label": "slots" },
     { "id": "named-slots", "label": "named slots" }

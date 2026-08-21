@@ -1,6 +1,6 @@
 documentId: "advanced-patterns-quiz"
 title: "Patrones avanzados para composables"
-level: "basic"
+level: advanced
 slug: "advanced-patterns-quiz"
 description: "Evalúa entradas reactivas flexibles, estado protegido, factories, composición y scopes de efectos."
 category:

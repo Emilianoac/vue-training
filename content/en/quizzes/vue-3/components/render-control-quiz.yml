@@ -1,6 +1,6 @@
 documentId: "render-control-quiz"
 title: "Render Control in Vue 3"
-level: "basic"
+level: intermediate
 slug: "render-control-quiz"
 description: "Test how to control existence, visibility, and identity with v-if, v-show, key, and dynamic components."
 category:

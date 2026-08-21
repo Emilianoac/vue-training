@@ -1,6 +1,6 @@
 documentId: "provide-inject-quiz"
 title: "Provide, Inject y contexto compartido"
-level: "basic"
+level: intermediate
 slug: "provide-inject-quiz"
 description: "Evalúa cómo compartir contexto reactivo entre ancestros y descendientes y cuándo evitar props drilling."
 category:

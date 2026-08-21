@@ -2,7 +2,7 @@
   "documentId": "watch-question-log",
   "title": "Log Changes with watch",
   "slug": "watch-question-log",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "watch", "label": "watch" },
     { "id": "ref", "label": "ref" }

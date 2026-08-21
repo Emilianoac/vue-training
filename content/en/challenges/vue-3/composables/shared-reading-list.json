@@ -2,7 +2,7 @@
   "documentId": "shared-reading-list",
   "title": "Share a Reading List",
   "slug": "shared-reading-list",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "composables", "label": "composables" },
     { "id": "ref", "label": "ref" },

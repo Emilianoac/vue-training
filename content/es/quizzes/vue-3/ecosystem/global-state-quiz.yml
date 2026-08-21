@@ -1,6 +1,6 @@
 documentId: global-state-quiz
 title: Estado global con Pinia
-level: basic
+level: intermediate
 slug: global-state-quiz
 description: Evaluación sobre stores, state, getters, actions y consumo reactivo con Pinia.
 category:

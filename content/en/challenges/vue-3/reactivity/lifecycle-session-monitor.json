@@ -2,7 +2,7 @@
   "documentId": "lifecycle-session-monitor",
   "title": "Clean Up Resources with onUnmounted",
   "slug": "lifecycle-session-monitor",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "on-mounted", "label": "onMounted" },
     { "id": "on-unmounted", "label": "onUnmounted" }

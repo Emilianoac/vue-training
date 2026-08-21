@@ -1,6 +1,6 @@
 documentId: "logic-abstraction-quiz"
 title: "Logic Abstraction with Composables"
-level: "basic"
+level: intermediate
 slug: "logic-abstraction-quiz"
 description: "Assess how to extract responsibilities, design clear APIs, and avoid premature abstraction with composables."
 category:

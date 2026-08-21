@@ -2,7 +2,7 @@
   "documentId": "dynamic-settings-tabs",
   "title": "Crear pestañas con componentes dinámicos",
   "slug": "dynamic-settings-tabs",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "dynamic-components", "label": "dynamic components" },
     { "id": "keep-alive", "label": "KeepAlive" },

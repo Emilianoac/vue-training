@@ -2,7 +2,7 @@
   "documentId": "keyboard-shortcut-listener",
   "title": "Register a Keyboard Shortcut",
   "slug": "keyboard-shortcut-listener",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "composables", "label": "composables" },
     { "id": "on-mounted", "label": "onMounted" },

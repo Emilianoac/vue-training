@@ -1,6 +1,6 @@
 documentId: "component-design-quiz"
 title: "Diseño de componentes en Vue 3"
-level: "basic"
+level: intermediate
 slug: "component-design-quiz"
 description: "Evaluación sobre responsabilidades, componentes contenedores y presentacionales, contratos y organización en Vue 3."
 category:

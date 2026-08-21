@@ -1,6 +1,6 @@
 documentId: "lifecycle-quiz"
 title: "Reactivity and the Component Lifecycle in Vue 3"
-level: "basic"
+level: intermediate
 slug: "lifecycle-quiz"
 description: "Quiz about how Vue's reactive system ties into the component lifecycle with onMounted and onUnmounted."
 category:

@@ -2,7 +2,7 @@
   "documentId": "shared-cart-store",
   "title": "Compartir un carrito con Pinia",
   "slug": "shared-cart-store",
-  "level": "basic",
+  "level": "intermediate",
   "topics": [
     { "id": "pinia", "label": "Pinia" },
     { "id": "define-store", "label": "defineStore" },

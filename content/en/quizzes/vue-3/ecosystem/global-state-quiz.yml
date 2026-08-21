@@ -1,6 +1,6 @@
 documentId: global-state-quiz
 title: Global State with Pinia
-level: basic
+level: intermediate
 slug: global-state-quiz
 description: Assessment on Pinia stores, state, getters, actions, and reactive consumption.
 category:

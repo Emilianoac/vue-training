@@ -56,13 +56,13 @@ steps:
 
           - id: watchers-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa tu comprensión de watchers y efectos secundarios en Vue 3.
 
           - id: watch-question-log
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Completa un componente que reacciona a cambios de una pregunta usando watch.
 
@@ -77,13 +77,13 @@ steps:
 
           - id: lifecycle-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa cuándo usar onMounted, onUnmounted y cómo limpiar efectos externos.
 
           - id: lifecycle-session-monitor
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Completa un componente que inicia y limpia recursos externos con hooks de ciclo de vida.
 
@@ -106,7 +106,7 @@ steps:
 
           - id: props-emits-quantity-stepper
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Completa un componente controlado que comunica cambios con update:modelValue.
 
@@ -121,13 +121,13 @@ steps:
 
           - id: slots-layout-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa cómo se define, proporciona y organiza contenido mediante slots.
 
           - id: slots-profile-panel
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Construye un panel reutilizable y completa sus regiones desde el componente padre.
 
@@ -142,13 +142,13 @@ steps:
 
           - id: provide-inject-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa provide, inject, reactividad y decisiones de uso.
 
           - id: provide-inject-theme
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Conecta un proveedor de tema con un descendiente reactivo.
 
@@ -163,13 +163,13 @@ steps:
 
           - id: render-control-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa v-if, v-show, key, componentes dinámicos y KeepAlive.
 
           - id: dynamic-settings-tabs
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Construye pestañas dinámicas que conserven el estado de sus componentes.
 
@@ -184,7 +184,7 @@ steps:
 
           - id: component-design-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa responsabilidades, contratos, nombres y organización de componentes.
 
@@ -207,7 +207,7 @@ steps:
 
           - id: basic-composables-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa definición, convenciones, encapsulación y consumo de composables.
 
@@ -228,13 +228,13 @@ steps:
 
           - id: shared-state-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Cuestionario 1
             subtitle: Evalúa alcance, tiempo de vida, SSR y elección de herramientas de estado.
 
           - id: shared-reading-list
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Sincroniza dos consumidores mediante un composable con estado compartido.
 
@@ -249,13 +249,13 @@ steps:
 
           - id: composable-effects-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa watchers internos, ciclo de vida, SSR y limpieza de efectos.
 
           - id: keyboard-shortcut-listener
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Registra y limpia un atajo de teclado desde un composable.
 
@@ -270,13 +270,13 @@ steps:
 
           - id: logic-abstraction-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa responsabilidades, contratos claros y el costo de crear abstracciones.
 
           - id: async-resource-loader
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Abstrae la carga asíncrona detrás de una API reutilizable con dependencias explícitas.
 
@@ -291,13 +291,13 @@ steps:
 
           - id: advanced-patterns-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Cuestionario 1
             subtitle: Evalúa entradas reactivas, readonly, factories, composición y scopes de efectos.
 
           - id: flexible-task-filter
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Crea un filtro que acepte valores, refs o getters sin perder reactividad.
 
@@ -314,13 +314,13 @@ steps:
 
           - id: routing-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa rutas dinámicas, vistas anidadas, historial y navegación con Vue Router.
 
           - id: dynamic-user-profile
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Crea un perfil que reaccione al parámetro dinámico de la ruta.
 
@@ -335,13 +335,13 @@ steps:
 
           - id: global-state-quiz
             type: quiz
-            level: basic
+            level: intermediate
             title: Cuestionario 1
             subtitle: Evalúa stores, state, getters, actions y consumo reactivo con Pinia.
 
           - id: shared-cart-store
             type: challenge
-            level: basic
+            level: intermediate
             title: Desafío 1
             subtitle: Construye un carrito cuyo estado se comparta entre varios componentes.
 
@@ -358,13 +358,13 @@ steps:
 
           - id: effect-dependency-tracking-quiz
             type: quiz
-            level: basic
+            level: advanced
             title: Cuestionario de efectos
             subtitle: Evalúa cómo el seguimiento de dependencias conecta lecturas con actualizaciones.
 
           - id: effect-dependency-tracking
             type: challenge
-            level: basic
+            level: advanced
             title: Desafío 1
             subtitle: Implementa un grafo básico de dependencias con effect, track, trigger y Proxy.
 
