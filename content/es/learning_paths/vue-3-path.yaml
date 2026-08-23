@@ -389,6 +389,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa versiones reducidas de reactive, ref, readonly, toRef y toRefs.
 
+      - name: Estado derivado y observación
+        id: derived-state-observation
+        items:
+          - id: derived-state-observation-lesson
+            type: lesson
+            level: basic
+            title: Estado derivado y observación reactiva
+            subtitle: Reconstruye computed, watch y watchEffect mediante caché, invalidación y limpieza.
+
+          - id: derived-state-observation-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de estado derivado
+            subtitle: Evalúa caché, fuentes observadas, invalidación y limpieza de efectos secundarios.
+
+          - id: derived-state-observation
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa versiones reducidas de computed, watch y watchEffect.
+
   - name: Calidad
     sub_steps:
       - name: Testing

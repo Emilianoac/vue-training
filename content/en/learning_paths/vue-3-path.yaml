@@ -389,6 +389,27 @@ steps:
             title: Challenge 1
             subtitle: Implement reduced versions of reactive, ref, readonly, toRef, and toRefs.
 
+      - name: Derived State and Observation
+        id: derived-state-observation
+        items:
+          - id: derived-state-observation-lesson
+            type: lesson
+            level: basic
+            title: Derived State and Reactive Observation
+            subtitle: Rebuild computed, watch, and watchEffect through caching, invalidation, and cleanup.
+
+          - id: derived-state-observation-quiz
+            type: quiz
+            level: advanced
+            title: Derived State Quiz
+            subtitle: Test caching, watched sources, invalidation, and side-effect cleanup.
+
+          - id: derived-state-observation
+            type: challenge
+            level: advanced
+            title: Challenge 1
+            subtitle: Implement reduced versions of computed, watch, and watchEffect.
+
   - name: Quality
     sub_steps:
       - name: Testing

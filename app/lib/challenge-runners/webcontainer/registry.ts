@@ -1,5 +1,6 @@
 import { createAsyncResourceLoaderChallenge } from "./challenges/async-resource-loader/config";
 import { createComputedUserFilterChallenge } from "./challenges/computed-user-filter/config";
+import { createDerivedStateObservationChallenge } from "./challenges/derived-state-observation/config";
 import { createDynamicSettingsTabsChallenge } from "./challenges/dynamic-settings-tabs/config";
 import { createDynamicUserProfileChallenge } from "./challenges/dynamic-user-profile/config";
 import { createEffectDependencyTrackingChallenge } from "./challenges/effect-dependency-tracking/config";
@@ -21,6 +22,7 @@ import type { WebContainerChallenge } from "./types";
 const challengeFactories: Record<string, (locale: string) => WebContainerChallenge> = {
   "async-resource-loader": createAsyncResourceLoaderChallenge,
   "computed-user-filter": createComputedUserFilterChallenge,
+  "derived-state-observation": createDerivedStateObservationChallenge,
   "dynamic-settings-tabs": createDynamicSettingsTabsChallenge,
   "dynamic-user-profile": createDynamicUserProfileChallenge,
   "effect-dependency-tracking": createEffectDependencyTrackingChallenge,

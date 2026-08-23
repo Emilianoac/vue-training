@@ -1,0 +1,250 @@
+documentId: derived-state-observation-quiz
+title: Derived State and Observation
+level: advanced
+slug: derived-state-observation-quiz
+description: Test how computed, watch, and watchEffect respond to reactive invalidations.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: computed
+    label: computed
+  - id: watch
+    label: watch
+  - id: watch-effect
+    label: watchEffect
+  - id: watcher-cleanup
+    label: watcher cleanup
+questions:
+  - text: What is the main purpose of computed()?
+    explanation: computed represents a value derived from other reactive sources and caches its latest result while those dependencies remain unchanged.
+    explanation_code:
+      - code: |-
+          const total = computed(() => price.value * quantity.value);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Produce and cache a value derived from reactive dependencies.
+      - id: "2"
+        isCorrect: false
+        text: Run any HTTP request when a component mounts.
+      - id: "3"
+        isCorrect: false
+        text: Store a historical copy of all reactive state.
+      - id: "4"
+        isCorrect: false
+        text: Replace every ref with a primitive variable.
+
+  - text: When does a lazy computed getter run for the first time?
+    explanation: The runner is created without executing the getter. The first .value read finds a dirty cache and calculates the result.
+    explanation_code:
+      - code: |-
+          const total = computed(() => calculateTotal());
+          // calculateTotal has not run yet.
+
+          console.log(total.value); // First execution.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: When any of its dependencies is declared.
+      - id: "2"
+        isCorrect: true
+        text: When a consumer reads .value for the first time.
+      - id: "3"
+        isCorrect: false
+        text: After every watcher in the component stops.
+      - id: "4"
+        isCorrect: false
+        text: Only when the computed value is written.
+
+  - text: What does a computed scheduler do when one of the getter's dependencies changes?
+    explanation: The scheduler invalidates the cache and notifies dependents of computed.value. The getter remains lazy and waits for a later read.
+    explanation_code:
+      - code: |-
+          scheduler() {
+            if (dirty) return;
+            dirty = true;
+            trigger(computedRef, 'value');
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: It permanently removes the getter.
+      - id: "2"
+        isCorrect: false
+        text: It copies the old value into every consumer.
+      - id: "3"
+        isCorrect: true
+        text: It marks the cache dirty and notifies consumers of .value.
+      - id: "4"
+        isCorrect: false
+        text: It always runs the getter immediately several times.
+
+  - text: What does the dirty flag represent in a computed value?
+    explanation: dirty means a dependency changed and the cached value is no longer trustworthy. The next read must calculate it again.
+    explanation_code:
+      - code: |-
+          if (dirty) {
+            cachedValue = runner();
+            dirty = false;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The getter necessarily produced an error.
+      - id: "2"
+        isCorrect: false
+        text: No effect can read the computed value.
+      - id: "3"
+        isCorrect: false
+        text: The value must be converted into readonly state.
+      - id: "4"
+        isCorrect: true
+        text: The cache is invalid and must be renewed on the next read.
+
+  - text: How can multiple consumers benefit from one computed cache?
+    explanation: They all read the same computedRef. Once the cache is renewed, later reads receive cachedValue without repeating the getter.
+    explanation_code:
+      - code: |-
+          renderHeader(total.value); // Recomputes if dirty.
+          renderSummary(total.value); // Reuses the cache.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: The first necessary read calculates the value and later reads reuse that result.
+      - id: "2"
+        isCorrect: false
+        text: Each consumer automatically creates an independent computed value.
+      - id: "3"
+        isCorrect: false
+        text: The getter runs once per consumer on every read.
+      - id: "4"
+        isCorrect: false
+        text: Consumers stop tracking the value's dependencies.
+
+  - text: What does watch() track when it receives a getter source?
+    explanation: The getter runs inside watch's inner effect. Only the reactive properties read by that source become its explicit dependencies.
+    explanation_code:
+      - code: |-
+          watch(
+            () => state.user.id,
+            (newId) => loadUser(newId),
+          );
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Every read performed later inside the callback.
+      - id: "2"
+        isCorrect: true
+        text: The reactive properties read while the source getter runs.
+      - id: "3"
+        isCorrect: false
+        text: Every property that exists in the application.
+      - id: "4"
+        isCorrect: false
+        text: Only values written inside the callback.
+
+  - text: Why does a watcher keep an oldValue?
+    explanation: Each job compares the source's current result with its previous result and provides both to the callback when appropriate.
+    explanation_code:
+      - code: |-
+          const newValue = runner();
+
+          if (!Object.is(newValue, oldValue)) {
+            callback(newValue, oldValue);
+            oldValue = newValue;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: To automatically revert any user change.
+      - id: "2"
+        isCorrect: false
+        text: To prevent the source from becoming reactive again.
+      - id: "3"
+        isCorrect: true
+        text: To compare results and provide the callback with new and previous values.
+      - id: "4"
+        isCorrect: false
+        text: To turn the callback into a writable computed value.
+
+  - text: What changes when a watcher uses { immediate: true }?
+    explanation: The job runs the callback while creating the watcher. During that first call, no previous value has been initialized yet.
+    explanation_code:
+      - code: |-
+          watch(userId, loadUser, { immediate: true });
+          // loadUser(userId.value, undefined)
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The source stops collecting dependencies.
+      - id: "2"
+        isCorrect: false
+        text: The watcher can only run once.
+      - id: "3"
+        isCorrect: false
+        text: Every callback becomes a synchronous DOM operation.
+      - id: "4"
+        isCorrect: true
+        text: The callback also runs initially and receives undefined as its previous value.
+
+  - text: How does watchEffect() discover its dependencies?
+    explanation: watchEffect immediately runs its function inside an effect. Reactive reads in the synchronous portion are tracked automatically.
+    explanation_code:
+      - code: |-
+          watchEffect(() => {
+            document.title = `${user.value.name} · ${count.value}`;
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: It tracks reactive values read during the synchronous execution of its function.
+      - id: "2"
+        isCorrect: false
+        text: It requires a separate array containing every source.
+      - id: "3"
+        isCorrect: false
+        text: It automatically watches every global JavaScript object.
+      - id: "4"
+        isCorrect: false
+        text: It only tracks values read after the first await.
+
+  - text: When should a watcher run its registered cleanup?
+    explanation: Cleanup releases resources from an execution that has become invalid. It must run before repeating the callback and when the watcher stops.
+    explanation_code:
+      - code: |-
+          const stop = watchEffect((onCleanup) => {
+            const connection = connect();
+            onCleanup(() => connection.close());
+          });
+
+          stop(); // Also runs pending cleanup.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Only after the entire application unmounts.
+      - id: "2"
+        isCorrect: true
+        text: Before the next execution and when the watcher stops.
+      - id: "3"
+        isCorrect: false
+        text: Before collecting dependencies for the first time.
+      - id: "4"
+        isCorrect: false
+        text: Only when the callback returns a different value.

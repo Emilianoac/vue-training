@@ -1,0 +1,38 @@
+{
+  "documentId": "derived-state-observation",
+  "title": "Construir estado derivado y observadores",
+  "slug": "derived-state-observation",
+  "level": "advanced",
+  "topics": [
+    { "id": "computed", "label": "computed" },
+    { "id": "watch", "label": "watch" },
+    { "id": "watch-effect", "label": "watchEffect" },
+    { "id": "watcher-cleanup", "label": "watcher cleanup" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue en profundidad"
+  },
+  "short_description": "Construye valores cacheados y observadores sobre un sistema de efectos con scheduler.",
+  "description": [
+    "El starter incluye ref, effect, track, trigger y stop para que puedas concentrarte en el comportamiento derivado.",
+    "Implementa versiones pedagógicas de computed, watch y watchEffect que invaliden cachés, comparen fuentes y limpien trabajo obsoleto."
+  ],
+  "instructions": [
+    "Completa computed(getter) con evaluación lazy, caché, una marca dirty y notificación de sus consumidores al invalidarse.",
+    "Completa watch(source, callback, options) para observar un ref o getter, conservar oldValue y admitir immediate.",
+    "Ejecuta la limpieza registrada por watch antes del siguiente callback y también al detener el watcher.",
+    "Completa watchEffect(fn) para descubrir dependencias durante su ejecución y limpiar antes de repetirse.",
+    "Haz que los handles retornados detengan el efecto interno y liberen la limpieza pendiente.",
+    "Conserva resetObservation para que cada test comience con dependencias vacías."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/derived-state-observation.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Caché computed", "body": "Guarda `cachedValue` y comienza con `dirty = true`. El getter de `.value` solo debe ejecutar el runner cuando la caché esté sucia." },
+    { "title": "Invalidar sin recalcular", "body": "El scheduler del computed marca `dirty = true` y llama a `trigger(computedRef, \"value\")`. No debe ejecutar el getter directamente." },
+    { "title": "Job de watch", "body": "Crea un efecto lazy para la fuente. Su scheduler ejecuta un job que obtiene `newValue`, lo compara, limpia el trabajo anterior y llama al callback." },
+    { "title": "Limpieza automática", "body": "En `watchEffect`, ejecuta la limpieza guardada dentro del wrapper y antes de llamar nuevamente a `fn(onCleanup)`. El handle también debe limpiarla antes de usar `stop`." }
+  ]
+}

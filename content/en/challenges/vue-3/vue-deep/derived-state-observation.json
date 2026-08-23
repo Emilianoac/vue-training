@@ -1,0 +1,38 @@
+{
+  "documentId": "derived-state-observation",
+  "title": "Build Derived State and Watchers",
+  "slug": "derived-state-observation",
+  "level": "advanced",
+  "topics": [
+    { "id": "computed", "label": "computed" },
+    { "id": "watch", "label": "watch" },
+    { "id": "watch-effect", "label": "watchEffect" },
+    { "id": "watcher-cleanup", "label": "watcher cleanup" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue in Depth"
+  },
+  "short_description": "Build cached values and watchers on top of an effect system with a scheduler.",
+  "description": [
+    "The starter includes ref, effect, track, trigger, and stop so you can focus on derived behavior.",
+    "Implement pedagogical versions of computed, watch, and watchEffect that invalidate caches, compare sources, and clean up stale work."
+  ],
+  "instructions": [
+    "Complete computed(getter) with lazy evaluation, caching, a dirty flag, and consumer notification when invalidated.",
+    "Complete watch(source, callback, options) so it observes a ref or getter, preserves oldValue, and supports immediate.",
+    "Run cleanup registered by watch before the next callback and when the watcher stops.",
+    "Complete watchEffect(fn) so it discovers dependencies while running and cleans up before repeating.",
+    "Make the returned handles stop the inner effect and release pending cleanup.",
+    "Keep resetObservation working so every test starts with empty dependencies."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/derived-state-observation.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Computed cache", "body": "Store `cachedValue` and begin with `dirty = true`. The `.value` getter should only run the runner when the cache is dirty." },
+    { "title": "Invalidate without recomputing", "body": "The computed scheduler sets `dirty = true` and calls `trigger(computedRef, \"value\")`. It should not run the getter directly." },
+    { "title": "Watch job", "body": "Create a lazy effect for the source. Its scheduler runs a job that obtains `newValue`, compares it, cleans up previous work, and calls the callback." },
+    { "title": "Automatic cleanup", "body": "In `watchEffect`, run the stored cleanup inside the wrapper before calling `fn(onCleanup)` again. The handle should also clean up before using `stop`." }
+  ]
+}
