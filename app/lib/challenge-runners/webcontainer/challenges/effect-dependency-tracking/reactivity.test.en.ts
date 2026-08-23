@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+// @ts-expect-error Virtual file mounted by the challenge runner.
 import { effect, reactive, resetReactivity } from "./reactivity";
 
 describe("reactive dependency tracking", () => {

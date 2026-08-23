@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+// @ts-expect-error Archivo virtual montado por el runner del challenge.
 import { effect, reactive, resetReactivity } from "./reactivity";
 
 describe("seguimiento de dependencias reactivas", () => {
