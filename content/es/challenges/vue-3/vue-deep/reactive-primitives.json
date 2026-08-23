@@ -1,0 +1,38 @@
+{
+  "documentId": "reactive-primitives",
+  "title": "Construir primitivas reactivas",
+  "slug": "reactive-primitives",
+  "level": "advanced",
+  "topics": [
+    { "id": "reactive", "label": "reactive" },
+    { "id": "ref", "label": "ref" },
+    { "id": "readonly", "label": "readonly" },
+    { "id": "to-ref", "label": "toRef" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue en profundidad"
+  },
+  "short_description": "Construye varias formas de estado sobre un mismo sistema de seguimiento de dependencias.",
+  "description": [
+    "El starter ya incluye effect, track y trigger para que puedas concentrarte en las primitivas que utilizan ese grafo.",
+    "Implementa versiones pedagógicas de reactive, ref, readonly, toRef y toRefs, conservando identidad, enlaces y notificaciones selectivas."
+  ],
+  "instructions": [
+    "Completa reactive(target) con conversión anidada perezosa, caché de proxies y notificación solo cuando el valor cambie.",
+    "Completa ref(initialValue) para seguir su propiedad value y convertir los objetos asignados en estado reactivo.",
+    "Completa readonly(target) como una vista profunda que permita lecturas y bloquee escrituras.",
+    "Completa toRef(object, key, defaultValue) para delegar sus lecturas y escrituras a la propiedad original.",
+    "Completa toRefs(object) para enlazar las propiedades enumerables existentes y conservar la forma de los arrays.",
+    "Conserva resetReactivity para que cada test comience con dependencias y cachés vacías."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/reactive-primitives.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Proxy reactivo", "body": "En `get`, llama a `track`, lee con `Reflect.get` y pasa los objetos anidados por `reactive`. En `set`, compara el valor anterior con `Object.is()` antes de llamar a `trigger`." },
+    { "title": "Identidad estable", "body": "Consulta `reactiveCache.get(target)` antes de crear un proxy y guarda el resultado en la misma caché. Usa otra caché para las vistas `readonly`." },
+    { "title": "Contenedor ref", "body": "El getter de `.value` debe llamar a `track(reference, \"value\")`. El setter compara el valor original, convierte objetos con `reactive` y luego llama a `trigger(reference, \"value\")`." },
+    { "title": "Referencias enlazadas", "body": "`toRef` no necesita guardar una copia: su getter retorna `object[key]` y su setter asigna `object[key]`. `toRefs` crea uno de estos enlaces por cada clave de `Object.keys(object)`." }
+  ]
+}

@@ -1,0 +1,262 @@
+documentId: reactive-primitives-quiz
+title: Reactive Primitives
+level: advanced
+slug: reactive-primitives-quiz
+description: Test how Vue represents objects, primitives, readonly views, and linked properties.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: reactive
+    label: reactive
+  - id: ref
+    label: ref
+  - id: readonly
+    label: readonly
+  - id: to-ref
+    label: toRef
+questions:
+  - text: What does reactive() return for an object?
+    explanation: reactive returns a Proxy that intercepts the original object's properties. Reactive operations must go through that proxy to reach its traps.
+    explanation_code:
+      - code: |-
+          const original = { count: 0 };
+          const state = reactive(original);
+
+          console.log(state === original); // false
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: A Proxy that intercepts reads and writes on the object.
+      - id: "2"
+        isCorrect: false
+        text: A serialized copy that is replaced after every change.
+      - id: "3"
+        isCorrect: false
+        text: A ref whose object is always stored in a value property.
+      - id: "4"
+        isCorrect: false
+        text: The same object frozen with Object.freeze().
+
+  - text: Which Proxy traps connect reads and writes with dependency tracking?
+    explanation: The get trap can call track when a property is read, while the set trap can call trigger after an effective write.
+    explanation_code:
+      - code: |-
+          new Proxy(target, {
+            get(object, key) {
+              track(object, key);
+            },
+            set(object, key, value) {
+              trigger(object, key);
+            },
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: apply and construct.
+      - id: "2"
+        isCorrect: true
+        text: get and set.
+      - id: "3"
+        isCorrect: false
+        text: has and ownKeys.
+      - id: "4"
+        isCorrect: false
+        text: getPrototypeOf and preventExtensions.
+
+  - text: Why does the setter compare values with Object.is() before calling trigger()?
+    explanation: Assigning the same value does not change observable state. Skipping trigger avoids re-running dependent work unnecessarily.
+    explanation_code:
+      - code: |-
+          const previousValue = object[key];
+          Reflect.set(object, key, nextValue);
+
+          if (!Object.is(previousValue, nextValue)) {
+            trigger(object, key);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: To automatically convert the value into a string.
+      - id: "2"
+        isCorrect: false
+        text: To prevent the property from accepting objects.
+      - id: "3"
+        isCorrect: true
+        text: To avoid notifying effects when the assignment does not change the value.
+      - id: "4"
+        isCorrect: false
+        text: To decide which Proxy trap should run.
+
+  - text: When does the reduced reactive() model convert a nested object?
+    explanation: The getter passes objects through reactive when it reads them. This lazy conversion avoids traversing the entire state tree in advance.
+    explanation_code:
+      - code: |-
+          get(object, key, receiver) {
+            const value = Reflect.get(object, key, receiver);
+            return isObject(value) ? reactive(value) : value;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: After the object is removed from state.
+      - id: "2"
+        isCorrect: false
+        text: Only when trigger is called manually.
+      - id: "3"
+        isCorrect: false
+        text: Before the original object is created.
+      - id: "4"
+        isCorrect: true
+        text: When the nested object is obtained through a read.
+
+  - text: Why does reactive() cache proxies in a WeakMap?
+    explanation: The cache returns the same proxy for the same target object. This preserves stable identity comparisons and avoids repeated wrappers.
+    explanation_code:
+      - code: |-
+          const cachedProxy = reactiveCache.get(target);
+          if (cachedProxy) return cachedProxy;
+
+          reactiveCache.set(target, proxy);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: To preserve one stable proxy per object without unnecessarily retaining the target.
+      - id: "2"
+        isCorrect: false
+        text: To store every primitive value used by refs.
+      - id: "3"
+        isCorrect: false
+        text: To run effects in the order they were created.
+      - id: "4"
+        isCorrect: false
+        text: To turn the Proxy into an immutable copy.
+
+  - text: Why does ref() use a container with a .value property for primitives?
+    explanation: JavaScript cannot wrap a primitive directly with Proxy. The container provides a property whose getter and setter can intercept reads and writes.
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+
+          count.value += 1;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Because primitives can only be stored inside arrays.
+      - id: "2"
+        isCorrect: true
+        text: Because a primitive cannot be wrapped with Proxy, but a container property can be intercepted.
+      - id: "3"
+        isCorrect: false
+        text: Because value makes every operation asynchronous.
+      - id: "4"
+        isCorrect: false
+        text: Because Vue must serialize every primitive before reading it.
+
+  - text: What do the getter and setter of a ref's .value do?
+    explanation: The getter tracks the value read. The setter compares the assignment, converts objects when needed, and notifies dependent effects.
+    explanation_code:
+      - code: |-
+          get value() {
+            track(reference, 'value');
+            return currentValue;
+          },
+          set value(nextValue) {
+            if (Object.is(rawValue, nextValue)) return;
+            trigger(reference, 'value');
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Both create a new Proxy on every access.
+      - id: "2"
+        isCorrect: false
+        text: The getter triggers effects and the setter tracks dependencies.
+      - id: "3"
+        isCorrect: true
+        text: The getter tracks the read and the setter notifies after an effective change.
+      - id: "4"
+        isCorrect: false
+        text: Both block every change made outside a component.
+
+  - text: What does readonly() create instead of an immutable snapshot?
+    explanation: readonly creates a live proxy view. If its source is reactive, consumers observe its changes, but writes made through the view are blocked.
+    explanation_code:
+      - code: |-
+          const state = reactive({ count: 0 });
+          const publicState = readonly(state);
+
+          state.count += 1;       // allowed
+          publicState.count += 1; // blocked
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: A JSON copy disconnected from the source.
+      - id: "2"
+        isCorrect: false
+        text: A computed property that recalculates the entire object.
+      - id: "3"
+        isCorrect: false
+        text: A list containing the history of every mutation.
+      - id: "4"
+        isCorrect: true
+        text: A live proxy view that allows reads and blocks writes.
+
+  - text: How does toRef(object, key) preserve the connection with a property?
+    explanation: The ref's value property delegates directly to the object. It stores no copy, so operations continue to pass through the source proxy.
+    explanation_code:
+      - code: |-
+          const count = toRef(state, 'count');
+
+          count.value += 1;
+          console.log(state.count); // 1
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Its getter reads object[key] and its setter writes object[key].
+      - id: "2"
+        isCorrect: false
+        text: It copies the initial value and synchronizes both values with a timer.
+      - id: "3"
+        isCorrect: false
+        text: It replaces the original object with a complete ref.
+      - id: "4"
+        isCorrect: false
+        text: It turns the property into a JavaScript constant.
+
+  - text: Which properties does toRefs() include in its result?
+    explanation: toRefs iterates over the enumerable keys present when it runs. Properties added later require another toRef or a new call.
+    explanation_code:
+      - code: |-
+          Object.keys(object).forEach((key) => {
+            result[key] = toRef(object, key);
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Every property the object may receive in the future.
+      - id: "2"
+        isCorrect: true
+        text: The enumerable properties that exist at call time.
+      - id: "3"
+        isCorrect: false
+        text: Only properties whose value is already a ref.
+      - id: "4"
+        isCorrect: false
+        text: Only properties defined as readonly.

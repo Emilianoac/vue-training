@@ -1,0 +1,262 @@
+documentId: reactive-primitives-quiz
+title: Primitivas reactivas
+level: advanced
+slug: reactive-primitives-quiz
+description: Evalúa cómo Vue representa objetos, primitivos, vistas readonly y propiedades enlazadas.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue en profundidad
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: reactive
+    label: reactive
+  - id: ref
+    label: ref
+  - id: readonly
+    label: readonly
+  - id: to-ref
+    label: toRef
+questions:
+  - text: ¿Qué retorna reactive() al recibir un objeto?
+    explanation: reactive retorna un Proxy que intercepta las propiedades del objeto original. Las operaciones reactivas deben pasar por ese proxy para alcanzar sus traps.
+    explanation_code:
+      - code: |-
+          const original = { count: 0 };
+          const state = reactive(original);
+
+          console.log(state === original); // false
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Un Proxy que intercepta las lecturas y escrituras del objeto.
+      - id: "2"
+        isCorrect: false
+        text: Una copia serializada que se reemplaza después de cada cambio.
+      - id: "3"
+        isCorrect: false
+        text: Un ref cuyo objeto siempre se encuentra en una propiedad value.
+      - id: "4"
+        isCorrect: false
+        text: El mismo objeto congelado mediante Object.freeze().
+
+  - text: ¿Qué traps de Proxy conectan las lecturas y escrituras con el seguimiento de dependencias?
+    explanation: El trap get puede llamar a track cuando se lee una propiedad y el trap set puede llamar a trigger después de una escritura efectiva.
+    explanation_code:
+      - code: |-
+          new Proxy(target, {
+            get(object, key) {
+              track(object, key);
+            },
+            set(object, key, value) {
+              trigger(object, key);
+            },
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: apply y construct.
+      - id: "2"
+        isCorrect: true
+        text: get y set.
+      - id: "3"
+        isCorrect: false
+        text: has y ownKeys.
+      - id: "4"
+        isCorrect: false
+        text: getPrototypeOf y preventExtensions.
+
+  - text: ¿Por qué el setter compara los valores con Object.is() antes de llamar a trigger()?
+    explanation: Una asignación del mismo valor no cambia el estado observable. Omitir trigger evita volver a ejecutar trabajo dependiente sin necesidad.
+    explanation_code:
+      - code: |-
+          const previousValue = object[key];
+          Reflect.set(object, key, nextValue);
+
+          if (!Object.is(previousValue, nextValue)) {
+            trigger(object, key);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para convertir automáticamente el valor en un string.
+      - id: "2"
+        isCorrect: false
+        text: Para impedir que la propiedad acepte objetos.
+      - id: "3"
+        isCorrect: true
+        text: Para no notificar efectos cuando la asignación no cambia el valor.
+      - id: "4"
+        isCorrect: false
+        text: Para decidir qué trap de Proxy debe ejecutarse.
+
+  - text: ¿Cuándo convierte un objeto anidado el modelo reducido de reactive()?
+    explanation: El getter pasa por reactive los objetos que encuentra al leerlos. Esta conversión perezosa evita recorrer todo el árbol de estado por adelantado.
+    explanation_code:
+      - code: |-
+          get(object, key, receiver) {
+            const value = Reflect.get(object, key, receiver);
+            return isObject(value) ? reactive(value) : value;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Después de que el objeto se elimina del estado.
+      - id: "2"
+        isCorrect: false
+        text: Solo cuando se llama manualmente a trigger.
+      - id: "3"
+        isCorrect: false
+        text: Antes de crear el objeto original.
+      - id: "4"
+        isCorrect: true
+        text: Cuando el objeto anidado se obtiene mediante una lectura.
+
+  - text: ¿Por qué reactive() guarda proxies en un WeakMap?
+    explanation: La caché retorna el mismo proxy para el mismo objeto objetivo. Así conserva comparaciones de identidad estables y evita crear envoltorios repetidos.
+    explanation_code:
+      - code: |-
+          const cachedProxy = reactiveCache.get(target);
+          if (cachedProxy) return cachedProxy;
+
+          reactiveCache.set(target, proxy);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Para conservar un proxy estable por objeto sin retener innecesariamente el objetivo.
+      - id: "2"
+        isCorrect: false
+        text: Para guardar todos los valores primitivos usados por los refs.
+      - id: "3"
+        isCorrect: false
+        text: Para ejecutar los efectos en el orden en que se crearon.
+      - id: "4"
+        isCorrect: false
+        text: Para convertir el Proxy en una copia inmutable.
+
+  - text: ¿Por qué ref() usa un contenedor con una propiedad .value para los primitivos?
+    explanation: JavaScript no permite envolver un primitivo directamente con Proxy. El contenedor aporta una propiedad cuyo getter y setter sí pueden interceptar lecturas y escrituras.
+    explanation_code:
+      - code: |-
+          const count = ref(0);
+
+          count.value += 1;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque los primitivos solo pueden almacenarse dentro de arrays.
+      - id: "2"
+        isCorrect: true
+        text: Porque un primitivo no puede envolverse con Proxy, pero una propiedad del contenedor sí puede interceptarse.
+      - id: "3"
+        isCorrect: false
+        text: Porque value convierte cualquier operación en asíncrona.
+      - id: "4"
+        isCorrect: false
+        text: Porque Vue necesita serializar cada primitivo antes de leerlo.
+
+  - text: ¿Qué hacen el getter y el setter de .value en un ref?
+    explanation: El getter registra la lectura de value. El setter compara la asignación, convierte objetos cuando corresponde y notifica a los efectos dependientes.
+    explanation_code:
+      - code: |-
+          get value() {
+            track(reference, 'value');
+            return currentValue;
+          },
+          set value(nextValue) {
+            if (Object.is(rawValue, nextValue)) return;
+            trigger(reference, 'value');
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Ambos crean un Proxy nuevo en cada acceso.
+      - id: "2"
+        isCorrect: false
+        text: El getter dispara efectos y el setter registra dependencias.
+      - id: "3"
+        isCorrect: true
+        text: El getter registra la lectura y el setter notifica después de un cambio efectivo.
+      - id: "4"
+        isCorrect: false
+        text: Ambos bloquean cualquier cambio realizado fuera de un componente.
+
+  - text: ¿Qué crea readonly() en lugar de una instantánea inmutable?
+    explanation: readonly crea una vista proxy viva. Si su fuente es reactiva, los consumidores observan sus cambios, pero las escrituras realizadas mediante la vista se bloquean.
+    explanation_code:
+      - code: |-
+          const state = reactive({ count: 0 });
+          const publicState = readonly(state);
+
+          state.count += 1;       // permitido
+          publicState.count += 1; // bloqueado
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Una copia JSON desconectada de la fuente.
+      - id: "2"
+        isCorrect: false
+        text: Un computed que recalcula el objeto completo.
+      - id: "3"
+        isCorrect: false
+        text: Una lista con el historial de todas las mutaciones.
+      - id: "4"
+        isCorrect: true
+        text: Una vista proxy viva que permite lecturas y bloquea escrituras.
+
+  - text: ¿Cómo conserva toRef(object, key) la conexión con una propiedad?
+    explanation: La propiedad value del ref delega directamente al objeto. No guarda una copia, por lo que las operaciones siguen pasando por el proxy de la fuente.
+    explanation_code:
+      - code: |-
+          const count = toRef(state, 'count');
+
+          count.value += 1;
+          console.log(state.count); // 1
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Su getter lee object[key] y su setter escribe object[key].
+      - id: "2"
+        isCorrect: false
+        text: Copia el valor inicial y sincroniza ambos valores mediante un temporizador.
+      - id: "3"
+        isCorrect: false
+        text: Reemplaza el objeto original por un ref completo.
+      - id: "4"
+        isCorrect: false
+        text: Convierte la propiedad en una constante de JavaScript.
+
+  - text: ¿Qué propiedades incluye toRefs() en su resultado?
+    explanation: toRefs recorre las claves enumerables presentes cuando se ejecuta. Las propiedades añadidas posteriormente requieren otro toRef o una nueva llamada.
+    explanation_code:
+      - code: |-
+          Object.keys(object).forEach((key) => {
+            result[key] = toRef(object, key);
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Todas las propiedades que el objeto pueda recibir en el futuro.
+      - id: "2"
+        isCorrect: true
+        text: Las propiedades enumerables que existen en el momento de la llamada.
+      - id: "3"
+        isCorrect: false
+        text: Solo las propiedades cuyo valor ya es un ref.
+      - id: "4"
+        isCorrect: false
+        text: Únicamente las propiedades definidas como readonly.

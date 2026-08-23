@@ -368,6 +368,27 @@ steps:
             title: Challenge 1
             subtitle: Implement a basic dependency graph with effect, track, trigger, and Proxy.
 
+      - name: Reactive Primitives
+        id: reactive-primitives
+        items:
+          - id: reactive-primitives-lesson
+            type: lesson
+            level: basic
+            title: Rebuilding Reactive Primitives
+            subtitle: Rebuild reactive, ref, readonly, and linked references on the same dependency system.
+
+          - id: reactive-primitives-quiz
+            type: quiz
+            level: advanced
+            title: Reactive Primitives Quiz
+            subtitle: Test how different primitives preserve identity, tracking, and links to state.
+
+          - id: reactive-primitives
+            type: challenge
+            level: advanced
+            title: Challenge 1
+            subtitle: Implement reduced versions of reactive, ref, readonly, toRef, and toRefs.
+
   - name: Quality
     sub_steps:
       - name: Testing

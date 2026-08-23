@@ -1,0 +1,38 @@
+{
+  "documentId": "reactive-primitives",
+  "title": "Build Reactive Primitives",
+  "slug": "reactive-primitives",
+  "level": "advanced",
+  "topics": [
+    { "id": "reactive", "label": "reactive" },
+    { "id": "ref", "label": "ref" },
+    { "id": "readonly", "label": "readonly" },
+    { "id": "to-ref", "label": "toRef" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": {
+    "id": "vue-deep",
+    "name": "Vue in Depth"
+  },
+  "short_description": "Build multiple forms of state on top of one dependency tracking system.",
+  "description": [
+    "The starter already includes effect, track, and trigger so you can focus on the primitives that use that graph.",
+    "Implement pedagogical versions of reactive, ref, readonly, toRef, and toRefs while preserving identity, links, and selective notifications."
+  ],
+  "instructions": [
+    "Complete reactive(target) with lazy nested conversion, proxy caching, and notification only when the value changes.",
+    "Complete ref(initialValue) so it tracks its value property and converts assigned objects into reactive state.",
+    "Complete readonly(target) as a deep view that allows reads and blocks writes.",
+    "Complete toRef(object, key, defaultValue) so its reads and writes delegate to the original property.",
+    "Complete toRefs(object) so it links existing enumerable properties and preserves array shape.",
+    "Keep resetReactivity working so each test starts with empty dependencies and caches."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/reactive-primitives.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Reactive proxy", "body": "In `get`, call `track`, read with `Reflect.get`, and pass nested objects through `reactive`. In `set`, compare the previous value with `Object.is()` before calling `trigger`." },
+    { "title": "Stable identity", "body": "Check `reactiveCache.get(target)` before creating a proxy and store the result in the same cache. Use a separate cache for `readonly` views." },
+    { "title": "Ref container", "body": "The `.value` getter should call `track(reference, \"value\")`. The setter compares the raw value, converts objects with `reactive`, and then calls `trigger(reference, \"value\")`." },
+    { "title": "Linked references", "body": "`toRef` does not need to store a copy: its getter returns `object[key]` and its setter assigns `object[key]`. `toRefs` creates one of these links for every key from `Object.keys(object)`." }
+  ]
+}

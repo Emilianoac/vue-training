@@ -8,6 +8,7 @@ import { createKeyboardShortcutListenerChallenge } from "./challenges/keyboard-s
 import { createLifecycleSessionMonitorChallenge } from "./challenges/lifecycle-session-monitor/config";
 import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emits-quantity-stepper/config";
 import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
+import { createReactivePrimitivesChallenge } from "./challenges/reactive-primitives/config";
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
 import { createSharedCartStoreChallenge } from "./challenges/shared-cart-store/config";
 import { createSharedReadingListChallenge } from "./challenges/shared-reading-list/config";
@@ -28,6 +29,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "lifecycle-session-monitor": createLifecycleSessionMonitorChallenge,
   "props-emits-quantity-stepper": createPropsEmitsQuantityStepperChallenge,
   "provide-inject-theme": createProvideInjectThemeChallenge,
+  "reactive-primitives": createReactivePrimitivesChallenge,
   "ref-counter-state": createRefCounterStateChallenge,
   "shared-cart-store": createSharedCartStoreChallenge,
   "shared-reading-list": createSharedReadingListChallenge,

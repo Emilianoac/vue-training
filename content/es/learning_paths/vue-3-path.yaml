@@ -368,6 +368,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa un grafo básico de dependencias con effect, track, trigger y Proxy.
 
+      - name: Primitivas reactivas
+        id: reactive-primitives
+        items:
+          - id: reactive-primitives-lesson
+            type: lesson
+            level: basic
+            title: Reconstruir primitivas reactivas
+            subtitle: Reconstruye reactive, ref, readonly y referencias enlazadas sobre el mismo sistema de dependencias.
+
+          - id: reactive-primitives-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de primitivas reactivas
+            subtitle: Evalúa cómo distintas primitivas conservan identidad, seguimiento y enlaces con el estado.
+
+          - id: reactive-primitives
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa versiones reducidas de reactive, ref, readonly, toRef y toRefs.
+
   - name: Calidad
     sub_steps:
       - name: Testing
