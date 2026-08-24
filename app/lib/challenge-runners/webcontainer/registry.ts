@@ -12,6 +12,7 @@ import { createPropsEmitsQuantityStepperChallenge } from "./challenges/props-emi
 import { createProvideInjectThemeChallenge } from "./challenges/provide-inject-theme/config";
 import { createReactivePrimitivesChallenge } from "./challenges/reactive-primitives/config";
 import { createRefCounterStateChallenge } from "./challenges/ref-counter-state/config";
+import { createRenderingComponentsChallenge } from "./challenges/rendering-components/config";
 import { createSharedCartStoreChallenge } from "./challenges/shared-cart-store/config";
 import { createSharedReadingListChallenge } from "./challenges/shared-reading-list/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
@@ -36,6 +37,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "provide-inject-theme": createProvideInjectThemeChallenge,
   "reactive-primitives": createReactivePrimitivesChallenge,
   "ref-counter-state": createRefCounterStateChallenge,
+  "rendering-components": createRenderingComponentsChallenge,
   "shared-cart-store": createSharedCartStoreChallenge,
   "shared-reading-list": createSharedReadingListChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,

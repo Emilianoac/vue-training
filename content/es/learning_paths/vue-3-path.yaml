@@ -452,6 +452,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa una cola de jobs con batching, fases de flush y nextTick.
 
+      - name: Renderizado y componentes
+        id: rendering-components
+        items:
+          - id: rendering-components-lesson
+            type: lesson
+            level: basic
+            title: De VNodes al DOM
+            subtitle: Comprende cómo el renderer monta, compara y actualiza elementos y componentes.
+
+          - id: rendering-components-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de renderizado
+            subtitle: Evalúa VNodes, mount, patch, componentes, children e identidad mediante key.
+
+          - id: rendering-components
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa un renderer reducido para elementos, componentes y listas keyed.
+
   - name: Calidad
     sub_steps:
       - name: Testing

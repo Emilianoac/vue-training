@@ -1,0 +1,37 @@
+{
+  "documentId": "rendering-components",
+  "title": "Build a VNode Renderer",
+  "slug": "rendering-components",
+  "level": "advanced",
+  "topics": [
+    { "id": "vnode", "label": "VNode" },
+    { "id": "render-function", "label": "render function" },
+    { "id": "renderer", "label": "renderer" },
+    { "id": "patching", "label": "patching" },
+    { "id": "keyed-diff", "label": "keyed diff" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue in Depth" },
+  "short_description": "Turn VNode trees into an object host and preserve their identity between renders.",
+  "description": [
+    "The starter includes host operations for creating, inserting, moving, and removing nodes without depending on the real DOM.",
+    "Implement the renderer that mounts elements, updates props and children, processes components, and reconciles keyed lists."
+  ],
+  "instructions": [
+    "Complete render(vnode, container) so it compares against container._vnode and also supports unmounting through null.",
+    "Complete patch(oldVNode, newVNode, container, anchor) so it replaces incompatible identities and dispatches Text, elements, and components.",
+    "Implement mountElement and patchElement with the operations from host.ts; key must not become a host prop.",
+    "Complete patchChildren so it handles transitions between text, arrays, and absence while unmounting what no longer exists.",
+    "Mount and update components by preserving an instance and patching the subtree returned by render(props).",
+    "Complete patchKeyedChildren so it reuses compatible type and key pairs, unmounts missing nodes, mounts new ones, and moves nodes into final order.",
+    "Keep resetRenderer working so every test can clear auxiliary state."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/rendering-components.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Compatible identity", "body": "Two VNodes can share a host node only when both `type` and `key` match. Before replacing, preserve the old node's next sibling as the anchor." },
+    { "title": "Props and children", "body": "Update new props first and then remove absent keys. For children, explicitly distinguish text, array, and null." },
+    { "title": "Component subtree", "body": "Store `{ vnode, subTree }` in `vnode.component`. On update, render with the new props and call `patch(previousTree, nextTree, ...)`." },
+    { "title": "Keyed order", "body": "Match VNodes by key first. Then walk the new list from right to left: the next VNode's `el` is the anchor used to mount or move the current one." }
+  ]
+}

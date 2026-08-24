@@ -452,6 +452,27 @@ steps:
             title: Challenge 1
             subtitle: Implement a job queue with batching, flush phases, and nextTick.
 
+      - name: Rendering and Components
+        id: rendering-components
+        items:
+          - id: rendering-components-lesson
+            type: lesson
+            level: basic
+            title: From VNodes to DOM
+            subtitle: Understand how the renderer mounts, compares, and updates elements and components.
+
+          - id: rendering-components-quiz
+            type: quiz
+            level: advanced
+            title: Rendering Quiz
+            subtitle: Test VNodes, mounting, patching, components, children, and key-based identity.
+
+          - id: rendering-components
+            type: challenge
+            level: advanced
+            title: Challenge 1
+            subtitle: Implement a reduced renderer for elements, components, and keyed lists.
+
   - name: Quality
     sub_steps:
       - name: Testing

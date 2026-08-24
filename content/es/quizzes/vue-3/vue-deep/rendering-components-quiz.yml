@@ -1,0 +1,246 @@
+documentId: rendering-components-quiz
+title: Renderizado y componentes
+level: advanced
+slug: rendering-components-quiz
+description: Evalúa cómo Vue convierte árboles de VNodes en actualizaciones del host.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue en profundidad
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: vnode
+    label: VNode
+  - id: render-function
+    label: render function
+  - id: renderer
+    label: renderer
+  - id: patching
+    label: patching
+  - id: keyed-diff
+    label: keyed diff
+questions:
+  - text: ¿Qué describe un VNode?
+    explanation: Un VNode es una representación en memoria de la UI deseada. Describe tipo, props y children sin ejecutar por sí mismo operaciones DOM.
+    explanation_code:
+      - code: |-
+          const vnode = h('section', { class: 'profile' }, [
+            h('h2', null, user.name),
+          ]);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Una aparición deseada de un elemento, componente o nodo especial dentro del árbol virtual.
+      - id: "2"
+        isCorrect: false
+        text: Una captura serializada obligatoria de todo el DOM real.
+      - id: "3"
+        isCorrect: false
+        text: Una cola de efectos pendientes del scheduler.
+      - id: "4"
+        isCorrect: false
+        text: Únicamente el código fuente de un template sin compilar.
+
+  - text: ¿Qué relación conserva el campo el de un VNode?
+    explanation: Durante mount, `el` recibe el nodo host creado. Un VNode compatible posterior hereda esa referencia para actualizar el mismo nodo.
+    explanation_code:
+      - code: |-
+          const element = vnode.el = hostCreateElement(vnode.type);
+          nextVNode.el = oldVNode.el;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: La relación entre un watcher y todas sus fuentes.
+      - id: "2"
+        isCorrect: true
+        text: El enlace entre la descripción virtual y el nodo host montado.
+      - id: "3"
+        isCorrect: false
+        text: La lista de props eliminadas durante el último render.
+      - id: "4"
+        isCorrect: false
+        text: El template original del componente padre.
+
+  - text: ¿Por qué normaliza el renderer strings, arrays y valores vacíos en formas conocidas de VNode?
+    explanation: La normalización convierte resultados variados en nodos Text, Comment o Fragment. Así `patch` puede despachar un conjunto controlado de formas.
+    explanation_code:
+      - code: |-
+          normalizeVNode('Hola');      // Text
+          normalizeVNode([a, b]);      // Fragment
+          normalizeVNode(null);        // Comment
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para que todos los valores terminen como el mismo elemento div.
+      - id: "2"
+        isCorrect: false
+        text: Para impedir que una función de render retorne arrays.
+      - id: "3"
+        isCorrect: true
+        text: Para que el algoritmo procese tipos uniformes en vez de combinaciones arbitrarias.
+      - id: "4"
+        isCorrect: false
+        text: Para convertir cualquier child en una prop del componente.
+
+  - text: ¿Por qué recibe createRenderer() operaciones host en vez de llamar APIs DOM por todo el algoritmo?
+    explanation: El runtime core decide el recorrido virtual y delega la materialización. Cambiar las operaciones host permite usar el mismo algoritmo fuera del navegador.
+    explanation_code:
+      - code: |-
+          createRenderer({
+            createElement,
+            insert,
+            remove,
+            patchProp,
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para que el renderer nunca pueda crear elementos.
+      - id: "2"
+        isCorrect: false
+        text: Para ejecutar todas las actualizaciones desde el compilador.
+      - id: "3"
+        isCorrect: false
+        text: Para eliminar la necesidad de VNodes.
+      - id: "4"
+        isCorrect: true
+        text: Para separar el diff de las operaciones concretas de cada plataforma.
+
+  - text: ¿Qué significa para patch() que el VNode anterior sea null?
+    explanation: Sin una descripción anterior no existe identidad host que preservar. `patch` debe montar el VNode nuevo desde cero.
+    explanation_code:
+      - code: |-
+          patch(null, vnode, container);
+          // Rama de montaje.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Que se trata de un montaje inicial del nuevo VNode.
+      - id: "2"
+        isCorrect: false
+        text: Que el nuevo VNode también debe ignorarse.
+      - id: "3"
+        isCorrect: false
+        text: Que solo deben compararse sus keys.
+      - id: "4"
+        isCorrect: false
+        text: Que el contenedor debe desmontarse por completo.
+
+  - text: ¿Qué ocurre cuando los VNodes anterior y nuevo no comparten type y key?
+    explanation: La identidad no es compatible. El renderer obtiene la posición, desmonta el árbol anterior y monta el nuevo en su lugar.
+    explanation_code:
+      - code: |-
+          if (!isSameVNodeType(oldVNode, newVNode)) {
+            unmount(oldVNode);
+            patch(null, newVNode, container, anchor);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Se copian todas las props sin revisar el tipo.
+      - id: "2"
+        isCorrect: true
+        text: Se reemplaza la identidad anterior mediante unmount y mount.
+      - id: "3"
+        isCorrect: false
+        text: Se conserva siempre la misma instancia de componente.
+      - id: "4"
+        isCorrect: false
+        text: Se ejecuta únicamente el scheduler sin tocar el árbol.
+
+  - text: ¿Por qué necesita el patch de props un recorrido de actualización y otro de eliminación?
+    explanation: Recorrer las props nuevas detecta adiciones y cambios. Recorrer las anteriores encuentra keys que ya no existen y deben limpiarse del host.
+    explanation_code:
+      - code: |-
+          patchProp(element, 'title', oldTitle, newTitle);
+          patchProp(element, 'disabled', true, null);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para aplicar cada prop nueva exactamente dos veces.
+      - id: "2"
+        isCorrect: false
+        text: Para ordenar alfabéticamente atributos y listeners.
+      - id: "3"
+        isCorrect: true
+        text: Porque las props nuevas no revelan cuáles desaparecieron del VNode anterior.
+      - id: "4"
+        isCorrect: false
+        text: Porque toda actualización debe recrear el elemento.
+
+  - text: ¿Por qué deben desmontarse los children array antes de reemplazarlos por texto?
+    explanation: Los hijos pueden contener componentes, efectos y refs. Desmontarlos libera su propiedad lógica antes de sustituir visualmente el contenido.
+    explanation_code:
+      - code: |-
+          if (Array.isArray(oldChildren)) {
+            unmountChildren(oldChildren);
+          }
+          hostSetElementText(container, nextText);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para convertir cada child anterior en un string.
+      - id: "2"
+        isCorrect: false
+        text: Para conservar activos sus efectos después de desaparecer.
+      - id: "3"
+        isCorrect: false
+        text: Para que el nuevo texto se transforme en un componente.
+      - id: "4"
+        isCorrect: true
+        text: Para liberar correctamente componentes y recursos antes de limpiar sus nodos.
+
+  - text: ¿Cómo llega un VNode de componente hasta nodos host?
+    explanation: El VNode enlaza una instancia, la instancia ejecuta su render y conserva un subTree. Ese subTree se procesa recursivamente hasta producir nodos host.
+    explanation_code:
+      - code: |-
+          vnode.component = instance;
+          instance.subTree = instance.render();
+          patch(null, instance.subTree, container);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Mediante su instancia y el subTree retornado por la función de render.
+      - id: "2"
+        isCorrect: false
+        text: Convirtiendo la definición directamente en una etiqueta HTML.
+      - id: "3"
+        isCorrect: false
+        text: Copiando el DOM del componente padre.
+      - id: "4"
+        isCorrect: false
+        text: Evitando por completo que patch procese su resultado.
+
+  - text: ¿Qué comunica key durante el diff de una lista?
+    explanation: "`key` expresa qué child nuevo corresponde a cuál anterior aunque cambie de posición. Esto permite preservar o reemplazar la identidad correcta."
+    explanation_code:
+      - code: |-
+          old: [h(Row, { key: 'a' }), h(Row, { key: 'b' })]
+          next: [h(Row, { key: 'b' }), h(Row, { key: 'a' })]
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: La posición fija que nunca puede cambiar.
+      - id: "2"
+        isCorrect: true
+        text: La identidad estable usada para emparejar hijos entre ambos árboles.
+      - id: "3"
+        isCorrect: false
+        text: El nombre del atributo DOM que debe mostrarse.
+      - id: "4"
+        isCorrect: false
+        text: La prioridad del job dentro del scheduler.
