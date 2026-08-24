@@ -1,0 +1,37 @@
+{
+  "documentId": "component-runtime",
+  "title": "Build a Component Runtime",
+  "slug": "component-runtime",
+  "level": "advanced",
+  "topics": [
+    { "id": "component-instance", "label": "component instance" },
+    { "id": "setup", "label": "setup" },
+    { "id": "props-emits", "label": "props and emits" },
+    { "id": "provide-inject", "label": "provide/inject" },
+    { "id": "lifecycle", "label": "lifecycle" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue in Depth" },
+  "short_description": "Prepare and run component instances without implementing a DOM renderer yet.",
+  "description": [
+    "The starter defines types and small helpers so you can focus on coordinating an instance.",
+    "Implement a pedagogical runtime that classifies inputs, runs setup with context, and connects events, dependencies, and lifecycle."
+  ],
+  "instructions": [
+    "Complete createComponentInstance(vnode, parent) with its own identity, parent/root relationships, separate stores, and an inheritable provides registry.",
+    "Complete setupComponent(instance) so it separates props and attrs, normalizes slots, and runs setup while the instance is active.",
+    "Interpret the setup result: store objects as setupState and functions as render.",
+    "Complete emit so it runs the normalized listener left by the parent in the VNode props.",
+    "Complete provide and inject through the active instance registry and a prototype chain.",
+    "Register onMounted and onUnmounted on the instance; mountComponent and unmountComponent must invoke them in the correct order.",
+    "Keep resetRuntime working so every test starts without an active instance or previous identifiers."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/component-runtime.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Instance record", "body": "Create different objects for `props`, `attrs`, `slots`, and `setupState`. When a parent exists, `root` must point to `parent.root`." },
+    { "title": "Setup context", "body": "Save the previous active instance, assign the new one before calling `setup`, and restore the previous one when it finishes." },
+    { "title": "Provides inheritance", "body": "An instance can initially share `parent.provides`. When `provide` runs, create `Object.create(parentProvides)` before writing if both registries are still the same object." },
+    { "title": "Lifecycle", "body": "`onMounted` and `onUnmounted` only append callbacks to the active instance. Mount obtains `subTree` from `render`; unmount runs final hooks and marks the instance." }
+  ]
+}

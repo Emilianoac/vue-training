@@ -410,6 +410,27 @@ steps:
             title: Challenge 1
             subtitle: Implement reduced versions of computed, watch, and watchEffect.
 
+      - name: Component Runtime
+        id: component-runtime
+        items:
+          - id: component-runtime-lesson
+            type: lesson
+            level: basic
+            title: How a Component Runs
+            subtitle: Understand how a definition becomes an instance with setup, inputs, rendering, and lifecycle.
+
+          - id: component-runtime-quiz
+            type: quiz
+            level: advanced
+            title: Component Runtime Quiz
+            subtitle: Test instances, setup, input channels, context, and lifecycle.
+
+          - id: component-runtime
+            type: challenge
+            level: advanced
+            title: Challenge 1
+            subtitle: Implement a reduced runtime that prepares and runs component instances.
+
   - name: Quality
     sub_steps:
       - name: Testing

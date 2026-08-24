@@ -410,6 +410,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa versiones reducidas de computed, watch y watchEffect.
 
+      - name: Runtime de componentes
+        id: component-runtime
+        items:
+          - id: component-runtime-lesson
+            type: lesson
+            level: basic
+            title: Cómo se ejecuta un componente
+            subtitle: Comprende cómo una definición se convierte en una instancia con setup, entradas, render y lifecycle.
+
+          - id: component-runtime-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de runtime de componentes
+            subtitle: Evalúa instancias, setup, canales de entrada, contexto y ciclo de vida.
+
+          - id: component-runtime
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa un runtime reducido que prepare y ejecute instancias de componentes.
+
   - name: Calidad
     sub_steps:
       - name: Testing

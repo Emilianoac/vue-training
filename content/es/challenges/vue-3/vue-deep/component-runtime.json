@@ -1,0 +1,37 @@
+{
+  "documentId": "component-runtime",
+  "title": "Construir un runtime de componentes",
+  "slug": "component-runtime",
+  "level": "advanced",
+  "topics": [
+    { "id": "component-instance", "label": "component instance" },
+    { "id": "setup", "label": "setup" },
+    { "id": "props-emits", "label": "props y emits" },
+    { "id": "provide-inject", "label": "provide/inject" },
+    { "id": "lifecycle", "label": "lifecycle" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue en profundidad" },
+  "short_description": "Prepara y ejecuta instancias sin implementar todavía un renderer DOM.",
+  "description": [
+    "El starter define los tipos y helpers pequeños para que puedas concentrarte en la coordinación de una instancia.",
+    "Implementa un runtime pedagógico que clasifique entradas, ejecute setup con contexto y conecte eventos, dependencias y lifecycle."
+  ],
+  "instructions": [
+    "Completa createComponentInstance(vnode, parent) con identidad propia, relación parent/root, almacenes separados y un registro provides heredable.",
+    "Completa setupComponent(instance) para separar props y attrs, normalizar slots y ejecutar setup mientras la instancia está activa.",
+    "Interpreta el resultado de setup: guarda objetos como setupState y funciones como render.",
+    "Completa emit para ejecutar el listener normalizado que el padre dejó en las props del VNode.",
+    "Completa provide e inject mediante el registro de la instancia activa y una cadena de prototipos.",
+    "Registra onMounted y onUnmounted en la instancia; mountComponent y unmountComponent deben invocarlos en el orden correcto.",
+    "Conserva resetRuntime para que cada test comience sin una instancia activa ni identificadores anteriores."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/component-runtime.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Registro de instancia", "body": "Crea objetos distintos para `props`, `attrs`, `slots` y `setupState`. Si existe un padre, `root` debe apuntar a `parent.root`." },
+    { "title": "Contexto de setup", "body": "Guarda la instancia activa anterior, asigna la nueva antes de llamar a `setup` y restaura la anterior al terminar." },
+    { "title": "Herencia de provides", "body": "Una instancia puede compartir inicialmente `parent.provides`. Al llamar a `provide`, crea `Object.create(parentProvides)` antes de escribir si ambos registros todavía son el mismo objeto." },
+    { "title": "Lifecycle", "body": "`onMounted` y `onUnmounted` solo añaden callbacks a la instancia activa. El montaje obtiene `subTree` desde `render`; el desmontaje ejecuta sus hooks finales y marca la instancia." }
+  ]
+}

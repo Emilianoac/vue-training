@@ -1,0 +1,246 @@
+documentId: component-runtime-quiz
+title: Component Runtime
+level: advanced
+slug: component-runtime-quiz
+description: Test how Vue turns definitions and VNodes into instances with inputs, context, and lifecycle.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: component-instance
+    label: component instance
+  - id: setup
+    label: setup
+  - id: props-emits
+    label: props and emits
+  - id: slots
+    label: slots
+  - id: provide-inject
+    label: provide/inject
+  - id: lifecycle
+    label: lifecycle
+questions:
+  - text: How do a component definition, a VNode, and an instance differ?
+    explanation: The definition describes a reusable type, the VNode declares one concrete occurrence, and the instance preserves the live state of that occurrence between renders.
+    explanation_code:
+      - code: |-
+          const definition = { setup, render };
+          const vnode = h(definition, { start: 2 });
+          const instance = createComponentInstance(vnode, parent);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: The definition describes the type, the VNode an occurrence, and the instance its live state.
+      - id: "2"
+        isCorrect: false
+        text: All three names represent exactly the same object.
+      - id: "3"
+        isCorrect: false
+        text: The instance only contains HTML already inserted into the DOM.
+      - id: "4"
+        isCorrect: false
+        text: The VNode always stores all mutable state returned by setup.
+
+  - text: Why does every mounted occurrence of the same component definition need its own instance?
+    explanation: The definition is reused, but every occurrence must preserve independent props, setupState, hooks, and a subtree.
+    explanation_code:
+      - code: |-
+          const first = createComponentInstance(h(Counter), parent);
+          const second = createComponentInstance(h(Counter), parent);
+
+          first !== second; // true
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: To compile a different JavaScript copy for every render.
+      - id: "2"
+        isCorrect: true
+        text: So every occurrence preserves independent state and lifecycle.
+      - id: "3"
+        isCorrect: false
+        text: To prevent two components from using the same render function.
+      - id: "4"
+        isCorrect: false
+        text: To automatically transform all attributes into props.
+
+  - text: What does an instance's subTree represent?
+    explanation: A component render function produces VNodes. The instance keeps that result as its subTree so it can be mounted or compared with the next one.
+    explanation_code:
+      - code: |-
+          instance.subTree = instance.render.call(instance.proxy);
+          mountSubTree(instance.subTree);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The complete list of the application's ancestors.
+      - id: "2"
+        isCorrect: false
+        text: A copy of every prop declared by child components.
+      - id: "3"
+        isCorrect: true
+        text: The VNode tree produced by that instance's render function.
+      - id: "4"
+        isCorrect: false
+        text: The original uncompiled template source code.
+
+  - text: How does the runtime decide whether an incoming value belongs to props or attrs?
+    explanation: The runtime compares every key with the props declaration. Keys that are not declared and are not declared listeners remain in attrs.
+    explanation_code:
+      - code: |-
+          if (declaredProps.has(key)) {
+            instance.props[key] = value;
+          } else {
+            instance.attrs[key] = value;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: By the primitive type of the received value.
+      - id: "2"
+        isCorrect: false
+        text: By the order of keys in the object.
+      - id: "3"
+        isCorrect: false
+        text: Only reactive values are considered props.
+      - id: "4"
+        isCorrect: true
+        text: It uses the props declaration and keeps unrecognized values in attrs.
+
+  - text: Why does the runtime normalize slots as functions?
+    explanation: A function lets the child decide when and where to obtain VNodes, retains the parent's rendering context, and accepts slot props.
+    explanation_code:
+      - code: |-
+          slots.header = (slotProps) =>
+            normalizeVNodes(rawHeader(slotProps));
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: To produce VNodes on demand and accept data supplied by the child.
+      - id: "2"
+        isCorrect: false
+        text: To turn every slot directly into a permanent DOM element.
+      - id: "3"
+        isCorrect: false
+        text: To force the slot to run only once in the entire application.
+      - id: "4"
+        isCorrect: false
+        text: To remove the parent component's reactive context.
+
+  - text: What purpose does currentInstance serve while setup() runs?
+    explanation: The active instance lets synchronously called APIs know where to register dependencies, providers, and hooks without exposing the instance as an argument.
+    explanation_code:
+      - code: |-
+          currentInstance = instance;
+          const result = setup(props, context);
+          currentInstance = previous;
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Store the latest DOM element created by any component.
+      - id: "2"
+        isCorrect: true
+        text: Associate provide, inject, and lifecycle with the component running setup.
+      - id: "3"
+        isCorrect: false
+        text: Automatically convert setup into an asynchronous function.
+      - id: "4"
+        isCorrect: false
+        text: Share setupState across every instance of the same type.
+
+  - text: What happens when setup() returns an object?
+    explanation: The runtime stores those bindings as setupState and can apply proxyRefs so rendering can access refs without .value on every read.
+    explanation_code:
+      - code: |-
+          const result = setup(props, context);
+          instance.setupState = proxyRefs(result);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The object replaces the entire component definition.
+      - id: "2"
+        isCorrect: false
+        text: Every property automatically becomes a DOM attribute.
+      - id: "3"
+        isCorrect: true
+        text: Its bindings are stored in setupState so rendering can resolve them.
+      - id: "4"
+        isCorrect: false
+        text: The runtime always interprets it as a finished root VNode.
+
+  - text: Where does emit() find the parent's listener for a component event?
+    explanation: The listener belongs to the props of the VNode created by the parent for that instance. A component event does not need to bubble through every ancestor.
+    explanation_code:
+      - code: |-
+          const handler = instance.vnode.props?.onSave;
+          handler?.(payload);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: In every DOM element below the component.
+      - id: "2"
+        isCorrect: false
+        text: In a global registry shared by every application.
+      - id: "3"
+        isCorrect: false
+        text: Only inside the child's setupState object.
+      - id: "4"
+        isCorrect: true
+        text: In the current VNode props through the normalized handler name.
+
+  - text: How can a provides prototype chain resolve the nearest ancestor value?
+    explanation: Each provider creates a layer that inherits from its parent. An own key shadows the inherited one in that branch, while an absent key continues through the prototype.
+    explanation_code:
+      - code: |-
+          child.provides = Object.create(parent.provides);
+          child.provides.theme = 'dark';
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Each layer can shadow one key and delegate the others to the inherited registry.
+      - id: "2"
+        isCorrect: false
+        text: It copies every provider in the application before each inject.
+      - id: "3"
+        isCorrect: false
+        text: It always searches from the root and ignores nearer providers.
+      - id: "4"
+        isCorrect: false
+        text: It converts every provided value into a global variable.
+
+  - text: Why can the runtime reuse an instance when the next VNode has the same type and key?
+    explanation: That combination preserves logical identity. The runtime updates props and slots, renders again, and keeps the instance's setupState and hooks.
+    explanation_code:
+      - code: |-
+          if (oldVNode.type === nextVNode.type
+            && oldVNode.key === nextVNode.key) {
+            updateComponent(instance, nextVNode);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Because the new props are completely discarded.
+      - id: "2"
+        isCorrect: true
+        text: Because it keeps the same identity and can preserve its state between renders.
+      - id: "3"
+        isCorrect: false
+        text: Because every key forces a new instance to be created.
+      - id: "4"
+        isCorrect: false
+        text: Because the component type stops mattering after mount.
