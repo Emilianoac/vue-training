@@ -431,6 +431,27 @@ steps:
             title: Challenge 1
             subtitle: Implement a reduced runtime that prepares and runs component instances.
 
+      - name: Update Scheduling
+        id: update-scheduling
+        items:
+          - id: update-scheduling-lesson
+            type: lesson
+            level: basic
+            title: Scheduling Reactive Updates
+            subtitle: Understand batching, job order, watcher phases, and nextTick within the scheduler.
+
+          - id: update-scheduling-quiz
+            type: quiz
+            level: advanced
+            title: Update Scheduling Quiz
+            subtitle: Test batching, deduplication, flush order, and watcher timing.
+
+          - id: update-scheduling
+            type: challenge
+            level: advanced
+            title: Challenge 1
+            subtitle: Implement a job queue with batching, flush phases, and nextTick.
+
   - name: Quality
     sub_steps:
       - name: Testing

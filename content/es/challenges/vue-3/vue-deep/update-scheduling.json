@@ -1,0 +1,37 @@
+{
+  "documentId": "update-scheduling",
+  "title": "Construir un scheduler de actualizaciones",
+  "slug": "update-scheduling",
+  "level": "advanced",
+  "topics": [
+    { "id": "scheduler", "label": "scheduler" },
+    { "id": "batching", "label": "batching" },
+    { "id": "job-queue", "label": "job queue" },
+    { "id": "watcher-flush", "label": "watcher flush" },
+    { "id": "next-tick", "label": "nextTick" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue en profundidad" },
+  "short_description": "Agrupa jobs reactivos y ejecútalos en fases pre, update y post.",
+  "description": [
+    "El starter define un job con id, marcas pre y disposed, y las estructuras principales de la cola.",
+    "Implementa batching por microtask, deduplicación, orden determinista, timing de watchers y nextTick."
+  ],
+  "instructions": [
+    "Completa queueJob(job) para deduplicar por identidad, ignorar jobs disposed y programar un único flush pendiente.",
+    "Ordena la cola por id ascendente y coloca un job pre antes del update que comparte su id.",
+    "Completa queuePostJob(job) con una cola deduplicada que se ejecute después de los jobs principales.",
+    "Completa queueWatcher(job, flush, ownerId): sync se ejecuta inmediatamente, post usa la cola posterior y pre comparte el id del owner.",
+    "Haz que el flush procese jobs añadidos durante su ejecución y vuelva a revisar trabajo creado desde la fase post.",
+    "Completa nextTick(callback?) para reutilizar la promesa del flush actual y admitir tanto await como callback.",
+    "Conserva resetScheduler para que cada test comience con colas, sets e índices vacíos."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/update-scheduling.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Identidad del job", "body": "Usa un `Set` junto a la cola. Añade el job solo cuando su misma referencia todavía no esté pendiente." },
+    { "title": "Una microtask", "body": "Guarda `currentFlushPromise`. Créala con `resolvedPromise.then(flushJobs)` únicamente cuando aún sea `null`." },
+    { "title": "Orden pre", "body": "Compara primero `id`. Si dos jobs comparten id, el que tenga `pre = true` debe ordenarse antes." },
+    { "title": "Finalizar el ciclo", "body": "Vacía la fase post antes de poner `currentFlushPromise = null`. Si una callback añadió más trabajo, ejecuta otro flush antes de resolver la promesa actual." }
+  ]
+}

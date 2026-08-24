@@ -1,0 +1,247 @@
+documentId: update-scheduling-quiz
+title: Update Scheduling
+level: advanced
+slug: update-scheduling-quiz
+description: Test how Vue batches, orders, and completes reactive updates.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: scheduler
+    label: scheduler
+  - id: batching
+    label: batching
+  - id: job-queue
+    label: job queue
+  - id: watcher-flush
+    label: watcher flush
+  - id: next-tick
+    label: nextTick
+questions:
+  - text: What responsibility does a scheduler add between invalidation and effect execution?
+    explanation: The scheduler receives notification and decides when the job runs. It can queue and batch it instead of repeating the effect immediately.
+    explanation_code:
+      - code: |-
+          if (effect.scheduler) {
+            effect.scheduler(effect.run);
+          } else {
+            effect.run();
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: It decides the timing and channel in which invalidated work will run.
+      - id: "2"
+        isCorrect: false
+        text: It turns every effect into a readonly computed property.
+      - id: "3"
+        isCorrect: false
+        text: It prevents dependencies from ever changing again.
+      - id: "4"
+        isCorrect: false
+        text: It replaces the reactive graph with DOM events.
+
+  - text: What remains synchronous when a component update is scheduled?
+    explanation: Assignments change state immediately. The scheduler defers the consuming job, such as component rendering.
+    explanation_code:
+      - code: |-
+          count.value = 3;
+          console.log(count.value); // 3 immediately.
+          // The component update remains queued.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Only the final write; earlier writes are removed from state.
+      - id: "2"
+        isCorrect: true
+        text: State mutations; the work reacting to them is what gets deferred.
+      - id: "3"
+        isCorrect: false
+        text: Every render for each intermediate value.
+      - id: "4"
+        isCorrect: false
+        text: Only post-flush callbacks.
+
+  - text: Why must a component reuse the same update job across invalidations?
+    explanation: The pending Set compares functions by identity. A stable reference lets it recognize and deduplicate the same update.
+    explanation_code:
+      - code: |-
+          instance.effect = effect(instance.update, {
+            scheduler: () => queueJob(instance.update),
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: So the component can never render again.
+      - id: "2"
+        isCorrect: false
+        text: To share one instance across every component.
+      - id: "3"
+        isCorrect: true
+        text: So the queue identifies several invalidations as the same pending work.
+      - id: "4"
+        isCorrect: false
+        text: So every trigger creates a different Promise.
+
+  - text: What does queue deduplication prevent without discarding state changes?
+    explanation: Every mutation has already been applied. Deduplication avoids running the same consumer several times within the batch.
+    explanation_code:
+      - code: |-
+          queuedJobs.add(instance.update);
+          // Later invalidations reuse this entry.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Two different components updating their own subtrees.
+      - id: "2"
+        isCorrect: false
+        text: State preserving the latest written value.
+      - id: "3"
+        isCorrect: false
+        text: A reactive property notifying its dependencies.
+      - id: "4"
+        isCorrect: true
+        text: Repeating the same job for every invalidation in the batch.
+
+  - text: Why does queueFlush() share one pending promise?
+    explanation: One shared promise schedules a single microtask. Every job added before it runs participates in the same flush.
+    explanation_code:
+      - code: |-
+          if (!currentFlushPromise) {
+            currentFlushPromise = resolvedPromise.then(flushJobs);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: So several pending jobs share one flush microtask.
+      - id: "2"
+        isCorrect: false
+        text: To execute every job in an independent event loop.
+      - id: "3"
+        isCorrect: false
+        text: To block mutations until the DOM changes.
+      - id: "4"
+        isCorrect: false
+        text: To turn jobs into network requests.
+
+  - text: Why should scheduler state be cleared in a finally block?
+    explanation: The queue, sets, and promise must remain usable even when a job throws. `finally` guarantees that restoration.
+    explanation_code:
+      - code: |-
+          try {
+            runQueuedJobs();
+          } finally {
+            queue.length = 0;
+            currentFlushPromise = null;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: To always run every job twice.
+      - id: "2"
+        isCorrect: true
+        text: To avoid leaving the queue blocked or marked as busy after an error.
+      - id: "3"
+        isCorrect: false
+        text: To make every watcher synchronous.
+      - id: "4"
+        isCorrect: false
+        text: To preserve every executed job forever.
+
+  - text: Why are component update jobs ordered by instance id?
+    explanation: Parents usually have lower ids because they are created first. Running them first allows them to update props or unmount children before those children run.
+    explanation_code:
+      - code: |-
+          queue.sort((first, second) => first.id - second.id);
+          // parent.update before child.update
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: So children always render before their parents.
+      - id: "2"
+        isCorrect: false
+        text: To sort component names alphabetically.
+      - id: "3"
+        isCorrect: true
+        text: To preserve parent-child order and skip work from unmounted children.
+      - id: "4"
+        isCorrect: false
+        text: So every component shares the same id.
+
+  - text: When does a default pre watcher run relative to its component DOM update?
+    explanation: The `pre` job shares the component id but sorts before its update job. Its own DOM still contains the previous version.
+    explanation_code:
+      - code: |-
+          watcherJob.id = instance.uid;
+          watcherJob.pre = true;
+          queueJob(watcherJob);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: After every post-flush callback.
+      - id: "2"
+        isCorrect: false
+        text: Only after the component unmounts.
+      - id: "3"
+        isCorrect: false
+        text: In a separate task unrelated to the update.
+      - id: "4"
+        isCorrect: true
+        text: Before the DOM belonging to its own instance is updated.
+
+  - text: How do post and sync watcher timing differ?
+    explanation: "`post` participates in the phase after the main updates and remains batched. `sync` runs during the trigger and observes every mutation without batching."
+    explanation_code:
+      - code: |-
+          watch(source, readDom, { flush: 'post' });
+          watch(flag, reactNow, { flush: 'sync' });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: post waits for updated DOM; sync responds immediately without batching.
+      - id: "2"
+        isCorrect: false
+        text: Both always run before any mutation.
+      - id: "3"
+        isCorrect: false
+        text: sync only runs after nextTick.
+      - id: "4"
+        isCorrect: false
+        text: post ignores every change made during a flush.
+
+  - text: What does nextTick() wait for?
+    explanation: "`nextTick` returns the pending flush promise. It does not create a render; it resumes after phases already scheduled by an earlier mutation."
+    explanation_code:
+      - code: |-
+          count.value++;
+          await nextTick();
+          console.log(element.textContent); // Updated DOM.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Every asynchronous operation outside Vue.
+      - id: "2"
+        isCorrect: true
+        text: Completion of the update flush that is currently pending.
+      - id: "3"
+        isCorrect: false
+        text: A fixed delay of exactly one millisecond.
+      - id: "4"
+        isCorrect: false
+        text: Automatic creation of a new reactive mutation.

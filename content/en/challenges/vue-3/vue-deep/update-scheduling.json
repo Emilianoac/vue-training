@@ -1,0 +1,37 @@
+{
+  "documentId": "update-scheduling",
+  "title": "Build an Update Scheduler",
+  "slug": "update-scheduling",
+  "level": "advanced",
+  "topics": [
+    { "id": "scheduler", "label": "scheduler" },
+    { "id": "batching", "label": "batching" },
+    { "id": "job-queue", "label": "job queue" },
+    { "id": "watcher-flush", "label": "watcher flush" },
+    { "id": "next-tick", "label": "nextTick" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue in Depth" },
+  "short_description": "Batch reactive jobs and run them through pre, update, and post phases.",
+  "description": [
+    "The starter defines a job with id, pre and disposed flags, plus the main queue structures.",
+    "Implement microtask batching, deduplication, deterministic order, watcher timing, and nextTick."
+  ],
+  "instructions": [
+    "Complete queueJob(job) so it deduplicates by identity, ignores disposed jobs, and schedules one pending flush.",
+    "Sort the queue by ascending id and place a pre job before the update that shares its id.",
+    "Complete queuePostJob(job) with a deduplicated queue that runs after the main jobs.",
+    "Complete queueWatcher(job, flush, ownerId): sync runs immediately, post uses the post queue, and pre shares its owner id.",
+    "Make the flush process jobs added while it is running and check again for work created by the post phase.",
+    "Complete nextTick(callback?) so it reuses the current flush promise and supports both await and callback forms.",
+    "Keep resetScheduler working so every test starts with empty queues, sets, and indexes."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/update-scheduling.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Job identity", "body": "Use a `Set` beside the queue. Add the job only when that same reference is not already pending." },
+    { "title": "One microtask", "body": "Store `currentFlushPromise`. Create it with `resolvedPromise.then(flushJobs)` only while it is still `null`." },
+    { "title": "Pre order", "body": "Compare `id` first. When two jobs share an id, the one with `pre = true` must sort first." },
+    { "title": "Finish the cycle", "body": "Flush the post phase before setting `currentFlushPromise = null`. If a callback added more work, run another flush before the current promise resolves." }
+  ]
+}

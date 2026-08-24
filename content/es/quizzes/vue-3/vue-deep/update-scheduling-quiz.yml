@@ -1,0 +1,247 @@
+documentId: update-scheduling-quiz
+title: Programación de actualizaciones
+level: advanced
+slug: update-scheduling-quiz
+description: Evalúa cómo Vue agrupa, ordena y completa actualizaciones reactivas.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue en profundidad
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: scheduler
+    label: scheduler
+  - id: batching
+    label: batching
+  - id: job-queue
+    label: job queue
+  - id: watcher-flush
+    label: watcher flush
+  - id: next-tick
+    label: nextTick
+questions:
+  - text: ¿Qué responsabilidad añade un scheduler entre la invalidación y la ejecución de un efecto?
+    explanation: El scheduler recibe la notificación y decide cuándo ejecutar el job. Puede encolarlo y agruparlo en vez de repetir el efecto inmediatamente.
+    explanation_code:
+      - code: |-
+          if (effect.scheduler) {
+            effect.scheduler(effect.run);
+          } else {
+            effect.run();
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Decide el momento y el canal en que se ejecutará el trabajo invalidado.
+      - id: "2"
+        isCorrect: false
+        text: Convierte cualquier efecto en una propiedad computed readonly.
+      - id: "3"
+        isCorrect: false
+        text: Impide que las dependencias vuelvan a cambiar.
+      - id: "4"
+        isCorrect: false
+        text: Reemplaza el grafo reactivo por eventos DOM.
+
+  - text: ¿Qué permanece síncrono cuando se programa la actualización de un componente?
+    explanation: Las asignaciones modifican el estado de inmediato. El scheduler aplaza el job consumidor, como el render del componente.
+    explanation_code:
+      - code: |-
+          count.value = 3;
+          console.log(count.value); // 3 inmediatamente.
+          // El update del componente continúa encolado.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Solo la escritura final; las anteriores se eliminan del estado.
+      - id: "2"
+        isCorrect: true
+        text: Las mutaciones del estado; lo aplazado es el trabajo que reacciona a ellas.
+      - id: "3"
+        isCorrect: false
+        text: Todos los renders de cada valor intermedio.
+      - id: "4"
+        isCorrect: false
+        text: Únicamente las callbacks post-flush.
+
+  - text: ¿Por qué debe un componente reutilizar el mismo job de actualización entre invalidaciones?
+    explanation: El Set de pendientes compara funciones por identidad. Una referencia estable permite reconocer y deduplicar el mismo update.
+    explanation_code:
+      - code: |-
+          instance.effect = effect(instance.update, {
+            scheduler: () => queueJob(instance.update),
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para que el componente no pueda volver a renderizar nunca.
+      - id: "2"
+        isCorrect: false
+        text: Para compartir una instancia entre todos los componentes.
+      - id: "3"
+        isCorrect: true
+        text: Para que la cola identifique varias invalidaciones como el mismo trabajo pendiente.
+      - id: "4"
+        isCorrect: false
+        text: Para que cada trigger cree una Promise diferente.
+
+  - text: ¿Qué evita la deduplicación de la cola sin descartar cambios de estado?
+    explanation: Todas las mutaciones ya están aplicadas. La deduplicación evita ejecutar varias veces el mismo consumidor dentro del lote.
+    explanation_code:
+      - code: |-
+          queuedJobs.add(instance.update);
+          // Las siguientes invalidaciones reutilizan esta entrada.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Que dos componentes diferentes actualicen sus propios subárboles.
+      - id: "2"
+        isCorrect: false
+        text: Que el estado conserve el último valor escrito.
+      - id: "3"
+        isCorrect: false
+        text: Que una propiedad reactive notifique a sus dependencias.
+      - id: "4"
+        isCorrect: true
+        text: Repetir el mismo job por cada invalidación ocurrida en el lote.
+
+  - text: ¿Por qué comparte queueFlush() una sola promesa pendiente?
+    explanation: Una promesa compartida programa una única microtask. Todos los jobs añadidos antes de ejecutarla participan en el mismo flush.
+    explanation_code:
+      - code: |-
+          if (!currentFlushPromise) {
+            currentFlushPromise = resolvedPromise.then(flushJobs);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Para que varios jobs pendientes compartan una sola microtask de flush.
+      - id: "2"
+        isCorrect: false
+        text: Para ejecutar cada job en un event loop independiente.
+      - id: "3"
+        isCorrect: false
+        text: Para bloquear las mutaciones hasta que cambie el DOM.
+      - id: "4"
+        isCorrect: false
+        text: Para convertir los jobs en peticiones de red.
+
+  - text: ¿Por qué debería limpiarse el estado del scheduler en un bloque finally?
+    explanation: La cola, los sets y la promesa deben quedar utilizables aunque un job lance un error. `finally` garantiza esa restauración.
+    explanation_code:
+      - code: |-
+          try {
+            runQueuedJobs();
+          } finally {
+            queue.length = 0;
+            currentFlushPromise = null;
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para ejecutar los jobs siempre dos veces.
+      - id: "2"
+        isCorrect: true
+        text: Para no dejar la cola bloqueada o marcada como ocupada después de un error.
+      - id: "3"
+        isCorrect: false
+        text: Para volver síncronos todos los watchers.
+      - id: "4"
+        isCorrect: false
+        text: Para conservar indefinidamente cada job ejecutado.
+
+  - text: ¿Por qué se ordenan los jobs de actualización por id de instancia?
+    explanation: Los padres suelen tener ids menores porque se crean primero. Ejecutarlos antes permite actualizar props o desmontar hijos antes del turno de estos.
+    explanation_code:
+      - code: |-
+          queue.sort((first, second) => first.id - second.id);
+          // parent.update antes que child.update
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Para que los hijos siempre rendericen antes que sus padres.
+      - id: "2"
+        isCorrect: false
+        text: Para ordenar alfabéticamente los nombres de componentes.
+      - id: "3"
+        isCorrect: true
+        text: Para mantener un orden padre-hijo y poder omitir trabajo de hijos desmontados.
+      - id: "4"
+        isCorrect: false
+        text: Para que todos los componentes compartan el mismo id.
+
+  - text: ¿Cuándo se ejecuta un watcher pre predeterminado respecto del update DOM de su componente?
+    explanation: El job `pre` comparte el id del componente, pero se ordena antes de su job de actualización. El DOM propio aún conserva la versión anterior.
+    explanation_code:
+      - code: |-
+          watcherJob.id = instance.uid;
+          watcherJob.pre = true;
+          queueJob(watcherJob);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Después de todas las callbacks post-flush.
+      - id: "2"
+        isCorrect: false
+        text: Solo después de desmontar el componente.
+      - id: "3"
+        isCorrect: false
+        text: En una tarea independiente sin relación con el update.
+      - id: "4"
+        isCorrect: true
+        text: Antes de que se actualice el DOM perteneciente a su propia instancia.
+
+  - text: ¿En qué se diferencian los timings post y sync de un watcher?
+    explanation: "`post` participa en la fase posterior del flush y conserva batching. `sync` ejecuta durante el trigger y observa cada mutación sin agruparla."
+    explanation_code:
+      - code: |-
+          watch(source, readDom, { flush: 'post' });
+          watch(flag, reactNow, { flush: 'sync' });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: post espera al DOM actualizado; sync responde inmediatamente y no se agrupa.
+      - id: "2"
+        isCorrect: false
+        text: Ambos se ejecutan siempre antes de cualquier mutación.
+      - id: "3"
+        isCorrect: false
+        text: sync se ejecuta únicamente después de nextTick.
+      - id: "4"
+        isCorrect: false
+        text: post ignora todos los cambios ocurridos durante un flush.
+
+  - text: ¿Qué espera nextTick()?
+    explanation: "`nextTick` retorna la promesa del flush pendiente. No crea un render; permite continuar después de las fases ya programadas por una mutación anterior."
+    explanation_code:
+      - code: |-
+          count.value++;
+          await nextTick();
+          console.log(element.textContent); // DOM actualizado.
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Todas las operaciones asíncronas externas a Vue.
+      - id: "2"
+        isCorrect: true
+        text: La finalización del ciclo de flush que esté actualmente pendiente.
+      - id: "3"
+        isCorrect: false
+        text: Un retraso fijo de exactamente un milisegundo.
+      - id: "4"
+        isCorrect: false
+        text: La creación automática de una mutación reactiva nueva.

@@ -431,6 +431,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa un runtime reducido que prepare y ejecute instancias de componentes.
 
+      - name: Programación de actualizaciones
+        id: update-scheduling
+        items:
+          - id: update-scheduling-lesson
+            type: lesson
+            level: basic
+            title: Programar actualizaciones reactivas
+            subtitle: Comprende batching, orden de jobs, fases de watchers y nextTick dentro del scheduler.
+
+          - id: update-scheduling-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de programación de actualizaciones
+            subtitle: Evalúa batching, deduplicación, orden del flush y timing de watchers.
+
+          - id: update-scheduling
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa una cola de jobs con batching, fases de flush y nextTick.
+
   - name: Calidad
     sub_steps:
       - name: Testing
