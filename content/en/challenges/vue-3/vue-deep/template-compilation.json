@@ -1,0 +1,35 @@
+{
+  "documentId": "template-compilation",
+  "title": "Build a Template Compiler",
+  "slug": "template-compilation",
+  "level": "advanced",
+  "topics": [
+    { "id": "template-compiler", "label": "template compiler" },
+    { "id": "render-function", "label": "render function" },
+    { "id": "vnode", "label": "VNode" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue in Depth" },
+  "short_description": "Parse a reduced template grammar and generate a render function that creates VNodes.",
+  "description": [
+    "The compiler accepts elements, text, interpolations, nested children, and multiple root nodes. Attributes and directives remain outside this reduced grammar.",
+    "Complete the parse, transform, and code-generation stages while preserving clear errors for malformed templates."
+  ],
+  "instructions": [
+    "Implement baseParse(template) so it returns a Root AST and consumes the entire source.",
+    "Implement interpolation parsing for {{ expression }}, trimming the expression and rejecting a missing closing delimiter.",
+    "Implement element parsing with matching start and end tags, nested children, and an explicit error for a missing or mismatched closing tag.",
+    "Implement text parsing so it stops at the next interpolation or element boundary without leaving the parser stuck.",
+    "Complete transform(ast) so every node receives a codegenNode and every interpolation is generated as a read from _ctx.",
+    "Complete generate(ast) so one root child returns that expression and multiple root children return an array.",
+    "Complete compile(template) so it returns both the transformed AST and the generated render-function source."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/template-compilation.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Consumption", "body": "Every parser branch must remove characters from `context.source`. Text should stop at the closest `{{` or `<` boundary." },
+    { "title": "Ancestor stack", "body": "Push the current element before parsing its children and pop it afterward. `isEnd()` can then stop when the next closing tag belongs to an active ancestor." },
+    { "title": "Code generation", "body": "Generate text with `JSON.stringify()`, interpolation as `String(_ctx.expression)`, and elements as `h(tag, null, children)`." },
+    { "title": "Root shape", "body": "A single root child can be returned directly. For multiple roots, generate an array so no source node disappears." }
+  ]
+}

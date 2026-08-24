@@ -16,6 +16,7 @@ import { createRenderingComponentsChallenge } from "./challenges/rendering-compo
 import { createSharedCartStoreChallenge } from "./challenges/shared-cart-store/config";
 import { createSharedReadingListChallenge } from "./challenges/shared-reading-list/config";
 import { createSlotsProfilePanelChallenge } from "./challenges/slots-profile-panel/config";
+import { createTemplateCompilationChallenge } from "./challenges/template-compilation/config";
 import { createUpdateSchedulingChallenge } from "./challenges/update-scheduling/config";
 import { createUserDirectoryComponentsChallenge } from "./challenges/user-directory-components/config";
 import { createUseDisclosurePanelChallenge } from "./challenges/use-disclosure-panel/config";
@@ -41,6 +42,7 @@ const challengeFactories: Record<string, (locale: string) => WebContainerChallen
   "shared-cart-store": createSharedCartStoreChallenge,
   "shared-reading-list": createSharedReadingListChallenge,
   "slots-profile-panel": createSlotsProfilePanelChallenge,
+  "template-compilation": createTemplateCompilationChallenge,
   "update-scheduling": createUpdateSchedulingChallenge,
   "user-directory-components": createUserDirectoryComponentsChallenge,
   "use-disclosure-panel": createUseDisclosurePanelChallenge,

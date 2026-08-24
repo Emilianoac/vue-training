@@ -1,0 +1,35 @@
+{
+  "documentId": "template-compilation",
+  "title": "Construye un compilador de templates",
+  "slug": "template-compilation",
+  "level": "advanced",
+  "topics": [
+    { "id": "template-compiler", "label": "compilador de templates" },
+    { "id": "render-function", "label": "función de render" },
+    { "id": "vnode", "label": "VNode" }
+  ],
+  "category": { "name": "Vue 3", "image": { "url": "https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png" } },
+  "subCategory": { "id": "vue-deep", "name": "Vue en profundidad" },
+  "short_description": "Analiza una gramática reducida de templates y genera una función de render que crea VNodes.",
+  "description": [
+    "El compilador acepta elementos, texto, interpolaciones, children anidados y múltiples nodos raíz. Los atributos y las directivas quedan fuera de esta gramática reducida.",
+    "Completa las fases parse, transform y codegen conservando errores claros para templates mal formados."
+  ],
+  "instructions": [
+    "Implementa baseParse(template) para que retorne un AST Root y consuma todo el source.",
+    "Implementa el parse de interpolaciones {{ expression }}, limpiando la expresión y rechazando un delimitador de cierre ausente.",
+    "Implementa el parse de elementos con tags de inicio y cierre coincidentes, children anidados y un error explícito para un cierre ausente o incorrecto.",
+    "Implementa el parse de texto para que se detenga ante la siguiente interpolación o elemento sin dejar bloqueado el parser.",
+    "Completa transform(ast) para que cada nodo reciba un codegenNode y cada interpolación se genere como una lectura desde _ctx.",
+    "Completa generate(ast) para que un único child raíz retorne esa expresión y múltiples children raíz retornen un array.",
+    "Completa compile(template) para que retorne tanto el AST transformado como el source de la función de render."
+  ],
+  "cover": { "url": "/images/challenges/vue-3/vue-deep/template-compilation.webp" },
+  "images": [{ "url": "" }],
+  "hints": [
+    { "title": "Consumo", "body": "Cada rama del parser debe eliminar caracteres de `context.source`. El texto debe detenerse en el límite `{{` o `<` más cercano." },
+    { "title": "Stack de ancestros", "body": "Añade el elemento actual antes de procesar sus children y retíralo después. Así `isEnd()` puede detenerse cuando el siguiente cierre pertenece a un ancestro activo." },
+    { "title": "Generación de código", "body": "Genera texto con `JSON.stringify()`, interpolaciones como `String(_ctx.expression)` y elementos como `h(tag, null, children)`." },
+    { "title": "Forma de la raíz", "body": "Un único child raíz puede retornarse directamente. Para múltiples raíces, genera un array y evita que desaparezca algún nodo fuente." }
+  ]
+}

@@ -1,0 +1,245 @@
+documentId: template-compilation-quiz
+title: Compilación de templates
+level: advanced
+slug: template-compilation-quiz
+description: Evalúa cómo Vue convierte templates en instrucciones de render optimizadas.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue en profundidad
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: template-compiler
+    label: compilador de templates
+  - id: render-function
+    label: función de render
+  - id: patch-flags
+    label: patch flags
+  - id: block-tree
+    label: árbol de blocks
+  - id: vapor-mode
+    label: Vapor Mode
+questions:
+  - text: ¿Qué produce el compilador tradicional de templates de Vue?
+    explanation: El compilador convierte la sintaxis declarativa del template en JavaScript. En el pipeline tradicional, ese JavaScript es una función de render que crea VNodes para el renderer.
+    explanation_code:
+      - code: |-
+          template → función de render → VNodes → renderer → DOM
+        language: text
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Una función de render que describe el árbol VNode deseado.
+      - id: "2"
+        isCorrect: false
+        text: Una copia permanente del DOM del navegador guardada en el bundle.
+      - id: "3"
+        isCorrect: false
+        text: Una cola del scheduler con todas las actualizaciones futuras.
+      - id: "4"
+        isCorrect: false
+        text: Solamente una hoja CSS para el componente.
+
+  - text: ¿Qué responsabilidad pertenece a la fase parse?
+    explanation: Parse consume los caracteres fuente y registra su estructura como nodos. Transform asigna significado de compilación después y codegen emite JavaScript desde el árbol transformado.
+    explanation_code:
+      - code: |-
+          const ast = parse('<h1>Hola {{ name }}</h1>');
+          transform(ast);
+          const code = generate(ast);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Montar los nodos generados en el DOM real.
+      - id: "2"
+        isCorrect: true
+        text: Leer el template fuente y construir un AST.
+      - id: "3"
+        isCorrect: false
+        text: Ejecutar los hooks de lifecycle del componente.
+      - id: "4"
+        isCorrect: false
+        text: Comparar los árboles VNode anterior y nuevo.
+
+  - text: ¿Por qué es más útil un AST que inspeccionar repetidamente el string fuente?
+    explanation: Un AST convierte sintaxis en tipos de nodo con significado. Las fases posteriores pueden tratar elementos, texto, interpolaciones y directivas sin volver a analizar sus caracteres.
+    explanation_code:
+      - code: |-
+          {
+            type: 'Interpolation',
+            content: 'user.name',
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Ejecuta automáticamente todas las expresiones durante el build.
+      - id: "2"
+        isCorrect: false
+        text: Garantiza que todos los nodos sean estáticos.
+      - id: "3"
+        isCorrect: true
+        text: Conserva el significado sintáctico en una estructura para las fases posteriores.
+      - id: "4"
+        isCorrect: false
+        text: Reemplaza la necesidad de generar código.
+
+  - text: ¿Por qué una interpolación generada lee desde el contexto de render?
+    explanation: El compilador conserva la expresión para runtime. `_ctx` entrega los valores actuales de la instancia cuando se ejecuta su función de render.
+    explanation_code:
+      - code: |-
+          // <p>{{ user.name }}</p>
+          toDisplayString(_ctx.user.name);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque los valores interpolados deben congelarse durante el build.
+      - id: "2"
+        isCorrect: false
+        text: Porque el navegador entrega _ctx como variable global.
+      - id: "3"
+        isCorrect: false
+        text: Porque toda interpolación es una prop del componente.
+      - id: "4"
+        isCorrect: true
+        text: Porque la expresión debe usar el estado actual de cada instancia del componente.
+
+  - text: ¿Por qué los children de un componente suelen generarse como funciones de slot?
+    explanation: El contenido del slot se declara en el contexto del padre, pero se renderiza donde el hijo lo solicita. Una función conserva esa propiedad y posterga su creación hasta que el hijo invoca el slot.
+    explanation_code:
+      - code: |-
+          createVNode(UserCard, null, {
+            default: withCtx(() => [
+              createElementVNode('span', null, _ctx.label),
+            ]),
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Para conservar el scope de render del padre y permitir que el hijo elija dónde renderizarlos.
+      - id: "2"
+        isCorrect: false
+        text: Para convertir cada child en un atributo nativo del DOM.
+      - id: "3"
+        isCorrect: false
+        text: Para ejecutar el contenido del slot solo durante el build.
+      - id: "4"
+        isCorrect: false
+        text: Para impedir que el hijo renderice contenido fallback.
+
+  - text: ¿Cómo se diferencian las directivas estructurales de las que producen props o helpers runtime?
+    explanation: Las directivas estructurales modifican el control de flujo y los subárboles generados. Otras pueden compilarse como props, listeners, helpers o metadata sin reemplazar la estructura que las rodea.
+    explanation_code:
+      - code: |-
+          // v-if cambia el control de flujo
+          return _ctx.visible ? createVNode('p') : createCommentVNode();
+
+          // v-bind aporta una prop
+          createVNode('p', { title: _ctx.title });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Las estructurales son las únicas directivas que reconoce el compilador.
+      - id: "2"
+        isCorrect: true
+        text: Las estructurales cambian qué ramas o subárboles repetidos pueden existir.
+      - id: "3"
+        isCorrect: false
+        text: Las estructurales siempre se convierten en atributos DOM visibles.
+      - id: "4"
+        isCorrect: false
+        text: Las props y los helpers runtime son evaluados solamente por el parser.
+
+  - text: ¿Por qué puede el compilador guardar en caché un subárbol estático?
+    explanation: Si un subárbol no depende del contexto de render ni de un scope local, su resultado no puede cambiar entre renders. Reutilizarlo evita crear y comparar VNodes equivalentes otra vez.
+    explanation_code:
+      - code: |-
+          // <h2>Cuenta</h2>
+          const heading = _cache[0] || (_cache[0] = createVNode('h2', null, 'Cuenta'));
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Porque todos los subárboles son automáticamente inmutables.
+      - id: "2"
+        isCorrect: false
+        text: Porque el HTML estático debe recrearse en cada render.
+      - id: "3"
+        isCorrect: true
+        text: Porque el análisis estático demuestra que no depende de valores de render cambiantes.
+      - id: "4"
+        isCorrect: false
+        text: Porque la caché hace que el renderer ignore también todos los siblings dinámicos.
+
+  - text: ¿Qué información comunica un patch flag al renderer?
+    explanation: Un patch flag registra el tipo de trabajo dinámico que puede requerir un VNode generado. El renderer usa comprobaciones bitwise rápidas en vez de comparar defensivamente cada campo.
+    explanation_code:
+      - code: |-
+          if (vnode.patchFlag & PatchFlags.TEXT) {
+            hostSetElementText(vnode.el, vnode.children);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: El momento exacto en que el scheduler debe vaciar el componente.
+      - id: "2"
+        isCorrect: false
+        text: La ubicación fuente de cada elemento estático.
+      - id: "3"
+        isCorrect: false
+        text: La instancia de componente propietaria del VNode.
+      - id: "4"
+        isCorrect: true
+        text: Qué aspectos dinámicos de ese VNode pueden necesitar actualización.
+
+  - text: ¿Cómo reducen trabajo los blocks durante una actualización?
+    explanation: Un block registra sus descendientes dinámicos relevantes en una lista aplanada. El renderer puede visitar esa lista y omitir nodos estáticos del subárbol completo.
+    explanation_code:
+      - code: |-
+          block.dynamicChildren = [dynamicParagraph, dynamicSpan];
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: Permiten recorrer una lista de descendientes dinámicos en vez de todo el subárbol estable.
+      - id: "2"
+        isCorrect: false
+        text: Convierten todos los descendientes dinámicos en HTML estático.
+      - id: "3"
+        isCorrect: false
+        text: Impiden que v-if y v-for creen subárboles.
+      - id: "4"
+        isCorrect: false
+        text: Eliminan la necesidad de una función de render.
+
+  - text: ¿Qué debe cambiar para usar un componente Vapor dentro de una aplicación VDOM existente?
+    explanation: El SFC activa la compilación Vapor y la aplicación VDOM instala el plugin oficial de interop. En Vue 3.5.38, usado actualmente por Vue Training, estas entradas de Vapor todavía no están disponibles.
+    explanation_code:
+      - code: |-
+          // Component.vue: <script setup vapor>
+          createApp(App)
+            .use(vaporInteropPlugin)
+            .mount('#app');
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Todos los componentes deben reescribirse como JSX.
+      - id: "2"
+        isCorrect: true
+        text: El SFC debe activar Vapor y la app VDOM debe instalar vaporInteropPlugin.
+      - id: "3"
+        isCorrect: false
+        text: createApp convierte automáticamente todos los componentes anidados a Vapor.
+      - id: "4"
+        isCorrect: false
+        text: Solo es necesario añadir un patch flag al VNode raíz.

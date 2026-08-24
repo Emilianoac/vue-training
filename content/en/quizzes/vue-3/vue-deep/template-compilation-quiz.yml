@@ -1,0 +1,245 @@
+documentId: template-compilation-quiz
+title: Template Compilation
+level: advanced
+slug: template-compilation-quiz
+description: Test how Vue turns templates into optimized rendering instructions.
+category:
+  name: Vue 3
+  image:
+    url: https://res.cloudinary.com/du6pa3pa5/image/upload/v1765247921/vue-training/vue_0b0e7956d5.png
+subCategory:
+  id: vue-deep
+  name: Vue in Depth
+  image:
+    url: /images/quizzes/categories/vue-in-depth.webp
+topics:
+  - id: template-compiler
+    label: template compiler
+  - id: render-function
+    label: render function
+  - id: patch-flags
+    label: patch flags
+  - id: block-tree
+    label: block tree
+  - id: vapor-mode
+    label: Vapor Mode
+questions:
+  - text: What does Vue's traditional template compiler produce?
+    explanation: The compiler turns declarative template syntax into JavaScript. In the traditional pipeline, that JavaScript is a render function that creates VNodes for the renderer.
+    explanation_code:
+      - code: |-
+          template → render function → VNodes → renderer → DOM
+        language: text
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: A render function that describes the desired VNode tree.
+      - id: "2"
+        isCorrect: false
+        text: A permanent copy of the browser DOM stored in the bundle.
+      - id: "3"
+        isCorrect: false
+        text: A scheduler queue containing every future component update.
+      - id: "4"
+        isCorrect: false
+        text: Only a CSS stylesheet for the component.
+
+  - text: What responsibility belongs to the parse phase?
+    explanation: Parse consumes source characters and records their structure as nodes. Transform assigns compilation meaning later, and codegen emits JavaScript from the transformed tree.
+    explanation_code:
+      - code: |-
+          const ast = parse('<h1>Hello {{ name }}</h1>');
+          transform(ast);
+          const code = generate(ast);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Mounting the generated nodes into the real DOM.
+      - id: "2"
+        isCorrect: true
+        text: Reading the template source and building an AST.
+      - id: "3"
+        isCorrect: false
+        text: Running component lifecycle hooks.
+      - id: "4"
+        isCorrect: false
+        text: Comparing the previous and next VNode trees.
+
+  - text: Why is an AST more useful than repeatedly inspecting the source string?
+    explanation: An AST turns syntax into meaningful node types. Later passes can handle elements, text, interpolations, and directives without parsing their characters again.
+    explanation_code:
+      - code: |-
+          {
+            type: 'Interpolation',
+            content: 'user.name',
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: It automatically executes every template expression during build.
+      - id: "2"
+        isCorrect: false
+        text: It guarantees that every node is static.
+      - id: "3"
+        isCorrect: true
+        text: It preserves syntactic meaning in a structured form for later passes.
+      - id: "4"
+        isCorrect: false
+        text: It replaces the need for code generation.
+
+  - text: Why does a generated interpolation read from the render context?
+    explanation: The compiler preserves the expression for runtime. `_ctx` supplies the current values belonging to the component instance when its render function executes.
+    explanation_code:
+      - code: |-
+          // <p>{{ user.name }}</p>
+          toDisplayString(_ctx.user.name);
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Because interpolation values must be frozen during the build.
+      - id: "2"
+        isCorrect: false
+        text: Because the browser provides _ctx as a global variable.
+      - id: "3"
+        isCorrect: false
+        text: Because every interpolation is a component prop.
+      - id: "4"
+        isCorrect: true
+        text: Because the expression must use the current state of each component instance.
+
+  - text: Why are component children commonly generated as slot functions?
+    explanation: Slot content is declared in the parent's context but rendered where the child requests it. A function preserves that ownership and defers creation until the child invokes the slot.
+    explanation_code:
+      - code: |-
+          createVNode(UserCard, null, {
+            default: withCtx(() => [
+              createElementVNode('span', null, _ctx.label),
+            ]),
+          });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: To preserve the parent's render scope while allowing the child to choose where to render them.
+      - id: "2"
+        isCorrect: false
+        text: To convert every component child into a native DOM attribute.
+      - id: "3"
+        isCorrect: false
+        text: To make slot content execute only during the build.
+      - id: "4"
+        isCorrect: false
+        text: To prevent the child from rendering any fallback content.
+
+  - text: How do structural directives differ from directives that produce props or runtime helpers?
+    explanation: Structural directives reshape generated control flow and subtrees. Other directives can compile into props, listeners, helper calls, or directive metadata without replacing the surrounding tree structure.
+    explanation_code:
+      - code: |-
+          // v-if changes control flow
+          return _ctx.visible ? createVNode('p') : createCommentVNode();
+
+          // v-bind contributes a prop
+          createVNode('p', { title: _ctx.title });
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Structural directives are the only directives recognized by the compiler.
+      - id: "2"
+        isCorrect: true
+        text: Structural directives change which generated branches or repeated subtrees can exist.
+      - id: "3"
+        isCorrect: false
+        text: Structural directives always become visible DOM attributes.
+      - id: "4"
+        isCorrect: false
+        text: Props and runtime helpers are evaluated only by the parser.
+
+  - text: Why can the compiler cache a static subtree?
+    explanation: If a subtree has no dependency on render context or a local scope, its result cannot change between renders. Reusing it avoids creating and comparing equivalent VNodes again.
+    explanation_code:
+      - code: |-
+          // <h2>Account</h2>
+          const heading = _cache[0] || (_cache[0] = createVNode('h2', null, 'Account'));
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Because every subtree is automatically immutable.
+      - id: "2"
+        isCorrect: false
+        text: Because static HTML must be recreated during every render.
+      - id: "3"
+        isCorrect: true
+        text: Because static analysis proves that its output does not depend on changing render values.
+      - id: "4"
+        isCorrect: false
+        text: Because caching makes the renderer ignore all dynamic siblings too.
+
+  - text: What information does a patch flag communicate to the renderer?
+    explanation: A patch flag records the kind of dynamic work a generated VNode may require. The renderer uses fast bitwise checks instead of defensively comparing every field.
+    explanation_code:
+      - code: |-
+          if (vnode.patchFlag & PatchFlags.TEXT) {
+            hostSetElementText(vnode.el, vnode.children);
+          }
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: The exact time when the scheduler must flush the component.
+      - id: "2"
+        isCorrect: false
+        text: The source location of every static element.
+      - id: "3"
+        isCorrect: false
+        text: The component instance that owns the VNode.
+      - id: "4"
+        isCorrect: true
+        text: Which dynamic aspects of that VNode may need updating.
+
+  - text: How do blocks reduce work during an update?
+    explanation: A block tracks its relevant dynamic descendants in a flattened list. The renderer can visit that list and skip static nodes in the full subtree.
+    explanation_code:
+      - code: |-
+          block.dynamicChildren = [dynamicParagraph, dynamicSpan];
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: true
+        text: They let the renderer traverse a collected list of dynamic descendants instead of the entire stable subtree.
+      - id: "2"
+        isCorrect: false
+        text: They turn all dynamic descendants into static HTML.
+      - id: "3"
+        isCorrect: false
+        text: They prevent v-if and v-for from creating subtrees.
+      - id: "4"
+        isCorrect: false
+        text: They remove the need for a render function.
+
+  - text: What must change to use a Vapor component inside an existing VDOM application?
+    explanation: The SFC opts into Vapor compilation, while the VDOM application installs the official interop plugin. On Vue Training's current Vue 3.5.38, these Vapor entry points are not available yet.
+    explanation_code:
+      - code: |-
+          // Component.vue: <script setup vapor>
+          createApp(App)
+            .use(vaporInteropPlugin)
+            .mount('#app');
+        language: js
+    answers:
+      - id: "1"
+        isCorrect: false
+        text: Every component must be rewritten as JSX.
+      - id: "2"
+        isCorrect: true
+        text: The SFC must opt into Vapor and the VDOM app must install vaporInteropPlugin.
+      - id: "3"
+        isCorrect: false
+        text: createApp automatically converts all nested components into Vapor output.
+      - id: "4"
+        isCorrect: false
+        text: Only a patch flag needs to be added to the root VNode.

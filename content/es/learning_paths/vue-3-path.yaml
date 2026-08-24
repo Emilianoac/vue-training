@@ -473,6 +473,27 @@ steps:
             title: Desafío 1
             subtitle: Implementa un renderer reducido para elementos, componentes y listas keyed.
 
+      - name: Compilación de templates
+        id: template-compilation
+        items:
+          - id: template-compilation-lesson
+            type: lesson
+            level: basic
+            title: De templates a estrategias de renderizado
+            subtitle: Comprende cómo Vue convierte templates en instrucciones de render optimizadas y cómo Vapor cambia el destino de compilación.
+
+          - id: template-compilation-quiz
+            type: quiz
+            level: advanced
+            title: Cuestionario de compilación
+            subtitle: Evalúa AST, transformaciones, codegen, optimizaciones del compiler y Vapor Mode.
+
+          - id: template-compilation
+            type: challenge
+            level: advanced
+            title: Desafío 1
+            subtitle: Implementa un compilador reducido que transforma templates en funciones de render.
+
   - name: Calidad
     sub_steps:
       - name: Testing
