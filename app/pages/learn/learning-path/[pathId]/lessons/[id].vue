@@ -41,7 +41,7 @@ function handleComplete() {
     <LessonView :lesson="lesson">
       <template #actions>
         <Button
-          class="mt-4 w-full xl:hidden"
+          class="mt-4 w-full lg:hidden"
           size="lg"
           :variant="done ? 'outline' : 'default'"
           @click="handleComplete"
@@ -52,7 +52,7 @@ function handleComplete() {
 
       <template #aside-actions>
         <Button
-          class="mt-4 w-full"
+          class="w-full"
           size="lg"
           :variant="done ? 'outline' : 'default'"
           @click="handleComplete"

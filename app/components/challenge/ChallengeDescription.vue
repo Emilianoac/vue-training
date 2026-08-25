@@ -17,7 +17,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <aside class="h-full overflow-auto">
+  <aside>
     <ActivityLevelBadge
       class="mb-3"
       :type="props.challenge.level"

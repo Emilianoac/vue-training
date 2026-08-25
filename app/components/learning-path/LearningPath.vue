@@ -3,6 +3,7 @@ import type { ItemType } from "@/schemas/learningPath.schema";
 import useLearningPathData from "@/composables/learning-path/useLearningPathData";
 import {
   createActivityPath,
+  forgetLearningPathSection,
   rememberLearningPathSection,
 } from "@/composables/learning-path/useLearningPathNavigation";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
@@ -20,7 +21,7 @@ const { learningPath, getLearningPath } = useLearningPathData();
 
 await getLearningPath(props.pathId);
 
-const { isCompleted, useProgress } = useLearningPathProgress();
+const { isCompleted, resetProgress, useProgress } = useLearningPathProgress();
 const { allItems, completedCount, progressPercent } = useProgress(() => props.pathId, learningPath);
 
 function getActivityPath(type: ItemType, id: string) {
@@ -33,6 +34,11 @@ function isPlannedSubStep(subStep: { status?: string; items?: unknown[] }) {
 
 function isPlannedStep(step: { sub_steps: Array<{ status?: string; items?: unknown[] }> }) {
   return step.sub_steps.every(isPlannedSubStep);
+}
+
+function handleResetProgress() {
+  resetProgress(props.pathId);
+  forgetLearningPathSection(props.pathId);
 }
 
 watch(locale, async () => {
@@ -106,6 +112,7 @@ watch(locale, async () => {
             :total-count="allItems.length"
             :completed-count="completedCount"
             :progress-percent="progressPercent"
+            @reset="handleResetProgress"
           />
         </aside>
       </div>

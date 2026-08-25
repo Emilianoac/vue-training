@@ -59,6 +59,14 @@ export function useLearningPathProgress() {
     writeStorage(next);
   }
 
+  function resetProgress(pathId: string) {
+    const pathPrefix = `${pathId}:`;
+    completed.value = Object.fromEntries(
+      Object.entries(completed.value).filter(([key]) => !key.startsWith(pathPrefix)),
+    );
+    writeStorage(completed.value);
+  }
+
   function useProgress(
     pathId: MaybeRefOrGetter<string>,
     learningPath: MaybeRefOrGetter<LearningPath | null | undefined>,
@@ -84,7 +92,7 @@ export function useLearningPathProgress() {
     return { allItems, completedCount, progressPercent };
   }
 
-  return { isCompleted, markComplete, markIncomplete, useProgress };
+  return { isCompleted, markComplete, markIncomplete, resetProgress, useProgress };
 }
 
 function isProgressItem(item: unknown): item is ProgressItem {

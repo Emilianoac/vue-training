@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { CheckCircleIcon } from "lucide-vue-next";
+import { CheckCircleIcon, CircleXIcon } from "lucide-vue-next";
 import useQuizGame from "~/composables/quiz/useQuizGame";
+import {
+  hasPassedLearningPathQuiz,
+  LEARNING_PATH_QUIZ_PASS_PERCENTAGE,
+} from "@/domain/quiz/learningPathQuizCompletion";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
@@ -46,6 +50,7 @@ const {
   elapsedTime,
   actions,
 } = useQuizGame();
+const hasPassed = computed(() => hasPassedLearningPathQuiz(state.result.stats.percentage));
 
 await actions.loadQuiz(quizId);
 
@@ -72,7 +77,7 @@ watch(
 function handleQuizCompleted() {
   completionDialogOpen.value = true;
 
-  if (!hasCompleted.value) {
+  if (hasPassed.value && !hasCompleted.value) {
     hasCompleted.value = true;
     markComplete(pathId, "quiz", quizId);
   }
@@ -99,6 +104,7 @@ function continueToLearningPath() {
       :category="quiz.category.name"
       :level="quiz.level"
       :number-of-questions="totalQuestions"
+      :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
       @startQuiz="actions.startQuiz()"
     />
 
@@ -148,13 +154,21 @@ function continueToLearningPath() {
     <DialogContent>
       <DialogHeader>
         <div
-          class="mb-2 flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary"
+          class="mb-2 flex size-11 items-center justify-center rounded-full"
+          :class="hasPassed ? 'bg-primary/10 text-primary' : 'bg-destructive/10 text-destructive'"
         >
-          <CheckCircleIcon class="size-6" />
+          <CheckCircleIcon v-if="hasPassed" class="size-6" />
+          <CircleXIcon v-else class="size-6" />
         </div>
-        <DialogTitle>{{ t("quiz.completion.title") }}</DialogTitle>
+        <DialogTitle>
+          {{ t(hasPassed ? "quiz.completion.title" : "quiz.completion.failedTitle") }}
+        </DialogTitle>
         <DialogDescription>
-          {{ t("quiz.completion.message") }}
+          {{
+            t(hasPassed ? "quiz.completion.message" : "quiz.completion.failedMessage", {
+              percentage: LEARNING_PATH_QUIZ_PASS_PERCENTAGE,
+            })
+          }}
         </DialogDescription>
       </DialogHeader>
 

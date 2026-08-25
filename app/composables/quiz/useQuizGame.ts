@@ -85,8 +85,7 @@ export default function useQuiz() {
       state.answer.hasCheckedAnswer = true;
     },
     goToNextQuestion: () => {
-      state.progress.percentage =
-        (state.result.history.length / totalQuestions.value) * 100;
+      state.progress.percentage = (state.result.history.length / totalQuestions.value) * 100;
 
       if (isLastQuestion.value) {
         finishQuiz();
@@ -127,8 +126,8 @@ export default function useQuiz() {
 
   function finishQuiz() {
     state.endTime = Date.now();
-    state.quizState.isFinished = true;
     state.result.stats = calculateQuizStats(state.result.history);
+    state.quizState.isFinished = true;
   }
 
   function setError(err: unknown) {

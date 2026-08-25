@@ -13,7 +13,11 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<
-    DialogContentProps & { class?: HTMLAttributes["class"]; showCloseButton?: boolean }
+    DialogContentProps & {
+      class?: HTMLAttributes["class"];
+      overlayClass?: HTMLAttributes["class"];
+      showCloseButton?: boolean;
+    }
   >(),
   {
     showCloseButton: true,
@@ -21,7 +25,7 @@ const props = withDefaults(
 );
 const emits = defineEmits<DialogContentEmits>();
 
-const delegatedProps = reactiveOmit(props, "class");
+const delegatedProps = reactiveOmit(props, "class", "overlayClass");
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const portalTarget = shallowRef<string | HTMLElement>("body");
@@ -43,7 +47,7 @@ function syncPortalTarget() {
 
 <template>
   <DialogPortal :to="portalTarget">
-    <DialogOverlay />
+    <DialogOverlay :class="props.overlayClass" />
     <DialogContent
       data-slot="dialog-content"
       v-bind="{ ...$attrs, ...forwarded }"

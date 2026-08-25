@@ -9,11 +9,7 @@ const typeToSegment: Record<ItemType, string> = {
   tip: "tips",
 };
 
-export function createActivityPath(
-  pathId: string,
-  type: ItemType,
-  activityId: string,
-) {
+export function createActivityPath(pathId: string, type: ItemType, activityId: string) {
   return `/learn/learning-path/${pathId}/${typeToSegment[type]}/${activityId}`;
 }
 
@@ -30,6 +26,11 @@ export function consumeLearningPathSection(pathId: string) {
   const sectionId = sessionStorage.getItem(storageKey);
   sessionStorage.removeItem(storageKey);
   return isValidSectionId(sectionId) ? sectionId : null;
+}
+
+export function forgetLearningPathSection(pathId: string) {
+  if (typeof sessionStorage === "undefined") return;
+  sessionStorage.removeItem(createSectionStorageKey(pathId));
 }
 
 export function getLearningPathReturnPath() {

@@ -1,5 +1,17 @@
 <script lang="ts" setup>
+import { RotateCcwIcon } from "lucide-vue-next";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const { t } = useI18n();
 
@@ -7,6 +19,10 @@ defineProps<{
   completedCount: number;
   progressPercent: number;
   totalCount: number;
+}>();
+
+const emit = defineEmits<{
+  reset: [];
 }>();
 </script>
 
@@ -31,6 +47,35 @@ defineProps<{
               :style="{ width: progressPercent + '%' }"
             />
           </div>
+
+          <Dialog>
+            <DialogTrigger as-child>
+              <Button class="mt-4 w-full" variant="outline" :disabled="completedCount === 0">
+                <RotateCcwIcon />
+                {{ t("learningPath.progress.resetAction") }}
+              </Button>
+            </DialogTrigger>
+            <DialogContent class="z-[1000]" overlay-class="z-[999]">
+              <DialogHeader>
+                <DialogTitle>{{ t("learningPath.progress.resetTitle") }}</DialogTitle>
+                <DialogDescription>
+                  {{ t("learningPath.progress.resetDescription") }}
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose as-child>
+                  <Button variant="outline">
+                    {{ t("learningPath.progress.resetCancel") }}
+                  </Button>
+                </DialogClose>
+                <DialogClose as-child>
+                  <Button variant="destructive" @click="emit('reset')">
+                    {{ t("learningPath.progress.resetConfirm") }}
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </CardContent>
     </Card>

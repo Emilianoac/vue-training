@@ -5,5 +5,6 @@ export type LessonDocument = LessonsEnCollectionItem | LessonsEsCollectionItem;
 
 export interface LessonService {
   fetchLesson(id: string, locale: string): Promise<LessonDocument>;
+  fetchLessonForChallenge(challengeId: string, locale: string): Promise<LessonDocument>;
   fetchLessons(locale: string): Promise<Lesson[]>;
 }

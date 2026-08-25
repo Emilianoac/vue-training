@@ -2,7 +2,7 @@
 import type { Challenge } from "@/schemas/challenge.schema";
 import { useMediaQuery } from "@vueuse/core";
 import { CheckCircleIcon } from "lucide-vue-next";
-import ChallengeDescription from "@/components/challenge/ChallengeDescription.vue";
+import ChallengeSidebar from "@/components/challenge/ChallengeSidebar.vue";
 import ChallengeRunner from "@/components/challenge/challenge-runner/ChallengeRunner.vue";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,9 +47,7 @@ function handleCompleted(method: "tests" | "manual") {
 <template>
   <ResizablePanelGroup v-if="isDesktop" direction="horizontal" class="flex-1">
     <ResizablePanel :default-size="30" :min-size="20" class="pr-4">
-      <ScrollArea class="h-full pr-4" type="auto">
-        <ChallengeDescription :challenge="props.challenge" :show-title="false" />
-      </ScrollArea>
+      <ChallengeSidebar :challenge="props.challenge" />
     </ResizablePanel>
 
     <ResizableHandle
@@ -63,8 +61,8 @@ function handleCompleted(method: "tests" | "manual") {
 
   <ScrollArea v-else class="h-full pr-4" viewport-class="overflow-y-scroll!" type="auto">
     <div class="flex flex-col gap-4">
-      <section>
-        <ChallengeDescription :challenge="props.challenge" :show-title="false" />
+      <section class="h-[70dvh] min-h-[480px] overflow-hidden">
+        <ChallengeSidebar :challenge="props.challenge" />
       </section>
       <div class="h-[calc(100dvh-7rem)] min-h-[640px]">
         <ChallengeRunner :challenge-id="props.challenge.documentId" @completed="handleCompleted" />

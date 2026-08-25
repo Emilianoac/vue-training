@@ -103,19 +103,25 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 <template>
   <div class="flex h-full min-h-0 flex-col">
     <div
-      class="grid min-h-0 flex-1 grid-cols-1 gap-10 overflow-hidden p-4 lg:grid-cols-[400px_1fr]"
+      class="grid min-h-0 flex-1 grid-cols-1 gap-6 overflow-hidden p-4 xl:grid-cols-[minmax(300px,1fr)_minmax(0,800px)_minmax(300px,1fr)] lg:justify-center"
     >
-      <aside class="hidden h-full min-h-0 lg:block">
-        <div
-          class="sticky top-0 flex max-h-full h-full min-h-0 flex-col rounded-md border bg-card p-6"
-        >
+      <aside class="hidden h-full min-h-0 xl:block">
+        <div class="sticky top-0 flex max-h-full h-full min-h-0 flex-col rounded-md border bg-card">
+          <div class="flex items-center justify-between text-sm mb-3 border-b p-3">
+            <h2 class="shrink-0 font-semibold">{{ t("lesson.sections") }}</h2>
+            <p class="text-muted-foreground">{{ lessonSections.length }}</p>
+          </div>
           <nav ref="lessonNavigation" class="space-y-1 flex-1 overflow-hidden">
-            <ScrollArea class="h-full pr-3">
-              <ul>
+            <ScrollArea class="h-full">
+              <ul class="p-3">
                 <li v-for="section in lessonSections" :key="section.id" class="mb-2 border-b pb-2">
                   <Button
-                    class="h-auto w-full justify-start whitespace-break-spaces px-2"
-                    :variant="activeSectionId === section.id ? 'secondary' : 'ghost'"
+                    class="h-auto w-full justify-start whitespace-break-spaces px-2 font-light border border-transparent"
+                    :class="{
+                      'bg-[#7a857d2e] hover:bg-[#7a857d2e]!': activeSectionId === section.id,
+                      'hover:bg-[#7a857d1a]!': activeSectionId !== section.id,
+                    }"
+                    variant="ghost"
                     as-child
                   >
                     <a
@@ -131,30 +137,35 @@ function isRecord(value: unknown): value is Record<string, unknown> {
               </ul>
             </ScrollArea>
           </nav>
-
-          <div class="shrink-0">
-            <slot name="aside-actions" :total-sections="totalSections" :sections="lessonSections" />
-          </div>
         </div>
       </aside>
 
       <main ref="lessonContent" class="lesson-container overflow-hidden rounded-md border">
         <div class="h-full">
           <ScrollArea class="h-full p-6" type="auto">
-            <section
-              v-for="(blocks, index) in sectionBlocks"
-              :key="lessonSections[index]?.id ?? index"
-              :data-lesson-section="lessonSections[index]?.id"
-            >
-              <ContentRenderer
-                :id="lessonSections[index]?.usesHeadingId ? undefined : lessonSections[index]?.id"
-                :value="getSectionValue(blocks)"
-              />
-            </section>
-            <slot name="actions" :total-sections="totalSections" />
+            <div class="max-w-[800px] m-auto">
+              <section
+                v-for="(blocks, index) in sectionBlocks"
+                :key="lessonSections[index]?.id ?? index"
+                :data-lesson-section="lessonSections[index]?.id"
+              >
+                <ContentRenderer
+                  :id="lessonSections[index]?.usesHeadingId ? undefined : lessonSections[index]?.id"
+                  :value="getSectionValue(blocks)"
+                />
+              </section>
+              <slot name="actions" :total-sections="totalSections" />
+            </div>
           </ScrollArea>
         </div>
       </main>
+
+      <aside class="hidden h-full min-h-0 xl:block">
+        <div v-if="$slots['aside-actions']" class="sticky top-0 rounded-md border bg-card p-4">
+          <h2 class="mb-3 text-sm font-semibold">{{ t("lesson.actions") }}</h2>
+          <slot name="aside-actions" :total-sections="totalSections" :sections="lessonSections" />
+        </div>
+      </aside>
     </div>
   </div>
 </template>

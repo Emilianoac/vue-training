@@ -90,6 +90,20 @@ describe("useLearningPathProgress", () => {
     expect(JSON.parse(localStorage.getItem("learning-path-progress") ?? "{}")).toEqual({});
   });
 
+  it("resets only the selected learning path", () => {
+    const { isCompleted, markComplete, resetProgress } = useLearningPathProgress();
+
+    markComplete("vue-path", "lesson", "reactive-state");
+    markComplete("another-path", "lesson", "another-lesson");
+    resetProgress("vue-path");
+
+    expect(isCompleted("vue-path", "lesson", "reactive-state").value).toBe(false);
+    expect(isCompleted("another-path", "lesson", "another-lesson").value).toBe(true);
+    expect(JSON.parse(localStorage.getItem("learning-path-progress") ?? "{}")).toEqual({
+      "another-path:lesson:another-lesson": true,
+    });
+  });
+
   it("calculates completed items and progress percentage", () => {
     const { markComplete, useProgress } = useLearningPathProgress();
     const progress = useProgress("vue-path", learningPath);

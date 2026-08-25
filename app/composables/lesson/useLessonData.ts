@@ -19,6 +19,14 @@ export default function useLessonData() {
     await loadAndSet(() => lessonService.fetchLesson(id, locale.value), lesson);
   }
 
+  async function getLessonForChallenge(challengeId: string) {
+    lesson.value = undefined;
+    await loadAndSet(
+      () => lessonService.fetchLessonForChallenge(challengeId, locale.value),
+      lesson,
+    );
+  }
+
   async function getLesons() {
     await loadAndSet(() => lessonService.fetchLessons(locale.value), lessons);
   }
@@ -46,6 +54,7 @@ export default function useLessonData() {
     error,
 
     getLesson,
+    getLessonForChallenge,
     getLesons,
   };
 }

@@ -15,6 +15,7 @@ defineProps<{
   category: string;
   numberOfQuestions: number;
   level: Level;
+  requiredPercentage?: number;
 }>();
 </script>
 
@@ -29,6 +30,16 @@ defineProps<{
           <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">{{ title }}</h1>
           <!-- Quiz Description -->
           <p class="opacity-85">{{ description }}</p>
+
+          <div
+            v-if="requiredPercentage !== undefined"
+            class="mt-5 flex items-start gap-3 rounded-md border bg-background/60 p-4 text-sm"
+          >
+            <Icon name="mdi:target" class="mt-0.5 size-5 shrink-0 text-primary" />
+            <p>
+              {{ $t("quiz.welcome.pathRequirement", { percentage: requiredPercentage }) }}
+            </p>
+          </div>
 
           <Button class="mt-8" size="xl" @click="$emit('startQuiz')">
             {{ $t("quiz.start_quiz") }}
