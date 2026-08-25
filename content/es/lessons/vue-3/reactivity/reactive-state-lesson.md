@@ -30,7 +30,7 @@ state.count++;
 En JavaScript puro, si tienes `a = 1` y `b = a + 1`, y luego cambias `a = 5`, el valor de `b` seguirá siendo 2. 
 No hay un vínculo automático. 
 
-``` javascript
+``` js
 let a = 1;
 let b = a + 1; // b es 2
 a = 5; // b sigue siendo 2, no cambia automáticamente
@@ -44,7 +44,7 @@ Si ese valor cambia más adelante, Vue usa `trigger` para avisar a esos efectos 
 
 **Ejemplo simplificado de cómo funciona internamente:**
 
-``` javascript
+``` js
 function reactive(target) {
   return new Proxy(target, {
     get(obj, prop) {

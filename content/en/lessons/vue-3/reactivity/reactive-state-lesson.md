@@ -26,7 +26,7 @@ state.count++;
 In plain JavaScript, if you have `a = 1` and `b = a + 1`, and then you change `a = 5`, the value of `b` will still be 2.  
 There is no automatic link.
 
-``` javascript
+``` js
 let a = 1;
 let b = a + 1; // b is 2
 a = 5; // b is still 2, it does not change automatically
@@ -37,7 +37,7 @@ Vue uses JavaScript Proxies to "wrap" reactive data. This allows Vue to detect w
 As a value is read, Vue uses `track` to record which effects depend on it, such as a component render or a `computed`.
 If that value changes later, Vue uses `trigger` to notify those effects and run them again.
 
-``` javascript
+``` js
 function reactive(target) {
   return new Proxy(target, {
     get(obj, prop) {
