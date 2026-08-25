@@ -84,90 +84,90 @@ function continueToLearningPath() {
 </script>
 
 <template>
-    <ActivityShell
-      v-if="quiz"
+  <ActivityShell
+    v-if="quiz"
+    :title="quiz.title"
+    :back-to="learningPathReturnPath"
+    content-class="p-4 flex-initial"
+  >
+    <QuizWelcome
+      v-if="!state.quizState.isInitialized"
+      class="max-w-full lg:max-w-[90%] mx-auto"
       :title="quiz.title"
-      :back-to="learningPathReturnPath"
-      content-class="p-4 flex-initial"
-    >
-      <QuizWelcome
-        v-if="!state.quizState.isInitialized"
-        class="max-w-full lg:max-w-[90%] mx-auto"
-        :title="quiz.title"
-        :description="quiz.description"
-        :image="quiz.category.image.url"
-        :category="quiz.category.name"
-        :level="quiz.level"
-        :number-of-questions="totalQuestions"
-        @startQuiz="actions.startQuiz()"
-      />
+      :description="quiz.description"
+      :image="quiz.subCategory.image.url"
+      :category="quiz.category.name"
+      :level="quiz.level"
+      :number-of-questions="totalQuestions"
+      @startQuiz="actions.startQuiz()"
+    />
 
-      <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
+    <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
 
-      <QuizOnProgress
-        v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
+    <QuizOnProgress
+      v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
+      class="max-w-[1000px] mx-auto"
+      :total-questions="totalQuestions"
+      :currentQuestion="currentQuestion"
+      :quizProgress="state.progress.percentage"
+      :currentQuestionIndex="displayQuestionIndex"
+      :selectedOptionId="state.answer.selectedOptionId"
+      :hasCheckedAnswer="state.answer.hasCheckedAnswer"
+      :isLastQuestion="isLastQuestion"
+      :is-finished="state.quizState.isFinished"
+      :is-quiz-initialized="state.quizState.isInitialized"
+      @update:showDetails="showQuestionDetails = $event"
+      @update:selectedOptionId="state.answer.selectedOptionId = $event"
+      @answerCurrentQuestion="actions.answerCurrentQuestion()"
+      @goToNextQuestion="actions.goToNextQuestion()"
+    />
+
+    <template v-else>
+      <QuizResults
         class="max-w-[1000px] mx-auto"
-        :total-questions="totalQuestions"
-        :currentQuestion="currentQuestion"
-        :quizProgress="state.progress.percentage"
-        :currentQuestionIndex="displayQuestionIndex"
-        :selectedOptionId="state.answer.selectedOptionId"
-        :hasCheckedAnswer="state.answer.hasCheckedAnswer"
-        :isLastQuestion="isLastQuestion"
-        :is-finished="state.quizState.isFinished"
-        :is-quiz-initialized="state.quizState.isInitialized"
-        @update:showDetails="showQuestionDetails = $event"
-        @update:selectedOptionId="state.answer.selectedOptionId = $event"
-        @answerCurrentQuestion="actions.answerCurrentQuestion()"
-        @goToNextQuestion="actions.goToNextQuestion()"
+        :elapsed-time="elapsedTime"
+        :userHistory="state.result.history"
+        :userStats="state.result.stats"
+        @resetQuiz="actions.resetQuizState()"
       />
+    </template>
+  </ActivityShell>
 
-      <template v-else>
-        <QuizResults
-          class="max-w-[1000px] mx-auto"
-          :elapsed-time="elapsedTime"
-          :userHistory="state.result.history"
-          :userStats="state.result.stats"
-          @resetQuiz="actions.resetQuizState()"
-        />
-      </template>
-    </ActivityShell>
+  <Teleport to="body">
+    <QuizQuestionDetailsModal
+      v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
+      :question-text="currentQuestion.text"
+      :code-examples="currentQuestion.explanation_code"
+      :explanation="currentQuestion.explanation"
+      :correct-answer="currentCorrectAnswer.text"
+      @close-modal="showQuestionDetails = false"
+    />
+  </Teleport>
 
-    <Teleport to="body">
-      <QuizQuestionDetailsModal
-        v-if="showQuestionDetails && currentQuestion && currentCorrectAnswer"
-        :question-text="currentQuestion.text"
-        :code-examples="currentQuestion.explanation_code"
-        :explanation="currentQuestion.explanation"
-        :correct-answer="currentCorrectAnswer.text"
-        @close-modal="showQuestionDetails = false"
-      />
-    </Teleport>
+  <Dialog v-model:open="completionDialogOpen">
+    <DialogContent>
+      <DialogHeader>
+        <div
+          class="mb-2 flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary"
+        >
+          <CheckCircleIcon class="size-6" />
+        </div>
+        <DialogTitle>{{ t("quiz.completion.title") }}</DialogTitle>
+        <DialogDescription>
+          {{ t("quiz.completion.message") }}
+        </DialogDescription>
+      </DialogHeader>
 
-    <Dialog v-model:open="completionDialogOpen">
-      <DialogContent>
-        <DialogHeader>
-          <div
-            class="mb-2 flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary"
-          >
-            <CheckCircleIcon class="size-6" />
-          </div>
-          <DialogTitle>{{ t("quiz.completion.title") }}</DialogTitle>
-          <DialogDescription>
-            {{ t("quiz.completion.message") }}
-          </DialogDescription>
-        </DialogHeader>
-
-        <DialogFooter>
-          <Button @click="continueToLearningPath">
-            {{ t("quiz.completion.continueLearningPath") }}
+      <DialogFooter>
+        <Button @click="continueToLearningPath">
+          {{ t("quiz.completion.continueLearningPath") }}
+        </Button>
+        <DialogClose as-child>
+          <Button variant="outline">
+            {{ t("quiz.completion.close") }}
           </Button>
-          <DialogClose as-child>
-            <Button variant="outline">
-              {{ t("quiz.completion.close") }}
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 </template>
