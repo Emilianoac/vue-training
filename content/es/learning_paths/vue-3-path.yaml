@@ -359,7 +359,7 @@ steps:
           - id: effect-dependency-tracking-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de efectos
+            title: Cuestionario 1
             subtitle: Evalúa cómo el seguimiento de dependencias conecta lecturas con actualizaciones.
 
           - id: effect-dependency-tracking
@@ -380,7 +380,7 @@ steps:
           - id: reactive-primitives-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de primitivas reactivas
+            title: Cuestionario 1
             subtitle: Evalúa cómo distintas primitivas conservan identidad, seguimiento y enlaces con el estado.
 
           - id: reactive-primitives
@@ -401,7 +401,7 @@ steps:
           - id: derived-state-observation-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de estado derivado
+            title: Cuestionario 1
             subtitle: Evalúa caché, fuentes observadas, invalidación y limpieza de efectos secundarios.
 
           - id: derived-state-observation
@@ -422,7 +422,7 @@ steps:
           - id: component-runtime-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de runtime de componentes
+            title: Cuestionario 1
             subtitle: Evalúa instancias, setup, canales de entrada, contexto y ciclo de vida.
 
           - id: component-runtime
@@ -443,7 +443,7 @@ steps:
           - id: update-scheduling-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de programación de actualizaciones
+            title: Cuestionario 1
             subtitle: Evalúa batching, deduplicación, orden del flush y timing de watchers.
 
           - id: update-scheduling
@@ -464,7 +464,7 @@ steps:
           - id: rendering-components-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de renderizado
+            title: Cuestionario 1
             subtitle: Evalúa VNodes, mount, patch, componentes, children e identidad mediante key.
 
           - id: rendering-components
@@ -485,7 +485,7 @@ steps:
           - id: template-compilation-quiz
             type: quiz
             level: advanced
-            title: Cuestionario de compilación
+            title: Cuestionario 1
             subtitle: Evalúa AST, transformaciones, codegen, optimizaciones del compiler y Vapor Mode.
 
           - id: template-compilation

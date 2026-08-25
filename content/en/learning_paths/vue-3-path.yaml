@@ -15,7 +15,7 @@ steps:
           - id: reactive-state-quiz
             type: quiz
             level: basic
-            title: Reactivity Quiz
+            title: Quiz 1
             subtitle: Test your understanding of reactivity concepts in Vue 3.
 
           - id: ref-counter-state
@@ -36,7 +36,7 @@ steps:
           - id: computed-properties-quiz
             type: quiz
             level: basic
-            title: Computed Properties Quiz
+            title: Quiz 1
             subtitle: Test your knowledge of computed properties in Vue 3.
 
           - id: computed-user-filter
@@ -57,7 +57,7 @@ steps:
           - id: watchers-quiz
             type: quiz
             level: intermediate
-            title: Watchers Quiz
+            title: Quiz 1
             subtitle: Test your understanding of watchers and side effects in Vue 3.
 
           - id: watch-question-log
@@ -78,7 +78,7 @@ steps:
           - id: lifecycle-quiz
             type: quiz
             level: intermediate
-            title: Lifecycle Quiz
+            title: Quiz 1
             subtitle: Test when to use onMounted, onUnmounted, and how to clean up external effects.
 
           - id: lifecycle-session-monitor
@@ -359,7 +359,7 @@ steps:
           - id: effect-dependency-tracking-quiz
             type: quiz
             level: advanced
-            title: Effects Quiz
+            title: Quiz 1
             subtitle: Test how dependency tracking connects reads to updates.
 
           - id: effect-dependency-tracking
@@ -380,7 +380,7 @@ steps:
           - id: reactive-primitives-quiz
             type: quiz
             level: advanced
-            title: Reactive Primitives Quiz
+            title: Quiz 1
             subtitle: Test how different primitives preserve identity, tracking, and links to state.
 
           - id: reactive-primitives
@@ -401,7 +401,7 @@ steps:
           - id: derived-state-observation-quiz
             type: quiz
             level: advanced
-            title: Derived State Quiz
+            title: Quiz 1
             subtitle: Test caching, watched sources, invalidation, and side-effect cleanup.
 
           - id: derived-state-observation
@@ -422,7 +422,7 @@ steps:
           - id: component-runtime-quiz
             type: quiz
             level: advanced
-            title: Component Runtime Quiz
+            title: Quiz 1
             subtitle: Test instances, setup, input channels, context, and lifecycle.
 
           - id: component-runtime
@@ -443,7 +443,7 @@ steps:
           - id: update-scheduling-quiz
             type: quiz
             level: advanced
-            title: Update Scheduling Quiz
+            title: Quiz 1
             subtitle: Test batching, deduplication, flush order, and watcher timing.
 
           - id: update-scheduling
@@ -464,7 +464,7 @@ steps:
           - id: rendering-components-quiz
             type: quiz
             level: advanced
-            title: Rendering Quiz
+            title: Quiz 1
             subtitle: Test VNodes, mounting, patching, components, children, and key-based identity.
 
           - id: rendering-components
@@ -485,7 +485,7 @@ steps:
           - id: template-compilation-quiz
             type: quiz
             level: advanced
-            title: Template Compilation Quiz
+            title: Quiz 1
             subtitle: Test ASTs, transforms, codegen, compiler optimizations, and Vapor Mode.
 
           - id: template-compilation
