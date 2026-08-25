@@ -60,12 +60,12 @@ watch(
                     <Button size="sm" variant="outline"> Read more </Button>
                   </DialogTrigger>
                   <DialogContent class="sm:max-w-3xl w-full gap-3">
-                    <DialogHeader class="border-b pb-5">
+                    <DialogHeader class="border-b pb-5 text-start">
                       <DialogTitle class="font-bold">{{ tip.title }}</DialogTitle>
                       <Button
                         variant="link"
                         as-child
-                        class="p-0! text-blue-500 text-xs h-auto w-fit"
+                        class="p-0! text-blue-500 text-xs h-auto w-fit whitespace-break-spaces"
                       >
                         <a
                           :href="tip.source_url"
@@ -77,7 +77,7 @@ watch(
                         </a>
                       </Button>
                     </DialogHeader>
-                    <ScrollArea class="overflow-x-hidden h-[60vh] pr-6">
+                    <ScrollArea class="overflow-x-hidden h-[60vh] pr-6" type="auto">
                       <TipDetails :tip="tip" class="h-full" />
                     </ScrollArea>
                   </DialogContent>
