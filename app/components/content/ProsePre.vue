@@ -29,8 +29,8 @@ const { copy, copied } = useClipboard({
         </Tooltip>
       </TooltipProvider>
     </div>
-    <ScrollArea>
-      <pre class="bg-card/50 p-4 overflow-x-auto" :class="$props.class"><slot /></pre>
+    <ScrollArea type="auto" class="bg-card/50">
+      <pre class="p-4 overflow-x-auto text-sm" :class="$props.class"><slot /></pre>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   </div>
