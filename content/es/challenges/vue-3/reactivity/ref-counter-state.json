@@ -14,16 +14,15 @@
     "id": "reactivity",
     "name": "Reactividad"
   },
-  "short_description": "Practica declarar estado primitivo reactivo con ref y actualizarlo con .value.",
+  "short_description": "Practica crear, mostrar y actualizar estado primitivo reactivo con ref.",
   "description": [
-    "En este desafío, completarás un pequeño componente de contador usando la función ref de Vue.",
-    "Concéntrate en la primera regla central de la lección: dentro de <script setup>, los refs se leen y actualizan con .value, mientras que el template puede mostrarlos directamente."
+    "En este desafío, completarás un pequeño componente de contador creando su estado con la función ref de Vue.",
+    "El objetivo es distinguir cómo se trabaja con un ref dentro de <script setup> y cómo se utiliza desde el template."
   ],
   "instructions": [
-    "Declara una variable count usando ref(0).",
-    "Haz que la función increment aumente count en 1 usando count.value.",
-    "Haz que la función reset vuelva count a 0 usando count.value.",
-    "Muestra el valor de count en el template sin escribir .value."
+    "Importa ref desde vue y crea un estado llamado 'count' cuyo valor inicial sea 0.",
+    "Completa increment para aumentar el contador en 1 y reset para devolverlo a su valor inicial.",
+    "Renderiza el valor actual del contador en el template."
   ],
   "cover": {
     "url": "/images/challenges/vue-3/reactivity/ref-counter-state.webp"
@@ -35,15 +34,15 @@
   ],
   "hints": [
     {
-      "title": "Empieza por el estado",
-      "body": "En `<script setup>`, importa `ref` desde `vue` y cambia el valor plano por `const count = ref(0)`"
+      "title": "Crea el estado",
+      "body": "Importa `ref` desde `vue` y declara el estado con `const count = ref(0)`"
     },
     {
-      "title": "Actualizar un ref",
-      "body": "Dentro de las funciones, `count` es un objeto ref. Por eso `increment` debe modificar `count.value`"
+      "title": "Actualiza el ref",
+      "body": "Dentro de las funciones, modifica `count.value`: auméntalo en `increment` y asígnale `0` en `reset`"
     },
     {
-      "title": "El template desempaqueta refs",
+      "title": "Muestra el estado",
       "body": "En el template puedes escribir `{{ count }}`. Vue muestra automáticamente el valor interno del ref."
     }
   ]
