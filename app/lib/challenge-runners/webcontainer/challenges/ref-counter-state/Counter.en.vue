@@ -1,14 +1,12 @@
 <script setup>
-import { ref } from "vue";
-
-const count = ref(0);
+// TODO: import ref from vue and create `count` with the initial value 0.
 
 function increment() {
-  // TODO: increase count using count.value.
+  // TODO: increase the current count by 1.
 }
 
 function reset() {
-  // TODO: reset count to 0 using count.value.
+  // TODO: return the count to its initial value.
 }
 </script>
 
@@ -18,21 +16,11 @@ function reset() {
     <p data-testid="count" class="value">Count:</p>
 
     <div class="actions">
-      <button
-        data-testid="increment-button"
-        class="btn btn-primary"
-        @click="increment"
-      >
+      <button data-testid="increment-button" class="btn btn-primary" @click="increment">
         Increment
       </button>
 
-      <button
-        data-testid="reset-button"
-        class="btn"
-        @click="reset"
-      >
-        Reset
-      </button>
+      <button data-testid="reset-button" class="btn" @click="reset">Reset</button>
     </div>
   </section>
 </template>
