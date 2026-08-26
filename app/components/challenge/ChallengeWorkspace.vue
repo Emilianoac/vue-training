@@ -25,6 +25,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   completed: [];
   continue: [];
+  progressChange: [hasProgress: boolean];
 }>();
 
 const { t } = useI18n();
@@ -55,7 +56,11 @@ function handleCompleted(method: "tests" | "manual") {
     />
 
     <ResizablePanel :default-size="70" :min-size="60" class="pl-4">
-      <ChallengeRunner :challenge-id="props.challenge.documentId" @completed="handleCompleted" />
+      <ChallengeRunner
+        :challenge-id="props.challenge.documentId"
+        @completed="handleCompleted"
+        @progress-change="emit('progressChange', $event)"
+      />
     </ResizablePanel>
   </ResizablePanelGroup>
 
@@ -65,7 +70,11 @@ function handleCompleted(method: "tests" | "manual") {
         <ChallengeSidebar :challenge="props.challenge" />
       </section>
       <div class="h-[calc(100dvh-7rem)] min-h-[640px]">
-        <ChallengeRunner :challenge-id="props.challenge.documentId" @completed="handleCompleted" />
+        <ChallengeRunner
+          :challenge-id="props.challenge.documentId"
+          @completed="handleCompleted"
+          @progress-change="emit('progressChange', $event)"
+        />
       </div>
     </div>
   </ScrollArea>

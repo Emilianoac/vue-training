@@ -126,7 +126,13 @@
     "plannedDescription": "Esta sección está planificada y se añadirá más adelante."
   },
   "activity": {
-    "leave": "Abandonar actividad"
+    "leave": "Abandonar actividad",
+    "leaveWarning": {
+      "title": "¿Abandonar el desafío?",
+      "description": "El progreso realizado en este desafío no se guardará si sales o recargas la página.",
+      "cancel": "Seguir trabajando",
+      "confirm": "Abandonar desafío"
+    }
   },
   "quiz": {
     "welcome": {

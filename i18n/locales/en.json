@@ -126,7 +126,13 @@
     "plannedDescription": "This section is planned and will be added later."
   },
   "activity": {
-    "leave": "Leave activity"
+    "leave": "Leave activity",
+    "leaveWarning": {
+      "title": "Leave the challenge?",
+      "description": "Your progress in this challenge will not be saved if you leave or reload the page.",
+      "cancel": "Keep working",
+      "confirm": "Leave challenge"
+    }
   },
   "quiz": {
     "welcome": {

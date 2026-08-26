@@ -93,6 +93,9 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
       .map((file) => file.path),
   );
   const hasUnsavedChanges = computed(() => dirtyFilePaths.value.length > 0);
+  const hasCodeChanges = computed(() =>
+    editableChallengeFiles.some((file) => fileContents[file.path] !== file.content),
+  );
   const canRunTests = computed(() => isReady.value && !isRunning.value && !isPreviewStarting.value);
   const canLoadPreview = computed(
     () => isReady.value && !isPreviewStarting.value && !isRunning.value,
@@ -591,6 +594,7 @@ export function useWebContainerRunner(challengeId = "ref-counter-state") {
 
   return {
     activeFilePath,
+    hasCodeChanges,
     hasUnsavedChanges,
     canSaveCode,
     canLoadSolution,

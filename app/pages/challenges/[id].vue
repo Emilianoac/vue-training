@@ -10,6 +10,7 @@ const route = useRoute();
 const { locale } = useI18n();
 
 const { challenge, getChallenge } = useChallengeData();
+const hasChallengeProgress = ref(false);
 await getChallenge(route.params.id as string);
 
 useSeoMeta({
@@ -30,8 +31,12 @@ watch(
     :title="challenge.title"
     back-to="/learn/challenges"
     content-class="p-4 pr-0 lg:pr-4"
+    :warn-before-leave="hasChallengeProgress"
   >
-    <ChallengeWorkspace :challenge="challenge" />
+    <ChallengeWorkspace
+      :challenge="challenge"
+      @progress-change="hasChallengeProgress = $event"
+    />
   </ActivityShell>
 </template>
 

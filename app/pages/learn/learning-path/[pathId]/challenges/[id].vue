@@ -17,6 +17,7 @@ const challengeId = route.params.id as string;
 const { challenge, getChallenge } = useChallengeData();
 const { markComplete } = useLearningPathProgress();
 const learningPathReturnPath = getLearningPathReturnPath();
+const hasChallengeProgress = ref(false);
 await getChallenge(challengeId);
 
 function goToLearningPath() {
@@ -45,12 +46,14 @@ watch(
     :title="challenge.title"
     :back-to="learningPathReturnPath"
     content-class="p-4 pr-0 lg:pr-4"
+    :warn-before-leave="hasChallengeProgress"
   >
     <ChallengeWorkspace
       :challenge="challenge"
       :continue-label="t('challenge.completion.continueLearningPath')"
       @completed="markChallengeComplete"
       @continue="goToLearningPath"
+      @progress-change="hasChallengeProgress = $event"
     />
   </ActivityShell>
 </template>

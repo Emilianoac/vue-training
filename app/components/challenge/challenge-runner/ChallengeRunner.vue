@@ -44,6 +44,7 @@ const {
   code,
   dirtyFilePaths,
   editableFiles,
+  hasCodeChanges,
   isReady,
   isStaticMode,
   isFirstSetupLoading,
@@ -71,6 +72,7 @@ const {
 
 const emit = defineEmits<{
   completed: [method: "tests" | "manual"];
+  progressChange: [hasProgress: boolean];
 }>();
 
 const activeEditorTab = ref("editor");
@@ -97,6 +99,14 @@ watch(
   (summary) => {
     if (summary.total > 0 && summary.failed === 0) emit("completed", "tests");
   },
+);
+
+watch(
+  hasCodeChanges,
+  (hasProgress) => {
+    emit("progressChange", hasProgress);
+  },
+  { immediate: true },
 );
 
 watch(activeEditorTab, (tab) => {
