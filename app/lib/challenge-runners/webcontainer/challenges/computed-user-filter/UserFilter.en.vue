@@ -1,7 +1,10 @@
 <script setup>
+// TODO: import computed and turn filteredUsers into a computed property.
+// It should return only the users whose name includes search.value.
 import { ref } from "vue";
 
 const search = ref("");
+// Do not modify this list: the tests use it as input data.
 const users = ref([
   "Ada Lovelace",
   "Evan You",
@@ -9,12 +12,10 @@ const users = ref([
   "Terry Davis",
 ]);
 
-// TODO: import computed and turn filteredUsers into a computed property.
-// It should return only the users whose name includes search.value.
 const filteredUsers = users;
 
 function clearSearch() {
-  search.value = "";
+  // TODO: return the search to its initial state.
 }
 </script>
 

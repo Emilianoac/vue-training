@@ -26,7 +26,7 @@
     "Importa computed desde vue.",
     "Convierte filteredUsers en una propiedad computada.",
     "Filtra los usuarios comparando cada nombre con search.value sin distinguir mayúsculas y minúsculas.",
-    "Mantén clearSearch enfocado solo en reiniciar search.value."
+    "Completa clearSearch para que la búsqueda vuelva a su estado inicial."
   ],
   "cover": {
     "url": "/images/challenges/vue-3/reactivity/computed-user-filter.webp"
@@ -38,16 +38,20 @@
   ],
   "hints": [
     {
-      "title": "Importa computed",
-      "body": "El import puede incluir `ref` y `computed`: `import { computed, ref } from \"vue\"`"
+      "title": "Incorpora computed",
+      "body": "`computed` y `ref` pueden compartir el mismo import nombrado desde `vue`"
     },
     {
       "title": "Deriva, no dupliques",
-      "body": "`filteredUsers` debe calcularse desde `users.value` y `search.value`. No necesitas otro `ref` para la lista filtrada."
+      "body": "Asigna a `filteredUsers` una llamada a `computed` cuya función lea `users.value` y `search.value`. No necesitas otro `ref` para la lista filtrada."
     },
     {
       "title": "Normaliza la búsqueda",
-      "body": "Usa `toLowerCase()` tanto en el nombre del usuario como en el texto de búsqueda para que el filtro funcione sin importar las mayúsculas."
+      "body": "Normaliza el texto de búsqueda con `trim()` y `toLowerCase()`. Si está vacío, devuelve todos los usuarios; de lo contrario, utiliza `filter()` e `includes()` sobre los nombres en minúsculas."
+    },
+    {
+      "title": "Restaura la búsqueda",
+      "body": "En `clearSearch`, devuelve el ref de búsqueda a su string vacío inicial. Recuerda que los refs se actualizan con `.value` dentro de `<script setup>`"
     }
   ]
 }

@@ -1,7 +1,10 @@
 <script setup>
+// TODO: importa computed y convierte filteredUsers en una propiedad computada.
+// Debe devolver solo los usuarios cuyo nombre incluya search.value.
 import { ref } from "vue";
 
 const search = ref("");
+// No modifiques esta lista: los tests la utilizan como datos de entrada.
 const users = ref([
   "Ada Lovelace",
   "Evan You",
@@ -9,12 +12,10 @@ const users = ref([
   "Terry Davis",
 ]);
 
-// TODO: importa computed y convierte filteredUsers en una propiedad computada.
-// Debe devolver solo los usuarios cuyo nombre incluya search.value.
 const filteredUsers = users;
 
 function clearSearch() {
-  search.value = "";
+  // TODO: devuelve la búsqueda a su estado inicial.
 }
 </script>
 

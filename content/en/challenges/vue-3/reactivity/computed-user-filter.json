@@ -26,7 +26,7 @@
     "Import computed from vue.",
     "Turn filteredUsers into a computed property.",
     "Filter users by comparing each name against search.value in a case-insensitive way.",
-    "Keep clearSearch focused on resetting search.value."
+    "Complete clearSearch so the search returns to its initial state."
   ],
   "cover": {
     "url": "/images/challenges/vue-3/reactivity/computed-user-filter.webp"
@@ -38,16 +38,20 @@
   ],
   "hints": [
     {
-      "title": "Import computed",
-      "body": "The import can include both `ref` and `computed`: `import { computed, ref } from \"vue\"`"
+      "title": "Bring in computed",
+      "body": "`computed` and `ref` can share the same named import from `vue`"
     },
     {
       "title": "Derive, do not duplicate",
-      "body": "`filteredUsers` should be computed from `users.value` and `search.value`. You do not need another `ref` for the filtered list."
+      "body": "Assign `filteredUsers` to a `computed` call whose function reads `users.value` and `search.value`. You do not need another `ref` for the filtered list."
     },
     {
       "title": "Normalize the search",
-      "body": "Use `toLowerCase()` on both the user's name and the search text so the filter works regardless of capitalization."
+      "body": "Normalize the search text with `trim()` and `toLowerCase()`. Return every user when it is empty; otherwise, use `filter()` and `includes()` against lowercase names."
+    },
+    {
+      "title": "Restore the search",
+      "body": "In `clearSearch`, return the search ref to its initial empty string. Remember that refs are updated with `.value` inside `<script setup>`"
     }
   ]
 }
