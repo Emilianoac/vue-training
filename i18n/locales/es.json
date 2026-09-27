@@ -160,8 +160,6 @@
       "correctDescription": "Buen trabajo. Revisa por qué esta respuesta es correcta antes de continuar.",
       "incorrectDescription": "Revisa la respuesta correcta y su explicación antes de continuar.",
       "view": "Ver feedback",
-      "expand": "Ampliar feedback",
-      "restore": "Restaurar panel",
       "close": "Cerrar feedback",
       "continue": "Continuar"
     },

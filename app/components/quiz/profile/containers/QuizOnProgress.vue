@@ -1,9 +1,17 @@
 <script lang="ts" setup>
 import type { Question } from "@/schemas/quiz.schema";
-import { CheckCircleIcon, CircleXIcon, Maximize2Icon, Minimize2Icon, XIcon } from "lucide-vue-next";
+import { CheckCircleIcon, CircleXIcon, XIcon } from "lucide-vue-next";
+import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
 import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue";
 import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const props = defineProps<{
@@ -24,13 +32,19 @@ const emits = defineEmits<{
 const correctAnswerAudio = ref<HTMLAudioElement | null>(null);
 const wrongAnswerAudio = ref<HTMLAudioElement | null>(null);
 const feedbackOpen = ref(false);
-const feedbackExpanded = ref(false);
-const answerWasCorrect = ref(false);
+const feedbackViewKey = ref(0);
 const { parse } = useMarkdownParser();
 
+const selectedAnswer = computed(
+  () =>
+    props.currentQuestion?.answers.find((answer) => answer.id === props.selectedOptionId) ?? null,
+);
 const correctAnswer = computed(
   () => props.currentQuestion?.answers.find((answer) => answer.isCorrect) ?? null,
 );
+const answerWasCorrect = computed(() => selectedAnswer.value?.isCorrect ?? false);
+const parsedQuestion = computed(() => parse(props.currentQuestion?.text ?? ""));
+const parsedSelectedAnswer = computed(() => parse(selectedAnswer.value?.text ?? ""));
 const parsedCorrectAnswer = computed(() => parse(correctAnswer.value?.text ?? ""));
 const parsedExplanation = computed(() => parse(props.currentQuestion?.explanation ?? ""));
 const explanationCode = computed(() => props.currentQuestion?.explanation_code ?? []);
@@ -41,10 +55,8 @@ function verifyCurrentAnswer() {
   );
   if (!selectedAnswer) return;
 
-  answerWasCorrect.value = selectedAnswer.isCorrect;
-  feedbackExpanded.value = false;
   emits("answerCurrentQuestion");
-  feedbackOpen.value = true;
+  openFeedback();
 
   const audio = selectedAnswer.isCorrect ? correctAnswerAudio.value : wrongAnswerAudio.value;
   if (!audio) return;
@@ -53,22 +65,19 @@ function verifyCurrentAnswer() {
   void audio.play().catch(() => undefined);
 }
 
+function openFeedback() {
+  feedbackViewKey.value += 1;
+  feedbackOpen.value = true;
+}
+
 function closeFeedback() {
   feedbackOpen.value = false;
-  feedbackExpanded.value = false;
 }
 
 function continueQuiz() {
   closeFeedback();
   emits("goToNextQuestion");
 }
-
-watch(
-  () => props.currentQuestionIndex,
-  () => {
-    feedbackExpanded.value = false;
-  },
-);
 </script>
 
 <template>
@@ -104,7 +113,7 @@ watch(
             type="button"
             size="lg"
             variant="secondary"
-            @click="feedbackOpen = true"
+            @click="openFeedback"
           >
             {{ $t("quiz.feedback.view") }}
           </Button>
@@ -128,55 +137,16 @@ watch(
         </div>
       </div>
 
-      <Teleport to="body" :disabled="!feedbackExpanded">
-        <Transition
-          enter-active-class="transition-opacity duration-300 ease-out"
-          enter-from-class="opacity-0"
-          leave-active-class="transition-opacity duration-200 ease-in"
-          leave-to-class="opacity-0"
+      <Dialog v-model:open="feedbackOpen">
+        <DialogContent
+          v-if="currentQuestion && selectedAnswer && correctAnswer"
+          :show-close-button="false"
+          class="grid h-[calc(100%_-_2rem)] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden rounded-xl bg-card p-0 sm:max-w-4xl md:h-[calc(100%_-_5rem)]"
+          overlay-class="bg-background/60 backdrop-blur-[1px]"
         >
-          <div
-            v-if="feedbackOpen"
-            class="bg-background/60 backdrop-blur-[1px]"
-            :class="feedbackExpanded ? 'fixed inset-0 z-40' : 'absolute inset-0 z-20'"
-            aria-hidden="true"
-            @click="closeFeedback"
-          />
-        </Transition>
-
-        <Transition
-          enter-active-class="transition-transform duration-300 ease-out"
-          enter-from-class="translate-y-full"
-          leave-active-class="transition-transform duration-200 ease-in"
-          leave-to-class="translate-y-full"
-        >
-          <section
-            v-show="feedbackOpen && currentQuestion && correctAnswer"
-            class="flex transform-gpu flex-col overflow-hidden border bg-card shadow-2xl will-change-transform"
-            :class="
-              feedbackExpanded
-                ? 'fixed inset-y-4 left-1/2 z-50 w-[calc(100%_-_2rem)] max-w-4xl -translate-x-1/2 rounded-xl md:inset-y-10'
-                : 'absolute inset-x-0 bottom-0 z-30 h-[500px] max-h-[90%] rounded-t-xl'
-            "
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="quiz-feedback-title"
-            @keydown.esc.stop="closeFeedback"
-          >
-            <header class="border-b px-6 py-4 text-left">
-              <div class="absolute top-3 right-4 flex items-center gap-1">
-                <Button
-                  size="icon-sm"
-                  variant="ghost"
-                  :aria-label="
-                    $t(feedbackExpanded ? 'quiz.feedback.restore' : 'quiz.feedback.expand')
-                  "
-                  :title="$t(feedbackExpanded ? 'quiz.feedback.restore' : 'quiz.feedback.expand')"
-                  @click="feedbackExpanded = !feedbackExpanded"
-                >
-                  <Minimize2Icon v-if="feedbackExpanded" />
-                  <Maximize2Icon v-else />
-                </Button>
+          <DialogHeader class="relative gap-0 border-b px-6 py-4 text-left">
+            <div class="absolute top-3 right-4">
+              <DialogClose as-child>
                 <Button
                   size="icon-sm"
                   variant="ghost"
@@ -186,64 +156,95 @@ watch(
                 >
                   <XIcon />
                 </Button>
-              </div>
+              </DialogClose>
+            </div>
 
-              <div class="flex items-center gap-2 pr-20">
+            <DialogTitle class="flex items-center gap-2 pr-12 text-base">
+              <div
+                class="flex size-6 shrink-0 items-center justify-center rounded-full"
+                :class="
+                  answerWasCorrect
+                    ? 'bg-primary/10 text-primary'
+                    : 'bg-destructive/10 text-destructive'
+                "
+              >
+                <CheckCircleIcon v-if="answerWasCorrect" class="size-6" />
+                <CircleXIcon v-else class="size-5" />
+              </div>
+              <span>
+                {{
+                  $t(
+                    answerWasCorrect
+                      ? "quiz.feedback.correctTitle"
+                      : "quiz.feedback.incorrectTitle",
+                  )
+                }}
+              </span>
+            </DialogTitle>
+          </DialogHeader>
+
+          <ScrollArea
+            :key="`${currentQuestionIndex}-${feedbackViewKey}`"
+            type="auto"
+            class="min-h-0 bg-background"
+          >
+            <div class="mx-auto max-w-3xl space-y-5 px-6 py-5">
+              <section>
+                <p class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                  {{ $t("quiz.question") }} {{ currentQuestionIndex + 1 }}
+                </p>
+                <div class="mt-2 font-semibold leading-7" v-html="parsedQuestion" />
+              </section>
+
+              <hr />
+
+              <section
+                class="grid gap-3"
+                :class="answerWasCorrect ? 'grid-cols-1' : 'md:grid-cols-2'"
+              >
                 <div
-                  class="flex size-6 shrink-0 items-center justify-center rounded-full"
+                  class="rounded-md border p-4"
                   :class="
                     answerWasCorrect
-                      ? 'bg-primary/10 text-primary'
-                      : 'bg-destructive/10 text-destructive'
+                      ? 'border-primary/50 bg-primary/5'
+                      : 'border-destructive/50 bg-destructive/5'
                   "
                 >
-                  <CheckCircleIcon v-if="answerWasCorrect" class="size-6" />
-                  <CircleXIcon v-else class="size-5" />
+                  <h3 class="text-sm font-semibold">{{ $t("quiz.your_answer") }}</h3>
+                  <div class="mt-2 text-sm" v-html="parsedSelectedAnswer" />
                 </div>
-                <div class="min-w-0">
-                  <h2 id="quiz-feedback-title" class="font-semibold">
-                    {{
-                      $t(
-                        answerWasCorrect
-                          ? "quiz.feedback.correctTitle"
-                          : "quiz.feedback.incorrectTitle",
-                      )
-                    }}
-                  </h2>
-                </div>
-              </div>
-            </header>
 
-            <ScrollArea :key="currentQuestionIndex" type="auto" class="min-h-0 flex-1">
-              <div class="mx-auto max-w-3xl space-y-5 px-6 py-5">
-                <section class="rounded-md border bg-muted/30 p-4">
+                <div
+                  v-if="!answerWasCorrect"
+                  class="rounded-md border border-primary/50 bg-primary/5 p-4"
+                >
                   <h3 class="text-sm font-semibold">{{ $t("quiz.correct_answer") }}</h3>
                   <div class="mt-2 text-sm" v-html="parsedCorrectAnswer" />
-                </section>
+                </div>
+              </section>
 
-                <section>
-                  <h3 class="font-semibold">{{ $t("quiz.explanation") }}</h3>
-                  <div class="mt-2 text-sm leading-6" v-html="parsedExplanation" />
+              <section>
+                <h3 class="font-semibold">{{ $t("quiz.explanation") }}</h3>
+                <div class="mt-2 text-sm leading-7" v-html="parsedExplanation" />
 
-                  <highlightjs
-                    v-for="codeExample in explanationCode"
-                    :key="`${codeExample.language}-${codeExample.code}`"
-                    class="mt-4 overflow-hidden rounded-md text-sm"
-                    :language="codeExample.language"
-                    :code="codeExample.code"
-                  />
-                </section>
-              </div>
-            </ScrollArea>
+                <HighlightedCodeBlock
+                  v-for="codeExample in explanationCode"
+                  :key="`${codeExample.language}-${codeExample.code}`"
+                  class="mt-4 text-sm"
+                  :language="codeExample.language"
+                  :code="codeExample.code"
+                />
+              </section>
+            </div>
+          </ScrollArea>
 
-            <footer class="flex border-t bg-card px-6 py-4">
-              <Button class="w-full sm:ml-auto sm:w-auto" size="lg" @click="continueQuiz">
-                {{ $t("quiz.feedback.continue") }}
-              </Button>
-            </footer>
-          </section>
-        </Transition>
-      </Teleport>
+          <footer class="flex border-t bg-card px-6 py-4">
+            <Button class="w-full sm:ml-auto sm:w-auto" size="lg" @click="continueQuiz">
+              {{ $t("quiz.feedback.continue") }}
+            </Button>
+          </footer>
+        </DialogContent>
+      </Dialog>
     </div>
 
     <audio
