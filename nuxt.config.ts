@@ -68,6 +68,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
+    baseUrl: "https://vue-training-app.vercel.app",
     langDir: "locales",
     strategy: "no_prefix",
     defaultLocale: "en",
