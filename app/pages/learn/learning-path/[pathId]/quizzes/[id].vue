@@ -41,6 +41,23 @@ const { quiz, state, totalQuestions, displayQuestionIndex, currentQuestion, elap
   useQuizGame();
 const hasPassed = computed(() => hasPassedLearningPathQuiz(state.result.stats.percentage));
 
+type QuizStage = "welcome" | "loading" | "ongoing" | "results";
+
+const quizStage = computed<QuizStage>(() => {
+  if (!state.quizState.isInitialized) return "welcome";
+  if (state.quizState.isLoading) return "loading";
+  if (!state.quizState.isFinished) return "ongoing";
+
+  return "results";
+});
+
+const activityContentClasses = {
+  welcome: "p-4",
+  loading: "",
+  ongoing: "p-4",
+  results: "p-4 pr-0",
+} satisfies Record<QuizStage, string>;
+
 await actions.loadQuiz(quizId);
 
 useSeoMeta({
@@ -82,36 +99,38 @@ function continueToLearningPath() {
     v-if="quiz"
     :title="quiz.title"
     :back-to="learningPathReturnPath"
-    content-class="p-4 flex-initial"
+    :content-class="activityContentClasses[quizStage]"
   >
-    <QuizWelcome
-      v-if="!state.quizState.isInitialized"
-      class="max-w-full lg:max-w-[90%] mx-auto"
-      :title="quiz.title"
-      :description="quiz.description"
-      :image="quiz.subCategory.image.url"
-      :category="quiz.category.name"
-      :level="quiz.level"
-      :number-of-questions="totalQuestions"
-      :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
-      @startQuiz="actions.startQuiz()"
-    />
+    <div v-if="quizStage === 'welcome'" class="flex h-full min-h-0 items-center">
+      <QuizWelcome
+        class="mx-auto max-h-full max-w-full lg:max-w-[90%]"
+        :title="quiz.title"
+        :description="quiz.description"
+        :image="quiz.subCategory.image.url"
+        :category="quiz.category.name"
+        :level="quiz.level"
+        :number-of-questions="totalQuestions"
+        :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
+        @startQuiz="actions.startQuiz()"
+      />
+    </div>
 
-    <QuizOnLoading v-else-if="state.quizState.isInitialized && state.quizState.isLoading" />
+    <QuizOnLoading v-else-if="quizStage === 'loading'" />
 
-    <QuizOnProgress
-      v-else-if="state.quizState.isInitialized && !state.quizState.isFinished"
-      class="max-w-[1000px] mx-auto"
-      :total-questions="totalQuestions"
-      :currentQuestion="currentQuestion"
-      :quizProgress="state.progress.percentage"
-      :currentQuestionIndex="displayQuestionIndex"
-      :selectedOptionId="state.answer.selectedOptionId"
-      :hasCheckedAnswer="state.answer.hasCheckedAnswer"
-      @update:selectedOptionId="state.answer.selectedOptionId = $event"
-      @answerCurrentQuestion="actions.answerCurrentQuestion()"
-      @goToNextQuestion="actions.goToNextQuestion()"
-    />
+    <div v-else-if="quizStage === 'ongoing'" class="flex h-full min-h-0 items-center">
+      <QuizOnProgress
+        class="mx-auto max-h-full max-w-[1000px]"
+        :total-questions="totalQuestions"
+        :currentQuestion="currentQuestion"
+        :quizProgress="state.progress.percentage"
+        :currentQuestionIndex="displayQuestionIndex"
+        :selectedOptionId="state.answer.selectedOptionId"
+        :hasCheckedAnswer="state.answer.hasCheckedAnswer"
+        @update:selectedOptionId="state.answer.selectedOptionId = $event"
+        @answerCurrentQuestion="actions.answerCurrentQuestion()"
+        @goToNextQuestion="actions.goToNextQuestion()"
+      />
+    </div>
 
     <template v-else>
       <QuizResults
