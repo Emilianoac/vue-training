@@ -57,7 +57,9 @@ function continueQuiz() {
 </script>
 
 <template>
-  <div class="relative flex h-full w-full flex-col gap-4 overflow-hidden">
+  <div
+    class="quiz-on-progress relative flex h-full max-h-full w-full flex-col gap-4 overflow-hidden"
+  >
     <!-- Progress -->
     <QuizProgress
       :progress="quizProgress"
@@ -65,9 +67,11 @@ function continueQuiz() {
       :quizLength="totalQuestions"
     />
 
-    <div class="relative">
+    <div
+      class="relative flex min-h-0 flex-auto flex-col overflow-hidden rounded-md border bg-card"
+    >
       <!-- Quiz Container -->
-      <div class="mx-auto min-h-0 w-full flex-1 overflow-hidden rounded-md border bg-card p-4">
+      <div class="mx-auto min-h-0 w-full flex-auto overflow-hidden p-4">
         <!-- Question -->
         <QuizQuestion
           v-if="currentQuestion"
@@ -80,7 +84,7 @@ function continueQuiz() {
       </div>
 
       <!-- Controls -->
-      <div class="w-full left-0 bg-card border-t rounded-md">
+      <div class="w-full shrink-0 border-t bg-card">
         <div class="mx-auto flex justify-end items-center gap-3 p-4">
           <Button
             v-if="hasCheckedAnswer && currentQuestion"
@@ -222,4 +226,10 @@ function continueQuiz() {
   </div>
 </template>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+@media (min-width: 768px) and (min-height: 700px) {
+  .quiz-on-progress {
+    height: fit-content;
+  }
+}
+</style>

@@ -33,7 +33,7 @@ const parsedAnswers = computed(() =>
       <div class="question-text" v-html="parsedQuestion"></div>
     </div>
 
-    <ScrollArea type="auto" class="min-h-0 flex-1 pr-4">
+    <ScrollArea type="auto" class="min-h-0 flex-1 overflow-hidden pr-4">
       <ul class="flex flex-col gap-3">
         <li
           v-for="answer in parsedAnswers"
