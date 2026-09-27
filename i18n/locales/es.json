@@ -136,7 +136,8 @@
   },
   "quiz": {
     "welcome": {
-      "pathRequirement": "Necesitas al menos un {percentage}% de respuestas correctas para que este quiz cuente como completado en el learning path."
+      "passingScore": "Para aprobar",
+      "requiredPercentage": "{percentage}% de aciertos"
     },
     "start_quiz": "Comenzar cuestionario",
     "question": "Pregunta",

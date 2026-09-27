@@ -20,53 +20,75 @@ defineProps<{
 </script>
 
 <template>
-  <div class="bg-card border rounded-lg w-full h-full overflow-hidden">
-    <ScrollArea class="h-full w-full" type="auto">
-      <div class="flex flex-col-reverse md:grid grid-cols-[1fr_0.6fr]">
-        <div class="p-4 md:p-10">
-          <ActivityLevelBadge :type="level" :text="$t(`general.levels.${level}`)" class="mb-3" />
+  <ScrollArea
+    type="auto"
+    class="flex max-h-full w-full flex-col overflow-hidden rounded-lg border bg-card"
+    viewport-class="h-auto! min-h-0 flex-auto"
+  >
+    <div class="flex flex-col-reverse md:grid md:grid-cols-[1fr_0.6fr]">
+      <div class="p-4 md:p-10">
+        <div class="flex justify-between items-center mb-3">
           <span class="block opacity-75 text-sm">{{ category }}</span>
-          <!-- Quiz Title -->
-          <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">{{ title }}</h1>
-          <!-- Quiz Description -->
-          <p class="opacity-85">{{ description }}</p>
+          <ActivityLevelBadge :type="level" :text="$t(`general.levels.${level}`)" />
+        </div>
 
+        <div class="xl:max-w-[70%]">
+          <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl mb-3">
+            {{ title }}
+          </h1>
+
+          <p class="opacity-85">{{ description }}</p>
+        </div>
+
+        <Button class="mt-8" size="xl" @click="$emit('startQuiz')">
+          {{ $t("quiz.start_quiz") }}
+          <Icon class="ms-1" name="mdi:arrow-right" size="24" />
+        </Button>
+
+        <hr class="my-8" />
+
+        <div
+          class="flex flex-col divide-y divide-border text-sm sm:flex-row sm:divide-x sm:divide-y-0"
+        >
+          <div
+            class="flex flex-col py-3 first:pt-0 last:pb-0 sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0"
+          >
+            <span class="mb-1 flex items-center gap-1.5 opacity-70">
+              <Icon name="mdi:help-circle-outline" class="size-4 shrink-0" />
+              {{ $t("quiz.total_questions") }}
+            </span>
+
+            <span class="inline-block font-bold">{{ numberOfQuestions }}</span>
+          </div>
+          <div
+            class="flex flex-col py-3 first:pt-0 last:pb-0 sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0"
+          >
+            <span class="mb-1 flex items-center gap-1.5 opacity-70">
+              <Icon name="mdi:clock-outline" class="size-4 shrink-0" />
+              {{ $t("general.duration") }}
+            </span>
+            <span class="inline-block font-bold">{{ $t("quiz.quiz_duration") }}</span>
+          </div>
           <div
             v-if="requiredPercentage !== undefined"
-            class="mt-5 flex items-start gap-3 rounded-md border bg-background/60 p-4 text-sm"
+            class="flex flex-col py-3 first:pt-0 last:pb-0 sm:px-6 sm:py-0 sm:first:pl-0 sm:last:pr-0"
           >
-            <Icon name="mdi:target" class="mt-0.5 size-5 shrink-0 text-primary" />
-            <p>
-              {{ $t("quiz.welcome.pathRequirement", { percentage: requiredPercentage }) }}
-            </p>
+            <span class="mb-1 flex items-center gap-1.5 opacity-70">
+              <Icon name="mdi:target" class="size-4 shrink-0" />
+              {{ $t("quiz.welcome.passingScore") }}
+            </span>
+
+            <span class="inline-block font-bold">
+              {{ $t("quiz.welcome.requiredPercentage", { percentage: requiredPercentage }) }}
+            </span>
           </div>
-
-          <Button class="mt-8" size="xl" @click="$emit('startQuiz')">
-            {{ $t("quiz.start_quiz") }}
-            <Icon class="ms-1" name="mdi:arrow-right" size="24" />
-          </Button>
-
-          <hr class="my-8 border-slate-200 dark:border-slate-800" />
-
-          <div class="flex gap-10">
-            <div class="flex flex-col">
-              <span class="inline-block text-sm opacity-70 mb-1">{{
-                $t("general.questions")
-              }}</span>
-              <span class="inline-block font-bold">{{ numberOfQuestions }}</span>
-            </div>
-            <div class="flex flex-col">
-              <span class="inline-block text-sm opacity-70 mb-1">{{ $t("general.duration") }}</span>
-              <span class="inline-block font-bold">{{ $t("quiz.quiz_duration") }}</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <img :src="image" alt="Quiz Image" class="h-full w-full object-cover" />
         </div>
       </div>
-    </ScrollArea>
-  </div>
+      <div>
+        <img :src="image" alt="Quiz Image" class="h-full w-full object-cover" />
+      </div>
+    </div>
+  </ScrollArea>
 </template>
 
 <style></style>

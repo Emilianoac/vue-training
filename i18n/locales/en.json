@@ -136,7 +136,8 @@
   },
   "quiz": {
     "welcome": {
-      "pathRequirement": "You need at least {percentage}% correct answers for this quiz to count as completed in the learning path."
+      "passingScore": "To pass",
+      "requiredPercentage": "{percentage}% correct"
     },
     "start_quiz": "Start with the quiz",
     "question": "Question",
