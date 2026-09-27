@@ -160,6 +160,8 @@
       "correctDescription": "Nice work. Review why this answer is correct before continuing.",
       "incorrectDescription": "Review the correct answer and its explanation before continuing.",
       "view": "View feedback",
+      "expand": "Expand feedback",
+      "restore": "Restore drawer",
       "close": "Close feedback",
       "continue": "Continue"
     },
