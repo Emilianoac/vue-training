@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { AnswerRecord } from "@/schemas/quiz.schema";
+import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -211,9 +212,10 @@ function getStars(p: number) {
                 v-html="question.parsedExplanation"
               ></div>
 
-              <highlightjs
+              <HighlightedCodeBlock
                 v-for="codeExample in question.codeExample"
-                class="text-xs md:text-base rounded-md overflow-hidden mt-5 mb-4 last-of-type:mb-0"
+                :key="`${codeExample.language}-${codeExample.code}`"
+                class="mt-5 mb-4 text-xs last-of-type:mb-0 md:text-base"
                 :language="codeExample.language"
                 :code="codeExample.code"
               />
