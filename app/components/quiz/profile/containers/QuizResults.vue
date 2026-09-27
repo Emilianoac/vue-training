@@ -59,9 +59,9 @@ function getStars(p: number) {
 </script>
 
 <template>
-  <ScrollArea class="h-full pr-2 w-full">
+  <ScrollArea class="h-full pr-4 w-full">
     <div class="w-full overflow-y-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_0.8fr] gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
         <!-- Quiz Results Summary -->
         <div
           class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]"
