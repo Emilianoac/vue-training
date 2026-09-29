@@ -3,6 +3,7 @@ import { CheckIcon } from "lucide-vue-next";
 import useLessonData from "@/composables/lesson/useLessonData";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
+import LessonReader from "@/components/lesson/reader/LessonReader.vue";
 
 definePageMeta({
   layout: "activity",
@@ -38,7 +39,7 @@ function handleComplete() {
 
 <template>
   <ActivityShell v-if="lesson" :title="lesson.title" :back-to="learningPathReturnPath">
-    <LessonView :lesson="lesson">
+    <LessonReader :lesson="lesson">
       <template #actions>
         <Button
           class="mt-4 w-full lg:hidden"
@@ -61,6 +62,6 @@ function handleComplete() {
           {{ done ? t("lesson.completed") : t("lesson.markAsCompleted") }}
         </Button>
       </template>
-    </LessonView>
+    </LessonReader>
   </ActivityShell>
 </template>

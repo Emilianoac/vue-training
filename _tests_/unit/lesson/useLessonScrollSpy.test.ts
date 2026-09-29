@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { findActiveLessonSection } from "@/composables/lesson/useLessonScrollSpy";
+import { findActiveLessonSection } from "@/components/lesson/reader/useLessonScrollSpy";
 
 const sections = [
   { id: "introduction", top: 20 },

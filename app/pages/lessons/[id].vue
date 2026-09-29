@@ -1,5 +1,6 @@
 ﻿<script lang="ts" setup>
 import useLessonData from "@/composables/lesson/useLessonData";
+import LessonReader from "@/components/lesson/reader/LessonReader.vue";
 
 const route = useRoute();
 const { locale } = useI18n();
@@ -17,5 +18,5 @@ watch(locale, async () => {
 </script>
 
 <template>
-  <LessonView v-if="lesson" :lesson="(lesson as unknown as Record<string, unknown>)" />
+  <LessonReader v-if="lesson" :lesson="lesson" />
 </template>

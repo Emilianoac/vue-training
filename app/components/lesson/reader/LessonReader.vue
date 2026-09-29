@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { LessonDocument } from "@/composables/lesson/useLessonData";
-import { useLessonScrollSpy } from "@/composables/lesson/useLessonScrollSpy";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useLessonScrollSpy } from "./useLessonScrollSpy";
 
 const props = defineProps<{
   lesson: LessonDocument;
@@ -13,17 +13,18 @@ const lessonContent = useTemplateRef<HTMLElement>("lessonContent");
 const lessonNavigation = useTemplateRef<HTMLElement>("lessonNavigation");
 const { activeSectionId, refresh: refreshScrollSpy } = useLessonScrollSpy(lessonContent);
 
-const sectionBlocks = computed(() => {
-  const body = props.lesson.body as { value?: unknown[] } | undefined;
-  const blocks = body?.value;
+type LessonBlock = LessonDocument["body"]["value"][number];
 
-  if (!blocks?.length) return [];
+const sectionBlocks = computed<LessonBlock[][]>(() => {
+  const blocks = props.lesson.body.value;
 
-  const sections: unknown[][] = [];
-  let current: unknown[] = [];
+  if (!blocks.length) return [];
+
+  const sections: LessonBlock[][] = [];
+  let current: LessonBlock[] = [];
 
   for (const block of blocks) {
-    if ((block as unknown[])[0] === "h2") {
+    if (Array.isArray(block) && block[0] === "h2") {
       if (current.length) sections.push(current);
       current = [block];
     } else {
@@ -61,15 +62,14 @@ onMounted(() => {
   refreshScrollSpy();
 });
 
-function getSectionValue(blocks: unknown[]) {
-  const body = props.lesson.body as Record<string, unknown> | undefined;
+function getSectionValue(blocks: LessonBlock[]): LessonDocument {
   return {
     ...props.lesson,
-    body: { ...body, value: blocks },
-  } as Record<string, unknown>;
+    body: { ...props.lesson.body, value: blocks },
+  };
 }
 
-function getSectionDetails(blocks: unknown[], index: number) {
+function getSectionDetails(blocks: LessonBlock[], index: number) {
   const heading = blocks.find((block) => Array.isArray(block) && block[0] === "h2");
   if (!Array.isArray(heading)) {
     return {
