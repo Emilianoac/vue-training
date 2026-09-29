@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useQuizOptionHoverSound from "@/composables/quiz/useQuizOptionHoverSound";
+
 const props = defineProps<{
   answerId: string;
   answerText: string;
@@ -18,6 +20,14 @@ const showCorrect = computed(() => props.showAnswerResult && props.isCorrectAnsw
 const showWrongSelected = computed(
   () => props.showAnswerResult && !props.isCorrectAnswer && props.isSelected,
 );
+
+const { playHoverSound } = useQuizOptionHoverSound();
+
+function handlePointerEnter(event: PointerEvent) {
+  if (props.isDisabled || props.isSelected) return;
+
+  playHoverSound(event);
+}
 </script>
 
 <template>
@@ -33,7 +43,11 @@ const showWrongSelected = computed(
 
   <label
     :for="`answer-${answerId}`"
-    class="grid grid-cols-1 md:grid-cols-[1fr_max-content] items-center w-full p-4 cursor-pointer rounded-md border border-slate-200 dark:border-slate-800 peer-checked:border-blue-500! peer-focus-visible:border-primary! peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"
+    data-quiz-click-target
+    :data-selected="isSelected"
+    :aria-disabled="isDisabled"
+    @pointerenter="handlePointerEnter"
+    class="grid h-full w-full cursor-pointer grid-cols-1 items-center rounded-md border border-slate-200 p-4 peer-checked:border-blue-500! peer-checked:bg-gray-100 peer-focus-visible:border-primary! peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background md:min-h-24 md:grid-cols-[1fr_max-content] dark:border-slate-800 peer-checked:dark:bg-slate-800"
     :class="{
       '!border-green-500 bg-green-800/10': showCorrect,
 

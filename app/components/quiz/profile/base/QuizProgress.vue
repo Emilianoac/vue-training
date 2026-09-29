@@ -11,8 +11,8 @@ const completedQuestions = computed(() => Math.round((props.progress / 100) * pr
 <template>
   <div>
     <!-- Quiz Progress -->
-    <div class="flex justify-between items-center mb-4">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
+    <div class="flex justify-end items-center mb-4">
+      <p class="text-sm text-gray-500 dark:text-gray-400 block text-end">
         {{ $t("quiz.question") }} {{ currentQuestionIndex }} {{ $t("general.of") }} {{ quizLength }}
       </p>
     </div>
@@ -30,8 +30,8 @@ const completedQuestions = computed(() => Math.round((props.progress / 100) * pr
         :key="questionNumber"
         class="h-2.5 flex-1 rounded-full border-1 border-transparent transition-colors duration-500 ease-in-out"
         :class="[
-          questionNumber <= completedQuestions ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700',
-          questionNumber === currentQuestionIndex ? 'border-primary!' : '',
+          questionNumber <= completedQuestions ? 'bg-blue-300' : 'bg-gray-200 dark:bg-gray-700',
+          questionNumber === currentQuestionIndex ? 'border-blue-500!' : '',
         ]"
         :aria-current="questionNumber === currentQuestionIndex ? 'step' : undefined"
       ></div>
