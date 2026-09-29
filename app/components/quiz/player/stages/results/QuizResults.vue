@@ -3,8 +3,8 @@ import type { AnswerRecord } from "@/schemas/quiz.schema";
 import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import useQuizPassedCelebration from "@/composables/quiz/useQuizPassedCelebration";
-import useQuizResultsPresentation from "@/composables/quiz/useQuizResultsPresentation";
+import useQuizPassedCelebration from "./useQuizPassedCelebration";
+import useQuizResultsPresentation from "./useQuizResultsPresentation";
 import vueHostUrl from "@/assets/images/quiz/vue-host.png";
 
 const emit = defineEmits<{
