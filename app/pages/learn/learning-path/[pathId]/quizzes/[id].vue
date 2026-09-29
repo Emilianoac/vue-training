@@ -7,6 +7,9 @@ import {
 } from "@/domain/quiz/learningPathQuizCompletion";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
+import useQuizAmbientMusic, { type QuizStage } from "@/composables/quiz/useQuizAmbientMusic";
+import useQuizButtonClickSound from "@/composables/quiz/useQuizButtonClickSound";
+import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
@@ -36,12 +39,12 @@ const completionDialogOpen = ref(false);
 const hasCompleted = ref(false);
 const { markComplete } = useLearningPathProgress();
 const learningPathReturnPath = getLearningPathReturnPath();
+useQuizButtonClickSound();
+const { primeCharacterSound } = useQuizCharacterSound();
 
 const { quiz, state, totalQuestions, displayQuestionIndex, currentQuestion, elapsedTime, actions } =
   useQuizGame();
 const hasPassed = computed(() => hasPassedLearningPathQuiz(state.result.stats.percentage));
-
-type QuizStage = "welcome" | "loading" | "ongoing" | "results";
 
 const quizStage = computed<QuizStage>(() => {
   if (!state.quizState.isInitialized) return "welcome";
@@ -50,6 +53,8 @@ const quizStage = computed<QuizStage>(() => {
 
   return "results";
 });
+
+useQuizAmbientMusic(quizStage);
 
 const activityContentClasses = {
   welcome: "p-4",
@@ -92,11 +97,17 @@ function handleQuizCompleted() {
 function continueToLearningPath() {
   router.push(learningPathReturnPath);
 }
+
+function startQuiz() {
+  primeCharacterSound();
+  actions.startQuiz();
+}
 </script>
 
 <template>
   <ActivityShell
     v-if="quiz"
+    data-quiz-sound-scope
     :title="quiz.title"
     :back-to="learningPathReturnPath"
     :content-class="activityContentClasses[quizStage]"
@@ -111,7 +122,7 @@ function continueToLearningPath() {
         :level="quiz.level"
         :number-of-questions="totalQuestions"
         :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
-        @startQuiz="actions.startQuiz()"
+        @startQuiz="startQuiz"
       />
     </div>
 
@@ -119,7 +130,7 @@ function continueToLearningPath() {
 
     <div v-else-if="quizStage === 'ongoing'" class="flex h-full min-h-0 items-center">
       <QuizOnProgress
-        class="mx-auto max-h-full max-w-[1000px]"
+        class="mx-auto max-h-full max-w-[1200px]"
         :total-questions="totalQuestions"
         :currentQuestion="currentQuestion"
         :quizProgress="state.progress.percentage"
@@ -136,6 +147,7 @@ function continueToLearningPath() {
       <QuizResults
         class="max-w-[1000px] mx-auto"
         :elapsed-time="elapsedTime"
+        :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
         :userHistory="state.result.history"
         :userStats="state.result.stats"
         @resetQuiz="actions.resetQuizState()"

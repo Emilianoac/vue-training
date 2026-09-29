@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import useQuizGame from "~/composables/quiz/useQuizGame";
+import useQuizAmbientMusic, { type QuizStage } from "@/composables/quiz/useQuizAmbientMusic";
+import useQuizButtonClickSound from "@/composables/quiz/useQuizButtonClickSound";
+import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
 
 import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
@@ -13,6 +16,8 @@ definePageMeta({
 
 const route = useRoute();
 const { locale } = useI18n();
+useQuizButtonClickSound();
+const { primeCharacterSound } = useQuizCharacterSound();
 
 const {
   quiz,
@@ -27,8 +32,6 @@ const {
   actions,
 } = useQuizGame();
 
-type QuizStage = "welcome" | "loading" | "ongoing" | "results";
-
 const quizStage = computed<QuizStage>(() => {
   if (!state.quizState.isInitialized) return "welcome";
   if (state.quizState.isLoading) return "loading";
@@ -36,6 +39,8 @@ const quizStage = computed<QuizStage>(() => {
 
   return "results";
 });
+
+useQuizAmbientMusic(quizStage);
 
 const activityContentClasses = {
   welcome: "p-4",
@@ -56,11 +61,17 @@ watch(
     await actions.loadQuiz(route.params.id as string);
   },
 );
+
+function startQuiz() {
+  primeCharacterSound();
+  actions.startQuiz();
+}
 </script>
 
 <template>
   <ActivityShell
     v-if="quiz"
+    data-quiz-sound-scope
     :title="quiz.title"
     back-to="/learn/quizzes"
     class="lg:max-w-full"
@@ -78,7 +89,7 @@ watch(
         "
         :level="quiz.level"
         :number-of-questions="totalQuestions"
-        @startQuiz="actions.startQuiz()"
+        @startQuiz="startQuiz"
       />
     </div>
 

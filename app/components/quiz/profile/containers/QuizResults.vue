@@ -3,6 +3,9 @@ import type { AnswerRecord } from "@/schemas/quiz.schema";
 import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import useQuizPassedCelebration from "@/composables/quiz/useQuizPassedCelebration";
+import useQuizResultsPresentation from "@/composables/quiz/useQuizResultsPresentation";
+import vueHostUrl from "@/assets/images/quiz/vue-host.png";
 
 const emit = defineEmits<{
   (e: "resetQuiz"): void;
@@ -17,52 +20,24 @@ const props = defineProps<{
     percentage: number;
   };
   elapsedTime: number;
+  requiredPercentage?: number;
 }>();
 
-const { parse } = useMarkdownParser();
-
-const parsedHistory = computed(() =>
-  props.userHistory.map((q) => ({
-    ...q,
-    parsedQuestion: parse(q.question),
-    parsedAnswers: q.answers.map((a) => ({
-      ...a,
-      parsedText: parse(a.text),
-    })),
-    parsedExplanation: parse(q.explanation),
-  })),
+const { parsedHistory, stars: starsArray } = useQuizResultsPresentation(
+  () => props.userHistory,
+  () => props.userStats.percentage,
 );
 
-const starsArray = getStars(props.userStats.percentage);
-
-function getStars(p: number) {
-  const maxStars = 3;
-  let points = (p / 100) * maxStars;
-
-  if (p > 0 && points < 0.5) {
-    points = 0.5;
-  }
-
-  const stars = [];
-  for (let i = 0; i < maxStars; i++) {
-    if (points >= 1) {
-      stars.push("full");
-      points -= 1;
-    } else if (points >= 0.5) {
-      stars.push("half");
-      points -= 0.5;
-    } else {
-      stars.push("empty");
-    }
-  }
-  return stars;
-}
+useQuizPassedCelebration(
+  () => props.userStats.percentage,
+  () => props.requiredPercentage,
+);
 </script>
 
 <template>
   <ScrollArea class="h-full pr-4 w-full">
     <div class="w-full overflow-y-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_0.9fr] gap-6">
         <!-- Quiz Results Summary -->
         <div
           class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]"
@@ -116,42 +91,19 @@ function getStars(p: number) {
         <div
           class="bg-slate-50 dark:bg-slate-800/50 border dark:border-slate-800 border-slate-200 p-7 rounded-lg min-h-[300px]"
         >
-          <!-- progress bar -->
-          <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-              <p>{{ $t("quiz.results.accuracy") }}</p>
-              <p class="font-bold">{{ userStats.percentage }}%</p>
-            </div>
-            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
-              <div
-                class="bg-primary h-2.5 rounded-full"
-                :style="{ width: `${userStats.percentage}%` }"
-              ></div>
-            </div>
-          </div>
-
           <!-- Time Taken -->
           <div class="flex items-center mb-5 gap-3">
             <Icon name="mdi:clock-outline" class="text-xl" />
             <div>
               <p class="text-slate-500 text-sm">{{ $t("quiz.results.time_taken") }}</p>
-              <p class="font-semibold">
+              <p class="font-semibold text-sm">
                 {{ Math.floor(elapsedTime / 60) ? Math.floor(elapsedTime / 60) + " min" : "" }}
                 {{ elapsedTime % 60 }} {{ $t("general.seconds") }}
               </p>
             </div>
           </div>
 
-          <!-- Questions Answered -->
-          <div class="flex items-center mb-5 gap-3">
-            <Icon name="mdi:checkbox-marked-circle-outline" class="text-green-500 text-xl" />
-            <div>
-              <p class="text-slate-500 text-sm">
-                {{ $t("quiz.results.questions_correctly_answered") }}
-              </p>
-              <p class="font-semibold">{{ userStats.correct }} / {{ userStats.total }}</p>
-            </div>
-          </div>
+          <img :src="vueHostUrl" class="max-w-[160px] mx-auto" />
 
           <div class="space-y-2">
             <!-- Retake Quiz Button -->
@@ -164,7 +116,7 @@ function getStars(p: number) {
       </div>
 
       <div class="mt-8">
-        <h2 class="text-2xl font-bold mb-4">
+        <h2 class="text-xl font-bold mb-4">
           {{ $t("quiz.results.question_review") }}
         </h2>
         <ul>
