@@ -10,10 +10,10 @@ import { getLearningPathReturnPath } from "@/composables/learning-path/useLearni
 import useQuizAmbientMusic, { type QuizStage } from "@/composables/quiz/useQuizAmbientMusic";
 import useQuizButtonClickSound from "@/composables/quiz/useQuizButtonClickSound";
 import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
-import QuizWelcome from "@/components/quiz/profile/containers/QuizWelcome.vue";
-import QuizOnProgress from "@/components/quiz/profile/containers/QuizOnProgress.vue";
-import QuizResults from "@/components/quiz/profile/containers/QuizResults.vue";
-import QuizOnLoading from "@/components/quiz/profile/containers/QuizOnLoading.vue";
+import QuizWelcome from "@/components/quiz/player/views/QuizWelcome.vue";
+import QuizOnProgress from "@/components/quiz/player/views/QuizOnProgress.vue";
+import QuizResults from "@/components/quiz/player/views/QuizResults.vue";
+import QuizOnLoading from "@/components/quiz/player/views/QuizOnLoading.vue";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

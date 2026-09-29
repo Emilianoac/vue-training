@@ -2,9 +2,9 @@
 import type { Question } from "@/schemas/quiz.schema";
 import { CheckCircleIcon, CircleXIcon, XIcon } from "lucide-vue-next";
 import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
-import QuizAnswerList from "@/components/quiz/profile/base/QuizAnswerList.vue";
-import QuizProgress from "@/components/quiz/profile/base/QuizProgress.vue";
-import QuizQuestion from "@/components/quiz/profile/base/QuizQuestion.vue";
+import QuizAnswerList from "@/components/quiz/player/blocks/QuizAnswerList.vue";
+import QuizProgress from "@/components/quiz/player/blocks/QuizProgress.vue";
+import QuizQuestion from "@/components/quiz/player/blocks/QuizQuestion.vue";
 import { Button } from "@/components/ui/button";
 import vueHostUrl from "@/assets/images/quiz/vue-host.png";
 import {
