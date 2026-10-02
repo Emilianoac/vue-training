@@ -133,9 +133,14 @@ function startQuiz() {
         :currentQuestionIndex="displayQuestionIndex"
         :selectedOptionId="state.answer.selectedOptionId"
         :hasCheckedAnswer="state.answer.hasCheckedAnswer"
+        :has-used-evan-you-call="state.lifeline.hasUsedEvanYouCall"
+        :pending-eliminated-option-ids="state.lifeline.pendingEliminatedOptionIds"
+        :eliminated-option-ids="state.lifeline.eliminatedOptionIds"
         @update:selectedOptionId="state.answer.selectedOptionId = $event"
         @answerCurrentQuestion="actions.answerCurrentQuestion()"
         @goToNextQuestion="actions.goToNextQuestion()"
+        @callEvanYou="actions.callEvanYou()"
+        @applyEvanYouCall="actions.applyEvanYouCall()"
       />
     </div>
 

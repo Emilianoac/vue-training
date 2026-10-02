@@ -12,7 +12,9 @@ export default function useQuizButtonClickSound() {
     const interactiveElement = event.target.closest(interactiveSelector);
     if (
       !interactiveElement ||
-      interactiveElement.matches(":disabled, [aria-disabled='true'], [data-selected='true']")
+      interactiveElement.matches(
+        ":disabled, [aria-disabled='true'], [data-selected='true'], [data-quiz-click-sound='off']",
+      )
     ) {
       return;
     }

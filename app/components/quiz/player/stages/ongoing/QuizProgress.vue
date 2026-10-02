@@ -10,14 +10,6 @@ const completedQuestions = computed(() => Math.round((props.progress / 100) * pr
 
 <template>
   <div class="space-y-2 bg-background pb-2 z-20">
-    <!-- Quiz Progress -->
-    <div class="flex justify-end items-center">
-      <p class="text-xs text-gray-500 dark:text-gray-400 block text-end">
-        {{ $t("quiz.question") }} <strong>{{ currentQuestionIndex }}</strong> {{ $t("general.of") }}
-        {{ quizLength }}
-      </p>
-    </div>
-
     <!-- Progress Bar -->
     <div
       class="flex w-full gap-1"

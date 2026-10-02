@@ -5,6 +5,8 @@ import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue"
 import QuizAnswerList from "./QuizAnswerList.vue";
 import QuizProgress from "./QuizProgress.vue";
 import QuizQuestion from "./QuizQuestion.vue";
+import CallEvanYouButton from "./lifelines/CallEvanYouButton.vue";
+import CallEvanYouDialog from "./lifelines/CallEvanYouDialog.vue";
 import { Button } from "@/components/ui/button";
 import vueHostUrl from "@/assets/images/quiz/vue-host.png";
 import {
@@ -23,12 +25,17 @@ const props = defineProps<{
   currentQuestion: Question | null;
   hasCheckedAnswer: boolean;
   selectedOptionId: string | null;
+  hasUsedEvanYouCall: boolean;
+  pendingEliminatedOptionIds: string[];
+  eliminatedOptionIds: string[];
 }>();
 
 const emits = defineEmits<{
   (e: "answerCurrentQuestion"): void;
   (e: "goToNextQuestion"): void;
   (e: "update:selectedOptionId", value: string | null): void;
+  (e: "callEvanYou"): void;
+  (e: "applyEvanYouCall"): void;
 }>();
 
 const correctAnswerAudio = ref<HTMLAudioElement | null>(null);
@@ -36,6 +43,8 @@ const wrongAnswerAudio = ref<HTMLAudioElement | null>(null);
 const feedbackOpen = ref(false);
 const feedbackViewKey = ref(0);
 const isContinuing = ref(false);
+const isCallingEvan = ref(false);
+const evanYouDialogOpen = ref(false);
 const quizContainer = useTemplateRef<HTMLElement>("quizContainer");
 const { parse } = useMarkdownParser();
 
@@ -57,6 +66,31 @@ const parsedSelectedAnswer = computed(() => parse(selectedAnswer.value?.text ?? 
 const parsedCorrectAnswer = computed(() => parse(correctAnswer.value?.text ?? ""));
 const parsedExplanation = computed(() => parse(props.currentQuestion?.explanation ?? ""));
 const explanationCode = computed(() => props.currentQuestion?.explanation_code ?? []);
+const evanYouRemainingOptionLabels = computed(() => {
+  const eliminatedOptionIds = new Set(props.pendingEliminatedOptionIds);
+
+  return (props.currentQuestion?.answers ?? [])
+    .map((answer, index) => ({
+      id: answer.id,
+      label: String.fromCharCode(65 + index),
+    }))
+    .filter((answer) => !eliminatedOptionIds.has(answer.id))
+    .map((answer) => answer.label);
+});
+
+function callEvanYou() {
+  isCallingEvan.value = true;
+  emits("callEvanYou");
+}
+
+function connectEvanYouCall() {
+  isCallingEvan.value = false;
+  evanYouDialogOpen.value = true;
+}
+
+function applyEvanYouCall() {
+  emits("applyEvanYouCall");
+}
 
 function verifyCurrentAnswer() {
   const selectedAnswer = props.currentQuestion?.answers.find(
@@ -141,9 +175,27 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="quizContainer"
-    class="quiz-on-progress relative flex h-full max-h-full min-h-0 w-full flex-col overflow-hidden"
+    class="quiz-on-progress relative flex h-full max-h-full min-h-0 w-full flex-col overflow-hidden space-y-4"
     v-if="currentQuestion"
   >
+    <div class="space-y-2">
+      <div class="flex justify-end">
+        <CallEvanYouButton
+          class="self-end"
+          :used="hasUsedEvanYouCall"
+          :disabled="hasCheckedAnswer"
+          @activate="callEvanYou"
+          @connected="connectEvanYouCall"
+        />
+      </div>
+      <QuizProgress
+        :progress="quizProgress"
+        :currentQuestionIndex="currentQuestionIndex"
+        :quizLength="totalQuestions"
+        class="min-w-0 flex-1"
+      />
+    </div>
+
     <ScrollArea
       type="auto"
       class="quiz-content-scroll min-h-0 flex-1 md:flex md:flex-col md:gap-4"
@@ -151,13 +203,6 @@ onBeforeUnmount(() => {
       scrollbar-class="md:hidden"
     >
       <div class="flex min-h-full flex-col gap-5 pr-3 md:contents space-y-2">
-        <!-- Progress -->
-        <QuizProgress
-          :progress="quizProgress"
-          :currentQuestionIndex="currentQuestionIndex"
-          :quizLength="totalQuestions"
-          class="sticky top-0"
-        />
         <div class="grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr]">
           <div>
             <img :src="vueHostUrl" class="mx-auto max-w-[90px] md:max-w-[180px]" />
@@ -184,6 +229,7 @@ onBeforeUnmount(() => {
                   :answers="currentQuestion.answers"
                   :selected-option="selectedOptionId"
                   :show-answer-result="hasCheckedAnswer"
+                  :eliminated-option-ids="eliminatedOptionIds"
                   @update:selected-option="emits('update:selectedOptionId', $event)"
                 />
               </ScrollArea>
@@ -303,6 +349,12 @@ onBeforeUnmount(() => {
               </footer>
             </DialogContent>
           </Dialog>
+
+          <CallEvanYouDialog
+            v-model:open="evanYouDialogOpen"
+            :option-labels="evanYouRemainingOptionLabels"
+            @resolved="applyEvanYouCall"
+          />
         </div>
       </div>
     </ScrollArea>
@@ -331,7 +383,7 @@ onBeforeUnmount(() => {
           v-if="!hasCheckedAnswer && currentQuestion"
           type="button"
           size="lg"
-          :disabled="!selectedOptionId"
+          :disabled="!selectedOptionId || isCallingEvan"
           @click="verifyCurrentAnswer"
         >
           {{ $t("quiz.verify_answer") }}

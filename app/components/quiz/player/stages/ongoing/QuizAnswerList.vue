@@ -7,6 +7,7 @@ const props = defineProps<{
   answers: Answer[];
   selectedOption: string | null;
   showAnswerResult: boolean;
+  eliminatedOptionIds?: string[];
 }>();
 
 const emit = defineEmits<{
@@ -16,11 +17,13 @@ const emit = defineEmits<{
 const { parse } = useMarkdownParser();
 
 const parsedAnswers = computed(() =>
-  props.answers.map((answer) => ({
+  props.answers.map((answer, index) => ({
     ...answer,
+    optionLabel: String.fromCharCode(65 + index),
     parsedText: parse(answer.text),
   })),
 );
+
 </script>
 
 <template>
@@ -33,10 +36,12 @@ const parsedAnswers = computed(() =>
       <QuizAnswerOption
         :answer-id="answer.id"
         :answer-text="answer.parsedText"
+        :option-label="answer.optionLabel"
         :is-selected="selectedOption === answer.id"
+        :is-eliminated="eliminatedOptionIds?.includes(answer.id) ?? false"
         :is-correct-answer="answer.isCorrect"
         :show-answer-result="showAnswerResult"
-        :is-disabled="showAnswerResult"
+        :is-disabled="showAnswerResult || (eliminatedOptionIds?.includes(answer.id) ?? false)"
         @select="emit('update:selectedOption', $event)"
       />
     </li>

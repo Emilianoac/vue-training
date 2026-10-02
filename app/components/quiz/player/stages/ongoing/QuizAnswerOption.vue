@@ -4,9 +4,11 @@ import useQuizOptionHoverSound from "@/composables/quiz/useQuizOptionHoverSound"
 const props = defineProps<{
   answerId: string;
   answerText: string;
+  optionLabel: string;
 
   isSelected: boolean;
   isDisabled: boolean;
+  isEliminated: boolean;
 
   isCorrectAnswer: boolean;
   showAnswerResult: boolean;
@@ -47,15 +49,17 @@ function handlePointerEnter(event: PointerEvent) {
     :data-selected="isSelected"
     :aria-disabled="isDisabled"
     @pointerenter="handlePointerEnter"
-    class="grid h-full w-full cursor-pointer grid-cols-1 items-center rounded-md border border-slate-200 p-4 peer-checked:border-blue-500! peer-checked:bg-gray-100 peer-focus-visible:border-primary! peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background md:min-h-24 dark:border-slate-800 peer-checked:dark:bg-slate-800"
+    class="grid h-full w-full cursor-pointer grid-cols-1 items-center rounded-md border border-slate-200 p-4 transition-[opacity,border-color,background-color] peer-checked:border-blue-500! peer-checked:bg-gray-100 peer-focus-visible:border-primary! peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background md:min-h-24 dark:border-slate-800 peer-checked:dark:bg-slate-800"
     :class="{
       'border-green-500! bg-green-800/10!': showCorrect,
 
       'border-red-500! bg-red-800/10!': showWrongSelected,
 
-      'hover:bg-gray-100! dark:hover:bg-slate-800!': !showAnswerResult,
+      'hover:bg-gray-100! dark:hover:bg-slate-800!': !showAnswerResult && !isEliminated,
 
-      'cursor-not-allowed! opacity-85': isDisabled,
+      'cursor-not-allowed! opacity-85': isDisabled && !isEliminated,
+
+      'cursor-not-allowed! border-dashed! opacity-35 grayscale': isEliminated,
     }"
   >
     <div class="flex items-center gap-1">
@@ -65,6 +69,9 @@ function handlePointerEnter(event: PointerEvent) {
       >
         <div v-if="isSelected" class="w-[70%] h-[70%] rounded-sm bg-blue-500"></div>
       </div>
+      <span class="ml-2 font-mono text-sm font-bold text-muted-foreground" aria-hidden="true">
+        {{ optionLabel }}.
+      </span>
       <span class="block w-full text-sm md:text-base text-start pl-3" v-html="answerText" />
     </div>
 

@@ -1,113 +1,14 @@
 <script lang="ts" setup>
 import useMarkdownParser from "@/composables/useMarkdownParser";
-import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
+import QuizTypewriterText from "./QuizTypewriterText.vue";
 
 const { parse } = useMarkdownParser();
-const { playCharacterSound } = useQuizCharacterSound();
 
 const props = defineProps<{
   text: string;
 }>();
 
 const parsedQuestion = computed(() => parse(props.text));
-const animatedQuestionElement = ref<HTMLElement | null>(null);
-const isAnimationReady = ref(false);
-
-let animationRun = 0;
-let animationTimer: ReturnType<typeof setTimeout> | undefined;
-
-function clearAnimationTimer() {
-  if (animationTimer === undefined) return;
-
-  clearTimeout(animationTimer);
-  animationTimer = undefined;
-}
-
-function getCharacterDelay(character: string) {
-  if (/[.!?]/.test(character)) return 90;
-  if (/[,;:]/.test(character)) return 55;
-  return 20;
-}
-
-async function animateQuestion() {
-  const currentRun = ++animationRun;
-  clearAnimationTimer();
-  isAnimationReady.value = false;
-
-  await nextTick();
-
-  if (currentRun !== animationRun) return;
-
-  const root = animatedQuestionElement.value;
-  if (!root) return;
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    isAnimationReady.value = true;
-    return;
-  }
-
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  const segments: Array<{ node: Text; characters: string[] }> = [];
-  let textNode = walker.nextNode();
-
-  while (textNode) {
-    const node = textNode as Text;
-    segments.push({ node, characters: Array.from(node.data) });
-    node.data = "";
-    textNode = walker.nextNode();
-  }
-
-  isAnimationReady.value = true;
-
-  let segmentIndex = 0;
-  let characterIndex = 0;
-  let audibleCharacterIndex = 0;
-
-  function revealNextCharacter() {
-    if (currentRun !== animationRun) return;
-
-    const segment = segments[segmentIndex];
-    if (!segment) return;
-
-    const character = segment.characters[characterIndex];
-
-    if (character === undefined) {
-      segmentIndex += 1;
-      characterIndex = 0;
-      revealNextCharacter();
-      return;
-    }
-
-    segment.node.data += character;
-    characterIndex += 1;
-
-    if (/\S/.test(character)) {
-      playCharacterSound(audibleCharacterIndex);
-      audibleCharacterIndex += 1;
-    }
-
-    animationTimer = setTimeout(revealNextCharacter, getCharacterDelay(character));
-  }
-
-  revealNextCharacter();
-}
-
-watch(
-  () => props.text,
-  () => {
-    void animateQuestion();
-  },
-  { flush: "sync" },
-);
-
-onMounted(() => {
-  void animateQuestion();
-});
-
-onBeforeUnmount(() => {
-  animationRun += 1;
-  clearAnimationTimer();
-});
 </script>
 
 <template>
@@ -125,21 +26,7 @@ onBeforeUnmount(() => {
       <span class="shrink-0 text-emerald-400 text-3xl animate-pulse" aria-hidden="true"> ❯ </span>
 
       <div class="block font-semibold md:flex md:items-center md:text-[1.3rem]">
-        <div class="grid flex-1">
-          <div
-            class="invisible col-start-1 row-start-1"
-            aria-hidden="true"
-            v-html="parsedQuestion"
-          ></div>
-          <div
-            ref="animatedQuestionElement"
-            class="col-start-1 row-start-1 leading-7"
-            :class="isAnimationReady ? 'visible' : 'invisible'"
-            aria-hidden="true"
-            v-html="parsedQuestion"
-          ></div>
-          <div class="sr-only" v-html="parsedQuestion"></div>
-        </div>
+        <QuizTypewriterText class="flex-1 leading-7" :html="parsedQuestion" />
       </div>
     </div>
   </div>

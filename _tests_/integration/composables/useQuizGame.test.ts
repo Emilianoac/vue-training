@@ -30,6 +30,8 @@ const quiz: Quiz = {
       answers: [
         { id: "ref", text: "ref", isCorrect: true },
         { id: "reactive", text: "reactive", isCorrect: false },
+        { id: "computed", text: "computed", isCorrect: false },
+        { id: "watch", text: "watch", isCorrect: false },
       ],
     },
     {
@@ -63,6 +65,7 @@ function arrangeQuiz() {
 describe("useQuiz", () => {
   beforeEach(() => {
     vi.useRealTimers();
+    vi.restoreAllMocks();
     useQuizDataMock.mockReset();
   });
 
@@ -118,6 +121,35 @@ describe("useQuiz", () => {
       selectedOptionId: null,
       hasCheckedAnswer: false,
     });
+  });
+
+  it("uses Evan's call once and applies the eliminated answers after the dialogue", async () => {
+    vi.spyOn(Math, "random").mockReturnValue(0);
+    arrangeQuiz();
+    const game = useQuiz();
+    await game.actions.loadQuiz("reactivity");
+
+    game.state.answer.selectedOptionId = "computed";
+    game.actions.callEvanYou();
+
+    expect(game.state.lifeline).toEqual({
+      hasUsedEvanYouCall: true,
+      pendingEliminatedOptionIds: ["computed", "watch"],
+      eliminatedOptionIds: [],
+    });
+    expect(game.state.answer.selectedOptionId).toBe("computed");
+
+    game.actions.applyEvanYouCall();
+
+    expect(game.state.lifeline.eliminatedOptionIds).toEqual(["computed", "watch"]);
+    expect(game.state.answer.selectedOptionId).toBeNull();
+
+    game.state.answer.selectedOptionId = "ref";
+    game.actions.answerCurrentQuestion();
+    game.actions.goToNextQuestion();
+
+    expect(game.state.lifeline.hasUsedEvanYouCall).toBe(true);
+    expect(game.state.lifeline.eliminatedOptionIds).toEqual([]);
   });
 
   it("finishes the quiz and calculates the result", async () => {

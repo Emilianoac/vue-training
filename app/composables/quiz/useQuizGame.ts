@@ -1,4 +1,5 @@
 import { calculateQuizStats } from "@/domain/quiz/calculateQuizStats";
+import { getEvanYouLifelineResult } from "@/domain/quiz/getEvanYouLifelineResult";
 import { recordQuizAnswer } from "@/domain/quiz/recordQuizAnswer";
 import useQuizData from "./useQuizData";
 import type { AnswerRecord } from "@/schemas/quiz.schema";
@@ -20,6 +21,11 @@ export default function useQuiz() {
     answer: {
       selectedOptionId: null as string | null,
       hasCheckedAnswer: false,
+    },
+    lifeline: {
+      hasUsedEvanYouCall: false,
+      pendingEliminatedOptionIds: [] as string[],
+      eliminatedOptionIds: [] as string[],
     },
     result: {
       history: [] as AnswerRecord[],
@@ -84,6 +90,33 @@ export default function useQuiz() {
       state.result.history.push(newAnswerRecord);
       state.answer.hasCheckedAnswer = true;
     },
+    callEvanYou: () => {
+      if (
+        !currentQuestion.value ||
+        state.answer.hasCheckedAnswer ||
+        state.lifeline.hasUsedEvanYouCall
+      ) {
+        return;
+      }
+
+      const result = getEvanYouLifelineResult(currentQuestion.value.answers);
+
+      state.lifeline.hasUsedEvanYouCall = true;
+      state.lifeline.pendingEliminatedOptionIds = result.eliminatedOptionIds;
+    },
+    applyEvanYouCall: () => {
+      if (!state.lifeline.hasUsedEvanYouCall) return;
+
+      state.lifeline.eliminatedOptionIds = [...state.lifeline.pendingEliminatedOptionIds];
+      state.lifeline.pendingEliminatedOptionIds = [];
+
+      if (
+        state.answer.selectedOptionId &&
+        state.lifeline.eliminatedOptionIds.includes(state.answer.selectedOptionId)
+      ) {
+        state.answer.selectedOptionId = null;
+      }
+    },
     goToNextQuestion: () => {
       state.progress.percentage = (state.result.history.length / totalQuestions.value) * 100;
 
@@ -99,6 +132,9 @@ export default function useQuiz() {
       state.progress.currentQuestionIndex = 0;
       state.answer.selectedOptionId = null;
       state.answer.hasCheckedAnswer = false;
+      state.lifeline.hasUsedEvanYouCall = false;
+      state.lifeline.pendingEliminatedOptionIds = [];
+      state.lifeline.eliminatedOptionIds = [];
       state.quizState.isFinished = false;
       state.result.history = [];
       state.result.stats = { correct: 0, wrong: 0, percentage: 0, total: 0 };
@@ -122,6 +158,8 @@ export default function useQuiz() {
   function resetQuestionState() {
     state.answer.selectedOptionId = null;
     state.answer.hasCheckedAnswer = false;
+    state.lifeline.pendingEliminatedOptionIds = [];
+    state.lifeline.eliminatedOptionIds = [];
   }
 
   function finishQuiz() {

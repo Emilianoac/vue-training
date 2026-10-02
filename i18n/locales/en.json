@@ -139,6 +139,22 @@
       "passingScore": "To pass",
       "requiredPercentage": "{percentage}% correct"
     },
+    "lifeline": {
+      "callEvan": "Call Evan You",
+      "callDescription": "Call Evan You",
+      "calling": "Calling Evan…",
+      "used": "Call used",
+      "usedDescription": "You have already used this lifeline in this run.",
+      "unavailableDescription": "The call is only available before checking your answer.",
+      "title": "Call Evan You",
+      "description": "Evan helps you narrow down the possible answers.",
+      "connected": "Call connected",
+      "dialogue": "Hi, I'm Evan You. Hmm… I can't give you the answer, but I can tell you it's between these options:",
+      "completeDialogue": "Show the full dialogue",
+      "skipDialogue": "Press to complete the dialogue",
+      "or": "or",
+      "thanks": "Thanks, Evan"
+    },
     "start_quiz": "Start with the quiz",
     "question": "Question",
     "verify_answer": "Verify answer",

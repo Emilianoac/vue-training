@@ -139,6 +139,22 @@
       "passingScore": "Para aprobar",
       "requiredPercentage": "{percentage}% de aciertos"
     },
+    "lifeline": {
+      "callEvan": "Llamar a Evan You",
+      "callDescription": "Llamar a Evan You",
+      "calling": "Llamando a Evan…",
+      "used": "Llamada utilizada",
+      "usedDescription": "Ya utilizaste esta ayuda en esta partida.",
+      "unavailableDescription": "La llamada solo está disponible antes de verificar la respuesta.",
+      "title": "Llamada a Evan You",
+      "description": "Evan te ayuda a reducir las posibles respuestas.",
+      "connected": "Llamada conectada",
+      "dialogue": "Hola, soy Evan You. Mmm… no puedo darte la respuesta, pero puedo decirte que está entre estas opciones:",
+      "completeDialogue": "Mostrar todo el diálogo",
+      "skipDialogue": "Pulsa para completar el diálogo",
+      "or": "o",
+      "thanks": "Gracias, Evan"
+    },
     "start_quiz": "Comenzar cuestionario",
     "question": "Pregunta",
     "verify_answer": "Verificar respuesta",
