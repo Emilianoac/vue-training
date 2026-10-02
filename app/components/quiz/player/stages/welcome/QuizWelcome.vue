@@ -18,15 +18,47 @@ defineProps<{
   level: Level;
   requiredPercentage?: number;
 }>();
+
+const container = useTemplateRef<HTMLElement>("container");
+const content = useTemplateRef<HTMLElement>("content");
+const footer = useTemplateRef<HTMLElement>("footer");
+const isHeightConstrained = ref(false);
+
+let resizeObserver: ResizeObserver | undefined;
+
+function updateHeightConstraint() {
+  if (!container.value || !content.value || !footer.value) return;
+
+  isHeightConstrained.value =
+    content.value.scrollHeight + footer.value.offsetHeight > container.value.clientHeight;
+}
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver(updateHeightConstraint);
+
+  if (container.value) resizeObserver.observe(container.value);
+  if (content.value) resizeObserver.observe(content.value);
+  if (footer.value) resizeObserver.observe(footer.value);
+
+  updateHeightConstraint();
+});
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect();
+});
 </script>
 
 <template>
-  <div class="flex h-full max-h-full min-h-0 w-full items-center justify-center">
+  <div
+    ref="container"
+    class="flex h-full max-h-full min-h-0 w-full items-center justify-center"
+  >
     <div
-      class="flex h-fit max-h-full min-h-0 w-full max-w-[590px] flex-col overflow-hidden rounded-xl bg-card"
+      class="flex max-h-full min-h-0 w-full max-w-[590px] flex-col overflow-hidden rounded-xl bg-card"
+      :class="isHeightConstrained ? 'h-full' : 'h-fit'"
     >
       <ScrollArea type="auto" class="min-h-0 flex-1 overflow-hidden" viewport-class="min-h-0">
-        <section class="flex w-full flex-col items-center p-4">
+        <section ref="content" class="flex w-full flex-col items-center p-4">
           <div class="relative w-full pb-16 sm:pb-20">
             <div
               class="relative aspect-[16/7] overflow-hidden rounded-lg border bg-card sm:aspect-[21/6]"
@@ -104,6 +136,7 @@ defineProps<{
       </ScrollArea>
 
       <footer
+        ref="footer"
         class="relative z-10 rounded-bl-xl rounded-br-xl flex shrink-0 justify-center border-t bg-card p-4 shadow-[0_-10px_24px_-14px_rgba(0,0,0,0.65)] sm:px-6"
       >
         <Button class="w-full sm:w-auto sm:min-w-72" size="xl" @click="$emit('startQuiz')">
