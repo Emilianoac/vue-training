@@ -36,6 +36,7 @@ const wrongAnswerAudio = ref<HTMLAudioElement | null>(null);
 const feedbackOpen = ref(false);
 const feedbackViewKey = ref(0);
 const isContinuing = ref(false);
+const quizContainer = useTemplateRef<HTMLElement>("quizContainer");
 const { parse } = useMarkdownParser();
 
 const ANSWER_RESULT_SOUND_DELAY_MS = 180;
@@ -112,6 +113,22 @@ function continueQuiz() {
   }, FEEDBACK_CLOSE_TRANSITION_MS);
 }
 
+watch(
+  () => props.currentQuestionIndex,
+  async () => {
+    await nextTick();
+
+    if (!import.meta.client || !window.matchMedia("(max-width: 767px)").matches) return;
+
+    const viewport = quizContainer.value?.querySelector<HTMLElement>(
+      '.quiz-content-scroll [data-slot="scroll-area-viewport"]',
+    );
+
+    if (viewport) viewport.scrollTop = 0;
+  },
+  { flush: "post" },
+);
+
 onBeforeUnmount(() => {
   clearAnswerResultSoundTimer();
 
@@ -123,6 +140,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    ref="quizContainer"
     class="quiz-on-progress relative flex h-full max-h-full min-h-0 w-full flex-col overflow-hidden"
     v-if="currentQuestion"
   >
@@ -132,16 +150,17 @@ onBeforeUnmount(() => {
       viewport-class="md:contents"
       scrollbar-class="md:hidden"
     >
-      <div class="flex min-h-full flex-col gap-5 pr-3 md:contents space-y-6">
+      <div class="flex min-h-full flex-col gap-5 pr-3 md:contents space-y-2">
         <!-- Progress -->
         <QuizProgress
           :progress="quizProgress"
           :currentQuestionIndex="currentQuestionIndex"
           :quizLength="totalQuestions"
+          class="sticky top-0"
         />
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-[200px_1fr]">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr]">
           <div>
-            <img :src="vueHostUrl" class="mx-auto max-w-[100px] md:max-w-[180px]" />
+            <img :src="vueHostUrl" class="mx-auto max-w-[90px] md:max-w-[180px]" />
           </div>
           <QuizQuestion
             :key="currentQuestionIndex"
@@ -175,7 +194,7 @@ onBeforeUnmount(() => {
             <DialogContent
               v-if="currentQuestion && selectedAnswer && correctAnswer"
               :show-close-button="false"
-              class="grid min-w-0 max-h-[calc(100dvh_-_2rem)] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden rounded-xl bg-card p-0 sm:max-w-4xl md:max-h-[calc(100dvh_-_5rem)]"
+              class="grid min-w-0 max-h-[calc(100dvh_-_6rem)] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden rounded-xl bg-card p-0 sm:max-w-4xl md:max-h-[calc(100dvh_-_5rem)]"
               overlay-class="bg-background/60 backdrop-blur-[1px]"
             >
               <DialogHeader class="relative gap-0 border-b px-6 py-4 text-left">
@@ -289,7 +308,7 @@ onBeforeUnmount(() => {
     </ScrollArea>
 
     <!-- Controls -->
-    <div class="w-full shrink-0 border-t bg-card rounded mt-6">
+    <div class="w-full shrink-0 border-t bg-card rounded mt-2">
       <div class="mx-auto flex justify-end items-center gap-3 p-2">
         <Button
           v-if="hasCheckedAnswer && currentQuestion"

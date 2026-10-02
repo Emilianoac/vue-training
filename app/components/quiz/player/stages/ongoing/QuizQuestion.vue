@@ -133,7 +133,7 @@ onBeforeUnmount(() => {
           ></div>
           <div
             ref="animatedQuestionElement"
-            class="col-start-1 row-start-1"
+            class="col-start-1 row-start-1 leading-7"
             :class="isAnimationReady ? 'visible' : 'invisible'"
             aria-hidden="true"
             v-html="parsedQuestion"
