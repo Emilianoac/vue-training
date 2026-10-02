@@ -91,7 +91,7 @@ function handleReviewResults() {
     <DialogContent
       :data-outcome="outcome"
       overlay-class="z-50 backdrop-blur-[2px]"
-      class="completion-dialog z-[52] p-0 max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto bg-background text-card-foreground shadow-2xl w-[80%] max-h-[80%] sm:max-w-[900px]"
+      class="completion-dialog z-[52] p-0 max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto bg-background text-card-foreground shadow-2xl w-[90%] max-h-[85%] sm:max-w-[900px]"
     >
       <div class="grid min-h-0 md:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.35fr)]">
         <div class="completion-stage">
@@ -113,7 +113,7 @@ function handleReviewResults() {
           </div>
         </div>
 
-        <div class="flex min-w-0 flex-col justify-center p-8">
+        <div class="flex min-w-0 flex-col justify-center p-4">
           <div class="outcome-text mb-3 flex items-center gap-2 text-xs font-bold tracking-wider">
             <Icon :name="presentation.icon" size="1.8em" />
             <span>{{ presentation.eyebrow }}</span>
