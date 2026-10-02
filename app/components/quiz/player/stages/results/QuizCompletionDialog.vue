@@ -91,7 +91,7 @@ function handleReviewResults() {
     <DialogContent
       :data-outcome="outcome"
       overlay-class="z-50 backdrop-blur-[2px]"
-      class="completion-dialog z-[52] p-0 max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto text-slate-100 shadow-2xl w-[calc(100%-2rem)] sm:max-w-[900px]"
+      class="completion-dialog z-[52] p-0 max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto bg-background text-card-foreground shadow-2xl w-[80%] max-h-[80%] sm:max-w-[900px]"
     >
       <div class="grid min-h-0 md:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.35fr)]">
         <div class="completion-stage">
@@ -103,11 +103,11 @@ function handleReviewResults() {
             :class="{ 'opacity-60 grayscale-75': outcome === 'failed' }"
           />
 
-          <div class="score-card relative z-10">
+          <div class="score-card relative z-10 top-4">
             <strong class="outcome-text block text-5xl font-extrabold tracking-tight md:text-6xl">
               {{ percentage }}%
             </strong>
-            <span class="mt-1 block text-sm text-slate-300">
+            <span class="mt-1 block text-sm text-muted-foreground">
               {{ $t("quiz.completion.goal", { percentage: requiredPercentage }) }}
             </span>
           </div>
@@ -119,10 +119,10 @@ function handleReviewResults() {
             <span>{{ presentation.eyebrow }}</span>
           </div>
 
-          <DialogTitle class="text-3xl leading-tight font-extrabold tracking-tight">
+          <DialogTitle class="text-2xl md:text-3xl leading-tight font-extrabold tracking-tight">
             {{ presentation.title }}
           </DialogTitle>
-          <DialogDescription class="mt-2 text-base leading-relaxed text-slate-400">
+          <DialogDescription class="mt-2 md:text-base leading-relaxed text-muted-foreground">
             {{ presentation.description }}
           </DialogDescription>
 
@@ -133,19 +133,19 @@ function handleReviewResults() {
               </span>
               <div class="min-w-0">
                 <strong class="outcome-text block text-2xl leading-none">{{ percentage }}%</strong>
-                <span class="mt-1 block truncate text-xs text-slate-400">
+                <span class="mt-1 block truncate text-xs text-muted-foreground">
                   {{ $t("quiz.results.your_score") }}
                 </span>
               </div>
             </div>
 
-            <Icon name="mdi:chevron-right" class="size-7 text-slate-600" />
+            <Icon name="mdi:chevron-right" class="size-7 text-muted-foreground/60" />
 
             <div class="min-w-0">
-              <strong class="block text-2xl leading-none text-slate-300">
+              <strong class="block text-2xl leading-none text-foreground">
                 {{ requiredPercentage }}%
               </strong>
-              <span class="mt-1 block truncate text-xs text-slate-500">
+              <span class="mt-1 block truncate text-xs text-muted-foreground">
                 {{ $t("quiz.completion.target") }}
               </span>
             </div>
@@ -163,12 +163,7 @@ function handleReviewResults() {
                 class="size-5"
               />
             </Button>
-            <Button
-              variant="ghost"
-              size="lg"
-              class="w-full text-slate-400 hover:bg-slate-800 hover:text-slate-100"
-              @click="handleReviewResults"
-            >
+            <Button variant="secondary" size="lg" class="w-full" @click="handleReviewResults">
               {{ $t("quiz.completion.reviewResults") }}
               <Icon name="mdi:eye" class="size-5" />
             </Button>
@@ -183,6 +178,8 @@ function handleReviewResults() {
 .completion-dialog {
   --outcome-color: var(--primary);
   --outcome-soft: color-mix(in oklch, var(--primary) 18%, transparent);
+  --stage-surface: color-mix(in oklch, var(--card) 68%, var(--muted));
+  --stage-score-surface: color-mix(in oklch, var(--card) 88%, var(--outcome-soft));
 }
 
 .completion-dialog[data-outcome="failed"] {
@@ -193,6 +190,11 @@ function handleReviewResults() {
 .completion-dialog[data-outcome="perfect"] {
   --outcome-color: oklch(0.85 0.17 91);
   --outcome-soft: color-mix(in oklch, oklch(0.85 0.17 91) 18%, transparent);
+}
+
+.dark .completion-dialog {
+  --stage-surface: #07111f;
+  --stage-score-surface: color-mix(in oklch, #07111f 88%, transparent);
 }
 
 .outcome-text {
@@ -210,7 +212,11 @@ function handleReviewResults() {
   border-bottom: 1px solid color-mix(in oklch, var(--border) 75%, transparent);
   background:
     radial-gradient(circle at 50% 38%, var(--outcome-soft), transparent 42%),
-    linear-gradient(155deg, color-mix(in oklch, var(--outcome-color) 8%, #07111f), #07111f 70%);
+    linear-gradient(
+      155deg,
+      color-mix(in oklch, var(--outcome-color) 8%, var(--stage-surface)),
+      var(--stage-surface) 70%
+    );
 }
 
 .stage-light {
@@ -230,7 +236,7 @@ function handleReviewResults() {
   border: 1px solid var(--outcome-color);
   border-radius: 0.9rem;
   padding: 0.85rem 1rem;
-  background: color-mix(in oklch, #07111f 88%, transparent);
+  background: var(--stage-score-surface);
   text-align: center;
   box-shadow: 0 0 32px var(--outcome-soft);
 }
@@ -239,7 +245,7 @@ function handleReviewResults() {
   border: 1px solid color-mix(in oklch, var(--border) 65%, transparent);
   border-radius: 0.75rem;
   padding: 1rem;
-  background: color-mix(in oklch, var(--outcome-soft) 26%, #111c2d);
+  background: color-mix(in oklch, var(--outcome-soft) 70%, var(--muted));
 }
 
 .outcome-icon {
