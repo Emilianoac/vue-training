@@ -21,6 +21,7 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
+const completionStage = useTemplateRef<HTMLElement>("completionStage");
 
 const presentation = computed(() => {
   if (props.outcome === "failed") {
@@ -73,6 +74,7 @@ const primaryActionLabel = computed(() => {
 useQuizCompletionConfetti(
   () => open.value,
   () => props.outcome,
+  () => completionStage.value,
 );
 
 function handlePrimaryAction() {
@@ -94,7 +96,7 @@ function handleReviewResults() {
       class="completion-dialog z-[52] p-0 max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto bg-background text-card-foreground shadow-2xl w-[90%] max-h-[85%] sm:max-w-[900px]"
     >
       <div class="grid min-h-0 md:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.35fr)]">
-        <div class="completion-stage">
+        <div ref="completionStage" class="completion-stage">
           <div class="stage-light" aria-hidden="true"></div>
           <img
             :src="presentation.hostImage"

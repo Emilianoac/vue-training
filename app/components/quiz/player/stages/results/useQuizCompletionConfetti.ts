@@ -15,19 +15,24 @@ type ConfettiWindow = Window & {
 };
 
 const CONFETTI_CANVAS_SELECTOR = "canvas[data-quiz-completion-confetti]";
-const CONFETTI_CANVAS_Z_INDEX = "51";
-const INITIAL_BURST_DELAY_MS = 140;
-const CONFETTI_CADENCE_MS = 900;
+const CONFETTI_CANVAS_Z_INDEX = "53";
+const INITIAL_BURST_DELAY_MS = 80;
+const CONFETTI_CADENCE_MS = 650;
+const PASSED_CONFETTI_COLORS = ["#60a5fa", "#ef4444", "#facc15", "#a78bfa", "#34d399"];
+const PERFECT_CONFETTI_COLORS = ["#38bdf8", "#fb7185", "#fde047", "#c084fc", "#f8fafc"];
 
 export default function useQuizCompletionConfetti(
   open: MaybeRefOrGetter<boolean>,
   outcome: MaybeRefOrGetter<QuizOutcome>,
+  stage: MaybeRefOrGetter<HTMLElement | null>,
 ) {
-  let cadenceTimer: ReturnType<typeof setTimeout> | undefined;
-  let secondaryBurstTimer: ReturnType<typeof setTimeout> | undefined;
+  let cadenceTimer: number | undefined;
+  let initialBurstTimer: number | undefined;
 
   function getColors() {
-    return toValue(outcome) === "perfect" ? [48, 62, 86, 145] : [82, 132, 148, 165];
+    return toValue(outcome) === "perfect"
+      ? PERFECT_CONFETTI_COLORS
+      : PASSED_CONFETTI_COLORS;
   }
 
   function canCelebrate() {
@@ -51,68 +56,74 @@ export default function useQuizCompletionConfetti(
     return canvases.at(-1);
   }
 
-  function placeConfettiBehindDialog() {
+  function getStageGeometry() {
+    const stageElement = toValue(stage);
+    if (!stageElement) return null;
+
+    const stageRect = stageElement.getBoundingClientRect();
+
+    return {
+      stageRect,
+      origin: {
+        x: stageRect.left + stageRect.width / 2,
+        y: stageRect.top + 24,
+      },
+    };
+  }
+
+  function placeConfettiInHostColumn() {
     const canvas = findConfettiCanvas();
-    if (!canvas) return;
+    const geometry = getStageGeometry();
+    if (!canvas || !geometry) return;
+
+    const { stageRect } = geometry;
 
     canvas.dataset.quizCompletionConfetti = "";
     canvas.style.zIndex = CONFETTI_CANVAS_Z_INDEX;
     canvas.style.opacity = "1";
+    canvas.style.clipPath = `inset(${Math.max(0, stageRect.top)}px ${Math.max(0, window.innerWidth - stageRect.right)}px ${Math.max(0, window.innerHeight - stageRect.bottom)}px ${Math.max(0, stageRect.left)}px)`;
   }
 
   function launch(options: ConfettiOptions) {
     (window as ConfettiWindow).confetti?.(options);
-    placeConfettiBehindDialog();
+    placeConfettiInHostColumn();
   }
 
   function launchInitialBurst() {
-    const colors = getColors();
+    const geometry = getStageGeometry();
+    if (!geometry) return;
 
     launch({
-      color: colors,
-      count: 170,
+      color: getColors(),
+      count: 64,
       fade: true,
-      position: {
-        x: window.innerWidth / 2,
-        y: window.innerHeight * 0.42,
-      },
-      size: 1.2,
-      velocity: 220,
+      position: geometry.origin,
+      size: 1.8,
+      velocity: 155,
     });
-
-    secondaryBurstTimer = window.setTimeout(() => {
-      launch({
-        color: colors,
-        count: 90,
-        fade: true,
-        position: {
-          x: window.innerWidth / 2,
-          y: window.innerHeight * 0.35,
-        },
-        size: 0.95,
-        velocity: 160,
-      });
-    }, INITIAL_BURST_DELAY_MS);
   }
 
   function launchCadenceBurst() {
+    const geometry = getStageGeometry();
+    if (!geometry) return;
+
     launch({
       color: getColors(),
-      count: 16,
+      count: 10,
       fade: true,
       position: {
-        x: window.innerWidth * (0.15 + Math.random() * 0.7),
-        y: window.innerHeight * 0.18,
+        x: geometry.origin.x + (Math.random() - 0.5) * 36,
+        y: geometry.origin.y,
       },
-      size: 0.75,
-      velocity: 75,
+      size: 1.25,
+      velocity: 80,
     });
   }
 
   function clearScheduledBursts() {
-    if (secondaryBurstTimer !== undefined) {
-      window.clearTimeout(secondaryBurstTimer);
-      secondaryBurstTimer = undefined;
+    if (initialBurstTimer !== undefined) {
+      window.clearTimeout(initialBurstTimer);
+      initialBurstTimer = undefined;
     }
 
     if (cadenceTimer !== undefined) {
@@ -150,7 +161,10 @@ export default function useQuizCompletionConfetti(
 
     if (!canCelebrate()) return;
 
-    launchInitialBurst();
+    initialBurstTimer = window.setTimeout(() => {
+      initialBurstTimer = undefined;
+      launchInitialBurst();
+    }, INITIAL_BURST_DELAY_MS);
     scheduleCadenceBurst();
   }
 
