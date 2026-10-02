@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
             <DialogContent
               v-if="currentQuestion && selectedAnswer && correctAnswer"
               :show-close-button="false"
-              class="grid max-h-[calc(100dvh_-_2rem)] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden rounded-xl bg-card p-0 sm:max-w-4xl md:max-h-[calc(100dvh_-_5rem)]"
+              class="grid min-w-0 max-h-[calc(100dvh_-_2rem)] grid-rows-[auto_minmax(0,1fr)_auto] gap-0 overflow-hidden rounded-xl bg-card p-0 sm:max-w-4xl md:max-h-[calc(100dvh_-_5rem)]"
               overlay-class="bg-background/60 backdrop-blur-[1px]"
             >
               <DialogHeader class="relative gap-0 border-b px-6 py-4 text-left">
@@ -220,10 +220,10 @@ onBeforeUnmount(() => {
               <ScrollArea
                 :key="`${currentQuestionIndex}-${feedbackViewKey}`"
                 type="auto"
-                class="min-h-0 bg-background"
+                class="min-h-0 min-w-0 w-full overflow-hidden bg-background"
               >
-                <div class="mx-auto max-w-3xl space-y-5 px-6 py-5">
-                  <section>
+                <div class="mx-auto w-full min-w-0 max-w-3xl space-y-5 px-6 py-5">
+                  <section class="min-w-0">
                     <p class="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                       {{ $t("quiz.question") }} {{ currentQuestionIndex }}
                     </p>
@@ -233,7 +233,7 @@ onBeforeUnmount(() => {
                   <hr />
 
                   <section
-                    class="grid gap-3"
+                    class="grid min-w-0 gap-3"
                     :class="answerWasCorrect ? 'grid-cols-1' : 'md:grid-cols-2'"
                   >
                     <div
@@ -257,7 +257,7 @@ onBeforeUnmount(() => {
                     </div>
                   </section>
 
-                  <section>
+                  <section class="min-w-0">
                     <h3 class="font-semibold">{{ $t("quiz.explanation") }}</h3>
                     <div class="mt-2 text-sm leading-7" v-html="parsedExplanation" />
 
