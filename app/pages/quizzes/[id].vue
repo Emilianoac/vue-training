@@ -4,10 +4,12 @@ import useQuizGame from "~/composables/quiz/useQuizGame";
 import useQuizAmbientMusic, { type QuizStage } from "@/composables/quiz/useQuizAmbientMusic";
 import useQuizButtonClickSound from "@/composables/quiz/useQuizButtonClickSound";
 import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
+import { getQuizOutcome, QUIZ_PASS_PERCENTAGE } from "@/domain/quiz/getQuizOutcome";
 
 import QuizWelcome from "@/components/quiz/player/stages/welcome/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/player/stages/ongoing/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/player/stages/results/QuizResults.vue";
+import QuizCompletionDialog from "@/components/quiz/player/stages/results/QuizCompletionDialog.vue";
 import QuizOnLoading from "@/components/quiz/player/stages/loading/QuizOnLoading.vue";
 
 definePageMeta({
@@ -16,6 +18,7 @@ definePageMeta({
 
 const route = useRoute();
 const { locale } = useI18n();
+const completionDialogOpen = ref(false);
 useQuizButtonClickSound();
 const { primeCharacterSound } = useQuizCharacterSound();
 
@@ -31,6 +34,7 @@ const {
 
   actions,
 } = useQuizGame();
+const outcome = computed(() => getQuizOutcome(state.result.stats.percentage));
 
 const quizStage = computed<QuizStage>(() => {
   if (!state.quizState.isInitialized) return "welcome";
@@ -62,9 +66,20 @@ watch(
   },
 );
 
+watch(
+  () => state.quizState.isFinished,
+  (isFinished) => {
+    if (isFinished) completionDialogOpen.value = true;
+  },
+);
+
 function startQuiz() {
   primeCharacterSound();
   actions.startQuiz();
+}
+
+function retryQuiz() {
+  actions.resetQuizState();
 }
 </script>
 
@@ -89,6 +104,7 @@ function startQuiz() {
         "
         :level="quiz.level"
         :number-of-questions="totalQuestions"
+        :required-percentage="QUIZ_PASS_PERCENTAGE"
         @startQuiz="startQuiz"
       />
     </div>
@@ -122,6 +138,15 @@ function startQuiz() {
       @resetQuiz="actions.resetQuizState()"
     />
   </ActivityShell>
+
+  <QuizCompletionDialog
+    v-model:open="completionDialogOpen"
+    :outcome="outcome"
+    :percentage="state.result.stats.percentage"
+    :required-percentage="QUIZ_PASS_PERCENTAGE"
+    mode="standalone"
+    @primary-action="retryQuiz"
+  />
 </template>
 
 <style lang="postcss" scoped></style>

@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { CheckCircleIcon, CircleXIcon } from "lucide-vue-next";
 import useQuizGame from "~/composables/quiz/useQuizGame";
-import {
-  hasPassedLearningPathQuiz,
-  LEARNING_PATH_QUIZ_PASS_PERCENTAGE,
-} from "@/domain/quiz/learningPathQuizCompletion";
+import { getQuizOutcome, QUIZ_PASS_PERCENTAGE } from "@/domain/quiz/getQuizOutcome";
 import { useLearningPathProgress } from "@/composables/learning-path/useLearningPathProgress";
 import { getLearningPathReturnPath } from "@/composables/learning-path/useLearningPathNavigation";
 import useQuizAmbientMusic, { type QuizStage } from "@/composables/quiz/useQuizAmbientMusic";
@@ -13,17 +9,8 @@ import useQuizCharacterSound from "@/composables/quiz/useQuizCharacterSound";
 import QuizWelcome from "@/components/quiz/player/stages/welcome/QuizWelcome.vue";
 import QuizOnProgress from "@/components/quiz/player/stages/ongoing/QuizOnProgress.vue";
 import QuizResults from "@/components/quiz/player/stages/results/QuizResults.vue";
+import QuizCompletionDialog from "@/components/quiz/player/stages/results/QuizCompletionDialog.vue";
 import QuizOnLoading from "@/components/quiz/player/stages/loading/QuizOnLoading.vue";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 definePageMeta({
   layout: "activity",
@@ -31,7 +18,7 @@ definePageMeta({
 
 const route = useRoute();
 const router = useRouter();
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 
 const pathId = route.params.pathId as string;
 const quizId = route.params.id as string;
@@ -44,7 +31,7 @@ const { primeCharacterSound } = useQuizCharacterSound();
 
 const { quiz, state, totalQuestions, displayQuestionIndex, currentQuestion, elapsedTime, actions } =
   useQuizGame();
-const hasPassed = computed(() => hasPassedLearningPathQuiz(state.result.stats.percentage));
+const outcome = computed(() => getQuizOutcome(state.result.stats.percentage));
 
 const quizStage = computed<QuizStage>(() => {
   if (!state.quizState.isInitialized) return "welcome";
@@ -88,7 +75,7 @@ watch(
 function handleQuizCompleted() {
   completionDialogOpen.value = true;
 
-  if (hasPassed.value && !hasCompleted.value) {
+  if (outcome.value !== "failed" && !hasCompleted.value) {
     hasCompleted.value = true;
     markComplete(pathId, "quiz", quizId);
   }
@@ -96,6 +83,15 @@ function handleQuizCompleted() {
 
 function continueToLearningPath() {
   router.push(learningPathReturnPath);
+}
+
+function handleCompletionPrimaryAction() {
+  if (outcome.value === "failed") {
+    actions.resetQuizState();
+    return;
+  }
+
+  continueToLearningPath();
 }
 
 function startQuiz() {
@@ -121,7 +117,7 @@ function startQuiz() {
         :category="quiz.category.name"
         :level="quiz.level"
         :number-of-questions="totalQuestions"
-        :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
+        :required-percentage="QUIZ_PASS_PERCENTAGE"
         @startQuiz="startQuiz"
       />
     </div>
@@ -147,7 +143,6 @@ function startQuiz() {
       <QuizResults
         class="max-w-[1000px] mx-auto"
         :elapsed-time="elapsedTime"
-        :required-percentage="LEARNING_PATH_QUIZ_PASS_PERCENTAGE"
         :userHistory="state.result.history"
         :userStats="state.result.stats"
         @resetQuiz="actions.resetQuizState()"
@@ -155,38 +150,12 @@ function startQuiz() {
     </template>
   </ActivityShell>
 
-  <Dialog v-model:open="completionDialogOpen">
-    <DialogContent>
-      <DialogHeader>
-        <div
-          class="mb-2 flex size-11 items-center justify-center rounded-full"
-          :class="hasPassed ? 'bg-primary/10 text-primary' : 'bg-destructive/10 text-destructive'"
-        >
-          <CheckCircleIcon v-if="hasPassed" class="size-6" />
-          <CircleXIcon v-else class="size-6" />
-        </div>
-        <DialogTitle>
-          {{ t(hasPassed ? "quiz.completion.title" : "quiz.completion.failedTitle") }}
-        </DialogTitle>
-        <DialogDescription>
-          {{
-            t(hasPassed ? "quiz.completion.message" : "quiz.completion.failedMessage", {
-              percentage: LEARNING_PATH_QUIZ_PASS_PERCENTAGE,
-            })
-          }}
-        </DialogDescription>
-      </DialogHeader>
-
-      <DialogFooter>
-        <Button @click="continueToLearningPath">
-          {{ t("quiz.completion.continueLearningPath") }}
-        </Button>
-        <DialogClose as-child>
-          <Button variant="outline">
-            {{ t("quiz.completion.close") }}
-          </Button>
-        </DialogClose>
-      </DialogFooter>
-    </DialogContent>
-  </Dialog>
+  <QuizCompletionDialog
+    v-model:open="completionDialogOpen"
+    :outcome="outcome"
+    :percentage="state.result.stats.percentage"
+    :required-percentage="QUIZ_PASS_PERCENTAGE"
+    mode="learning-path"
+    @primary-action="handleCompletionPrimaryAction"
+  />
 </template>

@@ -3,7 +3,6 @@ import type { AnswerRecord } from "@/schemas/quiz.schema";
 import HighlightedCodeBlock from "@/components/content/HighlightedCodeBlock.vue";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import useQuizPassedCelebration from "./useQuizPassedCelebration";
 import useQuizResultsPresentation from "./useQuizResultsPresentation";
 import vueHostUrl from "@/assets/images/quiz/vue-host.png";
 
@@ -20,7 +19,6 @@ const props = defineProps<{
     percentage: number;
   };
   elapsedTime: number;
-  requiredPercentage?: number;
 }>();
 
 const { parsedHistory, stars: starsArray } = useQuizResultsPresentation(
@@ -28,10 +26,6 @@ const { parsedHistory, stars: starsArray } = useQuizResultsPresentation(
   () => props.userStats.percentage,
 );
 
-useQuizPassedCelebration(
-  () => props.userStats.percentage,
-  () => props.requiredPercentage,
-);
 </script>
 
 <template>
